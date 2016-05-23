@@ -58,3 +58,4 @@ target/
 desktop.ini
 sandbox/
 upgrade.sh
+examples/ipynb/.ipynb_checkpoints/pytablewriter_examples-checkpoint.ipynb
