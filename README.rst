@@ -28,8 +28,8 @@ Features
     - Pandas (Definition of a DataFrame variable)
     - Python code (Definition of a nested list variable)
     - reStructuredText
-        - Grid table
-        - Simple Table
+        - Grid tables
+        - Simple tables
         - CSV table
 - Automatic value formatting
     - Alignment
