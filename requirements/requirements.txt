@@ -1,0 +1,5 @@
+DataProperty>=0.2.8
+dominate
+pathvalidate>=0.3.0
+six
+XlsxWriter

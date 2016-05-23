@@ -1,0 +1,6 @@
+.. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
+   :target: https://pypi.python.org/pypi/pytablewriter
+.. image:: https://travis-ci.org/thombashi/pytablewriter.svg?branch=master
+    :target: https://travis-ci.org/thombashi/pytablewriter
+.. image:: https://coveralls.io/repos/github/thombashi/pytablewriter/badge.svg?branch=master
+    :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master

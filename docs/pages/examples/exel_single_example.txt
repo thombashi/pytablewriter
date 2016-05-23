@@ -1,0 +1,29 @@
+.. code-block:: python
+    :caption: Sample code
+
+    import pytablewriter
+
+    writer = pytablewriter.ExcelTableWriter()
+    writer.open_workbook("sample_single.xlsx")
+
+    writer.make_worksheet("zone")
+    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.value_matrix = [
+        ["1", "AD", "Europe/Andorra"],
+        ["2", "AE", "Asia/Dubai"],
+        ["3", "AF", "Asia/Kabul"],
+        ["4", "AG", "America/Antigua"],
+        ["5", "AI", "America/Anguilla"],
+    ]
+    writer.write_table()
+
+    writer.close()
+
+Output
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: ss/excel_single.png
+   :scale: 100%
+   :alt: excel_single
+   
+   Output excel file (``sample_single.xlsx``)

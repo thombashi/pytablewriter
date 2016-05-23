@@ -1,0 +1,21 @@
+Features
+--------
+
+- Write a table in various formats:
+    - CSV
+    - Microsoft Excel :superscript:`TM`
+    - HTML
+    - JavaScript (Definition of a nested list variable)
+    - JSON
+    - Markdown
+    - Pandas (Definition of a DataFrame variable)
+    - Python code (Definition of a nested list variable)
+    - reStructuredText
+        - Grid table
+        - Simple Table
+        - CSV table
+- Automatic value formatting
+    - Alignment
+    - Padding
+    - Decimal places of numbers
+- Output to a stream such as a file or the standard output

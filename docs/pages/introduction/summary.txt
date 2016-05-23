@@ -1,0 +1,1 @@
+pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/Markdown/Excel/Pandas/Python/reStructuredText
