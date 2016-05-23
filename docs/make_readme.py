@@ -94,6 +94,11 @@ def main():
             open(os.path.join(
                 DOC_PAGE_DIR, "introduction", "summary.txt")).readlines()
         ])
+        write_line_list(f, [
+            line.rstrip() for line in
+            open(os.path.join(
+                DOC_PAGE_DIR, "introduction", "feature.txt")).readlines()
+        ])
 
         write_examples(f)
 
