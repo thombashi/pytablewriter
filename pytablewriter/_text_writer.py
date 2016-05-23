@@ -70,13 +70,11 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         Write closing line of the table if the value is |True|.
 
-
     .. figure:: ss/table_char.png
        :scale: 60%
        :alt: table_char
 
        Character attributes that compose a table
-
     """
 
     def __init__(self):

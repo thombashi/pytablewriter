@@ -18,7 +18,6 @@ class TableWriter(TableWriterInterface):
     """
     Abstract class of table writer.
 
-
     .. py:attribute:: stream
 
         Stream to write the table.
