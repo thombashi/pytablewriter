@@ -55,6 +55,6 @@ docs/_build/
 
 # PyBuilder
 target/
-/.idea
-convert_readme.sh
 desktop.ini
+sandbox/
+upgrade.sh
