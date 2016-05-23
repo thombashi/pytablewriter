@@ -20,7 +20,7 @@ install:
 
 script: 
   - tox
-  - python setup.py test --addopts "-v --cov tablewriter --cov-report term-missing"
+  - python setup.py test --addopts "-v --cov pytablewriter --cov-report term-missing"
 
 after_success:
   - coveralls
