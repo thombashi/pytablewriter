@@ -52,6 +52,12 @@ def write_examples(f):
     write_usage_file(f, "markdown_example.txt")
 
     write_line_list(f, [
+        "Write a reStructuredText table (grid tables)",
+        "----------------------------------------------------------------",
+    ])
+    write_usage_file(f, "rst_grid_table_example.txt")
+
+    write_line_list(f, [
         "Write a JavaScript table (variable definition of nested list )",
         "----------------------------------------------------------------",
     ])

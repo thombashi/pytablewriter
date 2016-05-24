@@ -81,6 +81,66 @@ Rendering result
 
    Rendered markdown at GitHub
 
+Write a reStructuredText table (grid tables)
+----------------------------------------------------------------
+
+
+.. code:: python
+
+    import pytablewriter
+
+    writer = pytablewriter.RstGridTableWriter()
+    writer.table_name = "zone"
+    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.value_matrix = [
+        ["1", "AD", "Europe/Andorra"],
+        ["2", "AE", "Asia/Dubai"],
+        ["3", "AF", "Asia/Kabul"],
+        ["4", "AG", "America/Antigua"],
+        ["5", "AI", "America/Anguilla"],
+    ]
+
+    writer.write_table()
+
+
+.. code::
+
+    .. table:: zone
+
+        +-------+------------+----------------+
+        |zone_id|country_code|   zone_name    |
+        +=======+============+================+
+        |      1|AD          |Europe/Andorra  |
+        +-------+------------+----------------+
+        |      2|AE          |Asia/Dubai      |
+        +-------+------------+----------------+
+        |      3|AF          |Asia/Kabul      |
+        +-------+------------+----------------+
+        |      4|AG          |America/Antigua |
+        +-------+------------+----------------+
+        |      5|AI          |America/Anguilla|
+        +-------+------------+----------------+
+
+
+Rendering result
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. table:: zone
+
+    +-------+------------+----------------+
+    |zone_id|country_code|   zone_name    |
+    +=======+============+================+
+    |      1|AD          |Europe/Andorra  |
+    +-------+------------+----------------+
+    |      2|AE          |Asia/Dubai      |
+    +-------+------------+----------------+
+    |      3|AF          |Asia/Kabul      |
+    +-------+------------+----------------+
+    |      4|AG          |America/Antigua |
+    +-------+------------+----------------+
+    |      5|AI          |America/Anguilla|
+    +-------+------------+----------------+
+
 Write a JavaScript table (variable definition of nested list )
 ----------------------------------------------------------------
 
