@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 try:
     import json
-except ImportError:
+except ImportError:   # pragma: no cover
     import simplejson as json
 
 import dataproperty
