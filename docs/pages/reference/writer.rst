@@ -9,10 +9,20 @@ TableWriter class
     :show-inheritance:
 
 
+Base table writer classes
+-------------------------------
+
 TextTableWriter class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: pytablewriter._text_writer.TextTableWriter
+    :inherited-members:
+    :show-inheritance:
+
+IndentationTextTableWriter class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: pytablewriter._text_writer.IndentationTextTableWriter
     :inherited-members:
     :show-inheritance:
 

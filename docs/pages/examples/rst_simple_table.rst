@@ -1,6 +1,6 @@
 .. _example-rst-simple-table-writer:
 
-Write a reStructuredText simple table
+Write a reStructuredText simple tables
 -------------------------------------------
 
 |RstSimpleTableWriter| the class can write a table 
