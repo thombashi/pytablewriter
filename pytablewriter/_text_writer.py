@@ -238,6 +238,13 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
 
 class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
+    """
+    Base class of table writer that text format with indentation.
+
+    .. py:attribute:: indent_string
+
+        String of an indent for each level.
+    """
 
     def __init__(self):
         super(IndentationTextTableWriter, self).__init__()
