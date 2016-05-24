@@ -10,10 +10,10 @@ import dataproperty
 import dominate.tags as tags
 import pathvalidate
 
-from ._text_writer import IndentationTextTableWriter
+from ._text_writer import TextTableWriter
 
 
-class HtmlTableWriter(IndentationTextTableWriter):
+class HtmlTableWriter(TextTableWriter):
     """
     Concrete class of a table writer for HTML format.
 
@@ -27,6 +27,7 @@ class HtmlTableWriter(IndentationTextTableWriter):
 
         self.is_padding = False
         self.is_quote_str = False
+        self.indent_string = u"    "
 
         self._table_tag = None
 
@@ -73,4 +74,4 @@ class HtmlTableWriter(IndentationTextTableWriter):
             tbody_tag += tr_tag
 
         self._table_tag += tbody_tag
-        self._write_line(str(self._table_tag))
+        self._write_line(self._table_tag.render(indent=self.indent_string))
