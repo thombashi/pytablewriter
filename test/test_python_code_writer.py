@@ -44,6 +44,19 @@ normal_test_data_list = [
 """
     ),
     Data(
+        table="table name",
+        indent=0,
+        header=header_list,
+        value=value_matrix,
+        expected="""table_name = [
+    ["a", "b", "c", "dd", "e"],
+    [1, 123.1, "a", 1.0, "1"],
+    [2, 2.2, "bb", 2.2, "2.2"],
+    [3, 3.3, "ccc", 3.0, "cccc"],
+]
+"""
+    ),
+    Data(
         table="tablename",
         indent=1,
         header=header_list,

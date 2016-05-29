@@ -41,7 +41,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.stream.close()
         self.stream = org_stream
 
-        self._write_line(u"var %s = [" % (self.table_name))
+        self._write_line(u"var %s = [" % (self.variable_name))
         self.dec_indent_level()
         self._write_line(data_frame_text)
         self.inc_indent_level()

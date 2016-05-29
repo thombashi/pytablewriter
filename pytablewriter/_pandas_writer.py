@@ -36,7 +36,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._preprocess()
 
         if dataproperty.is_not_empty_string(self.table_name):
-            self._write_line(self.table_name + u" = pandas.DataFrame(")
+            self._write_line(self.variable_name + u" = pandas.DataFrame(")
         else:
             self._write_line(u"pandas.DataFrame(")
 

@@ -287,6 +287,17 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
 
 class SourceCodeTableWriter(IndentationTextTableWriter):
 
+    @property
+    def variable_name(self):
+        """
+        :return: |table_name| that converted to a variable name.
+        :rtype: str
+        """
+
+        import pathvalidate
+
+        return pathvalidate.sanitize_python_var_name(self.table_name, u"_")
+
     def __init__(self):
         super(SourceCodeTableWriter, self).__init__()
 

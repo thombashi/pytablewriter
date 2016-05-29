@@ -33,7 +33,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if dataproperty.is_not_empty_string(self.table_name):
-            self._write_line(self.table_name + u" = [")
+            self._write_line(self.variable_name + u" = [")
         else:
             self._write_line(u"[")
 
