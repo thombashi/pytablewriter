@@ -5,10 +5,8 @@
 """
 
 from __future__ import absolute_import
-import collections
 
 import pytablewriter
-import pytest
 
 
 table_writer_class = pytablewriter.NullTableWriter

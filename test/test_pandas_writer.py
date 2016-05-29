@@ -116,10 +116,13 @@ class Test_PandasDataFrameWriter_write_new_line:
 
 class Test_PandasDataFrameWriter_write_table:
 
-    @pytest.mark.parametrize(["table", "indent", "header", "value", "expected"], [
-        [data.table, data.indent, data.header, data.value, data.expected]
-        for data in normal_test_data_list
-    ])
+    @pytest.mark.parametrize(
+        ["table", "indent", "header", "value", "expected"],
+        [
+            [data.table, data.indent, data.header, data.value, data.expected]
+            for data in normal_test_data_list
+        ]
+    )
     def test_normal(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -131,10 +134,13 @@ class Test_PandasDataFrameWriter_write_table:
         out, err = capsys.readouterr()
         assert out == expected
 
-    @pytest.mark.parametrize(["table", "indent", "header", "value", "expected"], [
-        [data.table, data.indent, data.header, data.value, data.expected]
-        for data in exception_test_data_list
-    ])
+    @pytest.mark.parametrize(
+        ["table", "indent", "header", "value", "expected"],
+        [
+            [data.table, data.indent, data.header, data.value, data.expected]
+            for data in exception_test_data_list
+        ]
+    )
     def test_exception(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

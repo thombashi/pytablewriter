@@ -125,7 +125,8 @@ class Test_ExcelTableWriter_write_table:
         [data.table, data.header, data.value, data.expected]
         for data in normal_test_data_list
     ])
-    def test_exception_null_sheet(self, tmpdir, table, header, value, expected):
+    def test_exception_null_sheet(
+            self, tmpdir, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = table_writer_class()
