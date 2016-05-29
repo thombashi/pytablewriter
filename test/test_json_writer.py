@@ -16,6 +16,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -76,6 +77,44 @@ normal_test_data_list = [
                     "c": "ccc",
                     "dd": 3,
                     "e": "cccc"
+                }
+            ]
+        }
+        """)
+    ),
+    Data(
+        table="table name",
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=json.loads("""{
+            "table name": [
+                {
+                    "a": 1,
+                    "b": null,
+                    "c": "a",
+                    "dd": 1,
+                    "e": null
+                },
+                {
+                    "a": null,
+                    "b": 2.2,
+                    "c": null,
+                    "dd": 2.2,
+                    "e": 2.2
+                },
+                {
+                    "a": 3,
+                    "b": 3.3,
+                    "c": "ccc",
+                    "dd": null,
+                    "e": "cccc"
+                },
+                {
+                    "a": null,
+                    "b": null,
+                    "c": null,
+                    "dd": null,
+                    "e": null
                 }
             ]
         }

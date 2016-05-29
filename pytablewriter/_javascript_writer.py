@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+import re
 
 import dataproperty
 import six
@@ -22,6 +23,12 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         :ref:`example-js-table-writer`
     """
 
+    def __init__(self):
+        super(JavaScriptTableWriter, self).__init__()
+
+        self._prop_extractor.none_value = "null"
+        self.__re_replace_null = re.compile('["]null["]', re.MULTILINE)
+
     def write_table(self):
         """
         |write_table| with JavaScript nested list variable definition format.
@@ -37,6 +44,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         super(JavaScriptTableWriter, self).write_table()
         self.dec_indent_level()
         data_frame_text = self.stream.getvalue().rstrip(u",\n")
+        data_frame_text = self.__re_replace_null.sub(
+            self._prop_extractor.none_value, data_frame_text)
 
         self.stream.close()
         self.stream = org_stream

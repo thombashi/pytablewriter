@@ -12,3 +12,9 @@ value_matrix = [
     [2, 2.2, "bb", "2.2", 2.2],
     [3, 3.3, "ccc", "3",   "cccc"],
 ]
+value_matrix_with_none = [
+    ["1", None, "a", "1",   None],
+    [None, 2.2, None, "2.2", 2.2],
+    [3, 3.3, "ccc", None,   "cccc"],
+    [None, None, None, None,   None],
+]

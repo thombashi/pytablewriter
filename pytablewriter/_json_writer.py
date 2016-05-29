@@ -9,6 +9,7 @@ try:
     import json
 except ImportError:   # pragma: no cover
     import simplejson as json
+import re
 
 import dataproperty
 
@@ -28,6 +29,9 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
     def __init__(self):
         super(JsonTableWriter, self).__init__()
 
+        self.__none_value = "null"
+        self.__re_replace_null = re.compile('["]null["]', re.MULTILINE)
+
     def write_null_line(self):
         self._verify_stream()
         self.stream.write(u"\n")
@@ -40,15 +44,22 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
         self._verify_property()
         self._preprocess_value_matrix()
 
-        self.stream.write(
-            json.dumps(self._value_matrix, sort_keys=True, indent=4) + u"\n")
+        json_text = json.dumps(
+            self._value_matrix, sort_keys=True, indent=4) + u"\n"
+        json_text = self.__re_replace_null.sub(
+            self.__none_value, json_text)
+
+        self.stream.write(json_text)
 
     def _preprocess_value_matrix(self):
         if self._preprocessed_value_matrix:
             return
 
         value_matrix = [
-            [dataproperty.convert_value(value) for value in value_list]
+            [
+                dataproperty.convert_value(value, self.__none_value)
+                for value in value_list
+            ]
             for value_list in self.value_matrix
         ]
         table_data = [

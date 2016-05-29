@@ -12,6 +12,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple(
@@ -71,6 +72,21 @@ normal_test_data_list = [
         [2, 2.2, "bb", 2.2, "2.2"],
         [3, 3.3, "ccc", 3.0, "cccc"]
     ];
+"""
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=header_list,
+        value=value_matrix_with_none,
+        is_write_header=True,
+        expected="""var tablename = [
+    ["a", "b", "c", "dd", "e"],
+    [1, null, "a", 1.0, null],
+    [null, 2.2, null, 2.2, "2.2"],
+    [3, 3.3, "ccc", null, "cccc"],
+    [null, null, null, null, null]
+];
 """
     ),
 ]
