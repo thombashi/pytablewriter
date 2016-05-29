@@ -26,6 +26,13 @@ IndentationTextTableWriter class
     :inherited-members:
     :show-inheritance:
 
+SourceCodeTableWriter class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: pytablewriter._text_writer.SourceCodeTableWriter
+    :inherited-members:
+    :show-inheritance:
+
 
 Concrete table writer classes
 -------------------------------

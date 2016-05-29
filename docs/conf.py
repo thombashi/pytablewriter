@@ -51,8 +51,7 @@ author = u'Tsuyoshi Hombashi'
 # built documents.
 #
 # The short X.Y version.
-version = "0.1.0"
-#version = pkg_resources.get_distribution("pytablewriter").version
+version = pkg_resources.get_distribution("pytablewriter").version
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -313,6 +312,7 @@ rp_class = u"""
 
 .. |CsvTableWriter| replace:: :py:class:`~pytablewriter.CsvTableWriter`
 .. |ExcelTableWriter| replace:: :py:class:`~pytablewriter.ExcelTableWriter`
+.. |HtmlTableWriter| replace:: :py:class:`~pytablewriter.HtmlTableWriter`
 .. |JavaScriptTableWriter| replace:: :py:class:`~pytablewriter.JavaScriptTableWriter`
 .. |JsonTableWriter| replace:: :py:class:`~pytablewriter.JsonTableWriter`
 .. |MarkdownTableWriter| replace:: :py:class:`~pytablewriter.MarkdownTableWriter`

@@ -41,7 +41,7 @@ Examples
 ========
 
 Write a Markdown table
-----------------------------
+----------------------
 
 .. code:: python
 
@@ -82,7 +82,7 @@ Rendering result
    Rendered markdown at GitHub
 
 Write a reStructuredText table (grid tables)
-----------------------------------------------------------------
+--------------------------------------------
 
 
 .. code:: python
@@ -141,8 +141,8 @@ Rendering result
     |      5|AI          |America/Anguilla|
     +-------+------------+----------------+
 
-Write a JavaScript table (variable definition of nested list )
-----------------------------------------------------------------
+Write a JavaScript table (variable definition of nested list)
+-------------------------------------------------------------
 
 .. code:: python
 
@@ -173,7 +173,7 @@ Write a JavaScript table (variable definition of nested list )
     ];
 
 Write an Excel table
-----------------------------
+--------------------
 
 .. code:: python
 
@@ -206,9 +206,9 @@ Output
 
 For more information
 --------------------
+
 More examples are available at 
 http://pytablewriter.readthedocs.org/en/latest/pages/examples/index.html
-
 
 Installation
 ============
