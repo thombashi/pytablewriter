@@ -12,6 +12,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple("Data", "col_delim header value expected")
@@ -43,6 +44,17 @@ normal_test_data_list = [
         expected="""1\t123.1\t"a"\t1.0\t"1"
 2\t2.2\t"bb"\t2.2\t"2.2"
 3\t3.3\t"ccc"\t3.0\t"cccc"
+"""
+    ),
+    Data(
+        col_delim=",",
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=""""a","b","c","dd","e"
+1,,"a",1.0,
+,2.2,,2.2,"2.2"
+3,3.3,"ccc",,"cccc"
+,,,,
 """
     ),
 ]

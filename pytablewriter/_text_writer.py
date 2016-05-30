@@ -307,3 +307,5 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.char_right_side_row = u"],"
         self.is_padding = False
         self.is_write_header_separator_row = False
+
+        self._prop_extractor.none_value = None

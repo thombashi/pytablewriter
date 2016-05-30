@@ -12,6 +12,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -97,6 +98,54 @@ normal_test_data_list = [
             <td align="left">cccc</td>
         </tr>
     </tbody>
+</table>
+"""
+    ),
+    Data(
+        table="",
+        indent="  ",
+        header=header_list,
+        value=value_matrix_with_none,
+        expected="""<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>dd</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="right">1</td>
+      <td align="left"></td>
+      <td align="left">a</td>
+      <td align="right">1.0</td>
+      <td align="left"></td>
+    </tr>
+    <tr>
+      <td align="left"></td>
+      <td align="right">2.2</td>
+      <td align="left"></td>
+      <td align="right">2.2</td>
+      <td align="right">2.2</td>
+    </tr>
+    <tr>
+      <td align="right">3</td>
+      <td align="right">3.3</td>
+      <td align="left">ccc</td>
+      <td align="left"></td>
+      <td align="left">cccc</td>
+    </tr>
+    <tr>
+      <td align="left"></td>
+      <td align="left"></td>
+      <td align="left"></td>
+      <td align="left"></td>
+      <td align="left"></td>
+    </tr>
+  </tbody>
 </table>
 """
     ),

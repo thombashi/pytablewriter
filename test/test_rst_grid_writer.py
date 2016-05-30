@@ -12,6 +12,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -97,6 +98,26 @@ normal_test_data_list = [
     +-------+------------+----------------+
     |      5|AI          |America/Anguilla|
     +-------+------------+----------------+
+"""
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=""".. table:: table name
+
+    +-+---+---+---+----+
+    |a| b | c |dd | e  |
+    +=+===+===+===+====+
+    |1|   |a  |1.0|    |
+    +-+---+---+---+----+
+    | |2.2|   |2.2|2.2 |
+    +-+---+---+---+----+
+    |3|3.3|ccc|   |cccc|
+    +-+---+---+---+----+
+    | |   |   |   |    |
+    +-+---+---+---+----+
 """
     ),
 ]

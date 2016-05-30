@@ -68,6 +68,7 @@ class TableWriter(TableWriterInterface):
 
         self._prop_extractor = dataproperty.PropertyExtractor()
         self._prop_extractor.min_padding_len = 1
+        self._prop_extractor.none_value = ""
 
         self._preprocessed_property = False
 
