@@ -28,7 +28,11 @@ a Pandas DataFrame to the |stream| from a matrix of data.
 .. code-block:: python
     :caption: Output
     
-    zone = pandas.DataFrame(
-        {'country_code': [2, 'AE', 'Asia/Dubai'],
-         'zone_id': [1, 'AD', 'Europe/Andorra'],
-         'zone_name': [3, 'AF', 'Asia/Kabul']})
+    Timezone = pandas.DataFrame(
+        {'country_code': ['AD', 'AE', 'AF', 'AG', 'AI'],
+         'zone_id': [1, 2, 3, 4, 5],
+         'zone_name': ['Europe/Andorra',
+                       'Asia/Dubai',
+                       'Asia/Kabul',
+                       'America/Antigua',
+                       'America/Anguilla']})
