@@ -109,10 +109,13 @@ class TableWriter(TableWriterInterface):
             col_prop, value_prop, is_header) % (value_prop.data)
 
         if self.is_quote_str and any([
-            col_prop.typecode == dataproperty.Typecode.STRING,
+            all([
+                col_prop.typecode == dataproperty.Typecode.STRING,
+                value_prop.typecode != dataproperty.Typecode.NONE,
+            ]),
             is_header
         ]):
-            return u'"%s"' % (item.strip())
+            return u'"%s"' % (item)
 
         return item
 
