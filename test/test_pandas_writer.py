@@ -12,6 +12,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -23,9 +24,11 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected="""pandas.DataFrame(
-    {'a': [1, 123.1, 'a', 1, 1],
-     'b': [2, 2.2, 'bb', 2.2, 2.2],
-     'c': [3, 3.3, 'ccc', 3, 'cccc']})
+    {'a': [1, 2, 3],
+     'b': [123.1, 2.2, 3.3],
+     'c': ['a', 'bb', 'ccc'],
+     'dd': [1, 2.2, 3],
+     'e': [1, 2.2, 'cccc']})
 """
     ),
     Data(
@@ -34,9 +37,11 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected="""tablename = pandas.DataFrame(
-    {'a': [1, 123.1, 'a', 1, 1],
-     'b': [2, 2.2, 'bb', 2.2, 2.2],
-     'c': [3, 3.3, 'ccc', 3, 'cccc']})
+    {'a': [1, 2, 3],
+     'b': [123.1, 2.2, 3.3],
+     'c': ['a', 'bb', 'ccc'],
+     'dd': [1, 2.2, 3],
+     'e': [1, 2.2, 'cccc']})
 """
     ),
     Data(
@@ -45,9 +50,11 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected="""table_name = pandas.DataFrame(
-    {'a': [1, 123.1, 'a', 1, 1],
-     'b': [2, 2.2, 'bb', 2.2, 2.2],
-     'c': [3, 3.3, 'ccc', 3, 'cccc']})
+    {'a': [1, 2, 3],
+     'b': [123.1, 2.2, 3.3],
+     'c': ['a', 'bb', 'ccc'],
+     'dd': [1, 2.2, 3],
+     'e': [1, 2.2, 'cccc']})
 """
     ),
     Data(
@@ -56,20 +63,24 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected="""    pandas.DataFrame(
-        {'a': [1, 123.1, 'a', 1, 1],
-         'b': [2, 2.2, 'bb', 2.2, 2.2],
-         'c': [3, 3.3, 'ccc', 3, 'cccc']})
+        {'a': [1, 2, 3],
+         'b': [123.1, 2.2, 3.3],
+         'c': ['a', 'bb', 'ccc'],
+         'dd': [1, 2.2, 3],
+         'e': [1, 2.2, 'cccc']})
 """
     ),
     Data(
-        table="",
+        table="table with%null-value",
         indent=0,
         header=header_list,
-        value=value_matrix,
-        expected="""pandas.DataFrame(
-    {'a': [1, 123.1, 'a', 1, 1],
-     'b': [2, 2.2, 'bb', 2.2, 2.2],
-     'c': [3, 3.3, 'ccc', 3, 'cccc']})
+        value=value_matrix_with_none,
+        expected="""table_with_null_value = pandas.DataFrame(
+    {'a': [1, None, 3, None],
+     'b': [None, 2.2, 3.3, None],
+     'c': ['a', None, 'ccc', None],
+     'dd': [1, 2.2, None, None],
+     'e': [None, 2.2, 'cccc', None]})
 """
     ),
 ]

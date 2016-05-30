@@ -61,8 +61,9 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
         self._value_matrix = [
             [dataproperty.convert_value(value) for value in value_list]
-            for value_list in self.value_matrix
+            for value_list in zip(*self.value_matrix)
         ]
-        self._value_matrix = dict(zip(self.header_list, self._value_matrix))
+        self._value_matrix = dict(
+            zip(self.header_list, self._value_matrix))
 
         self._preprocessed_value_matrix = True
