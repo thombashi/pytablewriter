@@ -12,6 +12,7 @@ import pytest
 
 from .data import header_list
 from .data import value_matrix
+from .data import value_matrix_with_none
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -68,7 +69,21 @@ normal_test_data_list = [
         [3, 3.3, "ccc", 3.0, "cccc"],
     ]
 """
-    )
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=header_list,
+        value=value_matrix_with_none,
+        expected="""table_name = [
+    ["a", "b", "c", "dd", "e"],
+    [1, None, "a", 1.0, None],
+    [None, 2.2, None, 2.2, "2.2"],
+    [3, 3.3, "ccc", None, "cccc"],
+    [None, None, None, None, None],
+]
+"""
+    ),
 ]
 
 exception_test_data_list = [
