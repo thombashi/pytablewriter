@@ -61,6 +61,8 @@ def main():
         "http://%s.readthedocs.org/en/latest/" % (PROJECT_NAME),
     ])
 
+    return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())
