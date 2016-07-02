@@ -57,7 +57,8 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
 
         value_matrix = [
             [
-                dataproperty.convert_value(value, self.__none_value)
+                dataproperty.DataProperty(
+                    value, none_value=self.__none_value).data
                 for value in value_list
             ]
             for value_list in self.value_matrix

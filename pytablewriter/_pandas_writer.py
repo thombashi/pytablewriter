@@ -60,7 +60,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             return
 
         self._value_matrix = [
-            [dataproperty.convert_value(value) for value in value_list]
+            [dataproperty.DataProperty(value).data for value in value_list]
             for value_list in zip(*self.value_matrix)
         ]
         self._value_matrix = dict(
