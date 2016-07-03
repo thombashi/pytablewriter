@@ -114,7 +114,7 @@ class TableWriter(TableWriterInterface):
         try:
             item = item_format % (value_prop.data)
         except TypeError:
-            item = value_prop.data
+            item = str(value_prop.data)
 
         if self.is_quote_str and any([
             all([
