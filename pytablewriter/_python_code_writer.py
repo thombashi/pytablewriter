@@ -24,6 +24,8 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super(PythonCodeTableWriter, self).__init__()
 
         self.table_name = u""
+        self._prop_extractor.inf_value = 'float("inf")'
+        self._prop_extractor.nan_value = 'float("nan")'
 
     def write_table(self):
         """
