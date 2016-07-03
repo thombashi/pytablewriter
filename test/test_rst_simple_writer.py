@@ -13,6 +13,8 @@ import pytest
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
+from .data import mix_header_list
+from .data import mix_value_matrix
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -81,6 +83,22 @@ normal_test_data_list = [
     3  3.3  ccc       cccc
                           
     =  ===  ===  ===  ====
+"""
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=""".. table:: table name
+
+    =  ====  ====  ====  ===  =====  ===  ===  =======  ========================
+    i   f     c     if   ifc  bool   inf  nan  mix_num            time          
+    =  ====  ====  ====  ===  =====  ===  ===  =======  ========================
+    1  1.10  aa     1.0  1    True   inf  nan      1.0  2017-01-01T00:00:00     
+    2  2.20  bbb    2.2  2.2  False  inf  nan      inf  2017-01-02T03:04:05+0900
+    3  3.33  cccc  -3.0  ccc  True   inf  nan      nan  2017-01-01T00:00:00     
+    =  ====  ====  ====  ===  =====  ===  ===  =======  ========================
 """
     ),
 ]
