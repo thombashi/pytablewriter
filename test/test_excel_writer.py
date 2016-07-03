@@ -14,6 +14,8 @@ from simplesqlite.loader.data import TableData
 
 from .data import header_list
 from .data import value_matrix
+from .data import mix_header_list
+from .data import mix_value_matrix
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -43,6 +45,31 @@ normal_test_data_list = [
                 [1, 123.1, "a", 1,   1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3,   "cccc"],
+            ])
+    ),
+    Data(
+        table="",
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=TableData(
+            "Sheet1",
+            [
+                'i', 'f', 'c', 'if', 'ifc', 'bool',
+                'inf', 'nan', 'mix_num', 'time',
+            ],
+            [
+                [
+                    1.0, 1.1, 'aa', 1.0, 1.0, 1, 'Inf',
+                    'NaN', 1.0, '2017-01-01T00:00:00',
+                ],
+                [
+                    2.0, 2.2, 'bbb', 2.2, 2.2, 0, 'Inf', 'NaN',
+                    'Inf', '2017-01-02T03:04:05+0900',
+                ],
+                [
+                    3.0, 3.33, 'cccc', -3.0, 'ccc', 1, 'Inf',
+                    'NaN', 'NaN', '2017-01-01T00:00:00',
+                ],
             ])
     ),
 ]

@@ -195,6 +195,9 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         self.__last_data_row = None
         self.__last_data_col = None
 
+        self._prop_extractor.inf_value = "Inf"
+        self._prop_extractor.nan_value = "NaN"
+
     def open_workbook(self, workbook_path):
         """
         Open workbook.
