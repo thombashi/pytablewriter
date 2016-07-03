@@ -106,13 +106,21 @@ class TableWriter(TableWriterInterface):
         return u"%s"
 
     def _get_row_item(self, col_prop, value_prop, is_header):
-        item = self.__get_format(
-            col_prop, value_prop, is_header) % (value_prop.data)
+        from dataproperty import Typecode
+
+        item_format = self.__get_format(
+            col_prop, value_prop, is_header)
+
+        try:
+            item = item_format % (value_prop.data)
+        except TypeError:
+            item = value_prop.data
 
         if self.is_quote_str and any([
             all([
-                col_prop.typecode == dataproperty.Typecode.STRING,
-                value_prop.typecode != dataproperty.Typecode.NONE,
+                col_prop.typecode == Typecode.STRING,
+                value_prop.typecode not in [
+                    Typecode.NONE, Typecode.INFINITY, Typecode.NAN]
             ]),
             is_header
         ]):
