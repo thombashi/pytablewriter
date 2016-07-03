@@ -9,6 +9,7 @@ from __future__ import absolute_import
 import dataproperty
 import six
 
+from ._converter import lower_bool_converter
 from ._error import EmptyTableNameError
 from ._text_writer import SourceCodeTableWriter
 
@@ -26,6 +27,9 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         super(JavaScriptTableWriter, self).__init__()
 
         self._prop_extractor.none_value = "null"
+        self._prop_extractor.inf_value = "Infinity"
+        self._prop_extractor.nan_value = "NaN"
+        self._prop_extractor.bool_converter = lower_bool_converter
 
     def write_table(self):
         """
