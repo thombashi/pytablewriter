@@ -14,6 +14,7 @@ import re
 import dataproperty
 
 from ._converter import lower_bool_converter
+from ._converter import strip_quote
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 
@@ -35,10 +36,6 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
         self._prop_extractor.nan_value = "NaN"
         self._prop_extractor.bool_converter = lower_bool_converter
 
-        self.__re_replace_null = re.compile('["]null["]', re.MULTILINE)
-        self.__re_replace_true = re.compile('["]true["]', re.MULTILINE)
-        self.__re_replace_false = re.compile('["]false["]', re.MULTILINE)
-
     def write_null_line(self):
         self._verify_stream()
         self.stream.write(u"\n")
@@ -53,10 +50,9 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
 
         json_text = json.dumps(
             self._value_matrix, sort_keys=True, indent=4) + u"\n"
-        json_text = self.__re_replace_null.sub(
-            self._prop_extractor.none_value, json_text)
-        json_text = self.__re_replace_true.sub("true", json_text)
-        json_text = self.__re_replace_false.sub("false", json_text)
+        json_text = strip_quote(json_text, self._prop_extractor.none_value)
+        json_text = strip_quote(json_text, "true")
+        json_text = strip_quote(json_text, "false")
 
         self.stream.write(json_text)
 
@@ -67,7 +63,8 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
         self._prop_extractor.data_matrix = self.value_matrix
         value_matrix = [
             [data_prop.data for data_prop in prop_list]
-            for prop_list in self._prop_extractor.extract_data_property_matrix()
+            for prop_list
+            in self._prop_extractor.extract_data_property_matrix()
         ]
 
         table_data = [
