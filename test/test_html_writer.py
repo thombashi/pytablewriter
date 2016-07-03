@@ -13,6 +13,8 @@ import pytest
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
+from .data import mix_header_list
+from .data import mix_value_matrix
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -146,6 +148,68 @@ normal_test_data_list = [
       <td align="left"></td>
     </tr>
   </tbody>
+</table>
+"""
+    ),
+    Data(
+        table="tablename",
+        indent="    ",
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected="""<table id="tablename">
+    <caption>tablename</caption>
+    <thead>
+        <tr>
+            <th>i</th>
+            <th>f</th>
+            <th>c</th>
+            <th>if</th>
+            <th>ifc</th>
+            <th>bool</th>
+            <th>inf</th>
+            <th>nan</th>
+            <th>mix_num</th>
+            <th>time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="right">1</td>
+            <td align="right">1.10</td>
+            <td align="left">aa</td>
+            <td align="right">1.0</td>
+            <td align="right">1</td>
+            <td align="left">True</td>
+            <td align="left">inf</td>
+            <td align="left">nan</td>
+            <td align="right">1.0</td>
+            <td align="left">2017-01-01T00:00:00</td>
+        </tr>
+        <tr>
+            <td align="right">2</td>
+            <td align="right">2.20</td>
+            <td align="left">bbb</td>
+            <td align="right">2.2</td>
+            <td align="right">2.2</td>
+            <td align="left">False</td>
+            <td align="left">inf</td>
+            <td align="left">nan</td>
+            <td align="left">inf</td>
+            <td align="left">2017-01-02T03:04:05+0900</td>
+        </tr>
+        <tr>
+            <td align="right">3</td>
+            <td align="right">3.33</td>
+            <td align="left">cccc</td>
+            <td align="right">-3.0</td>
+            <td align="left">ccc</td>
+            <td align="left">True</td>
+            <td align="left">inf</td>
+            <td align="left">nan</td>
+            <td align="left">nan</td>
+            <td align="left">2017-01-01T00:00:00</td>
+        </tr>
+    </tbody>
 </table>
 """
     ),
