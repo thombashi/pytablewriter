@@ -5,7 +5,10 @@
 """
 
 from __future__ import absolute_import
+import datetime
 
+
+_time = datetime.datetime(2017, 1, 1, 0, 0, 0)
 _inf = float("inf")
 _nan = float("nan")
 
@@ -22,9 +25,28 @@ value_matrix_with_none = [
     [None, None, None, None,   None],
 ]
 
-mix_header_list = ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix"]
+mix_header_list = [
+    "i",
+    "f",
+    "c",
+    "if",
+    "ifc",
+    "bool",
+    "inf",
+    "nan",
+    "mix_num",
+    "time",
+]
 mix_value_matrix = [
-    [1, 1.1,  "aa",   1,   1,     True,   _inf,       _nan,  1.0],
-    [2, 2.2,  "bbb",  2.2, 2.2,   False,  "inf",      "nan", _inf],
-    [3, 3.33, "cccc", -3,  "ccc", "true", "infinity", "NAN", _nan],
+    [
+        1, 1.1,  "aa",   1,   1,     True,
+        _inf,       _nan,  1.0,  _time
+    ],
+    [
+        2, 2.2,  "bbb",  2.2, 2.2,   False,
+        "inf",      "nan", _inf, "2017-01-02 03:04:05+0900",
+    ],
+    [
+        3, 3.33, "cccc", -3,  "ccc", "true",
+        "infinity", "NAN", _nan, _time],
 ]
