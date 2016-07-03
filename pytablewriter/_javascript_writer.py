@@ -14,6 +14,10 @@ from ._error import EmptyTableNameError
 from ._text_writer import SourceCodeTableWriter
 
 
+def js_datetime_converter(value):
+    return 'new Date("%s")' % (value.strftime("%Y-%m-%dT%H:%M:%S%z"))
+
+
 class JavaScriptTableWriter(SourceCodeTableWriter):
     """
     Concrete class of a table writer for JavaScript format.
@@ -30,6 +34,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._prop_extractor.inf_value = "Infinity"
         self._prop_extractor.nan_value = "NaN"
         self._prop_extractor.bool_converter = lower_bool_converter
+        self._prop_extractor.datetime_converter = js_datetime_converter
 
     def write_table(self):
         """

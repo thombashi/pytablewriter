@@ -98,10 +98,10 @@ normal_test_data_list = [
         value=mix_value_matrix,
         is_write_header=True,
         expected="""var tablename = [
-    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix"],
-    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1.0],
-    [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity],
-    [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN]
+    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
+    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1.0, new Date("2017-01-01T00:00:00")],
+    [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, new Date("2017-01-02T03:04:05+0900")],
+    [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
 ];
 """
     ),
