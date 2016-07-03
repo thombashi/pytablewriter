@@ -13,6 +13,8 @@ import pytest
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
+from .data import mix_header_list
+from .data import mix_value_matrix
 
 
 Data = collections.namedtuple("Data", "table indent header value expected")
@@ -81,6 +83,26 @@ normal_test_data_list = [
      'c': ['a', None, 'ccc', None],
      'dd': [1, 2.2, None, None],
      'e': [None, 2.2, 'cccc', None]})
+"""
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected="""tablename = pandas.DataFrame(
+    {'bool': [True, False, True],
+     'c': ['aa', 'bbb', 'cccc'],
+     'f': [1.1, 2.2, 3.33],
+     'i': [1, 2, 3],
+     'if': [1, 2.2, -3],
+     'ifc': [1, 2.2, 'ccc'],
+     'inf': [numpy.inf, numpy.inf, numpy.inf],
+     'mix_num': [1.0, numpy.inf, numpy.nan],
+     'nan': [numpy.nan, numpy.nan, numpy.nan],
+     'time': ['2017-01-01T00:00:00',
+              '2017-01-02T03:04:05+0900',
+              '2017-01-01T00:00:00']})
 """
     ),
 ]
