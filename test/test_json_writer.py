@@ -17,6 +17,8 @@ import pytest
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
+from .data import mix_header_list
+from .data import mix_value_matrix
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -119,6 +121,42 @@ normal_test_data_list = [
             ]
         }
         """)
+    ),
+    Data(
+        table="table name",
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=json.loads("""{"table name": [{"bool": true,
+                  "c": "aa",
+                  "f": 1.1,
+                  "i": 1,
+                  "if": 1,
+                  "ifc": 1,
+                  "inf": "Infinity",
+                  "mix_num": 1.0,
+                  "nan": "NaN",
+                  "time": "2017-01-01T00:00:00"},
+                 {"bool": false,
+                  "c": "bbb",
+                  "f": 2.2,
+                  "i": 2,
+                  "if": 2.2,
+                  "ifc": 2.2,
+                  "inf": "Infinity",
+                  "mix_num": "Infinity",
+                  "nan": "NaN",
+                  "time": "2017-01-02T03:04:05+0900"},
+                 {"bool": true,
+                  "c": "cccc",
+                  "f": 3.33,
+                  "i": 3,
+                  "if": -3,
+                  "ifc": "ccc",
+                  "inf": "Infinity",
+                  "mix_num": "NaN",
+                  "nan": "NaN",
+                  "time": "2017-01-01T00:00:00"}]
+                  }""")
     ),
 ]
 

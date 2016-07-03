@@ -13,6 +13,7 @@ import re
 
 import dataproperty
 
+from ._converter import lower_bool_converter
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 
@@ -29,8 +30,14 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
     def __init__(self):
         super(JsonTableWriter, self).__init__()
 
-        self.__none_value = "null"
+        self._prop_extractor.none_value = "null"
+        self._prop_extractor.inf_value = "Infinity"
+        self._prop_extractor.nan_value = "NaN"
+        self._prop_extractor.bool_converter = lower_bool_converter
+
         self.__re_replace_null = re.compile('["]null["]', re.MULTILINE)
+        self.__re_replace_true = re.compile('["]true["]', re.MULTILINE)
+        self.__re_replace_false = re.compile('["]false["]', re.MULTILINE)
 
     def write_null_line(self):
         self._verify_stream()
@@ -47,7 +54,9 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
         json_text = json.dumps(
             self._value_matrix, sort_keys=True, indent=4) + u"\n"
         json_text = self.__re_replace_null.sub(
-            self.__none_value, json_text)
+            self._prop_extractor.none_value, json_text)
+        json_text = self.__re_replace_true.sub("true", json_text)
+        json_text = self.__re_replace_false.sub("false", json_text)
 
         self.stream.write(json_text)
 
@@ -55,14 +64,12 @@ class JsonTableWriter(TableWriter, TextWriterInterface):
         if self._preprocessed_value_matrix:
             return
 
+        self._prop_extractor.data_matrix = self.value_matrix
         value_matrix = [
-            [
-                dataproperty.DataProperty(
-                    value, none_value=self.__none_value).data
-                for value in value_list
-            ]
-            for value_list in self.value_matrix
+            [data_prop.data for data_prop in prop_list]
+            for prop_list in self._prop_extractor.extract_data_property_matrix()
         ]
+
         table_data = [
             dict(zip(self.header_list, value_list))
             for value_list in value_matrix
