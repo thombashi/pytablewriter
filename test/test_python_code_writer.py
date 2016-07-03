@@ -92,10 +92,10 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         expected="""tablename = [
-    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix"],
-    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1.0],
-    [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf")],
-    [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan")],
+    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
+    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1.0, 2017-01-01T00:00:00],
+    [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), 2017-01-02T03:04:05+0900],
+    [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), 2017-01-01T00:00:00],
 ]
 """
     ),
