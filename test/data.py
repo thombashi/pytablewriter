@@ -50,3 +50,10 @@ mix_value_matrix = [
         3, 3.33, "cccc", -3,  "ccc", "true",
         "infinity", "NAN", _nan, _time],
 ]
+
+float_header_list = ["a", "b", "c"]
+float_value_matrix = [
+    [0.01, 9.123,   0.0],
+    [1.0, 99.123,  0.01],
+    [1.2, 999.123, 0.001],
+]
