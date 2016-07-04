@@ -65,6 +65,7 @@ class TableWriter(TableWriterInterface):
 
         self.is_padding = True
         self.is_quote_str = True
+        self.is_float_formatting = True
 
         self._value_matrix = []
         self._column_prop_list = []
@@ -147,7 +148,11 @@ class TableWriter(TableWriterInterface):
                 padding_space_len = int(
                     (col_prop.padding_len - value_prop.str_len) / 2)
 
-        if any([is_header, value_prop.typecode == dataproperty.Typecode.NONE]):
+        if any([
+            is_header,
+            not self.is_float_formatting,
+            value_prop.typecode == dataproperty.Typecode.NONE,
+        ]):
             format_str = u"s"
         else:
             format_str = col_prop.format_str
