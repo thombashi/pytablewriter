@@ -68,21 +68,13 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         if self._preprocessed_value_matrix:
             return
 
-        #"""
         self._prop_extractor.data_matrix = self.value_matrix
         self._value_matrix = [
             [data_prop.data for data_prop in prop_list]
             for prop_list
             in zip(*self._prop_extractor.extract_data_property_matrix())
         ]
-        #"""
 
-        """
-        self._value_matrix = [
-            [dataproperty.DataProperty(value).data for value in value_list]
-            for value_list in zip(*self.value_matrix)
-        ]
-        #"""
         self._value_matrix = dict(
             zip(self.header_list, self._value_matrix))
 
