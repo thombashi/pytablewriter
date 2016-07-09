@@ -9,7 +9,6 @@ try:
     import json
 except ImportError:   # pragma: no cover
     import simplejson as json
-import re
 
 import dataproperty
 
