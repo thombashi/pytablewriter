@@ -59,6 +59,8 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             data_frame_text, self._prop_extractor.inf_value)
         data_frame_text = strip_quote(
             data_frame_text, self._prop_extractor.nan_value)
+        data_frame_text = strip_quote(data_frame_text, "True")
+        data_frame_text = strip_quote(data_frame_text, "False")
 
         self.dec_indent_level()
         self._write_line(data_frame_text)
