@@ -146,8 +146,11 @@ class TableWriter(TableWriterInterface):
 
     def __get_to_string_format(self, col_prop, value_prop):
         if any([
-            not self.is_float_formatting,
-            value_prop.typecode == dataproperty.Typecode.NONE,
+            all([
+                value_prop.typecode == Typecode.FLOAT,
+                not self.is_float_formatting
+            ]),
+            value_prop.typecode == Typecode.NONE,
         ]):
             format_str = u""
         else:
