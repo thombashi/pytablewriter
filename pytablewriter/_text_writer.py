@@ -147,14 +147,24 @@ class TextTableWriter(TableWriter, TextWriterInterface):
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
-    def _get_left_align_formatformat(self):
-        return u"%%-%d%s"
+    def _get_header_item(self, col_prop, value_prop):
+        from dataproperty.converter import StringConverterCreator
 
-    def _get_right_align_formatformat(self):
-        return u"%%%d%s"
+        format_string = self.__get_header_format_string(col_prop)
+        item = format_string.format(
+            StringConverterCreator().create(value_prop.data).convert())
 
-    def _get_center_align_formatformat(self):
-        return self._get_left_align_formatformat()
+        if self.is_quote_str:
+            return u'"%s"' % (item)
+
+        return item
+
+    def __get_header_format_string(self, col_prop):
+        return(
+            u"{:" +
+            self._get_center_align_formatformat() +
+            str(self._get_padding_len(col_prop)) +
+            u"}")
 
     def _write_raw_string(self, unicode_text):
         self._verify_stream()
@@ -175,8 +185,8 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             return
 
         self.__write_value_row([
-            self._get_row_item(
-                col_prop, dataproperty.DataProperty(header), is_header=True)
+            self._get_header_item(
+                col_prop, dataproperty.DataProperty(header))
             for col_prop, header in
             zip(self._column_prop_list, self.header_list)
         ])
