@@ -104,38 +104,64 @@ class TableWriter(TableWriterInterface):
         return 0
 
     def _get_left_align_formatformat(self):
-        return u"%s"
+        return u"<"
 
     def _get_right_align_formatformat(self):
-        return u"%s"
+        return u">"
 
     def _get_center_align_formatformat(self):
-        return u"%s"
+        return u"^"
 
-    def _get_row_item(self, col_prop, value_prop, is_header):
+    def _get_row_item(self, col_prop, value_prop):
         from dataproperty import Typecode
 
-        item_format = self.__get_format(
-            col_prop, value_prop, is_header)
+        to_string_format_str = self.__get_to_string_format(
+            col_prop, value_prop)
 
-        try:
-            item = item_format % (value_prop.data)
-        except TypeError:
-            item = str(value_prop.data)
+        if col_prop.typecode in [Typecode.BOOL, Typecode.DATETIME]:
+            hoge = to_string_format_str.format(value_prop.data)
+        else:
+            try:
+                value = col_prop.type_factory.value_converter_factory.create(
+                    value_prop.data).convert()
+            except dataproperty.TypeConversionError:
+                value = value_prop.data
+
+            try:
+                hoge = to_string_format_str.format(value)
+            except ValueError:
+                hoge = "{}".format(value)
+
+        item = self.__get_align_format(col_prop).format(hoge)
 
         if self.is_quote_str and any([
             all([
                 col_prop.typecode == Typecode.STRING,
                 value_prop.typecode not in [
-                    Typecode.NONE, Typecode.INFINITY, Typecode.NAN]
+                    Typecode.NONE, Typecode.BOOL, Typecode.INFINITY, Typecode.NAN]
             ]),
-            is_header
         ]):
             return u'"%s"' % (item)
 
         return item
 
-    def __get_format(self, col_prop, value_prop, is_header=False):
+    def __get_to_string_format(self, col_prop, value_prop):
+        if any([
+            not self.is_float_formatting,
+            value_prop.typecode == dataproperty.Typecode.NONE,
+        ]):
+            format_str = u""
+        else:
+            format_str = col_prop.format_str
+
+        try:
+            format_str.format(value_prop.data)
+        except dataproperty.TypeConversionError:
+            format_str = u""
+
+        return u"{:" + format_str + u"}"
+
+    def __get_align_format(self, col_prop):
         align_func_table = {
             dataproperty.Align.AUTO: self._get_left_align_formatformat,
             dataproperty.Align.LEFT: self._get_left_align_formatformat,
@@ -143,32 +169,14 @@ class TableWriter(TableWriterInterface):
             dataproperty.Align.CENTER: self._get_center_align_formatformat,
         }
 
-        padding_space_len = 0
-        if self.is_padding:
-            if any([is_header, col_prop.align == dataproperty.Align.CENTER]):
-                padding_space_len = int(
-                    (col_prop.padding_len - value_prop.str_len) / 2)
+        align = align_func_table[col_prop.align]()
 
-        if any([
-            is_header,
-            not self.is_float_formatting,
-            value_prop.typecode == dataproperty.Typecode.NONE,
-        ]):
-            format_str = u"s"
-        else:
-            format_str = col_prop.format_str
+        format_list = [u"{:" + align]
+        if self._get_padding_len(col_prop) > 0:
+            format_list.append(str(self._get_padding_len(col_prop)))
+        format_list.append(u"s}")
 
-        if is_header:
-            formatformat = align_func_table[dataproperty.Align.CENTER]()
-        else:
-            formatformat = align_func_table[col_prop.align]()
-
-        return (
-            u" " * padding_space_len +
-            formatformat % (
-                self._get_padding_len(col_prop) - padding_space_len,
-                format_str)
-        )
+        return u"".join(format_list)
 
     def _verify_property(self):
         self._verify_table_name()
@@ -239,7 +247,7 @@ class TableWriter(TableWriterInterface):
 
         self._value_matrix = [
             [
-                self._get_row_item(col_prop, value_prop, is_header=False)
+                self._get_row_item(col_prop, value_prop)
                 for col_prop, value_prop in
                 zip(self._column_prop_list, value_prop_list)
             ]
