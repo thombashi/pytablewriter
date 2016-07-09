@@ -10,6 +10,7 @@ import dataproperty
 from six.moves import range
 import xlsxwriter
 
+from dataproperty.type import IntegerTypeChecker
 from ._converter import str_datetime_converter
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
@@ -320,7 +321,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         dict_col_numprops = {}
         for col, col_prop in enumerate(self._column_prop_list):
             num_props = {}
-            if dataproperty.is_integer(col_prop.minmax_decimal_places.max_value):
+            if IntegerTypeChecker(col_prop.minmax_decimal_places.max_value).is_type():
                 float_digit = col_prop.minmax_decimal_places.max_value
                 if float_digit > 0:
                     num_props = {"num_format": "0.%s" % ("0" * float_digit)}
@@ -344,7 +345,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
     def __set_cell_width(self):
         font_size = self.__cell_format_property.get("font_size")
 
-        if not dataproperty.is_integer(font_size):
+        if not IntegerTypeChecker(font_size).is_type():
             return
 
         for col_idx, col_prop in enumerate(self._column_prop_list):
