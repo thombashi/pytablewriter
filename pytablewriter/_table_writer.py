@@ -156,7 +156,7 @@ class TableWriter(TableWriterInterface):
 
         try:
             format_str.format(value_prop.data)
-        except dataproperty.TypeConversionError:
+        except ValueError:
             format_str = u""
 
         return u"{:" + format_str + u"}"
