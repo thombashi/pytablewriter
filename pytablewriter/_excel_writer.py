@@ -10,6 +10,7 @@ import dataproperty
 from six.moves import range
 import xlsxwriter
 
+from ._converter import str_datetime_converter
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 
@@ -197,6 +198,8 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
 
         self._prop_extractor.inf_value = "Inf"
         self._prop_extractor.nan_value = "NaN"
+        self._prop_extractor.datetime_converter = str_datetime_converter
+        self._prop_extractor.datetime_format_str = "s"
 
     def open_workbook(self, workbook_path):
         """
