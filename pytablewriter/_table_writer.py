@@ -18,6 +18,10 @@ def default_datetime_converter(value):
     return value.strftime("%Y-%m-%dT%H:%M:%S%z")
 
 
+def default_bool_converter(value):
+    return str(value)
+
+
 class TableWriter(TableWriterInterface):
     """
     Abstract class of table writer.
@@ -75,6 +79,7 @@ class TableWriter(TableWriterInterface):
         self._prop_extractor.min_padding_len = 1
         self._prop_extractor.none_value = ""
         self._prop_extractor.datetime_format_str = "%Y-%m-%dT%H:%M:%S%z"
+        self._prop_extractor.bool_converter = default_bool_converter
 
         self._preprocessed_property = False
 
