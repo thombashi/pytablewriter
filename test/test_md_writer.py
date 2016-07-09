@@ -37,6 +37,23 @@ normal_test_data_list = [
 """
     ),
     Data(
+        table="",
+        indent=0,
+        header=header_list,
+        value=[
+            ["1", 123.09999999999999, "a", "1",   1],
+            [2, 2.2000000000000002, "bb", "2.2", 2.2000000000000002],
+            [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
+        ],
+        is_float_formatting=True,
+        expected=""" a |  b  | c |dd | e  
+--:|----:|---|--:|----
+  1|123.1|a  |1.0|1   
+  2|  2.2|bb |2.2|2.2 
+  3|  3.3|ccc|3.3|cccc
+"""
+    ),
+    Data(
         table="tablename",
         indent=0,
         header=header_list,
