@@ -12,6 +12,10 @@ def lower_bool_converter(bool_value):
     return str(bool_value).lower()
 
 
+def str_datetime_converter(value):
+    return value.strftime("%Y-%m-%dT%H:%M:%S%z")
+
+
 def strip_quote(text, value):
     re_replace = re.compile(
         '["\']%s["\']' % (value), re.MULTILINE)
