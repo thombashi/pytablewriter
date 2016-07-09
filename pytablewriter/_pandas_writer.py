@@ -65,12 +65,14 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self.inc_indent_level()
 
     def _preprocess_value_matrix(self):
+        from ._function import _get_data_helper
+
         if self._preprocessed_value_matrix:
             return
 
         self._prop_extractor.data_matrix = self.value_matrix
         self._value_matrix = [
-            [data_prop.data for data_prop in prop_list]
+            [_get_data_helper(data_prop) for data_prop in prop_list]
             for prop_list
             in zip(*self._prop_extractor.extract_data_property_matrix())
         ]
