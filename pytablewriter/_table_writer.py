@@ -14,10 +14,6 @@ from ._error import EmptyValueError
 from ._interface import TableWriterInterface
 
 
-def default_datetime_converter(value):
-    return value.strftime("%Y-%m-%dT%H:%M:%S%z")
-
-
 def default_bool_converter(value):
     return str(value)
 
