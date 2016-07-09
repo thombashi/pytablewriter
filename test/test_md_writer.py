@@ -135,19 +135,6 @@ normal_test_data_list = [
 1.20|999.12| 0.00
 """
     ),
-    Data(
-        table="",
-        indent=0,
-        header=float_header_list,
-        value=float_value_matrix,
-        is_float_formatting=False,
-        expected=""" a  |  b   |  c  
----:|-----:|----:
-0.01| 9.123|  0.0
- 1.0|99.123| 0.01
- 1.2|999.123|0.001
-"""
-    ),
 ]
 
 exception_test_data_list = [
