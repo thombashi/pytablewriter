@@ -8,6 +8,7 @@ from __future__ import absolute_import
 import sys
 
 import dataproperty
+from dataproperty import Typecode
 
 from ._error import EmptyHeaderError
 from ._error import EmptyValueError
@@ -113,8 +114,6 @@ class TableWriter(TableWriterInterface):
         return u"^"
 
     def _get_row_item(self, col_prop, value_prop):
-        from dataproperty import Typecode
-
         to_string_format_str = self.__get_to_string_format(
             col_prop, value_prop)
 
