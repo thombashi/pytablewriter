@@ -35,6 +35,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._prop_extractor.nan_value = "NaN"
         self._prop_extractor.bool_converter = lower_bool_converter
         self._prop_extractor.datetime_converter = js_datetime_converter
+        self._prop_extractor.datetime_format_str = "s"
 
     def write_table(self):
         """

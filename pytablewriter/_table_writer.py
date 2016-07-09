@@ -74,7 +74,7 @@ class TableWriter(TableWriterInterface):
         self._prop_extractor = dataproperty.PropertyExtractor()
         self._prop_extractor.min_padding_len = 1
         self._prop_extractor.none_value = ""
-        self._prop_extractor.datetime_converter = default_datetime_converter
+        self._prop_extractor.datetime_format_str = "%Y-%m-%dT%H:%M:%S%z"
 
         self._preprocessed_property = False
 
