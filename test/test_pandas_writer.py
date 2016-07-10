@@ -100,9 +100,9 @@ normal_test_data_list = [
      'inf': [numpy.inf, numpy.inf, numpy.inf],
      'mix_num': [1.0, numpy.inf, numpy.nan],
      'nan': [numpy.nan, numpy.nan, numpy.nan],
-     'time': ['2017-01-01T00:00:00',
-              '2017-01-02T03:04:05+0900',
-              '2017-01-01T00:00:00']})
+     'time': ['2017-01-01 00:00:00',
+              '2017-01-02 03:04:05+0900',
+              '2017-01-01 00:00:00']})
 """
     ),
 ]

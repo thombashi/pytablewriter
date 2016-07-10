@@ -183,7 +183,7 @@ normal_test_data_list = [
             <td align="left">inf</td>
             <td align="left">nan</td>
             <td align="right">1.0</td>
-            <td align="left">2017-01-01T00:00:00</td>
+            <td align="left">2017-01-01 00:00:00</td>
         </tr>
         <tr>
             <td align="right">2</td>
@@ -195,7 +195,7 @@ normal_test_data_list = [
             <td align="left">inf</td>
             <td align="left">nan</td>
             <td align="left">inf</td>
-            <td align="left">2017-01-02T03:04:05+0900</td>
+            <td align="left">2017-01-02 03:04:05+0900</td>
         </tr>
         <tr>
             <td align="right">3</td>
@@ -207,7 +207,7 @@ normal_test_data_list = [
             <td align="left">inf</td>
             <td align="left">nan</td>
             <td align="left">nan</td>
-            <td align="left">2017-01-01T00:00:00</td>
+            <td align="left">2017-01-01 00:00:00</td>
         </tr>
     </tbody>
 </table>

@@ -135,7 +135,7 @@ normal_test_data_list = [
                   "inf": "Infinity",
                   "mix_num": 1.0,
                   "nan": "NaN",
-                  "time": "2017-01-01T00:00:00"},
+                  "time": "2017-01-01 00:00:00"},
                  {"bool": false,
                   "c": "bbb",
                   "f": 2.2,
@@ -145,7 +145,7 @@ normal_test_data_list = [
                   "inf": "Infinity",
                   "mix_num": "Infinity",
                   "nan": "NaN",
-                  "time": "2017-01-02T03:04:05+0900"},
+                  "time": "2017-01-02 03:04:05+0900"},
                  {"bool": true,
                   "c": "cccc",
                   "f": 3.33,
@@ -155,7 +155,7 @@ normal_test_data_list = [
                   "inf": "Infinity",
                   "mix_num": "NaN",
                   "nan": "NaN",
-                  "time": "2017-01-01T00:00:00"}]
+                  "time": "2017-01-01 00:00:00"}]
                   }""")
     ),
 ]
