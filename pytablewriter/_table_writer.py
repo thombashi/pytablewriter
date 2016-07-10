@@ -147,7 +147,8 @@ class TableWriter(TableWriterInterface):
     def __get_to_string_format(self, col_prop, value_prop):
         if any([
             all([
-                value_prop.typecode == Typecode.FLOAT,
+                col_prop.typecode == Typecode.FLOAT,
+                value_prop.typecode in [Typecode.INT, Typecode.FLOAT],
                 not self.is_float_formatting
             ]),
             value_prop.typecode == Typecode.NONE,
