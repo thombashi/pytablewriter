@@ -43,9 +43,15 @@ class TableWriter(TableWriterInterface):
 
         Padding an item in the table if the value is |True|.
 
-    .. py:attribute:: is_quote_str
+    .. py:attribute:: is_quote_header
 
-        Add double quote to string in the table if the value is |True|.
+        Add double quote to string in the header if the value is |True|.
+
+    .. py:attribute:: is_quote_table
+
+        Dictionary of { Typecode : bool } format.
+        Add double quote to string in table elements,
+        where a |Typecode| of table-value is |True| in the dictionary.
     """
 
     @property
@@ -65,7 +71,18 @@ class TableWriter(TableWriterInterface):
         self.value_matrix = None
 
         self.is_padding = True
-        self.is_quote_str = True
+        self.is_quote_header = True
+        self.is_quote_table = {
+            Typecode.NONE: False,
+            Typecode.INT: False,
+            Typecode.FLOAT: False,
+            Typecode.STRING: True,
+            Typecode.DATETIME: True,
+            Typecode.FLOAT: False,
+            Typecode.NAN: False,
+            Typecode.BOOL: False,
+        }
+
         self.is_float_formatting = True
 
         self._value_matrix = []
@@ -133,12 +150,12 @@ class TableWriter(TableWriterInterface):
 
         item = self.__get_align_format(col_prop).format(hoge)
 
-        if self.is_quote_str and any([
-            all([
-                col_prop.typecode == Typecode.STRING,
-                value_prop.typecode not in [
-                    Typecode.NONE, Typecode.BOOL, Typecode.INFINITY, Typecode.NAN]
-            ]),
+        if all([
+            self.is_quote_table.get(col_prop.typecode, False),
+            any([
+                self.is_quote_table.get(value_prop.typecode, False),
+                value_prop.typecode in [Typecode.INT, Typecode.FLOAT],
+            ])
         ]):
             return u'"%s"' % (item)
 

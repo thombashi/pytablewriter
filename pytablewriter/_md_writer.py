@@ -26,7 +26,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self.indent_string = u""
         self.column_delimiter = u"|"
         self.char_cross_point = u"|"
-        self.is_quote_str = False
+        self.is_quote_header = False
+        self.is_quote_table[dataproperty.Typecode.STRING] = False
+        self.is_quote_table[dataproperty.Typecode.DATETIME] = False
 
         self._prop_extractor.min_padding_len = 3
 
