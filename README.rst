@@ -48,28 +48,26 @@ Write a Markdown table
     import pytablewriter
 
     writer = pytablewriter.MarkdownTableWriter()
-    writer.table_name = "zone"
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.table_name = "example_table"
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
     writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
     ]
 
     writer.write_table()
 
 .. code::
 
-    # zone
-    zone_id|country_code|   zone_name
-    ------:|------------|----------------
-          1|AD          |Europe/Andorra
-          2|AE          |Asia/Dubai
-          3|AF          |Asia/Kabul
-          4|AG          |America/Antigua
-          5|AI          |America/Anguilla
+    # example_table
+    int|float|str |bool |mix|          time
+    --:|----:|----|-----|--:|------------------------
+      0|  0.1|hoge|True |  0|2017-01-01 03:04:05+0900
+      2| -2.2|foo |False|   |2017-12-23 12:34:51+0900
+      3|  0.0|bar |True |inf|2017-03-03 22:44:55+0900
+    -10| -9.9|    |False|nan|2017-01-01 00:00:00+0900
 
 
 Rendering result
@@ -90,14 +88,13 @@ Write a reStructuredText table (grid tables)
     import pytablewriter
 
     writer = pytablewriter.RstGridTableWriter()
-    writer.table_name = "zone"
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.table_name = "example_table"
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
     writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
     ]
 
     writer.write_table()
@@ -105,41 +102,36 @@ Write a reStructuredText table (grid tables)
 
 .. code::
 
-    .. table:: zone
+    .. table:: example_table
 
-        +-------+------------+----------------+
-        |zone_id|country_code|   zone_name    |
-        +=======+============+================+
-        |      1|AD          |Europe/Andorra  |
-        +-------+------------+----------------+
-        |      2|AE          |Asia/Dubai      |
-        +-------+------------+----------------+
-        |      3|AF          |Asia/Kabul      |
-        +-------+------------+----------------+
-        |      4|AG          |America/Antigua |
-        +-------+------------+----------------+
-        |      5|AI          |America/Anguilla|
-        +-------+------------+----------------+
-
+        +---+-----+----+-----+---+------------------------+
+        |int|float|str |bool |mix|          time          |
+        +===+=====+====+=====+===+========================+
+        |  0|  0.1|hoge|True |  0|2017-01-01 03:04:05+0900|
+        +---+-----+----+-----+---+------------------------+
+        |  2| -2.2|foo |False|   |2017-12-23 12:34:51+0900|
+        +---+-----+----+-----+---+------------------------+
+        |  3|  0.0|bar |True |inf|2017-03-03 22:44:55+0900|
+        +---+-----+----+-----+---+------------------------+
+        |-10| -9.9|    |False|nan|2017-01-01 00:00:00+0900|
+        +---+-----+----+-----+---+------------------------+
 
 Rendering result
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. table:: zone
+.. table:: example_table
 
-    +-------+------------+----------------+
-    |zone_id|country_code|   zone_name    |
-    +=======+============+================+
-    |      1|AD          |Europe/Andorra  |
-    +-------+------------+----------------+
-    |      2|AE          |Asia/Dubai      |
-    +-------+------------+----------------+
-    |      3|AF          |Asia/Kabul      |
-    +-------+------------+----------------+
-    |      4|AG          |America/Antigua |
-    +-------+------------+----------------+
-    |      5|AI          |America/Anguilla|
-    +-------+------------+----------------+
+    +---+-----+----+-----+---+------------------------+
+    |int|float|str |bool |mix|          time          |
+    +===+=====+====+=====+===+========================+
+    |  0|  0.1|hoge|True |  0|2017-01-01 03:04:05+0900|
+    +---+-----+----+-----+---+------------------------+
+    |  2| -2.2|foo |False|   |2017-12-23 12:34:51+0900|
+    +---+-----+----+-----+---+------------------------+
+    |  3|  0.0|bar |True |inf|2017-03-03 22:44:55+0900|
+    +---+-----+----+-----+---+------------------------+
+    |-10| -9.9|    |False|nan|2017-01-01 00:00:00+0900|
+    +---+-----+----+-----+---+------------------------+
 
 Write a JavaScript table (variable definition of nested list)
 -------------------------------------------------------------
@@ -149,27 +141,25 @@ Write a JavaScript table (variable definition of nested list)
     import pytablewriter
 
     writer = pytablewriter.JavaScriptTableWriter()
-    writer.table_name = "zone"
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.table_name = "example_table"
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
     writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
     ]
 
     writer.write_table()
 
 .. code:: js
 
-    var zone = [
-        ["zone_id", "country_code", "zone_name"],
-        [1, "AD", "Europe/Andorra"],
-        [2, "AE", "Asia/Dubai"],
-        [3, "AF", "Asia/Kabul"],
-        [4, "AG", "America/Antigua"],
-        [5, "AI", "America/Anguilla"]
+    var example_table = [
+        ["int", "float", "str", "bool", "mix", "time"],
+        [0, 0.1, "hoge", true, 0, new Date("2017-01-01T03:04:05+0900")],
+        [2, -2.2, "foo", false, null, new Date("2017-12-23T12:34:51+0900")],
+        [3, 0.0, "bar", true, Infinity, new Date("2017-03-03T22:44:55+0900")],
+        [-10, -9.9, "", false, NaN, new Date("2017-01-01T00:00:00+0900")]
     ];
 
 Write an Excel table
@@ -180,20 +170,20 @@ Write an Excel table
     import pytablewriter
 
     writer = pytablewriter.ExcelTableWriter()
-    writer.open_workbook("sample_single.xlsx")
+    writer.open_workbook("sample.xlsx")
 
-    writer.make_worksheet("zone")
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.make_worksheet("example")
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
     writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
     ]
     writer.write_table()
 
     writer.close()
+
 
 Output
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
