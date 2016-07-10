@@ -16,14 +16,13 @@ With a table name
     import pytablewriter
 
     writer = pytablewriter.JsonTableWriter()
-    writer.table_name = "zone"
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.table_name = "example_table"
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
     writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
     ]
     
     writer.write_table()
@@ -31,33 +30,40 @@ With a table name
 
 .. code-block:: json
     :caption: Output
-    
+
     {
-        "zone": [
+        "example_table": [
             {
-                "country_code": "AD",
-                "zone_id": 1,
-                "zone_name": "Europe/Andorra"
+                "bool": true,
+                "float": 0.1,
+                "int": 0,
+                "mix": 0,
+                "str": "hoge",
+                "time": "2017-01-01 03:04:05+0900"
             },
             {
-                "country_code": "AE",
-                "zone_id": 2,
-                "zone_name": "Asia/Dubai"
+                "bool": false,
+                "float": -2.23,
+                "int": 2,
+                "mix": null,
+                "str": "foo",
+                "time": "2017-12-23 12:34:51+0900"
             },
             {
-                "country_code": "AF",
-                "zone_id": 3,
-                "zone_name": "Asia/Kabul"
+                "bool": true,
+                "float": 0,
+                "int": 3,
+                "mix": "Infinity",
+                "str": "bar",
+                "time": "2017-03-03 22:44:55+0900"
             },
             {
-                "country_code": "AG",
-                "zone_id": 4,
-                "zone_name": "America/Antigua"
-            },
-            {
-                "country_code": "AI",
-                "zone_id": 5,
-                "zone_name": "America/Anguilla"
+                "bool": false,
+                "float": -9.9,
+                "int": -10,
+                "mix": "NaN",
+                "str": "",
+                "time": "2017-01-01 00:00:00+0900"
             }
         ]
     }
@@ -72,13 +78,12 @@ Without a table name
     import pytablewriter
 
     writer = pytablewriter.JsonTableWriter()
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
     writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
     ]
     
     writer.write_table()
@@ -86,31 +91,38 @@ Without a table name
 
 .. code-block:: json
     :caption: Output
-    
+
     [
         {
-            "country_code": "AD",
-            "zone_id": 1,
-            "zone_name": "Europe/Andorra"
+            "bool": true,
+            "float": 0.1,
+            "int": 0,
+            "mix": 0,
+            "str": "hoge",
+            "time": "2017-01-01 03:04:05+0900"
         },
         {
-            "country_code": "AE",
-            "zone_id": 2,
-            "zone_name": "Asia/Dubai"
+            "bool": false,
+            "float": -2.23,
+            "int": 2,
+            "mix": null,
+            "str": "foo",
+            "time": "2017-12-23 12:34:51+0900"
         },
         {
-            "country_code": "AF",
-            "zone_id": 3,
-            "zone_name": "Asia/Kabul"
+            "bool": true,
+            "float": 0,
+            "int": 3,
+            "mix": "Infinity",
+            "str": "bar",
+            "time": "2017-03-03 22:44:55+0900"
         },
         {
-            "country_code": "AG",
-            "zone_id": 4,
-            "zone_name": "America/Antigua"
-        },
-        {
-            "country_code": "AI",
-            "zone_id": 5,
-            "zone_name": "America/Anguilla"
+            "bool": false,
+            "float": -9.9,
+            "int": -10,
+            "mix": "NaN",
+            "str": "",
+            "time": "2017-01-01 00:00:00+0900"
         }
     ]
