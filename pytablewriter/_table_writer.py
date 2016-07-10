@@ -135,7 +135,7 @@ class TableWriter(TableWriterInterface):
             col_prop, value_prop)
 
         if col_prop.typecode in [Typecode.BOOL, Typecode.DATETIME]:
-            hoge = to_string_format_str.format(value_prop.data)
+            item = to_string_format_str.format(value_prop.data)
         else:
             try:
                 value = col_prop.type_factory.value_converter_factory.create(
@@ -144,11 +144,11 @@ class TableWriter(TableWriterInterface):
                 value = value_prop.data
 
             try:
-                hoge = to_string_format_str.format(value)
+                item = to_string_format_str.format(value)
             except ValueError:
-                hoge = "{}".format(value)
+                item = "{}".format(value)
 
-        item = self.__get_align_format(col_prop).format(hoge)
+        item = self.__get_align_format(col_prop).format(item)
 
         if all([
             self.is_quote_table.get(col_prop.typecode, False),
