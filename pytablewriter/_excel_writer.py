@@ -7,10 +7,10 @@
 from __future__ import absolute_import
 
 import dataproperty
+from dataproperty.type import IntegerTypeChecker
 from six.moves import range
 import xlsxwriter
 
-from dataproperty.type import IntegerTypeChecker
 from ._converter import str_datetime_converter
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
