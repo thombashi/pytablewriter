@@ -16,7 +16,7 @@ from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 
 
-class ExcelWorkbook(object):
+class ExcelWorkbookXlsx(object):
 
     @property
     def workbook(self):
@@ -209,7 +209,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         :param str workbook_path: File path to open.
         """
 
-        self.__workbook = ExcelWorkbook(workbook_path)
+        self.__workbook = ExcelWorkbookXlsx(workbook_path)
 
     def close(self):
         """
