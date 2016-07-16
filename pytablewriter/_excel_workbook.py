@@ -83,7 +83,12 @@ class ExcelWorkbookXls(ExcelWorkbook):
                 # the work sheet is already exists
                 return self._worksheet_table.get(worksheet_name)
         else:
-            worksheet_name = None
+            sheet_id = 1
+            while True:
+                worksheet_name = "Sheet{:d}".format(sheet_id)
+                if worksheet_name not in self._worksheet_table:
+                    break
+                sheet_id += 1
 
         worksheet = self.workbook.add_sheet(worksheet_name)
         self._worksheet_table[worksheet_name] = worksheet

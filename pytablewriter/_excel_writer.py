@@ -10,6 +10,7 @@ import abc
 import dataproperty as dp
 from dataproperty.type import IntegerTypeChecker
 from six.moves import range
+import xlwt
 
 from ._converter import str_datetime_converter
 from ._excel_workbook import ExcelWorkbookXls
@@ -175,6 +176,72 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
     def _postprocess(self):
         self._last_data_row = self.first_data_row + len(self.value_matrix)
         self._last_data_col = self._get_last_column()
+
+
+class ExcelXlsTableWriter(ExcelTableWriter):
+    """
+    Concrete class of a table writer for Excel format
+    (older or equal to Office 2003).
+    """
+
+    def __init__(self):
+        super(ExcelXlsTableWriter, self).__init__()
+
+        self.__col_style_table = {}
+
+    def open_workbook(self, workbook_path):
+        self._workbook = ExcelWorkbookXls(workbook_path)
+
+    def _write_header(self):
+        if dp.is_empty_list_or_tuple(self.header_list):
+            return
+
+        for col, value in enumerate(self.header_list):
+            self.stream.write(0, col, value)
+
+    def _write_cell(self, row, col, prop):
+        if prop.typecode in [dp.Typecode.FLOAT]:
+            try:
+                cell_style = self.__get_cell_style(col)
+            except ValueError:
+                pass
+            else:
+                self.stream.write(
+                    row, col, prop.data, cell_style)
+                return
+
+        self.stream.write(row, col, prop.data)
+
+    def _postprocess(self):
+        super(ExcelXlsTableWriter, self)._postprocess()
+
+        self.__col_style_table = {}
+
+    def __get_cell_style(self, col):
+        if col in self.__col_style_table:
+            return self.__col_style_table.get(col)
+
+        try:
+            col_prop = self._column_prop_list[col]
+        except KeyError:
+            return {}
+
+        if col_prop.typecode not in [dp.Typecode.FLOAT]:
+            raise ValueError()
+
+        if not IntegerTypeChecker(col_prop.minmax_decimal_places.max_value).is_type():
+            raise ValueError()
+
+        float_digit = col_prop.minmax_decimal_places.max_value
+        if float_digit <= 0:
+            raise ValueError()
+
+        num_format_str = "#,{:s}0.{:s}".format(
+            "#" * float_digit, "0" * float_digit)
+        cell_style = xlwt.easyxf(num_format_str=num_format_str)
+        self.__col_style_table[col] = cell_style
+
+        return cell_style
 
 
 class ExcelXlsxTableWriter(ExcelTableWriter):
@@ -349,3 +416,6 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             self.last_header_row, self.first_data_col,
             self.last_data_row, self.last_data_col)
         self.stream.freeze_panes(self.first_data_row, self.first_data_col)
+
+        self.__col_cell_format_cache = {}
+        self.__col_numprops_table = {}
