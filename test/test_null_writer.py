@@ -39,7 +39,7 @@ class Test_NullTableWriter_write_new_line:
         writer = table_writer_class()
         writer.write_null_line()
 
-        out, err = capsys.readouterr()
+        out, _err = capsys.readouterr()
         assert out == ""
 
 
@@ -49,5 +49,5 @@ class Test_NullTableWriter_write_table:
         writer = table_writer_class()
         writer.write_table()
 
-        out, err = capsys.readouterr()
+        out, _err = capsys.readouterr()
         assert out == ""

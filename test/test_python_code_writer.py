@@ -148,7 +148,7 @@ class Test_PythonCodeTableWriter_write_new_line:
         writer = table_writer_class()
         writer.write_null_line()
 
-        out, err = capsys.readouterr()
+        out, _err = capsys.readouterr()
         assert out == "\n"
 
 
@@ -169,7 +169,7 @@ class Test_PythonCodeTableWriter_write_table:
         writer.value_matrix = value
         writer.write_table()
 
-        out, err = capsys.readouterr()
+        out, _err = capsys.readouterr()
         assert out == expected
 
     @pytest.mark.parametrize(
