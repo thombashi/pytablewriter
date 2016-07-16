@@ -12,6 +12,7 @@ from dataproperty.type import IntegerTypeChecker
 from six.moves import range
 
 from ._converter import str_datetime_converter
+from ._excel_workbook import ExcelWorkbookXls
 from ._excel_workbook import ExcelWorkbookXlsx
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
@@ -142,6 +143,13 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
     def write_null_line(self):
         pass
 
+    def _write_value_matrix(self):
+        for row, value_prop_list in enumerate(self._value_prop_matrix):
+            sheet_row = self.first_data_row + row
+
+            for col, prop in enumerate(value_prop_list):
+                self._write_cell(sheet_row, col, prop)
+
     def _get_last_column(self):
         if dp.is_not_empty_list_or_tuple(self.header_list):
             return len(self.header_list) - 1
@@ -224,6 +232,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         }
 
         self.__col_cell_format_cache = {}
+        self.__col_numprops_table = {}
 
     def open_workbook(self, workbook_path):
         self._workbook = ExcelWorkbookXlsx(workbook_path)
@@ -258,56 +267,60 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
                 row=row, col=0, data=[""] * len(self.header_list),
                 cell_format=header_format)
 
-    def _write_value_matrix(self):
-        col_numproperty_table = self.__get_number_property()
+    def _write_cell(self, row, col, prop):
+        base_props = dict(self.__cell_format_property)
+        format_key = "{:d}_{:d}".format(col, prop.typecode)
 
-        for row, value_prop_list in enumerate(self._value_prop_matrix):
-            sheet_row = self.first_data_row + row
+        if prop.typecode in [dp.Typecode.INT, dp.Typecode.FLOAT]:
+            num_props = self.__get_number_property(col)
+            base_props.update(num_props)
+            cell_format = self.__get_cell_format(format_key, base_props)
 
-            for col, prop in enumerate(value_prop_list):
-                base_props = dict(self.__cell_format_property)
-                key = "%d_%d" % (col, prop.typecode)
+            try:
+                self.stream.write_number(
+                    row, col, float(prop.data), cell_format)
+            except TypeError:
+                pass
+        else:
+            if prop.data is None:
+                base_props = dict(self.__nan_format_property)
 
-                if prop.typecode in [dp.Typecode.INT, dp.Typecode.FLOAT]:
-                    num_props = col_numproperty_table.get(col, {})
-                    base_props.update(num_props)
+            cell_format = self.__get_cell_format(format_key, base_props)
+            self.stream.write(
+                row, col, prop.data, cell_format)
 
-                    cell_format = self.__col_cell_format_cache.get(key)
-                    if cell_format is None:
-                        # cache miss
-                        cell_format = self.__add_format(base_props)
-                        self.__col_cell_format_cache[key] = cell_format
+    def __get_number_property(self, col):
+        if col in self.__col_numprops_table:
+            return self.__col_numprops_table.get(col)
 
-                    try:
-                        self.stream.write_number(
-                            sheet_row, col, float(prop.data), cell_format)
-                    except TypeError:
-                        pass
-                else:
-                    if prop.data is None:
-                        base_props = dict(self.__nan_format_property)
+        try:
+            col_prop = self._column_prop_list[col]
+        except KeyError:
+            return {}
 
-                    cell_format = self.__col_cell_format_cache.get(key)
-                    if cell_format is None:
-                        # cache miss
-                        cell_format = self.__add_format(base_props)
-                        self.__col_cell_format_cache[key] = cell_format
+        if col_prop.typecode not in [dp.Typecode.INT, dp.Typecode.FLOAT]:
+            return {}
 
-                    self.stream.write(
-                        sheet_row, col, prop.data, cell_format)
+        num_props = {}
+        if IntegerTypeChecker(col_prop.minmax_decimal_places.max_value).is_type():
+            float_digit = col_prop.minmax_decimal_places.max_value
+            if float_digit > 0:
+                num_props = {"num_format": "0.{:s}".format("0" * float_digit)}
 
-    def __get_number_property(self):
-        dict_col_numprops = {}
-        for col, col_prop in enumerate(self._column_prop_list):
-            num_props = {}
-            if IntegerTypeChecker(col_prop.minmax_decimal_places.max_value).is_type():
-                float_digit = col_prop.minmax_decimal_places.max_value
-                if float_digit > 0:
-                    num_props = {"num_format": "0.%s" % ("0" * float_digit)}
+        self.__col_numprops_table[col] = num_props
 
-            dict_col_numprops[col] = num_props
+        return num_props
 
-        return dict_col_numprops
+    def __get_cell_format(self, format_key, cell_props):
+        cell_format = self.__col_cell_format_cache.get(format_key)
+        if cell_format is not None:
+            return cell_format
+
+        # cache miss
+        cell_format = self.__add_format(cell_props)
+        self.__col_cell_format_cache[format_key] = cell_format
+
+        return cell_format
 
     def __add_format(self, dict_property):
         return self.workbook.workbook.add_format(dict_property)
