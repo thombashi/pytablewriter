@@ -16,6 +16,7 @@ Python 2.7+ or 3.3+
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `six <https://pypi.python.org/pypi/six/>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
+- `xlwt <http://www.python-excel.org/>`__
 
 
 Test dependencies
