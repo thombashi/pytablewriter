@@ -208,8 +208,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         else:
             work_sheet_name = None
 
-        worksheet = self.workbook.workbook.add_worksheet(
-            work_sheet_name)
+        worksheet = self.workbook.add_worksheet(work_sheet_name)
 
         self.__sheet_table[worksheet.name] = worksheet
         self.stream = worksheet

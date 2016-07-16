@@ -36,6 +36,11 @@ class ExcelWorkbookXlsx(object):
         self.__workbook.close()
         self.__clear()
 
+    def add_worksheet(self, worksheet_name):
+        worksheet = self.__workbook.add_worksheet(worksheet_name)
+
+        return worksheet
+
     def __clear(self):
         self.__workbook = None
         self.__file_path = None
