@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 import abc
 
-import dataproperty
+import dataproperty as dp
 from dataproperty.type import IntegerTypeChecker
 from six.moves import range
 
@@ -143,10 +143,10 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         pass
 
     def _get_last_column(self):
-        if dataproperty.is_not_empty_list_or_tuple(self.header_list):
+        if dp.is_not_empty_list_or_tuple(self.header_list):
             return len(self.header_list) - 1
 
-        if dataproperty.is_not_empty_list_or_tuple(self.value_matrix):
+        if dp.is_not_empty_list_or_tuple(self.value_matrix):
             return len(self.value_matrix[0]) - 1
 
         raise ValueError()
@@ -243,7 +243,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         self._postprocess()
 
     def _write_header(self):
-        if dataproperty.is_empty_list_or_tuple(self.header_list):
+        if dp.is_empty_list_or_tuple(self.header_list):
             return
 
         header_format_props = self.format_table.get(
@@ -268,7 +268,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
                 base_props = dict(self.__cell_format_property)
                 key = "%d_%d" % (col, prop.typecode)
 
-                if prop.typecode in [dataproperty.Typecode.INT, dataproperty.Typecode.FLOAT]:
+                if prop.typecode in [dp.Typecode.INT, dp.Typecode.FLOAT]:
                     num_props = col_numproperty_table.get(col, {})
                     base_props.update(num_props)
 
