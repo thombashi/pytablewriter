@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 import abc
 
+import dataproperty
 import six
 import xlsxwriter
 
@@ -30,6 +31,10 @@ class ExcelWorkbookInterface(object):
     def close(self):
         pass
 
+    @abc.abstractmethod
+    def add_worksheet(self, worksheet_name):
+        pass
+
 
 class ExcelWorkbook(ExcelWorkbookInterface):
 
@@ -48,18 +53,19 @@ class ExcelWorkbook(ExcelWorkbookInterface):
     def _clear(self):
         self._workbook = None
         self._file_path = None
+        self._worksheet_table = {}
 
 
 class ExcelWorkbookXlsx(ExcelWorkbook):
 
     def __init__(self, file_path):
+        super(ExcelWorkbookXlsx, self).__init__(file_path)
         self.open(file_path)
 
     def __del__(self):
         self.close()
 
     def open(self, file_path):
-        self._file_path = file_path
         self._workbook = xlsxwriter.Workbook(file_path)
 
     def close(self):
@@ -70,6 +76,14 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         self._clear()
 
     def add_worksheet(self, worksheet_name):
+        if dataproperty.is_not_empty_string(worksheet_name):
+            if worksheet_name in self._worksheet_table:
+                # the work sheet is already exists
+                return self._worksheet_table.get(worksheet_name)
+        else:
+            worksheet_name = None
+
         worksheet = self.workbook.add_worksheet(worksheet_name)
+        self._worksheet_table[worksheet_name] = worksheet
 
         return worksheet

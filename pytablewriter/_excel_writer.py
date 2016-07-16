@@ -198,20 +198,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
             if the ``sheet_name`` is empty.
         """
 
-        if dataproperty.is_not_empty_string(sheet_name):
-            if sheet_name in self.__sheet_table:
-                # the sheet is already exists
-                self.stream = self.__sheet_table.get(sheet_name)
-                return
-
-            work_sheet_name = sheet_name
-        else:
-            work_sheet_name = None
-
-        worksheet = self.workbook.add_worksheet(work_sheet_name)
-
-        self.__sheet_table[worksheet.name] = worksheet
-        self.stream = worksheet
+        self.stream = self.workbook.add_worksheet(sheet_name)
 
     def write_null_line(self):
         pass
