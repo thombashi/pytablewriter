@@ -41,6 +41,10 @@ class ExcelWorkbook(ExcelWorkbookInterface):
     def file_path(self):
         return self._file_path
 
+    def __init__(self, file_path):
+        self._clear()
+        self._file_path = file_path
+
     def _clear(self):
         self._workbook = None
         self._file_path = None
