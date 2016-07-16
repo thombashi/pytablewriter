@@ -155,7 +155,6 @@ class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
         }
 
         self.__workbook = None
-        self.__sheet_table = {}
         self.__col_cell_format_cache = {}
 
         self.__first_header_row = 0
