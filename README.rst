@@ -21,6 +21,8 @@ Features
 - Write a table in various formats:
     - CSV
     - Microsoft Excel :superscript:`TM`
+        - `.xlsx` format
+        - `.xls` format
     - HTML
     - JavaScript (Definition of a nested list variable)
     - JSON
