@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 import collections
+import itertools
 
 import pytablewriter
 import pytest
@@ -107,19 +108,27 @@ invalid_test_data_list = [
     ),
 ]
 
-table_writer_class = pytablewriter.ExcelXlsxTableWriter
+table_writer_class_list = [
+    pytablewriter.ExcelXlsTableWriter,
+    pytablewriter.ExcelXlsxTableWriter,
+]
 
 
 class Test_ExcelTableWriter_write_table:
 
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
-        [data.table, data.header, data.value, data.expected]
-        for data in normal_test_data_list
-    ])
-    def test_normal(self, tmpdir, table, header, value, expected):
+    @pytest.mark.parametrize(
+        ["writer_class", "table", "header", "value", "expected"],
+        [
+            [writer_class, data.table, data.header, data.value, data.expected]
+            for writer_class, data in itertools.product(
+                table_writer_class_list, normal_test_data_list)
+        ]
+    )
+    def test_normal(
+            self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
 
-        writer = table_writer_class()
+        writer = writer_class()
         writer.open_workbook(str(test_file_path))
         writer.make_worksheet(table)
         writer.header_list = header
@@ -132,14 +141,18 @@ class Test_ExcelTableWriter_write_table:
         for tabledata in loader.load():
             assert tabledata == expected
 
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
-        [data.table, data.header, data.value, data.expected]
-        for data in invalid_test_data_list
-    ])
-    def test_exception(self, tmpdir, table, header, value, expected):
+    @pytest.mark.parametrize(
+        ["writer_class", "table", "header", "value", "expected"],
+        [
+            [writer_class, data.table, data.header, data.value, data.expected]
+            for writer_class, data in itertools.product(
+                table_writer_class_list, invalid_test_data_list)
+        ]
+    )
+    def test_exception(self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
 
-        writer = table_writer_class()
+        writer = writer_class()
         writer.open_workbook(str(test_file_path))
         writer.make_worksheet(table)
         writer.header_list = header
@@ -148,15 +161,19 @@ class Test_ExcelTableWriter_write_table:
         with pytest.raises(expected):
             writer.write_table()
 
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
-        [data.table, data.header, data.value, data.expected]
-        for data in normal_test_data_list
-    ])
+    @pytest.mark.parametrize(
+        ["writer_class", "table", "header", "value", "expected"],
+        [
+            [writer_class, data.table, data.header, data.value, data.expected]
+            for writer_class, data in itertools.product(
+                table_writer_class_list, normal_test_data_list)
+        ]
+    )
     def test_exception_null_sheet(
-            self, tmpdir, table, header, value, expected):
+            self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
 
-        writer = table_writer_class()
+        writer = writer_class()
         writer.open_workbook(str(test_file_path))
         writer.header_list = header
         writer.value_matrix = value
