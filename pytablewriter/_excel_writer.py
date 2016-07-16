@@ -151,6 +151,10 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
 
         raise ValueError()
 
+    def _postprocess(self):
+        self._last_data_row = self.first_data_row + len(self.value_matrix)
+        self._last_data_col = self._get_last_column()
+
 
 class ExcelXlsxTableWriter(ExcelTableWriter):
     """
@@ -236,7 +240,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         self._write_header()
         self._write_value_matrix()
 
-        self.__postprocess()
+        self._postprocess()
 
     def _write_header(self):
         if dataproperty.is_empty_list_or_tuple(self.header_list):
@@ -321,9 +325,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             )
             self.stream.set_column(col_idx, col_idx, width=width)
 
-    def __postprocess(self):
-        self._last_data_row = self.first_data_row + len(self.value_matrix)
-        self._last_data_col = self._get_last_column()
+    def _postprocess(self):
+        super(ExcelXlsxTableWriter, self)._postprocess()
 
         self.stream.autofilter(
             self.last_header_row, self.first_data_col,
