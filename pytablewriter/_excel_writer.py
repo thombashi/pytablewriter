@@ -9,43 +9,11 @@ from __future__ import absolute_import
 import dataproperty
 from dataproperty.type import IntegerTypeChecker
 from six.moves import range
-import xlsxwriter
 
 from ._converter import str_datetime_converter
+from ._excel_workbook import ExcelWorkbookXlsx
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
-
-
-class ExcelWorkbookXlsx(object):
-
-    @property
-    def workbook(self):
-        return self.__workbook
-
-    @property
-    def file_path(self):
-        return self.__file_path
-
-    def __init__(self, file_path):
-        self.open(file_path)
-
-    def __del__(self):
-        self.close()
-
-    def open(self, file_path):
-        self.__file_path = file_path
-        self.__workbook = xlsxwriter.Workbook(file_path)
-
-    def close(self):
-        if self.workbook is None:
-            return
-
-        self.__workbook.close()
-        self.__clear()
-
-    def __clear(self):
-        self.__workbook = None
-        self.__file_path = None
 
 
 class ExcelTableWriter(TableWriter, TextWriterInterface):
