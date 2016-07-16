@@ -193,7 +193,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         Make a worksheet to the current workbook.
 
         :param str sheet_name:
-            Name of the worksheet to create. Name of the work sheet will 
+            Name of the worksheet to create. Name of the work sheet will
             automatically decided (like ``"Sheet1"``)
             if the ``sheet_name`` is empty.
         """
