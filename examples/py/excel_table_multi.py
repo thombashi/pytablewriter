@@ -4,7 +4,7 @@
 import pytablewriter
 
 
-writer = pytablewriter.ExcelTableWriter()
+writer = pytablewriter.ExcelXlsxTableWriter()
 writer.open_workbook("sample.xlsx")
 
 # write the first worksheet

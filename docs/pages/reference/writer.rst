@@ -47,7 +47,7 @@ CSV table writer class
 Excel table writer class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: pytablewriter.ExcelTableWriter
+.. autoclass:: pytablewriter.ExcelXlsxTableWriter
     :inherited-members:
     :show-inheritance:
 

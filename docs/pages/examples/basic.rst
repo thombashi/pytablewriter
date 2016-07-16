@@ -14,7 +14,7 @@ Write a table to the standard output (defaults)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The standard output is the default stream of writers
-(except the |ExcelTableWriter|).
+(except the |ExcelXlsxTableWriter|).
 
 .. code-block:: python
     :caption: Sample code

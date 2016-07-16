@@ -11,7 +11,7 @@ from ._error import EmptyTableNameError
 from ._error import EmptyValueError
 
 from ._csv_writer import CsvTableWriter
-from ._excel_writer import ExcelTableWriter
+from ._excel_writer import ExcelXlsxTableWriter
 from ._html_writer import HtmlTableWriter
 from ._javascript_writer import JavaScriptTableWriter
 from ._json_writer import JsonTableWriter

@@ -311,7 +311,7 @@ rp_class = u"""
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
 
 .. |CsvTableWriter| replace:: :py:class:`~pytablewriter.CsvTableWriter`
-.. |ExcelTableWriter| replace:: :py:class:`~pytablewriter.ExcelTableWriter`
+.. |ExcelXlsxTableWriter| replace:: :py:class:`~pytablewriter.ExcelXlsxTableWriter`
 .. |HtmlTableWriter| replace:: :py:class:`~pytablewriter.HtmlTableWriter`
 .. |JavaScriptTableWriter| replace:: :py:class:`~pytablewriter.JavaScriptTableWriter`
 .. |JsonTableWriter| replace:: :py:class:`~pytablewriter.JsonTableWriter`
@@ -339,7 +339,7 @@ rp_attr = u"""
 
 .. |excel_attr| replace:: 
     This attributes available after execution of
-    the :py:meth:`~.ExcelTableWriter.write_table` method.
+    the :py:meth:`~.ExcelXlsxTableWriter.write_table` method.
 """
 
 rp_method = u"""

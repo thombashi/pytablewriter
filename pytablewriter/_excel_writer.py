@@ -16,7 +16,7 @@ from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 
 
-class ExcelTableWriter(TableWriter, TextWriterInterface):
+class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
     """
     Concrete class of a table writer for Excel format.
 
@@ -143,7 +143,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         return self.format_table.get(self.FormatName.CELL, self.default_format)
 
     def __init__(self):
-        super(ExcelTableWriter, self).__init__()
+        super(ExcelXlsxTableWriter, self).__init__()
 
         self.stream = None
 

@@ -107,7 +107,7 @@ invalid_test_data_list = [
     ),
 ]
 
-table_writer_class = pytablewriter.ExcelTableWriter
+table_writer_class = pytablewriter.ExcelXlsxTableWriter
 
 
 class Test_ExcelTableWriter_write_table:

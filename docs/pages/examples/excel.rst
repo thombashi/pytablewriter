@@ -3,7 +3,7 @@
 Write an Excel table
 -------------------------------------------
 
-|ExcelTableWriter| class can write a table to worksheet(s) in 
+|ExcelXlsxTableWriter| class can write a table to worksheet(s) in 
 an Excel workbook file from a matrix of data.
 
 .. include:: exel_single_example.txt
@@ -17,7 +17,7 @@ Write multiple Excel tables
 
     import pytablewriter
     
-    writer = pytablewriter.ExcelTableWriter()
+    writer = pytablewriter.ExcelXlsxTableWriter()
     writer.open_workbook("sample.xlsx")
 
     # write the first worksheet
