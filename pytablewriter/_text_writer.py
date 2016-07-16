@@ -155,7 +155,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             StringConverterCreator().create(value_prop.data).convert())
 
         if self.is_quote_header:
-            return u'"%s"' % (item)
+            return u'"{:s}"'.format(item)
 
         return item
 

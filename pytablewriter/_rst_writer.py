@@ -79,7 +79,8 @@ class RstCsvTableWriter(RstTableWriter):
 
         self._write_line(u".. csv-table:: " + self.table_name)
         self.inc_indent_level()
-        self._write_line(u':header: "%s"' % (u'", "'.join(self.header_list)))
+        self._write_line(
+            u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
         self._write_line(u":widths: " + u", ".join([
             str(col_prop.padding_len)
             for col_prop in self._column_prop_list

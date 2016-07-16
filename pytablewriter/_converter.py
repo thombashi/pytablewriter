@@ -18,5 +18,5 @@ def str_datetime_converter(value):
 
 def strip_quote(text, value):
     re_replace = re.compile(
-        '["\']%s["\']' % (value), re.MULTILINE)
+        '["\']{:s}["\']'.format(value), re.MULTILINE)
     return re_replace.sub(value, text)

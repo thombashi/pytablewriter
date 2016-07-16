@@ -15,7 +15,7 @@ from ._text_writer import SourceCodeTableWriter
 
 
 def js_datetime_converter(value):
-    return 'new Date("%s")' % (value.strftime("%Y-%m-%dT%H:%M:%S%z"))
+    return 'new Date("{:s}")'.format(value.strftime("%Y-%m-%dT%H:%M:%S%z"))
 
 
 class JavaScriptTableWriter(SourceCodeTableWriter):
@@ -57,7 +57,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.stream.close()
         self.stream = org_stream
 
-        self._write_line(u"var %s = [" % (self.variable_name))
+        self._write_line(u"var {:s} = [".format(self.variable_name))
         self.dec_indent_level()
         self._write_line(data_frame_text)
         self.inc_indent_level()

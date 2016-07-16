@@ -157,7 +157,7 @@ class TableWriter(TableWriterInterface):
                 value_prop.typecode in [Typecode.INT, Typecode.FLOAT],
             ])
         ]):
-            return u'"%s"' % (item)
+            return u'"{:s}"'.format(item)
 
         return item
 
@@ -226,9 +226,9 @@ class TableWriter(TableWriterInterface):
             dict_invalid = {}
 
             if len(self.header_list) != len(value_list):
-                erroror_key = "row=%d" % (row)
+                erroror_key = "row={:d}".format(row)
                 dict_invalid[erroror_key] = (
-                    "expected-col-size=%d, actual= %s" % (
+                    "expected-col-size={:d}, actual={:s}".format(
                         len(value_list), len(self.header_list))
                 )
 
@@ -237,9 +237,9 @@ class TableWriter(TableWriterInterface):
 
             message = [
                 "_verify_value_matrix: miss match length with header and value",
-                "  header: col-size=%d %s" % (
+                "  header: col-size={:d} {:s}".format(
                     len(self.header_list), self.header_list),
-                "  value:  %s" % (str(dict_invalid)),
+                "  value:  {:s}".format(str(dict_invalid)),
             ]
             raise ValueError(os.linesep.join(message))
 
