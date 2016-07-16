@@ -50,6 +50,9 @@ class ExcelWorkbook(ExcelWorkbookInterface):
         self._clear()
         self._file_path = file_path
 
+    def __del__(self):
+        self.close()
+
     def _clear(self):
         self._workbook = None
         self._file_path = None
@@ -61,9 +64,6 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
     def __init__(self, file_path):
         super(ExcelWorkbookXlsx, self).__init__(file_path)
         self.open(file_path)
-
-    def __del__(self):
-        self.close()
 
     def open(self, file_path):
         self._workbook = xlsxwriter.Workbook(file_path)
