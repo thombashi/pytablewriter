@@ -51,6 +51,10 @@ Excel table writer class
     :inherited-members:
     :show-inheritance:
 
+.. autoclass:: pytablewriter.ExcelXlsTableWriter
+    :inherited-members:
+    :show-inheritance:
+
 HTML table writer class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
