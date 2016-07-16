@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+import abc
 
 import dataproperty
 from dataproperty.type import IntegerTypeChecker
@@ -16,9 +17,145 @@ from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 
 
-class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
+class ExcelTableWriter(TableWriter, TextWriterInterface):
     """
-    Concrete class of a table writer for Excel format.
+    Abstract class of a table writer for Excel format.
+    """
+
+    @property
+    def workbook(self):
+        return self._workbook
+
+    @property
+    def first_header_row(self):
+        """
+        :return: Index of the first row of the header.
+        :rtype: int
+
+        .. note:: |excel_attr|
+        """
+
+        return self._first_header_row
+
+    @property
+    def last_header_row(self):
+        """
+        :return: Index of the last row of the header.
+        :rtype: int
+
+        .. note:: |excel_attr|
+        """
+
+        return self._last_header_row
+
+    @property
+    def first_data_row(self):
+        """
+        :return: Index of the first row of the data (table body).
+        :rtype: int
+
+        .. note:: |excel_attr|
+        """
+
+        return self._first_data_row
+
+    @property
+    def last_data_row(self):
+        """
+        :return: Index of the last row of the data (table body).
+        :rtype: int
+
+        .. note:: |excel_attr|
+        """
+
+        return self._last_data_row
+
+    @property
+    def first_data_col(self):
+        """
+        :return: Index of the first column of the table.
+        :rtype: int
+
+        .. note:: |excel_attr|
+        """
+
+        return self._first_data_col
+
+    @property
+    def last_data_col(self):
+        """
+        :return: Index of the last column of the table.
+        :rtype: int
+
+        .. note:: |excel_attr|
+        """
+
+        return self._last_data_col
+
+    def __init__(self):
+        super(ExcelTableWriter, self).__init__()
+
+        self.stream = None
+        self._workbook = None
+
+        self._prop_extractor.inf_value = "Inf"
+        self._prop_extractor.nan_value = "NaN"
+        self._prop_extractor.datetime_converter = str_datetime_converter
+        self._prop_extractor.datetime_format_str = "s"
+
+        self._first_header_row = 0
+        self._last_header_row = self.first_header_row
+        self._first_data_row = self.last_header_row + 1
+        self._first_data_col = 0
+        self._last_data_row = None
+        self._last_data_col = None
+
+    @abc.abstractproperty
+    def open_workbook(self, workbook_path):
+        """
+        Open workbook.
+
+        :param str workbook_path: File path to open.
+        """
+
+    def close(self):
+        """
+        Close the current workbook.
+        """
+
+        if self.workbook is not None:
+            self.workbook.close()
+            self._workbook = None
+
+    def make_worksheet(self, sheet_name):
+        """
+        Make a worksheet to the current workbook.
+
+        :param str sheet_name:
+            Name of the worksheet to create. Name of the work sheet will
+            automatically decided (like ``"Sheet1"``)
+            if the ``sheet_name`` is empty.
+        """
+
+        self.stream = self.workbook.add_worksheet(sheet_name)
+
+    def write_null_line(self):
+        pass
+
+    def _get_last_column(self):
+        if dataproperty.is_not_empty_list_or_tuple(self.header_list):
+            return len(self.header_list) - 1
+
+        if dataproperty.is_not_empty_list_or_tuple(self.value_matrix):
+            return len(self.value_matrix[0]) - 1
+
+        raise ValueError()
+
+
+class ExcelXlsxTableWriter(ExcelTableWriter):
+    """
+    Concrete class of a table writer for Excel format
+    (newer or equal to Office 2007).
 
     :Examples:
 
@@ -65,76 +202,6 @@ class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
         }
 
     @property
-    def workbook(self):
-        return self.__workbook
-
-    @property
-    def first_header_row(self):
-        """
-        :return: Index of the first row of the header.
-        :rtype: int
-
-        .. note:: |excel_attr|
-        """
-
-        return self.__first_header_row
-
-    @property
-    def last_header_row(self):
-        """
-        :return: Index of the last row of the header.
-        :rtype: int
-
-        .. note:: |excel_attr|
-        """
-
-        return self.__last_header_row
-
-    @property
-    def first_data_row(self):
-        """
-        :return: Index of the first row of the data (table body).
-        :rtype: int
-
-        .. note:: |excel_attr|
-        """
-
-        return self.__first_data_row
-
-    @property
-    def last_data_row(self):
-        """
-        :return: Index of the last row of the data (table body).
-        :rtype: int
-
-        .. note:: |excel_attr|
-        """
-
-        return self.__last_data_row
-
-    @property
-    def first_data_col(self):
-        """
-        :return: Index of the first column of the table.
-        :rtype: int
-
-        .. note:: |excel_attr|
-        """
-
-        return self.__first_data_col
-
-    @property
-    def last_data_col(self):
-        """
-        :return: Index of the last column of the table.
-        :rtype: int
-
-        .. note:: |excel_attr|
-        """
-
-        return self.__last_data_col
-
-    @property
     def __nan_format_property(self):
         return self.format_table.get(self.FormatName.NAN, self.default_format)
 
@@ -145,8 +212,6 @@ class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
     def __init__(self):
         super(ExcelXlsxTableWriter, self).__init__()
 
-        self.stream = None
-
         self.default_format = self.Default.CELL_FORMAT
         self.format_table = {
             self.FormatName.CELL	: self.Default.CELL_FORMAT,
@@ -154,53 +219,10 @@ class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
             self.FormatName.NAN		: self.Default.NAN_FORMAT,
         }
 
-        self.__workbook = None
         self.__col_cell_format_cache = {}
 
-        self.__first_header_row = 0
-        self.__last_header_row = self.first_header_row
-        self.__first_data_row = self.last_header_row + 1
-        self.__first_data_col = 0
-        self.__last_data_row = None
-        self.__last_data_col = None
-
-        self._prop_extractor.inf_value = "Inf"
-        self._prop_extractor.nan_value = "NaN"
-        self._prop_extractor.datetime_converter = str_datetime_converter
-        self._prop_extractor.datetime_format_str = "s"
-
     def open_workbook(self, workbook_path):
-        """
-        Open workbook.
-
-        :param str workbook_path: File path to open.
-        """
-
-        self.__workbook = ExcelWorkbookXlsx(workbook_path)
-
-    def close(self):
-        """
-        Close the current workbook.
-        """
-
-        if self.workbook is not None:
-            self.workbook.close()
-            self.__workbook = None
-
-    def make_worksheet(self, sheet_name):
-        """
-        Make a worksheet to the current workbook.
-
-        :param str sheet_name:
-            Name of the worksheet to create. Name of the work sheet will
-            automatically decided (like ``"Sheet1"``)
-            if the ``sheet_name`` is empty.
-        """
-
-        self.stream = self.workbook.add_worksheet(sheet_name)
-
-    def write_null_line(self):
-        pass
+        self._workbook = ExcelWorkbookXlsx(workbook_path)
 
     def write_table(self):
         """
@@ -283,15 +305,6 @@ class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
 
         return dict_col_numprops
 
-    def __get_last_column(self):
-        if dataproperty.is_not_empty_list_or_tuple(self.header_list):
-            return len(self.header_list) - 1
-
-        if dataproperty.is_not_empty_list_or_tuple(self.value_matrix):
-            return len(self.value_matrix[0]) - 1
-
-        raise ValueError()
-
     def __add_format(self, dict_property):
         return self.workbook.workbook.add_format(dict_property)
 
@@ -309,8 +322,8 @@ class ExcelXlsxTableWriter(TableWriter, TextWriterInterface):
             self.stream.set_column(col_idx, col_idx, width=width)
 
     def __postprocess(self):
-        self.__last_data_row = self.first_data_row + len(self.value_matrix)
-        self.__last_data_col = self.__get_last_column()
+        self._last_data_row = self.first_data_row + len(self.value_matrix)
+        self._last_data_col = self._get_last_column()
 
         self.stream.autofilter(
             self.last_header_row, self.first_data_col,
