@@ -143,6 +143,19 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
     def write_null_line(self):
         pass
 
+    def write_table(self):
+        """
+        Write a table to the current worksheet.
+        """
+
+        self._verify_property()
+        self._preprocess_property()
+
+        self._write_header()
+        self._write_value_matrix()
+
+        self._postprocess()
+
     def _write_value_matrix(self):
         for row, value_prop_list in enumerate(self._value_prop_matrix):
             sheet_row = self.first_data_row + row
@@ -237,20 +250,6 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def open_workbook(self, workbook_path):
         self._workbook = ExcelWorkbookXlsx(workbook_path)
 
-    def write_table(self):
-        """
-        Write a table to the current worksheet.
-        """
-
-        self._verify_property()
-        self._preprocess_property()
-        self.__set_cell_width()
-
-        self._write_header()
-        self._write_value_matrix()
-
-        self._postprocess()
-
     def _write_header(self):
         if dp.is_empty_list_or_tuple(self.header_list):
             return
@@ -337,6 +336,11 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
                 (font_size / 10.0) + 2
             )
             self.stream.set_column(col_idx, col_idx, width=width)
+
+    def _preprocess_property(self):
+        super(ExcelXlsxTableWriter, self)._preprocess_property()
+
+        self.__set_cell_width()
 
     def _postprocess(self):
         super(ExcelXlsxTableWriter, self)._postprocess()
