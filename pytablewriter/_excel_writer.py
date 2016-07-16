@@ -199,31 +199,31 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         FONT_SIZE = 9
 
         CELL_FORMAT = {
-            "font_name" 	: FONT_NAME,
-            "font_size" 	: FONT_SIZE,
-            "align"			: "top",
-            "text_wrap"		: True,
-            "top"			: 1,
-            "left"			: 1,
-            "bottom"		: 1,
-            "right"			: 1,
+            "font_name": FONT_NAME,
+            "font_size": FONT_SIZE,
+            "align": "top",
+            "text_wrap": True,
+            "top": 1,
+            "left": 1,
+            "bottom": 1,
+            "right": 1,
         }
         HEADER_FORMAT = {
-            "font_name" 	: FONT_NAME,
-            "font_size" 	: FONT_SIZE,
-            "bg_color"		: "#DFDFFF",
-            "bold"			: True,
-            "left"			: 1,
-            "right"			: 1,
+            "font_name": FONT_NAME,
+            "font_size": FONT_SIZE,
+            "bg_color": "#DFDFFF",
+            "bold": True,
+            "left": 1,
+            "right": 1,
         }
         NAN_FORMAT = {
-            "font_name"		: FONT_NAME,
-            "font_size"		: FONT_SIZE,
-            "font_color"	: "silver",
-            "top"			: 1,
-            "left"			: 1,
-            "bottom"		: 1,
-            "right"			: 1,
+            "font_name": FONT_NAME,
+            "font_size": FONT_SIZE,
+            "font_color": "silver",
+            "top": 1,
+            "left": 1,
+            "bottom": 1,
+            "right": 1,
         }
 
     @property
@@ -239,9 +239,9 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
         self.default_format = self.Default.CELL_FORMAT
         self.format_table = {
-            self.FormatName.CELL	: self.Default.CELL_FORMAT,
-            self.FormatName.HEADER	: self.Default.HEADER_FORMAT,
-            self.FormatName.NAN		: self.Default.NAN_FORMAT,
+            self.FormatName.CELL: self.Default.CELL_FORMAT,
+            self.FormatName.HEADER: self.Default.HEADER_FORMAT,
+            self.FormatName.NAN: self.Default.NAN_FORMAT,
         }
 
         self.__col_cell_format_cache = {}
