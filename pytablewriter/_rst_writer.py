@@ -61,11 +61,10 @@ class RstCsvTableWriter(RstTableWriter):
         super(RstCsvTableWriter, self).__init__()
 
         self.column_delimiter = u", "
+        self.char_cross_point = u""
         self.is_padding = False
-        self.is_write_header = False
         self.is_write_header_separator_row = False
         self.is_write_value_separator_row = False
-        self.is_write_opening_row = False
         self.is_write_closing_row = False
         self.is_quote_table[dataproperty.Typecode.STRING] = True
         self.is_quote_table[dataproperty.Typecode.DATETIME] = True
@@ -78,18 +77,37 @@ class RstCsvTableWriter(RstTableWriter):
         self._verify_property()
         self._preprocess()
 
-        self._write_line(u".. csv-table:: " + self.table_name)
         self.inc_indent_level()
+        super(RstCsvTableWriter, self).write_table()
+        self.dec_indent_level()
+
+    def _get_opening_row_item_list(self):
+        directive = u".. csv-table:: "
+
+        if dataproperty.is_empty_string(self.table_name):
+            return [directive]
+
+        return [directive + self.table_name]
+
+    def _write_opening_row(self):
+        self.dec_indent_level()
+        super(RstTableWriter, self)._write_opening_row()
+        self.inc_indent_level()
+
+    def _write_header(self):
+        if not self.is_write_header:
+            return
+
         self._write_line(
             u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
         self._write_line(u":widths: " + u", ".join([
             str(col_prop.padding_len)
             for col_prop in self._column_prop_list
         ]))
-
         self._write_line()
-        super(RstCsvTableWriter, self).write_table()
-        self.dec_indent_level()
+
+    def _write_closing_row(self):
+        pass
 
 
 class RstGridTableWriter(RstTableWriter):
