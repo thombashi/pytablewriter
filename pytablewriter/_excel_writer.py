@@ -174,7 +174,12 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         raise ValueError()
 
     def _postprocess(self):
-        self._last_data_row = self.first_data_row + len(self.value_matrix)
+        self._last_data_row = self.first_data_row
+        try:
+            self._last_data_row += len(self.value_matrix)
+        except TypeError:
+            pass
+
         self._last_data_col = self._get_last_column()
 
 

@@ -202,7 +202,10 @@ class TableWriter(TableWriterInterface):
         self._verify_table_name()
         self._verify_stream()
         self._verify_header()
-        self._verify_value_matrix()
+        try:
+            self._verify_value_matrix()
+        except EmptyValueError:
+            pass
 
     def _verify_table_name(self):
         pass
@@ -251,13 +254,13 @@ class TableWriter(TableWriterInterface):
         self._column_prop_list = []
         self._value_prop_matrix = []
 
-        if dataproperty.is_empty_list_or_tuple(self.value_matrix):
-            return
-
         self._prop_extractor.header_list = self.header_list
         self._prop_extractor.data_matrix = self.__value_matrix_org
         self._column_prop_list = self._prop_extractor.extract_column_property_list()
-        self._value_prop_matrix = self._prop_extractor.extract_data_property_matrix()
+        try:
+            self._value_prop_matrix = self._prop_extractor.extract_data_property_matrix()
+        except TypeError:
+            self._value_prop_matrix = []
 
         self._preprocessed_property = True
 

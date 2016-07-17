@@ -72,11 +72,15 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         if self._preprocessed_value_matrix:
             return
 
+        try:
+            data_prop_matrix = self._prop_extractor.extract_data_property_matrix()
+        except TypeError:
+            data_prop_matrix = []
+
         self._prop_extractor.data_matrix = self.value_matrix
         self._value_matrix = [
             [_get_data_helper(data_prop) for data_prop in prop_list]
-            for prop_list
-            in zip(*self._prop_extractor.extract_data_property_matrix())
+            for prop_list in zip(*data_prop_matrix)
         ]
 
         self._value_matrix = dict(

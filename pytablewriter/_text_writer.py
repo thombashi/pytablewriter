@@ -184,6 +184,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         if not self.is_write_header:
             return
 
+        if dataproperty.is_empty_list_or_tuple(self._column_prop_list):
+            self.__write_value_row(self.header_list)
+            return
+
         self.__write_value_row([
             self._get_header_item(
                 col_prop, dataproperty.DataProperty(header))
