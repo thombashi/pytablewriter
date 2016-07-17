@@ -111,7 +111,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self._verify_property()
         self._preprocess()
 
-        self.__write_opening_row()
+        self._write_opening_row()
 
         try:
             self._write_header()
@@ -131,7 +131,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             except TypeError:
                 continue
 
-        self.__write_closing_row()
+        self._write_closing_row()
 
     def _get_opening_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_opening_row)
@@ -226,7 +226,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             self.column_delimiter.join(value_list) +
             self.char_right_side_row)
 
-    def __write_opening_row(self):
+    def _write_opening_row(self):
         if not self.is_write_opening_row:
             return
 
@@ -244,7 +244,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_value_row_separator_item_list())
 
-    def __write_closing_row(self):
+    def _write_closing_row(self):
         if not self.is_write_closing_row:
             return
 
@@ -319,7 +319,20 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.column_delimiter = u", "
         self.char_left_side_row = u"["
         self.char_right_side_row = u"],"
+        self.char_cross_point = u""
         self.is_padding = False
         self.is_write_header_separator_row = False
+        self.is_write_opening_row = True
+        self.is_write_closing_row = True
 
         self._prop_extractor.none_value = None
+
+    def _write_opening_row(self):
+        self.dec_indent_level()
+        super(SourceCodeTableWriter, self)._write_opening_row()
+        self.inc_indent_level()
+
+    def _write_closing_row(self):
+        self.dec_indent_level()
+        super(SourceCodeTableWriter, self)._write_closing_row()
+        self.inc_indent_level()

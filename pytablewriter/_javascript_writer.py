@@ -52,17 +52,25 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
         super(JavaScriptTableWriter, self).write_table()
         self.dec_indent_level()
-        data_frame_text = self.stream.getvalue().rstrip(u",\n")
+        data_frame_text = self.stream.getvalue().rstrip(u"\n")
+        if self.is_write_closing_row:
+            data_frame_line_list = data_frame_text.splitlines()
+            data_frame_line_list[-2] = data_frame_line_list[-2].rstrip(u",")
+            data_frame_text = u"\n".join(data_frame_line_list)
 
         self.stream.close()
         self.stream = org_stream
 
-        self._write_line(u"var {:s} = [".format(self.variable_name))
         self.dec_indent_level()
         self._write_line(data_frame_text)
         self.inc_indent_level()
-        self._write_line(u"];")
 
     def _verify_table_name(self):
         if dataproperty.is_empty_string(self.table_name):
             raise EmptyTableNameError()
+
+    def _get_opening_row_item_list(self):
+        return u"var {:s} = [".format(self.variable_name)
+
+    def _get_closing_row_item_list(self):
+        return u"];"
