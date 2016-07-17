@@ -8,6 +8,7 @@ from __future__ import absolute_import
 import abc
 
 import dataproperty
+import pathvalidate
 import six
 import xlsxwriter
 import xlwt
@@ -78,6 +79,8 @@ class ExcelWorkbookXls(ExcelWorkbook):
         self._clear()
 
     def add_worksheet(self, worksheet_name):
+        worksheet_name = pathvalidate.sanitize_excel_sheet_name(worksheet_name)
+
         if dataproperty.is_not_empty_string(worksheet_name):
             if worksheet_name in self._worksheet_table:
                 # the work sheet is already exists
@@ -114,6 +117,8 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         self._clear()
 
     def add_worksheet(self, worksheet_name):
+        worksheet_name = pathvalidate.sanitize_excel_sheet_name(worksheet_name)
+
         if dataproperty.is_not_empty_string(worksheet_name):
             if worksheet_name in self._worksheet_table:
                 # the work sheet is already exists
