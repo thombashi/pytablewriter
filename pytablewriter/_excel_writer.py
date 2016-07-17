@@ -146,6 +146,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         """
 
         self.stream = self.workbook.add_worksheet(sheet_name)
+        self._current_data_row = self._first_data_row
 
     def write_null_line(self):
         pass
