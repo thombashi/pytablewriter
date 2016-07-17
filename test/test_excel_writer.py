@@ -36,6 +36,16 @@ normal_test_data_list = [
             ])
     ),
     Data(
+        table="tablename",
+        header=header_list,
+        value=None,
+        expected=TableData(
+            "tablename",
+            ["a", "b", "c", "dd", "e"],
+            [
+            ])
+    ),
+    Data(
         table="",
         header=header_list,
         value=value_matrix,
@@ -94,18 +104,7 @@ invalid_test_data_list = [
         value=normal_test_data_list[0].value,
         expected=pytablewriter.EmptyHeaderError
     ),
-    Data(
-        table="",
-        header=normal_test_data_list[0].header,
-        value=[],
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="",
-        header=normal_test_data_list[0].header,
-        value=None,
-        expected=pytablewriter.EmptyValueError
-    ),
+
 ]
 
 table_writer_class_list = [

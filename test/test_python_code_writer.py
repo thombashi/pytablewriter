@@ -37,6 +37,16 @@ normal_test_data_list = [
         table="tablename",
         indent=0,
         header=header_list,
+        value=None,
+        expected="""tablename = [
+    ["a", "b", "c", "dd", "e"],
+]
+"""
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=header_list,
         value=value_matrix,
         expected="""tablename = [
     ["a", "b", "c", "dd", "e"],
@@ -122,20 +132,6 @@ exception_test_data_list = [
         header=None,
         value=value_matrix,
         expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=header_list,
-        value=[],
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=header_list,
-        value=None,
-        expected=pytablewriter.EmptyValueError,
     ),
 ]
 

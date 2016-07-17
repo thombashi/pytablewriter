@@ -37,6 +37,15 @@ normal_test_data_list = [
         table="tablename",
         indent=0,
         header=header_list,
+        value=None,
+        expected="""tablename = pandas.DataFrame(
+    {})
+"""
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=header_list,
         value=value_matrix,
         expected="""tablename = pandas.DataFrame(
     {'a': [1, 2, 3],
@@ -128,20 +137,6 @@ exception_test_data_list = [
         header=None,
         value=normal_test_data_list[0].value,
         expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=[],
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=None,
-        expected=pytablewriter.EmptyValueError,
     ),
 ]
 

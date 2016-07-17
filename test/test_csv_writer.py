@@ -32,6 +32,13 @@ normal_test_data_list = [
     ),
     Data(
         col_delim=",",
+        header=header_list,
+        value=[],
+        expected=""""a","b","c","dd","e"
+"""
+    ),
+    Data(
+        col_delim=",",
         header=[],
         value=value_matrix,
         expected="""1,123.1,"a",1.0,"1"
@@ -72,18 +79,7 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(
-        col_delim=",",
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyValueError,
-    ),
-    Data(
-        col_delim=",",
-        header=header_list,
-        value=[],
-        expected=pytablewriter.EmptyValueError,
-    ),
+
 ]
 
 table_writer_class = pytablewriter.CsvTableWriter

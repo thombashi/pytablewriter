@@ -40,6 +40,16 @@ normal_test_data_list = [
         table="",
         indent=0,
         header=header_list,
+        value=None,
+        is_float_formatting=True,
+        expected=""" a | b | c |dd | e 
+---|---|---|---|---
+"""
+    ),
+    Data(
+        table="",
+        indent=0,
+        header=header_list,
         value=[
             ["1", 123.09999999999999, "a", "1",   1],
             [2, 2.2000000000000002, "bb", "2.2", 2.2000000000000002],
@@ -161,22 +171,6 @@ exception_test_data_list = [
         value=value_matrix,
         is_float_formatting=True,
         expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=[],
-        is_float_formatting=True,
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=None,
-        is_float_formatting=True,
-        expected=pytablewriter.EmptyValueError
     ),
 ]
 

@@ -39,6 +39,18 @@ normal_test_data_list = [
 """
     ),
     Data(
+        table="",
+        indent=0,
+        header=header_list,
+        value=None,
+        expected=""".. table:: 
+
+    +-+-+-+--+-+
+    |a|b|c|dd|e|
+    +=+=+=+==+=+
+    +-+-+-+--+-+
+"""
+    ),    Data(
         table="tablename",
         indent=0,
         header=header_list,
@@ -192,20 +204,6 @@ exception_test_data_list = [
         header=None,
         value=normal_test_data_list[0].value,
         expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=[],
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=None,
-        expected=pytablewriter.EmptyValueError,
     ),
 ]
 

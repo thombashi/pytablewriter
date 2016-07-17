@@ -62,10 +62,51 @@ normal_test_data_list = [
 """
     ),
     Data(
+        table="",
+        indent="  ",
+        header=header_list,
+        value=value_matrix,
+        expected="""<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>dd</th>
+      <th>e</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="right">1</td>
+      <td align="right">123.1</td>
+      <td align="left">a</td>
+      <td align="right">1.0</td>
+      <td align="right">1</td>
+    </tr>
+    <tr>
+      <td align="right">2</td>
+      <td align="right">2.2</td>
+      <td align="left">bb</td>
+      <td align="right">2.2</td>
+      <td align="right">2.2</td>
+    </tr>
+    <tr>
+      <td align="right">3</td>
+      <td align="right">3.3</td>
+      <td align="left">ccc</td>
+      <td align="right">3.0</td>
+      <td align="left">cccc</td>
+    </tr>
+  </tbody>
+</table>
+"""
+    ),
+    Data(
         table="tablename",
         indent="    ",
         header=header_list,
-        value=value_matrix,
+        value=[],
         expected="""<table id="tablename">
     <caption>tablename</caption>
     <thead>
@@ -77,29 +118,26 @@ normal_test_data_list = [
             <th>e</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody></tbody>
+</table>
+"""
+    ),
+    Data(
+        table=None,
+        indent="    ",
+        header=header_list,
+        value=None,
+        expected="""<table>
+    <thead>
         <tr>
-            <td align="right">1</td>
-            <td align="right">123.1</td>
-            <td align="left">a</td>
-            <td align="right">1.0</td>
-            <td align="right">1</td>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>dd</th>
+            <th>e</th>
         </tr>
-        <tr>
-            <td align="right">2</td>
-            <td align="right">2.2</td>
-            <td align="left">bb</td>
-            <td align="right">2.2</td>
-            <td align="right">2.2</td>
-        </tr>
-        <tr>
-            <td align="right">3</td>
-            <td align="right">3.3</td>
-            <td align="left">ccc</td>
-            <td align="right">3.0</td>
-            <td align="left">cccc</td>
-        </tr>
-    </tbody>
+    </thead>
+    <tbody></tbody>
 </table>
 """
     ),
@@ -237,20 +275,7 @@ exception_test_data_list = [
         value=normal_test_data_list[0].value,
         expected=pytablewriter.EmptyHeaderError
     ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=[],
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=None,
-        expected=pytablewriter.EmptyValueError,
-    ),
+
 ]
 
 table_writer_class = pytablewriter.HtmlTableWriter

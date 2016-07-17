@@ -36,6 +36,17 @@ normal_test_data_list = [
 """
     ),
     Data(
+        table="tablename",
+        indent=0,
+        header=header_list,
+        value=None,
+        is_write_header=True,
+        expected="""var tablename = [
+    ["a", "b", "c", "dd", "e"]
+];
+"""
+    ),
+    Data(
         table="table name",
         indent=0,
         header=header_list,
@@ -140,22 +151,6 @@ exception_test_data_list = [
         value=normal_test_data_list[0].value,
         is_write_header=True,
         expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=[],
-        is_write_header=True,
-        expected=pytablewriter.EmptyValueError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=None,
-        is_write_header=True,
-        expected=pytablewriter.EmptyValueError,
     ),
 ]
 
