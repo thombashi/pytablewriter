@@ -27,6 +27,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         :ref:`example-js-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return True
+
     def __init__(self):
         super(JavaScriptTableWriter, self).__init__()
 

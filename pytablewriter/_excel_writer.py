@@ -25,6 +25,10 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
     """
 
     @property
+    def support_split_write(self):
+        return True
+
+    @property
     def workbook(self):
         return self._workbook
 

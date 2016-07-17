@@ -14,6 +14,10 @@ from ._interface import IndentationInterface
 class NullTableWriter(
         IndentationInterface, TextWriterInterface, TableWriterInterface):
 
+    @property
+    def support_split_write(self):
+        return False
+
     def set_indent_level(self, indent_level):
         pass
 

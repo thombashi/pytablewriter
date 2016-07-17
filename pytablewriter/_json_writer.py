@@ -27,6 +27,10 @@ class JsonTableWriter(IndentationTextTableWriter):
         :ref:`example-json-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return True
+
     def __init__(self):
         super(JsonTableWriter, self).__init__()
 

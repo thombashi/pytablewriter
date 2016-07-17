@@ -20,6 +20,10 @@ class CsvTableWriter(TextTableWriter):
         :ref:`example-csv-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return True
+
     def __init__(self):
         super(CsvTableWriter, self).__init__()
 

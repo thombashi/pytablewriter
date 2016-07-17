@@ -20,6 +20,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         :ref:`example-markdown-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return True
+
     def __init__(self):
         super(MarkdownTableWriter, self).__init__()
 

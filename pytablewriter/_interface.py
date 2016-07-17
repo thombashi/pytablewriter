@@ -16,6 +16,10 @@ class TableWriterInterface(object):
     Interface class of writing table.
     """
 
+    @abc.abstractproperty
+    def support_split_write(self):  # pragma: no cover
+        pass
+
     @abc.abstractmethod
     def write_table(self):   # pragma: no cover
         pass

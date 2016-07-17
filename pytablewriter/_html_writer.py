@@ -22,6 +22,10 @@ class HtmlTableWriter(TextTableWriter):
         :ref:`example-html-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return False
+
     def __init__(self):
         super(HtmlTableWriter, self).__init__()
 

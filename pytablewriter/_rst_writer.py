@@ -57,6 +57,10 @@ class RstCsvTableWriter(RstTableWriter):
         :ref:`example-rst-csv-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return True
+
     def __init__(self):
         super(RstCsvTableWriter, self).__init__()
 
@@ -121,6 +125,10 @@ class RstGridTableWriter(RstTableWriter):
         :ref:`example-rst-grid-table-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return False
+
     def __init__(self):
         super(RstGridTableWriter, self).__init__()
 
@@ -145,6 +153,10 @@ class RstSimpleTableWriter(RstTableWriter):
 
         :ref:`example-rst-simple-table-writer`
     """
+
+    @property
+    def support_split_write(self):
+        return False
 
     def __init__(self):
         super(RstSimpleTableWriter, self).__init__()

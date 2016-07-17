@@ -21,6 +21,10 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         :ref:`example-pandas-dataframe-writer`
     """
 
+    @property
+    def support_split_write(self):
+        return False
+
     def __init__(self):
         super(PandasDataFrameWriter, self).__init__()
 
