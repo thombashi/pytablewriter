@@ -36,3 +36,6 @@ class CsvTableWriter(TextTableWriter):
             return
 
         super(CsvTableWriter, self)._write_header()
+
+    def _write_closing_row(self):
+        pass
