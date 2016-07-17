@@ -54,6 +54,12 @@ normal_test_data_list = [
         """)
     ),
     Data(
+        table="",
+        header=header_list,
+        value=None,
+        expected=json.loads("[]")
+    ),
+    Data(
         table="tablename",
         header=header_list,
         value=value_matrix,
@@ -126,37 +132,44 @@ normal_test_data_list = [
         table="table name",
         header=mix_header_list,
         value=mix_value_matrix,
-        expected=json.loads("""{"table name": [{"bool": true,
-                  "c": "aa",
-                  "f": 1.1,
-                  "i": 1,
-                  "if": 1,
-                  "ifc": 1,
-                  "inf": "Infinity",
-                  "mix_num": 1.0,
-                  "nan": "NaN",
-                  "time": "2017-01-01 00:00:00"},
-                 {"bool": false,
-                  "c": "bbb",
-                  "f": 2.2,
-                  "i": 2,
-                  "if": 2.2,
-                  "ifc": 2.2,
-                  "inf": "Infinity",
-                  "mix_num": "Infinity",
-                  "nan": "NaN",
-                  "time": "2017-01-02 03:04:05+0900"},
-                 {"bool": true,
-                  "c": "cccc",
-                  "f": 3.33,
-                  "i": 3,
-                  "if": -3,
-                  "ifc": "ccc",
-                  "inf": "Infinity",
-                  "mix_num": "NaN",
-                  "nan": "NaN",
-                  "time": "2017-01-01 00:00:00"}]
-                  }""")
+        expected=json.loads("""{ "table name" : [
+            {
+                "bool": true,
+                "c": "aa",
+                "f": 1.1,
+                "i": 1,
+                "if": 1,
+                "ifc": 1,
+                "inf": "Infinity",
+                "mix_num": 1.0,
+                "nan": "NaN",
+                "time": "2017-01-01 00:00:00"
+            },
+            {
+                "bool": false,
+                "c": "bbb",
+                "f": 2.2,
+                "i": 2,
+                "if": 2.2,
+                "ifc": 2.2,
+                "inf": "Infinity",
+                "mix_num": "Infinity",
+                "nan": "NaN",
+                "time": "2017-01-02 03:04:05+0900"
+            },
+            {
+                "bool": true,
+                "c": "cccc",
+                "f": 3.33,
+                "i": 3,
+                "if": -3,
+                "ifc": "ccc",
+                "inf": "Infinity",
+                "mix_num": "NaN",
+                "nan": "NaN",
+                "time": "2017-01-01 00:00:00"
+            }]}
+        """)
     ),
 ]
 
@@ -199,6 +212,71 @@ class Test_JsonTableWriter_write_table:
         writer.table_name = table
         writer.header_list = header
         writer.value_matrix = value
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
+        assert json.loads(out) == expected
+
+    @pytest.mark.parametrize(["table", "header", "expected"], [
+        [
+            "tablename",
+            ["ha", "hb", "hc"],
+            json.loads("""{ "tablename" : [
+                {
+                    "ha": 1,
+                    "hb": 2,
+                    "hc": 3
+                },
+                {
+                    "ha": 11,
+                    "hb": 12,
+                    "hc": 13
+                },
+                {
+                    "ha": 1,
+                    "hb": 2,
+                    "hc": 3
+                },
+                {
+                    "ha": 11,
+                    "hb": 12,
+                    "hc": 13
+                },
+                {
+                    "ha": 101,
+                    "hb": 102,
+                    "hc": 103
+                },
+                {
+                    "ha": 1001,
+                    "hb": 1002,
+                    "hc": 1003
+                }]}"""),
+        ],
+    ])
+    def test_normal_multiple(self, capsys, table, header, expected):
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.header_list = header
+
+        writer.is_write_header = True
+        writer.is_write_closing_row = False
+        writer.write_table()
+
+        writer.is_write_opening_row = False
+        writer.is_write_header = False
+        writer.value_matrix = [
+            [1, 2, 3],
+            [11, 12, 13],
+        ]
+        writer.write_table()
+        writer.write_table()
+
+        writer.is_write_closing_row = True
+        writer.value_matrix = [
+            [101, 102, 103],
+            [1001, 1002, 1003],
+        ]
         writer.write_table()
 
         out, _err = capsys.readouterr()
