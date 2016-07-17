@@ -39,19 +39,13 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._verify_property()
         self._preprocess()
 
-        if dataproperty.is_not_empty_string(self.table_name):
-            self._write_line(self.variable_name + u" = pandas.DataFrame(")
-        else:
-            self._write_line(u"pandas.DataFrame(")
-
         self.inc_indent_level()
         data_frame_text = (
             u"\n".join([
                 self._get_indent_string() + line
                 for line in
                 pprint.pformat(self._value_matrix, indent=1).splitlines()
-            ]) +
-            u")"
+            ])
         )
         self.dec_indent_level()
 
@@ -62,9 +56,20 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         data_frame_text = strip_quote(data_frame_text, "True")
         data_frame_text = strip_quote(data_frame_text, "False")
 
+        self._write_opening_row()
         self.dec_indent_level()
         self._write_line(data_frame_text)
         self.inc_indent_level()
+        self._write_closing_row()
+
+    def _get_opening_row_item_list(self):
+        if dataproperty.is_not_empty_string(self.table_name):
+            return [self.variable_name + u" = pandas.DataFrame("]
+
+        return u"pandas.DataFrame("
+
+    def _get_closing_row_item_list(self):
+        return u")"
 
     def _preprocess_value_matrix(self):
         from ._function import _get_data_helper
@@ -87,3 +92,9 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             zip(self.header_list, self._value_matrix))
 
         self._preprocessed_value_matrix = True
+
+    def _write_opening_row(self):
+        super(SourceCodeTableWriter, self)._write_opening_row()
+
+    def _write_closing_row(self):
+        super(SourceCodeTableWriter, self)._write_closing_row()

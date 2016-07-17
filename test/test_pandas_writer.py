@@ -30,7 +30,8 @@ normal_test_data_list = [
      'b': [123.1, 2.2, 3.3],
      'c': ['a', 'bb', 'ccc'],
      'dd': [1, 2.2, 3],
-     'e': [1, 2.2, 'cccc']})
+     'e': [1, 2.2, 'cccc']}
+)
 """
     ),
     Data(
@@ -39,7 +40,8 @@ normal_test_data_list = [
         header=header_list,
         value=None,
         expected="""tablename = pandas.DataFrame(
-    {})
+    {}
+)
 """
     ),
     Data(
@@ -52,7 +54,8 @@ normal_test_data_list = [
      'b': [123.1, 2.2, 3.3],
      'c': ['a', 'bb', 'ccc'],
      'dd': [1, 2.2, 3],
-     'e': [1, 2.2, 'cccc']})
+     'e': [1, 2.2, 'cccc']}
+)
 """
     ),
     Data(
@@ -65,7 +68,8 @@ normal_test_data_list = [
      'b': [123.1, 2.2, 3.3],
      'c': ['a', 'bb', 'ccc'],
      'dd': [1, 2.2, 3],
-     'e': [1, 2.2, 'cccc']})
+     'e': [1, 2.2, 'cccc']}
+)
 """
     ),
     Data(
@@ -78,7 +82,8 @@ normal_test_data_list = [
          'b': [123.1, 2.2, 3.3],
          'c': ['a', 'bb', 'ccc'],
          'dd': [1, 2.2, 3],
-         'e': [1, 2.2, 'cccc']})
+         'e': [1, 2.2, 'cccc']}
+    )
 """
     ),
     Data(
@@ -91,7 +96,8 @@ normal_test_data_list = [
      'b': [None, 2.2, 3.3, None],
      'c': ['a', None, 'ccc', None],
      'dd': [1, 2.2, None, None],
-     'e': [None, 2.2, 'cccc', None]})
+     'e': [None, 2.2, 'cccc', None]}
+)
 """
     ),
     Data(
@@ -111,7 +117,8 @@ normal_test_data_list = [
      'nan': [numpy.nan, numpy.nan, numpy.nan],
      'time': ['2017-01-01 00:00:00',
               '2017-01-02 03:04:05+0900',
-              '2017-01-01 00:00:00']})
+              '2017-01-01 00:00:00']}
+)
 """
     ),
 ]
