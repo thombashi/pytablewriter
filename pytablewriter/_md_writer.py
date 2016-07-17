@@ -26,6 +26,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self.indent_string = u""
         self.column_delimiter = u"|"
         self.char_cross_point = u"|"
+        self.is_write_opening_row = True
         self.is_quote_header = False
         self.is_quote_table[dataproperty.Typecode.STRING] = False
         self.is_quote_table[dataproperty.Typecode.DATETIME] = False
@@ -37,10 +38,13 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         |write_table| with Markdown table format.
         """
 
-        if dataproperty.is_not_empty_string(self.table_name):
-            self.__write_chapter(self.table_name)
-
         super(MarkdownTableWriter, self).write_table()
+
+    def _get_opening_row_item_list(self):
+        if dataproperty.is_empty_string(self.table_name):
+            return []
+
+        return [u"#" * (self._indent_level + 1) + u" " + self.table_name]
 
     def _get_header_row_separator_item_list(self):
         header_separator_list = []
@@ -58,9 +62,5 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         return header_separator_list
 
-    def __write_chapter(self, text):
-        if dataproperty.is_empty_string(text):
-            return
-
-        return self._write_raw_line(
-            u"#" * (self._indent_level + 1) + u" " + text)
+    def _write_closing_row(self):
+        pass

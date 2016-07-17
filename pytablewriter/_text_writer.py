@@ -233,7 +233,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self.__write_separator_row(self._get_opening_row_item_list())
 
     def __write_header_row_separator(self):
-        if not self.is_write_header_separator_row:
+        if any([
+            not self.is_write_header,
+            not self.is_write_header_separator_row,
+        ]):
             return
 
         self.__write_separator_row(self._get_header_row_separator_item_list())

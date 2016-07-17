@@ -214,6 +214,50 @@ class Test_MarkdownTableWriter_write_table:
         out, _err = capsys.readouterr()
         assert out == expected
 
+    @pytest.mark.parametrize(["table", "header", "expected"], [
+        [
+            "tablename",
+            ["ha", "hb", "hc"],
+            """# tablename
+ha |hb |hc 
+---|---|---
+  1|  2|  3
+ 11| 12| 13
+  1|  2|  3
+ 11| 12| 13
+ 101| 102| 103
+1001|1002|1003
+""",
+        ],
+    ])
+    def test_normal_multiple(self, capsys, table, header, expected):
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.header_list = header
+
+        writer.is_write_header = True
+        writer.is_write_closing_row = False
+        writer.write_table()
+
+        writer.is_write_opening_row = False
+        writer.is_write_header = False
+        writer.value_matrix = [
+            [1, 2, 3],
+            [11, 12, 13],
+        ]
+        writer.write_table()
+        writer.write_table()
+
+        writer.is_write_closing_row = True
+        writer.value_matrix = [
+            [101, 102, 103],
+            [1001, 1002, 1003],
+        ]
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
