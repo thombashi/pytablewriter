@@ -83,7 +83,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self.column_delimiter = u"|"
         self.char_left_side_row = u""
         self.char_right_side_row = u""
-        self.char_cross_point = u"+"
+        self.char_cross_point = u""
 
         self.char_opening_row = u"-"
         self.char_header_row_separator = u"-"

@@ -20,6 +20,7 @@ class RstTableWriter(IndentationTextTableWriter):
         super(RstTableWriter, self).__init__()
 
         self.char_header_row_separator = u"="
+        self.char_cross_point = u"+"
         self.indent_string = u"    "
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = True
