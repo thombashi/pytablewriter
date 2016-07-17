@@ -34,12 +34,15 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
         self._verify_property()
 
-        if dataproperty.is_not_empty_string(self.table_name):
-            self._write_line(self.variable_name + u" = [")
-        else:
-            self._write_line(u"[")
-
         self.inc_indent_level()
         super(PythonCodeTableWriter, self).write_table()
         self.dec_indent_level()
-        self._write_line(u"]")
+
+    def _get_opening_row_item_list(self):
+        if dataproperty.is_not_empty_string(self.table_name):
+            return [self.variable_name + u" = ["]
+
+        return u"["
+
+    def _get_closing_row_item_list(self):
+        return u"]"
