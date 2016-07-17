@@ -33,7 +33,6 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
         self.char_right_side_row = u","
-        self.char_cross_point = u""
 
         self._prop_extractor.none_value = "null"
         self._prop_extractor.inf_value = "Infinity"
