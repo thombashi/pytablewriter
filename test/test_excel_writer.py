@@ -140,6 +140,63 @@ class Test_ExcelTableWriter_write_table:
         for tabledata in loader.load():
             assert tabledata == expected
 
+    @pytest.mark.parametrize(["writer_class", "table", "header", "expected"], [
+        [
+            table_writer_class,
+            "tablename",
+            ["ha", "hb", "hc"],
+            TableData(
+                table_name=u'tablename',
+                header_list=[u'ha', u'hb', u'hc'],
+                record_list=[
+                    [1.0, 2.0, 3.0],
+                    [11.0, 12.0, 13.0],
+                    [1.0, 2.0, 3.0],
+                    [11.0, 12.0, 13.0],
+                    [101.0, 102.0, 103.0],
+                    [1001.0, 1002.0, 1003.0],
+                ]),
+        ]
+        for table_writer_class in table_writer_class_list
+    ])
+    def test_normal_multiple(
+            self, tmpdir, writer_class, table, header, expected):
+        test_file_path = tmpdir.join("test.xlsx")
+
+        writer = writer_class()
+        writer.open_workbook(str(test_file_path))
+        writer.make_worksheet(table)
+        writer.header_list = header
+
+        writer.is_write_header = True
+        writer.is_write_closing_row = False
+        writer.write_table()
+
+        writer.is_write_opening_row = False
+        writer.is_write_header = False
+        writer.value_matrix = [
+            [1, 2, 3],
+            [11, 12, 13],
+        ]
+        writer.write_table()
+        writer.write_table()
+
+        writer.is_write_closing_row = True
+        writer.value_matrix = [
+            [101, 102, 103],
+            [1001, 1002, 1003],
+        ]
+        writer.write_table()
+
+        writer.close()
+        assert writer.first_data_row == 1
+        assert writer.last_data_row == 7
+
+        loader = sloader.ExcelTableFileLoader(str(test_file_path))
+
+        for tabledata in loader.load():
+            assert tabledata == expected
+
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
         [

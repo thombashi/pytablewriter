@@ -39,6 +39,10 @@ class TableWriter(TableWriterInterface):
 
         Nested list of data to write.
 
+    .. py:attribute:: is_write_header
+
+        Write a header of the table if the value is |True|.
+
     .. py:attribute:: is_padding
 
         Padding an item in the table if the value is |True|.
@@ -70,6 +74,7 @@ class TableWriter(TableWriterInterface):
         self.header_list = None
         self.value_matrix = None
 
+        self.is_write_header = True
         self.is_padding = True
         self.is_quote_header = True
         self.is_quote_table = {

@@ -112,6 +112,8 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         self._last_data_row = None
         self._last_data_col = None
 
+        self._current_data_row = self._first_data_row
+
     @abc.abstractproperty
     def open_workbook(self, workbook_path):
         """
@@ -158,11 +160,11 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         self._postprocess()
 
     def _write_value_matrix(self):
-        for row, value_prop_list in enumerate(self._value_prop_matrix):
-            sheet_row = self.first_data_row + row
-
+        for value_prop_list in self._value_prop_matrix:
             for col, prop in enumerate(value_prop_list):
-                self._write_cell(sheet_row, col, prop)
+                self._write_cell(self._current_data_row, col, prop)
+
+            self._current_data_row += 1
 
     def _get_last_column(self):
         if dp.is_not_empty_list_or_tuple(self.header_list):
@@ -174,12 +176,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         raise ValueError()
 
     def _postprocess(self):
-        self._last_data_row = self.first_data_row
-        try:
-            self._last_data_row += len(self.value_matrix)
-        except TypeError:
-            pass
-
+        self._last_data_row = self._current_data_row
         self._last_data_col = self._get_last_column()
 
 
@@ -198,11 +195,14 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         self._workbook = ExcelWorkbookXls(workbook_path)
 
     def _write_header(self):
-        if dp.is_empty_list_or_tuple(self.header_list):
+        if any([
+            not self.is_write_header,
+            dp.is_empty_list_or_tuple(self.header_list),
+        ]):
             return
 
         for col, value in enumerate(self.header_list):
-            self.stream.write(0, col, value)
+            self.stream.write(self.first_header_row, col, value)
 
     def _write_cell(self, row, col, prop):
         if prop.typecode in [dp.Typecode.FLOAT]:
@@ -323,7 +323,10 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         self._workbook = ExcelWorkbookXlsx(workbook_path)
 
     def _write_header(self):
-        if dp.is_empty_list_or_tuple(self.header_list):
+        if any([
+            not self.is_write_header,
+            dp.is_empty_list_or_tuple(self.header_list),
+        ]):
             return
 
         header_format_props = self.format_table.get(

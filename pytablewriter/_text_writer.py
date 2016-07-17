@@ -50,10 +50,6 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         A character of the last line of a table.
 
-    .. py:attribute:: is_write_header
-
-        Write a header of the table if the value is |True|.
-
     .. py:attribute:: is_write_header_separator_row
 
         Write a header separator line of the table if the value is |True|.
@@ -90,7 +86,6 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self.char_value_row_separator = u"-"
         self.char_closing_row = u"-"
 
-        self.is_write_header = True
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = False
         self.is_write_opening_row = False
