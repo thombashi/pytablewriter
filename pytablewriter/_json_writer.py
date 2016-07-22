@@ -14,7 +14,6 @@ import dataproperty
 
 from ._converter import lower_bool_converter
 from ._converter import strip_quote
-from ._interface import TextWriterInterface
 from ._text_writer import IndentationTextTableWriter
 
 
