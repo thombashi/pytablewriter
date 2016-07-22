@@ -175,20 +175,32 @@ class TextTableWriter(TableWriter, TextWriterInterface):
     def _write_line(self, text=u""):
         self._write_raw_line(text)
 
+    def _write_row(self, value_list):
+        if dataproperty.is_empty_list_or_tuple(value_list):
+            return
+
+        self._write_line(
+            self.char_left_side_row +
+            self.column_delimiter.join(value_list) +
+            self.char_right_side_row)
+
     def _write_header(self):
         if not self.is_write_header:
             return
 
         if dataproperty.is_empty_list_or_tuple(self._column_prop_list):
-            self._write_value_row(self.header_list)
+            self._write_row(self.header_list)
             return
 
-        self._write_value_row([
+        self._write_row([
             self._get_header_item(
                 col_prop, dataproperty.DataProperty(header))
             for col_prop, header in
             zip(self._column_prop_list, self.header_list)
         ])
+
+    def _write_value_row(self, value_list):
+        self._write_row(value_list)
 
     def __get_row_separator_item_list(self, separator_char):
         return [
@@ -211,15 +223,6 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             left_cross_point +
             self.char_cross_point.join(value_list) +
             right_cross_point)
-
-    def _write_value_row(self, value_list):
-        if dataproperty.is_empty_list_or_tuple(value_list):
-            return
-
-        self._write_line(
-            self.char_left_side_row +
-            self.column_delimiter.join(value_list) +
-            self.char_right_side_row)
 
     def _write_opening_row(self):
         if not self.is_write_opening_row:
