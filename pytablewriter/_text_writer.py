@@ -122,7 +122,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
                 else:
                     self.__write_value_row_separator()
 
-                self.__write_value_row(value_list)
+                self._write_value_row(value_list)
             except TypeError:
                 continue
 
@@ -145,7 +145,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
     def _get_header_item(self, col_prop, value_prop):
         from dataproperty.converter import StringConverterCreator
 
-        format_string = self.__get_header_format_string(col_prop)
+        format_string = self._get_header_format_string(col_prop)
         item = format_string.format(
             StringConverterCreator().create(value_prop.data).convert())
 
@@ -154,7 +154,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         return item
 
-    def __get_header_format_string(self, col_prop):
+    def _get_header_format_string(self, col_prop):
         return(
             u"{:" +
             self._get_center_align_formatformat() +
@@ -180,10 +180,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             return
 
         if dataproperty.is_empty_list_or_tuple(self._column_prop_list):
-            self.__write_value_row(self.header_list)
+            self._write_value_row(self.header_list)
             return
 
-        self.__write_value_row([
+        self._write_value_row([
             self._get_header_item(
                 col_prop, dataproperty.DataProperty(header))
             for col_prop, header in
@@ -212,7 +212,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             self.char_cross_point.join(value_list) +
             right_cross_point)
 
-    def __write_value_row(self, value_list):
+    def _write_value_row(self, value_list):
         if dataproperty.is_empty_list_or_tuple(value_list):
             return
 
