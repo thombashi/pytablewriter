@@ -18,6 +18,10 @@ def js_datetime_converter(value):
     return 'new Date("{:s}")'.format(value.strftime("%Y-%m-%dT%H:%M:%S%z"))
 
 
+def str_datetime_converter(value):
+    return '"{:s}"'.format(value.strftime("%Y-%m-%d %H:%M:%S%z"))
+
+
 class JavaScriptTableWriter(SourceCodeTableWriter):
     """
     Concrete class of a table writer for JavaScript format.
@@ -38,7 +42,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._prop_extractor.inf_value = "Infinity"
         self._prop_extractor.nan_value = "NaN"
         self._prop_extractor.bool_converter = lower_bool_converter
-        self._prop_extractor.datetime_converter = js_datetime_converter
         self._prop_extractor.datetime_format_str = "s"
         self.is_quote_table[dataproperty.Typecode.DATETIME] = False
 
@@ -51,6 +54,11 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
         """
+
+        if self.is_datetime_instance_formatting:
+            self._prop_extractor.datetime_converter = js_datetime_converter
+        else:
+            self._prop_extractor.datetime_converter = str_datetime_converter
 
         self._verify_property()
         self._preprocess()

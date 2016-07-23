@@ -300,6 +300,15 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
 
 
 class SourceCodeTableWriter(IndentationTextTableWriter):
+    """
+    Base class of table writer with source code (variable definition) format.
+
+    .. py:attribute:: is_datetime_instance_formatting
+
+        Write |datetime| values in the table as definition of date time class
+        instances coincide with specific language if this value is |True|.
+        Write as |str| if this value is |False|.
+    """
 
     @property
     def variable_name(self):
@@ -324,6 +333,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_write_header_separator_row = False
         self.is_write_opening_row = True
         self.is_write_closing_row = True
+
+        self.is_datetime_instance_formatting = True
 
         self._prop_extractor.none_value = None
 

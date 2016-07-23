@@ -20,7 +20,8 @@ from .data import value_matrix_iter
 
 
 Data = collections.namedtuple(
-    "Data", "table indent header value is_write_header expected")
+    "Data",
+    "table indent header value is_write_header is_dti_fmt expected")
 
 normal_test_data_list = [
     Data(
@@ -29,6 +30,7 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         is_write_header=True,
+        is_dti_fmt=True,
         expected="""var table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
     [1, 123.1, "a", 1.0, "1"],
@@ -43,6 +45,7 @@ normal_test_data_list = [
         header=header_list,
         value=None,
         is_write_header=True,
+        is_dti_fmt=True,
         expected="""var tablename = [
     ["a", "b", "c", "dd", "e"]
 ];
@@ -54,6 +57,7 @@ normal_test_data_list = [
         header=None,
         value=value_matrix,
         is_write_header=True,
+        is_dti_fmt=True,
         expected="""var table_name = [
     [1, 123.1, "a", 1.0, "1"],
     [2, 2.2, "bb", 2.2, "2.2"],
@@ -67,6 +71,7 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         is_write_header=True,
+        is_dti_fmt=True,
         expected="""    var tablename = [
         ["a", "b", "c", "dd", "e"],
         [1, 123.1, "a", 1.0, "1"],
@@ -81,6 +86,7 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix_with_none,
         is_write_header=True,
+        is_dti_fmt=True,
         expected="""var tablename = [
     ["a", "b", "c", "dd", "e"],
     [1, null, "a", 1.0, null],
@@ -96,6 +102,7 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         is_write_header=True,
+        is_dti_fmt=True,
         expected="""var tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1.0, new Date("2017-01-01T00:00:00")],
@@ -104,7 +111,21 @@ normal_test_data_list = [
 ];
 """
     ),
-
+    Data(
+        table="tablename",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        is_write_header=True,
+        is_dti_fmt=False,
+        expected="""var tablename = [
+    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
+    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1.0, "2017-01-01 00:00:00"],
+    [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+0900"],
+    [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, "2017-01-01 00:00:00"]
+];
+"""
+    ),
 ]
 
 exception_test_data_list = [
@@ -114,6 +135,7 @@ exception_test_data_list = [
         header=normal_test_data_list[0].header,
         value=normal_test_data_list[0].value,
         is_write_header=True,
+        is_dti_fmt=True,
         expected=pytablewriter.EmptyTableNameError
     )
 ] + [
@@ -123,6 +145,7 @@ exception_test_data_list = [
         header=header,
         value=value,
         is_write_header=True,
+        is_dti_fmt=True,
         expected=pytablewriter.EmptyTableDataError
     )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
@@ -144,24 +167,28 @@ class Test_JavaScriptTableWriter_write_new_line:
 class Test_JavaScriptTableWriter_write_table:
 
     @pytest.mark.parametrize(
-        ["table", "indent", "header", "value", "is_write_header", "expected"],
+        [
+            "table", "indent", "header", "value",
+            "is_write_header", "is_dti_fmt", "expected"
+        ],
         [
             [
                 data.table, data.indent, data.header, data.value,
-                data.is_write_header, data.expected
+                data.is_write_header, data.is_dti_fmt, data.expected
             ]
             for data in normal_test_data_list
         ]
     )
     def test_normal_single(
             self, capsys, table, indent, header, value,
-            is_write_header, expected):
+            is_write_header, is_dti_fmt, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
         writer.header_list = header
         writer.value_matrix = value
         writer.is_write_header = is_write_header
+        writer.is_datetime_instance_formatting = is_dti_fmt
 
         writer.write_table()
 
