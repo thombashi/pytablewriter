@@ -155,11 +155,9 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         return item
 
     def _get_header_format_string(self, col_prop):
-        return(
-            u"{:" +
-            self._get_center_align_formatformat() +
-            str(self._get_padding_len(col_prop)) +
-            u"}")
+        return u"{{:{:s}{:s}}}".format(
+            self._get_center_align_formatformat(),
+            str(self._get_padding_len(col_prop)))
 
     def _write_raw_string(self, unicode_text):
         self._verify_stream()
