@@ -21,11 +21,11 @@ Data = collections.namedtuple("Data", "table indent header value expected")
 
 normal_test_data_list = [
     Data(
-        table="",
+        table="table-name ho'ge",
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected="""pandas.DataFrame(
+        expected="""table_name_ho_ge = pandas.DataFrame(
     {'a': [1, 2, 3],
      'b': [123.1, 2.2, 3.3],
      'c': ['a', 'bb', 'ccc'],
@@ -45,25 +45,11 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table=None,
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected="""tablename = pandas.DataFrame(
-    {'a': [1, 2, 3],
-     'b': [123.1, 2.2, 3.3],
-     'c': ['a', 'bb', 'ccc'],
-     'dd': [1, 2.2, 3],
-     'e': [1, 2.2, 'cccc']}
-)
-"""
-    ),
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected="""table_name = pandas.DataFrame(
+        expected="""pandas.DataFrame(
     {'a': [1, 2, 3],
      'b': [123.1, 2.2, 3.3],
      'c': ['a', 'bb', 'ccc'],
