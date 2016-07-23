@@ -5,19 +5,17 @@
 """
 
 from __future__ import absolute_import
-import collections
 
 import pytablewriter
 import pytest
 
+from .data import Data
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
 from .data import mix_header_list
 from .data import mix_value_matrix
 
-
-Data = collections.namedtuple("Data", "table indent header value expected")
 
 normal_test_data_list = [
     Data(

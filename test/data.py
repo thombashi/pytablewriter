@@ -5,7 +5,11 @@
 """
 
 from __future__ import absolute_import
+import collections
 import datetime
+import itertools
+
+from pytablewriter import EmptyTableError
 
 
 _time = datetime.datetime(2017, 1, 1, 0, 0, 0)
@@ -72,4 +76,17 @@ value_matrix_iter = [
         [1001, 1002, 1003],
 
     ],
+]
+
+
+Data = collections.namedtuple("Data", "table indent header value expected")
+null_test_data_list = [
+    Data(
+        table="dummy",
+        indent=0,
+        header=header,
+        value=value,
+        expected=EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]

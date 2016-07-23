@@ -10,6 +10,7 @@ import collections
 import pytablewriter
 import pytest
 
+from .data import null_test_data_list
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
@@ -184,16 +185,6 @@ normal_test_data_list = [
     ),
 ]
 
-exception_test_data_list = [
-    Data(
-        table="",
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyTableError
-    ),
-
-]
-
 table_writer_class = pytablewriter.MediaWikiTableWriter
 
 
@@ -227,7 +218,7 @@ class Test_MediaWikiTableWriter_write_table:
         ["table", "header", "value", "expected"],
         [
             [data.table, data.header, data.value, data.expected]
-            for data in exception_test_data_list
+            for data in null_test_data_list
         ]
     )
     def test_exception(self, capsys, table, header, value, expected):
@@ -338,7 +329,7 @@ class Test_MediaWikiTableWriter_write_table_iter:
         ["table", "header", "value", "expected"],
         [
             [data.table, data.header, data.value, data.expected]
-            for data in exception_test_data_list
+            for data in null_test_data_list
         ]
     )
     def test_exception(self, capsys, table, header, value, expected):

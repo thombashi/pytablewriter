@@ -5,20 +5,18 @@
 """
 
 from __future__ import absolute_import
-import collections
-import itertools
 
 import pytablewriter
 import pytest
 
+from .data import Data
+from .data import null_test_data_list
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
 from .data import mix_header_list
 from .data import mix_value_matrix
 
-
-Data = collections.namedtuple("Data", "table indent header value expected")
 
 normal_test_data_list = [
     Data(
@@ -183,17 +181,6 @@ normal_test_data_list = [
     ),
 ]
 
-exception_test_data_list = [
-    Data(
-        table="",
-        indent=0,
-        header=header,
-        value=value,
-        expected=pytablewriter.EmptyTableError
-    )
-    for header, value in itertools.product([None, [], ""], [None, [], ""])
-]
-
 table_writer_class = pytablewriter.RstGridTableWriter
 
 
@@ -231,7 +218,7 @@ class Test_RstGridTableWriter_write_table:
         ["table", "indent", "header", "value", "expected"],
         [
             [data.table, data.indent, data.header, data.value, data.expected]
-            for data in exception_test_data_list
+            for data in null_test_data_list
         ]
     )
     def test_exception(self, capsys, table, indent, header, value, expected):
