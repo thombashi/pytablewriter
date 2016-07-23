@@ -10,6 +10,7 @@ import dataproperty
 import dominate.tags as tags
 import pathvalidate
 
+from ._error import EmptyHeaderError
 from ._text_writer import TextTableWriter
 
 
@@ -53,12 +54,19 @@ class HtmlTableWriter(TextTableWriter):
         else:
             self._table_tag = tags.table()
 
-        self._write_header()
+        try:
+            self._write_header()
+        except EmptyHeaderError:
+            pass
+
         self._write_body()
 
     def _write_header(self):
         if not self.is_write_header:
             return
+
+        if dataproperty.is_empty_sequence(self.header_list):
+            raise EmptyHeaderError()
 
         tr_tag = tags.tr()
         for header in self.header_list:

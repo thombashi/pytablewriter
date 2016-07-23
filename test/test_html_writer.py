@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 import collections
+import itertools
 
 import pytablewriter
 import pytest
@@ -62,20 +63,11 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="",
+        table=None,
         indent="  ",
-        header=header_list,
+        header=None,
         value=value_matrix,
         expected="""<table>
-  <thead>
-    <tr>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>dd</th>
-      <th>e</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
       <td align="right">1</td>
@@ -256,26 +248,12 @@ normal_test_data_list = [
 exception_test_data_list = [
     Data(
         table="",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=None,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-
+        indent=0,
+        header=header,
+        value=value,
+        expected=pytablewriter.EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class = pytablewriter.HtmlTableWriter
