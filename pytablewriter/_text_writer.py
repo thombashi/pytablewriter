@@ -115,14 +115,14 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             pass
 
         is_first_value_row = True
-        for value_list in self._value_matrix:
+        for value_list, value_prop_list in zip(self._value_matrix, self._value_prop_matrix):
             try:
                 if is_first_value_row:
                     is_first_value_row = False
                 else:
                     self.__write_value_row_separator()
 
-                self._write_value_row(value_list)
+                self._write_value_row(value_list, value_prop_list)
             except TypeError:
                 continue
 
@@ -197,7 +197,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             zip(self._column_prop_list, self.header_list)
         ])
 
-    def _write_value_row(self, value_list):
+    def _write_value_row(self, value_list, value_prop_list):
         self._write_row(value_list)
 
     def __get_row_separator_item_list(self, separator_char):
