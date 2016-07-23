@@ -15,7 +15,7 @@ from ._interface import TextWriterInterface
 
 class TextTableWriter(TableWriter, TextWriterInterface):
     """
-    Base class of table writer that text format.
+    Base class of table writer with text format.
 
     .. py:attribute:: column_delimiter
 
@@ -253,7 +253,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
 class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     """
-    Base class of table writer that text format with indentation.
+    Base class of table writer with indentation text format.
 
     .. py:attribute:: indent_string
 
