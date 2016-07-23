@@ -320,6 +320,7 @@ rp_class = u"""
 .. |JavaScriptTableWriter| replace:: :py:class:`~pytablewriter.JavaScriptTableWriter`
 .. |JsonTableWriter| replace:: :py:class:`~pytablewriter.JsonTableWriter`
 .. |MarkdownTableWriter| replace:: :py:class:`~pytablewriter.MarkdownTableWriter`
+.. |MediaWikiTableWriter| replace:: :py:class:`~pytablewriter.MediaWikiTableWriter`
 .. |PandasDataFrameWriter| replace:: :py:class:`~pytablewriter.PandasDataFrameWriter`
 .. |PythonCodeTableWriter| replace:: :py:class:`~pytablewriter.PythonCodeTableWriter`
 .. |RstCsvTableWriter| replace:: :py:class:`~pytablewriter.RstCsvTableWriter`

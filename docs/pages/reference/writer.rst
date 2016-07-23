@@ -76,6 +76,13 @@ JSON table writer class
     :inherited-members:
     :show-inheritance:
 
+MediaWiki table writer class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: pytablewriter.MediaWikiTableWriter
+    :inherited-members:
+    :show-inheritance:
+
 Markdown table writer class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

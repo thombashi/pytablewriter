@@ -11,6 +11,7 @@ Examples
    javascript
    json
    markdown
+   mediawiki
    pandas_dataframe
    python_code
    rst_csv_table

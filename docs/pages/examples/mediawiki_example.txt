@@ -1,0 +1,66 @@
+.. code-block:: python
+    :caption: Sample code that write a MediaWiki table
+
+    import pytablewriter
+
+    writer = pytablewriter.MediaWikiTableWriter()
+    writer.table_name = "example_table"
+    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+    writer.value_matrix = [
+        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+        [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+    ]
+    
+    writer.write_table()
+
+.. code-block:: none
+    :caption: Output
+
+    {| class="wikitable"
+    |+example_table
+    ! int
+    ! float
+    ! str
+    ! bool
+    ! mix
+    ! time
+    |-
+    | style="text-align:right"| 0
+    | style="text-align:right"| 0.1
+    | hoge
+    | True
+    | style="text-align:right"| 0
+    | 2017-01-01 03:04:05+0900
+    |-
+    | style="text-align:right"| 2
+    | style="text-align:right"| -2.2
+    | foo
+    | False
+    | 
+    | 2017-12-23 12:34:51+0900
+    |-
+    | style="text-align:right"| 3
+    | style="text-align:right"| 0.0
+    | bar
+    | True
+    | inf
+    | 2017-03-03 22:44:55+0900
+    |-
+    | style="text-align:right"| -10
+    | style="text-align:right"| -9.9
+    | 
+    | False
+    | nan
+    | 2017-01-01 00:00:00+0900
+    |}
+
+
+Rendering result
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: ss/mediawiki.png
+   :alt: mediawiki_ss
+   
+   Rendered at Wikia
