@@ -365,7 +365,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             except TypeError:
                 pass
 
-        if prop.data is None:
+        if prop.typecode is dp.Typecode.NAN:
             base_props = dict(self.__nan_format_property)
 
         cell_format = self.__get_cell_format(format_key, base_props)
