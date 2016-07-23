@@ -239,6 +239,11 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self.__write_separator_row(self._get_header_row_separator_item_list())
 
     def write_value_row_separator(self):
+        """
+        Write row separator of the table which matched to the table type
+        regardless of the value of the :py:attr:`.is_write_value_separator_row`.
+        """
+
         self.__write_separator_row(self._get_value_row_separator_item_list())
 
     def _write_closing_row(self):
