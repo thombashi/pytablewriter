@@ -120,7 +120,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
                 if is_first_value_row:
                     is_first_value_row = False
                 else:
-                    self.__write_value_row_separator()
+                    self.write_value_row_separator()
 
                 self._write_value_row(value_list, value_prop_list)
             except TypeError:
@@ -237,7 +237,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_header_row_separator_item_list())
 
-    def __write_value_row_separator(self):
+    def write_value_row_separator(self):
         if not self.is_write_value_separator_row:
             return
 

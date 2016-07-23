@@ -164,6 +164,9 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
 
         self._postprocess()
 
+    def write_value_row_separator(self):
+        pass
+
     def _write_value_matrix(self):
         for value_prop_list in self._value_prop_matrix:
             for col, prop in enumerate(value_prop_list):

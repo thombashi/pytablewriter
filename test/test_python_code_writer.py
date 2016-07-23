@@ -200,7 +200,9 @@ class Test_PythonCodeTableWriter_write_table:
             [11, 12, 13],
         ]
         writer.write_table()
+        writer.write_value_row_separator()
         writer.write_table()
+        writer.write_value_row_separator()
 
         writer.is_write_closing_row = True
         writer.value_matrix = [

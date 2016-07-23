@@ -24,6 +24,10 @@ class TableWriterInterface(object):
     def write_table(self):   # pragma: no cover
         pass
 
+    @abc.abstractmethod
+    def write_value_row_separator(self):  # pragma: no cover
+        pass
+
 
 @six.add_metaclass(abc.ABCMeta)
 class TextWriterInterface(object):
