@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 import collections
+import itertools
 
 import pytablewriter
 import pytest
@@ -21,11 +22,11 @@ Data = collections.namedtuple("Data", "table indent header value expected")
 
 normal_test_data_list = [
     Data(
-        table="",
+        table="table-name ho'ge",
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected="""[
+        expected="""table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
     [1, 123.1, "a", 1.0, "1"],
     [2, 2.2, "bb", 2.2, "2.2"],
@@ -44,25 +45,11 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table=None,
         indent=0,
-        header=header_list,
+        header=None,
         value=value_matrix,
-        expected="""tablename = [
-    ["a", "b", "c", "dd", "e"],
-    [1, 123.1, "a", 1.0, "1"],
-    [2, 2.2, "bb", 2.2, "2.2"],
-    [3, 3.3, "ccc", 3.0, "cccc"],
-]
-"""
-    ),
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected="""table_name = [
-    ["a", "b", "c", "dd", "e"],
+        expected="""[
     [1, 123.1, "a", 1.0, "1"],
     [2, 2.2, "bb", 2.2, "2.2"],
     [3, 3.3, "ccc", 3.0, "cccc"],
@@ -113,26 +100,13 @@ normal_test_data_list = [
 
 exception_test_data_list = [
     Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=value_matrix,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=None,
-        value=value_matrix,
-        expected=pytablewriter.EmptyHeaderError
-    ),
+        table="",
+        indent=0,
+        header=header,
+        value=value,
+        expected=pytablewriter.EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class = pytablewriter.PythonCodeTableWriter
