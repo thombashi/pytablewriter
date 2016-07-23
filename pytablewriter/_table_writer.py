@@ -144,11 +144,11 @@ class TableWriter(TableWriterInterface):
         """
         Write a table with iteration.
         The following is premise to execute this method:
-            - set iterator to the |value_matrix|
-            - set the number of iterations to the |iteration_length| attribute
-            - set a callback function to the |write_callback| attribute,
-              this callback function is called when for each of the iteration
-              of writing a table is completed.
+        - set iterator to the |value_matrix|
+        - set the number of iterations to the |iteration_length| attribute
+        - set a callback function to the |write_callback| attribute, this
+        callback function is called when for each of the iteration of writing
+        a table is completed.
         """
 
         self._verify_table_name()
