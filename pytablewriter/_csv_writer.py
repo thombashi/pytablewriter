@@ -32,9 +32,6 @@ class CsvTableWriter(TextTableWriter):
         self.is_padding = False
         self.is_write_header_separator_row = False
 
-    def _verify_header(self):
-        pass
-
     def _write_header(self):
         if dataproperty.is_empty_list_or_tuple(self.header_list):
             return
