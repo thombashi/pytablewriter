@@ -28,7 +28,7 @@ class EmptyValueError(Exception):
     """
 
 
-class EmptyTableError(Exception):
+class EmptyTableDataError(Exception):
     """
     Raised when a table writer class of the |header_list| and |value_matrix|
     attributes are null

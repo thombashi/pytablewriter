@@ -13,6 +13,6 @@ Errors
     :undoc-members:
     :show-inheritance:
 
-.. autoclass:: pytablewriter.EmptyTableError
+.. autoclass:: pytablewriter.EmptyTableDataError
     :undoc-members:
     :show-inheritance:

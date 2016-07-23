@@ -9,7 +9,7 @@ from __future__ import absolute_import
 from ._error import EmptyHeaderError
 from ._error import EmptyTableNameError
 from ._error import EmptyValueError
-from ._error import EmptyTableError
+from ._error import EmptyTableDataError
 
 from ._csv_writer import CsvTableWriter
 from ._excel_writer import ExcelXlsTableWriter

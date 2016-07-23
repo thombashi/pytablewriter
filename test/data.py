@@ -9,7 +9,7 @@ import collections
 import datetime
 import itertools
 
-from pytablewriter import EmptyTableError
+from pytablewriter import EmptyTableDataError
 
 
 _time = datetime.datetime(2017, 1, 1, 0, 0, 0)
@@ -86,7 +86,7 @@ null_test_data_list = [
         indent=0,
         header=header,
         value=value,
-        expected=EmptyTableError
+        expected=EmptyTableDataError
     )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]

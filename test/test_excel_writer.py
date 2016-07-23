@@ -90,7 +90,7 @@ invalid_test_data_list = [
         table="",
         header=header,
         value=value,
-        expected=pytablewriter.EmptyTableError
+        expected=pytablewriter.EmptyTableDataError
     )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]

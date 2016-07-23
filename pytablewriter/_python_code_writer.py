@@ -35,7 +35,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         """
         |write_table| with Python nested list variable definition format.
 
-        :raises pytablewriter.EmptyTableError:
+        :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
         """
 

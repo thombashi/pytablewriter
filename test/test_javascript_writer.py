@@ -123,7 +123,7 @@ exception_test_data_list = [
         header=header,
         value=value,
         is_write_header=True,
-        expected=pytablewriter.EmptyTableError
+        expected=pytablewriter.EmptyTableDataError
     )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]

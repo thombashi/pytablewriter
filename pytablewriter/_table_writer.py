@@ -12,7 +12,7 @@ from dataproperty import Typecode
 
 from ._error import EmptyHeaderError
 from ._error import EmptyValueError
-from ._error import EmptyTableError
+from ._error import EmptyTableDataError
 from ._interface import TableWriterInterface
 
 
@@ -137,7 +137,7 @@ class TableWriter(TableWriterInterface):
             dataproperty.is_empty_sequence(self.header_list),
             dataproperty.is_empty_sequence(self.value_matrix),
         ]):
-            raise EmptyTableError()
+            raise EmptyTableDataError()
 
         old_is_write_header = self.is_write_header
         old_is_write_opening_row = self.is_write_opening_row
@@ -267,7 +267,7 @@ class TableWriter(TableWriterInterface):
             dataproperty.is_empty_sequence(self.header_list),
             dataproperty.is_empty_sequence(self.value_matrix),
         ]):
-            raise EmptyTableError()
+            raise EmptyTableDataError()
 
         try:
             self._verify_value_matrix()
