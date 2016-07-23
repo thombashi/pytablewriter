@@ -244,7 +244,7 @@ class TableWriter(TableWriterInterface):
             import os
 
             message = [
-                "_verify_value_matrix: miss match length with header and value",
+                "invalid table value: mismatch length with header and value",
                 "  header: col-size={:d} {:s}".format(
                     len(self.header_list), self.header_list),
                 "  value:  {:s}".format(str(dict_invalid)),
