@@ -13,7 +13,7 @@ pytablewriter
 Summary
 -------
 
-pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/Markdown/Excel/Pandas/Python/reStructuredText
+pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText
 
 Features
 --------
@@ -27,6 +27,7 @@ Features
     - JavaScript (Definition of a nested list variable)
     - JSON
     - Markdown
+    - MediaWiki
     - Pandas (Definition of a DataFrame variable)
     - Python code (Definition of a nested list variable)
     - reStructuredText
