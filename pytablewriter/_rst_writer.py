@@ -76,6 +76,9 @@ class RstCsvTableWriter(RstTableWriter):
     def write_table(self):
         """
         |write_table| with reStructuredText CSV table format.
+
+        :raises pytablewriter.EmptyTableError:
+            If the |header_list| and the |value_matrix| is empty.
         """
 
         self._verify_property()

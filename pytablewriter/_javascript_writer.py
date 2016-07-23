@@ -45,6 +45,11 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def write_table(self):
         """
         |write_table| with JavaScript nested list variable definition format.
+
+        :raises pytablewriter.EmptyTableNameError:
+            If the |table_name| is empty.
+        :raises pytablewriter.EmptyTableError:
+            If the |header_list| and the |value_matrix| is empty.
         """
 
         self._verify_property()

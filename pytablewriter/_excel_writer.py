@@ -156,6 +156,8 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
     def write_table(self):
         """
         Write a table to the current worksheet.
+
+        :raises IOError: If failed to write data to the worksheet.
         """
 
         self._verify_property()
