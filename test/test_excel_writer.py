@@ -46,14 +46,13 @@ normal_test_data_list = [
             ])
     ),
     Data(
-        table="",
-        header=header_list,
+        table=None,
+        header=None,
         value=value_matrix,
         expected=TableData(
             "Sheet1",
-            ["a", "b", "c", "dd", "e"],
+            [1, 123.1, "a", 1,   1],
             [
-                [1, 123.1, "a", 1,   1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3,   "cccc"],
             ])
@@ -88,23 +87,11 @@ normal_test_data_list = [
 invalid_test_data_list = [
     Data(
         table="",
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        header=None,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-
+        header=header,
+        value=value,
+        expected=pytablewriter.EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class_list = [
@@ -217,7 +204,8 @@ class Test_ExcelTableWriter_write_table:
                 table_writer_class_list, invalid_test_data_list)
         ]
     )
-    def test_exception(self, tmpdir, writer_class, table, header, value, expected):
+    def test_exception(
+            self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
