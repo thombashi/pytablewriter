@@ -161,15 +161,14 @@ class Test_CsvTableWriter_write_table_iter:
         assert out == expected
 
     @pytest.mark.parametrize(
-        ["table", "header", "value", "expected"],
+        ["header", "value", "expected"],
         [
-            [data.table, data.header, data.value, data.expected]
+            [data.header, data.value, data.expected]
             for data in exception_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, header, value, expected):
+    def test_exception(self, capsys, header, value, expected):
         writer = table_writer_class()
-        writer.table_name = table
         writer.header_list = header
         writer.value_matrix = value
 
