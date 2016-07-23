@@ -361,15 +361,16 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             try:
                 self.stream.write_number(
                     row, col, float(prop.data), cell_format)
+                return
             except TypeError:
                 pass
-        else:
-            if prop.data is None:
-                base_props = dict(self.__nan_format_property)
 
-            cell_format = self.__get_cell_format(format_key, base_props)
-            self.stream.write(
-                row, col, prop.data, cell_format)
+        if prop.data is None:
+            base_props = dict(self.__nan_format_property)
+
+        cell_format = self.__get_cell_format(format_key, base_props)
+        self.stream.write(
+            row, col, prop.data, cell_format)
 
     def __get_number_property(self, col):
         if col in self.__col_numprops_table:
