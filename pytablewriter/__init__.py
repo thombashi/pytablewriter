@@ -16,6 +16,7 @@ from ._excel_writer import ExcelXlsxTableWriter
 from ._html_writer import HtmlTableWriter
 from ._javascript_writer import JavaScriptTableWriter
 from ._json_writer import JsonTableWriter
+from ._mediawiki_writer import MediaWikiTableWriter
 from ._md_writer import MarkdownTableWriter
 from ._null_writer import NullTableWriter
 from ._pandas_writer import PandasDataFrameWriter
