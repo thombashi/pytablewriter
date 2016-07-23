@@ -120,7 +120,8 @@ class TextTableWriter(TableWriter, TextWriterInterface):
                 if is_first_value_row:
                     is_first_value_row = False
                 else:
-                    self.write_value_row_separator()
+                    if self.is_write_value_separator_row:
+                        self.write_value_row_separator()
 
                 self._write_value_row(value_list, value_prop_list)
             except TypeError:
@@ -238,9 +239,6 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self.__write_separator_row(self._get_header_row_separator_item_list())
 
     def write_value_row_separator(self):
-        if not self.is_write_value_separator_row:
-            return
-
         self.__write_separator_row(self._get_value_row_separator_item_list())
 
     def _write_closing_row(self):
@@ -325,6 +323,9 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
 
         self._prop_extractor.none_value = None
+
+    def _get_value_row_separator_item_list(self):
+        return []
 
     def _write_opening_row(self):
         self.dec_indent_level()

@@ -41,5 +41,8 @@ class CsvTableWriter(TextTableWriter):
 
         super(CsvTableWriter, self)._write_header()
 
+    def _get_value_row_separator_item_list(self):
+        return []
+
     def _get_closing_row_item_list(self):
         return []
