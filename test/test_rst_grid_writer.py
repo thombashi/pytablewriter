@@ -50,7 +50,8 @@ normal_test_data_list = [
     +=+=+=+==+=+
     +-+-+-+--+-+
 """
-    ),    Data(
+    ),
+    Data(
         table="tablename",
         indent=0,
         header=header_list,
