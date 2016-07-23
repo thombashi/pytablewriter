@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 import collections
+import itertools
 
 import pytablewriter
 import pytest
@@ -21,11 +22,11 @@ Data = collections.namedtuple("Data", "table indent header value expected")
 
 normal_test_data_list = [
     Data(
-        table="",
+        table="tablename",
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected=""".. table:: 
+        expected=""".. table:: tablename
 
     =  =====  ===  ===  ====
     a    b     c   dd    e  
@@ -50,14 +51,12 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table=None,
         indent=0,
-        header=header_list,
+        header=None,
         value=value_matrix,
-        expected=""".. table:: tablename
+        expected=""".. table:: 
 
-    =  =====  ===  ===  ====
-    a    b     c   dd    e  
     =  =====  ===  ===  ====
     1  123.1  a    1.0  1   
     2    2.2  bb   2.2  2.2 
@@ -119,25 +118,12 @@ normal_test_data_list = [
 exception_test_data_list = [
     Data(
         table="",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=None,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
+        indent=0,
+        header=header,
+        value=value,
+        expected=pytablewriter.EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class = pytablewriter.RstSimpleTableWriter
