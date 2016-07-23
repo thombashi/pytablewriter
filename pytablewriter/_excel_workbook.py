@@ -18,23 +18,23 @@ import xlwt
 class ExcelWorkbookInterface(object):
 
     @abc.abstractproperty
-    def workbook(self):
+    def workbook(self):  # pragma: no cover
         pass
 
     @abc.abstractproperty
-    def file_path(self):
+    def file_path(self):  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def open(self, file_path):
+    def open(self, file_path):  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def close(self):
+    def close(self):  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def add_worksheet(self, worksheet_name):
+    def add_worksheet(self, worksheet_name):  # pragma: no cover
         pass
 
 
