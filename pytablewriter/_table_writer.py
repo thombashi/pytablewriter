@@ -57,6 +57,18 @@ class TableWriter(TableWriterInterface):
         Dictionary of { Typecode : bool } format.
         Add double quote to string in table elements,
         where a |Typecode| of table-value is |True| in the dictionary.
+
+    .. py:attribute:: iteration_length
+
+        The number of iterations to write a table.
+        This value used in :py:meth:`.write_table_iter` method.
+        (defaults to ``-1`` which means number of iterations is indefinite)
+
+    .. py:attribute:: write_callback
+
+        This is called when for each of the iteration of writing a table is
+        completed. This method is used in :py:meth:`.write_table_iter` method.
+        (defaults to |None|)
     """
 
     @property
@@ -129,6 +141,16 @@ class TableWriter(TableWriterInterface):
             self.stream = None
 
     def write_table_iter(self):
+        """
+        Write a table with iteration.
+        The following is premise to execute this method:
+            - set iterator to the |value_matrix|
+            - set the number of iterations to the |iteration_length| attribute
+            - set a callback function to the |write_callback| attribute,
+              this callback function is called when for each of the iteration
+              of writing a table is completed.
+        """
+
         self._verify_table_name()
         self._verify_stream()
         self._verify_header()

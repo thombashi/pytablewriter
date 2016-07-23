@@ -334,17 +334,23 @@ rp_module = u"""
 """
 
 rp_attr = u"""
+.. |iteration_length| replace::
+    :py:attr:`~pytablewriter._table_writer.TableWriter.iteration_length`
+
 .. |stream| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.stream` property
+    :py:attr:`~pytablewriter._table_writer.TableWriter.stream`
 
 .. |table_name| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.table_name` property
+    :py:attr:`~pytablewriter._table_writer.TableWriter.table_name`
 
 .. |header_list| replace::
     :py:attr:`~pytablewriter._table_writer.TableWriter.header_list`
 
 .. |value_matrix|
     replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.value_matrix`
+
+.. |write_callback| replace::
+    :py:attr:`~pytablewriter._table_writer.TableWriter.write_callback`
 
 .. |column_delimiter| replace::
     :py:attr:`~pytablewriter._text_writer.TextTableWriter.column_delimiter`
