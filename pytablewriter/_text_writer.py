@@ -86,11 +86,6 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self.char_value_row_separator = u"-"
         self.char_closing_row = u"-"
 
-        self.is_write_header_separator_row = True
-        self.is_write_value_separator_row = False
-        self.is_write_opening_row = False
-        self.is_write_closing_row = False
-
     def write_null_line(self):
         """
         Write a null line to the |stream|.

@@ -89,6 +89,10 @@ class TableWriter(TableWriterInterface):
             Typecode.BOOL: False,
         }
 
+        self.is_write_header_separator_row = True
+        self.is_write_value_separator_row = False
+        self.is_write_opening_row = False
+        self.is_write_closing_row = False
         self.is_float_formatting = True
 
         self._value_matrix = []
@@ -102,6 +106,9 @@ class TableWriter(TableWriterInterface):
         self._prop_extractor.bool_converter = default_bool_converter
 
         self._preprocessed_property = False
+
+        self.iteration_length = -1
+        self.write_callback = None
 
     def close(self):
         """
@@ -120,6 +127,53 @@ class TableWriter(TableWriterInterface):
             pass
         finally:
             self.stream = None
+
+    def write_table_iter(self):
+        self._verify_table_name()
+        self._verify_stream()
+        self._verify_header()
+
+        if all([
+            dataproperty.is_empty_sequence(self.header_list),
+            dataproperty.is_empty_sequence(self.value_matrix),
+        ]):
+            raise EmptyTableError()
+
+        old_is_write_header = self.is_write_header
+        old_is_write_opening_row = self.is_write_opening_row
+        old_is_write_closing_row = self.is_write_closing_row
+
+        self.is_write_closing_row = False
+        iter_count = 1
+
+        for work_matrix in self.value_matrix:
+            is_final_iter = all([
+                self.iteration_length > 0,
+                iter_count >= self.iteration_length
+            ])
+
+            if is_final_iter:
+                self.is_write_closing_row = True
+
+            self.value_matrix = work_matrix
+            self.write_table()
+
+            if not is_final_iter:
+                self.write_value_row_separator()
+
+            self.is_write_opening_row = False
+            self.is_write_header = False
+
+            try:
+                self.write_callback(iter_count, self.iteration_length)
+            except TypeError:
+                pass
+
+            iter_count += 1
+
+        self.is_write_header = old_is_write_header
+        self.is_write_opening_row = old_is_write_opening_row
+        self.is_write_closing_row = old_is_write_closing_row
 
     def _get_padding_len(self, column_property):
         if self.is_padding:

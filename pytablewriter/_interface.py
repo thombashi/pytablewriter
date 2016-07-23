@@ -25,6 +25,10 @@ class TableWriterInterface(object):
         pass
 
     @abc.abstractmethod
+    def write_table_iter(self):  # pragma: no cover
+        pass
+
+    @abc.abstractmethod
     def write_value_row_separator(self):  # pragma: no cover
         pass
 
