@@ -187,6 +187,9 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         if not self.is_write_header:
             return
 
+        if dataproperty.is_empty_list_or_tuple(self.header_list):
+            raise EmptyHeaderError()
+
         if dataproperty.is_empty_list_or_tuple(self._column_prop_list):
             self._write_row(self.header_list)
             return

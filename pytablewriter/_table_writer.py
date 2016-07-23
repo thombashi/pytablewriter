@@ -220,8 +220,7 @@ class TableWriter(TableWriterInterface):
             raise IOError("null output stream")
 
     def _verify_header(self):
-        if dataproperty.is_empty_list_or_tuple(self.header_list):
-            raise EmptyHeaderError()
+        pass
 
     def _verify_value_matrix(self):
         if dataproperty.is_empty_list_or_tuple(self.value_matrix):
