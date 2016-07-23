@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 import collections
+import itertools
 
 import pytablewriter
 import pytest
@@ -21,11 +22,11 @@ Data = collections.namedtuple("Data", "table indent header value expected")
 
 normal_test_data_list = [
     Data(
-        table="",
+        table="table name",
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected=""".. csv-table:: 
+        expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
     :widths: 1, 5, 3, 3, 4
     
@@ -46,12 +47,11 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table=None,
         indent=0,
-        header=header_list,
+        header=None,
         value=value_matrix,
-        expected=""".. csv-table:: tablename
-    :header: "a", "b", "c", "dd", "e"
+        expected=""".. csv-table:: 
     :widths: 1, 5, 3, 3, 4
     
     1, 123.1, "a", 1.0, "1"
@@ -107,26 +107,14 @@ normal_test_data_list = [
 exception_test_data_list = [
     Data(
         table="",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=None,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
+        indent=0,
+        header=header,
+        value=value,
+        expected=pytablewriter.EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
+
 
 table_writer_class = pytablewriter.RstCsvTableWriter
 

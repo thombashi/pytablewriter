@@ -102,8 +102,10 @@ class RstCsvTableWriter(RstTableWriter):
         if not self.is_write_header:
             return
 
-        self._write_line(
-            u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
+        if dataproperty.is_not_empty_list_or_tuple(self.header_list):
+            self._write_line(
+                u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
+
         self._write_line(u":widths: " + u", ".join([
             str(col_prop.padding_len)
             for col_prop in self._column_prop_list
