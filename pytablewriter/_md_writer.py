@@ -8,6 +8,7 @@ from __future__ import absolute_import
 
 import dataproperty
 
+from ._error import EmptyHeaderError
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -43,6 +44,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         """
 
         super(MarkdownTableWriter, self).write_table()
+
+    def _verify_header(self):
+        if dataproperty.is_empty_sequence(self.header_list):
+            raise EmptyHeaderError()
 
     def _get_opening_row_item_list(self):
         if dataproperty.is_empty_string(self.table_name):
