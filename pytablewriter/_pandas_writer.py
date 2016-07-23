@@ -37,6 +37,8 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
     def write_table(self):
         """
         |write_table| with Pandas DataFrame variable definition format.
+
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         """
 
         import pprint

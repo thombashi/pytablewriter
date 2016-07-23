@@ -41,6 +41,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def write_table(self):
         """
         |write_table| with Markdown table format.
+
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         """
 
         super(MarkdownTableWriter, self).write_table()

@@ -50,6 +50,8 @@ class JsonTableWriter(IndentationTextTableWriter):
     def write_table(self):
         """
         |write_table| with JSON format.
+
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         """
 
         self._verify_property()
