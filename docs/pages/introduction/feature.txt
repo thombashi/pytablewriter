@@ -10,6 +10,7 @@ Features
     - JavaScript (Definition of a nested list variable)
     - JSON
     - Markdown
+    - MediaWiki
     - Pandas (Definition of a DataFrame variable)
     - Python code (Definition of a nested list variable)
     - reStructuredText

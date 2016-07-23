@@ -310,6 +310,10 @@ rp_class = u"""
 .. |datetime| replace:: :py:class:`datetime.datetime`
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
 
+.. |Typecode| replace:: :py:class:`dataproperty.Typecode`
+
+.. |EmptyHeaderError| replace:: :py:class:`~pytablewriter.EmptyHeaderError`
+
 .. |CsvTableWriter| replace:: :py:class:`~pytablewriter.CsvTableWriter`
 .. |ExcelXlsxTableWriter| replace:: :py:class:`~pytablewriter.ExcelXlsxTableWriter`
 .. |HtmlTableWriter| replace:: :py:class:`~pytablewriter.HtmlTableWriter`
@@ -321,7 +325,6 @@ rp_class = u"""
 .. |RstCsvTableWriter| replace:: :py:class:`~pytablewriter.RstCsvTableWriter`
 .. |RstGridTableWriter| replace:: :py:class:`~pytablewriter.RstGridTableWriter`
 .. |RstSimpleTableWriter| replace:: :py:class:`~pytablewriter.RstSimpleTableWriter`
-
 """
 
 rp_module = u"""
@@ -331,11 +334,20 @@ rp_module = u"""
 """
 
 rp_attr = u"""
-.. |stream| replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.stream`
-.. |table_name| replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.table_name`
-.. |header_list| replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.header_list`
-.. |value_matrix| replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.value_matrix`
-.. |column_delimiter| replace:: :py:attr:`~pytablewriter._text_writer.TextTableWriter.column_delimiter`
+.. |stream| replace::
+    :py:attr:`~pytablewriter._table_writer.TableWriter.stream` property
+
+.. |table_name| replace::
+    :py:attr:`~pytablewriter._table_writer.TableWriter.table_name` property
+
+.. |header_list| replace::
+    :py:attr:`~pytablewriter._table_writer.TableWriter.header_list`
+
+.. |value_matrix|
+    replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.value_matrix`
+
+.. |column_delimiter| replace::
+    :py:attr:`~pytablewriter._text_writer.TextTableWriter.column_delimiter`
 
 .. |excel_attr| replace:: 
     This attributes available after execution of

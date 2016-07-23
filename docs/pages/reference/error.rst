@@ -12,3 +12,7 @@ Errors
 .. autoclass:: pytablewriter.EmptyValueError
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: pytablewriter.EmptyTableError
+    :undoc-members:
+    :show-inheritance:
