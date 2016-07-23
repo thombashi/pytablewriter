@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 import collections
+import itertools
 
 import pytablewriter
 import pytest
@@ -80,7 +81,13 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-
+    Data(
+        col_delim=",",
+        header=header,
+        value=value,
+        expected=pytablewriter.EmptyTableError
+    )
+    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class = pytablewriter.CsvTableWriter
