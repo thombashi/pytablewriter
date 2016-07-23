@@ -22,7 +22,7 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 setuptools.setup(
     name="pytablewriter",
-    version="0.7.0",
+    version="0.8.0",
     author="Tsuyoshi Hombashi",
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/pytablewriter",
@@ -31,8 +31,8 @@ setuptools.setup(
     include_package_data=True,
     install_requires=install_requires,
     keywords=[
-        "table", "CSV", "JavaScript", "JSON",
-        "Markdown", "HTML", "Pandas", "reStructuredText",
+        "table", "CSV", "Excel", "JavaScript", "JSON",
+        "Markdown", "MediaWiki", "HTML", "Pandas", "reStructuredText",
     ],
     long_description=long_description,
     packages=setuptools.find_packages(exclude=['test*']),
