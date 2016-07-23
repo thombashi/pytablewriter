@@ -236,7 +236,7 @@ class TableWriter(TableWriterInterface):
             if len(self.header_list) != len(value_list):
                 erroror_key = "row={:d}".format(row)
                 dict_invalid[erroror_key] = (
-                    "expected-col-size={:d}, actual={:s}".format(
+                    "expected-col-size={:d}, actual={:d}".format(
                         len(value_list), len(self.header_list))
                 )
 
