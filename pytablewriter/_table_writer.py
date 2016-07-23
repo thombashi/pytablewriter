@@ -12,6 +12,7 @@ from dataproperty import Typecode
 
 from ._error import EmptyHeaderError
 from ._error import EmptyValueError
+from ._error import EmptyTableError
 from ._interface import TableWriterInterface
 
 
@@ -207,6 +208,13 @@ class TableWriter(TableWriterInterface):
         self._verify_table_name()
         self._verify_stream()
         self._verify_header()
+
+        if all([
+            dataproperty.is_empty_sequence(self.header_list),
+            dataproperty.is_empty_sequence(self.value_matrix),
+        ]):
+            raise EmptyTableError()
+
         try:
             self._verify_value_matrix()
         except EmptyValueError:
