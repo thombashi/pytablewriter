@@ -51,3 +51,13 @@ class Test_NullTableWriter_write_table:
 
         out, _err = capsys.readouterr()
         assert out == ""
+
+
+class Test_NullTableWriter_write_table_iter:
+
+    def test_smoke(self, capsys):
+        writer = table_writer_class()
+        writer.write_table_iter()
+
+        out, _err = capsys.readouterr()
+        assert out == ""

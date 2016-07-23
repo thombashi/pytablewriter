@@ -15,16 +15,18 @@ from .data import value_matrix
 from .data import value_matrix_with_none
 from .data import mix_header_list
 from .data import mix_value_matrix
+from .data import value_matrix_iter
 
 
 Data = collections.namedtuple("Data", "table header value expected")
 
 normal_test_data_list = [
     Data(
-        table="",
+        table="test table",
         header=header_list,
         value=value_matrix,
         expected="""{| class="wikitable"
+|+test table
 ! a
 ! b
 ! c
@@ -66,17 +68,10 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="test table",
-        header=header_list,
+        table=None,
+        header=None,
         value=value_matrix,
         expected="""{| class="wikitable"
-|+test table
-! a
-! b
-! c
-! dd
-! e
-|-
 | style="text-align:right"| 1
 | style="text-align:right"| 123.1
 | a
@@ -194,20 +189,9 @@ exception_test_data_list = [
         table="",
         header=[],
         value=[],
-        expected=pytablewriter.EmptyHeaderError
+        expected=pytablewriter.EmptyTableError
     ),
-    Data(
-        table="",
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        header=None,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
+
 ]
 
 table_writer_class = pytablewriter.MediaWikiTableWriter
@@ -239,10 +223,37 @@ class Test_MediaWikiTableWriter_write_table:
         out, _err = capsys.readouterr()
         assert out == expected
 
-    @pytest.mark.parametrize(["table", "header", "expected"], [
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
+        [
+            [data.table, data.header, data.value, data.expected]
+            for data in exception_test_data_list
+        ]
+    )
+    def test_exception(self, capsys, table, header, value, expected):
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.header_list = header
+        writer.value_matrix = value
+
+        with pytest.raises(expected):
+            writer.write_table()
+
+
+def simple_write_callback(iter_count, iteration_length):
+    import six
+
+    six.print_("{:d}/{:d}".format(iter_count, iteration_length))
+
+
+class Test_MediaWikiTableWriter_write_table_iter:
+
+    @pytest.mark.parametrize(["table", "header", "value", "callback", "expected"], [
         [
             "tablename",
             ["ha", "hb", "hc"],
+            value_matrix_iter,
+            None,
             """{| class="wikitable"
 |+tablename
 ! ha
@@ -275,33 +286,50 @@ class Test_MediaWikiTableWriter_write_table:
 |}
 """,
         ],
+        [
+            None,
+            None,
+            value_matrix_iter,
+            simple_write_callback,
+            """{| class="wikitable"
+| style="text-align:right"| 1
+| style="text-align:right"| 2
+| style="text-align:right"| 3
+|-
+| style="text-align:right"| 11
+| style="text-align:right"| 12
+| style="text-align:right"| 13
+|-
+1/3
+| style="text-align:right"| 1
+| style="text-align:right"| 2
+| style="text-align:right"| 3
+|-
+| style="text-align:right"| 11
+| style="text-align:right"| 12
+| style="text-align:right"| 13
+|-
+2/3
+| style="text-align:right"| 101
+| style="text-align:right"| 102
+| style="text-align:right"| 103
+|-
+| style="text-align:right"| 1001
+| style="text-align:right"| 1002
+| style="text-align:right"| 1003
+|}
+3/3
+""",
+        ],
     ])
-    def test_normal_multiple(self, capsys, table, header, expected):
+    def test_normal(self, capsys, table, header, value, callback, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header
-
-        writer.is_write_header = True
-        writer.is_write_closing_row = False
-        writer.write_table()
-
-        writer.is_write_opening_row = False
-        writer.is_write_header = False
-        writer.value_matrix = [
-            [1, 2, 3],
-            [11, 12, 13],
-        ]
-        writer.write_table()
-        writer.write_value_row_separator()
-        writer.write_table()
-        writer.write_value_row_separator()
-
-        writer.is_write_closing_row = True
-        writer.value_matrix = [
-            [101, 102, 103],
-            [1001, 1002, 1003],
-        ]
-        writer.write_table()
+        writer.value_matrix = value
+        writer.iteration_length = len(value)
+        writer.write_callback = callback
+        writer.write_table_iter()
 
         out, _err = capsys.readouterr()
         assert out == expected
@@ -320,4 +348,4 @@ class Test_MediaWikiTableWriter_write_table:
         writer.value_matrix = value
 
         with pytest.raises(expected):
-            writer.write_table()
+            writer.write_table_iter()
