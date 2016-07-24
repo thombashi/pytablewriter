@@ -170,7 +170,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self._write_raw_line(text)
 
     def _write_row(self, value_list):
-        if dataproperty.is_empty_list_or_tuple(value_list):
+        if dataproperty.is_empty_sequence(value_list):
             return
 
         self._write_line(
@@ -182,10 +182,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         if not self.is_write_header:
             return
 
-        if dataproperty.is_empty_list_or_tuple(self.header_list):
+        if dataproperty.is_empty_sequence(self.header_list):
             raise EmptyHeaderError()
 
-        if dataproperty.is_empty_list_or_tuple(self._column_prop_list):
+        if dataproperty.is_empty_sequence(self._column_prop_list):
             self._write_row(self.header_list)
             return
 
@@ -206,7 +206,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         ]
 
     def __write_separator_row(self, value_list):
-        if dataproperty.is_empty_list_or_tuple(value_list):
+        if dataproperty.is_empty_sequence(value_list):
             return
 
         left_cross_point = self.char_cross_point

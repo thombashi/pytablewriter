@@ -105,7 +105,7 @@ class RstCsvTableWriter(RstTableWriter):
         if not self.is_write_header:
             return
 
-        if dataproperty.is_not_empty_list_or_tuple(self.header_list):
+        if dataproperty.is_not_empty_sequence(self.header_list):
             self._write_line(
                 u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
 

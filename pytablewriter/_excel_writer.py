@@ -179,10 +179,10 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
             self._current_data_row += 1
 
     def _get_last_column(self):
-        if dp.is_not_empty_list_or_tuple(self.header_list):
+        if dp.is_not_empty_sequence(self.header_list):
             return len(self.header_list) - 1
 
-        if dp.is_not_empty_list_or_tuple(self.value_matrix):
+        if dp.is_not_empty_sequence(self.value_matrix):
             return len(self.value_matrix[0]) - 1
 
         raise ValueError()
@@ -209,7 +209,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
     def _write_header(self):
         if any([
             not self.is_write_header,
-            dp.is_empty_list_or_tuple(self.header_list),
+            dp.is_empty_sequence(self.header_list),
         ]):
             return
 
@@ -337,7 +337,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def _write_header(self):
         if any([
             not self.is_write_header,
-            dp.is_empty_list_or_tuple(self.header_list),
+            dp.is_empty_sequence(self.header_list),
         ]):
             return
 

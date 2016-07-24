@@ -33,7 +33,7 @@ class CsvTableWriter(TextTableWriter):
         self.is_write_header_separator_row = False
 
     def _write_header(self):
-        if dataproperty.is_empty_list_or_tuple(self.header_list):
+        if dataproperty.is_empty_sequence(self.header_list):
             return
 
         super(CsvTableWriter, self)._write_header()

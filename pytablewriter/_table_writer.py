@@ -320,10 +320,10 @@ class TableWriter(TableWriterInterface):
         pass
 
     def _verify_value_matrix(self):
-        if dataproperty.is_empty_list_or_tuple(self.value_matrix):
+        if dataproperty.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-        if dataproperty.is_empty_list_or_tuple(self.header_list):
+        if dataproperty.is_empty_sequence(self.header_list):
             return
 
         for row, value_list in enumerate(self.value_matrix):
