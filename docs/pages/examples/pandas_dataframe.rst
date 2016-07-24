@@ -3,11 +3,10 @@
 Write a Pandas DataFrame
 ----------------------------
 
-|PandasDataFrameWriter| the class can write a variable definition of 
-a Pandas DataFrame to the |stream| from a matrix of data.
+|PandasDataFrameWriter| the class can write a variable definition of Pandas DataFrame to the |stream| from a matrix of data.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a Pandas DataFrame definition
 
     import pytablewriter
 
@@ -25,7 +24,7 @@ a Pandas DataFrame to the |stream| from a matrix of data.
 
 
 .. code-block:: python
-    :caption: Output
+    :caption: Output of DataFrame definition
 
     example_table = pandas.DataFrame(
         {'bool': [True, False, True, False],

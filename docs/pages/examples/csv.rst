@@ -3,10 +3,10 @@
 Write a CSV table
 ----------------------------
 
-|CsvTableWriter| class can write a table to the |stream| from a matrix of data.
+|CsvTableWriter| class can write a Comma-Separated Values (CSV) table to the |stream| from a matrix of data.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a CSV table
 
     import pytablewriter
 
@@ -23,7 +23,7 @@ Write a CSV table
 
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of CSV
 
     "int","float","str","bool","mix","time"
     0,0.1,"hoge",True,0,"2017-01-01 03:04:05+0900"
@@ -35,7 +35,7 @@ Write a TSV table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can change the delimiter of a table with `column_delimiter` property.
-Following is an example which writing tab-separated values (TSV) table.
+Following is an example which writing Tab-Separated Values (TSV) table.
 
 .. code-block:: python
     :caption: Sample code
@@ -55,7 +55,7 @@ Following is an example which writing tab-separated values (TSV) table.
     writer.write_table()
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of TSV
 
     "int"	"float"	"str"	"bool"	"mix"	"time"
     0	0.1	"hoge"	True	0	"2017-01-01 03:04:05+09:00"

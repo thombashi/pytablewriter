@@ -1,5 +1,5 @@
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a Markdown table
 
     import pytablewriter
 
@@ -16,7 +16,7 @@
     writer.write_table()
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of Markdown
 
     # example_table
     int|float|str |bool |mix|          time          

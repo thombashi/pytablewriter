@@ -4,7 +4,7 @@ Write an Excel table
 -------------------------------------------
 
 |ExcelXlsxTableWriter| class can write a table to worksheet(s) in 
-an Excel workbook file from a matrix of data.
+an Excel workbook file (.xlsx format) from a matrix of data.
 
 .. include:: exel_single_example.txt
 
@@ -13,7 +13,7 @@ Write multiple Excel tables
 -------------------------------------------
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes two Excel sheets
 
     import pytablewriter
     
@@ -48,7 +48,7 @@ Write multiple Excel tables
     writer.close()
 
 
-Output
+Output of Excel book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: ss/excel_multi.png

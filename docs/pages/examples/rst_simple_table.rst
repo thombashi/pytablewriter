@@ -7,7 +7,7 @@ Write a reStructuredText simple tables
 with reStructuredText simple table format to the |stream| from a matrix of data.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a reStructuredText simple table
 
     import pytablewriter
 
@@ -25,7 +25,7 @@ with reStructuredText simple table format to the |stream| from a matrix of data.
 
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of reStructuredText simple table
 
     .. table:: example_table
 

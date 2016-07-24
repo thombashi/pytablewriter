@@ -1,5 +1,5 @@
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a JavaScript nested list definition
 
     import pytablewriter
 
@@ -16,7 +16,7 @@
     writer.write_table()
 
 .. code-block:: js
-    :caption: Output
+    :caption: Output of JavaScript code
 
     var example_table = [
         ["int", "float", "str", "bool", "mix", "time"],

@@ -7,7 +7,7 @@ Write a HTML table
 ``table`` tag format from a matrix of data.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a HTML table
 
     import pytablewriter
 
@@ -25,7 +25,7 @@ Write a HTML table
 
 
 .. code-block:: html
-    :caption: Output
+    :caption: Output of HTML
 
     <table id="example_table">
         <caption>example_table</caption>

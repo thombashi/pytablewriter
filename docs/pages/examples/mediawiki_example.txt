@@ -1,5 +1,5 @@
 .. code-block:: python
-    :caption: Sample code that write a MediaWiki table
+    :caption: Sample code that writes a MediaWiki table
 
     import pytablewriter
 
@@ -16,7 +16,7 @@
     writer.write_table()
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of WikiMedia text
 
     {| class="wikitable"
     |+example_table

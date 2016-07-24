@@ -1,5 +1,5 @@
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a Excel sheets
 
     import pytablewriter
 
@@ -19,7 +19,7 @@
     writer.close()
 
 
-Output
+Output of Excel book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: ss/excel_single.png

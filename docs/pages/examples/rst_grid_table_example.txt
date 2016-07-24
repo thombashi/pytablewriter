@@ -1,6 +1,6 @@
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a reStructuredText grid table
 
     import pytablewriter
 
@@ -18,7 +18,7 @@
 
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of reStructuredText grid table
 
     .. table:: example_table
 

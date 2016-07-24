@@ -7,7 +7,7 @@ Write a Python code table
 a Python nested list to the |stream| from a matrix of data.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a Python code
 
     import pytablewriter
 
@@ -25,7 +25,7 @@ a Python nested list to the |stream| from a matrix of data.
 
 
 .. code-block:: python
-    :caption: Output
+    :caption: Output of Python code
 
     example_table = [
         ["int", "float", "str", "bool", "mix", "time"],

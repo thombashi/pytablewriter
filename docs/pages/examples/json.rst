@@ -29,7 +29,7 @@ With a table name
 
 
 .. code-block:: json
-    :caption: Output
+    :caption: Output of JSON w/ table name
 
     {
         "example_table": [
@@ -73,7 +73,7 @@ Without a table name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
-    :caption: Sample code w/ table name
+    :caption: Sample code w/o table name
 
     import pytablewriter
 
@@ -90,7 +90,7 @@ Without a table name
 
 
 .. code-block:: json
-    :caption: Output
+    :caption: Output of JSON w/o table name
 
     [
         {

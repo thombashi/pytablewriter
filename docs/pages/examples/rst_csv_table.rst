@@ -3,11 +3,11 @@
 Write a reStructuredText CSV table
 -------------------------------------------
 
-|RstCsvTableWriter| the class can write a table 
+|RstCsvTableWriter| the class can writes a table 
 with reStructuredText CSV table format to the |stream| from a matrix of data.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that write a reStructuredText CSV table
 
     import pytablewriter
 
@@ -25,7 +25,7 @@ with reStructuredText CSV table format to the |stream| from a matrix of data.
 
 
 .. code-block:: none
-    :caption: Output
+    :caption: Output of reStructuredText CSV table
 
     .. csv-table:: example_table
         :header: "int", "float", "str", "bool", "mix", "time"
