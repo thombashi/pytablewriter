@@ -188,7 +188,7 @@ Write an Excel table
     writer.close()
 
 
-Output
+Output of Excel book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: ss/excel_single.png
