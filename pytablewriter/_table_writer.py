@@ -69,6 +69,17 @@ class TableWriter(TableWriterInterface):
         This is called when for each of the iteration of writing a table is
         completed. This method is used in :py:meth:`.write_table_iter` method.
         (defaults to |None|)
+        Example of a call back function definition is as follows:
+
+        .. code:: python
+
+            def callback_example(iter_count, iter_length):
+                print("{:d}/{:d}".format(iter_count, iter_length))
+
+        Arguments that passed to the callback is:
+
+        - first argument: current iteration number (start from 1)
+        - second argument: total number of iteration
     """
 
     @property
@@ -144,10 +155,12 @@ class TableWriter(TableWriterInterface):
         """
         Write a table with iteration.
         The following is premise to execute this method:
+
         - set iterator to the |value_matrix|
         - set the number of iterations to the |iteration_length| attribute
         - set a callback function to the |write_callback| attribute, this
-        callback function is called when for each of the iteration of writing
+
+        Callback function is called when for each of the iteration of writing
         a table is completed.
         """
 
