@@ -116,7 +116,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
                     is_first_value_row = False
                 else:
                     if self.is_write_value_separator_row:
-                        self.write_value_row_separator()
+                        self._write_value_row_separator()
 
                 self._write_value_row(value_list, value_prop_list)
             except TypeError:
@@ -236,7 +236,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_header_row_separator_item_list())
 
-    def write_value_row_separator(self):
+    def _write_value_row_separator(self):
         """
         Write row separator of the table which matched to the table type
         regardless of the value of the :py:attr:`.is_write_value_separator_row`.

@@ -168,7 +168,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
 
         self._postprocess()
 
-    def write_value_row_separator(self):
+    def _write_value_row_separator(self):
         pass
 
     def _write_value_matrix(self):

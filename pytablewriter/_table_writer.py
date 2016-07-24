@@ -181,7 +181,7 @@ class TableWriter(TableWriterInterface):
             self.write_table()
 
             if not is_final_iter:
-                self.write_value_row_separator()
+                self._write_value_row_separator()
 
             self.is_write_opening_row = False
             self.is_write_header = False
