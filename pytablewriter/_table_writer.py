@@ -10,7 +10,6 @@ import sys
 import dataproperty
 from dataproperty import Typecode
 
-from ._error import EmptyHeaderError
 from ._error import EmptyValueError
 from ._error import EmptyTableDataError
 from ._interface import TableWriterInterface
