@@ -11,6 +11,7 @@ except ImportError:   # pragma: no cover
     import simplejson as json
 
 import dataproperty
+from six.moves import zip
 
 from ._converter import lower_bool_converter
 from ._converter import strip_quote

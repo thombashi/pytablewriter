@@ -9,6 +9,7 @@ from __future__ import absolute_import
 import dataproperty
 import dominate.tags as tags
 import pathvalidate
+from six.moves import zip
 
 from ._error import EmptyHeaderError
 from ._text_writer import TextTableWriter

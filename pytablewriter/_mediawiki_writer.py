@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 
 import dataproperty
+from six.moves import zip
 
 from ._text_writer import TextTableWriter
 

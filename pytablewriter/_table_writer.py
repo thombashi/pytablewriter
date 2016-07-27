@@ -9,6 +9,7 @@ import sys
 
 import dataproperty
 from dataproperty import Typecode
+from six.moves import zip
 
 from ._error import EmptyValueError
 from ._error import EmptyTableDataError
