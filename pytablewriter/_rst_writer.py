@@ -48,7 +48,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
 class RstCsvTableWriter(RstTableWriter):
     """
-    Concrete class of a table writer for reStructuredText 
+    Concrete class of a table writer for reStructuredText
     `CSV table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     format.
 
