@@ -5,10 +5,7 @@
 """
 
 from __future__ import absolute_import
-try:
-    import json
-except ImportError:   # pragma: no cover
-    import simplejson as json
+import json
 
 import dataproperty
 from six.moves import zip

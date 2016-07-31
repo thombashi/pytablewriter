@@ -6,10 +6,7 @@
 
 from __future__ import absolute_import
 import collections
-try:
-    import json
-except ImportError:
-    import simplejson as json
+import json
 
 import pytablewriter
 import pytest
