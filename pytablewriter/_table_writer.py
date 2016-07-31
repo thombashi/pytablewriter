@@ -172,7 +172,9 @@ class TableWriter(TableWriterInterface):
 
         .. note::
 
-            Some of the classes do not support this method.
+            Following classes do not support this method:
+            |HtmlTableWriter|, |PandasDataFrameWriter|, |RstGridTableWriter|,
+            |RstSimpleTableWriter|.
             ``support_split_write`` attribute will return |True| if the class
             is supported this method.
         """
