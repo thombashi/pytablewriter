@@ -7,6 +7,10 @@
 from __future__ import absolute_import
 
 
+class NotSupportedError(Exception):
+    pass
+
+
 class EmptyTableNameError(Exception):
     """
     Raised when a table writer class of the |table_name| attribute is null

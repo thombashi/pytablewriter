@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 
+from ._error import NotSupportedError
 from ._error import EmptyHeaderError
 from ._error import EmptyTableNameError
 from ._error import EmptyValueError
