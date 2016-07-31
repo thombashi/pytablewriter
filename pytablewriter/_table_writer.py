@@ -11,6 +11,7 @@ import dataproperty
 from dataproperty import Typecode
 from six.moves import zip
 
+from ._error import NotSupportedError
 from ._error import EmptyValueError
 from ._error import EmptyTableDataError
 from ._interface import TableWriterInterface
@@ -163,6 +164,9 @@ class TableWriter(TableWriterInterface):
         Callback function is called when for each of the iteration of writing
         a table is completed.
         """
+
+        if not self.support_split_write:
+            raise NotSupportedError()
 
         self._verify_table_name()
         self._verify_stream()

@@ -16,7 +16,7 @@ class NullTableWriter(
 
     @property
     def support_split_write(self):
-        return False
+        return True
 
     def set_indent_level(self, indent_level):
         pass

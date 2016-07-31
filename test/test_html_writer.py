@@ -292,3 +292,12 @@ class Test_HtmlTableWriter_write_table:
 
         with pytest.raises(expected):
             writer.write_table()
+
+
+class Test_HtmlTableWriter_write_table_iter:
+
+    def test_exception(self):
+        writer = table_writer_class()
+
+        with pytest.raises(pytablewriter.NotSupportedError):
+            writer.write_table_iter()
