@@ -155,14 +155,26 @@ class TableWriter(TableWriterInterface):
     def write_table_iter(self):
         """
         Write a table with iteration.
+        "Iteration" means that divide the table writing into multiple process.
+        This method is useful especially for large data.
         The following is premise to execute this method:
 
         - set iterator to the |value_matrix|
         - set the number of iterations to the |iteration_length| attribute
-        - set a callback function to the |write_callback| attribute, this
 
+        Call back function (Optional):
         Callback function is called when for each of the iteration of writing
-        a table is completed.
+        a table is completed. To set call back function,
+        set a callback function to the |write_callback| attribute.
+
+        :raises pytablewriter.NotSupportedError:
+            If the class does not support this method.
+
+        .. note::
+
+            Some of the classes do not support this method.
+            ``support_split_write`` attribute will return |True| if the class
+            is supported this method.
         """
 
         if not self.support_split_write:
