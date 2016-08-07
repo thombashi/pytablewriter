@@ -291,6 +291,8 @@ rp_builtin = u"""
 .. |False| replace:: :py:obj:`False`
 .. |True| replace:: :py:obj:`True`
 .. |None| replace:: :py:obj:`None`
+.. |inf| replace:: :py:obj:`inf`
+.. |nan| replace:: :py:obj:`nan`
 
 .. |bool| replace:: :py:class:`bool`
 .. |dict| replace:: :py:class:`dict`

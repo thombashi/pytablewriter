@@ -79,6 +79,10 @@ class RstCsvTableWriter(RstTableWriter):
 
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+
+        .. note::
+
+            - |None| is not written
         """
 
         self._verify_property()
@@ -146,6 +150,10 @@ class RstGridTableWriter(RstTableWriter):
     def write_table(self):
         """
         |write_table| with reStructuredText grid tables format.
+
+        .. note::
+
+            - |None| is not written
         """
 
         self._write_table()
@@ -180,6 +188,10 @@ class RstSimpleTableWriter(RstTableWriter):
     def write_table(self):
         """
         |write_table| with reStructuredText simple tables format.
+
+        .. note::
+
+            - |None| is not written
         """
 
         self._write_table()

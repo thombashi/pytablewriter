@@ -53,6 +53,12 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+
+        .. note::
+
+            - |None| is written as ``null``
+            - |inf| is written as ``Infinity``
+            - |nan| is written as ``NaN``
         """
 
         if self.is_datetime_instance_formatting:

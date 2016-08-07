@@ -98,6 +98,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
     def write_table(self):
         """
         |write_table|.
+
+        .. note::
+
+            - |None| is not written
         """
 
         self._verify_property()

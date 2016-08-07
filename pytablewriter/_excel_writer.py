@@ -158,6 +158,12 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         Write a table to the current worksheet.
 
         :raises IOError: If failed to write data to the worksheet.
+
+        .. note::
+
+            - |None| is not written
+            - |inf| is written as `Inf`
+            - |nan| is written as ``NaN``
         """
 
         self._verify_property()

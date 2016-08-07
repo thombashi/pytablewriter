@@ -40,6 +40,12 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         |write_table| with Pandas DataFrame variable definition format.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+
+        .. note::
+
+            - |None| is written as ``None``
+            - |inf| is written as ``numpy.inf``
+            - |nan| is written as ``numpy.nan``
         """
 
         import pprint

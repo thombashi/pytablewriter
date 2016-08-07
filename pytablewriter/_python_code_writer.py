@@ -37,6 +37,12 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+
+        .. note::
+
+            - |None| is written as ``None``
+            - |inf| is written as ``float("inf")'``
+            - |nan| is written as ``float("nan")'``
         """
 
         self._verify_property()

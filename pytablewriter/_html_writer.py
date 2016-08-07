@@ -43,6 +43,10 @@ class HtmlTableWriter(TextTableWriter):
     def write_table(self):
         """
         |write_table| with HTML table format.
+
+        .. note::
+
+            - |None| is not written
         """
 
         self._verify_property()
