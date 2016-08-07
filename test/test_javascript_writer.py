@@ -40,14 +40,25 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table="null value",
         indent=0,
         header=header_list,
         value=None,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""var tablename = [
+        expected="""var null_value = [
     ["a", "b", "c", "dd", "e"]
+];
+"""
+    ),
+    Data(
+        table="null table",
+        indent=0,
+        header=header_list,
+        value=None,
+        is_write_header=False,
+        is_dti_fmt=True,
+        expected="""var null_table = [
 ];
 """
     ),
