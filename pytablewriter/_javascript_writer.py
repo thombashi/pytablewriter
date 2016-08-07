@@ -11,15 +11,12 @@ import six
 
 from ._converter import lower_bool_converter
 from ._error import EmptyTableNameError
+from ._function import str_datetime_converter
 from ._text_writer import SourceCodeTableWriter
 
 
 def js_datetime_converter(value):
     return 'new Date("{:s}")'.format(value.strftime("%Y-%m-%dT%H:%M:%S%z"))
-
-
-def str_datetime_converter(value):
-    return '"{:s}"'.format(value.strftime("%Y-%m-%d %H:%M:%S%z"))
 
 
 class JavaScriptTableWriter(SourceCodeTableWriter):

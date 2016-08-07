@@ -19,3 +19,7 @@ def _get_data_helper(data_prop):
         return full_format_str.format(data_prop.data)
 
     return data_prop.data
+
+
+def str_datetime_converter(value):
+    return '"{:s}"'.format(value.strftime("%Y-%m-%d %H:%M:%S%z"))
