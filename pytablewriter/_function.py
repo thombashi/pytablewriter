@@ -23,3 +23,8 @@ def _get_data_helper(data_prop):
 
 def str_datetime_converter(value):
     return '"{:s}"'.format(value.strftime("%Y-%m-%d %H:%M:%S%z"))
+
+
+def dateutil_datetime_converter(value):
+    return 'dateutil.parser.parse("{:s}")'.format(
+        value.strftime("%Y-%m-%dT%H:%M:%S%z"))
