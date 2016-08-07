@@ -349,8 +349,8 @@ rp_attr = u"""
 .. |header_list| replace::
     :py:attr:`~pytablewriter._table_writer.TableWriter.header_list`
 
-.. |value_matrix|
-    replace:: :py:attr:`~pytablewriter._table_writer.TableWriter.value_matrix`
+.. |value_matrix| replace::
+    :py:attr:`~pytablewriter._table_writer.TableWriter.value_matrix`
 
 .. |write_callback| replace::
     :py:attr:`~pytablewriter._table_writer.TableWriter.write_callback`
@@ -361,6 +361,9 @@ rp_attr = u"""
 .. |excel_attr| replace:: 
     This attributes available after execution of
     the :py:meth:`~.ExcelXlsxTableWriter.write_table` method.
+    
+.. |is_datetime_instance_formatting| replace::
+    :py:attr:`~pytablewriter._text_writer.is_datetime_instance_formatting`
 """
 
 rp_method = u"""
