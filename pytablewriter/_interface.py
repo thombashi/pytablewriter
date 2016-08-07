@@ -21,7 +21,7 @@ class TableWriterInterface(object):
         pass
 
     @abc.abstractmethod
-    def write_table(self):   # pragma: no cover
+    def write_table(self):  # pragma: no cover
         pass
 
     @abc.abstractmethod
@@ -40,7 +40,7 @@ class TextWriterInterface(object):
     """
 
     @abc.abstractmethod
-    def write_null_line(self):   # pragma: no cover
+    def write_null_line(self):  # pragma: no cover
         pass
 
 
@@ -51,13 +51,13 @@ class IndentationInterface(object):
     """
 
     @abc.abstractmethod
-    def set_indent_level(self, indent_level):   # pragma: no cover
+    def set_indent_level(self, indent_level):  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def inc_indent_level(self):   # pragma: no cover
+    def inc_indent_level(self):  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def dec_indent_level(self):   # pragma: no cover
+    def dec_indent_level(self):  # pragma: no cover
         pass
