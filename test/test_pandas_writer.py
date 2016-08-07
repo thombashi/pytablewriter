@@ -10,11 +10,13 @@ import pytablewriter
 import pytest
 
 from .data import Data
+from .data import null_test_data_list
 from .data import header_list
 from .data import value_matrix
 from .data import value_matrix_with_none
 from .data import mix_header_list
 from .data import mix_value_matrix
+from .data import value_matrix_iter
 
 
 normal_test_data_list = [
@@ -23,13 +25,18 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected="""table_name_ho_ge = pandas.DataFrame(
-    {'a': [1, 2, 3],
-     'b': [123.1, 2.2, 3.3],
-     'c': ['a', 'bb', 'ccc'],
-     'dd': [1, 2.2, 3],
-     'e': [1, 2.2, 'cccc']}
-)
+        expected="""table_name_ho_ge = pandas.DataFrame([
+    [1, 123.1, "a", 1.0, "1"],
+    [2, 2.2, "bb", 2.2, "2.2"],
+    [3, 3.3, "ccc", 3.0, "cccc"],
+])
+table_name_ho_ge.columns = [
+    "a",
+    "b",
+    "c",
+    "dd",
+    "e",
+]
 """
     ),
     Data(
@@ -37,37 +44,8 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=None,
-        expected="""tablename = pandas.DataFrame(
-    {}
-)
-"""
-    ),
-    Data(
-        table=None,
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected="""pandas.DataFrame(
-    {'a': [1, 2, 3],
-     'b': [123.1, 2.2, 3.3],
-     'c': ['a', 'bb', 'ccc'],
-     'dd': [1, 2.2, 3],
-     'e': [1, 2.2, 'cccc']}
-)
-"""
-    ),
-    Data(
-        table="",
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        expected="""    pandas.DataFrame(
-        {'a': [1, 2, 3],
-         'b': [123.1, 2.2, 3.3],
-         'c': ['a', 'bb', 'ccc'],
-         'dd': [1, 2.2, 3],
-         'e': [1, 2.2, 'cccc']}
-    )
+        expected="""tablename = pandas.DataFrame([
+])
 """
     ),
     Data(
@@ -75,13 +53,19 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix_with_none,
-        expected="""table_with_null_value = pandas.DataFrame(
-    {'a': [1, None, 3, None],
-     'b': [None, 2.2, 3.3, None],
-     'c': ['a', None, 'ccc', None],
-     'dd': [1, 2.2, None, None],
-     'e': [None, 2.2, 'cccc', None]}
-)
+        expected="""table_with_null_value = pandas.DataFrame([
+    [1, None, "a", 1.0, None],
+    [None, 2.2, None, 2.2, "2.2"],
+    [3, 3.3, "ccc", None, "cccc"],
+    [None, None, None, None, None],
+])
+table_with_null_value.columns = [
+    "a",
+    "b",
+    "c",
+    "dd",
+    "e",
+]
 """
     ),
     Data(
@@ -89,45 +73,55 @@ normal_test_data_list = [
         indent=0,
         header=mix_header_list,
         value=mix_value_matrix,
-        expected="""tablename = pandas.DataFrame(
-    {'bool': [True, False, True],
-     'c': ['aa', 'bbb', 'cccc'],
-     'f': [1.1, 2.2, 3.33],
-     'i': [1, 2, 3],
-     'if': [1, 2.2, -3],
-     'ifc': [1, 2.2, 'ccc'],
-     'inf': [numpy.inf, numpy.inf, numpy.inf],
-     'mix_num': [1.0, numpy.inf, numpy.nan],
-     'nan': [numpy.nan, numpy.nan, numpy.nan],
-     'time': ['2017-01-01 00:00:00',
-              '2017-01-02 03:04:05+0900',
-              '2017-01-01 00:00:00']}
-)
+        expected="""tablename = pandas.DataFrame([
+    [1, 1.10, "aa", 1.0, "1", True, numpy.inf, numpy.nan, 1.0, "2017-01-01 00:00:00"],
+    [2, 2.20, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan, numpy.inf, "2017-01-02 03:04:05+0900"],
+    [3, 3.33, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan, numpy.nan, "2017-01-01 00:00:00"],
+])
+tablename.columns = [
+    "i",
+    "f",
+    "c",
+    "if",
+    "ifc",
+    "bool",
+    "inf",
+    "nan",
+    "mix_num",
+    "time",
+]
 """
     ),
 ]
 
 exception_test_data_list = [
     Data(
-        table="",
+        table="dummy",
         indent=normal_test_data_list[0].indent,
         header=[],
         value=[],
-        expected=pytablewriter.EmptyHeaderError
+        expected=pytablewriter.EmptyTableDataError
     ),
     Data(
-        table="",
+        table="dummy",
         indent=normal_test_data_list[0].indent,
         header=[],
         value=normal_test_data_list[0].value,
         expected=pytablewriter.EmptyHeaderError
     ),
     Data(
-        table="",
+        table="dummy",
         indent=normal_test_data_list[0].indent,
         header=None,
         value=normal_test_data_list[0].value,
         expected=pytablewriter.EmptyHeaderError
+    ),
+    Data(
+        table="",
+        indent=normal_test_data_list[0].indent,
+        header=normal_test_data_list[0].header,
+        value=normal_test_data_list[0].value,
+        expected=pytablewriter.EmptyTableNameError
     ),
 ]
 
@@ -184,8 +178,50 @@ class Test_PandasDataFrameWriter_write_table:
 
 class Test_PandasDataFrameWriter_write_table_iter:
 
-    def test_exception(self):
+    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
+        [
+            "tablename",
+            ["ha", "hb", "hc"],
+            value_matrix_iter,
+            """tablename = pandas.DataFrame([
+    [1, 2, 3],
+    [11, 12, 13],
+    [1, 2, 3],
+    [11, 12, 13],
+    [101, 102, 103],
+    [1001, 1002, 1003],
+])
+tablename.columns = [
+    "ha",
+    "hb",
+    "hc",
+]
+""",
+        ],
+    ])
+    def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
+        writer.table_name = table
+        writer.header_list = header
+        writer.value_matrix = value
+        writer.iteration_length = len(value)
+        writer.write_table_iter()
 
-        with pytest.raises(pytablewriter.NotSupportedError):
+        out, _err = capsys.readouterr()
+        assert out == expected
+
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
+        [
+            [data.table, data.header, data.value, data.expected]
+            for data in null_test_data_list
+        ]
+    )
+    def test_exception(self, capsys, table, header, value, expected):
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.header_list = header
+        writer.value_matrix = value
+
+        with pytest.raises(expected):
             writer.write_table_iter()
