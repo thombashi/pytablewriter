@@ -155,7 +155,7 @@ exception_test_data_list = [
         header=[],
         value=[],
         is_float_formatting=True,
-        expected=pytablewriter.EmptyHeaderError
+        expected=pytablewriter.EmptyTableDataError
     ),
     Data(
         table="",

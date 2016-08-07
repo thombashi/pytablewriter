@@ -184,13 +184,14 @@ class TableWriter(TableWriterInterface):
 
         self._verify_table_name()
         self._verify_stream()
-        self._verify_header()
 
         if all([
             dataproperty.is_empty_sequence(self.header_list),
             dataproperty.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
+
+        self._verify_header()
 
         old_is_write_header = self.is_write_header
         old_is_write_opening_row = self.is_write_opening_row
@@ -314,7 +315,6 @@ class TableWriter(TableWriterInterface):
     def _verify_property(self):
         self._verify_table_name()
         self._verify_stream()
-        self._verify_header()
 
         if all([
             dataproperty.is_empty_sequence(self.header_list),
@@ -322,6 +322,7 @@ class TableWriter(TableWriterInterface):
         ]):
             raise EmptyTableDataError()
 
+        self._verify_header()
         try:
             self._verify_value_matrix()
         except EmptyValueError:

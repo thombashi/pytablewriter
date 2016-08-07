@@ -176,7 +176,7 @@ exception_test_data_list = [
         table="",
         header=[],
         value=[],
-        expected=pytablewriter.EmptyHeaderError
+        expected=pytablewriter.EmptyTableDataError
     ),
     Data(
         table="",
