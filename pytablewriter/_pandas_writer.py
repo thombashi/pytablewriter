@@ -49,6 +49,9 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             - |None| is written as ``None``
             - |inf| is written as ``numpy.inf``
             - |nan| is written as ``numpy.nan``
+            - |datetime| instance is determined by |is_datetime_instance_formatting| attribute:
+                - |True|: written by using `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
+                - |False|: written as |str|
         """
 
         self._verify_property()
