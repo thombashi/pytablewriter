@@ -58,12 +58,13 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             - |nan| is written as ``NaN``
         """
 
+        self._verify_property()
+
         if self.is_datetime_instance_formatting:
             self._prop_extractor.datetime_converter = js_datetime_converter
         else:
             self._prop_extractor.datetime_converter = str_datetime_converter
 
-        self._verify_property()
         self._preprocess()
 
         org_stream = self.stream
