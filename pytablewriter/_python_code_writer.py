@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import dataproperty
 
@@ -29,7 +30,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     def __init__(self):
         super(PythonCodeTableWriter, self).__init__()
 
-        self.table_name = u""
+        self.table_name = ""
         self._prop_extractor.inf_value = 'float("inf")'
         self._prop_extractor.nan_value = 'float("nan")'
 
@@ -60,9 +61,9 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
     def _get_opening_row_item_list(self):
         if dataproperty.is_not_empty_string(self.table_name):
-            return [self.variable_name + u" = ["]
+            return [self.variable_name + " = ["]
 
-        return u"["
+        return "["
 
     def _get_closing_row_item_list(self):
-        return u"]"
+        return "]"
