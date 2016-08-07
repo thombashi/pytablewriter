@@ -53,9 +53,6 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
         self._verify_property()
 
-        if dataproperty.is_empty_string(self.table_name):
-            raise EmptyTableNameError()
-
         if self.is_datetime_instance_formatting:
             self._prop_extractor.datetime_converter = dateutil_datetime_converter
         else:
@@ -83,6 +80,12 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
     def _get_closing_row_item_list(self):
         return "])"
+
+    def _verify_property(self):
+        super(PandasDataFrameWriter, self)._verify_property()
+
+        if dataproperty.is_empty_string(self.table_name):
+            raise EmptyTableNameError()
 
     def _verify_header(self):
         if dataproperty.is_empty_sequence(self.header_list):
