@@ -341,6 +341,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
 
         self.is_datetime_instance_formatting = True
+        self.is_quote_table[dataproperty.Typecode.DATETIME] = False
+        self._prop_extractor.datetime_format_str = "s"
 
         self._prop_extractor.none_value = None
 

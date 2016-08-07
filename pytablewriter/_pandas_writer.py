@@ -11,6 +11,8 @@ import dataproperty
 
 from ._error import EmptyTableNameError
 from ._error import EmptyHeaderError
+from ._function import str_datetime_converter
+from ._function import dateutil_datetime_converter
 from ._text_writer import SourceCodeTableWriter
 
 
@@ -53,6 +55,11 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
         if dataproperty.is_empty_string(self.table_name):
             raise EmptyTableNameError()
+
+        if self.is_datetime_instance_formatting:
+            self._prop_extractor.datetime_converter = dateutil_datetime_converter
+        else:
+            self._prop_extractor.datetime_converter = str_datetime_converter
 
         self.inc_indent_level()
         super(PandasDataFrameWriter, self).write_table()

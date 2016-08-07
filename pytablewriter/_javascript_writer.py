@@ -39,8 +39,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._prop_extractor.inf_value = "Infinity"
         self._prop_extractor.nan_value = "NaN"
         self._prop_extractor.bool_converter = lower_bool_converter
-        self._prop_extractor.datetime_format_str = "s"
-        self.is_quote_table[dataproperty.Typecode.DATETIME] = False
 
     def write_table(self):
         """
