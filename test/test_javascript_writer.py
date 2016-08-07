@@ -232,12 +232,15 @@ class Test_JavaScriptTableWriter_write_table:
 
 class Test_JavaScriptTableWriter_write_table_iter:
 
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "iter_len", "expected"],
         [
-            "tablename",
-            ["ha", "hb", "hc"],
-            value_matrix_iter,
-            """var tablename = [
+            [
+                "tablename",
+                ["ha", "hb", "hc"],
+                value_matrix_iter,
+                len(value_matrix_iter),
+                """var tablename = [
     ["ha", "hb", "hc"],
     [1, 2, 3],
     [11, 12, 13],
@@ -247,14 +250,28 @@ class Test_JavaScriptTableWriter_write_table_iter:
     [1001, 1002, 1003]
 ];
 """,
-        ],
-    ])
-    def test_normal(self, capsys, table, header, value, expected):
+            ],
+            [
+                "tablename",
+                ["ha", "hb", "hc"],
+                value_matrix_iter,
+                len(value_matrix_iter) - 1,
+                """var tablename = [
+    ["ha", "hb", "hc"],
+    [1, 2, 3],
+    [11, 12, 13],
+    [1, 2, 3],
+    [11, 12, 13]
+];
+""",
+            ],
+        ])
+    def test_normal(self, capsys, table, header, value, iter_len, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header
         writer.value_matrix = value
-        writer.iteration_length = len(value)
+        writer.iteration_length = iter_len
         writer.write_table_iter()
 
         out, _err = capsys.readouterr()

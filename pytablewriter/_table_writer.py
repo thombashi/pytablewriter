@@ -222,6 +222,9 @@ class TableWriter(TableWriterInterface):
             except TypeError:
                 pass
 
+            if is_final_iter:
+                break
+
             iter_count += 1
 
         self.is_write_header = old_is_write_header
