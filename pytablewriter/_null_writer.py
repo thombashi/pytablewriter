@@ -36,5 +36,8 @@ class NullTableWriter(
     def write_table_iter(self):
         pass
 
+    def close(self):
+        pass
+
     def _write_value_row_separator(self):
         pass
