@@ -352,7 +352,7 @@ class TableWriter(TableWriterInterface):
             if len(self.header_list) != len(value_list):
                 erroror_key = "row={:d}".format(row)
                 dict_invalid[erroror_key] = (
-                    "expected-col-size={:d}, actual={:d}".format(
+                    "expected-col-len={:d}, actual={:d}".format(
                         len(value_list), len(self.header_list))
                 )
 
@@ -361,7 +361,7 @@ class TableWriter(TableWriterInterface):
 
             message = [
                 "invalid table value: mismatch length with header and value",
-                "  header: col-size={:d} {:s}".format(
+                "  header: col-len={:d} {:s}".format(
                     len(self.header_list), self.header_list),
                 "  value:  {:s}".format(str(dict_invalid)),
             ]
