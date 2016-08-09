@@ -347,9 +347,8 @@ class TableWriter(TableWriterInterface):
         if dataproperty.is_empty_sequence(self.header_list):
             return
 
+        dict_invalid = {}
         for row, value_list in enumerate(self.value_matrix):
-            dict_invalid = {}
-
             if len(self.header_list) != len(value_list):
                 erroror_key = "row={:d}".format(row)
                 dict_invalid[erroror_key] = (
