@@ -10,8 +10,8 @@ import itertools
 
 import pytablewriter
 import pytest
-import simplesqlite.loader as sloader
-from simplesqlite.loader.data import TableData
+import pytablereader as sloader
+from pytablereader import TableData
 
 from .data import header_list
 from .data import value_matrix
@@ -44,18 +44,6 @@ normal_test_data_list = [
             "tablename",
             ["a", "b", "c", "dd", "e"],
             [
-            ])
-    ),
-    Data(
-        table=None,
-        header=None,
-        value=value_matrix,
-        expected=TableData(
-            "Sheet1",
-            [1, 123.1, "a", 1,   1],
-            [
-                [2, 2.2, "bb", 2.2, 2.2],
-                [3, 3.3, "ccc", 3,   "cccc"],
             ])
     ),
     Data(

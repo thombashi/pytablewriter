@@ -152,6 +152,22 @@ class TableWriter(TableWriterInterface):
         finally:
             self.stream = None
 
+    def set_table_data(self, tabledata):
+        """
+        Set table data to fllowing attributes from
+        :py:class:`pytablereader.TableData`
+
+        - :py:attr:`~.table_name`.
+        - :py:attr:`~.header_list`.
+        - :py:attr:`~.value_matrix`.
+
+        :param pytablereader.TableData tabledata: Input data.
+        """
+
+        self.table_name = tabledata.table_name
+        self.header_list = tabledata.header_list
+        self.value_matrix = tabledata.record_list
+
     def write_table_iter(self):
         """
         Write a table with iteration.

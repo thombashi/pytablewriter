@@ -9,6 +9,7 @@ import collections
 import itertools
 
 import pytablewriter
+import pytablereader
 import pytest
 
 from .data import header_list
@@ -101,6 +102,30 @@ class Test_CsvTableWriter_write_new_line:
 
         out, _err = capsys.readouterr()
         assert out == "\n"
+
+
+class Test_CsvTableWriter_set_table_data:
+
+    def test_normal(self, capsys):
+        writer = table_writer_class()
+
+        csv_text = """"a","b","c","dd","e"
+1,,"a",1.0,
+,2.2,,2.2,"2.2"
+3,3.3,"ccc",,"cccc"
+"""
+
+        loader = pytablereader.CsvTableTextLoader(csv_text)
+        for tabledata in loader.load():
+            writer.set_table_data(tabledata)
+
+        assert writer.table_name == "csv1"
+        assert writer.header_list == ["a", "b", "c", "dd", "e"]
+        assert writer.value_matrix == [
+            ['1', '', 'a', '1.0', ''],
+            ['', '2.2', '', '2.2', '2.2'],
+            ['3', '3.3', 'ccc', '', 'cccc']
+        ]
 
 
 class Test_CsvTableWriter_write_table:
