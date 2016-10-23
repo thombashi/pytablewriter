@@ -1,4 +1,4 @@
+pytablereader
 pytest-cov
 pytest
-SimpleSQLite
 tox
