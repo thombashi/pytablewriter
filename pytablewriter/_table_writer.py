@@ -104,7 +104,7 @@ class TableWriter(TableWriterInterface):
         self.is_quote_header = True
         self.is_quote_table = {
             Typecode.NONE: False,
-            Typecode.INT: False,
+            Typecode.INTEGER: False,
             Typecode.FLOAT: False,
             Typecode.STRING: True,
             Typecode.DATETIME: True,
@@ -270,7 +270,7 @@ class TableWriter(TableWriterInterface):
             self.is_quote_table.get(col_prop.typecode, False),
             any([
                 self.is_quote_table.get(value_prop.typecode, False),
-                value_prop.typecode in [Typecode.INT, Typecode.FLOAT],
+                value_prop.typecode in [Typecode.INTEGER, Typecode.FLOAT],
             ])
         ]):
             return u'"{:s}"'.format(item)
@@ -281,7 +281,7 @@ class TableWriter(TableWriterInterface):
         if any([
             all([
                 col_prop.typecode == Typecode.FLOAT,
-                value_prop.typecode in [Typecode.INT, Typecode.FLOAT],
+                value_prop.typecode in [Typecode.INTEGER, Typecode.FLOAT],
                 not self.is_float_formatting
             ]),
             value_prop.typecode == Typecode.NONE,

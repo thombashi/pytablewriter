@@ -363,7 +363,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         base_props = dict(self.__cell_format_property)
         format_key = "{:d}_{:d}".format(col, prop.typecode)
 
-        if prop.typecode in [dp.Typecode.INT, dp.Typecode.FLOAT]:
+        if prop.typecode in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
             num_props = self.__get_number_property(col)
             base_props.update(num_props)
             cell_format = self.__get_cell_format(format_key, base_props)
@@ -391,7 +391,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         except KeyError:
             return {}
 
-        if col_prop.typecode not in [dp.Typecode.INT, dp.Typecode.FLOAT]:
+        if col_prop.typecode not in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
             return {}
 
         num_props = {}
