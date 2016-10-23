@@ -22,7 +22,7 @@ Python 2.7+ or 3.3+
 Test dependencies
 -----------------
 
+- `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `pytest <http://pytest.org/latest/>`__
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
-- `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `tox <https://testrun.org/tox/latest/>`__
