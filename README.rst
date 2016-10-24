@@ -237,3 +237,9 @@ Documentation
 
 http://pytablewriter.readthedocs.org/en/latest/
 
+Related Project
+===============
+
+- `pytablereader <https://github.com/thombashi/pytablereader>`__
+    - Loaded data by ``pytablereader`` can be write another table format with ``pytablewriter``
+

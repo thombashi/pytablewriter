@@ -61,6 +61,12 @@ def main():
         "http://{:s}.readthedocs.org/en/latest/".format(PROJECT_NAME),
     ])
 
+    maker.write_chapter("Related Project")
+    maker.write_line_list([
+        "- `pytablereader <https://github.com/thombashi/pytablereader>`__",
+        "    - Loaded data by ``pytablereader`` can be write another table format with ``pytablewriter``"
+    ])
+
     return 0
 
 
