@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 import collections
 
+import pytablereader
 import pytablewriter
 import pytest
 
@@ -186,6 +187,31 @@ class Test_MarkdownTableWriter_write_new_line:
 
         out, _err = capsys.readouterr()
         assert out == "\n"
+
+
+class Test_MarkdownTableWriter_set_table_data:
+
+    def test_normal(self, capsys):
+        writer = table_writer_class()
+
+        tabledata = pytablereader.TableData(
+            "tmp",
+            ["attr_a", "attr_b", "attr_c"],
+            [
+                ["1", "4",      "a"],
+                ["2", "2.1",    "bb"],
+                ["3", "120.9",  "ccc"],
+            ])
+
+        writer.set_table_data(tabledata)
+
+        assert writer.table_name == "tmp"
+        assert writer.header_list == ["attr_a", "attr_b", "attr_c"]
+        assert writer.value_matrix == [
+            ["1", "4",      "a"],
+            ["2", "2.1",    "bb"],
+            ["3", "120.9",  "ccc"],
+        ]
 
 
 class Test_MarkdownTableWriter_write_table:
