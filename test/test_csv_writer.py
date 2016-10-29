@@ -106,7 +106,7 @@ class Test_CsvTableWriter_write_new_line:
 
 class Test_CsvTableWriter_set_table_data:
 
-    def test_normal(self, capsys):
+    def test_normal(self):
         writer = table_writer_class()
 
         csv_text = """"a","b","c","dd","e"
