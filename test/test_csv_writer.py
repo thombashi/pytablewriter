@@ -8,8 +8,8 @@ from __future__ import absolute_import
 import collections
 import itertools
 
-import pytablewriter
-import pytablereader
+import pytablewriter as ptw
+import pytablereader as ptr
 import pytest
 
 from .data import header_list
@@ -86,12 +86,12 @@ exception_test_data_list = [
         col_delim=",",
         header=header,
         value=value,
-        expected=pytablewriter.EmptyTableDataError
+        expected=ptw.EmptyTableDataError
     )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
-table_writer_class = pytablewriter.CsvTableWriter
+table_writer_class = ptw.CsvTableWriter
 
 
 class Test_CsvTableWriter_write_new_line:
@@ -115,7 +115,7 @@ class Test_CsvTableWriter_set_table_data:
 3,3.3,"ccc",,"cccc"
 """
 
-        loader = pytablereader.CsvTableTextLoader(csv_text)
+        loader = ptr.CsvTableTextLoader(csv_text)
         for tabledata in loader.load():
             writer.set_table_data(tabledata)
 

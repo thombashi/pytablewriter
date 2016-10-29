@@ -7,8 +7,8 @@
 from __future__ import absolute_import
 import collections
 
-import pytablereader
-import pytablewriter
+import pytablereader as ptr
+import pytablewriter as ptw
 import pytest
 
 from .data import header_list
@@ -156,7 +156,7 @@ exception_test_data_list = [
         header=[],
         value=[],
         is_float_formatting=True,
-        expected=pytablewriter.EmptyTableDataError
+        expected=ptw.EmptyTableDataError
     ),
     Data(
         table="",
@@ -164,7 +164,7 @@ exception_test_data_list = [
         header=[],
         value=value_matrix,
         is_float_formatting=True,
-        expected=pytablewriter.EmptyHeaderError
+        expected=ptw.EmptyHeaderError
     ),
     Data(
         table="",
@@ -172,11 +172,11 @@ exception_test_data_list = [
         header=None,
         value=value_matrix,
         is_float_formatting=True,
-        expected=pytablewriter.EmptyHeaderError
+        expected=ptw.EmptyHeaderError
     ),
 ]
 
-table_writer_class = pytablewriter.MarkdownTableWriter
+table_writer_class = ptw.MarkdownTableWriter
 
 
 class Test_MarkdownTableWriter_write_new_line:
@@ -194,7 +194,7 @@ class Test_MarkdownTableWriter_set_table_data:
     def test_normal(self, capsys):
         writer = table_writer_class()
 
-        tabledata = pytablereader.TableData(
+        tabledata = ptr.TableData(
             "tmp",
             ["attr_a", "attr_b", "attr_c"],
             [
