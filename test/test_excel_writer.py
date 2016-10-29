@@ -10,7 +10,7 @@ import itertools
 
 import pytablewriter
 import pytest
-import pytablereader as sloader
+import pytablereader as ptr
 from pytablereader import TableData
 
 from .data import header_list
@@ -121,7 +121,7 @@ class Test_ExcelTableWriter_write_table:
         writer.write_table()
         writer.close()
 
-        loader = sloader.ExcelTableFileLoader(str(test_file_path))
+        loader = ptr.ExcelTableFileLoader(str(test_file_path))
 
         for tabledata in loader.load():
             assert tabledata == expected
@@ -207,7 +207,7 @@ class Test_ExcelTableWriter_write_table_iter:
         assert writer.first_data_row == 1
         assert writer.last_data_row == 7
 
-        loader = sloader.ExcelTableFileLoader(str(test_file_path))
+        loader = ptr.ExcelTableFileLoader(str(test_file_path))
 
         for tabledata in loader.load():
             assert tabledata == expected
