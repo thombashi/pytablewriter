@@ -241,6 +241,36 @@ class Test_MarkdownTableWriter_write_table:
         out, _err = capsys.readouterr()
         assert out == expected
 
+    def test_normal_tabledata(self, capsys):
+        writer = table_writer_class()
+
+        tabledata = ptr.TableData(
+            table_name="loader_mapping",
+            header_list=['Format name', 'Loader'],
+            record_list=[
+                ['csv', 'CsvTableFileLoader'],
+                ['excel', 'ExcelTableFileLoader'],
+                ['html', 'HtmlTableFileLoader'],
+                ['markdown', 'MarkdownTableFileLoader'],
+                ['mediawiki', 'MediaWikiTableFileLoader'],
+                ['json', 'JsonTableFileLoader'],
+            ])
+        writer.set_table_data(tabledata)
+        writer.write_table()
+
+        expected = """# loader_mapping
+Format name|         Loader         
+-----------|------------------------
+csv        |CsvTableFileLoader      
+excel      |ExcelTableFileLoader    
+html       |HtmlTableFileLoader     
+markdown   |MarkdownTableFileLoader 
+mediawiki  |MediaWikiTableFileLoader
+json       |JsonTableFileLoader     
+"""
+        out, _err = capsys.readouterr()
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
