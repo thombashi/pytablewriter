@@ -11,6 +11,7 @@ from ._error import EmptyHeaderError
 from ._error import EmptyTableNameError
 from ._error import EmptyValueError
 from ._error import EmptyTableDataError
+from ._error import WriterNotFoundError
 
 from .writer._csv_writer import CsvTableWriter
 from .writer._excel_writer import ExcelXlsTableWriter

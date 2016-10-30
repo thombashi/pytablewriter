@@ -37,3 +37,9 @@ class EmptyTableDataError(Exception):
     Raised when a table writer class of the |header_list| and |value_matrix|
     attributes are null
     """
+
+
+class WriterNotFoundError(Exception):
+    """
+    Raised when appropriate loader writer found.
+    """
