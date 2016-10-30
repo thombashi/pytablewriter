@@ -27,3 +27,5 @@ from .writer._python_code_writer import PythonCodeTableWriter
 from .writer._rst_writer import RstCsvTableWriter
 from .writer._rst_writer import RstGridTableWriter
 from .writer._rst_writer import RstSimpleTableWriter
+
+from ._factory import TableWriterFactory
