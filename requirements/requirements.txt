@@ -1,6 +1,6 @@
-DataProperty>=0.10.0
+DataProperty>=0.10.1
 dominate
-pathvalidate>=0.8.1
+pathvalidate>=0.8.3
 six
 XlsxWriter
 xlwt
