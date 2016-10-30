@@ -9,7 +9,7 @@ from __future__ import absolute_import
 import dataproperty
 from six.moves import zip
 
-from ._error import EmptyHeaderError
+from .._error import EmptyHeaderError
 from ._table_writer import TableWriter
 from ._interface import IndentationInterface
 from ._interface import TextWriterInterface

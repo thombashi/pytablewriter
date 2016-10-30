@@ -10,9 +10,10 @@ import json
 import dataproperty
 from six.moves import zip
 
-from ._converter import lower_bool_converter
-from ._converter import strip_quote
-from ._error import EmptyHeaderError
+from .._converter import lower_bool_converter
+from .._converter import strip_quote
+from .._error import EmptyHeaderError
+from .._function import _get_data_helper
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -91,8 +92,6 @@ class JsonTableWriter(IndentationTextTableWriter):
             raise EmptyHeaderError()
 
     def _preprocess_value_matrix(self):
-        from ._function import _get_data_helper
-
         if self._preprocessed_value_matrix:
             return
 

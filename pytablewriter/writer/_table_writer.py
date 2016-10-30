@@ -11,9 +11,9 @@ import dataproperty
 from dataproperty import Typecode
 from six.moves import zip
 
-from ._error import NotSupportedError
-from ._error import EmptyValueError
-from ._error import EmptyTableDataError
+from .._error import NotSupportedError
+from .._error import EmptyValueError
+from .._error import EmptyTableDataError
 from ._interface import TableWriterInterface
 
 

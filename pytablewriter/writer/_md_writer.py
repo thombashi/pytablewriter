@@ -8,7 +8,7 @@ from __future__ import absolute_import
 
 import dataproperty
 
-from ._error import EmptyHeaderError
+from .._error import EmptyHeaderError
 from ._text_writer import IndentationTextTableWriter
 
 
