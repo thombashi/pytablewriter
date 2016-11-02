@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+import itertools
 
 import pytest
 
@@ -13,48 +14,40 @@ import pytablewriter as ptw
 
 class Test_WriterFactory_create_from_file_extension:
 
-    @pytest.mark.parametrize(["value", "expected"], [
-        ["valid_ext.csv", ptw.CsvTableWriter],
-        ["valid_ext.CSV", ptw.CsvTableWriter],
-        [".csv", ptw.CsvTableWriter],
-        ["CSV", ptw.CsvTableWriter],
-        ["valid_ext.html", ptw.HtmlTableWriter],
-        ["valid_ext.HTML", ptw.HtmlTableWriter],
-        [".html", ptw.HtmlTableWriter],
-        ["HTML", ptw.HtmlTableWriter],
-        ["valid_ext.htm", ptw.HtmlTableWriter],
-        ["valid_ext.HTM", ptw.HtmlTableWriter],
-        [".htm", ptw.HtmlTableWriter],
-        ["HTM", ptw.HtmlTableWriter],
-        ["valid_ext.js", ptw.JavaScriptTableWriter],
-        ["valid_ext.JS", ptw.JavaScriptTableWriter],
-        [".js", ptw.JavaScriptTableWriter],
-        ["JS", ptw.JavaScriptTableWriter],
-        ["valid_ext.json", ptw.JsonTableWriter],
-        ["valid_ext.JSON", ptw.JsonTableWriter],
-        [".json", ptw.JsonTableWriter],
-        ["JSON", ptw.JsonTableWriter],
-        ["valid_ext.md", ptw.MarkdownTableWriter],
-        ["valid_ext.MD", ptw.MarkdownTableWriter],
-        [".md", ptw.MarkdownTableWriter],
-        ["MD", ptw.MarkdownTableWriter],
-        ["valid_ext.py", ptw.PythonCodeTableWriter],
-        ["valid_ext.PY", ptw.PythonCodeTableWriter],
-        [".py", ptw.PythonCodeTableWriter],
-        ["PY", ptw.PythonCodeTableWriter],
-        ["valid_ext.rst", ptw.RstGridTableWriter],
-        ["valid_ext.RST", ptw.RstGridTableWriter],
-        [".rst", ptw.RstGridTableWriter],
-        ["RST", ptw.RstGridTableWriter],
-        ["valid_ext.xls", ptw.ExcelXlsTableWriter],
-        ["valid_ext.XLS", ptw.ExcelXlsTableWriter],
-        [".xls", ptw.ExcelXlsTableWriter],
-        ["XLS", ptw.ExcelXlsTableWriter],
-        ["valid_ext.xlsx", ptw.ExcelXlsxTableWriter],
-        ["valid_ext.XLSX", ptw.ExcelXlsxTableWriter],
-        [".xlsx", ptw.ExcelXlsxTableWriter],
-        ["XLSX", ptw.ExcelXlsxTableWriter],
-    ])
+    @pytest.mark.parametrize(
+        ["value", "expected"],
+        list(itertools.product(
+            ["valid_ext.csv", "valid_ext.CSV", ".csv", "CSV"],
+            [ptw.CsvTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.html", "valid_ext.HTML", ".html", "HTML"],
+            [ptw.HtmlTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.htm", "valid_ext.HTM", ".htm", "HTM"],
+            [ptw.HtmlTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.js", "valid_ext.JS", ".js", "JS"],
+            [ptw.JavaScriptTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.json", "valid_ext.JSON", ".json", "JSON"],
+            [ptw.JsonTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.md", "valid_ext.MD", ".md", "MD"],
+            [ptw.MarkdownTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.py", "valid_ext.PY", ".py", "PY"],
+            [ptw.PythonCodeTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.rst", "valid_ext.RST", ".rst", "RST"],
+            [ptw.RstGridTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.xls", "valid_ext.XLS", ".xls", "XLS"],
+            [ptw.ExcelXlsTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.xlsx", "valid_ext.XLSX", ".xlsx"],
+            [ptw.ExcelXlsxTableWriter])
+        )
+    )
     def test_normal(self, value, expected):
         writer = ptw.TableWriterFactory.create_from_file_extension(value)
 
