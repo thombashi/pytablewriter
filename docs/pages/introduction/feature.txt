@@ -17,8 +17,8 @@ Features
         - Grid tables
         - Simple tables
         - CSV table
-- Automatic value formatting
+- Automatic tabular data formatting
     - Alignment
     - Padding
     - Decimal places of numbers
-- Output to a stream such as a file or the standard output
+- Output table to a stream such as a file or the standard output
