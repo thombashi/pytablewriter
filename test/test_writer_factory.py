@@ -84,11 +84,11 @@ class Test_FileLoaderFactory_create_from_format_name:
 
         assert isinstance(writer, expected)
 
-    @pytest.mark.parametrize(["file_path", "format_name", "expected"], [
-        ["valid_ext.csv", "not_exist_format", ptw.WriterNotFoundError],
-        ["valid_ext.csv", "", ptw.WriterNotFoundError],
-        ["valid_ext.csv", None, AttributeError],
+    @pytest.mark.parametrize(["format_name", "expected"], [
+        ["not_exist_format", ptw.WriterNotFoundError],
+        ["", ptw.WriterNotFoundError],
+        [None, AttributeError],
     ])
-    def test_exception(self, file_path, format_name, expected):
+    def test_exception(self, format_name, expected):
         with pytest.raises(expected):
             ptw.TableWriterFactory.create_from_format_name(format_name)
