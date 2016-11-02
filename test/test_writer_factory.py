@@ -65,21 +65,21 @@ class Test_WriterFactory_create_from_file_extension:
 
 class Test_FileLoaderFactory_create_from_format_name:
 
-    @pytest.mark.parametrize(["file_path", "format_name", "expected"], [
-        ["valid_ext.html", "csv", ptw.CsvTableWriter],
-        ["invalid_ext.txt", "CSV", ptw.CsvTableWriter],
-        ["valid_ext.html", "excel", ptw.ExcelXlsxTableWriter],
-        ["invalid_ext.txt", "Excel", ptw.ExcelXlsxTableWriter],
-        ["valid_ext.json", "html", ptw.HtmlTableWriter],
-        ["invalid_ext.txt", "HTML", ptw.HtmlTableWriter],
-        ["valid_ext.html", "json", ptw.JsonTableWriter],
-        ["invalid_ext.txt", "JSON", ptw.JsonTableWriter],
-        ["valid_ext.html", "markdown", ptw.MarkdownTableWriter],
-        ["invalid_ext.txt", "Markdown", ptw.MarkdownTableWriter],
-        ["valid_ext.html", "mediawiki", ptw.MediaWikiTableWriter],
-        ["invalid_ext.txt", "MediaWiki", ptw.MediaWikiTableWriter],
+    @pytest.mark.parametrize(["format_name", "expected"], [
+        ["csv", ptw.CsvTableWriter],
+        ["CSV", ptw.CsvTableWriter],
+        ["excel", ptw.ExcelXlsxTableWriter],
+        ["Excel", ptw.ExcelXlsxTableWriter],
+        ["html", ptw.HtmlTableWriter],
+        ["HTML", ptw.HtmlTableWriter],
+        ["json", ptw.JsonTableWriter],
+        ["JSON", ptw.JsonTableWriter],
+        ["markdown", ptw.MarkdownTableWriter],
+        ["Markdown", ptw.MarkdownTableWriter],
+        ["mediawiki", ptw.MediaWikiTableWriter],
+        ["MediaWiki", ptw.MediaWikiTableWriter],
     ])
-    def test_normal(self, file_path, format_name, expected):
+    def test_normal(self, format_name, expected):
         writer = ptw.TableWriterFactory.create_from_format_name(format_name)
 
         assert isinstance(writer, expected)
