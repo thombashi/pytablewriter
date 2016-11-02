@@ -4,8 +4,8 @@ import setuptools
 
 REQUIREMENT_DIR = "requirements"
 
-needs_pytest = set(['pytest', 'test', 'ptr']).intersection(sys.argv)
-pytest_runner = ['pytest-runner'] if needs_pytest else []
+needs_pytest = set(["pytest", "test", "ptr"]).intersection(sys.argv)
+pytest_runner = ["pytest-runner"] if needs_pytest else []
 
 with open("README.rst") as fp:
     long_description = fp.read()
@@ -21,7 +21,7 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 setuptools.setup(
     name="pytablewriter",
-    version="0.12.0",
+    version="0.12.1",
     author="Tsuyoshi Hombashi",
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/pytablewriter",
@@ -34,7 +34,7 @@ setuptools.setup(
         "Markdown", "MediaWiki", "HTML", "pandas", "reStructuredText",
     ],
     long_description=long_description,
-    packages=setuptools.find_packages(exclude=['test*']),
+    packages=setuptools.find_packages(exclude=["test*"]),
     setup_requires=pytest_runner,
     tests_require=tests_require,
     classifiers=[
