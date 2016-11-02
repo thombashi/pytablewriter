@@ -16,3 +16,7 @@ Errors
 .. autoclass:: pytablewriter.EmptyTableDataError
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: pytablewriter.WriterNotFoundError
+    :undoc-members:
+    :show-inheritance:
