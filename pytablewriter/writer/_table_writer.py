@@ -154,14 +154,13 @@ class TableWriter(TableWriterInterface):
 
     def set_table_data(self, tabledata):
         """
-        Set table data to fllowing attributes from
-        :py:class:`pytablereader.TableData`
+        Set following attributes from :py:class:`pytablereader.TableData`
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
 
-        :param pytablereader.TableData tabledata: Input data.
+        :param pytablereader.TableData tabledata: Input table data.
         """
 
         self.table_name = tabledata.table_name
