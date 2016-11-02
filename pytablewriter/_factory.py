@@ -125,7 +125,7 @@ class TableWriterFactory(object):
             +------------------------------+-----------------------------------+
             |``"rst"``/``"rst_grid_table"``|:py:class:`~.RstGridTableWriter`   |
             +------------------------------+-----------------------------------+
-            |``"rst_simple_table"``        |:py:class:`~.RstGridTableWriter`   |
+            |``"rst_simple_table"``        |:py:class:`~.RstSimpleTableWriter` |
             +------------------------------+-----------------------------------+
             |``"rst_csv_table"``           |:py:class:`~.RstCsvTableWriter`    |
             +------------------------------+-----------------------------------+
@@ -192,6 +192,9 @@ class TableWriterFactory(object):
             "null": NullTableWriter,
             "pandas": PandasDataFrameWriter,
             "python": PythonCodeTableWriter,
+            "rst_grid_table": RstGridTableWriter,
+            "rst_simple_table": RstSimpleTableWriter,
+            "rst_csv_table": RstCsvTableWriter,
         })
 
         return writer_mapping
