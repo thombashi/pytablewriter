@@ -135,6 +135,24 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
             self.workbook.close()
             self._workbook = None
 
+    def set_table_data(self, tabledata):
+        """
+        Set following attributes from :py:class:`pytablereader.TableData`
+
+        - :py:attr:`~.table_name`.
+        - :py:attr:`~.header_list`.
+        - :py:attr:`~.value_matrix`.
+
+        And create worksheet named from :py:attr:`~.table_name` ABC
+        if not existed yet.
+
+        :param pytablereader.TableData tabledata: Input table data.
+        """
+
+        super(ExcelTableWriter, self).set_table_data(tabledata)
+
+        self.make_worksheet(self.table_name)
+
     def make_worksheet(self, sheet_name):
         """
         Make a worksheet to the current workbook.
