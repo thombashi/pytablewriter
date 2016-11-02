@@ -85,13 +85,13 @@ class TableWriterFactory(object):
 
         try:
             return cls.__create_writer(
-                cls.get_extension_writer_mapping(), file_extension)
+                cls.__get_extension_writer_mapping(), file_extension)
         except WriterNotFoundError as e:
             raise WriterNotFoundError("\n".join([
                 "{:s} (unknown file extension).".format(e.args[0]),
                 "",
                 "acceptable file extensions are: {}.".format(
-                    ", ".join(sorted(cls.get_extension_writer_mapping()))),
+                    ", ".join(cls.get_extension_list())),
             ]))
 
     @classmethod
@@ -140,12 +140,12 @@ class TableWriterFactory(object):
 
         try:
             return cls.__create_writer(
-                cls.get_format_name_writer_mapping(), format_name)
+                cls.__get_format_name_writer_mapping(), format_name)
         except WriterNotFoundError as e:
             raise WriterNotFoundError("\n".join([
                 "{:s} (unknown format name).".format(e.args[0]),
                 "acceptable format names are: {}.".format(
-                    ", ".join(sorted(cls.get_format_name_writer_mapping()))),
+                    ", ".join(cls.get_format_name_list())),
             ]))
 
     @staticmethod
@@ -158,7 +158,25 @@ class TableWriterFactory(object):
             ]))
 
     @classmethod
-    def get_format_name_writer_mapping(cls):
+    def get_format_name_list(cls):
+        """
+        :return: Available format name List.
+        :rtype: list
+        """
+
+        return sorted(cls.__get_format_name_writer_mapping())
+
+    @classmethod
+    def get_extension_list(cls):
+        """
+        :return: Available format-extension list.
+        :rtype: list
+        """
+
+        return sorted(cls.__get_extension_writer_mapping())
+
+    @classmethod
+    def __get_format_name_writer_mapping(cls):
         """
         :return: Mappings of format-name and writer class.
         :rtype: dict
@@ -179,7 +197,7 @@ class TableWriterFactory(object):
         return writer_mapping
 
     @classmethod
-    def get_extension_writer_mapping(cls):
+    def __get_extension_writer_mapping(cls):
         """
         :return: Mappings of format-extension and writer class.
         :rtype: dict
