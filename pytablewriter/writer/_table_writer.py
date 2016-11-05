@@ -367,8 +367,8 @@ class TableWriter(TableWriterInterface):
             if len(self.header_list) != len(value_list):
                 erroror_key = "row={:d}".format(row)
                 dict_invalid[erroror_key] = (
-                    "expected-col-len={:d}, actual={:d}".format(
-                        len(value_list), len(self.header_list))
+                    "expected-col-len={:d}, actual={:d} {}".format(
+                        len(self.header_list), len(value_list), value_list)
                 )
 
         if len(dict_invalid) > 0:
