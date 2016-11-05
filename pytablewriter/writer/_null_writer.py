@@ -6,9 +6,11 @@
 
 from __future__ import absolute_import
 
-from ._interface import TableWriterInterface
-from ._interface import TextWriterInterface
-from ._interface import IndentationInterface
+from ._interface import (
+    TableWriterInterface,
+    TextWriterInterface,
+    IndentationInterface
+)
 
 
 class NullTableWriter(

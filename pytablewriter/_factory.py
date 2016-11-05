@@ -23,9 +23,11 @@ from .writer._null_writer import NullTableWriter
 from .writer._mediawiki_writer import MediaWikiTableWriter
 from .writer._pandas_writer import PandasDataFrameWriter
 from .writer._python_code_writer import PythonCodeTableWriter
-from .writer._rst_writer import RstCsvTableWriter
-from .writer._rst_writer import RstGridTableWriter
-from .writer._rst_writer import RstSimpleTableWriter
+from .writer._rst_writer import (
+    RstCsvTableWriter,
+    RstGridTableWriter,
+    RstSimpleTableWriter
+)
 
 
 class TableWriterFactory(object):
