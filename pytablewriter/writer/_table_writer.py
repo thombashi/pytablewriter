@@ -269,8 +269,8 @@ class TableWriter(TableWriterInterface):
             item = to_string_format_str.format(value_prop.data)
         else:
             try:
-                value = col_prop.type_factory.value_converter_factory.create(
-                    value_prop.data).convert()
+                value = col_prop.type_factory(
+                    value_prop.data, is_strict=False).create_type_converter().convert()
             except dataproperty.TypeConversionError:
                 value = value_prop.data
 

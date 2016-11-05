@@ -8,7 +8,7 @@ from __future__ import absolute_import
 import abc
 
 import dataproperty as dp
-from dataproperty.type import IntegerTypeChecker
+from dataproperty import IntegerType
 from six.moves import range
 import xlwt
 
@@ -270,7 +270,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         if col_prop.typecode not in [dp.Typecode.FLOAT]:
             raise ValueError()
 
-        if not IntegerTypeChecker(col_prop.minmax_decimal_places.max_value).is_type():
+        if not IntegerType(col_prop.minmax_decimal_places.max_value).is_type():
             raise ValueError()
 
         float_digit = col_prop.minmax_decimal_places.max_value
@@ -413,7 +413,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             return {}
 
         num_props = {}
-        if IntegerTypeChecker(col_prop.minmax_decimal_places.max_value).is_type():
+        if IntegerType(col_prop.minmax_decimal_places.max_value).is_type():
             float_digit = col_prop.minmax_decimal_places.max_value
             if float_digit > 0:
                 num_props = {"num_format": "0.{:s}".format("0" * float_digit)}
@@ -439,7 +439,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def __set_cell_width(self):
         font_size = self.__cell_format_property.get("font_size")
 
-        if not IntegerTypeChecker(font_size).is_type():
+        if not IntegerType(font_size).is_type():
             return
 
         for col_idx, col_prop in enumerate(self._column_prop_list):

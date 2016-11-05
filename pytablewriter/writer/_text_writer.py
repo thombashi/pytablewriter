@@ -145,11 +145,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
     def _get_header_item(self, col_prop, value_prop):
-        from dataproperty.converter import StringConverterCreator
+        from dataproperty import StringType
 
         format_string = self._get_header_format_string(col_prop)
-        item = format_string.format(
-            StringConverterCreator().create(value_prop.data).convert())
+        item = format_string.format(StringType(value_prop.data).convert())
 
         if self.is_quote_header:
             return u'"{:s}"'.format(item)
