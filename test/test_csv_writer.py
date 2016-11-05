@@ -122,9 +122,9 @@ class Test_CsvTableWriter_set_table_data:
         assert writer.table_name == "csv1"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
         assert writer.value_matrix == [
-            ['1', '', 'a', '1.0', ''],
+            [1, '', 'a', '1.0', ''],
             ['', '2.2', '', '2.2', '2.2'],
-            ['3', '3.3', 'ccc', '', 'cccc']
+            [3, '3.3', 'ccc', '', 'cccc']
         ]
 
 
