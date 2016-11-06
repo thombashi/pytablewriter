@@ -1,4 +1,4 @@
-DataProperty>=0.11.1
+DataProperty>=0.11.2
 dominate
 pathvalidate>=0.8.3
 six
