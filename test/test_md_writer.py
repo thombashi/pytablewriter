@@ -147,6 +147,25 @@ normal_test_data_list = [
 1.20|999.12| 0.00
 """
     ),
+    Data(
+        table="",
+        indent=0,
+        header=[u'Name', u'xUnit', u'Source', u'Remarks'],
+        value=[
+            [
+                u'Crotest',
+                u'',
+                u'[160]',
+                u'MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.',
+                u'',
+            ]
+        ],
+        is_float_formatting=True,
+        expected=""" Name  |xUnit|Source|                                                      Remarks                                                       
+-------|-----|------|--------------------------------------------------------------------------------------------------------------------
+Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.
+"""
+    ),
 ]
 
 exception_test_data_list = [

@@ -362,6 +362,7 @@ class TableWriter(TableWriterInterface):
         if dataproperty.is_empty_sequence(self.header_list):
             return
 
+        """
         dict_invalid = {}
         for row, value_list in enumerate(self.value_matrix):
             if len(self.header_list) != len(value_list):
@@ -381,6 +382,7 @@ class TableWriter(TableWriterInterface):
                 "  value:  {:s}".format(str(dict_invalid)),
             ]
             raise ValueError(os.linesep.join(message))
+        """
 
     def _preprocess_property(self):
         if self._preprocessed_property:
