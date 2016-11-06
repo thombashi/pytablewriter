@@ -27,27 +27,27 @@ class TableWriter(TableWriterInterface):
 
     .. py:attribute:: stream
 
-        Stream to write the table.
+        Stream to write tables.
 
     .. py:attribute:: table_name
 
-        Table name of the table.
+        Name of the table.
 
     .. py:attribute:: header_list
 
-        List of header data to write.
+        List of table header to write.
 
     .. py:attribute:: value_matrix
 
-        Nested list of data to write.
+        Table data (nested list) to write.
 
     .. py:attribute:: is_write_header
 
-        Write a header of the table if the value is |True|.
+        Write headers of the table if the value is |True|.
 
     .. py:attribute:: is_padding
 
-        Padding an item in the table if the value is |True|.
+        Padding for each item in the table if the value is |True|.
 
     .. py:attribute:: is_quote_header
 
@@ -55,9 +55,9 @@ class TableWriter(TableWriterInterface):
 
     .. py:attribute:: is_quote_table
 
-        Dictionary of { Typecode : bool } format.
-        Add double quote to string in table elements,
-        where a |Typecode| of table-value is |True| in the dictionary.
+        Add double quote to string in a table elements,
+        where |Typecode| of table-value is |True| in the mapping table
+        (dictionary): ``{ Typecode : bool }``.
 
     .. py:attribute:: iteration_length
 
@@ -67,10 +67,10 @@ class TableWriter(TableWriterInterface):
 
     .. py:attribute:: write_callback
 
-        This is called when for each of the iteration of writing a table is
-        completed. This method is used in :py:meth:`.write_table_iter` method.
-        (defaults to |None|)
-        Example of a call back function definition is as follows:
+        The value expected to a function.
+        The function called when for each of the iteration of writing a table
+        completed. (defaults to |None|)
+        Example callback function definition is as follows:
 
         .. code:: python
 
