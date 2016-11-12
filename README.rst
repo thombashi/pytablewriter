@@ -1,6 +1,9 @@
 pytablewriter
 =============
 
+.. image:: https://badge.fury.io/py/pytablewriter.svg
+    :target: https://badge.fury.io/py/pytablewriter
+
 .. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
    :target: https://pypi.python.org/pypi/pytablewriter
 
