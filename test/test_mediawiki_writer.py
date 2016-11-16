@@ -70,6 +70,29 @@ normal_test_data_list = [
     ),
     Data(
         table=None,
+        header=["ho ge", "foo - bar"],
+        value=[
+            [1, "\n".join([" # a b c", "# h o g e"])],
+            [2, "\n".join([" *hoge", "* abc"])],
+        ],
+        expected="""{| class="wikitable"
+! ho ge
+! foo - bar
+|-
+| style="text-align:right"| 1
+| 
+# a b c
+# h o g e
+|-
+| style="text-align:right"| 2
+| 
+*hoge
+* abc
+|}
+"""
+    ),
+    Data(
+        table=None,
         header=None,
         value=value_matrix,
         expected="""{| class="wikitable"

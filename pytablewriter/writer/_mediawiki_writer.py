@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+import re
 
 import dataproperty
 from six.moves import zip
@@ -20,6 +21,8 @@ class MediaWikiTableWriter(TextTableWriter):
 
         :ref:`example-mediawiki-table-writer`
     """
+
+    __RE_TABLE_SEQUENCE = re.compile(u"[\s]+[*|#]+")
 
     @property
     def support_split_write(self):
@@ -70,12 +73,14 @@ class MediaWikiTableWriter(TextTableWriter):
             self._get_center_align_formatformat(),
             str(self._get_padding_len(col_prop)))
 
-    @staticmethod
-    def __modify_table_element(value, value_prop):
+    def __modify_table_element(self, value, value_prop):
         if value_prop.align is dataproperty.Align.LEFT:
             forma_stirng = u'| {1:s}'
         else:
             forma_stirng = u'| style="text-align:{0:s}"| {1:s}'
+
+        if self.__RE_TABLE_SEQUENCE.search(value) is not None:
+            value = u"\n" + value.lstrip()
 
         return forma_stirng.format(
             value_prop.align.align_string, value)
