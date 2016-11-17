@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
 import collections
 
 import pytablewriter
@@ -52,8 +53,7 @@ normal_test_data_list = [
 | style="text-align:right"| 3.0
 | cccc
 |}
-"""
-    ),
+"""),
     Data(
         table=None,
         header=header_list,
@@ -66,14 +66,15 @@ normal_test_data_list = [
 ! e
 |-
 |}
-"""
-    ),
+"""),
     Data(
         table=None,
         header=["ho ge", "foo - bar"],
         value=[
             [1, "\n".join([" # a b c", "# h o g e"])],
             [2, "\n".join([" *hoge", "* abc"])],
+            [3, "\n".join([" a * b", "a # b ## c ###"])],
+            [3, "\n".join([" a # b", "a * b ** c ***"])],
         ],
         expected="""{| class="wikitable"
 ! ho ge
@@ -88,9 +89,16 @@ normal_test_data_list = [
 | 
 *hoge
 * abc
+|-
+| style="text-align:right"| 3
+|  a * b
+a # b ## c ###
+|-
+| style="text-align:right"| 3
+|  a # b
+a * b ** c ***
 |}
-"""
-    ),
+"""),
     Data(
         table=None,
         header=None,
@@ -114,8 +122,7 @@ normal_test_data_list = [
 | style="text-align:right"| 3.0
 | cccc
 |}
-"""
-    ),
+"""),
     Data(
         table="test table",
         header=header_list,
@@ -152,8 +159,7 @@ normal_test_data_list = [
 | 
 | 
 |}
-"""
-    ),
+"""),
     Data(
         table="test table",
         header=mix_header_list,
@@ -204,8 +210,7 @@ normal_test_data_list = [
 | nan
 | 2017-01-01 00:00:00
 |}
-"""
-    ),
+"""),
 ]
 
 table_writer_class = pytablewriter.MediaWikiTableWriter
@@ -235,6 +240,8 @@ class Test_MediaWikiTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+        print("expected: {}".format(expected))
+        print("actual: {}".format(out))
         assert out == expected
 
     @pytest.mark.parametrize(

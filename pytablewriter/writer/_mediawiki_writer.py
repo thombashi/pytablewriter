@@ -22,7 +22,7 @@ class MediaWikiTableWriter(TextTableWriter):
         :ref:`example-mediawiki-table-writer`
     """
 
-    __RE_TABLE_SEQUENCE = re.compile(u"[\s]+[*|#]+")
+    __RE_TABLE_SEQUENCE = re.compile(u"^[\s]+[*|#]+")
 
     @property
     def support_split_write(self):
