@@ -13,8 +13,10 @@ from six.moves import range
 import xlwt
 
 from .._converter import str_datetime_converter
-from ._excel_workbook import ExcelWorkbookXls
-from ._excel_workbook import ExcelWorkbookXlsx
+from ._excel_workbook import (
+    ExcelWorkbookXls,
+    ExcelWorkbookXlsx
+)
 from ._interface import TextWriterInterface
 from ._table_writer import TableWriter
 

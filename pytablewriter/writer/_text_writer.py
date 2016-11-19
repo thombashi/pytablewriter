@@ -11,8 +11,10 @@ from six.moves import zip
 
 from .._error import EmptyHeaderError
 from ._table_writer import TableWriter
-from ._interface import IndentationInterface
-from ._interface import TextWriterInterface
+from ._interface import (
+    IndentationInterface,
+    TextWriterInterface
+)
 
 
 class TextTableWriter(TableWriter, TextWriterInterface):

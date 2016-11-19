@@ -9,8 +9,10 @@ from __future__ import unicode_literals
 
 import dataproperty
 
-from .._function import str_datetime_converter
-from .._function import dateutil_datetime_converter
+from .._function import (
+    str_datetime_converter,
+    dateutil_datetime_converter
+)
 from ._text_writer import SourceCodeTableWriter
 
 
