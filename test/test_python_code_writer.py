@@ -22,7 +22,7 @@ from .data import value_matrix_iter
 
 normal_test_data_list = [
     Data(
-        table="table-name ho'ge",
+        table="Table-Name ho'ge",
         indent=0,
         header=header_list,
         value=value_matrix,
@@ -35,7 +35,7 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table="TABLENAME",
         indent=0,
         header=header_list,
         value=None,
@@ -57,7 +57,7 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="tablename",
+        table="TableName",
         indent=1,
         header=header_list,
         value=value_matrix,
@@ -70,7 +70,7 @@ normal_test_data_list = [
 """
     ),
     Data(
-        table="table name",
+        table="TABLE Name",
         indent=0,
         header=header_list,
         value=value_matrix_with_none,

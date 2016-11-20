@@ -326,7 +326,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         import pathvalidate
 
-        return pathvalidate.sanitize_python_var_name(self.table_name, u"_")
+        return pathvalidate.sanitize_python_var_name(
+            self.table_name, u"_").lower()
 
     def __init__(self):
         super(SourceCodeTableWriter, self).__init__()
