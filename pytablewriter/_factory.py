@@ -48,27 +48,20 @@ class TableWriterFactory(object):
         Create a writer from a file extension.
         Supported file extensions are as follows:
 
-            +------------------+-----------------------------------+
-            |Format name       |Writer                             |
-            +==================+===================================+
-            |``"csv"``         |:py:class:`~.CsvTableWriter`       |
-            +------------------+-----------------------------------+
-            |``"html"``        |:py:class:`~.HtmlTableWriter`      |
-            +------------------+-----------------------------------+
-            |``"js"``          |:py:class:`~.JavaScriptTableWriter`|
-            +------------------+-----------------------------------+
-            |``"json"``        |:py:class:`~.JsonTableWriter`      |
-            +------------------+-----------------------------------+
-            |``"md"``          |:py:class:`~.MarkdownTableWriter`  |
-            +------------------+-----------------------------------+
-            |``"py"``          |:py:class:`~.PythonCodeTableWriter`|
-            +------------------+-----------------------------------+
-            |``"rst"``         |:py:class:`~.RstGridTableWriter`   |
-            +------------------+-----------------------------------+
-            |``"xls"``         |:py:class:`~.ExcelXlsTableWriter`  |
-            +------------------+-----------------------------------+
-            |``"xlsx"``        |:py:class:`~.ExcelXlsxTableWriter` |
-            +------------------+-----------------------------------+
+            ==================  ===================================
+            Format name         Writer                             
+            ==================  ===================================
+            ``"csv"``           :py:class:`~.CsvTableWriter`       
+            ``"html"``          :py:class:`~.HtmlTableWriter`      
+            ``"js"``            :py:class:`~.JavaScriptTableWriter`
+            ``"json"``          :py:class:`~.JsonTableWriter`      
+            ``"md"``            :py:class:`~.MarkdownTableWriter`  
+            ``"py"``            :py:class:`~.PythonCodeTableWriter`
+            ``"rst"``           :py:class:`~.RstGridTableWriter`   
+            ``"xls"``           :py:class:`~.ExcelXlsTableWriter`  
+            ``"xlsx"``          :py:class:`~.ExcelXlsxTableWriter` 
+            ==================  ===================================
+
         :param str file_extension:
             File extension string (case insensitive).
         :return:
@@ -102,35 +95,23 @@ class TableWriterFactory(object):
         Create a writer from a format name.
         Supported file formats are as follows:
 
-            +------------------------------+-----------------------------------+
-            |Format name                   |Loader                             |
-            +==============================+===================================+
-            |``"csv"``                     |:py:class:`~.CsvTableWriter`       |
-            +------------------------------+-----------------------------------+
-            |``"excel"``                   |:py:class:`~.ExcelXlsxTableWriter` |
-            +------------------------------+-----------------------------------+
-            |``"html"``                    |:py:class:`~.HtmlTableWriter`      |
-            +------------------------------+-----------------------------------+
-            |``"javascript"``/``"js"``     |:py:class:`~.JavaScriptTableWriter`|
-            +------------------------------+-----------------------------------+
-            |``"json"``                    |:py:class:`~.JsonTableWriter`      |
-            +------------------------------+-----------------------------------+
-            |``"markdown"``                |:py:class:`~.MarkdownTableWriter`  |
-            +------------------------------+-----------------------------------+
-            |``"mediawiki"``               |:py:class:`~.MediaWikiTableWriter` |
-            +------------------------------+-----------------------------------+
-            |``"null"``                    |:py:class:`~.NullTableWriter`      |
-            +------------------------------+-----------------------------------+
-            |``"pandas"``                  |:py:class:`~.PandasDataFrameWriter`|
-            +------------------------------+-----------------------------------+
-            |``"py"``/``"python"``         |:py:class:`~.PythonCodeTableWriter`|
-            +------------------------------+-----------------------------------+
-            |``"rst"``/``"rst_grid_table"``|:py:class:`~.RstGridTableWriter`   |
-            +------------------------------+-----------------------------------+
-            |``"rst_simple_table"``        |:py:class:`~.RstSimpleTableWriter` |
-            +------------------------------+-----------------------------------+
-            |``"rst_csv_table"``           |:py:class:`~.RstCsvTableWriter`    |
-            +------------------------------+-----------------------------------+
+            ==============================  ===================================
+            Format name                     Loader                             
+            ==============================  ===================================
+            ``"csv"``                       :py:class:`~.CsvTableWriter`       
+            ``"excel"``                     :py:class:`~.ExcelXlsxTableWriter` 
+            ``"html"``                      :py:class:`~.HtmlTableWriter`      
+            ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
+            ``"json"``                      :py:class:`~.JsonTableWriter`      
+            ``"markdown"``                  :py:class:`~.MarkdownTableWriter`  
+            ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter` 
+            ``"null"``                      :py:class:`~.NullTableWriter`      
+            ``"pandas"``                    :py:class:`~.PandasDataFrameWriter`
+            ``"py"``/``"python"``           :py:class:`~.PythonCodeTableWriter`
+            ``"rst"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`   
+            ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter` 
+            ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`    
+            ==============================  ===================================
 
         :param str format_name: Format name string (case insensitive).
         :return: Writer that coincide with the ``format_name``:
