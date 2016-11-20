@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-import dataproperty
+import dataproperty as dp
 import dominate.tags as tags
 import pathvalidate
 from six.moves import zip
@@ -35,8 +35,8 @@ class HtmlTableWriter(TextTableWriter):
         self.is_quote_header = False
         self.indent_string = u"    "
         self.is_quote_header = False
-        self.is_quote_table[dataproperty.Typecode.STRING] = False
-        self.is_quote_table[dataproperty.Typecode.DATETIME] = False
+        self.is_quote_table[dp.Typecode.STRING] = False
+        self.is_quote_table[dp.Typecode.DATETIME] = False
 
         self._table_tag = None
 
@@ -52,7 +52,7 @@ class HtmlTableWriter(TextTableWriter):
         self._verify_property()
         self._preprocess()
 
-        if dataproperty.is_not_empty_string(self.table_name):
+        if dp.is_not_empty_string(self.table_name):
             self._table_tag = tags.table(
                 id=pathvalidate.sanitize_python_var_name(self.table_name))
             self._table_tag += tags.caption(self.table_name)
@@ -70,7 +70,7 @@ class HtmlTableWriter(TextTableWriter):
         if not self.is_write_header:
             return
 
-        if dataproperty.is_empty_sequence(self.header_list):
+        if dp.is_empty_sequence(self.header_list):
             raise EmptyHeaderError()
 
         tr_tag = tags.tr()

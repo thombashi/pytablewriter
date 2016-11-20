@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-import dataproperty
+import dataproperty as dp
 import six
 
 from .._converter import lower_bool_converter
@@ -85,7 +85,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
 
     def _verify_table_name(self):
-        if dataproperty.is_empty_string(self.table_name):
+        if dp.is_empty_string(self.table_name):
             raise EmptyTableNameError()
 
     def _get_opening_row_item_list(self):

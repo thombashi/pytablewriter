@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-import dataproperty
+import dataproperty as dp
 from six.moves import zip
 
 from .._error import EmptyHeaderError
@@ -177,7 +177,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         self._write_raw_line(text)
 
     def _write_row(self, value_list):
-        if dataproperty.is_empty_sequence(value_list):
+        if dp.is_empty_sequence(value_list):
             return
 
         self._write_line(
@@ -189,16 +189,16 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         if not self.is_write_header:
             return
 
-        if dataproperty.is_empty_sequence(self.header_list):
+        if dp.is_empty_sequence(self.header_list):
             raise EmptyHeaderError()
 
-        if dataproperty.is_empty_sequence(self._column_prop_list):
+        if dp.is_empty_sequence(self._column_prop_list):
             self._write_row(self.header_list)
             return
 
         self._write_row([
             self._get_header_item(
-                col_prop, dataproperty.DataProperty(header))
+                col_prop, dp.DataProperty(header))
             for col_prop, header in
             zip(self._column_prop_list, self.header_list)
         ])
@@ -213,14 +213,14 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         ]
 
     def __write_separator_row(self, value_list):
-        if dataproperty.is_empty_sequence(value_list):
+        if dp.is_empty_sequence(value_list):
             return
 
         left_cross_point = self.char_cross_point
         right_cross_point = self.char_cross_point
-        if dataproperty.is_empty_string(self.char_left_side_row):
+        if dp.is_empty_string(self.char_left_side_row):
             left_cross_point = u""
-        if dataproperty.is_empty_string(self.char_right_side_row):
+        if dp.is_empty_string(self.char_right_side_row):
             right_cross_point = u""
 
         self._write_line(
@@ -343,12 +343,12 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
 
         self.is_datetime_instance_formatting = True
-        self.is_quote_table[dataproperty.Typecode.DATETIME] = False
+        self.is_quote_table[dp.Typecode.DATETIME] = False
         self._prop_extractor.datetime_format_str = "s"
 
         self._prop_extractor.none_value = None
         self._prop_extractor.is_strict_type_mapping[
-            dataproperty.Typecode.DATETIME] = False
+            dp.Typecode.DATETIME] = False
 
     def _get_value_row_separator_item_list(self):
         return []

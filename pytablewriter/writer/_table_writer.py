@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 import sys
 
-import dataproperty
+import dataproperty as dp
 from dataproperty import Typecode
 from six.moves import zip
 
@@ -125,7 +125,7 @@ class TableWriter(TableWriterInterface):
         self._column_prop_list = []
         self._value_prop_matrix = []
 
-        self._prop_extractor = dataproperty.PropertyExtractor()
+        self._prop_extractor = dp.PropertyExtractor()
         self._prop_extractor.min_padding_len = 1
         self._prop_extractor.none_value = ""
         self._prop_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
@@ -202,8 +202,8 @@ class TableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all([
-            dataproperty.is_empty_sequence(self.header_list),
-            dataproperty.is_empty_sequence(self.value_matrix),
+            dp.is_empty_sequence(self.header_list),
+            dp.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
 
@@ -276,13 +276,13 @@ class TableWriter(TableWriterInterface):
             try:
                 value = col_prop.type_factory(
                     value_prop.data, is_strict=False).create_type_converter().convert()
-            except dataproperty.TypeConversionError:
+            except dp.TypeConversionError:
                 value = value_prop.data
 
             try:
                 item = to_string_format_str.format(value)
             except ValueError:
-                item = dataproperty.to_unicode(value)
+                item = dp.to_unicode(value)
 
         item = self.__get_align_format(col_prop, value_prop).format(item)
 
@@ -319,10 +319,10 @@ class TableWriter(TableWriterInterface):
 
     def __get_align_format(self, col_prop, value_prop):
         align_func_table = {
-            dataproperty.Align.AUTO: self._get_left_align_formatformat,
-            dataproperty.Align.LEFT: self._get_left_align_formatformat,
-            dataproperty.Align.RIGHT: self._get_right_align_formatformat,
-            dataproperty.Align.CENTER: self._get_center_align_formatformat,
+            dp.Align.AUTO: self._get_left_align_formatformat,
+            dp.Align.LEFT: self._get_left_align_formatformat,
+            dp.Align.RIGHT: self._get_right_align_formatformat,
+            dp.Align.CENTER: self._get_center_align_formatformat,
         }
 
         align = align_func_table[col_prop.align]()
@@ -340,8 +340,8 @@ class TableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all([
-            dataproperty.is_empty_sequence(self.header_list),
-            dataproperty.is_empty_sequence(self.value_matrix),
+            dp.is_empty_sequence(self.header_list),
+            dp.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
 
@@ -362,10 +362,10 @@ class TableWriter(TableWriterInterface):
         pass
 
     def _verify_value_matrix(self):
-        if dataproperty.is_empty_sequence(self.value_matrix):
+        if dp.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-        if dataproperty.is_empty_sequence(self.header_list):
+        if dp.is_empty_sequence(self.header_list):
             return
 
     def _preprocess_property(self):

@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 import abc
 
-import dataproperty
+import dataproperty as dp
 import pathvalidate
 import six
 import xlsxwriter
@@ -81,7 +81,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
     def add_worksheet(self, worksheet_name):
         worksheet_name = pathvalidate.sanitize_excel_sheet_name(worksheet_name)
 
-        if dataproperty.is_not_empty_string(worksheet_name):
+        if dp.is_not_empty_string(worksheet_name):
             if worksheet_name in self._worksheet_table:
                 # the work sheet is already exists
                 return self._worksheet_table.get(worksheet_name)
@@ -119,7 +119,7 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
     def add_worksheet(self, worksheet_name):
         worksheet_name = pathvalidate.sanitize_excel_sheet_name(worksheet_name)
 
-        if dataproperty.is_not_empty_string(worksheet_name):
+        if dp.is_not_empty_string(worksheet_name):
             if worksheet_name in self._worksheet_table:
                 # the work sheet is already exists
                 return self._worksheet_table.get(worksheet_name)

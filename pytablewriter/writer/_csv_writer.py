@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-import dataproperty
+import dataproperty as dp
 
 from ._text_writer import TextTableWriter
 
@@ -33,7 +33,7 @@ class CsvTableWriter(TextTableWriter):
         self.is_write_header_separator_row = False
 
     def _write_header(self):
-        if dataproperty.is_empty_sequence(self.header_list):
+        if dp.is_empty_sequence(self.header_list):
             return
 
         super(CsvTableWriter, self)._write_header()

@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import dataproperty
+import dataproperty as dp
 
 from .._function import (
     str_datetime_converter,
@@ -65,7 +65,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         self.dec_indent_level()
 
     def _get_opening_row_item_list(self):
-        if dataproperty.is_not_empty_string(self.table_name):
+        if dp.is_not_empty_string(self.table_name):
             return [self.variable_name + " = ["]
 
         return "["
