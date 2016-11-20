@@ -346,6 +346,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self._prop_extractor.datetime_format_str = "s"
 
         self._prop_extractor.none_value = None
+        self._prop_extractor.is_strict_type_mapping[
+            dataproperty.Typecode.DATETIME] = False
 
     def _get_value_row_separator_item_list(self):
         return []
