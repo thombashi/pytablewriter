@@ -248,9 +248,12 @@ class TableWriter(TableWriterInterface):
         self.is_write_opening_row = old_is_write_opening_row
         self.is_write_closing_row = old_is_write_closing_row
 
-    def _get_padding_len(self, column_property):
+    def _get_padding_len(self, column_property, value_prop=None):
         if self.is_padding:
-            return column_property.padding_len
+            try:
+                return value_prop.get_padding_len(column_property.ascii_char_width)
+            except AttributeError:
+                return column_property.ascii_char_width
 
         return 0
 
@@ -279,9 +282,9 @@ class TableWriter(TableWriterInterface):
             try:
                 item = to_string_format_str.format(value)
             except ValueError:
-                item = "{}".format(value)
+                item = dataproperty.to_unicode(value)
 
-        item = self.__get_align_format(col_prop).format(item)
+        item = self.__get_align_format(col_prop, value_prop).format(item)
 
         if all([
             self.is_quote_table.get(col_prop.typecode, False),
@@ -314,7 +317,7 @@ class TableWriter(TableWriterInterface):
 
         return u"{:" + format_str + u"}"
 
-    def __get_align_format(self, col_prop):
+    def __get_align_format(self, col_prop, value_prop):
         align_func_table = {
             dataproperty.Align.AUTO: self._get_left_align_formatformat,
             dataproperty.Align.LEFT: self._get_left_align_formatformat,
@@ -325,8 +328,9 @@ class TableWriter(TableWriterInterface):
         align = align_func_table[col_prop.align]()
 
         format_list = [u"{:" + align]
-        if self._get_padding_len(col_prop) > 0:
-            format_list.append(str(self._get_padding_len(col_prop)))
+        col_padding_len = self._get_padding_len(col_prop, value_prop)
+        if col_padding_len > 0:
+            format_list.append(str(col_padding_len))
         format_list.append(u"s}")
 
         return u"".join(format_list)

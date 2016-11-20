@@ -149,7 +149,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
     def _get_header_item(self, col_prop, value_prop):
         from dataproperty import StringType
 
-        format_string = self._get_header_format_string(col_prop)
+        format_string = self._get_header_format_string(col_prop, value_prop)
         item = format_string.format(StringType(value_prop.data).convert())
 
         if self.is_quote_header:
@@ -157,10 +157,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         return item
 
-    def _get_header_format_string(self, col_prop):
+    def _get_header_format_string(self, col_prop, value_prop):
         return u"{{:{:s}{:s}}}".format(
             self._get_center_align_formatformat(),
-            str(self._get_padding_len(col_prop)))
+            str(self._get_padding_len(col_prop, value_prop)))
 
     def _write_raw_string(self, unicode_text):
         self._verify_stream()
