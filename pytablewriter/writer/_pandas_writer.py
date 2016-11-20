@@ -78,7 +78,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._write_line("{}.columns = [".format(self.variable_name))
         self.inc_indent_level()
         for header in self.header_list:
-            self._write_line('"{}",'.format(header))
+            self._write_line('"{}",'.format(dp.to_unicode(header)))
         self.dec_indent_level()
         self._write_line("]")
 

@@ -46,7 +46,7 @@ class MediaWikiTableWriter(TextTableWriter):
             return
 
         if dp.is_not_empty_string(self.table_name):
-            self._write_line(u"|+" + self.table_name)
+            self._write_line(u"|+" + dp.to_unicode(self.table_name))
 
         super(MediaWikiTableWriter, self)._write_header()
 

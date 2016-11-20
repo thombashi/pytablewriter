@@ -118,7 +118,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def _get_opening_row_item_list(self):
         if dp.is_not_empty_string(self.table_name):
-            return u'{{ "{:s}" : ['.format(self.table_name)
+            return u'{{ "{:s}" : ['.format(dp.to_unicode(self.table_name))
 
         return u"["
 

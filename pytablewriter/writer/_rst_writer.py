@@ -38,7 +38,8 @@ class RstTableWriter(IndentationTextTableWriter):
         if dp.is_empty_string(self.table_name):
             self._write_line(u".. table:: ")
         else:
-            self._write_line(u".. table:: " + self.table_name)
+            self._write_line(u".. table:: {}".format(
+                dp.to_unicode(self.table_name)))
 
         self._write_line()
         self.inc_indent_level()
@@ -110,8 +111,8 @@ class RstCsvTableWriter(RstTableWriter):
             return
 
         if dp.is_not_empty_sequence(self.header_list):
-            self._write_line(
-                u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
+            self._write_line(u':header: "{:s}"'.format(u'", "'.join(
+                [dp.to_unicode(header) for header in self.header_list])))
 
         self._write_line(u":widths: " + u", ".join([
             str(col_prop.padding_len)

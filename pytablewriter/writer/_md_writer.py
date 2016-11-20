@@ -59,7 +59,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         if dp.is_empty_string(self.table_name):
             return []
 
-        return [u"#" * (self._indent_level + 1) + u" " + self.table_name]
+        return [
+            u"#" * (self._indent_level + 1) + u" " +
+            dp.to_unicode(self.table_name)
+        ]
 
     def _get_header_row_separator_item_list(self):
         header_separator_list = []
