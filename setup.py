@@ -1,16 +1,21 @@
-import sys
+import io
 import os.path
 import setuptools
+import sys
 
 REQUIREMENT_DIR = "requirements"
+ENCODING = "utf8"
 
 needs_pytest = set(["pytest", "test", "ptr"]).intersection(sys.argv)
 pytest_runner = ["pytest-runner"] if needs_pytest else []
 
-with open("README.rst") as fp:
-    long_description = fp.read()
 
-with open(os.path.join("docs", "pages", "introduction", "summary.txt")) as f:
+with io.open("README.rst", encoding=ENCODING) as f:
+    long_description = f.read()
+
+with io.open(
+        os.path.join("docs", "pages", "introduction", "summary.txt"),
+        encoding=ENCODING) as f:
     summary = f.read()
 
 with open(os.path.join(REQUIREMENT_DIR, "requirements.txt")) as f:
