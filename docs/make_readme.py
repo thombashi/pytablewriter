@@ -5,6 +5,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <gogogo.vm@gmail.com>
 """
 
+from __future__ import unicode_literals
+
 import sys
 
 import readmemaker
@@ -31,6 +33,9 @@ def write_examples(maker):
 
     maker.write_chapter("Write an Excel table")
     maker.write_example_file("exel_single_example.txt")
+
+    maker.write_chapter("Write a table with multibyte character")
+    maker.write_example_file("multibyte_table_example.txt")
 
     maker.write_chapter("For more information")
     maker.write_line_list([
