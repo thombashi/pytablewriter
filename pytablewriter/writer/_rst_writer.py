@@ -27,15 +27,15 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
         self.is_quote_header = False
-        self.is_quote_table[dataproperty.Typecode.STRING] = False
-        self.is_quote_table[dataproperty.Typecode.DATETIME] = False
+        self.is_quote_table[dp.Typecode.STRING] = False
+        self.is_quote_table[dp.Typecode.DATETIME] = False
 
         self.table_name = u""
 
     def _write_table(self):
         self._verify_property()
 
-        if dataproperty.is_empty_string(self.table_name):
+        if dp.is_empty_string(self.table_name):
             self._write_line(u".. table:: ")
         else:
             self._write_line(u".. table:: " + self.table_name)
