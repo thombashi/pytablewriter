@@ -368,28 +368,6 @@ class TableWriter(TableWriterInterface):
         if dataproperty.is_empty_sequence(self.header_list):
             return
 
-        """
-        dict_invalid = {}
-        for row, value_list in enumerate(self.value_matrix):
-            if len(self.header_list) != len(value_list):
-                erroror_key = "row={:d}".format(row)
-                dict_invalid[erroror_key] = (
-                    "expected-col-len={:d}, actual={:d} {}".format(
-                        len(self.header_list), len(value_list), value_list)
-                )
-
-        if len(dict_invalid) > 0:
-            import os
-
-            message = [
-                "invalid table value: mismatch length with header and value",
-                "  header: col-len={:d} {:s}".format(
-                    len(self.header_list), self.header_list),
-                "  value:  {:s}".format(str(dict_invalid)),
-            ]
-            raise ValueError(os.linesep.join(message))
-        """
-
     def _preprocess_property(self):
         if self._preprocessed_property:
             return
