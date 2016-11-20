@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 import json
 
-import dataproperty
+import dataproperty as dp
 from six.moves import zip
 
 from .._converter import (
@@ -80,7 +80,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         json_text = joint_text.join(json_text_list)
         if all([
             not self.is_write_closing_row,
-            dataproperty.is_not_empty_string(json_text),
+            dp.is_not_empty_string(json_text),
         ]):
             json_text += joint_text
 
@@ -90,7 +90,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._write_closing_row()
 
     def _verify_header(self):
-        if dataproperty.is_empty_sequence(self.header_list):
+        if dp.is_empty_sequence(self.header_list):
             raise EmptyHeaderError()
 
     def _preprocess_value_matrix(self):
@@ -117,13 +117,13 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._preprocessed_value_matrix = True
 
     def _get_opening_row_item_list(self):
-        if dataproperty.is_not_empty_string(self.table_name):
+        if dp.is_not_empty_string(self.table_name):
             return u'{{ "{:s}" : ['.format(self.table_name)
 
         return u"["
 
     def _get_closing_row_item_list(self):
-        if dataproperty.is_not_empty_string(self.table_name):
+        if dp.is_not_empty_string(self.table_name):
             return u"]}"
 
         return u"]"

@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-import dataproperty
+import dataproperty as dp
 
 from ._text_writer import IndentationTextTableWriter
 
@@ -70,8 +70,8 @@ class RstCsvTableWriter(RstTableWriter):
         self.is_write_header_separator_row = False
         self.is_write_value_separator_row = False
         self.is_write_closing_row = False
-        self.is_quote_table[dataproperty.Typecode.STRING] = True
-        self.is_quote_table[dataproperty.Typecode.DATETIME] = True
+        self.is_quote_table[dp.Typecode.STRING] = True
+        self.is_quote_table[dp.Typecode.DATETIME] = True
 
     def write_table(self):
         """
@@ -95,10 +95,10 @@ class RstCsvTableWriter(RstTableWriter):
     def _get_opening_row_item_list(self):
         directive = u".. csv-table:: "
 
-        if dataproperty.is_empty_string(self.table_name):
+        if dp.is_empty_string(self.table_name):
             return [directive]
 
-        return [directive + self.table_name]
+        return [directive + dp.to_unicode(self.table_name)]
 
     def _write_opening_row(self):
         self.dec_indent_level()
@@ -109,7 +109,7 @@ class RstCsvTableWriter(RstTableWriter):
         if not self.is_write_header:
             return
 
-        if dataproperty.is_not_empty_sequence(self.header_list):
+        if dp.is_not_empty_sequence(self.header_list):
             self._write_line(
                 u':header: "{:s}"'.format(u'", "'.join(self.header_list)))
 

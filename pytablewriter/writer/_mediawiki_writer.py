@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 import re
 
-import dataproperty
+import dataproperty as dp
 from six.moves import zip
 
 from ._text_writer import TextTableWriter
@@ -45,7 +45,7 @@ class MediaWikiTableWriter(TextTableWriter):
         if not self.is_write_header:
             return
 
-        if dataproperty.is_not_empty_string(self.table_name):
+        if dp.is_not_empty_string(self.table_name):
             self._write_line(u"|+" + self.table_name)
 
         super(MediaWikiTableWriter, self)._write_header()
@@ -74,7 +74,7 @@ class MediaWikiTableWriter(TextTableWriter):
             str(self._get_padding_len(col_prop, value_prop)))
 
     def __modify_table_element(self, value, value_prop):
-        if value_prop.align is dataproperty.Align.LEFT:
+        if value_prop.align is dp.Align.LEFT:
             forma_stirng = u'| {1:s}'
         else:
             forma_stirng = u'| style="text-align:{0:s}"| {1:s}'
