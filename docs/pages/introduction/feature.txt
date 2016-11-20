@@ -21,4 +21,5 @@ Features
     - Alignment
     - Padding
     - Decimal places of numbers
+- Multibyte character support
 - Output table to a stream such as a file or the standard output
