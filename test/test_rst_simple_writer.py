@@ -5,7 +5,7 @@
 """
 
 from __future__ import absolute_import
-import collections
+from __future__ import print_function
 
 import pytablewriter
 import pytest
@@ -103,13 +103,13 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected=""".. table:: table name
 
-    =  ====  ====  ====  ===  =====  ===  ===  =======  ========================
-    i   f     c     if   ifc  bool   inf  nan  mix_num            time          
-    =  ====  ====  ====  ===  =====  ===  ===  =======  ========================
-    1  1.10  aa     1.0  1    True   inf  nan      1.0  2017-01-01 00:00:00     
-    2  2.20  bbb    2.2  2.2  False  inf  nan      inf  2017-01-02 03:04:05+0900
-    3  3.33  cccc  -3.0  ccc  True   inf  nan      nan  2017-01-01 00:00:00     
-    =  ====  ====  ====  ===  =====  ===  ===  =======  ========================
+    =  ====  ====  ====  ===  =====  ===  ===  =======  =========================
+    i   f     c     if   ifc  bool   inf  nan  mix_num            time           
+    =  ====  ====  ====  ===  =====  ===  ===  =======  =========================
+    1  1.10  aa     1.0  1    True   inf  nan      1.0  2017-01-01 00:00:00      
+    2  2.20  bbb    2.2  2.2  False  inf  nan      inf  2017-01-02 03:04:05+09:00
+    3  3.33  cccc  -3.0  ccc  True   inf  nan      nan  2017-01-01 00:00:00      
+    =  ====  ====  ====  ===  =====  ===  ===  =======  =========================
 """
     ),
 ]
@@ -137,6 +137,8 @@ class Test_RstSimpleTableWriter_write_table:
         ]
     )
     def test_normal(self, capsys, table, indent, header, value, expected):
+        import dataproperty
+
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -145,6 +147,10 @@ class Test_RstSimpleTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print("expected: {}".format(expected))
+        print("actual: {}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(

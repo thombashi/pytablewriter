@@ -5,6 +5,8 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
+from __future__ import unicode_literals
 import collections
 
 import pytablereader as ptr
@@ -36,8 +38,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.0|cccc
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
@@ -46,8 +47,7 @@ normal_test_data_list = [
         is_float_formatting=True,
         expected=""" a | b | c |dd | e 
 ---|---|---|---|---
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
@@ -63,8 +63,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.3|cccc
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -77,8 +76,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.0|cccc
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -91,8 +89,7 @@ normal_test_data_list = [
   1|123.1|a  |  1|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|  3|cccc
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=1,
@@ -105,8 +102,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.0|cccc
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
@@ -119,21 +115,19 @@ normal_test_data_list = [
    |2.2|   |2.2|2.2 
   3|3.3|ccc|   |cccc
    |   |   |   |    
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
         header=mix_header_list,
         value=mix_value_matrix,
         is_float_formatting=True,
-        expected=""" i | f  | c  | if |ifc|bool |inf|nan|mix_num|          time          
---:|---:|----|---:|---|-----|---|---|------:|------------------------
-  1|1.10|aa  | 1.0|1  |True |inf|nan|    1.0|2017-01-01 00:00:00     
-  2|2.20|bbb | 2.2|2.2|False|inf|nan|    inf|2017-01-02 03:04:05+0900
-  3|3.33|cccc|-3.0|ccc|True |inf|nan|    nan|2017-01-01 00:00:00     
-"""
-    ),
+        expected=""" i | f  | c  | if |ifc|bool |inf|nan|mix_num|          time           
+--:|---:|----|---:|---|-----|---|---|------:|-------------------------
+  1|1.10|aa  | 1.0|1  |True |inf|nan|    1.0|2017-01-01 00:00:00      
+  2|2.20|bbb | 2.2|2.2|False|inf|nan|    inf|2017-01-02 03:04:05+09:00
+  3|3.33|cccc|-3.0|ccc|True |inf|nan|    nan|2017-01-01 00:00:00      
+"""),
     Data(
         table="",
         indent=0,
@@ -145,8 +139,7 @@ normal_test_data_list = [
 0.01|  9.12| 0.00
 1.00| 99.12| 0.01
 1.20|999.12| 0.00
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
@@ -164,8 +157,23 @@ normal_test_data_list = [
         expected=""" Name  |xUnit|Source|                                                      Remarks                                                       
 -------|-----|------|--------------------------------------------------------------------------------------------------------------------
 Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.
-"""
-    ),
+"""),
+    Data(
+        table="",
+        indent=0,
+        header=["姓", "名", "生年月日", "郵便番号", "住所", "電話番号"],
+        value=[
+            ["山田", "太郎", "2001/1/1", "100-0002",
+             "東京都千代田区皇居外苑", "03-1234-5678"],
+            ["山田", "次郎", "2001/1/2", "251-0036",
+             "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
+        ],
+        is_float_formatting=True,
+        expected=""" 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  
+----|----|--------|--------|--------------------------|------------
+山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678
+山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999
+"""),
 ]
 
 exception_test_data_list = [
@@ -258,6 +266,10 @@ class Test_MarkdownTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print(u"expected:\n{}".format(expected))
+        print(u"actual:\n{}".format(out))
+
         assert out == expected
 
     def test_normal_tabledata(self, capsys):

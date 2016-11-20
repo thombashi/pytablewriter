@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
 
 import pytablewriter
 import pytest
@@ -223,7 +224,7 @@ normal_test_data_list = [
             <td align="left">inf</td>
             <td align="left">nan</td>
             <td align="left">inf</td>
-            <td align="left">2017-01-02 03:04:05+0900</td>
+            <td align="left">2017-01-02 03:04:05+09:00</td>
         </tr>
         <tr>
             <td align="right">3</td>

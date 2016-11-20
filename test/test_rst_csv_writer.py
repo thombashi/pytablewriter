@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
 
 import pytablewriter
 import pytest
@@ -94,10 +95,10 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected=""".. csv-table:: table name
     :header: "i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"
-    :widths: 1, 4, 4, 4, 3, 5, 3, 3, 7, 24
+    :widths: 1, 4, 4, 4, 3, 5, 3, 3, 7, 25
     
     1, 1.10, "aa", 1.0, "1", True, inf, nan, 1.0, "2017-01-01 00:00:00"
-    2, 2.20, "bbb", 2.2, "2.2", False, inf, nan, inf, "2017-01-02 03:04:05+0900"
+    2, 2.20, "bbb", 2.2, "2.2", False, inf, nan, inf, "2017-01-02 03:04:05+09:00"
     3, 3.33, "cccc", -3.0, "ccc", True, inf, nan, nan, "2017-01-01 00:00:00"
 """
     ),

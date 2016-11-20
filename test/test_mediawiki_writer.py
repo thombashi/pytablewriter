@@ -197,7 +197,7 @@ a * b ** c ***
 | inf
 | nan
 | inf
-| 2017-01-02 03:04:05+0900
+| 2017-01-02 03:04:05+09:00
 |-
 | style="text-align:right"| 3
 | style="text-align:right"| 3.33

@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
 import collections
 import json
 
@@ -153,7 +154,7 @@ normal_test_data_list = [
                 "inf": "Infinity",
                 "mix_num": "Infinity",
                 "nan": "NaN",
-                "time": "2017-01-02 03:04:05+0900"
+                "time": "2017-01-02 03:04:05+09:00"
             },
             {
                 "bool": true,

@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
 import collections
 import itertools
 
@@ -63,7 +64,7 @@ normal_test_data_list = [
                 ],
                 [
                     2.0, 2.2, 'bbb', 2.2, 2.2, 'False', 'Inf', 'NaN',
-                    'Inf', '2017-01-02T03:04:05+0900',
+                    'Inf', '2017-01-02 03:04:05+09:00',
                 ],
                 [
                     3.0, 3.33, 'cccc', -3.0, 'ccc', 'True', 'Inf',
@@ -124,6 +125,9 @@ class Test_ExcelTableWriter_write_table:
         loader = ptr.ExcelTableFileLoader(str(test_file_path))
 
         for tabledata in loader.load():
+            print("expected: {}".format(expected.dumps()))
+            print("actual: {}".format(tabledata.dumps()))
+
             assert tabledata == expected
 
     @pytest.mark.parametrize(

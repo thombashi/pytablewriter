@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import print_function
 
 import pytablewriter
 import pytest
@@ -128,6 +129,29 @@ class Test_PythonCodeTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        assert out == expected
+
+    def test_normal_not_strict(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "tablename"
+        writer.header_list = mix_header_list
+        writer.value_matrix = mix_value_matrix
+        writer.write_table()
+
+        expected = """tablename = [
+    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
+    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1.0, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+    [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
+]
+"""
+
+        out, _err = capsys.readouterr()
+
+        print("expected: {}".format(expected))
+        print("actual: {}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(
