@@ -90,7 +90,7 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected="""tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1.0, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), dateutil.parser.parse("2017-01-02T03:04:05+0900")],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
@@ -141,7 +141,7 @@ class Test_PythonCodeTableWriter_write_table:
 
         expected = """tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1.0, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), dateutil.parser.parse("2017-01-02T03:04:05+0900")],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]

@@ -198,7 +198,10 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         self._write_row([
             self._get_header_item(
-                col_prop, dp.DataProperty(header))
+                col_prop,
+                dp.DataProperty(
+                    header, is_strict_type_mapping=dp.STRICT_TYPE_MAPPING)
+            )
             for col_prop, header in
             zip(self._column_prop_list, self.header_list)
         ])

@@ -76,9 +76,9 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         expected=""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"
-1,1.10,"aa",1.0,"1",True,inf,nan,1.0,"2017-01-01 00:00:00"
-2,2.20,"bbb",2.2,"2.2",False,inf,nan,inf,"2017-01-02 03:04:05+09:00"
-3,3.33,"cccc",-3.0,"ccc",True,inf,nan,nan,"2017-01-01 00:00:00"
+1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00"
+2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
+3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00"
 """
     ),
 ]
@@ -144,6 +144,9 @@ class Test_CsvTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
 
         assert out == expected
 

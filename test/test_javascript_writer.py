@@ -117,7 +117,7 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""var tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1.0, new Date("2017-01-01T00:00:00")],
+    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
     [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, new Date("2017-01-02T03:04:05+0900")],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
 ];
@@ -132,7 +132,7 @@ normal_test_data_list = [
         is_dti_fmt=False,
         expected="""var tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1.0, "2017-01-01 00:00:00"],
+    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1, "2017-01-01 00:00:00"],
     [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+0900"],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, "2017-01-01 00:00:00"]
 ];
@@ -205,6 +205,10 @@ class Test_JavaScriptTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(

@@ -122,11 +122,11 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         is_float_formatting=True,
-        expected=""" i | f  | c  | if |ifc|bool |inf|nan|mix_num|          time           
---:|---:|----|---:|---|-----|---|---|------:|-------------------------
-  1|1.10|aa  | 1.0|1  |True |inf|nan|    1.0|2017-01-01 00:00:00      
-  2|2.20|bbb | 2.2|2.2|False|inf|nan|    inf|2017-01-02 03:04:05+09:00
-  3|3.33|cccc|-3.0|ccc|True |inf|nan|    nan|2017-01-01 00:00:00      
+        expected=""" i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           
+--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
+  1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      
+  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
+  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      
 """),
     Data(
         table="",
@@ -134,11 +134,11 @@ normal_test_data_list = [
         header=float_header_list,
         value=float_value_matrix,
         is_float_formatting=True,
-        expected=""" a  |  b   |  c  
----:|-----:|----:
-0.01|  9.12| 0.00
-1.00| 99.12| 0.01
-1.20|999.12| 0.00
+        expected=""" a  |   b   |  c  
+---:|------:|----:
+0.01|  9.123|0.000
+1.00| 99.123|0.010
+1.20|999.123|0.001
 """),
     Data(
         table="",
@@ -267,8 +267,8 @@ class Test_MarkdownTableWriter_write_table:
 
         out, _err = capsys.readouterr()
 
-        print(u"expected:\n{}".format(expected))
-        print(u"actual:\n{}".format(out))
+        print("expected:\n{}".format(expected))
+        print("actual:\n{}".format(out))
 
         assert out == expected
 

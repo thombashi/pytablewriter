@@ -34,8 +34,7 @@ normal_test_data_list = [
     2    2.2  bb   2.2  2.2 
     3    3.3  ccc  3.0  cccc
     =  =====  ===  ===  ====
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
@@ -47,8 +46,7 @@ normal_test_data_list = [
     a  b  c  dd  e
     =  =  =  ==  =
     =  =  =  ==  =
-"""
-    ),
+"""),
     Data(
         table=None,
         indent=0,
@@ -61,8 +59,7 @@ normal_test_data_list = [
     2    2.2  bb   2.2  2.2 
     3    3.3  ccc  3.0  cccc
     =  =====  ===  ===  ====
-"""
-    ),
+"""),
     Data(
         table="",
         indent=1,
@@ -77,8 +74,7 @@ normal_test_data_list = [
         2    2.2  bb   2.2  2.2 
         3    3.3  ccc  3.0  cccc
         =  =====  ===  ===  ====
-"""
-    ),
+"""),
     Data(
         table="table name",
         indent=0,
@@ -94,8 +90,7 @@ normal_test_data_list = [
     3  3.3  ccc       cccc
                           
     =  ===  ===  ===  ====
-"""
-    ),
+"""),
     Data(
         table="table name",
         indent=0,
@@ -103,15 +98,14 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected=""".. table:: table name
 
-    =  ====  ====  ====  ===  =====  ===  ===  =======  =========================
-    i   f     c     if   ifc  bool   inf  nan  mix_num            time           
-    =  ====  ====  ====  ===  =====  ===  ===  =======  =========================
-    1  1.10  aa     1.0  1    True   inf  nan      1.0  2017-01-01 00:00:00      
-    2  2.20  bbb    2.2  2.2  False  inf  nan      inf  2017-01-02 03:04:05+09:00
-    3  3.33  cccc  -3.0  ccc  True   inf  nan      nan  2017-01-01 00:00:00      
-    =  ====  ====  ====  ===  =====  ===  ===  =======  =========================
-"""
-    ),
+    =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
+    i   f     c     if   ifc  bool     inf     nan  mix_num             time           
+    =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
+    1  1.10  aa     1.0  1    True   Infinity  NaN         1  2017-01-01 00:00:00      
+    2  2.20  bbb    2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
+    3  3.33  cccc  -3.0  ccc  True   Infinity  NaN       NaN  2017-01-01 00:00:00      
+    =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
+"""),
 ]
 
 table_writer_class = pytablewriter.RstSimpleTableWriter
@@ -137,8 +131,6 @@ class Test_RstSimpleTableWriter_write_table:
         ]
     )
     def test_normal(self, capsys, table, indent, header, value, expected):
-        import dataproperty
-
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -148,8 +140,8 @@ class Test_RstSimpleTableWriter_write_table:
 
         out, _err = capsys.readouterr()
 
-        print("expected: {}".format(expected))
-        print("actual: {}".format(out))
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
 
         assert out == expected
 

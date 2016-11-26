@@ -75,7 +75,7 @@ table_with_null_value.columns = [
         header=mix_header_list,
         value=mix_value_matrix,
         expected="""tablename = pandas.DataFrame([
-    [1, 1.10, "aa", 1.0, "1", True, numpy.inf, numpy.nan, 1.0, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [1, 1.10, "aa", 1.0, "1", True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.20, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan, numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
     [3, 3.33, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
 ])
@@ -157,6 +157,10 @@ class Test_PandasDataFrameWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(

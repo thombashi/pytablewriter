@@ -183,9 +183,9 @@ a * b ** c ***
 | style="text-align:right"| 1.0
 | style="text-align:right"| 1
 | True
-| inf
-| nan
-| style="text-align:right"| 1.0
+| Infinity
+| NaN
+| style="text-align:right"| 1
 | 2017-01-01 00:00:00
 |-
 | style="text-align:right"| 2
@@ -194,9 +194,9 @@ a * b ** c ***
 | style="text-align:right"| 2.2
 | style="text-align:right"| 2.2
 | False
-| inf
-| nan
-| inf
+| Infinity
+| NaN
+| Infinity
 | 2017-01-02 03:04:05+09:00
 |-
 | style="text-align:right"| 3
@@ -205,9 +205,9 @@ a * b ** c ***
 | style="text-align:right"| -3.0
 | ccc
 | True
-| inf
-| nan
-| nan
+| Infinity
+| NaN
+| NaN
 | 2017-01-01 00:00:00
 |}
 """),
@@ -240,8 +240,10 @@ class Test_MediaWikiTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
-        print("expected: {}".format(expected))
-        print("actual: {}".format(out))
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(

@@ -209,9 +209,9 @@ normal_test_data_list = [
             <td align="right">1.0</td>
             <td align="right">1</td>
             <td align="left">True</td>
-            <td align="left">inf</td>
-            <td align="left">nan</td>
-            <td align="right">1.0</td>
+            <td align="left">Infinity</td>
+            <td align="left">NaN</td>
+            <td align="right">1</td>
             <td align="left">2017-01-01 00:00:00</td>
         </tr>
         <tr>
@@ -221,9 +221,9 @@ normal_test_data_list = [
             <td align="right">2.2</td>
             <td align="right">2.2</td>
             <td align="left">False</td>
-            <td align="left">inf</td>
-            <td align="left">nan</td>
-            <td align="left">inf</td>
+            <td align="left">Infinity</td>
+            <td align="left">NaN</td>
+            <td align="left">Infinity</td>
             <td align="left">2017-01-02 03:04:05+09:00</td>
         </tr>
         <tr>
@@ -233,9 +233,9 @@ normal_test_data_list = [
             <td align="right">-3.0</td>
             <td align="left">ccc</td>
             <td align="left">True</td>
-            <td align="left">inf</td>
-            <td align="left">nan</td>
-            <td align="left">nan</td>
+            <td align="left">Infinity</td>
+            <td align="left">NaN</td>
+            <td align="left">NaN</td>
             <td align="left">2017-01-01 00:00:00</td>
         </tr>
     </tbody>
@@ -275,6 +275,10 @@ class Test_HtmlTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(
