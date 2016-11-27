@@ -1,6 +1,6 @@
 .. _example-excel-table-writer:
 
-Write an Excel table
+Write a table to Excel sheet
 -------------------------------------------
 
 |ExcelXlsxTableWriter| class can write a table to worksheet(s) in 
@@ -9,7 +9,7 @@ an Excel workbook file (.xlsx format) from a matrix of data.
 .. include:: exel_single_example.txt
 
 
-Write multiple Excel tables
+Write tables to Excel sheets
 -------------------------------------------
 
 .. code-block:: python

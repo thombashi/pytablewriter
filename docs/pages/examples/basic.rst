@@ -3,21 +3,20 @@ Basic usage
 
 Basic usage of the ``pytablewriter`` is as follows:
 
-1. Create a writer instance that corresponds to the format you want to output
+1. Create a writer instance that corresponds to the format you want to write
 2. Assign a value to instance variables (such as |table_name|/|header_list|/|value_matrix|) of the writer
 3. Call the ``write_table`` method
 
-Next examples are write a table to the standard output/a file 
-with reStructuredText format.
+Next examples show how to write a table to the standard output/file with reStructuredText format.
 
 Write a table to the standard output (defaults)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The standard output is the default stream of writers
+The standard output is the default output stream of writers
 (except the |ExcelXlsxTableWriter|).
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a table to stdout
 
     import pytablewriter
 
@@ -58,11 +57,11 @@ The standard output is the default stream of writers
 Write a table to a file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can change the output stream if you set the |stream| attribute.
+You can change the output stream if you set the |stream| attribute of a writer.
 This example will write a table to a ``sample.rst`` file.
 
 .. code-block:: python
-    :caption: Sample code
+    :caption: Sample code that writes a table to a file
 
     import six
     import pytablewriter
@@ -108,4 +107,7 @@ This example will write a table to a ``sample.rst`` file.
         +-------+------------+----------------+
         |      5|AI          |America/Anguilla|
         +-------+------------+----------------+
-   
+
+
+
+.. include:: from_pandas_dataframe.rst

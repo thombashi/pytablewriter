@@ -167,6 +167,10 @@ class TableWriter(TableWriterInterface):
         - :py:attr:`~.value_matrix`.
 
         :param pandas.DataFrame dataframe: Input dataframe.
+
+        :Examples:
+
+            :ref:`example-from-pandas-dataframe`
         """
 
         self.header_list = list(dataframe.columns.values)
