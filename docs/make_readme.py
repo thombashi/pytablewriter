@@ -31,11 +31,14 @@ def write_examples(maker):
         "Write a JavaScript table (variable definition of nested list)")
     maker.write_example_file("javascript_example.txt")
 
-    maker.write_chapter("Write an Excel table")
+    maker.write_chapter("Write a table to an Excel sheet")
     maker.write_example_file("exel_single_example.txt")
 
     maker.write_chapter("Write a table with multibyte character")
     maker.write_example_file("multibyte_table_example.txt")
+
+    maker.write_chapter("Write a table from pandas DataFrame")
+    maker.write_example_file("from_pandas_dataframe_example.txt")
 
     maker.write_chapter("For more information")
     maker.write_line_list([
