@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import six
+"""
+.. codeauthor:: Tsuyoshi Hombashi <gogogo.vm@gmail.com>
+"""
+
+from __future__ import print_function
+
 import pytablewriter
 
 
@@ -23,4 +28,4 @@ with open(filename, "w") as f:
     writer.write_table()
 
 with open(filename) as f:
-    six.print_(f.read())
+    print(f.read())
