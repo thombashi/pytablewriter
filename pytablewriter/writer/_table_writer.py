@@ -159,6 +159,19 @@ class TableWriter(TableWriterInterface):
         finally:
             self.stream = None
 
+    def set_dataframe(self, dataframe):
+        """
+        Set following attributes from :py:class:`pandas.DataFrame`
+
+        - :py:attr:`~.header_list`.
+        - :py:attr:`~.value_matrix`.
+
+        :param pandas.DataFrame dataframe: Input dataframe.
+        """
+
+        self.header_list = list(dataframe.columns.values)
+        self.value_matrix = dataframe.values.tolist()
+
     def set_table_data(self, tabledata):
         """
         Set following attributes from :py:class:`pytablereader.TableData`

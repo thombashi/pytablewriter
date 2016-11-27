@@ -19,6 +19,13 @@ from .data import mix_header_list
 from .data import mix_value_matrix
 from .data import value_matrix_iter
 
+try:
+    import numpy
+    import pandas
+    SKIP_DATAFRAME_TEST = False
+except ImportError:
+    SKIP_DATAFRAME_TEST = True
+
 
 normal_test_data_list = [
     Data(
@@ -230,3 +237,68 @@ tablename.columns = [
 
         with pytest.raises(expected):
             writer.write_table_iter()
+
+
+@pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
+class Test_PandasDataFrameWriter_set_dataframe:
+
+    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
+        [
+            "tablename",
+            ["ha", "hb", "hc"],
+            value_matrix_iter,
+            """tablename = pandas.DataFrame([
+    [1, 1.10, "aa", 1.0, "1", True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [2, 2.20, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan, numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+    [3, 3.33, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+])
+tablename.columns = [
+    "i",
+    "f",
+    "c",
+    "if",
+    "ifc",
+    "bool",
+    "inf",
+    "nan",
+    "mix_num",
+    "time",
+]
+""",
+        ],
+    ])
+    def test_normal(self, capsys, table, header, value, expected):
+        import dateutil
+
+        df = pandas.DataFrame([
+            [1, 1.10, "aa", 1.0, "1", True, numpy.inf, numpy.nan,
+                1, dateutil.parser.parse("2017-01-01T00:00:00")],
+            [2, 2.20, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan,
+                numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+            [3, 3.33, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan,
+                numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+        ])
+        df.columns = [
+            "i",
+            "f",
+            "c",
+            "if",
+            "ifc",
+            "bool",
+            "inf",
+            "nan",
+            "mix_num",
+            "time",
+        ]
+
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.set_dataframe(df)
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
+        assert out == expected
