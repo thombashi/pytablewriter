@@ -8,6 +8,7 @@ from __future__ import absolute_import
 import json
 
 import dataproperty as dp
+from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from .._converter import (
@@ -118,7 +119,8 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def _get_opening_row_item_list(self):
         if dp.is_not_empty_string(self.table_name):
-            return u'{{ "{:s}" : ['.format(dp.to_unicode(self.table_name))
+            return u'{{ "{:s}" : ['.format(
+                MultiByteStrDecoder(self.table_name).unicode_str)
 
         return u"["
 

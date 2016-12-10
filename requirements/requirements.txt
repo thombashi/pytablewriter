@@ -1,6 +1,7 @@
-DataProperty>=0.13.3
+DataProperty>=0.13.5
 dominate>=2.3.0
-pathvalidate>=0.9.3
+mbstrdecoder
+pathvalidate>=0.9.4
 six
 XlsxWriter
 xlwt

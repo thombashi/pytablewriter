@@ -8,6 +8,7 @@ from __future__ import absolute_import
 import re
 
 import dataproperty as dp
+from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ._text_writer import TextTableWriter
@@ -46,7 +47,8 @@ class MediaWikiTableWriter(TextTableWriter):
             return
 
         if dp.is_not_empty_string(self.table_name):
-            self._write_line(u"|+" + dp.to_unicode(self.table_name))
+            self._write_line(
+                u"|+" + MultiByteStrDecoder(self.table_name).unicode_str)
 
         super(MediaWikiTableWriter, self)._write_header()
 

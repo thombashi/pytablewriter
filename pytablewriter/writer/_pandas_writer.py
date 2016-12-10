@@ -8,6 +8,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import dataproperty as dp
+from mbstrdecoder import MultiByteStrDecoder
 
 from .._error import (
     EmptyTableNameError,
@@ -78,7 +79,8 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._write_line("{}.columns = [".format(self.variable_name))
         self.inc_indent_level()
         for header in self.header_list:
-            self._write_line('"{}",'.format(dp.to_unicode(header)))
+            self._write_line(
+                '"{}",'.format(MultiByteStrDecoder(header).unicode_str))
         self.dec_indent_level()
         self._write_line("]")
 

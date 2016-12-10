@@ -9,6 +9,7 @@ import sys
 
 import dataproperty as dp
 from dataproperty import Typecode
+from mbstrdecoder import MultiByteStrDecoder
 import six
 from six.moves import zip
 
@@ -304,7 +305,7 @@ class TableWriter(TableWriterInterface):
             try:
                 item = to_string_format_str.format(value)
             except ValueError:
-                item = dp.to_unicode(value)
+                item = MultiByteStrDecoder(value).unicode_str
 
         item = self.__get_align_format(col_prop, value_prop).format(item)
 

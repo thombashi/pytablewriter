@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 
 import dataproperty as dp
+from mbstrdecoder import MultiByteStrDecoder
 
 from .._error import EmptyHeaderError
 from ._text_writer import IndentationTextTableWriter
@@ -61,7 +62,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         return [
             u"#" * (self._indent_level + 1) + u" " +
-            dp.to_unicode(self.table_name)
+            MultiByteStrDecoder(self.table_name).unicode_str
         ]
 
     def _get_header_row_separator_item_list(self):

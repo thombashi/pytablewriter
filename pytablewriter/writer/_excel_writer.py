@@ -280,7 +280,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             raise ValueError()
 
         num_format_str = "#,{:s}0.{:s}".format(
-            "#" * float_digit, "0" * float_digit)
+            "#" * int(float_digit), "0" * int(float_digit))
         cell_style = xlwt.easyxf(num_format_str=num_format_str)
         self.__col_style_table[col] = cell_style
 
@@ -418,7 +418,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         if IntegerType(col_prop.minmax_decimal_places.max_value).is_type():
             float_digit = col_prop.minmax_decimal_places.max_value
             if float_digit > 0:
-                num_props = {"num_format": "0.{:s}".format("0" * float_digit)}
+                num_props = {
+                    "num_format": "0.{:s}".format("0" * int(float_digit))}
 
         self.__col_numprops_table[col] = num_props
 

@@ -8,6 +8,7 @@ from __future__ import absolute_import
 
 import dataproperty as dp
 import dominate.tags as tags
+from mbstrdecoder import MultiByteStrDecoder
 import pathvalidate
 from six.moves import zip
 
@@ -55,7 +56,8 @@ class HtmlTableWriter(TextTableWriter):
         if dp.is_not_empty_string(self.table_name):
             self._table_tag = tags.table(
                 id=pathvalidate.sanitize_python_var_name(self.table_name))
-            self._table_tag += tags.caption(dp.to_unicode(self.table_name))
+            self._table_tag += tags.caption(
+                MultiByteStrDecoder(self.table_name).unicode_str)
         else:
             self._table_tag = tags.table()
 
@@ -75,7 +77,7 @@ class HtmlTableWriter(TextTableWriter):
 
         tr_tag = tags.tr()
         for header in self.header_list:
-            tr_tag += tags.th(dp.to_unicode(header))
+            tr_tag += tags.th(MultiByteStrDecoder(header).unicode_str)
 
         thead_tag = tags.thead()
         thead_tag += tr_tag
@@ -88,7 +90,7 @@ class HtmlTableWriter(TextTableWriter):
         for value_list, value_prop_list in zip(self._value_matrix, self._value_prop_matrix):
             tr_tag = tags.tr()
             for value, value_prop in zip(value_list, value_prop_list):
-                td_tag = tags.td(dp.to_unicode(value))
+                td_tag = tags.td(MultiByteStrDecoder(value).unicode_str)
                 td_tag["align"] = value_prop.align.align_string
                 tr_tag += td_tag
             tbody_tag += tr_tag

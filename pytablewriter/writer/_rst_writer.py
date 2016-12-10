@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 
 import dataproperty as dp
+from mbstrdecoder import MultiByteStrDecoder
 
 from ._text_writer import IndentationTextTableWriter
 
@@ -39,7 +40,7 @@ class RstTableWriter(IndentationTextTableWriter):
             self._write_line(u".. table:: ")
         else:
             self._write_line(u".. table:: {}".format(
-                dp.to_unicode(self.table_name)))
+                MultiByteStrDecoder(self.table_name).unicode_str))
 
         self._write_line()
         self.inc_indent_level()
@@ -99,7 +100,7 @@ class RstCsvTableWriter(RstTableWriter):
         if dp.is_empty_string(self.table_name):
             return [directive]
 
-        return [directive + dp.to_unicode(self.table_name)]
+        return [directive + MultiByteStrDecoder(self.table_name).unicode_str]
 
     def _write_opening_row(self):
         self.dec_indent_level()
@@ -112,7 +113,11 @@ class RstCsvTableWriter(RstTableWriter):
 
         if dp.is_not_empty_sequence(self.header_list):
             self._write_line(u':header: "{:s}"'.format(u'", "'.join(
-                [dp.to_unicode(header) for header in self.header_list])))
+                [
+                    MultiByteStrDecoder(header).unicode_str
+                    for header in self.header_list
+                ]))
+            )
 
         self._write_line(u":widths: " + u", ".join([
             str(col_prop.padding_len)
