@@ -1,6 +1,6 @@
 .. _example-excel-table-writer:
 
-Write a table to Excel sheet
+Write a table to Excel a sheet
 -------------------------------------------
 
 |ExcelXlsxTableWriter| class can write a table to worksheet(s) in 

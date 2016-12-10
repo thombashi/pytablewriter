@@ -107,7 +107,3 @@ This example will write a table to a ``sample.rst`` file.
         +-------+------------+----------------+
         |      5|AI          |America/Anguilla|
         +-------+------------+----------------+
-
-
-
-.. include:: from_pandas_dataframe.rst

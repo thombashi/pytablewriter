@@ -6,15 +6,12 @@ Examples
 
    basic
    csv
-   excel
+   spreadsheet/index
    html
-   javascript
    json
    markdown
    mediawiki
-   pandas_dataframe
-   python_code
-   rst_csv_table
-   rst_grid_table
-   rst_simple_table
+   rst/index
+   sourcecode/index
    multibyte_table
+   datasource/index

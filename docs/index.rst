@@ -3,7 +3,7 @@ Welcome to pytablewriter's documentation!
 
 .. toctree::
    :caption: Table of Contents
-   :maxdepth: 2
+   :maxdepth: 3
    :numbered:
    
    pages/introduction/index
