@@ -176,6 +176,37 @@ class TableWriter(TableWriterInterface):
         self.header_list = tabledata.header_list
         self.value_matrix = tabledata.record_list
 
+    def from_csv(self, csv_source):
+        """
+        Set tabular attributes to the writer from
+        from CSV data source. Following attributes will be set:
+
+        - :py:attr:`~.header_list`.
+        - :py:attr:`~.value_matrix`.
+
+        :py:attr:`~.table_name` will be also setting if the CSV data source
+        is a file. In that case, :py:attr:`~.table_name` is as same as
+        the filename.
+
+        :param str csv_source:
+            Input CSV data source, either can be designated CSV text or
+            CSV file path.
+        """
+
+        import pytablereader as ptr
+
+        loader = ptr.CsvTableTextLoader(csv_source)
+        try:
+            for tabledata in loader.load():
+                self.from_tabledata(tabledata)
+            return
+        except ptr.error.InvalidDataError:
+            pass
+
+        loader = ptr.CsvTableFileLoader(csv_source)
+        for tabledata in loader.load():
+            self.from_tabledata(tabledata)
+
     def from_dataframe(self, dataframe):
         """
         Set tabular attributes to the writer from

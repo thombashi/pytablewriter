@@ -6,20 +6,23 @@
 
 from __future__ import absolute_import
 from __future__ import print_function
+from __future__ import unicode_literals
+import io
 
 import collections
 import itertools
 
 import pytablewriter as ptw
-import pytablereader as ptr
 import pytest
 
-from .data import header_list
-from .data import value_matrix
-from .data import value_matrix_with_none
-from .data import mix_header_list
-from .data import mix_value_matrix
-from .data import value_matrix_iter
+from .data import (
+    header_list,
+    value_matrix,
+    value_matrix_with_none,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix_iter
+)
 
 
 Data = collections.namedtuple("Data", "col_delim header value expected")
@@ -106,22 +109,38 @@ class Test_CsvTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_CsvTableWriter_set_table_data:
+class Test_CsvTableWriter_from_csv:
 
-    def test_normal(self):
-        writer = table_writer_class()
-
-        csv_text = """"a","b","c","dd","e"
+    __csv_text = """"a","b","c","dd","e"
 1,,"a",1.0,
 ,2.2,,2.2,"2.2"
 3,3.3,"ccc",,"cccc"
 """
 
-        loader = ptr.CsvTableTextLoader(csv_text)
-        for tabledata in loader.load():
-            writer.from_tabledata(tabledata)
+    def test_normal_from_text(self):
+        writer = table_writer_class()
+
+        writer.from_csv(self.__csv_text)
 
         assert writer.table_name == "csv1"
+        assert writer.header_list == ["a", "b", "c", "dd", "e"]
+        assert writer.value_matrix == [
+            [1, '', 'a', '1.0', ''],
+            ['', '2.2', '', '2.2', '2.2'],
+            [3, '3.3', 'ccc', '', 'cccc']
+        ]
+
+    def test_normal_from_file(self, tmpdir):
+        writer = table_writer_class()
+
+        file_path = str(tmpdir.join("test_data.csv"))
+
+        with io.open(file_path, "w", encoding="utf-8") as f:
+            f.write(self.__csv_text)
+
+        writer.from_csv(file_path)
+
+        assert writer.table_name == "test_data"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
         assert writer.value_matrix == [
             [1, '', 'a', '1.0', ''],
