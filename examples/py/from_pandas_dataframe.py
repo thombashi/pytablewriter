@@ -20,5 +20,5 @@ csv = StringIO(u""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"
 df = pd.read_csv(csv, sep=',')
 
 writer = pytablewriter.MarkdownTableWriter()
-writer.set_dataframe(df)
+writer.from_dataframe(df)
 writer.write_table()

@@ -14,7 +14,7 @@
     df = pd.read_csv(csv, sep=',')
 
     writer = pytablewriter.MarkdownTableWriter()
-    writer.set_dataframe(df)
+    writer.from_dataframe(df)
     writer.write_table()
 
 
