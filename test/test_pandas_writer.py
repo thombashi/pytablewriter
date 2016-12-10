@@ -240,7 +240,7 @@ tablename.columns = [
 
 
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
-class Test_PandasDataFrameWriter_set_dataframe:
+class Test_PandasDataFrameWriter_from_dataframe:
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [
@@ -293,7 +293,7 @@ tablename.columns = [
 
         writer = table_writer_class()
         writer.table_name = table
-        writer.set_dataframe(df)
+        writer.from_dataframe(df)
         writer.write_table()
 
         out, _err = capsys.readouterr()
