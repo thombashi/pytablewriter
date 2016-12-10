@@ -169,6 +169,10 @@ class TableWriter(TableWriterInterface):
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
 
+        :py:class:`pytablereader.TableData` can be create from various data
+        formats, for more detailed information can be found in
+        http://pytablereader.readthedocs.io/en/latest/
+
         :param pytablereader.TableData tabledata: Input table data.
         """
 
@@ -191,6 +195,10 @@ class TableWriter(TableWriterInterface):
         :param str csv_source:
             Input CSV data source, either can be designated CSV text or
             CSV file path.
+
+        :Examples:
+
+            :ref:`example-from-csv`
         """
 
         import pytablereader as ptr
