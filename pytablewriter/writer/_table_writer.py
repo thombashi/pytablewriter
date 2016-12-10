@@ -194,20 +194,17 @@ class TableWriter(TableWriterInterface):
         self.header_list = list(dataframe.columns.values)
         self.value_matrix = dataframe.values.tolist()
 
+    def set_dataframe(self, dataframe):
+        # This method will be deleted in the future. Use from_tabledata
+        # instead.
+
+        self.from_dataframe(dataframe)
+
     def set_table_data(self, tabledata):
-        """
-        Set following attributes from :py:class:`pytablereader.TableData`
+        # This method will be deleted in the future. Use from_tabledata
+        # instead.
 
-        - :py:attr:`~.table_name`.
-        - :py:attr:`~.header_list`.
-        - :py:attr:`~.value_matrix`.
-
-        :param pytablereader.TableData tabledata: Input table data.
-        """
-
-        self.table_name = tabledata.table_name
-        self.header_list = tabledata.header_list
-        self.value_matrix = tabledata.record_list
+        self.from_tabledata(tabledata)
 
     def write_table_iter(self):
         """

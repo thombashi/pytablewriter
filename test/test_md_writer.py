@@ -230,7 +230,7 @@ class Test_MarkdownTableWriter_set_table_data:
                 ["3", "120.9",  "ccc"],
             ])
 
-        writer.set_table_data(tabledata)
+        writer.from_tabledata(tabledata)
 
         assert writer.table_name == "tmp"
         assert writer.header_list == ["attr_a", "attr_b", "attr_c"]
@@ -286,7 +286,7 @@ class Test_MarkdownTableWriter_write_table:
                 ['mediawiki', 'MediaWikiTableFileLoader'],
                 ['json', 'JsonTableFileLoader'],
             ])
-        writer.set_table_data(tabledata)
+        writer.from_tabledata(tabledata)
         writer.write_table()
 
         expected = """# loader_mapping

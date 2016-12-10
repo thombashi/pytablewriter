@@ -119,7 +119,7 @@ class Test_CsvTableWriter_set_table_data:
 
         loader = ptr.CsvTableTextLoader(csv_text)
         for tabledata in loader.load():
-            writer.set_table_data(tabledata)
+            writer.from_tabledata(tabledata)
 
         assert writer.table_name == "csv1"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
