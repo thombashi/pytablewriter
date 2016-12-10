@@ -226,19 +226,11 @@ Write a table with multibyte character
     writer.write_table()
 
 
-.. code::
+.. figure:: ss/multi_byte_char.png
+   :scale: 100%
+   :alt: multi_byte_char_table
 
-    .. table:: 生成に関するパターン
-
-        ================  ============================================================================  ===  ================
-           パターン名                                         概要                                      GoF  Code Complete[1]
-        ================  ============================================================================  ===  ================
-        Abstract Factory  関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。      Yes  Yes
-        Builder           複合化されたインスタンスの生成過程を隠蔽する。                                Yes  No
-        Factory Method    実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。  Yes  Yes
-        Prototype         同様のインスタンスを生成するために、原型のインスタンスを複製する。            Yes  No
-        Singleton         あるクラスについて、インスタンスが単一であることを保証する。                  Yes  Yes
-        ================  ============================================================================  ===  ================
+   Output of multi-byte character table
 
 
 Rendering result
@@ -256,6 +248,8 @@ Rendering result
     Singleton         あるクラスについて、インスタンスが単一であることを保証する。                  Yes  Yes
     ================  ============================================================================  ===  ================
 
+
+
 Write a table from pandas DataFrame
 -----------------------------------
 
@@ -266,15 +260,15 @@ Write a table from pandas DataFrame
     import pytablewriter
     from StringIO import StringIO
 
-    csv = StringIO(u""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"
+    csv_data = StringIO(u""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"
     1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00+09:00"
     2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
     3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00+09:00"
     """)
-    df = pd.read_csv(csv, sep=',')
+    df = pd.read_csv(csv_data, sep=',')
 
     writer = pytablewriter.MarkdownTableWriter()
-    writer.set_dataframe(df)
+    writer.from_dataframe(df)
     writer.write_table()
 
 

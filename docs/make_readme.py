@@ -25,20 +25,20 @@ def write_examples(maker):
     maker.write_example_file("markdown_example.txt")
 
     maker.write_chapter("Write a reStructuredText table (grid tables)")
-    maker.write_example_file("rst_grid_table_example.txt")
+    maker.write_example_file("rst/rst_grid_table_example.txt")
 
     maker.write_chapter(
         "Write a JavaScript table (variable definition of nested list)")
-    maker.write_example_file("javascript_example.txt")
+    maker.write_example_file("sourcecode/javascript_example.txt")
 
     maker.write_chapter("Write a table to an Excel sheet")
-    maker.write_example_file("exel_single_example.txt")
+    maker.write_example_file("spreadsheet/exel_single_example.txt")
 
     maker.write_chapter("Write a table with multibyte character")
     maker.write_example_file("multibyte_table_example.txt")
 
     maker.write_chapter("Write a table from pandas DataFrame")
-    maker.write_example_file("from_pandas_dataframe_example.txt")
+    maker.write_example_file("datasource/from_pandas_dataframe_example.txt")
 
     maker.write_chapter("For more information")
     maker.write_line_list([
