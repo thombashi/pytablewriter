@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+import re
 import sys
 
 import dataproperty as dp
@@ -91,6 +92,8 @@ class TableWriter(TableWriterInterface):
         - second argument: total number of iteration
     """
 
+    __RE_LINE_BREAK = re.compile("[\n]")
+
     @property
     def value_matrix(self):
         return self.__value_matrix_org
@@ -125,6 +128,8 @@ class TableWriter(TableWriterInterface):
         self.is_write_value_separator_row = False
         self.is_write_opening_row = False
         self.is_write_closing_row = False
+
+        self.is_remove_line_break = False
         self.is_float_formatting = True
 
         self._value_matrix = []
@@ -360,6 +365,7 @@ class TableWriter(TableWriterInterface):
             except ValueError:
                 item = MultiByteStrDecoder(value).unicode_str
 
+        item = self.__remove_line_break(item)
         item = self.__get_align_format(col_prop, value_prop).format(item)
 
         if all([
@@ -480,3 +486,9 @@ class TableWriter(TableWriterInterface):
     def _preprocess(self):
         self._preprocess_property()
         self._preprocess_value_matrix()
+
+    def __remove_line_break(self, text):
+        if not self.is_remove_line_break:
+            return text
+
+        return self.__RE_LINE_BREAK.sub(" ", text)

@@ -149,7 +149,7 @@ normal_test_data_list = [
                 u'Crotest',
                 u'',
                 u'[160]',
-                u'MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.',
+                u'MIT License. A tiny and simple test framework for Crystal\nwith common assertions and no pollution into Object class.',
                 u'',
             ]
         ],

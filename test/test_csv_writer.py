@@ -111,42 +111,61 @@ class Test_CsvTableWriter_write_new_line:
 
 class Test_CsvTableWriter_from_csv:
 
-    __csv_text = """"a","b","c","dd","e"
-1,,"a",1.0,
-,2.2,,2.2,"2.2"
-3,3.3,"ccc",,"cccc"
+    __CSV_TEXT_INPUT = """"a","b","c","dd","e"
+1,1.1,"a",1.0,
+2,2.2,,2.2,"2.2"
+3,3.3,"ccc",,"cc\ncc"
 """
 
-    def test_normal_from_text(self):
-        writer = table_writer_class()
+    __CSV_EXPECTED = """"a","b","c","dd","e"
+1,1.1,"a","1.0",""
+2,2.2,"","2.2","2.2"
+3,3.3,"ccc","","cc cc"
+"""
 
-        writer.from_csv(self.__csv_text)
+    def test_normal_from_text(self, capsys):
+        writer = table_writer_class()
+        writer.from_csv(self.__CSV_TEXT_INPUT)
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
 
         assert writer.table_name == "csv1"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
         assert writer.value_matrix == [
-            [1, '', 'a', '1.0', ''],
-            ['', '2.2', '', '2.2', '2.2'],
-            [3, '3.3', 'ccc', '', 'cccc']
+            [1, '1.1', 'a', '1.0', ''],
+            [2, '2.2', '', '2.2', '2.2'],
+            [3, '3.3', 'ccc', '', 'cc\ncc']
         ]
 
-    def test_normal_from_file(self, tmpdir):
-        writer = table_writer_class()
+        print("[expected]\n{}".format(self.__CSV_EXPECTED))
+        print("[actual]\n{}".format(out))
 
+        assert out == self.__CSV_EXPECTED
+
+    def test_normal_from_file(self, capsys, tmpdir):
         file_path = str(tmpdir.join("test_data.csv"))
-
         with io.open(file_path, "w", encoding="utf-8") as f:
-            f.write(self.__csv_text)
+            f.write(self.__CSV_TEXT_INPUT)
 
+        writer = table_writer_class()
         writer.from_csv(file_path)
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
 
         assert writer.table_name == "test_data"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
         assert writer.value_matrix == [
-            [1, '', 'a', '1.0', ''],
-            ['', '2.2', '', '2.2', '2.2'],
-            [3, '3.3', 'ccc', '', 'cccc']
+            [1, '1.1', 'a', '1.0', ''],
+            [2, '2.2', '', '2.2', '2.2'],
+            [3, '3.3', 'ccc', '', 'cc\ncc']
         ]
+
+        print("[expected]\n{}".format(self.__CSV_EXPECTED))
+        print("[actual]\n{}".format(out))
+
+        assert out == self.__CSV_EXPECTED
 
 
 class Test_CsvTableWriter_write_table:

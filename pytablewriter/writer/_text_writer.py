@@ -349,6 +349,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_quote_table[dp.Typecode.DATETIME] = False
         self._prop_extractor.datetime_format_str = "s"
 
+        self.is_remove_line_break = True
+
         self._prop_extractor.none_value = None
         self._prop_extractor.is_strict_type_mapping[
             dp.Typecode.DATETIME] = False

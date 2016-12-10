@@ -90,7 +90,7 @@ normal_test_data_list = [
             ["2", "AE", "Asia/Dubai"],
             ["3", "AF", "Asia/Kabul"],
             ["4", "AG", "America/Antigua"],
-            ["5", "AI", "America/Anguilla"],
+            ["5", "AI", "America\nAnguilla"],
         ],
         expected=""".. table:: zone
 
@@ -105,7 +105,7 @@ normal_test_data_list = [
     +-------+------------+----------------+
     |      4|AG          |America/Antigua |
     +-------+------------+----------------+
-    |      5|AI          |America/Anguilla|
+    |      5|AI          |America Anguilla|
     +-------+------------+----------------+
 """),
     Data(
