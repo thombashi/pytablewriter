@@ -322,6 +322,7 @@ rp_class = u"""
 .. |HtmlTableWriter| replace:: :py:class:`~pytablewriter.HtmlTableWriter`
 .. |JavaScriptTableWriter| replace:: :py:class:`~pytablewriter.JavaScriptTableWriter`
 .. |JsonTableWriter| replace:: :py:class:`~pytablewriter.JsonTableWriter`
+.. |LtsvTableWriter| replace:: :py:class:`~pytablewriter.LtsvTableWriter`
 .. |MarkdownTableWriter| replace:: :py:class:`~pytablewriter.MarkdownTableWriter`
 .. |MediaWikiTableWriter| replace:: :py:class:`~pytablewriter.MediaWikiTableWriter`
 .. |PandasDataFrameWriter| replace:: :py:class:`~pytablewriter.PandasDataFrameWriter`

@@ -7,16 +7,19 @@ Features
         - `.xlsx` format
         - `.xls` format
     - HTML
-    - JavaScript (Definition of a nested list variable)
     - JSON
+    - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - Markdown
     - MediaWiki
-    - Pandas (Definition of a DataFrame variable)
-    - Python code (Definition of a nested list variable)
+    - Source code
+        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a DataFrame variable)
+        - Python code (Definition of a nested list variable)
+        - JavaScript (Definition of a nested list variable)
     - reStructuredText
         - Grid tables
         - Simple tables
         - CSV table
+    - Tab-separated values (TSV)
 - Automatic tabular data formatting
     - Alignment
     - Padding

@@ -1,1 +1,1 @@
-pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText
+pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TSV
