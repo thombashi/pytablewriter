@@ -19,7 +19,7 @@ pytablewriter
 Summary
 -------
 
-pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TSV
+pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TSV.
 
 Features
 --------
@@ -328,5 +328,5 @@ Related Project
 ===============
 
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
-    - Loaded table data with ``pytablereader`` can write another table format by ``pytablewriter``.
+    - Tabular data loaded by ``pytablereader`` can be written another tabular data format with ``pytablewriter``.
 
