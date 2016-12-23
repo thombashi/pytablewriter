@@ -88,7 +88,7 @@ class TableWriter(TableWriterInterface):
         - second argument: total number of iteration
     """
 
-    __RE_LINE_BREAK = re.compile("[\n]")
+    __RE_LINE_BREAK = re.compile("[\s\0\t\r\n]+")
 
     @property
     def value_matrix(self):
