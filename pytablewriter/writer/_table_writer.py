@@ -11,7 +11,6 @@ import sys
 import dataproperty as dp
 from dataproperty import Typecode
 from mbstrdecoder import MultiByteStrDecoder
-import six
 from six.moves import zip
 
 from .._error import (
@@ -20,10 +19,6 @@ from .._error import (
     EmptyTableDataError
 )
 from ._interface import TableWriterInterface
-
-if six.PY2:
-    reload(sys)
-    sys.setdefaultencoding("utf-8")
 
 
 def default_bool_converter(value):
