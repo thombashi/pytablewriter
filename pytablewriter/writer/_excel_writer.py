@@ -188,8 +188,8 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
         .. note::
 
             - |None| values will be written as an empty string.
-            - |inf| will be written as `Inf`
-            - |nan| will be written as ``NaN``
+            - |inf| values will be written as `Inf`
+            - |nan| values will be written as ``NaN``
         """
 
         self._verify_property()
