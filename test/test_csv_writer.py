@@ -36,15 +36,13 @@ normal_test_data_list = [
 1,123.1,"a",1.0,"1"
 2,2.2,"bb",2.2,"2.2"
 3,3.3,"ccc",3.0,"cccc"
-"""
-    ),
+"""),
     Data(
         col_delim=",",
         header=header_list,
         value=[],
         expected=""""a","b","c","dd","e"
-"""
-    ),
+"""),
     Data(
         col_delim=",",
         header=[],
@@ -52,8 +50,7 @@ normal_test_data_list = [
         expected="""1,123.1,"a",1.0,"1"
 2,2.2,"bb",2.2,"2.2"
 3,3.3,"ccc",3.0,"cccc"
-"""
-    ),
+"""),
     Data(
         col_delim="\t",
         header=None,
@@ -61,8 +58,7 @@ normal_test_data_list = [
         expected="""1\t123.1\t"a"\t1.0\t"1"
 2\t2.2\t"bb"\t2.2\t"2.2"
 3\t3.3\t"ccc"\t3.0\t"cccc"
-"""
-    ),
+"""),
     Data(
         col_delim=",",
         header=header_list,
@@ -72,8 +68,7 @@ normal_test_data_list = [
 ,2.2,,2.2,"2.2"
 3,3.3,"ccc",,"cccc"
 ,,,,
-"""
-    ),
+"""),
     Data(
         col_delim=",",
         header=mix_header_list,
@@ -82,8 +77,7 @@ normal_test_data_list = [
 1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00"
 2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
 3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00"
-"""
-    ),
+"""),
 ]
 
 exception_test_data_list = [

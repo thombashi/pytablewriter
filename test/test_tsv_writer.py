@@ -33,8 +33,7 @@ normal_test_data_list = [
         expected="""1\t123.1\t"a"\t1.0\t"1"
 2\t2.2\t"bb"\t2.2\t"2.2"
 3\t3.3\t"ccc"\t3.0\t"cccc"
-"""
-    ),
+"""),
 ]
 
 exception_test_data_list = [
