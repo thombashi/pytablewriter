@@ -13,7 +13,8 @@ from ._text_writer import TextTableWriter
 
 class CsvTableWriter(TextTableWriter):
     """
-    Concrete class of a table writer for CSV format.
+    Concrete class of a table writer for character separated values format.
+    Default separated character is comma (``","``).
 
     :Examples:
 
