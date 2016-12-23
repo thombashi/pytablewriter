@@ -19,7 +19,7 @@ pytablewriter
 Summary
 -------
 
-pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText
+pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TSV
 
 Features
 --------
@@ -30,16 +30,19 @@ Features
         - `.xlsx` format
         - `.xls` format
     - HTML
-    - JavaScript (Definition of a nested list variable)
     - JSON
+    - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - Markdown
     - MediaWiki
-    - Pandas (Definition of a DataFrame variable)
-    - Python code (Definition of a nested list variable)
+    - Source code
+        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a DataFrame variable)
+        - Python code (Definition of a nested list variable)
+        - JavaScript (Definition of a nested list variable)
     - reStructuredText
         - Grid tables
         - Simple tables
         - CSV table
+    - Tab-separated values (TSV)
 - Automatic tabular data formatting
     - Alignment
     - Padding
@@ -301,6 +304,7 @@ Python 2.7+ or 3.3+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
 - `dominate <http://github.com/Knio/dominate/>`__
+- `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `six <https://pypi.python.org/pypi/six/>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
