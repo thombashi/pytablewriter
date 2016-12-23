@@ -103,7 +103,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         .. note::
 
-            - |None| is not written
+            - |None| values will be written as an empty string.
         """
 
         self._verify_property()

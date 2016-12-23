@@ -45,9 +45,9 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
         .. note::
 
-            - |None| is written as ``None``
-            - |inf| is written as ``float("inf")'``
-            - |nan| is written as ``float("nan")'``
+            - |None| values will be written as ``None``
+            - |inf| values will be written as ``float("inf")'``
+            - |nan| values will be written as ``float("nan")'``
             - |datetime| instance is determined by |is_datetime_instance_formatting| attribute:
                 - |True|: written by using `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
                 - |False|: written as |str|

@@ -57,9 +57,9 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         .. note::
 
-            - |None| is written as ``null``
-            - |inf| is written as ``"Infinity"``
-            - |nan| is written as ``"NaN"``
+            - |None| values will be written as ``null``
+            - |inf| values will be written as ``"Infinity"``
+            - |nan| values will be written as ``"NaN"``
         """
 
         self._verify_property()

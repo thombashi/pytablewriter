@@ -85,7 +85,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         .. note::
 
-            - |None| is not written
+            - |None| values will be written as an empty string.
         """
 
         self._verify_property()
@@ -160,7 +160,7 @@ class RstGridTableWriter(RstTableWriter):
 
         .. note::
 
-            - |None| is not written
+            - |None| values will be written as an empty string.
         """
 
         self._write_table()
@@ -198,7 +198,7 @@ class RstSimpleTableWriter(RstTableWriter):
 
         .. note::
 
-            - |None| is not written
+            - |None| values will be written as an empty string.
         """
 
         self._write_table()

@@ -48,7 +48,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         .. note::
 
-            - |None| is not written
+            - |None| values will be written as an empty string.
         """
 
         super(MarkdownTableWriter, self).write_table()
