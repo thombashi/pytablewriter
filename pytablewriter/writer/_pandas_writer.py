@@ -10,10 +10,7 @@ from __future__ import unicode_literals
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 
-from .._error import (
-    EmptyTableNameError,
-    EmptyHeaderError
-)
+from .._error import EmptyTableNameError
 from .._function import (
     str_datetime_converter,
     dateutil_datetime_converter
@@ -97,5 +94,4 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             raise EmptyTableNameError()
 
     def _verify_header(self):
-        if dp.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError()
+        self._validate_empty_header()

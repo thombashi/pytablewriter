@@ -16,6 +16,7 @@ from six.moves import zip
 from .._error import (
     NotSupportedError,
     EmptyValueError,
+    EmptyHeaderError,
     EmptyTableDataError
 )
 from ._interface import TableWriterInterface
@@ -437,6 +438,15 @@ class TableWriter(TableWriterInterface):
 
     def _verify_header(self):
         pass
+
+    def _validate_empty_header(self):
+        """
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        """
+
+        if dp.is_empty_sequence(self.header_list):
+            raise EmptyHeaderError(
+                "header_list expected to have one ore more header names")
 
     def _verify_value_matrix(self):
         if dp.is_empty_sequence(self.value_matrix):

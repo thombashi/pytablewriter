@@ -15,7 +15,6 @@ from .._converter import (
     lower_bool_converter,
     strip_quote
 )
-from .._error import EmptyHeaderError
 from .._function import _get_data_helper
 from ._text_writer import IndentationTextTableWriter
 
@@ -91,8 +90,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._write_closing_row()
 
     def _verify_header(self):
-        if dp.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError()
+        self._validate_empty_header()
 
     def _preprocess_value_matrix(self):
         if self._preprocessed_value_matrix:
