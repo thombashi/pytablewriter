@@ -145,6 +145,29 @@ class TableWriterFactory(object):
         """
         :return: Available format name List.
         :rtype: list
+
+        :Examples:
+            .. code:: python
+
+                >>> for name in ptw.TableWriterFactory.get_format_name_list():
+                ...     print(name)
+                ...
+                csv
+                excel
+                html
+                javascript
+                js
+                json
+                markdown
+                mediawiki
+                null
+                pandas
+                py
+                python
+                rst
+                rst_csv_table
+                rst_grid_table
+                rst_simple_table
         """
 
         return sorted(cls.__get_format_name_writer_mapping())
@@ -152,8 +175,25 @@ class TableWriterFactory(object):
     @classmethod
     def get_extension_list(cls):
         """
-        :return: Available format-extension list.
+        :return: Available file format extension list.
         :rtype: list
+
+        :Examples:
+            .. code:: python
+
+                >>> for name in ptw.TableWriterFactory.get_extension_list():
+                ...     print(name)
+                ...
+                csv
+                htm
+                html
+                js
+                json
+                md
+                py
+                rst
+                xls
+                xlsx
         """
 
         return sorted(cls.__get_extension_writer_mapping())
