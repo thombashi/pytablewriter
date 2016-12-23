@@ -30,7 +30,8 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_quote_header = False
         self.is_quote_table[dp.Typecode.STRING] = False
         self.is_quote_table[dp.Typecode.DATETIME] = False
-        self.is_remove_line_break = True
+
+        self._is_remove_line_break = True
 
         self.table_name = u""
 

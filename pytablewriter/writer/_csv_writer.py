@@ -32,7 +32,8 @@ class CsvTableWriter(TextTableWriter):
         self.column_delimiter = u","
         self.is_padding = False
         self.is_write_header_separator_row = False
-        self.is_remove_line_break = True
+
+        self._is_remove_line_break = True
 
     def _write_header(self):
         if dp.is_empty_sequence(self.header_list):

@@ -125,7 +125,6 @@ class TableWriter(TableWriterInterface):
         self.is_write_opening_row = False
         self.is_write_closing_row = False
 
-        self.is_remove_line_break = False
         self.is_float_formatting = True
 
         self._value_matrix = []
@@ -138,6 +137,7 @@ class TableWriter(TableWriterInterface):
         self._prop_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
         self._prop_extractor.bool_converter = default_bool_converter
 
+        self._is_remove_line_break = False
         self._preprocessed_property = False
 
         self.iteration_length = -1
@@ -493,7 +493,7 @@ class TableWriter(TableWriterInterface):
         self._preprocess_value_matrix()
 
     def __remove_line_break(self, text):
-        if not self.is_remove_line_break:
+        if not self._is_remove_line_break:
             return text
 
         return self.__RE_LINE_BREAK.sub(" ", text)
