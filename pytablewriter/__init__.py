@@ -33,6 +33,7 @@ from .writer._rst_writer import (
     RstGridTableWriter,
     RstSimpleTableWriter
 )
+from .writer._tsv_writer import TsvTableWriter
 
 from ._factory import TableWriterFactory
 from ._function import dump_tabledata

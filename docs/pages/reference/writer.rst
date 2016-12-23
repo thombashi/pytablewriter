@@ -1,7 +1,15 @@
 
 CSV table writer class
 -------------------------------
+
+CSV table writer class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.CsvTableWriter
+    :inherited-members:
+
+TSV table writer class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: pytablewriter.TsvTableWriter
     :inherited-members:
 
 

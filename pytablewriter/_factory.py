@@ -28,6 +28,7 @@ from .writer._rst_writer import (
     RstGridTableWriter,
     RstSimpleTableWriter
 )
+from .writer._tsv_writer import TsvTableWriter
 
 
 class TableWriterFactory(object):
@@ -40,6 +41,7 @@ class TableWriterFactory(object):
         "json": JsonTableWriter,
         "py": PythonCodeTableWriter,
         "rst": RstGridTableWriter,
+        "tsv": TsvTableWriter,
     }
 
     @classmethod
@@ -58,6 +60,7 @@ class TableWriterFactory(object):
             ``"md"``            :py:class:`~.MarkdownTableWriter`  
             ``"py"``            :py:class:`~.PythonCodeTableWriter`
             ``"rst"``           :py:class:`~.RstGridTableWriter`   
+            ``"tsv"``           :py:class:`~.TsvTableWriter`       
             ``"xls"``           :py:class:`~.ExcelXlsTableWriter`  
             ``"xlsx"``          :py:class:`~.ExcelXlsxTableWriter` 
             ==================  ===================================
@@ -111,6 +114,7 @@ class TableWriterFactory(object):
             ``"rst"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`   
             ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter` 
             ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`    
+            ``"tsv"``                       :py:class:`~.TsvTableWriter`       
             ==============================  ===================================
 
         :param str format_name: Format name string (case insensitive).
@@ -126,7 +130,7 @@ class TableWriterFactory(object):
                 cls.__get_format_name_writer_mapping(), format_name)
         except WriterNotFoundError as e:
             raise WriterNotFoundError("\n".join([
-                "{:s} (unknown format name).".format(e.args[0]),
+                "{} (unknown format name).".format(e.args[0]),
                 "acceptable format names are: {}.".format(
                     ", ".join(cls.get_format_name_list())),
             ]))
@@ -137,7 +141,7 @@ class TableWriterFactory(object):
             return writer_mapping[format_name]()
         except KeyError:
             raise WriterNotFoundError(", ".join([
-                "writer not found: format='{:s}'".format(format_name),
+                "writer not found: format='{}'".format(format_name),
             ]))
 
     @classmethod
