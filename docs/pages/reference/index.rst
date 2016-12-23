@@ -6,4 +6,5 @@ Reference
    
    error
    writer
+   function
    writer_factory

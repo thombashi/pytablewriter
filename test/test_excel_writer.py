@@ -9,17 +9,18 @@ from __future__ import print_function
 import collections
 import itertools
 
-import pytablewriter
+import pytablewriter as ptw
 import pytest
 import pytablereader as ptr
 from pytablereader import TableData
 
-from .data import header_list
-from .data import value_matrix
-from .data import mix_header_list
-from .data import mix_value_matrix
-from .data import value_matrix_iter
-
+from .data import (
+    header_list,
+    value_matrix,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix_iter
+)
 
 Data = collections.namedtuple("Data", "table header value expected")
 
@@ -79,14 +80,14 @@ invalid_test_data_list = [
         table="",
         header=header,
         value=value,
-        expected=pytablewriter.EmptyTableDataError
+        expected=ptw.EmptyTableDataError
     )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class_list = [
-    pytablewriter.ExcelXlsTableWriter,
-    pytablewriter.ExcelXlsxTableWriter,
+    ptw.ExcelXlsTableWriter,
+    ptw.ExcelXlsxTableWriter,
 ]
 
 
@@ -125,8 +126,8 @@ class Test_ExcelTableWriter_write_table:
         loader = ptr.ExcelTableFileLoader(str(test_file_path))
 
         for tabledata in loader.load():
-            print("expected: {}".format(expected.dumps()))
-            print("actual: {}".format(tabledata.dumps()))
+            print("expected: {}".format(ptw.dump_tabledata(expected)))
+            print("actual: {}".format(ptw.dump_tabledata(tabledata)))
 
             assert tabledata == expected
 
@@ -196,7 +197,8 @@ class Test_ExcelTableWriter_write_table_iter:
             ]
             for table_writer_class in table_writer_class_list
         ])
-    def test_normal(self, tmpdir, writer_class, table, header, value, expected):
+    def test_normal(
+            self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()

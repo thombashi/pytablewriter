@@ -35,3 +35,4 @@ from .writer._rst_writer import (
 )
 
 from ._factory import TableWriterFactory
+from ._function import dump_tabledata
