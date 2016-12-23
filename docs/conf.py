@@ -329,6 +329,7 @@ rp_class = u"""
 .. |RstCsvTableWriter| replace:: :py:class:`~pytablewriter.RstCsvTableWriter`
 .. |RstGridTableWriter| replace:: :py:class:`~pytablewriter.RstGridTableWriter`
 .. |RstSimpleTableWriter| replace:: :py:class:`~pytablewriter.RstSimpleTableWriter`
+.. |TsvTableWriter| replace:: :py:class:`~pytablewriter.TsvTableWriter`
 """
 
 rp_module = u"""

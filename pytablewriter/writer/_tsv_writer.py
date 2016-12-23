@@ -13,6 +13,10 @@ from ._csv_writer import CsvTableWriter
 class TsvTableWriter(CsvTableWriter):
     """
     Concrete class of a table writer for tab separated values (TSV) format.
+
+    :Examples:
+
+        :ref:`example-tsv-table-writer`
     """
 
     def __init__(self):

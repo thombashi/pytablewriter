@@ -1,5 +1,5 @@
 
-CSV table writer class
+CSV table writer classes
 -------------------------------
 
 CSV table writer class
