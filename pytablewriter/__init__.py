@@ -23,6 +23,7 @@ from .writer._excel_writer import (
 from .writer._html_writer import HtmlTableWriter
 from .writer._javascript_writer import JavaScriptTableWriter
 from .writer._json_writer import JsonTableWriter
+from .writer._ltsv_writer import LtsvTableWriter
 from .writer._mediawiki_writer import MediaWikiTableWriter
 from .writer._md_writer import MarkdownTableWriter
 from .writer._null_writer import NullTableWriter

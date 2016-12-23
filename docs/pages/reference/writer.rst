@@ -13,6 +13,12 @@ TSV table writer class
     :inherited-members:
 
 
+LTSV table writer class
+-------------------------------
+.. autoclass:: pytablewriter.LtsvTableWriter
+    :inherited-members:
+
+
 Excel table writer classes
 -------------------------------
 

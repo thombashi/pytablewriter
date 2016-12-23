@@ -32,6 +32,9 @@ class Test_WriterFactory_create_from_file_extension:
             ["valid_ext.json", "valid_ext.JSON", ".json", "JSON"],
             [ptw.JsonTableWriter])
         ) + list(itertools.product(
+            ["valid_ext.ltsv", "valid_ext.LTSV", ".ltsv", "LTSV"],
+            [ptw.LtsvTableWriter])
+        ) + list(itertools.product(
             ["valid_ext.md", "valid_ext.MD", ".md", "MD"],
             [ptw.MarkdownTableWriter])
         ) + list(itertools.product(
@@ -81,6 +84,8 @@ class Test_FileLoaderFactory_create_from_format_name:
         ["JS", ptw.JavaScriptTableWriter],
         ["json", ptw.JsonTableWriter],
         ["JSON", ptw.JsonTableWriter],
+        ["ltsv", ptw.LtsvTableWriter],
+        ["LTSV", ptw.LtsvTableWriter],
         ["markdown", ptw.MarkdownTableWriter],
         ["Markdown", ptw.MarkdownTableWriter],
         ["mediawiki", ptw.MediaWikiTableWriter],

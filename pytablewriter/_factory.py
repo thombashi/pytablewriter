@@ -18,6 +18,7 @@ from .writer._excel_writer import ExcelXlsTableWriter
 from .writer._html_writer import HtmlTableWriter
 from .writer._javascript_writer import JavaScriptTableWriter
 from .writer._json_writer import JsonTableWriter
+from .writer._ltsv_writer import LtsvTableWriter
 from .writer._md_writer import MarkdownTableWriter
 from .writer._null_writer import NullTableWriter
 from .writer._mediawiki_writer import MediaWikiTableWriter
@@ -39,6 +40,7 @@ class TableWriterFactory(object):
         "csv": CsvTableWriter,
         "html": HtmlTableWriter,
         "json": JsonTableWriter,
+        "ltsv": LtsvTableWriter,
         "py": PythonCodeTableWriter,
         "rst": RstGridTableWriter,
         "tsv": TsvTableWriter,
@@ -57,12 +59,14 @@ class TableWriterFactory(object):
             ``"html"``          :py:class:`~.HtmlTableWriter`      
             ``"js"``            :py:class:`~.JavaScriptTableWriter`
             ``"json"``          :py:class:`~.JsonTableWriter`      
+            ``"ltsv"``          :py:class:`~.LtsvTableWriter`       
             ``"md"``            :py:class:`~.MarkdownTableWriter`  
             ``"py"``            :py:class:`~.PythonCodeTableWriter`
             ``"rst"``           :py:class:`~.RstGridTableWriter`   
             ``"tsv"``           :py:class:`~.TsvTableWriter`       
             ``"xls"``           :py:class:`~.ExcelXlsTableWriter`  
             ``"xlsx"``          :py:class:`~.ExcelXlsxTableWriter` 
+            ``"tsv"``           :py:class:`~.TsvTableWriter`       
             ==================  ===================================
 
         :param str file_extension:
@@ -106,6 +110,7 @@ class TableWriterFactory(object):
             ``"html"``                      :py:class:`~.HtmlTableWriter`      
             ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
             ``"json"``                      :py:class:`~.JsonTableWriter`      
+            ``"ltsv"``                      :py:class:`~.LtsvTableWriter`       
             ``"markdown"``                  :py:class:`~.MarkdownTableWriter`  
             ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter` 
             ``"null"``                      :py:class:`~.NullTableWriter`      
