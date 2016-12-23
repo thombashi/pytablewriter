@@ -28,6 +28,14 @@ Data = collections.namedtuple("Data", "header value expected")
 
 normal_test_data_list = [
     Data(
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=""""i"\t"f"\t"c"\t"if"\t"ifc"\t"bool"\t"inf"\t"nan"\t"mix_num"\t"time"
+1\t1.10\t"aa"\t1.0\t"1"\tTrue\tInfinity\tNaN\t1\t"2017-01-01 00:00:00"
+2\t2.20\t"bbb"\t2.2\t"2.2"\tFalse\tInfinity\tNaN\tInfinity\t"2017-01-02 03:04:05+09:00"
+3\t3.33\t"cccc"\t-3.0\t"ccc"\tTrue\tInfinity\tNaN\tNaN\t"2017-01-01 00:00:00"
+"""),
+    Data(
         header=None,
         value=value_matrix,
         expected="""1\t123.1\t"a"\t1.0\t"1"
