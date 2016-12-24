@@ -33,6 +33,9 @@ class TableWriter(TableWriterInterface):
     .. py:attribute:: stream
 
         Stream to write tables.
+        You can use arbitrary stream which supported ``write`` method
+        such as ``sys.stdout``, file stream, ``StringIO``, etc.
+        Defaults to ``sys.stdout``.
 
     .. py:attribute:: table_name
 
@@ -469,6 +472,7 @@ class TableWriter(TableWriterInterface):
         try:
             self._value_prop_matrix = self._prop_extractor.extract_data_property_matrix()
         except TypeError:
+            # raise
             self._value_prop_matrix = []
 
         self._preprocessed_property = True
