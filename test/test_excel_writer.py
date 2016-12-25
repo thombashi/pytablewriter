@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 import collections
+from decimal import Decimal
 import itertools
 
 import pytablewriter as ptw
@@ -21,6 +22,10 @@ from .data import (
     mix_value_matrix,
     value_matrix_iter
 )
+
+
+inf = Decimal('Infinity')
+nan = Decimal('NaN')
 
 Data = collections.namedtuple("Data", "table header value expected")
 
@@ -45,8 +50,8 @@ normal_test_data_list = [
         expected=TableData(
             "tablename",
             ["a", "b", "c", "dd", "e"],
-            [
-            ])
+            []
+        )
     ),
     Data(
         table="",
@@ -60,16 +65,16 @@ normal_test_data_list = [
             ],
             [
                 [
-                    1.0, 1.1, 'aa', 1.0, 1.0, 'True', 'Inf',
-                    'NaN', 1.0, '2017-01-01T00:00:00',
+                    1, "1.1", 'aa', 1, 1, 'True', inf,
+                    nan, 1, '2017-01-01T00:00:00',
                 ],
                 [
-                    2.0, 2.2, 'bbb', 2.2, 2.2, 'False', 'Inf', 'NaN',
-                    'Inf', '2017-01-02 03:04:05+09:00',
+                    2, "2.2", 'bbb', "2.2", "2.2", 'False', inf, nan,
+                    inf, '2017-01-02 03:04:05+09:00',
                 ],
                 [
-                    3.0, 3.33, 'cccc', -3.0, 'ccc', 'True', 'Inf',
-                    'NaN', 'NaN', '2017-01-01T00:00:00',
+                    3, "3.33", 'cccc', -3, 'ccc', 'True', inf,
+                    nan, nan, '2017-01-01T00:00:00',
                 ],
             ])
     ),
