@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
+from decimal import Decimal
 import io
 
 import collections
@@ -112,7 +113,7 @@ class Test_CsvTableWriter_from_csv:
 """
 
     __CSV_EXPECTED = """"a","b","c","dd","e"
-1,1.1,"a","1.0",""
+1,1.1,"a","1",""
 2,2.2,"","2.2","2.2"
 3,3.3,"ccc","","cc cc"
 """
@@ -127,9 +128,9 @@ class Test_CsvTableWriter_from_csv:
         assert writer.table_name == "csv1"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
         assert writer.value_matrix == [
-            [1, '1.1', 'a', '1.0', ''],
-            [2, '2.2', '', '2.2', '2.2'],
-            [3, '3.3', 'ccc', '', 'cc\ncc']
+            [1, Decimal('1.1'), 'a', Decimal('1.0'), ''],
+            [2, Decimal('2.2'), '', Decimal('2.2'), Decimal('2.2')],
+            [3, Decimal('3.3'), 'ccc', '', 'cc\ncc']
         ]
 
         print("[expected]\n{}".format(self.__CSV_EXPECTED))
@@ -151,9 +152,9 @@ class Test_CsvTableWriter_from_csv:
         assert writer.table_name == "test_data"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
         assert writer.value_matrix == [
-            [1, '1.1', 'a', '1.0', ''],
-            [2, '2.2', '', '2.2', '2.2'],
-            [3, '3.3', 'ccc', '', 'cc\ncc']
+            [1, Decimal('1.1'), 'a', Decimal('1'), ''],
+            [2, Decimal('2.2'), '', Decimal('2.2'), Decimal('2.2')],
+            [3, Decimal('3.3'), 'ccc', '', 'cc\ncc']
         ]
 
         print("[expected]\n{}".format(self.__CSV_EXPECTED))

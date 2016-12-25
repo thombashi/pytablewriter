@@ -8,19 +8,22 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 import collections
+from decimal import Decimal
 
 import pytablereader as ptr
 import pytablewriter as ptw
 import pytest
 
-from .data import header_list
-from .data import value_matrix
-from .data import value_matrix_with_none
-from .data import mix_header_list
-from .data import mix_value_matrix
-from .data import float_header_list
-from .data import float_value_matrix
-from .data import value_matrix_iter
+from .data import (
+    header_list,
+    value_matrix,
+    value_matrix_with_none,
+    mix_header_list,
+    mix_value_matrix,
+    float_header_list,
+    float_value_matrix,
+    value_matrix_iter
+)
 
 
 Data = collections.namedtuple(
@@ -225,9 +228,9 @@ class Test_MarkdownTableWriter_set_table_data:
             "tmp",
             ["attr_a", "attr_b", "attr_c"],
             [
-                ["1", "4",      "a"],
-                ["2", "2.1",    "bb"],
-                ["3", "120.9",  "ccc"],
+                ["1", "4", "a"],
+                ["2", "2.1", "bb"],
+                ["3", "120.9", "ccc"],
             ])
 
         writer.from_tabledata(tabledata)
@@ -235,9 +238,9 @@ class Test_MarkdownTableWriter_set_table_data:
         assert writer.table_name == "tmp"
         assert writer.header_list == ["attr_a", "attr_b", "attr_c"]
         assert writer.value_matrix == [
-            ["1", "4",      "a"],
-            ["2", "2.1",    "bb"],
-            ["3", "120.9",  "ccc"],
+            [1, 4, "a"],
+            [2, Decimal("2.1"), "bb"],
+            [3, Decimal("120.9"), "ccc"],
         ]
 
 
