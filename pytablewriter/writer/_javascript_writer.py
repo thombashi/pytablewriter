@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import dataproperty as dp
 import six
@@ -71,11 +72,11 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
         super(JavaScriptTableWriter, self).write_table()
         self.dec_indent_level()
-        data_frame_text = self.stream.getvalue().rstrip(u"\n")
+        data_frame_text = self.stream.getvalue().rstrip("\n")
         if self.is_write_closing_row:
             data_frame_line_list = data_frame_text.splitlines()
-            data_frame_line_list[-2] = data_frame_line_list[-2].rstrip(u",")
-            data_frame_text = u"\n".join(data_frame_line_list)
+            data_frame_line_list[-2] = data_frame_line_list[-2].rstrip(",")
+            data_frame_text = "\n".join(data_frame_line_list)
 
         self.stream.close()
         self.stream = org_stream
@@ -89,7 +90,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             raise EmptyTableNameError()
 
     def _get_opening_row_item_list(self):
-        return u"var {:s} = [".format(self.variable_name)
+        return "var {:s} = [".format(self.variable_name)
 
     def _get_closing_row_item_list(self):
-        return u"];"
+        return "];"

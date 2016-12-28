@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
@@ -20,9 +21,9 @@ class RstTableWriter(IndentationTextTableWriter):
     def __init__(self):
         super(RstTableWriter, self).__init__()
 
-        self.char_header_row_separator = u"="
-        self.char_cross_point = u"+"
-        self.indent_string = u"    "
+        self.char_header_row_separator = "="
+        self.char_cross_point = "+"
+        self.indent_string = "    "
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True
@@ -33,15 +34,15 @@ class RstTableWriter(IndentationTextTableWriter):
 
         self._is_remove_line_break = True
 
-        self.table_name = u""
+        self.table_name = ""
 
     def _write_table(self):
         self._verify_property()
 
         if dp.is_empty_string(self.table_name):
-            self._write_line(u".. table:: ")
+            self._write_line(".. table:: ")
         else:
-            self._write_line(u".. table:: {}".format(
+            self._write_line(".. table:: {}".format(
                 MultiByteStrDecoder(self.table_name).unicode_str))
 
         self._write_line()
@@ -68,8 +69,8 @@ class RstCsvTableWriter(RstTableWriter):
     def __init__(self):
         super(RstCsvTableWriter, self).__init__()
 
-        self.column_delimiter = u", "
-        self.char_cross_point = u""
+        self.column_delimiter = ", "
+        self.char_cross_point = ""
         self.is_padding = False
         self.is_write_header_separator_row = False
         self.is_write_value_separator_row = False
@@ -97,7 +98,7 @@ class RstCsvTableWriter(RstTableWriter):
         self.dec_indent_level()
 
     def _get_opening_row_item_list(self):
-        directive = u".. csv-table:: "
+        directive = ".. csv-table:: "
 
         if dp.is_empty_string(self.table_name):
             return [directive]
@@ -121,7 +122,7 @@ class RstCsvTableWriter(RstTableWriter):
                 ]))
             )
 
-        self._write_line(u":widths: " + u", ".join([
+        self._write_line(":widths: " + ", ".join([
             str(col_prop.padding_len)
             for col_prop in self._column_prop_list
         ]))
@@ -152,8 +153,8 @@ class RstGridTableWriter(RstTableWriter):
     def __init__(self):
         super(RstGridTableWriter, self).__init__()
 
-        self.char_left_side_row = u"|"
-        self.char_right_side_row = u"|"
+        self.char_left_side_row = "|"
+        self.char_right_side_row = "|"
 
     def write_table(self):
         """
@@ -185,11 +186,11 @@ class RstSimpleTableWriter(RstTableWriter):
     def __init__(self):
         super(RstSimpleTableWriter, self).__init__()
 
-        self.column_delimiter = u"  "
-        self.char_cross_point = u"  "
+        self.column_delimiter = "  "
+        self.char_cross_point = "  "
 
-        self.char_opening_row = u"="
-        self.char_closing_row = u"="
+        self.char_opening_row = "="
+        self.char_closing_row = "="
 
         self.is_write_value_separator_row = False
 

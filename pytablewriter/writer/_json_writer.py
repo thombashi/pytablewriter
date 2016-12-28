@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 import json
 
 import dataproperty as dp
@@ -37,7 +38,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.char_right_side_row = u","
+        self.char_right_side_row = ","
 
         self._prop_extractor.none_value = "null"
         self._prop_extractor.inf_value = "Infinity"
@@ -46,7 +47,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def write_null_line(self):
         self._verify_stream()
-        self.stream.write(u"\n")
+        self.stream.write("\n")
 
     def write_table(self):
         """
@@ -76,7 +77,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             json_text = strip_quote(json_text, "false")
             json_text_list.append(json_text)
 
-        joint_text = self.char_right_side_row + u"\n"
+        joint_text = self.char_right_side_row + "\n"
         json_text = joint_text.join(json_text_list)
         if all([
             not self.is_write_closing_row,
@@ -117,13 +118,13 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def _get_opening_row_item_list(self):
         if dp.is_not_empty_string(self.table_name):
-            return u'{{ "{:s}" : ['.format(
+            return '{{ "{:s}" : ['.format(
                 MultiByteStrDecoder(self.table_name).unicode_str)
 
-        return u"["
+        return "["
 
     def _get_closing_row_item_list(self):
         if dp.is_not_empty_string(self.table_name):
-            return u"]}"
+            return "]}"
 
-        return u"]"
+        return "]"

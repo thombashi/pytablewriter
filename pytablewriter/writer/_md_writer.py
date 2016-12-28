@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
@@ -28,9 +29,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def __init__(self):
         super(MarkdownTableWriter, self).__init__()
 
-        self.indent_string = u""
-        self.column_delimiter = u"|"
-        self.char_cross_point = u"|"
+        self.indent_string = ""
+        self.column_delimiter = "|"
+        self.char_cross_point = "|"
         self.is_write_opening_row = True
         self.is_quote_header = False
         self.is_quote_table[dp.Typecode.STRING] = False
@@ -61,7 +62,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             return []
 
         return [
-            u"#" * (self._indent_level + 1) + u" " +
+            "#" * (self._indent_level + 1) + " " +
             MultiByteStrDecoder(self.table_name).unicode_str
         ]
 
@@ -71,11 +72,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             padding_len = self._get_padding_len(col_prop)
 
             if col_prop.align == dp.Align.RIGHT:
-                separator_item = u"-" * (padding_len - 1) + u":"
+                separator_item = "-" * (padding_len - 1) + ":"
             elif col_prop.align == dp.Align.CENTER:
-                separator_item = u":" + u"-" * (padding_len - 2) + u":"
+                separator_item = ":" + "-" * (padding_len - 2) + ":"
             else:
-                separator_item = u"-" * padding_len
+                separator_item = "-" * padding_len
 
             header_separator_list.append(separator_item)
 

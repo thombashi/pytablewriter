@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import dataproperty as dp
 from six.moves import zip
@@ -80,15 +81,15 @@ class TextTableWriter(TableWriter, TextWriterInterface):
     def __init__(self):
         super(TextTableWriter, self).__init__()
 
-        self.column_delimiter = u"|"
-        self.char_left_side_row = u""
-        self.char_right_side_row = u""
-        self.char_cross_point = u""
+        self.column_delimiter = "|"
+        self.char_left_side_row = ""
+        self.char_right_side_row = ""
+        self.char_cross_point = ""
 
-        self.char_opening_row = u"-"
-        self.char_header_row_separator = u"-"
-        self.char_value_row_separator = u"-"
-        self.char_closing_row = u"-"
+        self.char_opening_row = "-"
+        self.char_header_row_separator = "-"
+        self.char_value_row_separator = "-"
+        self.char_closing_row = "-"
 
     def write_null_line(self):
         """
@@ -158,7 +159,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         return item
 
     def _get_header_format_string(self, col_prop, value_prop):
-        return u"{{:{:s}{:s}}}".format(
+        return "{{:{:s}{:s}}}".format(
             self._get_center_align_formatformat(),
             str(self._get_padding_len(col_prop, value_prop)))
 
@@ -167,13 +168,13 @@ class TextTableWriter(TableWriter, TextWriterInterface):
 
         self.stream.write(unicode_text)
 
-    def _write_raw_line(self, unicode_text=u""):
-        self._write_raw_string(unicode_text + u"\n")
+    def _write_raw_line(self, unicode_text=""):
+        self._write_raw_string(unicode_text + "\n")
 
     def _write(self, text):
         self._write_raw_string(text)
 
-    def _write_line(self, text=u""):
+    def _write_line(self, text=""):
         self._write_raw_line(text)
 
     def _write_row(self, value_list):
@@ -222,9 +223,9 @@ class TextTableWriter(TableWriter, TextWriterInterface):
         left_cross_point = self.char_cross_point
         right_cross_point = self.char_cross_point
         if dp.is_empty_string(self.char_left_side_row):
-            left_cross_point = u""
+            left_cross_point = ""
         if dp.is_empty_string(self.char_right_side_row):
-            right_cross_point = u""
+            right_cross_point = ""
 
         self._write_line(
             left_cross_point +
@@ -274,7 +275,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         super(IndentationTextTableWriter, self).__init__()
 
         self.set_indent_level(0)
-        self.indent_string = u""
+        self.indent_string = ""
 
     def set_indent_level(self, indent_level):
         """
@@ -305,7 +306,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     def _write(self, text):
         self._write_raw_string(self._get_indent_string() + text)
 
-    def _write_line(self, text=u""):
+    def _write_line(self, text=""):
         self._write_raw_line(self._get_indent_string() + text)
 
 
@@ -330,16 +331,16 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         import pathvalidate
 
         return pathvalidate.sanitize_python_var_name(
-            self.table_name, u"_").lower()
+            self.table_name, "_").lower()
 
     def __init__(self):
         super(SourceCodeTableWriter, self).__init__()
 
-        self.indent_string = u"    "
-        self.column_delimiter = u", "
-        self.char_left_side_row = u"["
-        self.char_right_side_row = u"],"
-        self.char_cross_point = u""
+        self.indent_string = "    "
+        self.column_delimiter = ", "
+        self.char_left_side_row = "["
+        self.char_right_side_row = "],"
+        self.char_cross_point = ""
         self.is_padding = False
         self.is_write_header_separator_row = False
         self.is_write_opening_row = True

@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import dataproperty as dp
 
@@ -28,8 +29,8 @@ class CsvTableWriter(TextTableWriter):
     def __init__(self):
         super(CsvTableWriter, self).__init__()
 
-        self.indent_string = u""
-        self.column_delimiter = u","
+        self.indent_string = ""
+        self.column_delimiter = ","
         self.is_padding = False
         self.is_write_header_separator_row = False
 

@@ -5,6 +5,7 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 import re
 import sys
 
@@ -338,13 +339,13 @@ class TableWriter(TableWriterInterface):
         return 0
 
     def _get_left_align_formatformat(self):
-        return u"<"
+        return "<"
 
     def _get_right_align_formatformat(self):
-        return u">"
+        return ">"
 
     def _get_center_align_formatformat(self):
-        return u"^"
+        return "^"
 
     def _get_row_item(self, col_prop, value_prop):
         to_string_format_str = self.__get_to_string_format(
@@ -387,16 +388,16 @@ class TableWriter(TableWriterInterface):
             ]),
             value_prop.typecode == Typecode.NONE,
         ]):
-            format_str = u""
+            format_str = ""
         else:
             format_str = col_prop.format_str
 
         try:
             format_str.format(value_prop.data)
         except ValueError:
-            format_str = u""
+            format_str = ""
 
-        return u"{:" + format_str + u"}"
+        return "{:" + format_str + "}"
 
     def __get_align_format(self, col_prop, value_prop):
         align_func_table = {
@@ -408,13 +409,13 @@ class TableWriter(TableWriterInterface):
 
         align = align_func_table[col_prop.align]()
 
-        format_list = [u"{:" + align]
+        format_list = ["{:" + align]
         col_padding_len = self._get_padding_len(col_prop, value_prop)
         if col_padding_len > 0:
             format_list.append(str(col_padding_len))
-        format_list.append(u"s}")
+        format_list.append("s}")
 
-        return u"".join(format_list)
+        return "".join(format_list)
 
     def _verify_property(self):
         self._verify_table_name()
