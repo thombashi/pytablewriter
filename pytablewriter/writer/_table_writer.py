@@ -472,7 +472,6 @@ class TableWriter(TableWriterInterface):
         try:
             self._value_prop_matrix = self._prop_extractor.extract_data_property_matrix()
         except TypeError:
-            # raise
             self._value_prop_matrix = []
 
         self._preprocessed_property = True
