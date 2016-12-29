@@ -104,6 +104,11 @@ class TableWriter(TableWriterInterface):
         self._preprocessed_property = False
         self._preprocessed_value_matrix = False
 
+    @property
+    def tabledata(self):
+        return ptr.TableData(
+            self.table_name, self.header_list, self.value_matrix)
+
     def __init__(self):
         self.stream = sys.stdout
         self.table_name = None
