@@ -12,6 +12,7 @@ import sys
 import dataproperty as dp
 from dataproperty import Typecode
 from mbstrdecoder import MultiByteStrDecoder
+import pytablereader as ptr
 from six.moves import zip
 
 from .._error import (
@@ -210,8 +211,6 @@ class TableWriter(TableWriterInterface):
 
             :ref:`example-from-csv`
         """
-
-        import pytablereader as ptr
 
         loader = ptr.CsvTableTextLoader(csv_source)
         try:
