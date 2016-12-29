@@ -107,7 +107,7 @@ class RstCsvTableWriter(RstTableWriter):
 
     def _write_opening_row(self):
         self.dec_indent_level()
-        super(RstTableWriter, self)._write_opening_row()
+        super(RstCsvTableWriter, self)._write_opening_row()
         self.inc_indent_level()
 
     def _write_header(self):
