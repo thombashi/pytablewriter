@@ -14,8 +14,10 @@ import dataproperty
 from ._error import WriterNotFoundError
 
 from .writer._csv_writer import CsvTableWriter
-from .writer._excel_writer import ExcelXlsxTableWriter
-from .writer._excel_writer import ExcelXlsTableWriter
+from .writer._excel_writer import (
+    ExcelXlsxTableWriter,
+    ExcelXlsTableWriter
+)
 from .writer._html_writer import HtmlTableWriter
 from .writer._javascript_writer import JavaScriptTableWriter
 from .writer._json_writer import JsonTableWriter
