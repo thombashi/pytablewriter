@@ -37,8 +37,8 @@ class HtmlTableWriter(TextTableWriter):
         self.is_quote_header = False
         self.indent_string = u"    "
         self.is_quote_header = False
-        self.is_quote_table[dp.Typecode.STRING] = False
-        self.is_quote_table[dp.Typecode.DATETIME] = False
+        self.quote_flag_table[dp.Typecode.STRING] = False
+        self.quote_flag_table[dp.Typecode.DATETIME] = False
 
         self._table_tag = None
 

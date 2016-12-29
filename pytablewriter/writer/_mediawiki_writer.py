@@ -41,7 +41,7 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
         self.is_quote_header = False
-        self.is_quote_table = {}
+        self.quote_flag_table = {}
 
     def _write_header(self):
         if not self.is_write_header:

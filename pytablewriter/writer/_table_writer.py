@@ -64,7 +64,7 @@ class TableWriter(TableWriterInterface):
 
         Add double quote to string in the header if the value is |True|.
 
-    .. py:attribute:: is_quote_table
+    .. py:attribute:: quote_flag_table
 
         Add double quote to string in a table elements,
         where |Typecode| of table-value is |True| in the mapping table
@@ -120,7 +120,7 @@ class TableWriter(TableWriterInterface):
         self.is_write_header = True
         self.is_padding = True
         self.is_quote_header = True
-        self.is_quote_table = {
+        self.quote_flag_table = {
             Typecode.NONE: False,
             Typecode.INTEGER: False,
             Typecode.FLOAT: False,
@@ -375,9 +375,9 @@ class TableWriter(TableWriterInterface):
         item = self.__get_align_format(col_prop, value_prop).format(item)
 
         if all([
-            self.is_quote_table.get(col_prop.typecode, False),
+            self.quote_flag_table.get(col_prop.typecode, False),
             any([
-                self.is_quote_table.get(value_prop.typecode, False),
+                self.quote_flag_table.get(value_prop.typecode, False),
                 value_prop.typecode in [Typecode.INTEGER, Typecode.FLOAT],
             ])
         ]):

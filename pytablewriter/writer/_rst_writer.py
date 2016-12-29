@@ -29,8 +29,8 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
         self.is_quote_header = False
-        self.is_quote_table[dp.Typecode.STRING] = False
-        self.is_quote_table[dp.Typecode.DATETIME] = False
+        self.quote_flag_table[dp.Typecode.STRING] = False
+        self.quote_flag_table[dp.Typecode.DATETIME] = False
 
         self._is_remove_line_break = True
 
@@ -75,8 +75,8 @@ class RstCsvTableWriter(RstTableWriter):
         self.is_write_header_separator_row = False
         self.is_write_value_separator_row = False
         self.is_write_closing_row = False
-        self.is_quote_table[dp.Typecode.STRING] = True
-        self.is_quote_table[dp.Typecode.DATETIME] = True
+        self.quote_flag_table[dp.Typecode.STRING] = True
+        self.quote_flag_table[dp.Typecode.DATETIME] = True
 
     def write_table(self):
         """
