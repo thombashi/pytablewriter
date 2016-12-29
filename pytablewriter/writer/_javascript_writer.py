@@ -7,11 +7,9 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import dataproperty as dp
 import six
 
 from .._converter import lower_bool_converter
-from .._error import EmptyTableNameError
 from .._function import str_datetime_converter
 from ._text_writer import SourceCodeTableWriter
 
