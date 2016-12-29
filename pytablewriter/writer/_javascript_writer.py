@@ -85,10 +85,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._write_line(data_frame_text)
         self.inc_indent_level()
 
-    def _verify_table_name(self):
-        if dp.is_empty_string(self.table_name):
-            raise EmptyTableNameError()
-
     def _get_opening_row_item_list(self):
         return "var {:s} = [".format(self.variable_name)
 

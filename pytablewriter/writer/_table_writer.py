@@ -147,6 +147,7 @@ class TableWriter(TableWriterInterface):
         self._prop_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
         self._prop_extractor.bool_converter = default_bool_converter
 
+        self._is_required_table_name = False
         self._is_remove_line_break = False
         self._preprocessed_property = False
 
@@ -438,7 +439,12 @@ class TableWriter(TableWriterInterface):
             pass
 
     def _verify_table_name(self):
-        pass
+        if all([
+                self._is_required_table_name,
+                dp.is_empty_string(self.table_name),
+        ]):
+            raise EmptyTableNameError(
+                "table_name must be string, with at least one character or more length.")
 
     def _verify_stream(self):
         if self.stream is None:

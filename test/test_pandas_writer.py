@@ -11,14 +11,16 @@ from __future__ import unicode_literals
 import pytablewriter
 import pytest
 
-from .data import Data
-from .data import null_test_data_list
-from .data import header_list
-from .data import value_matrix
-from .data import value_matrix_with_none
-from .data import mix_header_list
-from .data import mix_value_matrix
-from .data import value_matrix_iter
+from .data import (
+    Data,
+    null_test_data_list,
+    header_list,
+    value_matrix,
+    value_matrix_with_none,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix_iter
+)
 
 try:
     import numpy
@@ -46,8 +48,7 @@ table_name_ho_ge.columns = [
     "dd",
     "e",
 ]
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -55,8 +56,7 @@ table_name_ho_ge.columns = [
         value=None,
         expected="""tablename = pandas.DataFrame([
 ])
-"""
-    ),
+"""),
     Data(
         table="table with%null-value",
         indent=0,
@@ -75,8 +75,7 @@ table_with_null_value.columns = [
     "dd",
     "e",
 ]
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -99,8 +98,7 @@ tablename.columns = [
     "mix_num",
     "time",
 ]
-"""
-    ),
+"""),
 ]
 
 exception_test_data_list = [

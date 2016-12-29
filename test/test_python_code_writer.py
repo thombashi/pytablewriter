@@ -8,17 +8,19 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import pytablewriter
+import pytablewriter as ptw
 import pytest
 
-from .data import Data
-from .data import null_test_data_list
-from .data import header_list
-from .data import value_matrix
-from .data import value_matrix_with_none
-from .data import mix_header_list
-from .data import mix_value_matrix
-from .data import value_matrix_iter
+from .data import (
+    Data,
+    null_test_data_list,
+    header_list,
+    value_matrix,
+    value_matrix_with_none,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix_iter
+)
 
 
 normal_test_data_list = [
@@ -33,8 +35,7 @@ normal_test_data_list = [
     [2, 2.2, "bb", 2.2, "2.2"],
     [3, 3.3, "ccc", 3.0, "cccc"],
 ]
-"""
-    ),
+"""),
     Data(
         table="TABLENAME",
         indent=0,
@@ -43,20 +44,7 @@ normal_test_data_list = [
         expected="""tablename = [
     ["a", "b", "c", "dd", "e"],
 ]
-"""
-    ),
-    Data(
-        table=None,
-        indent=0,
-        header=None,
-        value=value_matrix,
-        expected="""[
-    [1, 123.1, "a", 1.0, "1"],
-    [2, 2.2, "bb", 2.2, "2.2"],
-    [3, 3.3, "ccc", 3.0, "cccc"],
-]
-"""
-    ),
+"""),
     Data(
         table="TableName",
         indent=1,
@@ -68,8 +56,7 @@ normal_test_data_list = [
         [2, 2.2, "bb", 2.2, "2.2"],
         [3, 3.3, "ccc", 3.0, "cccc"],
     ]
-"""
-    ),
+"""),
     Data(
         table="TABLE Name",
         indent=0,
@@ -82,8 +69,7 @@ normal_test_data_list = [
     [3, 3.3, "ccc", None, "cccc"],
     [None, None, None, None, None],
 ]
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -95,11 +81,10 @@ normal_test_data_list = [
     [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), dateutil.parser.parse("2017-01-02T03:04:05+0900")],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
-"""
-    ),
+"""),
 ]
 
-table_writer_class = pytablewriter.PythonCodeTableWriter
+table_writer_class = ptw.PythonCodeTableWriter
 
 
 class Test_PythonCodeTableWriter_write_new_line:
@@ -159,7 +144,11 @@ class Test_PythonCodeTableWriter_write_table:
         ["table", "indent", "header", "value", "expected"],
         [
             [data.table, data.indent, data.header, data.value, data.expected]
-            for data in null_test_data_list
+            for data in null_test_data_list + [
+                Data(table=None, indent=0, header=header_list,
+                     value=value_matrix,
+                     expected=ptw.EmptyTableNameError)
+            ]
         ]
     )
     def test_exception(self, capsys, table, indent, header, value, expected):
