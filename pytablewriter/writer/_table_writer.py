@@ -18,6 +18,7 @@ from six.moves import zip
 from .._error import (
     NotSupportedError,
     EmptyValueError,
+    EmptyTableNameError,
     EmptyHeaderError,
     EmptyTableDataError
 )
@@ -190,7 +191,7 @@ class TableWriter(TableWriterInterface):
 
         self.table_name = tabledata.table_name
         self.header_list = tabledata.header_list
-        self.value_matrix = tabledata.record_list
+        self.value_matrix = tabledata.value_matrix
 
     def from_csv(self, csv_source):
         """

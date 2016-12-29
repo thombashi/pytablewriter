@@ -1,8 +1,8 @@
-DataProperty>=0.13.7
+DataProperty>=0.13.9
 dominate>=2.3.0
-mbstrdecoder>=0.1.1
-pathvalidate>=0.10.1
-pytablereader>=0.7.1
+mbstrdecoder>=0.2.0
+pathvalidate>=0.12.1
+pytablereader>=0.8.1
 six
 XlsxWriter
 xlwt
