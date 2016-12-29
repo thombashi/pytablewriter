@@ -138,7 +138,7 @@ class RstCsvTableWriter(RstTableWriter):
 class RstGridTableWriter(RstTableWriter):
     """
     Concrete class of a table writer for reStructuredText
-    `grid tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__
+    `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__
     format.
 
     :Examples:
@@ -171,7 +171,7 @@ class RstGridTableWriter(RstTableWriter):
 class RstSimpleTableWriter(RstTableWriter):
     """
     Concrete class of a table writer for reStructuredText
-    `simple tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
+    `Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
     format.
 
     :Examples:
