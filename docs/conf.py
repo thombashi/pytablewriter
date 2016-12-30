@@ -10,6 +10,7 @@ import sphinx_rtd_theme
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('../pytablewriter'))
+#sys.path.insert(0, os.path.abspath('../pytablewriter/writer'))
 
 # -- General configuration ------------------------------------------------
 
@@ -342,22 +343,22 @@ rp_module = u"""
 
 rp_attr = u"""
 .. |iteration_length| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.iteration_length`
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.iteration_length`
 
 .. |stream| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.stream`
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.stream`
 
 .. |table_name| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.table_name`
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.table_name`
 
 .. |header_list| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.header_list`
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.header_list`
 
 .. |value_matrix| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.value_matrix`
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.value_matrix`
 
 .. |write_callback| replace::
-    :py:attr:`~pytablewriter._table_writer.TableWriter.write_callback`
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.write_callback`
 
 .. |column_delimiter| replace::
     :py:attr:`~pytablewriter._text_writer.TextTableWriter.column_delimiter`

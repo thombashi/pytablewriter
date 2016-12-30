@@ -100,3 +100,7 @@ TOML table writer class
 -------------------------------
 .. autoclass:: pytablewriter.TomlTableWriter
     :inherited-members:
+
+Base table writer class
+-------------------------------
+.. autoclass:: pytablewriter.writer._table_writer.AbstractTableWriter
