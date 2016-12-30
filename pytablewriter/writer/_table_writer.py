@@ -361,8 +361,8 @@ class TableWriter(TableWriterInterface):
             item = to_string_format_str.format(value_prop.data)
         else:
             try:
-                value = col_prop.type_factory(
-                    value_prop.data, is_strict=False).create_type_converter().convert()
+                value = col_prop.type_class(
+                    value_prop.data, is_strict=False).convert()
             except dp.TypeConversionError:
                 value = value_prop.data
 
@@ -480,7 +480,7 @@ class TableWriter(TableWriterInterface):
 
         self._prop_extractor.header_list = self.header_list
         self._prop_extractor.data_matrix = self.__value_matrix_org
-        self._column_prop_list = self._prop_extractor.extract_column_property_list()
+        self._column_prop_list = self._prop_extractor.extract_col_property_list()
         try:
             self._value_prop_matrix = self._prop_extractor.extract_data_property_matrix()
         except TypeError:

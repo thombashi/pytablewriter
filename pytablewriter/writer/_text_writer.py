@@ -201,7 +201,7 @@ class TextTableWriter(TableWriter, TextWriterInterface):
             self._get_header_item(
                 col_prop,
                 dp.DataProperty(
-                    header, is_strict_type_mapping=dp.STRICT_TYPE_MAPPING)
+                    header, strict_type_mapping=dp.STRICT_TYPE_MAPPING)
             )
             for col_prop, header in
             zip(self._column_prop_list, self.header_list)
@@ -354,7 +354,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self._is_remove_line_break = True
 
         self._prop_extractor.none_value = None
-        self._prop_extractor.is_strict_type_mapping[
+        self._prop_extractor.strict_type_mapping[
             dp.Typecode.DATETIME] = False
 
     def _get_value_row_separator_item_list(self):
