@@ -17,7 +17,7 @@ from ._text_writer import TextTableWriter
 
 class MediaWikiTableWriter(TextTableWriter):
     """
-    Concrete class of a table writer for MediaWiki format.
+    A table writer class for MediaWiki format.
 
     :Examples:
 

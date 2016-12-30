@@ -16,7 +16,7 @@ from ._csv_writer import CsvTableWriter
 
 class LtsvTableWriter(CsvTableWriter):
     """
-    Concrete class of a table writer for
+    A table writer class for
     `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.
 
     :Examples:

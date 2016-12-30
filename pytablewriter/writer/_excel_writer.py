@@ -24,7 +24,7 @@ from ._table_writer import TableWriter
 
 class ExcelTableWriter(TableWriter, TextWriterInterface):
     """
-    Abstract class of a table writer for Excel format.
+    Abstract class of a table writer for Excel file format.
     """
 
     @property
@@ -227,7 +227,7 @@ class ExcelTableWriter(TableWriter, TextWriterInterface):
 
 class ExcelXlsTableWriter(ExcelTableWriter):
     """
-    Concrete class of a table writer for Excel format
+    A table writer class for Excel file format: ``.xls``
     (older or equal to Office 2003).
     """
 
@@ -296,7 +296,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
 
 class ExcelXlsxTableWriter(ExcelTableWriter):
     """
-    Concrete class of a table writer for Excel format
+    A table writer class for Excel file format: ``.xlsx``
     (newer or equal to Office 2007).
 
     :Examples:

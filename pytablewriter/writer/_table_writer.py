@@ -62,13 +62,28 @@ class TableWriter(TableWriterInterface):
 
     .. py:attribute:: is_quote_header
 
-        Add double quote to string in the header if the value is |True|.
+        Add double quote to the headers if the value is |True|.
 
     .. py:attribute:: quote_flag_table
 
-        Add double quote to string in a table elements,
-        where |Typecode| of table-value is |True| in the mapping table
-        (dictionary): ``{ Typecode : bool }``.
+        Add double quote to strings in table elements,
+        where |Typecode| of table-value is |True| in the ``quote_flag_table``
+        mapping table. ``quote_flag_table`` should be a dictionary.
+        And is ``{ Typecode : bool }``. Defaults to 
+
+        .. code-block:: json
+            :caption: quote_flag_table default value
+
+            {
+                Typecode.NONE: False,
+                Typecode.INTEGER: False,
+                Typecode.FLOAT: False,
+                Typecode.STRING: True,
+                Typecode.DATETIME: True,
+                Typecode.FLOAT: False,
+                Typecode.NAN: False,
+                Typecode.BOOL: False,
+            }
 
     .. py:attribute:: iteration_length
 

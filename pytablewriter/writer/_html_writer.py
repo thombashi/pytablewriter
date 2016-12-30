@@ -19,7 +19,7 @@ from ._text_writer import TextTableWriter
 
 class HtmlTableWriter(TextTableWriter):
     """
-    Concrete class of a table writer for HTML format.
+    A table writer class for HTML format.
 
     :Examples:
 

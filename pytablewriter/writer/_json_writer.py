@@ -22,7 +22,7 @@ from ._text_writer import IndentationTextTableWriter
 
 class JsonTableWriter(IndentationTextTableWriter):
     """
-    Concrete class of a table writer for JSON format.
+    A table writer class for JSON format.
 
     :Examples:
 

@@ -18,7 +18,7 @@ from ._text_writer import SourceCodeTableWriter
 
 class PythonCodeTableWriter(SourceCodeTableWriter):
     """
-    Concrete class of a table writer for Python code (nested list) format.
+    A table writer class for Python source code format.
 
     :Examples:
 
@@ -38,8 +38,12 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
     def write_table(self):
         """
-        |write_table| with Python nested list variable definition format.
+        |write_table| with Python format.
+        The tabular data will be written as nested list variable definition
+        for Python format.
 
+        :raises pytablewriter.EmptyTableNameError:
+            If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
 

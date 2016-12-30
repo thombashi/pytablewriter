@@ -53,7 +53,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
 class RstCsvTableWriter(RstTableWriter):
     """
-    Concrete class of a table writer for reStructuredText
+    A table class writer for reStructuredText
     `CSV table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     format.
 
@@ -137,7 +137,7 @@ class RstCsvTableWriter(RstTableWriter):
 
 class RstGridTableWriter(RstTableWriter):
     """
-    Concrete class of a table writer for reStructuredText
+    A table writer class for reStructuredText
     `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__
     format.
 
@@ -170,7 +170,7 @@ class RstGridTableWriter(RstTableWriter):
 
 class RstSimpleTableWriter(RstTableWriter):
     """
-    Concrete class of a table writer for reStructuredText
+    A table writer class for reStructuredText
     `Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
     format.
 

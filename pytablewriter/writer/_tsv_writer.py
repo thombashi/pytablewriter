@@ -12,7 +12,7 @@ from ._csv_writer import CsvTableWriter
 
 class TsvTableWriter(CsvTableWriter):
     """
-    Concrete class of a table writer for tab separated values (TSV) format.
+    A table writer class for tab separated values (TSV) format.
 
     :Examples:
 

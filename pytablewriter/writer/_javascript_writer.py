@@ -20,7 +20,7 @@ def js_datetime_converter(value):
 
 class JavaScriptTableWriter(SourceCodeTableWriter):
     """
-    Concrete class of a table writer for JavaScript format.
+    A table writer for class JavaScript format.
 
     :Examples:
 

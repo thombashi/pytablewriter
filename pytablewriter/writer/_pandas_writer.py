@@ -20,7 +20,7 @@ from ._text_writer import SourceCodeTableWriter
 
 class PandasDataFrameWriter(SourceCodeTableWriter):
     """
-    Concrete class of a writer for Pandas DataFrame format.
+    A writer class for Pandas DataFrame format.
 
     :Examples:
 
@@ -42,8 +42,12 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
     def write_table(self):
         """
-        |write_table| with Pandas DataFrame variable definition format.
+        |write_table| with Pandas DataFrame format.
+        The tabular data will be written as ``pandas.DataFrame`` class
+        variable definition.
 
+        :raises pytablewriter.EmptyTableNameError:
+            If the |table_name| is empty.
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
 
         .. note::
