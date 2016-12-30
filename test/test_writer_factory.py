@@ -48,6 +48,9 @@ class Test_WriterFactory_create_from_file_extension:
             ["valid_ext.tsv", "valid_ext.TSV", ".tsv", "TSV"],
             [ptw.TsvTableWriter])
         ) + list(itertools.product(
+            ["valid_ext.toml", "valid_ext.TOML", ".toml", "TOML"],
+            [ptw.TomlTableWriter])
+        ) + list(itertools.product(
             ["valid_ext.xls", "valid_ext.XLS", ".xls", "XLS"],
             [ptw.ExcelXlsTableWriter])
         ) + list(itertools.product(
@@ -102,6 +105,8 @@ class Test_FileLoaderFactory_create_from_format_name:
         ["rst_csv_table", ptw.RstCsvTableWriter],
         ["tsv", ptw.TsvTableWriter],
         ["TSV", ptw.TsvTableWriter],
+        ["toml", ptw.TomlTableWriter],
+        ["TOML", ptw.TomlTableWriter],
     ])
     def test_normal(self, format_name, expected):
         writer = ptw.TableWriterFactory.create_from_format_name(format_name)

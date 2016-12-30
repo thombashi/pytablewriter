@@ -16,6 +16,7 @@ Python 2.7+ or 3.3+
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `six <https://pypi.python.org/pypi/six/>`__
+- `toml <https://github.com/uiri/toml>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
 - `xlwt <http://www.python-excel.org/>`__
 

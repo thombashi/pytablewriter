@@ -14,5 +14,6 @@ Examples
    mediawiki
    rst/index
    sourcecode/index
+   toml
    multibyte_table
    datasource/index

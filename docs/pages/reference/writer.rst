@@ -94,3 +94,9 @@ reStructuredText simple table writer class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.RstSimpleTableWriter
     :inherited-members:
+
+
+TOML table writer class
+-------------------------------
+.. autoclass:: pytablewriter.TomlTableWriter
+    :inherited-members:

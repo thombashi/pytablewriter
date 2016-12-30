@@ -33,6 +33,7 @@ from .writer._rst_writer import (
     RstSimpleTableWriter
 )
 from .writer._tsv_writer import TsvTableWriter
+from .writer._toml_writer import TomlTableWriter
 
 
 class TableWriterFactory(object):
@@ -47,6 +48,7 @@ class TableWriterFactory(object):
         "py": PythonCodeTableWriter,
         "rst": RstGridTableWriter,
         "tsv": TsvTableWriter,
+        "toml": TomlTableWriter,
     }
 
     @classmethod
@@ -70,6 +72,7 @@ class TableWriterFactory(object):
             ``"xls"``           :py:class:`~.ExcelXlsTableWriter`  
             ``"xlsx"``          :py:class:`~.ExcelXlsxTableWriter` 
             ``"tsv"``           :py:class:`~.TsvTableWriter`       
+            ``"toml"``          :py:class:`~.TomlTableWriter`      
             ==================  ===================================
 
         :param str file_extension:
@@ -123,6 +126,7 @@ class TableWriterFactory(object):
             ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter` 
             ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`    
             ``"tsv"``                       :py:class:`~.TsvTableWriter`       
+            ``"toml"``                      :py:class:`~.TomlTableWriter`      
             ==============================  ===================================
 
         :param str format_name: Format name string (case insensitive).
@@ -170,6 +174,7 @@ class TableWriterFactory(object):
                 javascript
                 js
                 json
+                ltsv
                 markdown
                 mediawiki
                 null
@@ -180,6 +185,8 @@ class TableWriterFactory(object):
                 rst_csv_table
                 rst_grid_table
                 rst_simple_table
+                toml
+                tsv
         """
 
         return sorted(cls.__get_format_name_writer_mapping())
@@ -201,9 +208,12 @@ class TableWriterFactory(object):
                 html
                 js
                 json
+                ltsv
                 md
                 py
                 rst
+                toml
+                tsv
                 xls
                 xlsx
         """
