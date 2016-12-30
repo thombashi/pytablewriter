@@ -19,10 +19,10 @@ from ._excel_workbook import (
     ExcelWorkbookXlsx
 )
 from ._interface import TextWriterInterface
-from ._table_writer import TableWriter
+from ._table_writer import AbstractTableWriter
 
 
-class ExcelTableWriter(TableWriter, TextWriterInterface):
+class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
     """
     Abstract class of a table writer for Excel file format.
     """

@@ -29,9 +29,9 @@ def default_bool_converter(value):
     return str(value)
 
 
-class TableWriter(TableWriterInterface):
+class AbstractTableWriter(TableWriterInterface):
     """
-    Abstract class of table writer.
+    Base abstract class of table writer classes.
 
     .. py:attribute:: stream
 

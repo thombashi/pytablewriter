@@ -11,14 +11,14 @@ import dataproperty as dp
 from six.moves import zip
 
 from .._error import EmptyHeaderError
-from ._table_writer import TableWriter
+from ._table_writer import AbstractTableWriter
 from ._interface import (
     IndentationInterface,
     TextWriterInterface
 )
 
 
-class TextTableWriter(TableWriter, TextWriterInterface):
+class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     """
     Base class of table writer with text format.
 
