@@ -19,16 +19,14 @@ pytablewriter
 Summary
 -------
 
-pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TSV.
+pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TOML/TSV.
 
 Features
 --------
 
 - Write a table in various formats:
     - CSV
-    - Microsoft Excel :superscript:`TM`
-        - `.xlsx` format
-        - `.xls` format
+    - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
     - HTML
     - JSON
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
@@ -38,17 +36,15 @@ Features
         - `Pandas <http://pandas.pydata.org/>`__ (Definition of a DataFrame variable)
         - Python code (Definition of a nested list variable)
         - JavaScript (Definition of a nested list variable)
-    - reStructuredText
-        - Grid tables
-        - Simple tables
-        - CSV table
+    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     - Tab-separated values (TSV)
+    - `TOML <https://github.com/toml-lang/toml>`__
 - Automatic tabular data formatting
     - Alignment
     - Padding
     - Decimal places of numbers
 - Multibyte character support
-- Output table to a stream such as a file or the standard output
+- Write table to a stream such as a file/standard-output/string-buffer
 
 Examples
 ========
@@ -307,6 +303,7 @@ Python 2.7+ or 3.3+
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `six <https://pypi.python.org/pypi/six/>`__
+- `toml <https://github.com/uiri/toml>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
 - `xlwt <http://www.python-excel.org/>`__
 
