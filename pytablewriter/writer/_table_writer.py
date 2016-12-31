@@ -155,7 +155,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._value_matrix = []
         self._column_prop_list = []
-        self._value_prop_matrix = []
+        self._value_dp_matrix = []
 
         self._dp_extractor = dp.DataPropertyExtractor()
         self._dp_extractor.min_padding_len = 1
@@ -491,15 +491,15 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._value_matrix = []
         self._column_prop_list = []
-        self._value_prop_matrix = []
+        self._value_dp_matrix = []
 
         self._dp_extractor.header_list = self.header_list
         self._dp_extractor.data_matrix = self.__value_matrix_org
         self._column_prop_list = self._dp_extractor.to_col_dataproperty_list()
         try:
-            self._value_prop_matrix = self._dp_extractor.to_dataproperty_matrix()
+            self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError:
-            self._value_prop_matrix = []
+            self._value_dp_matrix = []
 
         self._preprocessed_property = True
 
@@ -513,7 +513,7 @@ class AbstractTableWriter(TableWriterInterface):
                 for col_prop, value_prop in
                 zip(self._column_prop_list, value_prop_list)
             ]
-            for value_prop_list in self._value_prop_matrix
+            for value_prop_list in self._value_dp_matrix
         ]
 
         self._preprocessed_value_matrix = True
