@@ -34,9 +34,7 @@ class HtmlTableWriter(TextTableWriter):
         super(HtmlTableWriter, self).__init__()
 
         self.is_padding = False
-        self.is_quote_header = False
         self.indent_string = u"    "
-        self.is_quote_header = False
         self.quote_flag_table[dp.Typecode.STRING] = False
         self.quote_flag_table[dp.Typecode.DATETIME] = False
 

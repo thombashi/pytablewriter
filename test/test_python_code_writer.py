@@ -82,6 +82,20 @@ normal_test_data_list = [
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
 """),
+    Data(
+        table="quoted values",
+        indent=0,
+        header=['"quote"', '"abc efg"'],
+        value=[
+            ['"1', '"abc"'],
+            ['"-1', '"efg"'],
+        ],
+        expected="""quoted_values = [
+    ["quote", "abc efg"],
+    [1, "abc"],
+    [-1, "efg"],
+]
+"""),
 ]
 
 table_writer_class = ptw.PythonCodeTableWriter
@@ -116,6 +130,9 @@ class Test_PythonCodeTableWriter_write_table:
 
         out, _err = capsys.readouterr()
 
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     def test_normal_not_strict(self, capsys):
@@ -135,8 +152,8 @@ class Test_PythonCodeTableWriter_write_table:
 
         out, _err = capsys.readouterr()
 
-        print("expected: {}".format(expected))
-        print("actual: {}".format(out))
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
 
         assert out == expected
 

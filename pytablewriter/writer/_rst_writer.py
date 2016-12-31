@@ -28,7 +28,6 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.is_quote_header = False
         self.quote_flag_table[dp.Typecode.STRING] = False
         self.quote_flag_table[dp.Typecode.DATETIME] = False
 

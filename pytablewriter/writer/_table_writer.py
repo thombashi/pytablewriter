@@ -134,7 +134,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.is_write_header = True
         self.is_padding = True
-        self.is_quote_header = True
+        self.is_quote_header = False
         self.quote_flag_table = {
             Typecode.NONE: False,
             Typecode.INTEGER: False,
@@ -159,6 +159,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._dp_extractor = dp.DataPropertyExtractor()
         self._dp_extractor.min_padding_len = 1
+        self._dp_extractor.strip_str = '"'
         self._dp_extractor.none_value = ""
         self._dp_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
         self._dp_extractor.bool_converter = default_bool_converter
@@ -490,12 +491,13 @@ class AbstractTableWriter(TableWriterInterface):
             return
 
         self._value_matrix = []
-        self._column_dp_list = []
-        self._value_dp_matrix = []
 
         self._dp_extractor.header_list = self.header_list
         self._dp_extractor.data_matrix = self.__value_matrix_org
+
         self._column_dp_list = self._dp_extractor.to_col_dataproperty_list()
+        self._header_dp_list = self._dp_extractor.to_header_dataproperty_list()
+
         try:
             self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError:

@@ -40,7 +40,6 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.is_quote_header = False
         self.quote_flag_table = {}
 
     def _write_header(self):

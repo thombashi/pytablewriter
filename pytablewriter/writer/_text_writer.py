@@ -198,13 +198,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             return
 
         self._write_row([
-            self._get_header_item(
-                col_dp,
-                dp.DataProperty(
-                    header, strict_type_mapping=dp.STRICT_TYPE_MAPPING)
-            )
-            for col_dp, header in
-            zip(self._column_dp_list, self.header_list)
+            self._get_header_item(col_dp, header_dp)
+            for col_dp, header_dp in
+            zip(self._column_dp_list, self._header_dp_list)
         ])
 
     def _write_value_row(self, value_list, value_dp_list):
@@ -342,6 +338,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.char_right_side_row = "],"
         self.char_cross_point = ""
         self.is_padding = False
+        self.is_quote_header = True
         self.is_write_header_separator_row = False
         self.is_write_opening_row = True
         self.is_write_closing_row = True
