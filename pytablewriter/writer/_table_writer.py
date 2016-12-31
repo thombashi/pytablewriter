@@ -154,7 +154,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_float_formatting = True
 
         self._value_matrix = []
-        self._column_prop_list = []
+        self._column_dp_list = []
         self._value_dp_matrix = []
 
         self._dp_extractor = dp.DataPropertyExtractor()
@@ -490,12 +490,12 @@ class AbstractTableWriter(TableWriterInterface):
             return
 
         self._value_matrix = []
-        self._column_prop_list = []
+        self._column_dp_list = []
         self._value_dp_matrix = []
 
         self._dp_extractor.header_list = self.header_list
         self._dp_extractor.data_matrix = self.__value_matrix_org
-        self._column_prop_list = self._dp_extractor.to_col_dataproperty_list()
+        self._column_dp_list = self._dp_extractor.to_col_dataproperty_list()
         try:
             self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError:
@@ -511,7 +511,7 @@ class AbstractTableWriter(TableWriterInterface):
             [
                 self._get_row_item(col_dp, value_dp)
                 for col_dp, value_dp in
-                zip(self._column_prop_list, value_dp_list)
+                zip(self._column_dp_list, value_dp_list)
             ]
             for value_dp_list in self._value_dp_matrix
         ]

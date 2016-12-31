@@ -124,7 +124,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         self._write_line(":widths: " + ", ".join([
             str(col_prop.padding_len)
-            for col_prop in self._column_prop_list
+            for col_prop in self._column_dp_list
         ]))
         self._write_line()
 

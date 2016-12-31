@@ -272,7 +272,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             return self.__col_style_table.get(col)
 
         try:
-            col_prop = self._column_prop_list[col]
+            col_prop = self._column_dp_list[col]
         except KeyError:
             return {}
 
@@ -414,7 +414,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             return self.__col_numprops_table.get(col)
 
         try:
-            col_prop = self._column_prop_list[col]
+            col_prop = self._column_dp_list[col]
         except KeyError:
             return {}
 
@@ -452,7 +452,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         if not IntegerType(font_size).is_type():
             return
 
-        for col_idx, col_prop in enumerate(self._column_prop_list):
+        for col_idx, col_prop in enumerate(self._column_dp_list):
             width = (
                 min(col_prop.padding_len, self.MAX_CELL_WIDTH) *
                 (font_size / 10.0) + 2

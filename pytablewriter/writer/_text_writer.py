@@ -193,7 +193,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if dp.is_empty_sequence(self.header_list):
             raise EmptyHeaderError()
 
-        if dp.is_empty_sequence(self._column_prop_list):
+        if dp.is_empty_sequence(self._column_dp_list):
             self._write_row(self.header_list)
             return
 
@@ -204,7 +204,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                     header, strict_type_mapping=dp.STRICT_TYPE_MAPPING)
             )
             for col_prop, header in
-            zip(self._column_prop_list, self.header_list)
+            zip(self._column_dp_list, self.header_list)
         ])
 
     def _write_value_row(self, value_list, value_dp_list):
@@ -213,7 +213,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def __get_row_separator_item_list(self, separator_char):
         return [
             separator_char * self._get_padding_len(col_prop)
-            for col_prop in self._column_prop_list
+            for col_prop in self._column_dp_list
         ]
 
     def __write_separator_row(self, value_list):
