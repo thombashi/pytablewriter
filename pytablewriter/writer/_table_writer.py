@@ -157,7 +157,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._column_prop_list = []
         self._value_prop_matrix = []
 
-        self._prop_extractor = dp.PropertyExtractor()
+        self._prop_extractor = dp.DataPropertyExtractor()
         self._prop_extractor.min_padding_len = 1
         self._prop_extractor.none_value = ""
         self._prop_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
@@ -495,9 +495,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._prop_extractor.header_list = self.header_list
         self._prop_extractor.data_matrix = self.__value_matrix_org
-        self._column_prop_list = self._prop_extractor.extract_col_property_list()
+        self._column_prop_list = self._prop_extractor.to_col_dataproperty_list()
         try:
-            self._value_prop_matrix = self._prop_extractor.extract_data_property_matrix()
+            self._value_prop_matrix = self._prop_extractor.to_dataproperty_matrix()
         except TypeError:
             self._value_prop_matrix = []
 

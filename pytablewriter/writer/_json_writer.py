@@ -100,7 +100,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._prop_extractor.data_matrix = self.value_matrix
 
         try:
-            data_prop_matrix = self._prop_extractor.extract_data_property_matrix()
+            data_prop_matrix = self._prop_extractor.to_dataproperty_matrix()
         except TypeError:
             data_prop_matrix = []
 
