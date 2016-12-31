@@ -44,7 +44,6 @@ class TomlTableWriter(TextTableWriter):
 
         self._verify_property()
 
-        # self.stream.write(pytoml.dumps(self.tabledata.as_dict()))
         self.stream.write(toml.dumps(self.tabledata.as_dict()))
 
     def _verify_header(self):
