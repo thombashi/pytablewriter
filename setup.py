@@ -10,6 +10,7 @@ import os.path
 import setuptools
 import sys
 
+
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
@@ -33,7 +34,7 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 setuptools.setup(
     name="pytablewriter",
-    version="0.16.0",
+    version="0.16.1",
     author="Tsuyoshi Hombashi",
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/pytablewriter",
