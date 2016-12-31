@@ -44,7 +44,7 @@ class TomlTableWriter(TextTableWriter):
 
         self._verify_property()
 
-        self.stream.write(toml.dumps(self.tabledata.as_dict()))
+        self.stream.write(toml.dumps(self.tabledata.asdict()))
 
     def _verify_header(self):
         self._validate_empty_header()
