@@ -206,8 +206,8 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _write_value_matrix(self):
         for value_dp_list in self._value_dp_matrix:
-            for col, dp in enumerate(value_dp_list):
-                self._write_cell(self._current_data_row, col, dp)
+            for col_idx, value_dp in enumerate(value_dp_list):
+                self._write_cell(self._current_data_row, col_idx, value_dp)
 
             self._current_data_row += 1
 
@@ -249,18 +249,18 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         for col, value in enumerate(self.header_list):
             self.stream.write(self.first_header_row, col, value)
 
-    def _write_cell(self, row, col, prop):
-        if prop.typecode in [dp.Typecode.FLOAT]:
+    def _write_cell(self, row, col, value_dp):
+        if value_dp.typecode in [dp.Typecode.FLOAT]:
             try:
                 cell_style = self.__get_cell_style(col)
             except ValueError:
                 pass
             else:
                 self.stream.write(
-                    row, col, prop.data, cell_style)
+                    row, col, value_dp.data, cell_style)
                 return
 
-        self.stream.write(row, col, prop.data)
+        self.stream.write(row, col, value_dp.data)
 
     def _postprocess(self):
         super(ExcelXlsTableWriter, self)._postprocess()
@@ -386,28 +386,28 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
                 row=row, col=0, data=[""] * len(self.header_list),
                 cell_format=header_format)
 
-    def _write_cell(self, row, col, prop):
+    def _write_cell(self, row, col, value_dp):
         base_props = dict(self.__cell_format_property)
-        format_key = "{:d}_{:d}".format(col, prop.typecode)
+        format_key = "{:d}_{:d}".format(col, value_dp.typecode)
 
-        if prop.typecode in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
+        if value_dp.typecode in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
             num_props = self.__get_number_property(col)
             base_props.update(num_props)
             cell_format = self.__get_cell_format(format_key, base_props)
 
             try:
                 self.stream.write_number(
-                    row, col, float(prop.data), cell_format)
+                    row, col, float(value_dp.data), cell_format)
                 return
             except TypeError:
                 pass
 
-        if prop.typecode is dp.Typecode.NAN:
+        if value_dp.typecode is dp.Typecode.NAN:
             base_props = dict(self.__nan_format_property)
 
         cell_format = self.__get_cell_format(format_key, base_props)
         self.stream.write(
-            row, col, prop.data, cell_format)
+            row, col, value_dp.data, cell_format)
 
     def __get_number_property(self, col):
         if col in self.__col_numprops_table:
