@@ -11,15 +11,15 @@ from decimal import Decimal
 import dataproperty
 
 
-def _get_data_helper(data_prop):
-    if data_prop.typecode == dataproperty.Typecode.FLOAT:
-        if isinstance(data_prop.data, Decimal):
-            return float(data_prop.data)
-    elif data_prop.typecode == dataproperty.Typecode.DATETIME:
-        full_format_str = "{:" + data_prop.format_str + "}"
-        return full_format_str.format(data_prop.data)
+def _get_data_helper(dp):
+    if dp.typecode == dataproperty.Typecode.FLOAT:
+        if isinstance(dp.data, Decimal):
+            return float(dp.data)
+    elif dp.typecode == dataproperty.Typecode.DATETIME:
+        full_format_str = "{:" + dp.format_str + "}"
+        return full_format_str.format(dp.data)
 
-    return data_prop.data
+    return dp.data
 
 
 def str_datetime_converter(value):
