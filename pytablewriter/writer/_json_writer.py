@@ -100,13 +100,13 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._dp_extractor.data_matrix = self.value_matrix
 
         try:
-            data_prop_matrix = self._dp_extractor.to_dataproperty_matrix()
+            dp_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError:
-            data_prop_matrix = []
+            dp_matrix = []
 
         value_matrix = [
-            [_get_data_helper(data_prop) for data_prop in prop_list]
-            for prop_list in data_prop_matrix
+            [_get_data_helper(dp) for dp in dp_list]
+            for dp_list in dp_matrix
         ]
 
         self._value_matrix = [
