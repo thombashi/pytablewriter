@@ -147,21 +147,21 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
-    def _get_header_item(self, col_prop, value_prop):
+    def _get_header_item(self, col_prop, value_dp):
         from dataproperty import StringType
 
-        format_string = self._get_header_format_string(col_prop, value_prop)
-        item = format_string.format(StringType(value_prop.data).convert())
+        format_string = self._get_header_format_string(col_prop, value_dp)
+        item = format_string.format(StringType(value_dp.data).convert())
 
         if self.is_quote_header:
             return u'"{:s}"'.format(item)
 
         return item
 
-    def _get_header_format_string(self, col_prop, value_prop):
+    def _get_header_format_string(self, col_prop, value_dp):
         return "{{:{:s}{:s}}}".format(
             self._get_center_align_formatformat(),
-            str(self._get_padding_len(col_prop, value_prop)))
+            str(self._get_padding_len(col_prop, value_dp)))
 
     def _write_raw_string(self, unicode_text):
         self._verify_stream()

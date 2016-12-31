@@ -55,8 +55,8 @@ class MediaWikiTableWriter(TextTableWriter):
 
     def _write_value_row(self, value_list, value_dp_list):
         self._write_row([
-            self.__modify_table_element(value, value_prop)
-            for value, value_prop, in zip(value_list, value_dp_list)
+            self.__modify_table_element(value, value_dp)
+            for value, value_dp, in zip(value_list, value_dp_list)
         ])
 
     def _get_opening_row_item_list(self):
@@ -71,13 +71,13 @@ class MediaWikiTableWriter(TextTableWriter):
     def _get_closing_row_item_list(self):
         return "|}"
 
-    def _get_header_format_string(self, col_prop, value_prop):
+    def _get_header_format_string(self, col_prop, value_dp):
         return "! {{:{:s}{:s}}}".format(
             self._get_center_align_formatformat(),
-            str(self._get_padding_len(col_prop, value_prop)))
+            str(self._get_padding_len(col_prop, value_dp)))
 
-    def __modify_table_element(self, value, value_prop):
-        if value_prop.align is dp.Align.LEFT:
+    def __modify_table_element(self, value, value_dp):
+        if value_dp.align is dp.Align.LEFT:
             forma_stirng = '| {1:s}'
         else:
             forma_stirng = '| style="text-align:{0:s}"| {1:s}'
@@ -86,4 +86,4 @@ class MediaWikiTableWriter(TextTableWriter):
             value = "\n" + value.lstrip()
 
         return forma_stirng.format(
-            value_prop.align.align_string, value)
+            value_dp.align.align_string, value)

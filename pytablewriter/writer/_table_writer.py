@@ -350,10 +350,10 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_opening_row = old_is_write_opening_row
         self.is_write_closing_row = old_is_write_closing_row
 
-    def _get_padding_len(self, column_property, value_prop=None):
+    def _get_padding_len(self, column_property, value_dp=None):
         if self.is_padding:
             try:
-                return value_prop.get_padding_len(column_property.ascii_char_width)
+                return value_dp.get_padding_len(column_property.ascii_char_width)
             except AttributeError:
                 return column_property.ascii_char_width
 
@@ -368,18 +368,18 @@ class AbstractTableWriter(TableWriterInterface):
     def _get_center_align_formatformat(self):
         return "^"
 
-    def _get_row_item(self, col_prop, value_prop):
+    def _get_row_item(self, col_prop, value_dp):
         to_string_format_str = self.__get_to_string_format(
-            col_prop, value_prop)
+            col_prop, value_dp)
 
         if col_prop.typecode in [Typecode.BOOL, Typecode.DATETIME]:
-            item = to_string_format_str.format(value_prop.data)
+            item = to_string_format_str.format(value_dp.data)
         else:
             try:
                 value = col_prop.type_class(
-                    value_prop.data, is_strict=False).convert()
+                    value_dp.data, is_strict=False).convert()
             except dp.TypeConversionError:
-                value = value_prop.data
+                value = value_dp.data
 
             try:
                 item = to_string_format_str.format(value)
@@ -387,40 +387,40 @@ class AbstractTableWriter(TableWriterInterface):
                 item = MultiByteStrDecoder(value).unicode_str
 
         item = self.__remove_line_break(item)
-        item = self.__get_align_format(col_prop, value_prop).format(item)
+        item = self.__get_align_format(col_prop, value_dp).format(item)
 
         if all([
             self.quote_flag_table.get(col_prop.typecode, False),
             any([
-                self.quote_flag_table.get(value_prop.typecode, False),
-                value_prop.typecode in [Typecode.INTEGER, Typecode.FLOAT],
+                self.quote_flag_table.get(value_dp.typecode, False),
+                value_dp.typecode in [Typecode.INTEGER, Typecode.FLOAT],
             ])
         ]):
             return u'"{:s}"'.format(item)
 
         return item
 
-    def __get_to_string_format(self, col_prop, value_prop):
+    def __get_to_string_format(self, col_prop, value_dp):
         if any([
             all([
                 col_prop.typecode == Typecode.FLOAT,
-                value_prop.typecode in [Typecode.INTEGER, Typecode.FLOAT],
+                value_dp.typecode in [Typecode.INTEGER, Typecode.FLOAT],
                 not self.is_float_formatting
             ]),
-            value_prop.typecode == Typecode.NONE,
+            value_dp.typecode == Typecode.NONE,
         ]):
             format_str = ""
         else:
             format_str = col_prop.format_str
 
         try:
-            format_str.format(value_prop.data)
+            format_str.format(value_dp.data)
         except ValueError:
             format_str = ""
 
         return "{:" + format_str + "}"
 
-    def __get_align_format(self, col_prop, value_prop):
+    def __get_align_format(self, col_prop, value_dp):
         align_func_table = {
             dp.Align.AUTO: self._get_left_align_formatformat,
             dp.Align.LEFT: self._get_left_align_formatformat,
@@ -431,7 +431,7 @@ class AbstractTableWriter(TableWriterInterface):
         align = align_func_table[col_prop.align]()
 
         format_list = ["{:" + align]
-        col_padding_len = self._get_padding_len(col_prop, value_prop)
+        col_padding_len = self._get_padding_len(col_prop, value_dp)
         if col_padding_len > 0:
             format_list.append(str(col_padding_len))
         format_list.append("s}")
