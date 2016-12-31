@@ -24,26 +24,26 @@ def write_examples(maker):
     maker.write_chapter("Write a Markdown table")
     maker.write_example_file("markdown_example.txt")
 
-    maker.write_chapter("Write a reStructuredText table (grid tables)")
+    maker.write_chapter("Write a reStructuredText table (Grid Tables)")
     maker.write_example_file("rst/rst_grid_table_example.txt")
 
     maker.write_chapter(
-        "Write a JavaScript table (variable definition of nested list)")
+        "Write a JavaScript table (as a nested list variable definition)")
     maker.write_example_file("sourcecode/javascript_example.txt")
 
     maker.write_chapter("Write a table to an Excel sheet")
     maker.write_example_file("spreadsheet/exel_single_example.txt")
 
-    maker.write_chapter("Write a table with multibyte character")
+    maker.write_chapter("Write a table using multibyte character")
     maker.write_example_file("multibyte_table_example.txt")
 
-    maker.write_chapter("Write a table from pandas DataFrame")
+    maker.write_chapter("Write a table from ``pandas.DataFrame`` instance")
     maker.write_example_file("datasource/from_pandas_dataframe_example.txt")
 
     maker.write_chapter("For more information")
     maker.write_line_list([
         "More examples are available at ",
-        "http://{:s}.readthedocs.org/en/latest/pages/examples/index.html".format(
+        "http://{:s}.rtfd.io/en/latest/pages/examples/index.html".format(
             PROJECT_NAME),
     ])
 
@@ -66,7 +66,7 @@ def main():
     maker.set_indent_level(0)
     maker.write_chapter("Documentation")
     maker.write_line_list([
-        "http://{:s}.readthedocs.org/en/latest/".format(PROJECT_NAME),
+        "http://{:s}.rtfd.io/".format(PROJECT_NAME),
     ])
 
     maker.write_chapter("Related Project")

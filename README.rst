@@ -88,7 +88,7 @@ Rendering result
 
    Rendered markdown at GitHub
 
-Write a reStructuredText table (grid tables)
+Write a reStructuredText table (Grid Tables)
 --------------------------------------------
 
 
@@ -142,8 +142,8 @@ Rendering result
     |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
     +---+-----+----+-----+--------+------------------------+
 
-Write a JavaScript table (variable definition of nested list)
--------------------------------------------------------------
+Write a JavaScript table (as a nested list variable definition)
+---------------------------------------------------------------
 
 .. code:: python
 
@@ -203,8 +203,8 @@ Output of Excel book
 
    Output excel file (``sample_single.xlsx``)
 
-Write a table with multibyte character
---------------------------------------
+Write a table using multibyte character
+---------------------------------------
 
 ﻿You can use multibyte character as table data.
 
@@ -249,8 +249,8 @@ Rendering result
 
 
 
-Write a table from pandas DataFrame
------------------------------------
+Write a table from ``pandas.DataFrame`` instance
+------------------------------------------------
 
 
 .. code:: python
@@ -283,7 +283,7 @@ For more information
 --------------------
 
 More examples are available at 
-http://pytablewriter.readthedocs.org/en/latest/pages/examples/index.html
+http://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 
 Installation
 ============
@@ -319,7 +319,7 @@ Test dependencies
 Documentation
 =============
 
-http://pytablewriter.readthedocs.org/en/latest/
+http://pytablewriter.rtfd.io/
 
 Related Project
 ===============
