@@ -40,10 +40,10 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
         self.char_right_side_row = ","
 
-        self._prop_extractor.none_value = "null"
-        self._prop_extractor.inf_value = "Infinity"
-        self._prop_extractor.nan_value = "NaN"
-        self._prop_extractor.bool_converter = lower_bool_converter
+        self._dp_extractor.none_value = "null"
+        self._dp_extractor.inf_value = "Infinity"
+        self._dp_extractor.nan_value = "NaN"
+        self._dp_extractor.bool_converter = lower_bool_converter
 
     def write_null_line(self):
         self._verify_stream()
@@ -72,7 +72,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         for json_data in self._value_matrix:
             json_text = json.dumps(
                 json_data, sort_keys=True, indent=4 * self._indent_level)
-            json_text = strip_quote(json_text, self._prop_extractor.none_value)
+            json_text = strip_quote(json_text, self._dp_extractor.none_value)
             json_text = strip_quote(json_text, "true")
             json_text = strip_quote(json_text, "false")
             json_text_list.append(json_text)
@@ -97,10 +97,10 @@ class JsonTableWriter(IndentationTextTableWriter):
         if self._preprocessed_value_matrix:
             return
 
-        self._prop_extractor.data_matrix = self.value_matrix
+        self._dp_extractor.data_matrix = self.value_matrix
 
         try:
-            data_prop_matrix = self._prop_extractor.to_dataproperty_matrix()
+            data_prop_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError:
             data_prop_matrix = []
 

@@ -107,10 +107,10 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         self.stream = None
         self._workbook = None
 
-        self._prop_extractor.inf_value = "Inf"
-        self._prop_extractor.nan_value = "NaN"
-        self._prop_extractor.datetime_converter = str_datetime_converter
-        self._prop_extractor.datetime_format_str = "s"
+        self._dp_extractor.inf_value = "Inf"
+        self._dp_extractor.nan_value = "NaN"
+        self._dp_extractor.datetime_converter = str_datetime_converter
+        self._dp_extractor.datetime_format_str = "s"
 
         self._first_header_row = 0
         self._last_header_row = self.first_header_row

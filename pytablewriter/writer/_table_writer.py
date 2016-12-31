@@ -157,11 +157,11 @@ class AbstractTableWriter(TableWriterInterface):
         self._column_prop_list = []
         self._value_prop_matrix = []
 
-        self._prop_extractor = dp.DataPropertyExtractor()
-        self._prop_extractor.min_padding_len = 1
-        self._prop_extractor.none_value = ""
-        self._prop_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
-        self._prop_extractor.bool_converter = default_bool_converter
+        self._dp_extractor = dp.DataPropertyExtractor()
+        self._dp_extractor.min_padding_len = 1
+        self._dp_extractor.none_value = ""
+        self._dp_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
+        self._dp_extractor.bool_converter = default_bool_converter
 
         self._is_required_table_name = False
         self._is_remove_line_break = False
@@ -493,11 +493,11 @@ class AbstractTableWriter(TableWriterInterface):
         self._column_prop_list = []
         self._value_prop_matrix = []
 
-        self._prop_extractor.header_list = self.header_list
-        self._prop_extractor.data_matrix = self.__value_matrix_org
-        self._column_prop_list = self._prop_extractor.to_col_dataproperty_list()
+        self._dp_extractor.header_list = self.header_list
+        self._dp_extractor.data_matrix = self.__value_matrix_org
+        self._column_prop_list = self._dp_extractor.to_col_dataproperty_list()
         try:
-            self._value_prop_matrix = self._prop_extractor.to_dataproperty_matrix()
+            self._value_prop_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError:
             self._value_prop_matrix = []
 

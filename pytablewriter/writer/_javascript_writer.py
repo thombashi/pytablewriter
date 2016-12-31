@@ -34,10 +34,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def __init__(self):
         super(JavaScriptTableWriter, self).__init__()
 
-        self._prop_extractor.none_value = "null"
-        self._prop_extractor.inf_value = "Infinity"
-        self._prop_extractor.nan_value = "NaN"
-        self._prop_extractor.bool_converter = lower_bool_converter
+        self._dp_extractor.none_value = "null"
+        self._dp_extractor.inf_value = "Infinity"
+        self._dp_extractor.nan_value = "NaN"
+        self._dp_extractor.bool_converter = lower_bool_converter
 
     def write_table(self):
         """
@@ -58,9 +58,9 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._prop_extractor.datetime_converter = js_datetime_converter
+            self._dp_extractor.datetime_converter = js_datetime_converter
         else:
-            self._prop_extractor.datetime_converter = str_datetime_converter
+            self._dp_extractor.datetime_converter = str_datetime_converter
 
         self._preprocess()
 

@@ -33,8 +33,8 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super(PythonCodeTableWriter, self).__init__()
 
         self.table_name = ""
-        self._prop_extractor.inf_value = 'float("inf")'
-        self._prop_extractor.nan_value = 'float("nan")'
+        self._dp_extractor.inf_value = 'float("inf")'
+        self._dp_extractor.nan_value = 'float("nan")'
 
     def write_table(self):
         """
@@ -60,9 +60,9 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._prop_extractor.datetime_converter = dateutil_datetime_converter
+            self._dp_extractor.datetime_converter = dateutil_datetime_converter
         else:
-            self._prop_extractor.datetime_converter = str_datetime_converter
+            self._dp_extractor.datetime_converter = str_datetime_converter
 
         self.inc_indent_level()
         super(PythonCodeTableWriter, self).write_table()

@@ -39,7 +39,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         self._is_remove_line_break = True
 
-        self._prop_extractor.min_padding_len = 3
+        self._dp_extractor.min_padding_len = 3
 
     def write_table(self):
         """

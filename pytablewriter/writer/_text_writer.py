@@ -348,13 +348,13 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         self.is_datetime_instance_formatting = True
         self.quote_flag_table[dp.Typecode.DATETIME] = False
-        self._prop_extractor.datetime_format_str = "s"
+        self._dp_extractor.datetime_format_str = "s"
 
         self._is_required_table_name = True
         self._is_remove_line_break = True
 
-        self._prop_extractor.none_value = None
-        self._prop_extractor.strict_type_mapping[
+        self._dp_extractor.none_value = None
+        self._dp_extractor.strict_type_mapping[
             dp.Typecode.DATETIME] = False
 
     def _get_value_row_separator_item_list(self):
