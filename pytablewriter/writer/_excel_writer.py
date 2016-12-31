@@ -272,17 +272,17 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             return self.__col_style_table.get(col)
 
         try:
-            col_prop = self._column_dp_list[col]
+            col_dp = self._column_dp_list[col]
         except KeyError:
             return {}
 
-        if col_prop.typecode not in [dp.Typecode.FLOAT]:
+        if col_dp.typecode not in [dp.Typecode.FLOAT]:
             raise ValueError()
 
-        if not IntegerType(col_prop.minmax_decimal_places.max_value).is_type():
+        if not IntegerType(col_dp.minmax_decimal_places.max_value).is_type():
             raise ValueError()
 
-        float_digit = col_prop.minmax_decimal_places.max_value
+        float_digit = col_dp.minmax_decimal_places.max_value
         if float_digit <= 0:
             raise ValueError()
 
@@ -414,16 +414,16 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             return self.__col_numprops_table.get(col)
 
         try:
-            col_prop = self._column_dp_list[col]
+            col_dp = self._column_dp_list[col]
         except KeyError:
             return {}
 
-        if col_prop.typecode not in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
+        if col_dp.typecode not in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
             return {}
 
         num_props = {}
-        if IntegerType(col_prop.minmax_decimal_places.max_value).is_type():
-            float_digit = col_prop.minmax_decimal_places.max_value
+        if IntegerType(col_dp.minmax_decimal_places.max_value).is_type():
+            float_digit = col_dp.minmax_decimal_places.max_value
             if float_digit > 0:
                 num_props = {
                     "num_format": "0.{:s}".format("0" * int(float_digit))}
@@ -452,9 +452,9 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         if not IntegerType(font_size).is_type():
             return
 
-        for col_idx, col_prop in enumerate(self._column_dp_list):
+        for col_idx, col_dp in enumerate(self._column_dp_list):
             width = (
-                min(col_prop.padding_len, self.MAX_CELL_WIDTH) *
+                min(col_dp.padding_len, self.MAX_CELL_WIDTH) *
                 (font_size / 10.0) + 2
             )
             self.stream.set_column(col_idx, col_idx, width=width)

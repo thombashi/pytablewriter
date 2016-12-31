@@ -71,10 +71,10 @@ class MediaWikiTableWriter(TextTableWriter):
     def _get_closing_row_item_list(self):
         return "|}"
 
-    def _get_header_format_string(self, col_prop, value_dp):
+    def _get_header_format_string(self, col_dp, value_dp):
         return "! {{:{:s}{:s}}}".format(
             self._get_center_align_formatformat(),
-            str(self._get_padding_len(col_prop, value_dp)))
+            str(self._get_padding_len(col_dp, value_dp)))
 
     def __modify_table_element(self, value, value_dp):
         if value_dp.align is dp.Align.LEFT:

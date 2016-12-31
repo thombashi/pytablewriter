@@ -368,15 +368,15 @@ class AbstractTableWriter(TableWriterInterface):
     def _get_center_align_formatformat(self):
         return "^"
 
-    def _get_row_item(self, col_prop, value_dp):
+    def _get_row_item(self, col_dp, value_dp):
         to_string_format_str = self.__get_to_string_format(
-            col_prop, value_dp)
+            col_dp, value_dp)
 
-        if col_prop.typecode in [Typecode.BOOL, Typecode.DATETIME]:
+        if col_dp.typecode in [Typecode.BOOL, Typecode.DATETIME]:
             item = to_string_format_str.format(value_dp.data)
         else:
             try:
-                value = col_prop.type_class(
+                value = col_dp.type_class(
                     value_dp.data, is_strict=False).convert()
             except dp.TypeConversionError:
                 value = value_dp.data
@@ -387,10 +387,10 @@ class AbstractTableWriter(TableWriterInterface):
                 item = MultiByteStrDecoder(value).unicode_str
 
         item = self.__remove_line_break(item)
-        item = self.__get_align_format(col_prop, value_dp).format(item)
+        item = self.__get_align_format(col_dp, value_dp).format(item)
 
         if all([
-            self.quote_flag_table.get(col_prop.typecode, False),
+            self.quote_flag_table.get(col_dp.typecode, False),
             any([
                 self.quote_flag_table.get(value_dp.typecode, False),
                 value_dp.typecode in [Typecode.INTEGER, Typecode.FLOAT],
@@ -400,10 +400,10 @@ class AbstractTableWriter(TableWriterInterface):
 
         return item
 
-    def __get_to_string_format(self, col_prop, value_dp):
+    def __get_to_string_format(self, col_dp, value_dp):
         if any([
             all([
-                col_prop.typecode == Typecode.FLOAT,
+                col_dp.typecode == Typecode.FLOAT,
                 value_dp.typecode in [Typecode.INTEGER, Typecode.FLOAT],
                 not self.is_float_formatting
             ]),
@@ -411,7 +411,7 @@ class AbstractTableWriter(TableWriterInterface):
         ]):
             format_str = ""
         else:
-            format_str = col_prop.format_str
+            format_str = col_dp.format_str
 
         try:
             format_str.format(value_dp.data)
@@ -420,7 +420,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         return "{:" + format_str + "}"
 
-    def __get_align_format(self, col_prop, value_dp):
+    def __get_align_format(self, col_dp, value_dp):
         align_func_table = {
             dp.Align.AUTO: self._get_left_align_formatformat,
             dp.Align.LEFT: self._get_left_align_formatformat,
@@ -428,10 +428,10 @@ class AbstractTableWriter(TableWriterInterface):
             dp.Align.CENTER: self._get_center_align_formatformat,
         }
 
-        align = align_func_table[col_prop.align]()
+        align = align_func_table[col_dp.align]()
 
         format_list = ["{:" + align]
-        col_padding_len = self._get_padding_len(col_prop, value_dp)
+        col_padding_len = self._get_padding_len(col_dp, value_dp)
         if col_padding_len > 0:
             format_list.append(str(col_padding_len))
         format_list.append("s}")

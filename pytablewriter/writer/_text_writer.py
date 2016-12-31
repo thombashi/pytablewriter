@@ -147,10 +147,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
-    def _get_header_item(self, col_prop, value_dp):
+    def _get_header_item(self, col_dp, value_dp):
         from dataproperty import StringType
 
-        format_string = self._get_header_format_string(col_prop, value_dp)
+        format_string = self._get_header_format_string(col_dp, value_dp)
         item = format_string.format(StringType(value_dp.data).convert())
 
         if self.is_quote_header:
@@ -158,10 +158,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         return item
 
-    def _get_header_format_string(self, col_prop, value_dp):
+    def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(
             self._get_center_align_formatformat(),
-            str(self._get_padding_len(col_prop, value_dp)))
+            str(self._get_padding_len(col_dp, value_dp)))
 
     def _write_raw_string(self, unicode_text):
         self._verify_stream()
@@ -199,11 +199,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_row([
             self._get_header_item(
-                col_prop,
+                col_dp,
                 dp.DataProperty(
                     header, strict_type_mapping=dp.STRICT_TYPE_MAPPING)
             )
-            for col_prop, header in
+            for col_dp, header in
             zip(self._column_dp_list, self.header_list)
         ])
 
@@ -212,8 +212,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def __get_row_separator_item_list(self, separator_char):
         return [
-            separator_char * self._get_padding_len(col_prop)
-            for col_prop in self._column_dp_list
+            separator_char * self._get_padding_len(col_dp)
+            for col_dp in self._column_dp_list
         ]
 
     def __write_separator_row(self, value_list):
