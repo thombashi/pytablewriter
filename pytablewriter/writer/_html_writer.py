@@ -88,11 +88,11 @@ class HtmlTableWriter(TextTableWriter):
     def _write_body(self):
         tbody_tag = tags.tbody()
 
-        for value_list, value_prop_list in zip(self._value_matrix, self._value_dp_matrix):
+        for value_list, value_dp_list in zip(self._value_matrix, self._value_dp_matrix):
             tr_tag = tags.tr()
-            for value, value_prop in zip(value_list, value_prop_list):
+            for value, value_dp in zip(value_list, value_dp_list):
                 td_tag = tags.td(MultiByteStrDecoder(value).unicode_str)
-                td_tag["align"] = value_prop.align.align_string
+                td_tag["align"] = value_dp.align.align_string
                 tr_tag += td_tag
             tbody_tag += tr_tag
 

@@ -119,7 +119,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             pass
 
         is_first_value_row = True
-        for value_list, value_prop_list in zip(self._value_matrix, self._value_dp_matrix):
+        for value_list, value_dp_list in zip(self._value_matrix, self._value_dp_matrix):
             try:
                 if is_first_value_row:
                     is_first_value_row = False
@@ -127,7 +127,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                     if self.is_write_value_separator_row:
                         self._write_value_row_separator()
 
-                self._write_value_row(value_list, value_prop_list)
+                self._write_value_row(value_list, value_dp_list)
             except TypeError:
                 continue
 
@@ -207,7 +207,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             zip(self._column_prop_list, self.header_list)
         ])
 
-    def _write_value_row(self, value_list, value_prop_list):
+    def _write_value_row(self, value_list, value_dp_list):
         self._write_row(value_list)
 
     def __get_row_separator_item_list(self, separator_char):

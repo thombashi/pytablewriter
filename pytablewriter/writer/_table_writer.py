@@ -509,11 +509,11 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._value_matrix = [
             [
-                self._get_row_item(col_prop, value_prop)
-                for col_prop, value_prop in
-                zip(self._column_prop_list, value_prop_list)
+                self._get_row_item(col_dp, value_dp)
+                for col_dp, value_dp in
+                zip(self._column_prop_list, value_dp_list)
             ]
-            for value_prop_list in self._value_dp_matrix
+            for value_dp_list in self._value_dp_matrix
         ]
 
         self._preprocessed_value_matrix = True

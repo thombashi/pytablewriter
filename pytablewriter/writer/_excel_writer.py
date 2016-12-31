@@ -205,9 +205,9 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         pass
 
     def _write_value_matrix(self):
-        for value_prop_list in self._value_dp_matrix:
-            for col, prop in enumerate(value_prop_list):
-                self._write_cell(self._current_data_row, col, prop)
+        for value_dp_list in self._value_dp_matrix:
+            for col, dp in enumerate(value_dp_list):
+                self._write_cell(self._current_data_row, col, dp)
 
             self._current_data_row += 1
 

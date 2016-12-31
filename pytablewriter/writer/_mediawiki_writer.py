@@ -53,10 +53,10 @@ class MediaWikiTableWriter(TextTableWriter):
 
         super(MediaWikiTableWriter, self)._write_header()
 
-    def _write_value_row(self, value_list, value_prop_list):
+    def _write_value_row(self, value_list, value_dp_list):
         self._write_row([
             self.__modify_table_element(value, value_prop)
-            for value, value_prop, in zip(value_list, value_prop_list)
+            for value, value_prop, in zip(value_list, value_dp_list)
         ])
 
     def _get_opening_row_item_list(self):
