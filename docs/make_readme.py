@@ -28,7 +28,7 @@ def write_examples(maker):
     maker.write_example_file("rst/rst_grid_table_example.txt")
 
     maker.write_chapter(
-        "Write a JavaScript table (as a nested list variable definition)")
+        "Write a table with JavaScript format (as a nested list variable definition)")
     maker.write_example_file("sourcecode/javascript_example.txt")
 
     maker.write_chapter("Write a table to an Excel sheet")

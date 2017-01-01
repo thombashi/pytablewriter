@@ -142,8 +142,8 @@ Rendering result
     |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
     +---+-----+----+-----+--------+------------------------+
 
-Write a JavaScript table (as a nested list variable definition)
----------------------------------------------------------------
+Write a table with JavaScript format (as a nested list variable definition)
+---------------------------------------------------------------------------
 
 .. code:: python
 
