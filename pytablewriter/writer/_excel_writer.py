@@ -454,7 +454,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
         for col_idx, col_dp in enumerate(self._column_dp_list):
             width = (
-                min(col_dp.padding_len, self.MAX_CELL_WIDTH) *
+                min(col_dp.ascii_char_width, self.MAX_CELL_WIDTH) *
                 (font_size / 10.0) + 2
             )
             self.stream.set_column(col_idx, col_idx, width=width)
