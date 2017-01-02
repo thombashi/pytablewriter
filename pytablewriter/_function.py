@@ -16,8 +16,7 @@ def _get_data_helper(dp):
         if isinstance(dp.data, Decimal):
             return float(dp.data)
     elif dp.typecode == dataproperty.Typecode.DATETIME:
-        full_format_str = "{:" + dp.format_str + "}"
-        return full_format_str.format(dp.data)
+        return dp.format_str.format(dp.data)
 
     return dp.data
 
