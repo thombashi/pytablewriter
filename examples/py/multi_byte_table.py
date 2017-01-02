@@ -5,7 +5,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <gogogo.vm@gmail.com>
 """
 
-from __future__ import print_function
+import io
 
 import pytablewriter
 
@@ -20,4 +20,7 @@ writer.value_matrix = [
     ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
     ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
 ]
-writer.write_table()
+
+with io.open("multibyte_table_output.txt", "w", encoding="utf-8") as f:
+    writer.stream = f
+    writer.write_table()
