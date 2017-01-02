@@ -19,7 +19,7 @@ pytablewriter
 Summary
 -------
 
-pytablewriter is a python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TOML/TSV.
+A python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TOML/TSV.
 
 Features
 --------
@@ -230,23 +230,6 @@ Write a table using multibyte character
    :alt: multi_byte_char_table
 
    Output of multi-byte character table
-
-
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. table:: 生成に関するパターン
-
-    ================  ============================================================================  ===  ================
-       パターン名                                         概要                                      GoF  Code Complete[1]
-    ================  ============================================================================  ===  ================
-    Abstract Factory  関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。      Yes  Yes
-    Builder           複合化されたインスタンスの生成過程を隠蔽する。                                Yes  No
-    Factory Method    実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。  Yes  Yes
-    Prototype         同様のインスタンスを生成するために、原型のインスタンスを複製する。            Yes  No
-    Singleton         あるクラスについて、インスタンスが単一であることを保証する。                  Yes  Yes
-    ================  ============================================================================  ===  ================
-
 
 
 Write a table from ``pandas.DataFrame`` instance
