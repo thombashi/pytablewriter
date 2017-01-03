@@ -191,7 +191,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             return
 
         if dp.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError()
+            raise EmptyHeaderError("header is empty")
 
         if dp.is_empty_sequence(self._column_dp_list):
             self._write_row(self.header_list)

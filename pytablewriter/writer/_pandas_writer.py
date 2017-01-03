@@ -95,7 +95,8 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         super(PandasDataFrameWriter, self)._verify_property()
 
         if dp.is_empty_string(self.table_name):
-            raise EmptyTableNameError()
+            raise EmptyTableNameError(
+                "table_name must be a string of one or more characters")
 
     def _verify_header(self):
         self._validate_empty_header()

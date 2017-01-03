@@ -72,7 +72,7 @@ class HtmlTableWriter(TextTableWriter):
             return
 
         if dp.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError()
+            raise EmptyHeaderError("header_list is empty")
 
         tr_tag = tags.tr()
         for header in self.header_list:

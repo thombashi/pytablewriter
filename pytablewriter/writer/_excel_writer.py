@@ -218,7 +218,7 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         if dp.is_not_empty_sequence(self.value_matrix):
             return len(self.value_matrix[0]) - 1
 
-        raise ValueError()
+        raise ValueError("data not found")
 
     def _postprocess(self):
         self._last_data_row = self._current_data_row
