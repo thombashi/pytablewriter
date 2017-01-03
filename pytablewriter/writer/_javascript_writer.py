@@ -31,7 +31,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         JavaScript variable declarations type.
         The value must be either ``"var"``, ``"let"`` or ``"const"``.
         Defaults to ``"const"``.
-
     """
 
     __VALID_VAR_DECLARATION = ("var", "let", "const")
@@ -65,7 +64,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def get_variable_name(self, value):
         import pathvalidate
 
-        return pathvalidate.sanitize_js_var_name(self.table_name, "_").lower()
+        return pathvalidate.sanitize_js_var_name(value, "_").lower()
 
     def write_table(self):
         """
