@@ -13,13 +13,14 @@ import json
 import pytablewriter
 import pytest
 
-from .data import header_list
-from .data import value_matrix
-from .data import value_matrix_with_none
-from .data import mix_header_list
-from .data import mix_value_matrix
-from .data import value_matrix_iter
-
+from .data import (
+    header_list,
+    value_matrix,
+    value_matrix_with_none,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix_iter,
+)
 
 Data = collections.namedtuple("Data", "table header value expected")
 

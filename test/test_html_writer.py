@@ -11,13 +11,15 @@ from __future__ import unicode_literals
 import pytablewriter
 import pytest
 
-from .data import Data
-from .data import null_test_data_list
-from .data import header_list
-from .data import value_matrix
-from .data import value_matrix_with_none
-from .data import mix_header_list
-from .data import mix_value_matrix
+from .data import (
+    Data,
+    null_test_data_list,
+    header_list,
+    value_matrix,
+    value_matrix_with_none,
+    mix_header_list,
+    mix_value_matrix,
+)
 
 
 normal_test_data_list = [
