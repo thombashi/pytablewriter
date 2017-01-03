@@ -11,7 +11,7 @@ import six
 
 from .._converter import lower_bool_converter
 from .._function import str_datetime_converter
-from ._text_writer import SourceCodeTableWriter
+from ._sourcecode_writer import SourceCodeTableWriter
 
 
 def js_datetime_converter(value):

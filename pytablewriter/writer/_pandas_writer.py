@@ -15,7 +15,7 @@ from .._function import (
     str_datetime_converter,
     dateutil_datetime_converter
 )
-from ._text_writer import SourceCodeTableWriter
+from ._sourcecode_writer import SourceCodeTableWriter
 
 
 class PandasDataFrameWriter(SourceCodeTableWriter):
