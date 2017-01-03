@@ -25,6 +25,13 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     :Examples:
 
         :ref:`example-js-table-writer`
+
+    .. py:attribute:: variable_declaration
+
+        JavaScript variable declarations type.
+        The value must be either ``"var"``, ``"let"`` or ``"const"``.
+        Defaults to ``"const"``.
+
     """
 
     __VALID_VAR_DECLARATION = ("var", "let", "const")
