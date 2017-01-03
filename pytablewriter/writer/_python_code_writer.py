@@ -36,6 +36,12 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         self._dp_extractor.inf_value = 'float("inf")'
         self._dp_extractor.nan_value = 'float("nan")'
 
+    def get_variable_name(self, value):
+        import pathvalidate
+
+        return pathvalidate.sanitize_python_var_name(
+            self.table_name, "_").lower()
+
     def write_table(self):
         """
         |write_table| with Python format.

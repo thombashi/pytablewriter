@@ -39,6 +39,11 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._dp_extractor.nan_value = "NaN"
         self._dp_extractor.bool_converter = lower_bool_converter
 
+    def get_variable_name(self, value):
+        import pathvalidate
+
+        return pathvalidate.sanitize_js_var_name(self.table_name, "_").lower()
+
     def write_table(self):
         """
         |write_table| with JavaScript nested list variable definition format.

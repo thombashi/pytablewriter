@@ -40,6 +40,12 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._dp_extractor.inf_value = 'numpy.inf'
         self._dp_extractor.nan_value = 'numpy.nan'
 
+    def get_variable_name(self, value):
+        import pathvalidate
+
+        return pathvalidate.sanitize_python_var_name(
+            self.table_name, "_").lower()
+
     def write_table(self):
         """
         |write_table| with Pandas DataFrame format.

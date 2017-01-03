@@ -1,8 +1,8 @@
 DataProperty>=0.15.2
 dominate>=2.3.0
 mbstrdecoder>=0.2.1
-pathvalidate>=0.12.1
-pytablereader>=0.8.5
+pathvalidate>=0.13.0
+pytablereader>=0.8.6
 six
 toml
 XlsxWriter

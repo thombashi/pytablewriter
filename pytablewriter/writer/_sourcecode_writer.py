@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import abc
 
 import dataproperty as dp
 
@@ -23,6 +24,10 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         Write as |str| if this value is |False|.
     """
 
+    @abc.abstractmethod
+    def get_variable_name(self, value):  # pragma: no cover
+        pass
+
     @property
     def variable_name(self):
         """
@@ -32,10 +37,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         :rtype: str
         """
 
-        import pathvalidate
-
-        return pathvalidate.sanitize_python_var_name(
-            self.table_name, "_").lower()
+        return self.get_variable_name(self.table_name)
 
     def __init__(self):
         super(SourceCodeTableWriter, self).__init__()
