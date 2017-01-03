@@ -40,8 +40,7 @@ normal_test_data_list = [
     [2, 2.2, "bb", 2.2, "2.2"],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
-"""
-    ),
+"""),
     Data(
         table="null value",
         indent=0,
@@ -52,8 +51,7 @@ normal_test_data_list = [
         expected="""var null_value = [
     ["a", "b", "c", "dd", "e"]
 ];
-"""
-    ),
+"""),
     Data(
         table="null table",
         indent=0,
@@ -63,8 +61,7 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""var null_table = [
 ];
-"""
-    ),
+"""),
     Data(
         table="table name",
         indent=0,
@@ -77,8 +74,7 @@ normal_test_data_list = [
     [2, 2.2, "bb", 2.2, "2.2"],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=1,
@@ -92,8 +88,7 @@ normal_test_data_list = [
         [2, 2.2, "bb", 2.2, "2.2"],
         [3, 3.3, "ccc", 3.0, "cccc"]
     ];
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -108,8 +103,7 @@ normal_test_data_list = [
     [3, 3.3, "ccc", null, "cccc"],
     [null, null, null, null, null]
 ];
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -123,8 +117,7 @@ normal_test_data_list = [
     [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, new Date("2017-01-02T03:04:05+0900")],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
 ];
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent=0,
@@ -138,8 +131,7 @@ normal_test_data_list = [
     [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+0900"],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, "2017-01-01 00:00:00"]
 ];
-"""
-    ),
+"""),
 ]
 
 exception_test_data_list = [

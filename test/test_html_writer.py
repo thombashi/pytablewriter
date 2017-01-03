@@ -62,8 +62,7 @@ normal_test_data_list = [
     </tr>
   </tbody>
 </table>
-"""
-    ),
+"""),
     Data(
         table=None,
         indent="  ",
@@ -94,8 +93,7 @@ normal_test_data_list = [
     </tr>
   </tbody>
 </table>
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent="    ",
@@ -114,8 +112,7 @@ normal_test_data_list = [
     </thead>
     <tbody></tbody>
 </table>
-"""
-    ),
+"""),
     Data(
         table=None,
         indent="    ",
@@ -133,8 +130,7 @@ normal_test_data_list = [
     </thead>
     <tbody></tbody>
 </table>
-"""
-    ),
+"""),
     Data(
         table="",
         indent="  ",
@@ -181,8 +177,7 @@ normal_test_data_list = [
     </tr>
   </tbody>
 </table>
-"""
-    ),
+"""),
     Data(
         table="tablename",
         indent="    ",
@@ -243,8 +238,7 @@ normal_test_data_list = [
         </tr>
     </tbody>
 </table>
-"""
-    ),
+"""),
 ]
 
 table_writer_class = pytablewriter.HtmlTableWriter

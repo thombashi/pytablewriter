@@ -35,8 +35,7 @@ normal_test_data_list = [
     1, 123.1, "a", 1.0, "1"
     2, 2.2, "bb", 2.2, "2.2"
     3, 3.3, "ccc", 3.0, "cccc"
-"""
-    ),
+"""),
     Data(
         table="",
         indent=0,
@@ -46,8 +45,7 @@ normal_test_data_list = [
     :header: "a", "b", "c", "dd", "e"
     :widths: 1, 1, 1, 2, 1
     
-"""
-    ),
+"""),
     Data(
         table=None,
         indent=0,
@@ -59,8 +57,7 @@ normal_test_data_list = [
     1, 123.1, "a", 1.0, "1"
     2, 2.2, "bb", 2.2, "2.2"
     3, 3.3, "ccc", 3.0, "cccc"
-"""
-    ),
+"""),
     Data(
         table="",
         indent=1,
@@ -73,8 +70,7 @@ normal_test_data_list = [
         1, 123.1, "a", 1.0, "1"
         2, 2.2, "bb", 2.2, "2.2"
         3, 3.3, "ccc", 3.0, "cccc"
-"""
-    ),
+"""),
     Data(
         table="table name",
         indent=0,
@@ -88,8 +84,7 @@ normal_test_data_list = [
     , 2.2, , 2.2, "2.2"
     3, 3.3, "ccc", , "cccc"
     , , , , 
-"""
-    ),
+"""),
     Data(
         table="table name",
         indent=0,
@@ -102,8 +97,7 @@ normal_test_data_list = [
     1, 1.10, "aa", 1.0, "1", True, Infinity, NaN, 1, "2017-01-01 00:00:00"
     2, 2.20, "bbb", 2.2, "2.2", False, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"
     3, 3.33, "cccc", -3.0, "ccc", True, Infinity, NaN, NaN, "2017-01-01 00:00:00"
-"""
-    ),
+"""),
 ]
 
 table_writer_class = pytablewriter.RstCsvTableWriter
