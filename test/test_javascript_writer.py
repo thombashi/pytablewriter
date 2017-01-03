@@ -34,7 +34,7 @@ normal_test_data_list = [
         value=value_matrix,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""var table_name_ho_ge = [
+        expected="""const table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
     [1, 123.1, "a", 1.0, "1"],
     [2, 2.2, "bb", 2.2, "2.2"],
@@ -48,7 +48,7 @@ normal_test_data_list = [
         value=None,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""var null_value = [
+        expected="""const null_value = [
     ["a", "b", "c", "dd", "e"]
 ];
 """),
@@ -59,7 +59,7 @@ normal_test_data_list = [
         value=None,
         is_write_header=False,
         is_dti_fmt=True,
-        expected="""var null_table = [
+        expected="""const null_table = [
 ];
 """),
     Data(
@@ -69,7 +69,7 @@ normal_test_data_list = [
         value=value_matrix,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""var table_name = [
+        expected="""const table_name = [
     [1, 123.1, "a", 1.0, "1"],
     [2, 2.2, "bb", 2.2, "2.2"],
     [3, 3.3, "ccc", 3.0, "cccc"]
@@ -82,7 +82,7 @@ normal_test_data_list = [
         value=value_matrix,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""    var tablename = [
+        expected="""    const tablename = [
         ["a", "b", "c", "dd", "e"],
         [1, 123.1, "a", 1.0, "1"],
         [2, 2.2, "bb", 2.2, "2.2"],
@@ -96,7 +96,7 @@ normal_test_data_list = [
         value=value_matrix_with_none,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""var tablename = [
+        expected="""const tablename = [
     ["a", "b", "c", "dd", "e"],
     [1, null, "a", 1.0, null],
     [null, 2.2, null, 2.2, "2.2"],
@@ -111,7 +111,7 @@ normal_test_data_list = [
         value=mix_value_matrix,
         is_write_header=True,
         is_dti_fmt=True,
-        expected="""var tablename = [
+        expected="""const tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
     [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, new Date("2017-01-02T03:04:05+0900")],
@@ -125,7 +125,7 @@ normal_test_data_list = [
         value=mix_value_matrix,
         is_write_header=True,
         is_dti_fmt=False,
-        expected="""var tablename = [
+        expected="""const tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1, "2017-01-01 00:00:00"],
     [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+0900"],
@@ -205,6 +205,27 @@ class Test_JavaScriptTableWriter_write_table:
 
         assert out == expected
 
+    def test_normal_variable_declaration(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "$change variable declaration"
+        writer.variable_declaration = "var"
+        writer.value_matrix = value_matrix
+        writer.write_table()
+
+        expected = """var $change_variable_declaration = [
+    [1, 123.1, "a", 1.0, "1"],
+    [2, 2.2, "bb", 2.2, "2.2"],
+    [3, 3.3, "ccc", 3.0, "cccc"]
+];
+"""
+
+        out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_write_header", "expected"],
         [
@@ -239,7 +260,7 @@ class Test_JavaScriptTableWriter_write_table_iter:
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 len(value_matrix_iter),
-                """var tablename = [
+                """const tablename = [
     ["ha", "hb", "hc"],
     [1, 2, 3],
     [11, 12, 13],
@@ -255,7 +276,7 @@ class Test_JavaScriptTableWriter_write_table_iter:
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 len(value_matrix_iter) - 1,
-                """var tablename = [
+                """const tablename = [
     ["ha", "hb", "hc"],
     [1, 2, 3],
     [11, 12, 13],

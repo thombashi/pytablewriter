@@ -27,12 +27,28 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         :ref:`example-js-table-writer`
     """
 
+    __VALID_VAR_DECLARATION = ("var", "let", "const")
+
     @property
     def support_split_write(self):
         return True
 
+    @property
+    def variable_declaration(self):
+        return self.__variable_declaration
+
+    @variable_declaration.setter
+    def variable_declaration(self, value):
+        value = value.strip().lower()
+        if value not in self.__VALID_VAR_DECLARATION:
+            raise ValueError("declaration must be either var, let or const")
+
+        self.__variable_declaration = value
+
     def __init__(self):
         super(JavaScriptTableWriter, self).__init__()
+
+        self.variable_declaration = "const"
 
         self._dp_extractor.none_value = "null"
         self._dp_extractor.inf_value = "Infinity"
@@ -89,7 +105,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
 
     def _get_opening_row_item_list(self):
-        return "var {:s} = [".format(self.variable_name)
+        return "{:s} {:s} = [".format(
+            self.variable_declaration, self.variable_name)
 
     def _get_closing_row_item_list(self):
         return "];"
