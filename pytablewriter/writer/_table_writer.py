@@ -48,6 +48,34 @@ class AbstractTableWriter(TableWriterInterface):
 
         Table data (nested list) to write.
 
+    .. py:attribute:: type_hint_list
+
+        A list of type hints for each columns of data.
+        Acceptable values are:
+
+            - |None| (detect column type automatically)
+            - :py:class:`dataproperty.NoneType`
+            - :py:class:`dataproperty.StringType`
+            - :py:class:`dataproperty.NullStringType`
+            - :py:class:`dataproperty.IntegerType`
+            - :py:class:`dataproperty.FloatType`
+            - :py:class:`dataproperty.DateTimeType`
+            - :py:class:`dataproperty.BoolType`
+            - :py:class:`dataproperty.InfinityType`
+            - :py:class:`dataproperty.NanType`
+            - :py:class:`dataproperty.DictionaryType`
+
+        A writer will write data with appropriate type from the these
+        information when you call `write` method.
+        The writer will try to convert data type for each data in a column to
+        designated type if the type hint is not |None|.
+        If the type hint is |None| or failed to convert data,
+        writer try to detect column type from data with corresponding column.
+
+        If the list is |None|, the writer will detect types all of the columns
+        automatically and write a table.
+        Defaults to |None|.
+
     .. py:attribute:: is_write_header
 
         Write headers of the table if the value is |True|.
@@ -98,6 +126,14 @@ class AbstractTableWriter(TableWriterInterface):
             self.table_name, self.header_list, self.value_matrix)
 
     @property
+    def type_hint_list(self):
+        return self._dp_extractor.col_type_hint_list
+
+    @type_hint_list.setter
+    def type_hint_list(self, value):
+        self._dp_extractor.col_type_hint_list = value
+
+    @property
     def _quote_flag_mapping(self):
         return self._dp_extractor.quote_flag_mapping
 
@@ -130,6 +166,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.strip_str = '"'
         self._dp_extractor.type_value_mapping[dp.Typecode.NONE] = ""
 
+        self.type_hint_list = None
         self._quote_flag_mapping = {
             Typecode.NONE: False,
             Typecode.INTEGER: False,

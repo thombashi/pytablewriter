@@ -8,8 +8,10 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 import collections
+import datetime
 import itertools
 
+import dataproperty as dp
 import pytablewriter
 import pytest
 
@@ -168,6 +170,60 @@ class Test_JavaScriptTableWriter_write_new_line:
 
         out, _err = capsys.readouterr()
         assert out == "\n"
+
+
+class Test_JavaScriptTableWriter_type_hint:
+    DATATIME_DATA = datetime.datetime(2017, 1, 2, 3, 4, 5)
+    STR_DATA = "2017-01-02 03:04:05"
+    DATA_MATRIX = [
+        [STR_DATA, DATATIME_DATA],
+        [STR_DATA, DATATIME_DATA],
+    ]
+
+    @pytest.mark.parametrize(
+        ["table",  "header", "value", "type_hint", "expected"],
+        [
+            [
+                "th_none_none",
+                ["string", "datetime"],
+                DATA_MATRIX,
+                [None, None],
+                """const th_none_none = [
+    ["string", "datetime"],
+    ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
+    ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")]
+];
+""",
+            ],
+            [
+                "th_none_none",
+                ["string", "datetime"],
+                DATA_MATRIX,
+                [dp.DateTimeType, dp.StringType],
+                """const th_none_none = [
+    ["string", "datetime"],
+    [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
+    [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
+];
+""",
+            ],
+        ]
+    )
+    def test_normal(self, capsys, table, header, value, type_hint, expected):
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.header_list = header
+        writer.value_matrix = value
+        writer.type_hint_list = type_hint
+
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
+        assert out == expected
 
 
 class Test_JavaScriptTableWriter_write_table:
