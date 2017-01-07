@@ -151,12 +151,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         from dataproperty import StringType
 
         format_string = self._get_header_format_string(col_dp, value_dp)
-        item = format_string.format(StringType(value_dp.data).convert())
 
-        if self.is_quote_header:
-            return u'"{:s}"'.format(item)
-
-        return item
+        return format_string.format(StringType(value_dp.data).convert())
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(

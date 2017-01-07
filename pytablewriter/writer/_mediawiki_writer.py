@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import copy
 import re
 
 import dataproperty as dp
@@ -40,7 +41,7 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.quote_flag_table = {}
+        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
 
     def _write_header(self):
         if not self.is_write_header:

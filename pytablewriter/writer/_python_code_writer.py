@@ -33,8 +33,11 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super(PythonCodeTableWriter, self).__init__()
 
         self.table_name = ""
-        self._dp_extractor.inf_value = 'float("inf")'
-        self._dp_extractor.nan_value = 'float("nan")'
+        self._dp_extractor.type_value_mapping = {
+            dp.Typecode.NONE: None,
+            dp.Typecode.INFINITY: 'float("inf")',
+            dp.Typecode.NAN: 'float("nan")',
+        }
 
     def get_variable_name(self, value):
         import pathvalidate
@@ -66,9 +69,9 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._dp_extractor.datetime_converter = dateutil_datetime_converter
+            self._dp_extractor.datetime_formatter = dateutil_datetime_converter
         else:
-            self._dp_extractor.datetime_converter = str_datetime_converter
+            self._dp_extractor.datetime_formatter = str_datetime_converter
 
         self.inc_indent_level()
         super(PythonCodeTableWriter, self).write_table()

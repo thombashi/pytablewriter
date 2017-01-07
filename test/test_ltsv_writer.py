@@ -30,8 +30,8 @@ normal_test_data_list = [
     Data(
         header=header_list,
         value=value_matrix,
-        expected="""a:1\tb:123.1\tc:"a"\tdd:1.0\te:"1"
-a:2\tb:2.2\tc:"bb"\tdd:2.2\te:"2.2"
+        expected="""a:1\tb:123.1\tc:"a"\tdd:1.0\te:1
+a:2\tb:2.2\tc:"bb"\tdd:2.2\te:2.2
 a:3\tb:3.3\tc:"ccc"\tdd:3.0\te:"cccc"
 """),
     Data(
@@ -43,9 +43,9 @@ a:3\tb:3.3\tc:"ccc"\tdd:3.0\te:"cccc"
             [3, 3.3, "ccc", None,   "cccc"],
             [None, None, None, None,   None],
         ],
-        expected="""a:1\tb:""\tc:"a"\tdd:1.0
-b:"2.2"\tdd:2.2\te:"2.2"
-a:3\tb:"3.3"\tc:"ccc"\te:"cccc"
+        expected="""a:1\tc:"a"\tdd:1.0
+b:2.2\tdd:2.2\te:2.2
+a:3\tb:3.3\tc:"ccc"\te:"cccc"
 """),
     Data(
         header=["a!0", "a#1", "a.2$", "a_%3", "a-&4"],

@@ -48,21 +48,15 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.char_right_side_row = "],"
         self.char_cross_point = ""
         self.is_padding = False
-        self.is_quote_header = True
         self.is_write_header_separator_row = False
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
         self.is_datetime_instance_formatting = True
         self.quote_flag_table[dp.Typecode.DATETIME] = False
-        self._dp_extractor.datetime_format_str = "s"
 
         self._is_required_table_name = True
         self._is_remove_line_break = True
-
-        self._dp_extractor.none_value = None
-        self._dp_extractor.strict_type_mapping[
-            dp.Typecode.DATETIME] = False
 
     def _get_value_row_separator_item_list(self):
         return []

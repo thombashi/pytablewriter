@@ -6,16 +6,14 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import copy
 import json
 
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
-from .._converter import (
-    lower_bool_converter,
-    strip_quote
-)
+from .._converter import strip_quote
 from .._function import _get_data_helper
 from ._text_writer import IndentationTextTableWriter
 
@@ -40,10 +38,15 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
         self.char_right_side_row = ","
 
-        self._dp_extractor.none_value = "null"
-        self._dp_extractor.inf_value = "Infinity"
-        self._dp_extractor.nan_value = "NaN"
-        self._dp_extractor.bool_converter = lower_bool_converter
+        self._dp_extractor.type_value_mapping = {
+            dp.Typecode.NONE: "null",
+            dp.Typecode.INFINITY: "Infinity",
+            dp.Typecode.NAN: "NaN",
+        }
+        self._dp_extractor.const_value_mapping = {
+            True: "true", False: "false"}
+
+        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
 
     def write_null_line(self):
         self._verify_stream()
@@ -72,7 +75,9 @@ class JsonTableWriter(IndentationTextTableWriter):
         for json_data in self._value_matrix:
             json_text = json.dumps(
                 json_data, sort_keys=True, indent=4 * self._indent_level)
-            json_text = strip_quote(json_text, self._dp_extractor.none_value)
+            json_text = strip_quote(
+                json_text,
+                self._dp_extractor.type_value_mapping.get(dp.Typecode.NONE))
             json_text = strip_quote(json_text, "true")
             json_text = strip_quote(json_text, "false")
             json_text_list.append(json_text)

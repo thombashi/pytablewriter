@@ -7,15 +7,19 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+from dataproperty import Typecode
 import six
 
-from .._converter import lower_bool_converter
 from .._function import str_datetime_converter
 from ._sourcecode_writer import SourceCodeTableWriter
 
 
 def js_datetime_converter(value):
-    return 'new Date("{:s}")'.format(value.strftime("%Y-%m-%dT%H:%M:%S%z"))
+    try:
+        return 'new Date("{:s}")'.format(value.strftime("%Y-%m-%dT%H:%M:%S%z"))
+    except ValueError:
+        # the datetime strftime() methods require year >= 1900
+        return 'new Date("{}")'.format(value)
 
 
 class JavaScriptTableWriter(SourceCodeTableWriter):
@@ -55,11 +59,13 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         super(JavaScriptTableWriter, self).__init__()
 
         self.variable_declaration = "const"
-
-        self._dp_extractor.none_value = "null"
-        self._dp_extractor.inf_value = "Infinity"
-        self._dp_extractor.nan_value = "NaN"
-        self._dp_extractor.bool_converter = lower_bool_converter
+        self._dp_extractor.type_value_mapping = {
+            Typecode.NONE: "null",
+            Typecode.INFINITY: "Infinity",
+            Typecode.NAN: "NaN",
+        }
+        self._dp_extractor.const_value_mapping = {
+            True: "true", False: "false"}
 
     def get_variable_name(self, value):
         import pathvalidate
@@ -85,9 +91,9 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._dp_extractor.datetime_converter = js_datetime_converter
+            self._dp_extractor.datetime_formatter = js_datetime_converter
         else:
-            self._dp_extractor.datetime_converter = str_datetime_converter
+            self._dp_extractor.datetime_formatter = str_datetime_converter
 
         self._preprocess()
 

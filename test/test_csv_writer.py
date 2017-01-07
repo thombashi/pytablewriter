@@ -34,8 +34,8 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected=""""a","b","c","dd","e"
-1,123.1,"a",1.0,"1"
-2,2.2,"bb",2.2,"2.2"
+1,123.1,"a",1.0,1
+2,2.2,"bb",2.2,2.2
 3,3.3,"ccc",3.0,"cccc"
 """),
     Data(
@@ -48,16 +48,16 @@ normal_test_data_list = [
         col_delim=",",
         header=[],
         value=value_matrix,
-        expected="""1,123.1,"a",1.0,"1"
-2,2.2,"bb",2.2,"2.2"
+        expected="""1,123.1,"a",1.0,1
+2,2.2,"bb",2.2,2.2
 3,3.3,"ccc",3.0,"cccc"
 """),
     Data(
         col_delim="\t",
         header=None,
         value=value_matrix,
-        expected="""1\t123.1\t"a"\t1.0\t"1"
-2\t2.2\t"bb"\t2.2\t"2.2"
+        expected="""1\t123.1\t"a"\t1.0\t1
+2\t2.2\t"bb"\t2.2\t2.2
 3\t3.3\t"ccc"\t3.0\t"cccc"
 """),
     Data(
@@ -66,7 +66,7 @@ normal_test_data_list = [
         value=value_matrix_with_none,
         expected=""""a","b","c","dd","e"
 1,,"a",1.0,
-,2.2,,2.2,"2.2"
+,2.2,,2.2,2.2
 3,3.3,"ccc",,"cccc"
 ,,,,
 """),
@@ -75,9 +75,9 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         expected=""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"
-1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00"
-2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
-3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00"
+1,1.10,"aa",1.0,1,True,Infinity,NaN,1,"2017-01-01T00:00:00"
+2,2.20,"bbb",2.2,2.2,False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
+3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01T00:00:00"
 """),
 ]
 
@@ -113,9 +113,9 @@ class Test_CsvTableWriter_from_csv:
 """
 
     __CSV_EXPECTED = """"a","b","c","dd","e"
-1,1.1,"a","1",""
-2,2.2,"","2.2","2.2"
-3,3.3,"ccc","","cc cc"
+1,1.1,"a",1.0,
+2,2.2,,2.2,2.2
+3,3.3,"ccc",,"cc cc"
 """
 
     def test_normal_from_text(self, capsys):

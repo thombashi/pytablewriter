@@ -25,10 +25,6 @@ from .._error import (
 from ._interface import TableWriterInterface
 
 
-def default_bool_converter(value):
-    return str(value)
-
-
 class AbstractTableWriter(TableWriterInterface):
     """
     Base abstract class of table writer classes.
@@ -60,16 +56,12 @@ class AbstractTableWriter(TableWriterInterface):
 
         Padding for each item in the table if the value is |True|.
 
-    .. py:attribute:: is_quote_header
-
-        Add double quote to the headers if the value is |True|.
-
     .. py:attribute:: quote_flag_table
 
         Add double quote to strings in table elements,
         where |Typecode| of table-value is |True| in the ``quote_flag_table``
         mapping table. ``quote_flag_table`` should be a dictionary.
-        And is ``{ Typecode : bool }``. Defaults to 
+        And is ``{ Typecode : bool }``. Defaults to:
 
         .. code-block:: json
             :caption: quote_flag_table default value
@@ -126,6 +118,14 @@ class AbstractTableWriter(TableWriterInterface):
         return ptr.TableData(
             self.table_name, self.header_list, self.value_matrix)
 
+    @property
+    def quote_flag_table(self):
+        return self._dp_extractor.quote_flag_mapping
+
+    @quote_flag_table.setter
+    def quote_flag_table(self, value):
+        self._dp_extractor.quote_flag_mapping = value
+
     def __init__(self):
         self.stream = sys.stdout
         self.table_name = None
@@ -134,17 +134,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.is_write_header = True
         self.is_padding = True
-        self.is_quote_header = False
-        self.quote_flag_table = {
-            Typecode.NONE: False,
-            Typecode.INTEGER: False,
-            Typecode.FLOAT: False,
-            Typecode.STRING: True,
-            Typecode.DATETIME: True,
-            Typecode.FLOAT: False,
-            Typecode.NAN: False,
-            Typecode.BOOL: False,
-        }
 
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = False
@@ -160,9 +149,19 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor = dp.DataPropertyExtractor()
         self._dp_extractor.min_padding_len = 1
         self._dp_extractor.strip_str = '"'
-        self._dp_extractor.none_value = ""
-        self._dp_extractor.datetime_format_str = "%Y-%m-%d %H:%M:%S%z"
-        self._dp_extractor.bool_converter = default_bool_converter
+        self._dp_extractor.type_value_mapping[dp.Typecode.NONE] = ""
+
+        self.quote_flag_table = {
+            Typecode.NONE: False,
+            Typecode.INTEGER: False,
+            Typecode.FLOAT: False,
+            Typecode.STRING: True,
+            Typecode.NULL_STRING: True,
+            Typecode.DATETIME: True,
+            Typecode.FLOAT: False,
+            Typecode.NAN: False,
+            Typecode.BOOL: False,
+        }
 
         self._is_required_table_name = False
         self._is_remove_line_break = False
@@ -355,7 +354,8 @@ class AbstractTableWriter(TableWriterInterface):
     def _get_padding_len(self, column_property, value_dp=None):
         if self.is_padding:
             try:
-                return value_dp.get_padding_len(column_property.ascii_char_width)
+                return value_dp.get_padding_len(
+                    column_property.ascii_char_width)
             except AttributeError:
                 return column_property.ascii_char_width
 
@@ -388,19 +388,8 @@ class AbstractTableWriter(TableWriterInterface):
             except ValueError:
                 item = MultiByteStrDecoder(value).unicode_str
 
-        item = self.__remove_line_break(item)
-        item = self.__get_align_format(col_dp, value_dp).format(item)
-
-        if all([
-            self.quote_flag_table.get(col_dp.typecode, False),
-            any([
-                self.quote_flag_table.get(value_dp.typecode, False),
-                value_dp.typecode in [Typecode.INTEGER, Typecode.FLOAT],
-            ])
-        ]):
-            return u'"{:s}"'.format(item)
-
-        return item
+        return self.__get_align_format(col_dp, value_dp).format(
+            self.__remove_line_break(item))
 
     def __get_to_string_format(self, col_dp, value_dp):
         if any([

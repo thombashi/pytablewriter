@@ -66,18 +66,38 @@ normal_test_data_list = [
             ],
             [
                 [
-                    1, "1.1", 'aa', 1, 1, 'True', inf,
+                    1, "1.1", 'aa', 1, 1, 1, inf,
                     nan, 1, '2017-01-01T00:00:00',
                 ],
                 [
-                    2, "2.2", 'bbb', "2.2", "2.2", 'False', inf, nan,
+                    2, "2.2", 'bbb', "2.2", "2.2", 0, inf, nan,
                     inf, '2017-01-02 03:04:05+09:00',
                 ],
                 [
-                    3, "3.33", 'cccc', -3, 'ccc', 'True', inf,
+                    3, "3.33", 'cccc', -3, 'ccc', 1, inf,
                     nan, nan, '2017-01-01T00:00:00',
                 ],
             ])
+    ),
+    Data(
+        table="infnan",
+        header=["inf", "nan"],
+        value=[
+            [inf, nan],
+            ["inf", "nan"],
+            ["INF", "NAN"],
+            ["INFINITY", "inf"],
+        ],
+        expected=TableData(
+            "infnan",
+            ["inf", "nan"],
+            [
+                [inf, nan],
+                [inf, nan],
+                [inf, nan],
+                [inf, inf],
+            ]
+        )
     ),
 ]
 
@@ -132,10 +152,13 @@ class Test_ExcelTableWriter_write_table:
         loader = ptr.ExcelTableFileLoader(str(test_file_path))
 
         for tabledata in loader.load():
-            print("expected: {}".format(ptw.dump_tabledata(expected)))
-            print("actual: {}".format(ptw.dump_tabledata(tabledata)))
+            expected_dump = ptw.dump_tabledata(expected)
+            actual_dump = ptw.dump_tabledata(tabledata)
 
-            assert tabledata == expected
+            print("expected:\n{}".format(expected_dump))
+            print("actual:\n{}".format(actual_dump))
+
+            assert actual_dump == expected_dump
 
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],

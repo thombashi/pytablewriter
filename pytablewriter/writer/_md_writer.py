@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import copy
 
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
@@ -33,8 +34,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self.column_delimiter = "|"
         self.char_cross_point = "|"
         self.is_write_opening_row = True
-        self.quote_flag_table[dp.Typecode.STRING] = False
-        self.quote_flag_table[dp.Typecode.DATETIME] = False
+        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
+        #self.quote_flag_table[dp.Typecode.STRING] = False
+        #self.quote_flag_table[dp.Typecode.DATETIME] = False
 
         self._is_remove_line_break = True
 

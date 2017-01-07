@@ -32,8 +32,9 @@ class CsvTableWriter(TextTableWriter):
         self.indent_string = ""
         self.column_delimiter = ","
         self.is_padding = False
-        self.is_quote_header = True
         self.is_write_header_separator_row = False
+
+        self.quote_flag_table[dp.Typecode.NULL_STRING] = False
 
         self._is_remove_line_break = True
 

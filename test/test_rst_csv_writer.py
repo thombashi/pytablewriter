@@ -30,10 +30,10 @@ normal_test_data_list = [
         value=value_matrix,
         expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
-    :widths: 1, 5, 3, 3, 4
+    :widths: 3, 5, 5, 4, 6
     
-    1, 123.1, "a", 1.0, "1"
-    2, 2.2, "bb", 2.2, "2.2"
+    1, 123.1, "a", 1.0, 1
+    2, 2.2, "bb", 2.2, 2.2
     3, 3.3, "ccc", 3.0, "cccc"
 """),
     Data(
@@ -43,7 +43,7 @@ normal_test_data_list = [
         value=None,
         expected=""".. csv-table:: 
     :header: "a", "b", "c", "dd", "e"
-    :widths: 1, 1, 1, 2, 1
+    :widths: 3, 3, 3, 4, 3
     
 """),
     Data(
@@ -52,10 +52,10 @@ normal_test_data_list = [
         header=None,
         value=value_matrix,
         expected=""".. csv-table:: 
-    :widths: 1, 5, 3, 3, 4
+    :widths: 1, 5, 5, 3, 6
     
-    1, 123.1, "a", 1.0, "1"
-    2, 2.2, "bb", 2.2, "2.2"
+    1, 123.1, "a", 1.0, 1
+    2, 2.2, "bb", 2.2, 2.2
     3, 3.3, "ccc", 3.0, "cccc"
 """),
     Data(
@@ -65,10 +65,10 @@ normal_test_data_list = [
         value=value_matrix,
         expected="""    .. csv-table:: 
         :header: "a", "b", "c", "dd", "e"
-        :widths: 1, 5, 3, 3, 4
+        :widths: 3, 5, 5, 4, 6
         
-        1, 123.1, "a", 1.0, "1"
-        2, 2.2, "bb", 2.2, "2.2"
+        1, 123.1, "a", 1.0, 1
+        2, 2.2, "bb", 2.2, 2.2
         3, 3.3, "ccc", 3.0, "cccc"
 """),
     Data(
@@ -78,10 +78,10 @@ normal_test_data_list = [
         value=value_matrix_with_none,
         expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
-    :widths: 1, 3, 3, 3, 4
+    :widths: 3, 3, 5, 4, 6
     
     1, , "a", 1.0, 
-    , 2.2, , 2.2, "2.2"
+    , 2.2, , 2.2, 2.2
     3, 3.3, "ccc", , "cccc"
     , , , , 
 """),
@@ -92,11 +92,11 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected=""".. csv-table:: table name
     :header: "i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"
-    :widths: 1, 4, 4, 4, 3, 5, 8, 3, 8, 25
+    :widths: 3, 4, 6, 4, 5, 6, 8, 5, 9, 27
     
-    1, 1.10, "aa", 1.0, "1", True, Infinity, NaN, 1, "2017-01-01 00:00:00"
-    2, 2.20, "bbb", 2.2, "2.2", False, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"
-    3, 3.33, "cccc", -3.0, "ccc", True, Infinity, NaN, NaN, "2017-01-01 00:00:00"
+    1, 1.10, "aa", 1.0, 1, True, Infinity, NaN, 1, 2017-01-01 00:00:00
+    2, 2.20, "bbb", 2.2, 2.2, False, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"
+    3, 3.33, "cccc", -3.0, "ccc", True, Infinity, NaN, NaN, 2017-01-01 00:00:00
 """),
 ]
 
@@ -164,7 +164,7 @@ class Test_RstCsvTableWriter_write_table_iter:
             value_matrix_iter,
             """.. csv-table:: tablename
     :header: "ha", "hb", "hc"
-    :widths: 2, 2, 2
+    :widths: 4, 4, 4
     
     1, 2, 3
     11, 12, 13
@@ -184,6 +184,10 @@ class Test_RstCsvTableWriter_write_table_iter:
         writer.write_table_iter()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(

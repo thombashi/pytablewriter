@@ -31,8 +31,8 @@ normal_test_data_list = [
         value=value_matrix,
         expected="""table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
-    [1, 123.1, "a", 1.0, "1"],
-    [2, 2.2, "bb", 2.2, "2.2"],
+    [1, 123.1, "a", 1.0, 1],
+    [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"],
 ]
 """),
@@ -52,8 +52,8 @@ normal_test_data_list = [
         value=value_matrix,
         expected="""    tablename = [
         ["a", "b", "c", "dd", "e"],
-        [1, 123.1, "a", 1.0, "1"],
-        [2, 2.2, "bb", 2.2, "2.2"],
+        [1, 123.1, "a", 1.0, 1],
+        [2, 2.2, "bb", 2.2, 2.2],
         [3, 3.3, "ccc", 3.0, "cccc"],
     ]
 """),
@@ -65,7 +65,7 @@ normal_test_data_list = [
         expected="""table_name = [
     ["a", "b", "c", "dd", "e"],
     [1, None, "a", 1.0, None],
-    [None, 2.2, None, 2.2, "2.2"],
+    [None, 2.2, None, 2.2, 2.2],
     [3, 3.3, "ccc", None, "cccc"],
     [None, None, None, None, None],
 ]
@@ -77,8 +77,8 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected="""tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-    [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+    [1, 1.10, "aa", 1.0, 1, True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [2, 2.20, "bbb", 2.2, 2.2, False, float("inf"), float("nan"), float("inf"), "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
 """),
@@ -144,8 +144,8 @@ class Test_PythonCodeTableWriter_write_table:
 
         expected = """tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-    [2, 2.20, "bbb", 2.2, "2.2", False, float("inf"), float("nan"), float("inf"), dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+    [1, 1.10, "aa", 1.0, 1, True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [2, 2.20, "bbb", 2.2, 2.2, False, float("inf"), float("nan"), float("inf"), "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
 """

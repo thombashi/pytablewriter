@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import copy
 
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
@@ -21,6 +22,7 @@ class RstTableWriter(IndentationTextTableWriter):
     def __init__(self):
         super(RstTableWriter, self).__init__()
 
+        self.table_name = ""
         self.char_header_row_separator = "="
         self.char_cross_point = "+"
         self.indent_string = "    "
@@ -28,12 +30,9 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.quote_flag_table[dp.Typecode.STRING] = False
-        self.quote_flag_table[dp.Typecode.DATETIME] = False
+        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
 
         self._is_remove_line_break = True
-
-        self.table_name = ""
 
     def _write_table(self):
         self._verify_property()
@@ -75,7 +74,6 @@ class RstCsvTableWriter(RstTableWriter):
         self.is_write_value_separator_row = False
         self.is_write_closing_row = False
         self.quote_flag_table[dp.Typecode.STRING] = True
-        self.quote_flag_table[dp.Typecode.DATETIME] = True
 
     def write_table(self):
         """

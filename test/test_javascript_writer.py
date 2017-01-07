@@ -36,8 +36,8 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""const table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
-    [1, 123.1, "a", 1.0, "1"],
-    [2, 2.2, "bb", 2.2, "2.2"],
+    [1, 123.1, "a", 1.0, 1],
+    [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
 """),
@@ -70,8 +70,8 @@ normal_test_data_list = [
         is_write_header=True,
         is_dti_fmt=True,
         expected="""const table_name = [
-    [1, 123.1, "a", 1.0, "1"],
-    [2, 2.2, "bb", 2.2, "2.2"],
+    [1, 123.1, "a", 1.0, 1],
+    [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
 """),
@@ -84,8 +84,8 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""    const tablename = [
         ["a", "b", "c", "dd", "e"],
-        [1, 123.1, "a", 1.0, "1"],
-        [2, 2.2, "bb", 2.2, "2.2"],
+        [1, 123.1, "a", 1.0, 1],
+        [2, 2.2, "bb", 2.2, 2.2],
         [3, 3.3, "ccc", 3.0, "cccc"]
     ];
 """),
@@ -98,8 +98,8 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""const tablename = [
     ["a", "b", "c", "dd", "e"],
-    [1, null, "a", 1.0, null],
-    [null, 2.2, null, 2.2, "2.2"],
+    [1, null, "a", 1, null],
+    [null, 2.2, null, 2.2, 2.2],
     [3, 3.3, "ccc", null, "cccc"],
     [null, null, null, null, null]
 ];
@@ -113,8 +113,8 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""const tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
-    [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, new Date("2017-01-02T03:04:05+0900")],
+    [1, 1.10, "aa", 1.0, 1, true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
+    [2, 2.20, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
 ];
 """),
@@ -127,9 +127,9 @@ normal_test_data_list = [
         is_dti_fmt=False,
         expected="""const tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.10, "aa", 1.0, "1", true, Infinity, NaN, 1, "2017-01-01 00:00:00"],
-    [2, 2.20, "bbb", 2.2, "2.2", false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+0900"],
-    [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, "2017-01-01 00:00:00"]
+    [1, 1.10, "aa", 1.0, 1, true, Infinity, NaN, 1, "2017-01-01T00:00:00"],
+    [2, 2.20, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
+    [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, "2017-01-01T00:00:00"]
 ];
 """),
 ]
@@ -213,8 +213,8 @@ class Test_JavaScriptTableWriter_write_table:
         writer.write_table()
 
         expected = """var $change_variable_declaration = [
-    [1, 123.1, "a", 1.0, "1"],
-    [2, 2.2, "bb", 2.2, "2.2"],
+    [1, 123.1, "a", 1.0, 1],
+    [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
 """

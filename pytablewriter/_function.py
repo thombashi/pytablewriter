@@ -16,13 +16,14 @@ def _get_data_helper(dp):
         if isinstance(dp.data, Decimal):
             return float(dp.data)
     elif dp.typecode == dataproperty.Typecode.DATETIME:
-        return dp.format_str.format(dp.data)
+        return dp.to_str()
 
     return dp.data
 
 
 def str_datetime_converter(value):
-    return '"{:s}"'.format(value.strftime("%Y-%m-%d %H:%M:%S%z"))
+    return '"{:s}"'.format(
+        value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 
 
 def dateutil_datetime_converter(value):

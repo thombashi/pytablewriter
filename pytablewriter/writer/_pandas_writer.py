@@ -37,8 +37,11 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self.table_name = u""
 
         self.is_write_header = False
-        self._dp_extractor.inf_value = 'numpy.inf'
-        self._dp_extractor.nan_value = 'numpy.nan'
+        self._dp_extractor.type_value_mapping = {
+            dp.Typecode.NONE: None,
+            dp.Typecode.INFINITY: 'numpy.inf',
+            dp.Typecode.NAN: 'numpy.nan',
+        }
 
     def get_variable_name(self, value):
         import pathvalidate
@@ -69,9 +72,9 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._dp_extractor.datetime_converter = dateutil_datetime_converter
+            self._dp_extractor.datetime_formatter = dateutil_datetime_converter
         else:
-            self._dp_extractor.datetime_converter = str_datetime_converter
+            self._dp_extractor.datetime_formatter = str_datetime_converter
 
         self.inc_indent_level()
         super(PandasDataFrameWriter, self).write_table()

@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import copy
 
 import dataproperty as dp
 import dominate.tags as tags
@@ -35,8 +36,9 @@ class HtmlTableWriter(TextTableWriter):
 
         self.is_padding = False
         self.indent_string = u"    "
-        self.quote_flag_table[dp.Typecode.STRING] = False
-        self.quote_flag_table[dp.Typecode.DATETIME] = False
+        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
+        #self.quote_flag_table[dp.Typecode.STRING] = False
+        #self.quote_flag_table[dp.Typecode.DATETIME] = False
 
         self._table_tag = None
 

@@ -144,7 +144,7 @@ normal_test_data_list = [
                 "inf": "Infinity",
                 "mix_num": 1.0,
                 "nan": "NaN",
-                "time": "2017-01-01 00:00:00"
+                "time": "2017-01-01T00:00:00"
             },
             {
                 "bool": false,
@@ -168,7 +168,7 @@ normal_test_data_list = [
                 "inf": "Infinity",
                 "mix_num": "NaN",
                 "nan": "NaN",
-                "time": "2017-01-01 00:00:00"
+                "time": "2017-01-01T00:00:00"
             }]}
         """)
     ),
@@ -216,6 +216,10 @@ class Test_JsonTableWriter_write_table:
         writer.write_table()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(json.dumps(expected)))
+        print("[actual]\n{}".format(out))
+
         assert json.loads(out) == expected
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [

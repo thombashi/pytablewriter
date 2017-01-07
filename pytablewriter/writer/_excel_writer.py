@@ -13,7 +13,6 @@ from dataproperty import IntegerType
 from six.moves import range
 import xlwt
 
-from .._converter import str_datetime_converter
 from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx
@@ -107,10 +106,10 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         self.stream = None
         self._workbook = None
 
-        self._dp_extractor.inf_value = "Inf"
-        self._dp_extractor.nan_value = "NaN"
-        self._dp_extractor.datetime_converter = str_datetime_converter
-        self._dp_extractor.datetime_format_str = "s"
+        self._dp_extractor.type_value_mapping = {
+            dp.Typecode.INFINITY: "Inf",
+            dp.Typecode.NAN: "NaN",
+        }
 
         self._first_header_row = 0
         self._last_header_row = self.first_header_row
