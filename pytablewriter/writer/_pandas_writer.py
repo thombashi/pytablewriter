@@ -13,7 +13,7 @@ from mbstrdecoder import MultiByteStrDecoder
 from .._error import EmptyTableNameError
 from .._function import (
     quote_datetime_formatter,
-    dateutil_datetime_converter
+    dateutil_datetime_formatter
 )
 from ._sourcecode_writer import SourceCodeTableWriter
 
@@ -72,7 +72,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._dp_extractor.datetime_formatter = dateutil_datetime_converter
+            self._dp_extractor.datetime_formatter = dateutil_datetime_formatter
         else:
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 

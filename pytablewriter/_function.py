@@ -26,7 +26,7 @@ def quote_datetime_formatter(value):
         value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 
 
-def dateutil_datetime_converter(value):
+def dateutil_datetime_formatter(value):
     return 'dateutil.parser.parse("{:s}")'.format(
         value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 

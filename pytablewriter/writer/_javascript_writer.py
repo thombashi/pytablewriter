@@ -18,7 +18,7 @@ from .._function import quote_datetime_formatter
 from ._sourcecode_writer import SourceCodeTableWriter
 
 
-def js_datetime_converter(value):
+def js_datetime_formatter(value):
     try:
         return 'new Date("{:s}")'.format(
             value.strftime(DefaultValue.DATETIME_FORMAT))
@@ -96,7 +96,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
-            self._dp_extractor.datetime_formatter = js_datetime_converter
+            self._dp_extractor.datetime_formatter = js_datetime_formatter
         else:
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
