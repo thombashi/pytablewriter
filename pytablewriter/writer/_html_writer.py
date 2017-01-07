@@ -36,8 +36,8 @@ class HtmlTableWriter(TextTableWriter):
 
         self.is_padding = False
         self.indent_string = u"    "
-        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
 
+        self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
         self._table_tag = None
 
     def write_table(self):

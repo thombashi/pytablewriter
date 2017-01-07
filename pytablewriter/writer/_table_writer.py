@@ -56,27 +56,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         Padding for each item in the table if the value is |True|.
 
-    .. py:attribute:: quote_flag_table
-
-        Add double quote to strings in table elements,
-        where |Typecode| of table-value is |True| in the ``quote_flag_table``
-        mapping table. ``quote_flag_table`` should be a dictionary.
-        And is ``{ Typecode : bool }``. Defaults to:
-
-        .. code-block:: json
-            :caption: quote_flag_table default value
-
-            {
-                Typecode.NONE: False,
-                Typecode.INTEGER: False,
-                Typecode.FLOAT: False,
-                Typecode.STRING: True,
-                Typecode.DATETIME: True,
-                Typecode.FLOAT: False,
-                Typecode.NAN: False,
-                Typecode.BOOL: False,
-            }
-
     .. py:attribute:: iteration_length
 
         The number of iterations to write a table.
@@ -119,11 +98,11 @@ class AbstractTableWriter(TableWriterInterface):
             self.table_name, self.header_list, self.value_matrix)
 
     @property
-    def quote_flag_table(self):
+    def _quote_flag_mapping(self):
         return self._dp_extractor.quote_flag_mapping
 
-    @quote_flag_table.setter
-    def quote_flag_table(self, value):
+    @_quote_flag_mapping.setter
+    def _quote_flag_mapping(self, value):
         self._dp_extractor.quote_flag_mapping = value
 
     def __init__(self):
@@ -151,7 +130,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.strip_str = '"'
         self._dp_extractor.type_value_mapping[dp.Typecode.NONE] = ""
 
-        self.quote_flag_table = {
+        self._quote_flag_mapping = {
             Typecode.NONE: False,
             Typecode.INTEGER: False,
             Typecode.FLOAT: False,

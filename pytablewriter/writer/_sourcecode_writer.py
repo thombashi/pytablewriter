@@ -53,8 +53,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
 
         self.is_datetime_instance_formatting = True
-        self.quote_flag_table[dp.Typecode.DATETIME] = False
 
+        self._quote_flag_mapping[dp.Typecode.DATETIME] = False
         self._is_required_table_name = True
         self._is_remove_line_break = True
 

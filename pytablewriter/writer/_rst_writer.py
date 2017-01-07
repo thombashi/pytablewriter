@@ -30,8 +30,8 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.quote_flag_table = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
 
+        self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
         self._is_remove_line_break = True
 
     def _write_table(self):
@@ -73,7 +73,8 @@ class RstCsvTableWriter(RstTableWriter):
         self.is_write_header_separator_row = False
         self.is_write_value_separator_row = False
         self.is_write_closing_row = False
-        self.quote_flag_table[dp.Typecode.STRING] = True
+
+        self._quote_flag_mapping[dp.Typecode.STRING] = True
 
     def write_table(self):
         """
