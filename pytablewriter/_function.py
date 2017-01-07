@@ -21,7 +21,7 @@ def _get_data_helper(dp):
     return dp.data
 
 
-def str_datetime_converter(value):
+def quote_datetime_formatter(value):
     return '"{:s}"'.format(
         value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 

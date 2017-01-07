@@ -10,7 +10,8 @@ from __future__ import unicode_literals
 from dataproperty import Typecode
 import six
 
-from .._function import str_datetime_converter
+
+from .._function import quote_datetime_formatter
 from ._sourcecode_writer import SourceCodeTableWriter
 
 
@@ -93,7 +94,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = js_datetime_converter
         else:
-            self._dp_extractor.datetime_formatter = str_datetime_converter
+            self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         self._preprocess()
 

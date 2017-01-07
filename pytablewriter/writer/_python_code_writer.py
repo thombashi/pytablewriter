@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 import dataproperty as dp
 
 from .._function import (
-    str_datetime_converter,
+    quote_datetime_formatter,
     dateutil_datetime_converter
 )
 from ._sourcecode_writer import SourceCodeTableWriter
@@ -71,7 +71,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = dateutil_datetime_converter
         else:
-            self._dp_extractor.datetime_formatter = str_datetime_converter
+            self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         self.inc_indent_level()
         super(PythonCodeTableWriter, self).write_table()
