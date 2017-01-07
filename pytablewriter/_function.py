@@ -28,7 +28,7 @@ def quote_datetime_formatter(value):
 
 def dateutil_datetime_converter(value):
     return 'dateutil.parser.parse("{:s}")'.format(
-        value.strftime("%Y-%m-%dT%H:%M:%S%z"))
+        value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 
 
 def dump_tabledata(tabledata, format_name="rst_grid_table"):

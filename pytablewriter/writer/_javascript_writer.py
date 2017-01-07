@@ -7,7 +7,10 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from dataproperty import Typecode
+from dataproperty import (
+    DefaultValue,
+    Typecode,
+)
 import six
 
 
@@ -17,7 +20,8 @@ from ._sourcecode_writer import SourceCodeTableWriter
 
 def js_datetime_converter(value):
     try:
-        return 'new Date("{:s}")'.format(value.strftime("%Y-%m-%dT%H:%M:%S%z"))
+        return 'new Date("{:s}")'.format(
+            value.strftime(DefaultValue.DATETIME_FORMAT))
     except ValueError:
         # the datetime strftime() methods require year >= 1900
         return 'new Date("{}")'.format(value)
