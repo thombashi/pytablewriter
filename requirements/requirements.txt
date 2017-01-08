@@ -1,4 +1,4 @@
-DataProperty>=0.15.2
+DataProperty>=0.16.0
 dominate>=2.3.0
 mbstrdecoder>=0.2.1
 pathvalidate>=0.13.0
