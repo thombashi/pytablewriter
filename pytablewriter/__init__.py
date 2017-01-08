@@ -6,6 +6,17 @@
 
 from __future__ import absolute_import
 
+from dataproperty import (
+    StringType,
+    IntegerType,
+    FloatType,
+    DateTimeType,
+    BoolType,
+    InfinityType,
+    NanType,
+    DictionaryType,
+)
+
 from ._error import (
     NotSupportedError,
     EmptyHeaderError,

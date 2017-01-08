@@ -54,16 +54,14 @@ class AbstractTableWriter(TableWriterInterface):
         Acceptable values are:
 
             - |None| (detect column type automatically)
-            - :py:class:`dataproperty.NoneType`
-            - :py:class:`dataproperty.StringType`
-            - :py:class:`dataproperty.NullStringType`
-            - :py:class:`dataproperty.IntegerType`
-            - :py:class:`dataproperty.FloatType`
-            - :py:class:`dataproperty.DateTimeType`
-            - :py:class:`dataproperty.BoolType`
-            - :py:class:`dataproperty.InfinityType`
-            - :py:class:`dataproperty.NanType`
-            - :py:class:`dataproperty.DictionaryType`
+            - :py:class:`pytablewriter.StringType`
+            - :py:class:`pytablewriter.IntegerType`
+            - :py:class:`pytablewriter.FloatType`
+            - :py:class:`pytablewriter.DateTimeType`
+            - :py:class:`pytablewriter.BoolType`
+            - :py:class:`pytablewriter.InfinityType`
+            - :py:class:`pytablewriter.NanType`
+            - :py:class:`pytablewriter.DictionaryType`
 
         A writer will write data with appropriate type from the these
         information when you call `write` method.
