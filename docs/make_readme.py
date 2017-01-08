@@ -22,20 +22,21 @@ def write_examples(maker):
 
     maker.inc_indent_level()
     maker.write_chapter("Write a Markdown table")
-    maker.write_example_file("markdown_example.txt")
+    maker.write_example_file("table_format/markdown_example.txt")
 
     maker.write_chapter("Write a reStructuredText table (Grid Tables)")
-    maker.write_example_file("rst/rst_grid_table_example.txt")
+    maker.write_example_file("table_format/rst/rst_grid_table_example.txt")
 
     maker.write_chapter(
         "Write a table with JavaScript format (as a nested list variable definition)")
-    maker.write_example_file("sourcecode/javascript_example.txt")
+    maker.write_example_file("table_format/sourcecode/javascript_example.txt")
 
     maker.write_chapter("Write a table to an Excel sheet")
-    maker.write_example_file("spreadsheet/exel_single_example.txt")
+    maker.write_example_file(
+        "table_format/spreadsheet/exel_single_example.txt")
 
     maker.write_chapter("Write a table using multibyte character")
-    maker.write_example_file("multibyte_table_example.txt")
+    maker.write_example_file("multibyte/multibyte_table_example.txt")
 
     maker.write_chapter("Write a table from ``pandas.DataFrame`` instance")
     maker.write_example_file("datasource/from_pandas_dataframe_example.txt")

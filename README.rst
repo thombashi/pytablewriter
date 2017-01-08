@@ -71,12 +71,12 @@ Write a Markdown table
 .. code::
 
     # example_table
-    int|float|str |bool |mix|          time
-    --:|----:|----|-----|--:|------------------------
-      0|  0.1|hoge|True |  0|2017-01-01 03:04:05+0900
-      2| -2.2|foo |False|   |2017-12-23 12:34:51+0900
-      3|  0.0|bar |True |inf|2017-03-03 22:44:55+0900
-    -10| -9.9|    |False|nan|2017-01-01 00:00:00+0900
+    int|float|str |bool |  mix   |          time
+    --:|----:|----|-----|-------:|------------------------
+      0| 0.10|hoge|True |       0|2017-01-01 03:04:05+0900
+      2|-2.23|foo |False|        |2017-12-23 12:34:51+0900
+      3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900
+    -10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900
 
 
 Rendering result
@@ -163,12 +163,12 @@ Write a table with JavaScript format (as a nested list variable definition)
 
 .. code:: js
 
-    var example_table = [
+    const example_table = [
         ["int", "float", "str", "bool", "mix", "time"],
-        [0, 0.10, "hoge", true, 0, new Date("2017-01-01T03:04:05+0900")],
-        [2, -2.23, "foo", false, null, new Date("2017-12-23T12:34:51+0900")],
-        [3, 0.00, "bar", true, Infinity, new Date("2017-03-03T22:44:55+0900")],
-        [-10, -9.90, "", false, NaN, new Date("2017-01-01T00:00:00+0900")]
+        [0, 0.10, "hoge", true, 0, "2017-01-01 03:04:05+0900"],
+        [2, -2.23, "foo", false, null, "2017-12-23 12:34:51+0900"],
+        [3, 0.00, "bar", true, Infinity, "2017-03-03 22:44:55+0900"],
+        [-10, -9.90, "", false, NaN, "2017-01-01 00:00:00+0900"]
     ];
 
 Write a table to an Excel sheet
