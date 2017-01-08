@@ -1,4 +1,4 @@
-Tabular data sources
+Tabular Data Sources
 ========================
 
 .. toctree::

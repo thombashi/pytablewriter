@@ -1,6 +1,6 @@
 .. _example-csv-table-writer:
 
-Write a CSV table
+CSV
 ----------------------------
 
 |CsvTableWriter| class can write a Comma-Separated Values (CSV) table to the |stream| from a matrix of data.
@@ -26,15 +26,15 @@ Write a CSV table
     :caption: Output of CSV
 
     "int","float","str","bool","mix","time"
-    0,0.1,"hoge",True,0,"2017-01-01 03:04:05+0900"
-    2,-2.2,"foo",False,,"2017-12-23 12:34:51+0900"
-    3,0.0,"bar",True,inf,"2017-03-03 22:44:55+0900"
-    -10,-9.9,"",False,nan,"2017-01-01 00:00:00+0900"
+    0,0.10,"hoge",True,0,"2017-01-01 03:04:05+0900"
+    2,-2.23,"foo",False,,"2017-12-23 12:34:51+0900"
+    3,0.00,"bar",True,Infinity,"2017-03-03 22:44:55+0900"
+    -10,-9.90,,False,NaN,"2017-01-01 00:00:00+0900"
 
 
 .. _example-tsv-table-writer:
 
-Write a TSV table
+TSV
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |TsvTableWriter| class can write a Tab-Separated Values (TSV) table to the |stream| from a matrix of data.
@@ -59,7 +59,7 @@ Write a TSV table
     :caption: Output of TSV
 
     "int"	"float"	"str"	"bool"	"mix"	"time"
-    0	0.1	"hoge"	True	0	"2017-01-01 03:04:05+09:00"
-    2	-2.2	"foo"	False		"2017-12-23 45:01:23+0900"
-    3	0.0	"bar"	True	inf	"2017-03-03 33:44:55+0900"
-    -10	-9.9	""	False	nan	"2017-01-01 00:00:00+09:00"
+    0	0.10	"hoge"	True	0	"2017-01-01 03:04:05+0900"
+    2	-2.23	"foo"	False		"2017-12-23 12:34:51+0900"
+    3	0.00	"bar"	True	Infinity	"2017-03-03 22:44:55+0900"
+    -10	-9.90		False	NaN	"2017-01-01 00:00:00+0900"

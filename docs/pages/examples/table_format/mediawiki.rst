@@ -1,6 +1,6 @@
 .. _example-mediawiki-table-writer:
 
-Write a MediaWiki table
+MediaWiki
 ----------------------------
 
 |MediaWikiTableWriter| class can write a table to the |stream| with MediaWiki table 

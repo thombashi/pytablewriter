@@ -1,6 +1,6 @@
 .. _example-toml-table-writer:
 
-Write a TOML table
+TOML
 ----------------------------
 
 |TomlTableWriter| class can write a

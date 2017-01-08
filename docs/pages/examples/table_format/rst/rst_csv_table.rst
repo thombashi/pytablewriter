@@ -1,6 +1,6 @@
 .. _example-rst-csv-table-writer:
 
-Write a reStructuredText CSV table
+reStructuredText CSV Table
 -------------------------------------------
 
 |RstCsvTableWriter| the class can writes a table 
@@ -29,12 +29,12 @@ with reStructuredText CSV table format to the |stream| from a matrix of data.
 
     .. csv-table:: example_table
         :header: "int", "float", "str", "bool", "mix", "time"
-        :widths: 3, 5, 4, 5, 3, 24
+        :widths: 5, 7, 6, 6, 8, 26
         
-        0, 0.1, "hoge", True, 0, "2017-01-01 03:04:05+0900"
-        2, -2.2, "foo", False, , "2017-12-23 12:34:51+0900"
-        3, 0.0, "bar", True, inf, "2017-03-03 22:44:55+0900"
-        -10, -9.9, "", False, nan, "2017-01-01 00:00:00+0900"
+        0, 0.10, "hoge", True, 0, "2017-01-01 03:04:05+0900"
+        2, -2.23, "foo", False, , "2017-12-23 12:34:51+0900"
+        3, 0.00, "bar", True, Infinity, "2017-03-03 22:44:55+0900"
+        -10, -9.90, , False, NaN, "2017-01-01 00:00:00+0900"
 
 
 Rendering result
@@ -42,9 +42,9 @@ Rendering result
 
 .. csv-table:: example_table
     :header: "int", "float", "str", "bool", "mix", "time"
-    :widths: 3, 5, 4, 5, 3, 24
+    :widths: 5, 7, 6, 6, 8, 26
     
-    0, 0.1, "hoge", True, 0, "2017-01-01 03:04:05+0900"
-    2, -2.2, "foo", False, , "2017-12-23 12:34:51+0900"
-    3, 0.0, "bar", True, inf, "2017-03-03 22:44:55+0900"
-    -10, -9.9, "", False, nan, "2017-01-01 00:00:00+0900"
+    0, 0.10, "hoge", True, 0, "2017-01-01 03:04:05+0900"
+    2, -2.23, "foo", False, , "2017-12-23 12:34:51+0900"
+    3, 0.00, "bar", True, Infinity, "2017-03-03 22:44:55+0900"
+    -10, -9.90, , False, NaN, "2017-01-01 00:00:00+0900"

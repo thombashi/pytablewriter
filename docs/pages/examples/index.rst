@@ -2,18 +2,10 @@ Examples
 ========
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    basic
-   csv
-   ltsv
-   spreadsheet/index
-   html
-   json
-   markdown
-   mediawiki
-   rst/index
-   sourcecode/index
-   toml
-   multibyte_table
+   table_format/index
+   stream/index
+   multibyte/index
    datasource/index

@@ -1,6 +1,6 @@
 ﻿.. _example-ltsv-table-writer:
 
-Write a LTSV table
+LTSV
 ----------------------------
 
 |LtsvTableWriter| class can write a 
@@ -30,4 +30,4 @@ table to the |stream| from a matrix of data.
     int:0	float:0.10	str:"hoge"	bool:True	mix:0	time:"2017-01-01 03:04:05+0900"
     int:2	float:-2.23	str:"foo"	bool:False	time:"2017-12-23 12:34:51+0900"
     int:3	float:0.00	str:"bar"	bool:True	mix:Infinity	time:"2017-03-03 22:44:55+0900"
-    int:-10	float:-9.90	str:""	bool:False	mix:NaN	time:"2017-01-01 00:00:00+0900"
+    int:-10	float:-9.90	bool:False	mix:NaN	time:"2017-01-01 00:00:00+0900"

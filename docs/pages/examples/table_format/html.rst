@@ -1,6 +1,6 @@
 .. _example-html-table-writer:
 
-Write a HTML table
+HTML
 ----------------------------
 
 |HtmlTableWriter| class can write a table to a stream with 
@@ -42,7 +42,7 @@ Write a HTML table
         <tbody>
             <tr>
                 <td align="right">0</td>
-                <td align="right">0.1</td>
+                <td align="right">0.10</td>
                 <td align="left">hoge</td>
                 <td align="left">True</td>
                 <td align="right">0</td>
@@ -50,7 +50,7 @@ Write a HTML table
             </tr>
             <tr>
                 <td align="right">2</td>
-                <td align="right">-2.2</td>
+                <td align="right">-2.23</td>
                 <td align="left">foo</td>
                 <td align="left">False</td>
                 <td align="left"></td>
@@ -58,18 +58,18 @@ Write a HTML table
             </tr>
             <tr>
                 <td align="right">3</td>
-                <td align="right">0.0</td>
+                <td align="right">0.00</td>
                 <td align="left">bar</td>
                 <td align="left">True</td>
-                <td align="left">inf</td>
+                <td align="left">Infinity</td>
                 <td align="left">2017-03-03 22:44:55+0900</td>
             </tr>
             <tr>
                 <td align="right">-10</td>
-                <td align="right">-9.9</td>
+                <td align="right">-9.90</td>
                 <td align="left"></td>
                 <td align="left">False</td>
-                <td align="left">nan</td>
+                <td align="left">NaN</td>
                 <td align="left">2017-01-01 00:00:00+0900</td>
             </tr>
         </tbody>

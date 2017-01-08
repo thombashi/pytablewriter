@@ -1,7 +1,7 @@
-Write table as spread sheet
+Using Multi-Byte Characters
 ================================
 
 .. toctree::
    :maxdepth: 2
 
-   excel
+   multibyte_table

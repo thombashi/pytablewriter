@@ -74,6 +74,10 @@ class AbstractTableWriter(TableWriterInterface):
         automatically and write a table.
         Defaults to |None|.
 
+        :Examples:
+
+            :ref:`example-type-hint`
+
     .. py:attribute:: is_write_header
 
         Write headers of the table if the value is |True|.

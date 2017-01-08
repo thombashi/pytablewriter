@@ -1,4 +1,4 @@
-Write table as source code
+Source Code
 ================================
 
 .. toctree::

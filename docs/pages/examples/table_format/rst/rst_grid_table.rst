@@ -1,6 +1,6 @@
 .. _example-rst-grid-table-writer:
 
-Write a reStructuredText grid tables
+reStructuredText Grid Tables
 -------------------------------------------
 
 |RstGridTableWriter| the class can write a table 

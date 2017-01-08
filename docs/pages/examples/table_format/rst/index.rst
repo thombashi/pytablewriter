@@ -1,4 +1,4 @@
-Write reStructuredText table
+reStructuredText
 ================================
 
 .. toctree::

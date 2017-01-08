@@ -1,6 +1,6 @@
 .. _example-js-table-writer:
 
-Write a JavaScript table
+JavaScript Code
 ----------------------------
 
 |JavaScriptTableWriter| class can write a variable definition of nested list 
