@@ -39,12 +39,19 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
         .. note::
 
-            - |None| values will be written as ``None``
-            - |inf| values will be written as ``numpy.inf``
-            - |nan| values will be written as ``numpy.nan``
-            - |datetime| instance is determined by |is_datetime_instance_formatting| attribute:
-                - |True|: written by using `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
+            Values in the tabular data which described below will be converted
+            when writing:
+
+            - |None|: written as ``None``
+            - |inf|: written as ``numpy.inf``
+            - |nan|: written as ``numpy.nan``
+            - |datetime| instances determined by |is_datetime_instance_formatting| attribute:
+                - |True|: written as `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
                 - |False|: written as |str|
+
+            .. seealso::
+
+                :ref:`example-type-hint-python`
     """
 
     @property

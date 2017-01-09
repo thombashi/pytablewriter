@@ -52,9 +52,19 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
         .. note::
 
-            - |None| values will be written as ``null``
-            - |inf| values will be written as ``Infinity``
-            - |nan| values will be written as ``NaN``
+            Values in the tabular data which described below will be converted
+            when writing:
+
+            - |None|: written as ``null``
+            - |inf|: written as ``Infinity``
+            - |nan|: written as ``NaN``
+            - |datetime| instances determined by |is_datetime_instance_formatting| attribute:
+                - |True|: written as `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
+                - |False|: written as |str|
+
+            .. seealso::
+
+                :ref:`example-type-hint-js`
     """
 
     __VALID_VAR_DECLARATION = ("var", "let", "const")

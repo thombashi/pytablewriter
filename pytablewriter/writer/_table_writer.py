@@ -78,7 +78,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         :Examples:
 
-            :ref:`example-type-hint`
+            :ref:`example-type-hint-js`
 
     .. py:attribute:: is_write_header
 
