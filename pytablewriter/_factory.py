@@ -11,6 +11,7 @@ import os
 
 import dataproperty
 
+from ._const import FormatName
 from ._error import WriterNotFoundError
 
 from .writer._csv_writer import CsvTableWriter
@@ -38,17 +39,19 @@ from .writer._toml_writer import TomlTableWriter
 
 class TableWriterFactory(object):
     """
+    Factor class of writer classes.
     """
 
     __COMMON_WRITER_TABLE = {
-        "csv": CsvTableWriter,
-        "html": HtmlTableWriter,
-        "json": JsonTableWriter,
-        "ltsv": LtsvTableWriter,
-        "py": PythonCodeTableWriter,
-        "rst": RstGridTableWriter,
-        "tsv": TsvTableWriter,
-        "toml": TomlTableWriter,
+        FormatName.CSV: CsvTableWriter,
+        FormatName.HTML: HtmlTableWriter,
+        FormatName.JSON: JsonTableWriter,
+        FormatName.JAVASCRIPT_ABBR: JavaScriptTableWriter,
+        FormatName.LTSV: LtsvTableWriter,
+        FormatName.PYTHON_ABBR: PythonCodeTableWriter,
+        FormatName.RST: RstGridTableWriter,
+        FormatName.TSV: TsvTableWriter,
+        FormatName.TOML: TomlTableWriter,
     }
 
     @classmethod
@@ -229,17 +232,16 @@ class TableWriterFactory(object):
 
         writer_mapping = copy.deepcopy(cls.__COMMON_WRITER_TABLE)
         writer_mapping.update({
-            "excel": ExcelXlsxTableWriter,
-            "javascript": JavaScriptTableWriter,
-            "js": JavaScriptTableWriter,
-            "markdown": MarkdownTableWriter,
-            "mediawiki": MediaWikiTableWriter,
-            "null": NullTableWriter,
-            "pandas": PandasDataFrameWriter,
-            "python": PythonCodeTableWriter,
-            "rst_grid_table": RstGridTableWriter,
-            "rst_simple_table": RstSimpleTableWriter,
-            "rst_csv_table": RstCsvTableWriter,
+            FormatName.EXCEL: ExcelXlsxTableWriter,
+            FormatName.JAVASCRIPT: JavaScriptTableWriter,
+            FormatName.MARKDOWN: MarkdownTableWriter,
+            FormatName.MEDIAWIKI: MediaWikiTableWriter,
+            FormatName.NULL: NullTableWriter,
+            FormatName.PANDAS: PandasDataFrameWriter,
+            FormatName.PYTHON: PythonCodeTableWriter,
+            FormatName.RST_GRID_TABBLE: RstGridTableWriter,
+            FormatName.RST_SIMPLE_TABBLE: RstSimpleTableWriter,
+            FormatName.RST_CSV_TABBLE: RstCsvTableWriter,
         })
 
         return writer_mapping
@@ -254,7 +256,6 @@ class TableWriterFactory(object):
         writer_mapping = copy.deepcopy(cls.__COMMON_WRITER_TABLE)
         writer_mapping .update({
             "htm": HtmlTableWriter,
-            "js": JavaScriptTableWriter,
             "md": MarkdownTableWriter,
             "xls": ExcelXlsTableWriter,
             "xlsx": ExcelXlsxTableWriter,
