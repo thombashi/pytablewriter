@@ -11,6 +11,7 @@ import copy
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 
+from .._const import FormatName
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -22,6 +23,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         :ref:`example-markdown-table-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.MARKDOWN
 
     @property
     def support_split_write(self):

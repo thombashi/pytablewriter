@@ -11,6 +11,7 @@ import copy
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 
+from .._const import FormatName
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -59,6 +60,10 @@ class RstCsvTableWriter(RstTableWriter):
 
         :ref:`example-rst-csv-table-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.RST_CSV_TABBLE
 
     @property
     def support_split_write(self):
@@ -145,6 +150,10 @@ class RstGridTableWriter(RstTableWriter):
     """
 
     @property
+    def format_name(self):
+        return FormatName.RST_GRID_TABBLE
+
+    @property
     def support_split_write(self):
         return False
 
@@ -176,6 +185,10 @@ class RstSimpleTableWriter(RstTableWriter):
 
         :ref:`example-rst-simple-table-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.RST_SIMPLE_TABBLE
 
     @property
     def support_split_write(self):

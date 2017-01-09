@@ -13,6 +13,7 @@ from dataproperty import IntegerType
 from six.moves import range
 import xlwt
 
+from .._const import FormatName
 from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx
@@ -25,6 +26,10 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
     """
     Abstract class of a table writer for Excel file format.
     """
+
+    @property
+    def format_name(self):
+        return FormatName.EXCEL
 
     @property
     def support_split_write(self):

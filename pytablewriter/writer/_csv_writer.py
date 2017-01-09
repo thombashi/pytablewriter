@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 
 import dataproperty as dp
 
+from .._const import FormatName
 from ._text_writer import TextTableWriter
 
 
@@ -21,6 +22,10 @@ class CsvTableWriter(TextTableWriter):
 
         :ref:`example-csv-table-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.CSV
 
     @property
     def support_split_write(self):

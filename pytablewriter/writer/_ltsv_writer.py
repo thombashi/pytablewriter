@@ -11,6 +11,7 @@ import dataproperty as dp
 from six.moves import zip
 import pathvalidate
 
+from .._const import FormatName
 from ._csv_writer import CsvTableWriter
 
 
@@ -23,6 +24,10 @@ class LtsvTableWriter(CsvTableWriter):
 
         :ref:`example-ltsv-table-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.LTSV
 
     @property
     def support_split_write(self):

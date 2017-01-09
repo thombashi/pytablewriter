@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 
+from .._const import FormatName
 from ._interface import (
     TableWriterInterface,
     TextWriterInterface,
@@ -15,6 +16,10 @@ from ._interface import (
 
 class NullTableWriter(
         IndentationInterface, TextWriterInterface, TableWriterInterface):
+
+    @property
+    def format_name(self):
+        return FormatName.NULL
 
     @property
     def support_split_write(self):

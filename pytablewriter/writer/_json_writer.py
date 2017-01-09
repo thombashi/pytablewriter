@@ -13,6 +13,7 @@ import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
+from .._const import FormatName
 from .._converter import strip_quote
 from .._function import _get_data_helper
 from ._text_writer import IndentationTextTableWriter
@@ -26,6 +27,10 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         :ref:`example-json-table-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.JSON
 
     @property
     def support_split_write(self):

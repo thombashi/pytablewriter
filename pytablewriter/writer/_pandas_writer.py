@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 
+from .._const import FormatName
 from .._error import EmptyTableNameError
 from .._function import (
     quote_datetime_formatter,
@@ -26,6 +27,10 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
         :ref:`example-pandas-dataframe-writer`
     """
+
+    @property
+    def format_name(self):
+        return FormatName.PANDAS
 
     @property
     def support_split_write(self):

@@ -13,6 +13,7 @@ import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
+from .._const import FormatName
 from ._text_writer import TextTableWriter
 
 
@@ -26,6 +27,10 @@ class MediaWikiTableWriter(TextTableWriter):
     """
 
     __RE_TABLE_SEQUENCE = re.compile("^[\s]+[*|#]+")
+
+    @property
+    def format_name(self):
+        return FormatName.MEDIAWIKI
 
     @property
     def support_split_write(self):

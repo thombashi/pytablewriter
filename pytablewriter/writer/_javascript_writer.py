@@ -14,6 +14,7 @@ from dataproperty import (
 import six
 
 
+from .._const import FormatName
 from .._function import quote_datetime_formatter
 from ._sourcecode_writer import SourceCodeTableWriter
 
@@ -43,6 +44,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     """
 
     __VALID_VAR_DECLARATION = ("var", "let", "const")
+
+    @property
+    def format_name(self):
+        return FormatName.JAVASCRIPT
 
     @property
     def support_split_write(self):

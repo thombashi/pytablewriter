@@ -17,6 +17,10 @@ class TableWriterInterface(object):
     """
 
     @abc.abstractproperty
+    def format_name(self):  # pragma: no cover
+        pass
+
+    @abc.abstractproperty
     def support_split_write(self):  # pragma: no cover
         pass
 
