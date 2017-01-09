@@ -24,6 +24,26 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     :Examples:
 
         :ref:`example-python-code-table-writer`
+
+    .. py:method:: write_table
+
+        |write_table| with Python format.
+        The tabular data will be written as nested list variable definition
+        for Python format.
+
+        :raises pytablewriter.EmptyTableNameError:
+            If the |table_name| is empty.
+        :raises pytablewriter.EmptyTableDataError:
+            If the |header_list| and the |value_matrix| is empty.
+
+        .. note::
+
+            - |None| values will be written as ``None``
+            - |inf| values will be written as ``float("inf")'``
+            - |nan| values will be written as ``float("nan")'``
+            - |datetime| instance is determined by |is_datetime_instance_formatting| attribute:
+                - |True|: written by using `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
+                - |False|: written as |str|
     """
 
     @property
@@ -50,27 +70,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         return pathvalidate.sanitize_python_var_name(
             self.table_name, "_").lower()
 
-    def write_table(self):
-        """
-        |write_table| with Python format.
-        The tabular data will be written as nested list variable definition
-        for Python format.
-
-        :raises pytablewriter.EmptyTableNameError:
-            If the |table_name| is empty.
-        :raises pytablewriter.EmptyTableDataError:
-            If the |header_list| and the |value_matrix| is empty.
-
-        .. note::
-
-            - |None| values will be written as ``None``
-            - |inf| values will be written as ``float("inf")'``
-            - |nan| values will be written as ``float("nan")'``
-            - |datetime| instance is determined by |is_datetime_instance_formatting| attribute:
-                - |True|: written by using `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
-                - |False|: written as |str|
-        """
-
+    def _write_table(self):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
@@ -79,7 +79,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         self.inc_indent_level()
-        super(PythonCodeTableWriter, self).write_table()
+        super(PythonCodeTableWriter, self)._write_table()
         self.dec_indent_level()
 
     def _get_opening_row_item_list(self):

@@ -107,6 +107,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             - |None| values will be written as an empty string.
         """
 
+        self._logger.logging_write()
+        self._write_table()
+
+    def _write_table(self):
         self._verify_property()
         self._preprocess()
 

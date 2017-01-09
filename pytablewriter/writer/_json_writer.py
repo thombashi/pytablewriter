@@ -26,6 +26,18 @@ class JsonTableWriter(IndentationTextTableWriter):
     :Examples:
 
         :ref:`example-json-table-writer`
+
+    .. py:method:: write_table
+
+        |write_table| with JSON format.
+
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+
+        .. note::
+
+            - |None| values will be written as ``null``
+            - |inf| values will be written as ``"Infinity"``
+            - |nan| values will be written as ``"NaN"``
     """
 
     @property
@@ -57,22 +69,11 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._verify_stream()
         self.stream.write("\n")
 
-    def write_table(self):
-        """
-        |write_table| with JSON format.
-
-        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
-
-        .. note::
-
-            - |None| values will be written as ``null``
-            - |inf| values will be written as ``"Infinity"``
-            - |nan| values will be written as ``"NaN"``
-        """
-
+    def _write_table(self):
         self._verify_property()
         self._preprocess_value_matrix()
 
+        self._logger.logging_write()
         self._write_opening_row()
         self.inc_indent_level()
 

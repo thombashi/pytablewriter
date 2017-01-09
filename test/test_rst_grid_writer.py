@@ -72,7 +72,7 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected="""    .. table:: 
-    
+
         +-+-----+---+---+----+
         |a|  b  | c |dd | e  |
         +=+=====+===+===+====+

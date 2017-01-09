@@ -197,6 +197,10 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
             - |nan| values will be written as ``NaN``
         """
 
+        self._logger.logging_write()
+        self._write_table()
+
+    def _write_table(self):
         self._verify_property()
         self._preprocess_property()
 

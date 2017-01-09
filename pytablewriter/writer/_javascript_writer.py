@@ -13,7 +13,6 @@ from dataproperty import (
 )
 import six
 
-
 from .._const import FormatName
 from .._function import quote_datetime_formatter
 from ._sourcecode_writer import SourceCodeTableWriter
@@ -41,6 +40,21 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         JavaScript variable declarations type.
         The value must be either ``"var"``, ``"let"`` or ``"const"``.
         Defaults to ``"const"``.
+
+    .. py:method:: write_table
+
+        |write_table| with JavaScript nested list variable definition format.
+
+        :raises pytablewriter.EmptyTableNameError:
+            If the |table_name| is empty.
+        :raises pytablewriter.EmptyTableDataError:
+            If the |header_list| and the |value_matrix| is empty.
+
+        .. note::
+
+            - |None| values will be written as ``null``
+            - |inf| values will be written as ``Infinity``
+            - |nan| values will be written as ``NaN``
     """
 
     __VALID_VAR_DECLARATION = ("var", "let", "const")
@@ -82,22 +96,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
         return pathvalidate.sanitize_js_var_name(value, "_").lower()
 
-    def write_table(self):
-        """
-        |write_table| with JavaScript nested list variable definition format.
-
-        :raises pytablewriter.EmptyTableNameError:
-            If the |table_name| is empty.
-        :raises pytablewriter.EmptyTableDataError:
-            If the |header_list| and the |value_matrix| is empty.
-
-        .. note::
-
-            - |None| values will be written as ``null``
-            - |inf| values will be written as ``Infinity``
-            - |nan| values will be written as ``NaN``
-        """
-
+    def _write_table(self):
         self._verify_property()
 
         if self.is_datetime_instance_formatting:
@@ -111,7 +110,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.stream = six.StringIO()
 
         self.inc_indent_level()
-        super(JavaScriptTableWriter, self).write_table()
+        super(JavaScriptTableWriter, self)._write_table()
         self.dec_indent_level()
         data_frame_text = self.stream.getvalue().rstrip("\n")
         if self.is_write_closing_row:

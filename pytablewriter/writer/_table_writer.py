@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+import abc
 import re
 import sys
 
@@ -15,6 +16,7 @@ from mbstrdecoder import MultiByteStrDecoder
 import pytablereader as ptr
 from six.moves import zip
 
+from .._logger import WriterLogger
 from .._error import (
     NotSupportedError,
     EmptyValueError,
@@ -144,6 +146,10 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.quote_flag_mapping = value
         self.__clear_preprocessed_flag()
 
+    @abc.abstractmethod
+    def _write_table(self):
+        pass
+
     def __init__(self):
         self.stream = sys.stdout
         self.table_name = None
@@ -163,6 +169,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._value_matrix = []
         self._column_dp_list = []
         self._value_dp_matrix = []
+
+        self._logger = WriterLogger(self)
 
         self._dp_extractor = dp.DataPropertyExtractor()
         self._dp_extractor.min_padding_len = 1
@@ -348,7 +356,7 @@ class AbstractTableWriter(TableWriterInterface):
                 self.is_write_closing_row = True
 
             self.value_matrix = work_matrix
-            self.write_table()
+            self._write_table()
 
             if not is_final_iter:
                 self._write_value_row_separator()

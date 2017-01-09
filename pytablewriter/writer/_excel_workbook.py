@@ -14,6 +14,8 @@ import six
 import xlsxwriter
 import xlwt
 
+from .._logger import logger
+
 
 @six.add_metaclass(abc.ABCMeta)
 class ExcelWorkbookInterface(object):
@@ -76,7 +78,11 @@ class ExcelWorkbookXls(ExcelWorkbook):
         if self.workbook is None:
             return
 
-        self.workbook.save(self._file_path)
+        try:
+            self.workbook.save(self._file_path)
+        except IndexError as e:
+            logger.debug(e)
+
         self._clear()
 
     def add_worksheet(self, worksheet_name):

@@ -35,18 +35,24 @@ class RstTableWriter(IndentationTextTableWriter):
         self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
         self._is_remove_line_break = True
 
+    def write_table(self):
+        self._logger.logging_write()
+
+        self._write_line(self._get_table_directive())
+        self._write_table()
+
+    def _get_table_directive(self):
+        if dp.is_empty_string(self.table_name):
+            return ".. table:: \n"
+
+        return ".. table:: {}\n".format(
+            MultiByteStrDecoder(self.table_name).unicode_str)
+
     def _write_table(self):
         self._verify_property()
 
-        if dp.is_empty_string(self.table_name):
-            self._write_line(".. table:: ")
-        else:
-            self._write_line(".. table:: {}".format(
-                MultiByteStrDecoder(self.table_name).unicode_str))
-
-        self._write_line()
         self.inc_indent_level()
-        super(RstTableWriter, self).write_table()
+        super(RstTableWriter, self)._write_table()
         self.dec_indent_level()
 
 
@@ -93,12 +99,9 @@ class RstCsvTableWriter(RstTableWriter):
             - |None| values will be written as an empty string.
         """
 
-        self._verify_property()
-        self._preprocess()
+        self._logger.logging_write()
 
-        self.inc_indent_level()
-        super(RstCsvTableWriter, self).write_table()
-        self.dec_indent_level()
+        super(RstCsvTableWriter, self)._write_table()
 
     def _get_opening_row_item_list(self):
         directive = ".. csv-table:: "
@@ -118,7 +121,7 @@ class RstCsvTableWriter(RstTableWriter):
             return
 
         if dp.is_not_empty_sequence(self.header_list):
-            self._write_line(u':header: "{:s}"'.format(u'", "'.join(
+            self._write_line(':header: "{:s}"'.format(u'", "'.join(
                 [
                     MultiByteStrDecoder(header).unicode_str
                     for header in self.header_list
@@ -147,6 +150,14 @@ class RstGridTableWriter(RstTableWriter):
     :Examples:
 
         :ref:`example-rst-grid-table-writer`
+
+    .. py:method:: write_table
+
+        |write_table| with reStructuredText grid tables format.
+
+        .. note::
+
+            - |None| values will be written as an empty string.
     """
 
     @property
@@ -163,17 +174,6 @@ class RstGridTableWriter(RstTableWriter):
         self.char_left_side_row = "|"
         self.char_right_side_row = "|"
 
-    def write_table(self):
-        """
-        |write_table| with reStructuredText grid tables format.
-
-        .. note::
-
-            - |None| values will be written as an empty string.
-        """
-
-        self._write_table()
-
 
 class RstSimpleTableWriter(RstTableWriter):
     """
@@ -184,6 +184,14 @@ class RstSimpleTableWriter(RstTableWriter):
     :Examples:
 
         :ref:`example-rst-simple-table-writer`
+
+    .. py:method:: write_table
+
+        |write_table| with reStructuredText simple tables format.
+
+        .. note::
+
+            - |None| values will be written as an empty string.
     """
 
     @property
@@ -204,14 +212,3 @@ class RstSimpleTableWriter(RstTableWriter):
         self.char_closing_row = "="
 
         self.is_write_value_separator_row = False
-
-    def write_table(self):
-        """
-        |write_table| with reStructuredText simple tables format.
-
-        .. note::
-
-            - |None| values will be written as an empty string.
-        """
-
-        self._write_table()
