@@ -13,6 +13,24 @@ import logbook
 logger = logbook.Logger("pytablewriter")
 
 
+def set_logger(log_level):
+    """
+    Set logging level of ``pytablewriter``.
+    ``pytablewriter`` using
+    `logbook <http://logbook.readthedocs.io/en/stable/>`__ module for logging.
+
+    :param int log_level:
+        One of the log level of the
+        `logbook <http://logbook.readthedocs.io/en/stable/api/base.html>`__.
+        Disabled logging if the ``log_level`` is ``logbook.NOTSET``.
+    """
+
+    if log_level == logbook.NOTSET:
+        logger.disable()
+
+    logger.level = log_level
+
+
 class WriterLogger(object):
 
     def __init__(self, writer):

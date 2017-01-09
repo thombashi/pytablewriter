@@ -28,6 +28,7 @@ from ._error import (
 )
 from ._factory import TableWriterFactory
 from ._function import dump_tabledata
+from ._logger import set_logger
 
 from .writer._csv_writer import CsvTableWriter
 from .writer._excel_writer import (
