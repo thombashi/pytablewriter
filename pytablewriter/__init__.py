@@ -17,6 +17,7 @@ from dataproperty import (
     DictionaryType,
 )
 
+from ._const import FormatName
 from ._error import (
     NotSupportedError,
     EmptyHeaderError,
@@ -25,6 +26,8 @@ from ._error import (
     EmptyTableDataError,
     WriterNotFoundError
 )
+from ._factory import TableWriterFactory
+from ._function import dump_tabledata
 
 from .writer._csv_writer import CsvTableWriter
 from .writer._excel_writer import (
@@ -47,6 +50,3 @@ from .writer._rst_writer import (
 )
 from .writer._tsv_writer import TsvTableWriter
 from .writer._toml_writer import TomlTableWriter
-
-from ._factory import TableWriterFactory
-from ._function import dump_tabledata
