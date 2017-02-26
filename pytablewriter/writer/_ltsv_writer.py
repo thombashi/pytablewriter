@@ -7,9 +7,10 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import dataproperty as dp
-from six.moves import zip
 import pathvalidate
+import typepy
+
+from six.moves import zip
 
 from .._const import FormatName
 from ._csv_writer import CsvTableWriter
@@ -55,10 +56,10 @@ class LtsvTableWriter(CsvTableWriter):
                 "{:s}:{}".format(
                     pathvalidate.sanitize_ltsv_label(header_name), value)
                 for header_name, value in zip(self.header_list, value_list)
-                if dp.is_not_empty_string(value)
+                if typepy.is_not_null_string(value)
             ]
 
-            if dp.is_empty_sequence(ltsv_item_list):
+            if typepy.is_empty_sequence(ltsv_item_list):
                 continue
 
             self.stream.write("\t".join(ltsv_item_list) + "\n")

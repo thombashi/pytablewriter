@@ -6,12 +6,15 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import abc
 
-import dataproperty as dp
-from dataproperty import IntegerType
-from six.moves import range
+import dataproperty
+import typepy
+from typepy.type import Integer
 import xlwt
+
+from six.moves import range
 
 from .._const import FormatName
 from ._excel_workbook import (
@@ -112,8 +115,8 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         self._workbook = None
 
         self._dp_extractor.type_value_mapping = {
-            dp.Typecode.INFINITY: "Inf",
-            dp.Typecode.NAN: "NaN",
+            dataproperty.Typecode.INFINITY: "Inf",
+            dataproperty.Typecode.NAN: "NaN",
         }
 
         self._first_header_row = 0
@@ -220,10 +223,10 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
             self._current_data_row += 1
 
     def _get_last_column(self):
-        if dp.is_not_empty_sequence(self.header_list):
+        if typepy.is_not_empty_sequence(self.header_list):
             return len(self.header_list) - 1
 
-        if dp.is_not_empty_sequence(self.value_matrix):
+        if typepy.is_not_empty_sequence(self.value_matrix):
             return len(self.value_matrix[0]) - 1
 
         raise ValueError("data not found")
@@ -250,7 +253,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
     def _write_header(self):
         if any([
             not self.is_write_header,
-            dp.is_empty_sequence(self.header_list),
+            typepy.is_empty_sequence(self.header_list),
         ]):
             return
 
@@ -258,7 +261,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             self.stream.write(self.first_header_row, col, value)
 
     def _write_cell(self, row, col, value_dp):
-        if value_dp.typecode in [dp.Typecode.FLOAT]:
+        if value_dp.typecode in [typepy.Typecode.FLOAT]:
             try:
                 cell_style = self.__get_cell_style(col)
             except ValueError:
@@ -284,10 +287,10 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         except KeyError:
             return {}
 
-        if col_dp.typecode not in [dp.Typecode.FLOAT]:
+        if col_dp.typecode not in [typepy.Typecode.FLOAT]:
             raise ValueError()
 
-        if not IntegerType(col_dp.minmax_decimal_places.max_value).is_type():
+        if not Integer(col_dp.minmax_decimal_places.max_value).is_type():
             raise ValueError()
 
         float_digit = col_dp.minmax_decimal_places.max_value
@@ -378,7 +381,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def _write_header(self):
         if any([
             not self.is_write_header,
-            dp.is_empty_sequence(self.header_list),
+            typepy.is_empty_sequence(self.header_list),
         ]):
             return
 
@@ -398,7 +401,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         base_props = dict(self.__cell_format_property)
         format_key = "{:d}_{:d}".format(col, value_dp.typecode)
 
-        if value_dp.typecode in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
+        if value_dp.typecode in [typepy.Typecode.INTEGER, typepy.Typecode.FLOAT]:
             num_props = self.__get_number_property(col)
             base_props.update(num_props)
             cell_format = self.__get_cell_format(format_key, base_props)
@@ -410,7 +413,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             except TypeError:
                 pass
 
-        if value_dp.typecode is dp.Typecode.NAN:
+        if value_dp.typecode is typepy.Typecode.NAN:
             base_props = dict(self.__nan_format_property)
 
         cell_format = self.__get_cell_format(format_key, base_props)
@@ -426,11 +429,11 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         except KeyError:
             return {}
 
-        if col_dp.typecode not in [dp.Typecode.INTEGER, dp.Typecode.FLOAT]:
+        if col_dp.typecode not in [typepy.Typecode.INTEGER, typepy.Typecode.FLOAT]:
             return {}
 
         num_props = {}
-        if IntegerType(col_dp.minmax_decimal_places.max_value).is_type():
+        if Integer(col_dp.minmax_decimal_places.max_value).is_type():
             float_digit = col_dp.minmax_decimal_places.max_value
             if float_digit > 0:
                 num_props = {
@@ -457,7 +460,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def __set_cell_width(self):
         font_size = self.__cell_format_property.get("font_size")
 
-        if not IntegerType(font_size).is_type():
+        if not Integer(font_size).is_type():
             return
 
         for col_idx, col_dp in enumerate(self._column_dp_list):

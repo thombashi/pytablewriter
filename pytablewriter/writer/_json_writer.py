@@ -6,11 +6,14 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import copy
 import json
 
-import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
+import typepy
+
+import dataproperty as dp
 from six.moves import zip
 
 from .._const import FormatName
@@ -92,7 +95,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         json_text = joint_text.join(json_text_list)
         if all([
             not self.is_write_closing_row,
-            dp.is_not_empty_string(json_text),
+            typepy.is_not_null_string(json_text),
         ]):
             json_text += joint_text
 
@@ -128,14 +131,14 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._preprocessed_value_matrix = True
 
     def _get_opening_row_item_list(self):
-        if dp.is_not_empty_string(self.table_name):
+        if typepy.is_not_null_string(self.table_name):
             return '{{ "{:s}" : ['.format(
                 MultiByteStrDecoder(self.table_name).unicode_str)
 
         return "["
 
     def _get_closing_row_item_list(self):
-        if dp.is_not_empty_string(self.table_name):
+        if typepy.is_not_null_string(self.table_name):
             return "]}"
 
         return "]"

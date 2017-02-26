@@ -7,8 +7,10 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
+import typepy
+
+import dataproperty as dp
 
 from .._const import FormatName
 from .._error import EmptyTableNameError
@@ -93,7 +95,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         self.dec_indent_level()
 
         if any([
-            dp.is_empty_sequence(self.value_matrix),
+            typepy.is_empty_sequence(self.value_matrix),
             not self.is_write_closing_row,
         ]):
             return
@@ -115,7 +117,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
     def _verify_property(self):
         super(PandasDataFrameWriter, self)._verify_property()
 
-        if dp.is_empty_string(self.table_name):
+        if typepy.is_null_string(self.table_name):
             raise EmptyTableNameError(
                 "table_name must be a string of one or more characters")
 

@@ -7,15 +7,16 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import dataproperty as dp
+import typepy
+
 from six.moves import zip
 
 from .._error import EmptyHeaderError
-from ._table_writer import AbstractTableWriter
 from ._interface import (
     IndentationInterface,
     TextWriterInterface
 )
+from ._table_writer import AbstractTableWriter
 
 
 class TextTableWriter(AbstractTableWriter, TextWriterInterface):
@@ -178,7 +179,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self._write_raw_line(text)
 
     def _write_row(self, value_list):
-        if dp.is_empty_sequence(value_list):
+        if typepy.is_empty_sequence(value_list):
             return
 
         self._write_line(
@@ -190,10 +191,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if not self.is_write_header:
             return
 
-        if dp.is_empty_sequence(self.header_list):
+        if typepy.is_empty_sequence(self.header_list):
             raise EmptyHeaderError("header is empty")
 
-        if dp.is_empty_sequence(self._column_dp_list):
+        if typepy.is_empty_sequence(self._column_dp_list):
             self._write_row(self.header_list)
             return
 
@@ -213,14 +214,14 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         ]
 
     def __write_separator_row(self, value_list):
-        if dp.is_empty_sequence(value_list):
+        if typepy.is_empty_sequence(value_list):
             return
 
         left_cross_point = self.char_cross_point
         right_cross_point = self.char_cross_point
-        if dp.is_empty_string(self.char_left_side_row):
+        if typepy.is_null_string(self.char_left_side_row):
             left_cross_point = ""
-        if dp.is_empty_string(self.char_right_side_row):
+        if typepy.is_null_string(self.char_right_side_row):
             right_cross_point = ""
 
         self._write_line(

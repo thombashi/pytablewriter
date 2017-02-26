@@ -6,11 +6,14 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import copy
 import re
 
-import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
+import typepy
+
+import dataproperty as dp
 from six.moves import zip
 
 from .._const import FormatName
@@ -53,7 +56,7 @@ class MediaWikiTableWriter(TextTableWriter):
         if not self.is_write_header:
             return
 
-        if dp.is_not_empty_string(self.table_name):
+        if typepy.is_not_null_string(self.table_name):
             self._write_line(
                 "|+" + MultiByteStrDecoder(self.table_name).unicode_str)
 

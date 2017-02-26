@@ -6,12 +6,15 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import copy
 
-import dataproperty as dp
-import dominate.tags as tags
+import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
 import pathvalidate
+import typepy
+
+import dominate.tags as tags
 from six.moves import zip
 
 from .._const import FormatName
@@ -42,7 +45,8 @@ class HtmlTableWriter(TextTableWriter):
         self.is_padding = False
         self.indent_string = u"    "
 
-        self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
+        self._quote_flag_mapping = copy.deepcopy(
+            dataproperty.NULL_QUOTE_FLAG_MAPPING)
         self._table_tag = None
 
     def write_table(self):
@@ -57,7 +61,7 @@ class HtmlTableWriter(TextTableWriter):
         self._verify_property()
         self._preprocess()
 
-        if dp.is_not_empty_string(self.table_name):
+        if typepy.is_not_null_string(self.table_name):
             self._table_tag = tags.table(
                 id=pathvalidate.sanitize_python_var_name(self.table_name))
             self._table_tag += tags.caption(
@@ -76,7 +80,7 @@ class HtmlTableWriter(TextTableWriter):
         if not self.is_write_header:
             return
 
-        if dp.is_empty_sequence(self.header_list):
+        if typepy.is_empty_sequence(self.header_list):
             raise EmptyHeaderError("header_list is empty")
 
         tr_tag = tags.tr()

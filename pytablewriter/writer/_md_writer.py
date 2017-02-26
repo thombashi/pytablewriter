@@ -6,10 +6,13 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import copy
 
-import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
+import typepy
+
+import dataproperty as dp
 
 from .._const import FormatName
 from ._text_writer import IndentationTextTableWriter
@@ -62,7 +65,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._validate_empty_header()
 
     def _get_opening_row_item_list(self):
-        if dp.is_empty_string(self.table_name):
+        if typepy.is_null_string(self.table_name):
             return []
 
         return [

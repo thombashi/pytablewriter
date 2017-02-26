@@ -7,6 +7,8 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import typepy
+
 import dataproperty as dp
 
 from .._const import FormatName
@@ -90,7 +92,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         self.dec_indent_level()
 
     def _get_opening_row_item_list(self):
-        if dp.is_not_empty_string(self.table_name):
+        if typepy.is_not_null_string(self.table_name):
             return [self.variable_name + " = ["]
 
         return "["

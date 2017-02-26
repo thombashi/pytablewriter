@@ -6,17 +6,19 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import abc
 import re
 import sys
 
-import dataproperty as dp
 from dataproperty import Typecode
 from mbstrdecoder import MultiByteStrDecoder
+import typepy
+
+import dataproperty as dp
 import pytablereader as ptr
 from six.moves import zip
 
-from .._logger import WriterLogger
 from .._error import (
     NotSupportedError,
     EmptyValueError,
@@ -24,6 +26,7 @@ from .._error import (
     EmptyHeaderError,
     EmptyTableDataError
 )
+from .._logger import WriterLogger
 from ._interface import TableWriterInterface
 
 
@@ -332,8 +335,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all([
-            dp.is_empty_sequence(self.header_list),
-            dp.is_empty_sequence(self.value_matrix),
+            typepy.is_empty_sequence(self.header_list),
+            typepy.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
 
@@ -461,8 +464,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all([
-            dp.is_empty_sequence(self.header_list),
-            dp.is_empty_sequence(self.value_matrix),
+            typepy.is_empty_sequence(self.header_list),
+            typepy.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
 
@@ -475,7 +478,7 @@ class AbstractTableWriter(TableWriterInterface):
     def _verify_table_name(self):
         if all([
                 self._is_required_table_name,
-                dp.is_empty_string(self.table_name),
+                typepy.is_null_string(self.table_name),
         ]):
             raise EmptyTableNameError(
                 "table_name must be string, with at least one character or more length.")
@@ -492,15 +495,15 @@ class AbstractTableWriter(TableWriterInterface):
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         """
 
-        if dp.is_empty_sequence(self.header_list):
+        if typepy.is_empty_sequence(self.header_list):
             raise EmptyHeaderError(
                 "header_list expected to have one ore more header names")
 
     def _verify_value_matrix(self):
-        if dp.is_empty_sequence(self.value_matrix):
+        if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-        if dp.is_empty_sequence(self.header_list):
+        if typepy.is_empty_sequence(self.header_list):
             return
 
     def _preprocess_property(self):

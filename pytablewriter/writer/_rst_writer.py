@@ -6,10 +6,13 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import copy
 
-import dataproperty as dp
 from mbstrdecoder import MultiByteStrDecoder
+import typepy
+
+import dataproperty as dp
 
 from .._const import FormatName
 from ._text_writer import IndentationTextTableWriter
@@ -42,7 +45,7 @@ class RstTableWriter(IndentationTextTableWriter):
         self._write_table()
 
     def _get_table_directive(self):
-        if dp.is_empty_string(self.table_name):
+        if typepy.is_null_string(self.table_name):
             return ".. table:: \n"
 
         return ".. table:: {}\n".format(
@@ -106,7 +109,7 @@ class RstCsvTableWriter(RstTableWriter):
     def _get_opening_row_item_list(self):
         directive = ".. csv-table:: "
 
-        if dp.is_empty_string(self.table_name):
+        if typepy.is_null_string(self.table_name):
             return [directive]
 
         return [directive + MultiByteStrDecoder(self.table_name).unicode_str]
@@ -120,7 +123,7 @@ class RstCsvTableWriter(RstTableWriter):
         if not self.is_write_header:
             return
 
-        if dp.is_not_empty_sequence(self.header_list):
+        if typepy.is_not_empty_sequence(self.header_list):
             self._write_line(':header: "{:s}"'.format(u'", "'.join(
                 [
                     MultiByteStrDecoder(header).unicode_str
