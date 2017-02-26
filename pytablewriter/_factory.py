@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import copy
 import os
 
@@ -13,7 +14,6 @@ import dataproperty
 
 from ._const import FormatName
 from ._error import WriterNotFoundError
-
 from .writer._csv_writer import CsvTableWriter
 from .writer._excel_writer import (
     ExcelXlsxTableWriter,
@@ -24,8 +24,8 @@ from .writer._javascript_writer import JavaScriptTableWriter
 from .writer._json_writer import JsonTableWriter
 from .writer._ltsv_writer import LtsvTableWriter
 from .writer._md_writer import MarkdownTableWriter
-from .writer._null_writer import NullTableWriter
 from .writer._mediawiki_writer import MediaWikiTableWriter
+from .writer._null_writer import NullTableWriter
 from .writer._pandas_writer import PandasDataFrameWriter
 from .writer._python_code_writer import PythonCodeTableWriter
 from .writer._rst_writer import (
@@ -33,8 +33,8 @@ from .writer._rst_writer import (
     RstGridTableWriter,
     RstSimpleTableWriter
 )
-from .writer._tsv_writer import TsvTableWriter
 from .writer._toml_writer import TomlTableWriter
+from .writer._tsv_writer import TsvTableWriter
 
 
 class TableWriterFactory(object):
@@ -63,19 +63,19 @@ class TableWriterFactory(object):
             ==================  ===================================
             Format name         Writer                             
             ==================  ===================================
-            ``"csv"``           :py:class:`~.CsvTableWriter`       
-            ``"html"``          :py:class:`~.HtmlTableWriter`      
-            ``"js"``            :py:class:`~.JavaScriptTableWriter`
-            ``"json"``          :py:class:`~.JsonTableWriter`      
-            ``"ltsv"``          :py:class:`~.LtsvTableWriter`       
-            ``"md"``            :py:class:`~.MarkdownTableWriter`  
-            ``"py"``            :py:class:`~.PythonCodeTableWriter`
-            ``"rst"``           :py:class:`~.RstGridTableWriter`   
-            ``"tsv"``           :py:class:`~.TsvTableWriter`       
-            ``"xls"``           :py:class:`~.ExcelXlsTableWriter`  
-            ``"xlsx"``          :py:class:`~.ExcelXlsxTableWriter` 
-            ``"tsv"``           :py:class:`~.TsvTableWriter`       
-            ``"toml"``          :py:class:`~.TomlTableWriter`      
+            ``".csv"``          :py:class:`~.CsvTableWriter`       
+            ``".html"``         :py:class:`~.HtmlTableWriter`      
+            ``".js"``           :py:class:`~.JavaScriptTableWriter`
+            ``".json"``         :py:class:`~.JsonTableWriter`      
+            ``".ltsv"``         :py:class:`~.LtsvTableWriter`       
+            ``".md"``           :py:class:`~.MarkdownTableWriter`  
+            ``".py"``           :py:class:`~.PythonCodeTableWriter`
+            ``".rst"``          :py:class:`~.RstGridTableWriter`   
+            ``".tsv"``          :py:class:`~.TsvTableWriter`       
+            ``".xls"``          :py:class:`~.ExcelXlsTableWriter`  
+            ``".xlsx"``         :py:class:`~.ExcelXlsxTableWriter` 
+            ``".tsv"``          :py:class:`~.TsvTableWriter`       
+            ``".toml"``         :py:class:`~.TomlTableWriter`      
             ==================  ===================================
 
         :param str file_extension:
