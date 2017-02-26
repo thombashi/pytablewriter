@@ -1,8 +1,9 @@
 DataProperty>=0.16.2
 dominate>=2.3.0
-mbstrdecoder>=0.2.1
-pathvalidate>=0.13.0
-pytablereader>=0.8.8
+logbook>=1.0.0
+mbstrdecoder>=0.2.2
+pathvalidate>=0.14.1
+pytablereader>=0.8.10
 six
 toml
 typepy>=0.0.4
