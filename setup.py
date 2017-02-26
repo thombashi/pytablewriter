@@ -5,10 +5,12 @@
 """
 
 from __future__ import unicode_literals
+
 import io
 import os.path
-import setuptools
 import sys
+
+import setuptools
 
 
 REQUIREMENT_DIR = "requirements"
@@ -34,7 +36,7 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 setuptools.setup(
     name="pytablewriter",
-    version="0.17.1",
+    version="0.17.2",
     author="Tsuyoshi Hombashi",
     author_email="gogogo.vm@gmail.com",
     url="https://github.com/thombashi/pytablewriter",
@@ -54,10 +56,9 @@ setuptools.setup(
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Microsoft :: Windows",
-        "Operating System :: POSIX",
-        "Operating System :: POSIX :: Linux",
+        "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
