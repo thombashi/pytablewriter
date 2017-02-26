@@ -12,3 +12,6 @@
 
 .. image:: https://coveralls.io/repos/github/thombashi/pytablewriter/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
+
+.. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
+   :target: https://github.com/thombashi/pytablewriter
