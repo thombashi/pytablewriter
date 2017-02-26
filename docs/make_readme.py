@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 
 import sys
 
+from path import Path
 import readmemaker
 
 
@@ -20,26 +21,33 @@ def write_examples(maker):
     maker.set_indent_level(0)
     maker.write_chapter("Examples")
 
+    examples_root = Path("pages").joinpath("examples")
+
     maker.inc_indent_level()
     maker.write_chapter("Write a Markdown table")
-    maker.write_example_file("table_format/markdown_example.txt")
+    maker.write_file(
+        examples_root.joinpath("table_format", "markdown_example.txt"))
 
     maker.write_chapter("Write a reStructuredText table (Grid Tables)")
-    maker.write_example_file("table_format/rst/rst_grid_table_example.txt")
+    maker.write_file(examples_root.joinpath(
+        "table_format", "rst", "rst_grid_table_example.txt"))
 
     maker.write_chapter(
         "Write a table with JavaScript format (as a nested list variable definition)")
-    maker.write_example_file("table_format/sourcecode/javascript_example.txt")
+    maker.write_file(examples_root.joinpath(
+        "table_format", "sourcecode", "javascript_example.txt"))
 
     maker.write_chapter("Write a table to an Excel sheet")
-    maker.write_example_file(
-        "table_format/spreadsheet/exel_single_example.txt")
+    maker.write_file(examples_root.joinpath(
+        "table_format", "spreadsheet", "exel_single_example.txt"))
 
     maker.write_chapter("Write a table using multibyte character")
-    maker.write_example_file("multibyte/multibyte_table_example.txt")
+    maker.write_file(examples_root.joinpath(
+        "multibyte", "multibyte_table_example.txt"))
 
     maker.write_chapter("Write a table from ``pandas.DataFrame`` instance")
-    maker.write_example_file("datasource/from_pandas_dataframe_example.txt")
+    maker.write_file(examples_root.joinpath(
+        "datasource", "from_pandas_dataframe_example.txt"))
 
     maker.write_chapter("For more information")
     maker.write_line_list([

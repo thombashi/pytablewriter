@@ -16,6 +16,9 @@ pytablewriter
 .. image:: https://coveralls.io/repos/github/thombashi/pytablewriter/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
 
+.. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
+   :target: https://github.com/thombashi/pytablewriter
+
 Summary
 -------
 
@@ -287,6 +290,7 @@ Python 2.7+ or 3.3+
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `six <https://pypi.python.org/pypi/six/>`__
 - `toml <https://github.com/uiri/toml>`__
+- `typepy <https://github.com/thombashi/typepy>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
 - `xlwt <http://www.python-excel.org/>`__
 
