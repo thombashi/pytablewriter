@@ -433,7 +433,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         try:
             col_format_str.format(value_dp.data)
-        except ValueError:
+        except (TypeError, ValueError):
             return "{}"
 
         return col_format_str
