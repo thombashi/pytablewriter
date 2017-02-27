@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 import copy
 import os
 
-import dataproperty
+import typepy
 
 from ._const import FormatName
 from ._error import WriterNotFoundError
@@ -87,7 +87,7 @@ class TableWriterFactory(object):
         """
 
         ext = os.path.splitext(file_extension)[1]
-        if dataproperty.is_empty_string(ext):
+        if typepy.is_null_string(ext):
             file_extension = file_extension
         else:
             file_extension = ext
