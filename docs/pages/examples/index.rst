@@ -9,4 +9,4 @@ Examples
    stream/index
    multibyte/index
    datasource/index
-   data_format/index
+   typehint/index

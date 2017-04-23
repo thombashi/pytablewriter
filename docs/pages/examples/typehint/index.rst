@@ -1,4 +1,4 @@
-Configure Writing Data Type
+Configure Type Hints
 ============================
 
 .. toctree::
