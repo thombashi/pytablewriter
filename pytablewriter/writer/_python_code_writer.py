@@ -9,8 +9,6 @@ from __future__ import unicode_literals
 
 import typepy
 
-import dataproperty as dp
-
 from .._const import FormatName
 from .._function import (
     quote_datetime_formatter,
@@ -68,9 +66,9 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
         self.table_name = ""
         self._dp_extractor.type_value_mapping = {
-            dp.Typecode.NONE: None,
-            dp.Typecode.INFINITY: 'float("inf")',
-            dp.Typecode.NAN: 'float("nan")',
+            typepy.Typecode.NONE: None,
+            typepy.Typecode.INFINITY: 'float("inf")',
+            typepy.Typecode.NAN: 'float("nan")',
         }
 
     def get_variable_name(self, value):

@@ -7,7 +7,6 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import dataproperty
 import typepy
 
 from .._const import FormatName
@@ -40,7 +39,7 @@ class CsvTableWriter(TextTableWriter):
         self.is_padding = False
         self.is_write_header_separator_row = False
 
-        self._quote_flag_mapping[dataproperty.Typecode.NULL_STRING] = False
+        self._quote_flag_mapping[typepy.Typecode.NULL_STRING] = False
         self._is_remove_line_break = True
 
     def _write_header(self):

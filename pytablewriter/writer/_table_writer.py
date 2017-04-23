@@ -11,8 +11,8 @@ import abc
 import re
 import sys
 
-from dataproperty import Typecode
 from mbstrdecoder import MultiByteStrDecoder
+from typepy import Typecode
 import typepy
 
 import dataproperty as dp
@@ -59,14 +59,14 @@ class AbstractTableWriter(TableWriterInterface):
         Acceptable values are:
 
             - |None| (detect column type automatically)
-            - :py:class:`pytablewriter.StringType`
-            - :py:class:`pytablewriter.IntegerType`
-            - :py:class:`pytablewriter.FloatType`
-            - :py:class:`pytablewriter.DateTimeType`
-            - :py:class:`pytablewriter.BoolType`
-            - :py:class:`pytablewriter.InfinityType`
-            - :py:class:`pytablewriter.NanType`
-            - :py:class:`pytablewriter.DictionaryType`
+            - :py:class:`pytablewriter.String`
+            - :py:class:`pytablewriter.Integer`
+            - :py:class:`pytablewriter.Float`
+            - :py:class:`pytablewriter.DateTime`
+            - :py:class:`pytablewriter.Bool`
+            - :py:class:`pytablewriter.Infinity`
+            - :py:class:`pytablewriter.Nan`
+            - :py:class:`pytablewriter.Dictionary`
 
         A writer will write data with appropriate type from the these
         information when you call `write` method.
@@ -178,7 +178,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor = dp.DataPropertyExtractor()
         self._dp_extractor.min_padding_len = 1
         self._dp_extractor.strip_str = '"'
-        self._dp_extractor.type_value_mapping[dp.Typecode.NONE] = ""
+        self._dp_extractor.type_value_mapping[Typecode.NONE] = ""
 
         self.type_hint_list = None
         self._quote_flag_mapping = {
@@ -409,8 +409,9 @@ class AbstractTableWriter(TableWriterInterface):
         else:
             try:
                 value = col_dp.type_class(
-                    value_dp.data, is_strict=False).convert()
-            except dp.TypeConversionError:
+                    value_dp.data, strict_level=typepy.StrictLevel.MIN
+                ).convert()
+            except typepy.TypeConversionError:
                 value = value_dp.data
 
             try:

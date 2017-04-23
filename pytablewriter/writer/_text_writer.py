@@ -153,11 +153,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
     def _get_header_item(self, col_dp, value_dp):
-        from dataproperty import StringType
+        from typepy.type import String
 
         format_string = self._get_header_format_string(col_dp, value_dp)
 
-        return format_string.format(StringType(value_dp.data).convert())
+        return format_string.format(String(value_dp.data).convert())
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(

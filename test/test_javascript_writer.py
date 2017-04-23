@@ -7,13 +7,16 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
+
 import collections
 import datetime
 import itertools
 
-import dataproperty as dp
 import pytablewriter
 import pytest
+import typepy.type
+
+import dataproperty as dp
 
 from .data import (
     header_list,
@@ -23,6 +26,7 @@ from .data import (
     mix_value_matrix,
     value_matrix_iter,
 )
+
 
 Data = collections.namedtuple(
     "Data",
@@ -199,7 +203,7 @@ class Test_JavaScriptTableWriter_type_hint:
                 "th_none_none",
                 ["string", "datetime"],
                 DATA_MATRIX,
-                [dp.DateTimeType, dp.StringType],
+                [typepy.type.DateTime, typepy.type.String],
                 """const th_none_none = [
     ["string", "datetime"],
     [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],

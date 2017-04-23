@@ -6,9 +6,10 @@
 
 from __future__ import absolute_import
 from __future__ import unicode_literals
+
 import abc
 
-import dataproperty as dp
+import typepy
 
 from ._text_writer import IndentationTextTableWriter
 
@@ -54,7 +55,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         self.is_datetime_instance_formatting = True
 
-        self._quote_flag_mapping[dp.Typecode.DATETIME] = False
+        self._quote_flag_mapping[typepy.Typecode.DATETIME] = False
         self._is_required_table_name = True
         self._is_remove_line_break = True
 

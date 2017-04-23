@@ -7,11 +7,9 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from dataproperty import (
-    DefaultValue,
-    Typecode,
-)
+from dataproperty import DefaultValue
 import six
+from typepy import Typecode
 
 from .._const import FormatName
 from .._function import quote_datetime_formatter

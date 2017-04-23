@@ -9,7 +9,6 @@ from __future__ import unicode_literals
 
 import abc
 
-import dataproperty
 import typepy
 from typepy.type import Integer
 import xlwt
@@ -115,8 +114,8 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         self._workbook = None
 
         self._dp_extractor.type_value_mapping = {
-            dataproperty.Typecode.INFINITY: "Inf",
-            dataproperty.Typecode.NAN: "NaN",
+            typepy.Typecode.INFINITY: "Inf",
+            typepy.Typecode.NAN: "NaN",
         }
 
         self._first_header_row = 0

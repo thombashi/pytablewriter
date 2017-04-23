@@ -6,15 +6,15 @@
 
 from __future__ import absolute_import
 
-from dataproperty import (
-    StringType,
-    IntegerType,
-    FloatType,
-    DateTimeType,
-    BoolType,
-    InfinityType,
-    NanType,
-    DictionaryType,
+from typepy.type import (
+    Bool,
+    DateTime,
+    Dictionary,
+    Infinity,
+    Integer,
+    Nan,
+    RealNumber,
+    String,
 )
 
 from ._const import FormatName

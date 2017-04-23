@@ -9,10 +9,9 @@ from __future__ import unicode_literals
 
 import copy
 
+import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
 import typepy
-
-import dataproperty as dp
 
 from .._const import FormatName
 from ._text_writer import IndentationTextTableWriter
@@ -35,7 +34,8 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
-        self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
+        self._quote_flag_mapping = copy.deepcopy(
+            dataproperty.NULL_QUOTE_FLAG_MAPPING)
         self._is_remove_line_break = True
 
     def write_table(self):
@@ -88,7 +88,7 @@ class RstCsvTableWriter(RstTableWriter):
         self.is_write_value_separator_row = False
         self.is_write_closing_row = False
 
-        self._quote_flag_mapping[dp.Typecode.STRING] = True
+        self._quote_flag_mapping[typepy.Typecode.STRING] = True
 
     def write_table(self):
         """

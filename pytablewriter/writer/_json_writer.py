@@ -10,10 +10,10 @@ from __future__ import unicode_literals
 import copy
 import json
 
+import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
-import dataproperty as dp
 from six.moves import zip
 
 from .._const import FormatName
@@ -59,14 +59,15 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.char_right_side_row = ","
 
         self._dp_extractor.type_value_mapping = {
-            dp.Typecode.NONE: "null",
-            dp.Typecode.INFINITY: "Infinity",
-            dp.Typecode.NAN: "NaN",
+            typepy.Typecode.NONE: "null",
+            typepy.Typecode.INFINITY: "Infinity",
+            typepy.Typecode.NAN: "NaN",
         }
         self._dp_extractor.const_value_mapping = {
             True: "true", False: "false"}
 
-        self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
+        self._quote_flag_mapping = copy.deepcopy(
+            dataproperty.NULL_QUOTE_FLAG_MAPPING)
 
     def write_null_line(self):
         self._verify_stream()
@@ -86,7 +87,7 @@ class JsonTableWriter(IndentationTextTableWriter):
                 json_data, sort_keys=True, indent=4 * self._indent_level)
             json_text = strip_quote(
                 json_text,
-                self._dp_extractor.type_value_mapping.get(dp.Typecode.NONE))
+                self._dp_extractor.type_value_mapping.get(typepy.Typecode.NONE))
             json_text = strip_quote(json_text, "true")
             json_text = strip_quote(json_text, "false")
             json_text_list.append(json_text)

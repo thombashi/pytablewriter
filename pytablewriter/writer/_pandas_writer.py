@@ -10,8 +10,6 @@ from __future__ import unicode_literals
 from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
-import dataproperty as dp
-
 from .._const import FormatName
 from .._error import EmptyTableNameError
 from .._function import (
@@ -71,9 +69,9 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
         self.is_write_header = False
         self._dp_extractor.type_value_mapping = {
-            dp.Typecode.NONE: None,
-            dp.Typecode.INFINITY: 'numpy.inf',
-            dp.Typecode.NAN: 'numpy.nan',
+            typepy.Typecode.NONE: None,
+            typepy.Typecode.INFINITY: 'numpy.inf',
+            typepy.Typecode.NAN: 'numpy.nan',
         }
 
     def get_variable_name(self, value):
