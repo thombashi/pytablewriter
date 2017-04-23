@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pkg_resources
 import sys
 
+import pkg_resources
 import sphinx_rtd_theme
+
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -314,7 +315,7 @@ rp_class = u"""
 .. |datetime| replace:: :py:class:`datetime.datetime`
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
 
-.. |Typecode| replace:: :py:class:`dataproperty.Typecode`
+.. |Typecode| replace:: :py:class:`typepy.Typecode`
 
 .. |EmptyHeaderError| replace:: :py:class:`~pytablewriter.EmptyHeaderError`
 
