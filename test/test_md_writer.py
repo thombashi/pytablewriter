@@ -7,12 +7,14 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
+
 import collections
 from decimal import Decimal
 
+import pytest
+
 import pytablereader as ptr
 import pytablewriter as ptw
-import pytest
 
 from .data import (
     header_list,

@@ -87,7 +87,8 @@ class JsonTableWriter(IndentationTextTableWriter):
                 json_data, sort_keys=True, indent=4 * self._indent_level)
             json_text = strip_quote(
                 json_text,
-                self._dp_extractor.type_value_mapping.get(typepy.Typecode.NONE))
+                self._dp_extractor.type_value_mapping.get(
+                    typepy.Typecode.NONE))
             json_text = strip_quote(json_text, "true")
             json_text = strip_quote(json_text, "false")
             json_text_list.append(json_text)

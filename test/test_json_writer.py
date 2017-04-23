@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
+
 import collections
 import json
 
@@ -21,6 +22,7 @@ from .data import (
     mix_value_matrix,
     value_matrix_iter,
 )
+
 
 Data = collections.namedtuple("Data", "table header value expected")
 

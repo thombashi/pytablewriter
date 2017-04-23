@@ -16,8 +16,6 @@ import pytablewriter
 import pytest
 import typepy.type
 
-import dataproperty as dp
-
 from .data import (
     header_list,
     value_matrix,

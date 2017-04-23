@@ -7,15 +7,16 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
+
 import collections
 import datetime
 from decimal import Decimal
 import itertools
 
-import pytablewriter as ptw
 import pytest
 import toml
 
+import pytablewriter as ptw
 
 from .data import (
     header_list,
@@ -23,7 +24,6 @@ from .data import (
     value_matrix_with_none,
     mix_header_list,
     mix_value_matrix,
-    value_matrix_iter
 )
 
 

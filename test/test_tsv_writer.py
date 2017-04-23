@@ -11,8 +11,9 @@ from __future__ import unicode_literals
 import collections
 import itertools
 
-import pytablewriter as ptw
 import pytest
+
+import pytablewriter as ptw
 
 from .data import (
     header_list,
@@ -20,7 +21,6 @@ from .data import (
     value_matrix_with_none,
     mix_header_list,
     mix_value_matrix,
-    value_matrix_iter
 )
 
 
