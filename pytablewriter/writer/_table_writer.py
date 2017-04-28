@@ -289,18 +289,6 @@ class AbstractTableWriter(TableWriterInterface):
         self.header_list = list(dataframe.columns.values)
         self.value_matrix = dataframe.values.tolist()
 
-    def set_dataframe(self, dataframe):
-        # This method will be deleted in the future. Use from_tabledata
-        # instead.
-
-        self.from_dataframe(dataframe)
-
-    def set_table_data(self, tabledata):
-        # This method will be deleted in the future. Use from_tabledata
-        # instead.
-
-        self.from_tabledata(tabledata)
-
     def write_table_iter(self):
         """
         Write a table with iteration.
