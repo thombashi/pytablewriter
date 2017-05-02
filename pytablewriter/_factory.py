@@ -39,7 +39,7 @@ from .writer._tsv_writer import TsvTableWriter
 
 class TableWriterFactory(object):
     """
-    Factor class of writer classes.
+    A factor class of table writer classes.
     """
 
     __COMMON_WRITER_TABLE = {
@@ -57,7 +57,7 @@ class TableWriterFactory(object):
     @classmethod
     def create_from_file_extension(cls, file_extension):
         """
-        Create a writer from a file extension.
+        Create a writer class instance from a file extension.
         Supported file extensions are as follows:
 
             ==================  ===================================
@@ -108,8 +108,8 @@ class TableWriterFactory(object):
     @classmethod
     def create_from_format_name(cls, format_name):
         """
-        Create a writer from a format name.
-        Supported file formats are as follows:
+        Create a writer class instance from a format name.
+        Supported file format names are as follows:
 
             ==============================  ===================================
             Format name                     Loader                             
