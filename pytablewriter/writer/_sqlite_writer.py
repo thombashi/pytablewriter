@@ -19,6 +19,10 @@ from ._table_writer import AbstractTableWriter
 class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
     """
     A table writer class for SQLite database.
+
+    :Examples:
+
+        :ref:`example-sqlite-table-writer`
     """
 
     @property
