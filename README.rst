@@ -22,7 +22,7 @@ pytablewriter
 Summary
 -------
 
-A python library to write a table in various formats: CSV/HTML/JavaScript/JSON/LTSV/Markdown/MediaWiki/Excel/Pandas/Python/reStructuredText/TOML/TSV.
+A python library to write a table in various formats: CSV / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
@@ -35,11 +35,12 @@ Features
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - Markdown
     - MediaWiki
+    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     - Source code
         - `Pandas <http://pandas.pydata.org/>`__ (Definition of a DataFrame variable)
         - Python code (Definition of a nested list variable)
-        - JavaScript (Definition of a nested list variable)
-    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
+        - JavaScript code (Definition of a nested list variable)
+    - SQLite database file
     - Tab-separated values (TSV)
     - `TOML <https://github.com/toml-lang/toml>`__
 - Automatic tabular data formatting
@@ -286,8 +287,11 @@ Python 2.7+ or 3.3+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
 - `dominate <http://github.com/Knio/dominate/>`__
+- `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
+- `pytablereader <https://github.com/thombashi/pytablereader>`__
+- `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.python.org/pypi/six/>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
@@ -298,7 +302,6 @@ Python 2.7+ or 3.3+
 Test dependencies
 -----------------
 
-- `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `pytest <http://pytest.org/latest/>`__
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
