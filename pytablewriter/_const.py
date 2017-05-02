@@ -26,5 +26,6 @@ class FormatName(object):
     RST_GRID_TABBLE = "rst_grid_table"
     RST_SIMPLE_TABBLE = "rst_simple_table"
     RST_CSV_TABBLE = "rst_csv_table"
+    SQLITE = "sqlite"
     TSV = "tsv"
     TOML = "toml"

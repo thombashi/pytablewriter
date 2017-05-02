@@ -8,8 +8,9 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import pytablewriter as ptw
 import pytest
+
+import pytablewriter as ptw
 
 
 class Test_CsvTableWriter_write_table:
@@ -17,7 +18,7 @@ class Test_CsvTableWriter_write_table:
     @pytest.mark.parametrize(["format_name"], [
         [format_name]
         for format_name in ptw.TableWriterFactory.get_format_name_list()
-        if format_name not in ["null", "excel"]
+        if format_name not in ["null", "excel", "sqlite"]
     ])
     def test_smoke_multi_byte(self, capsys, format_name):
         writer = ptw.TableWriterFactory.create_from_format_name(format_name)

@@ -33,6 +33,7 @@ from .writer._rst_writer import (
     RstGridTableWriter,
     RstSimpleTableWriter
 )
+from .writer._sqlite_writer import SqliteTableWriter
 from .writer._toml_writer import TomlTableWriter
 from .writer._tsv_writer import TsvTableWriter
 
@@ -50,6 +51,7 @@ class TableWriterFactory(object):
         FormatName.LTSV: LtsvTableWriter,
         FormatName.PYTHON_ABBR: PythonCodeTableWriter,
         FormatName.RST: RstGridTableWriter,
+        FormatName.SQLITE: SqliteTableWriter,
         FormatName.TSV: TsvTableWriter,
         FormatName.TOML: TomlTableWriter,
     }
@@ -74,6 +76,8 @@ class TableWriterFactory(object):
             ``".tsv"``          :py:class:`~.TsvTableWriter`       
             ``".xls"``          :py:class:`~.ExcelXlsTableWriter`  
             ``".xlsx"``         :py:class:`~.ExcelXlsxTableWriter` 
+            ``".sqlite"``       :py:class:`~.SqliteTableWriter`    
+            ``".sqlite3"``      :py:class:`~.SqliteTableWriter`    
             ``".tsv"``          :py:class:`~.TsvTableWriter`       
             ``".toml"``         :py:class:`~.TomlTableWriter`      
             ==================  ===================================
@@ -128,6 +132,7 @@ class TableWriterFactory(object):
             ``"rst"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`   
             ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter` 
             ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`    
+            ``"sqlite"``                    :py:class:`~.SqliteTableWriter`    
             ``"tsv"``                       :py:class:`~.TsvTableWriter`       
             ``"toml"``                      :py:class:`~.TomlTableWriter`      
             ==============================  ===================================
@@ -168,6 +173,7 @@ class TableWriterFactory(object):
         :Examples:
             .. code:: python
 
+                >>> import pytablewriter as ptw
                 >>> for name in ptw.TableWriterFactory.get_format_name_list():
                 ...     print(name)
                 ...
@@ -188,6 +194,7 @@ class TableWriterFactory(object):
                 rst_csv_table
                 rst_grid_table
                 rst_simple_table
+                sqlite
                 toml
                 tsv
         """
@@ -203,6 +210,7 @@ class TableWriterFactory(object):
         :Examples:
             .. code:: python
 
+                >>> import pytablewriter as ptw
                 >>> for name in ptw.TableWriterFactory.get_extension_list():
                 ...     print(name)
                 ...
@@ -215,6 +223,8 @@ class TableWriterFactory(object):
                 md
                 py
                 rst
+                sqlite
+                sqlite3
                 toml
                 tsv
                 xls
@@ -257,6 +267,7 @@ class TableWriterFactory(object):
         writer_mapping .update({
             "htm": HtmlTableWriter,
             "md": MarkdownTableWriter,
+            "sqlite3": SqliteTableWriter,
             "xls": ExcelXlsTableWriter,
             "xlsx": ExcelXlsxTableWriter,
         })

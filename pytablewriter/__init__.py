@@ -51,5 +51,6 @@ from .writer._rst_writer import (
     RstGridTableWriter,
     RstSimpleTableWriter
 )
+from .writer._sqlite_writer import SqliteTableWriter
 from .writer._toml_writer import TomlTableWriter
 from .writer._tsv_writer import TsvTableWriter

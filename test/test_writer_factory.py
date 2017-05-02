@@ -47,6 +47,9 @@ class Test_WriterFactory_create_from_file_extension:
             ["valid_ext.rst", "valid_ext.RST", ".rst", "RST"],
             [ptw.RstGridTableWriter])
         ) + list(itertools.product(
+            ["valid_ext.sqlite", "valid_ext.sqlite3", ".sqlite", "SQLITE"],
+            [ptw.SqliteTableWriter])
+        ) + list(itertools.product(
             ["valid_ext.tsv", "valid_ext.TSV", ".tsv", "TSV"],
             [ptw.TsvTableWriter])
         ) + list(itertools.product(
@@ -105,6 +108,8 @@ class Test_FileLoaderFactory_create_from_format_name:
         ["rst_grid_table", ptw.RstGridTableWriter],
         ["rst_simple_table", ptw.RstSimpleTableWriter],
         ["rst_csv_table", ptw.RstCsvTableWriter],
+        ["sqlite", ptw.SqliteTableWriter],
+        ["SQLite", ptw.SqliteTableWriter],
         ["tsv", ptw.TsvTableWriter],
         ["TSV", ptw.TsvTableWriter],
         ["toml", ptw.TomlTableWriter],
