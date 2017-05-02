@@ -5,8 +5,6 @@
 .. codeauthor:: Tsuyoshi Hombashi <gogogo.vm@gmail.com>
 """
 
-from __future__ import print_function
-
 import pytablewriter
 
 
@@ -20,14 +18,6 @@ value_matrix = [
 
 writer = pytablewriter.ExcelXlsxTableWriter()
 writer.open_workbook("sample.xlsx")
-writer.make_worksheet("example")
-writer.header_list = header_list
-writer.value_matrix = value_matrix
-writer.write_table()
-writer.close()
-
-writer = pytablewriter.ExcelXlsTableWriter()
-writer.open_workbook("sample.xls")
 writer.make_worksheet("example")
 writer.header_list = header_list
 writer.value_matrix = value_matrix
