@@ -2,32 +2,32 @@
 CSV table writer classes
 -------------------------------
 
-CSV table writer class
+CSV writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.CsvTableWriter
     :inherited-members:
 
-TSV table writer class
+TSV writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.TsvTableWriter
     :inherited-members:
 
 
-LTSV table writer class
+LTSV writer
 -------------------------------
 .. autoclass:: pytablewriter.LtsvTableWriter
     :inherited-members:
 
 
-Excel table writer classes
+Excel writer classes
 -------------------------------
 
-Xlsx table writer class
+Xlsx table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.ExcelXlsxTableWriter
     :inherited-members:
 
-Xls table writer class
+Xls table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.ExcelXlsTableWriter
     :inherited-members:
@@ -36,23 +36,23 @@ Xls table writer class
 Markup language writer classes
 -------------------------------
 
-HTML table writer class
+HTML table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.HtmlTableWriter
     :inherited-members:
 
-MediaWiki table writer class
+MediaWiki table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.MediaWikiTableWriter
     :inherited-members:
 
-Markdown table writer class
+Markdown table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.MarkdownTableWriter
     :inherited-members:
 
 
-JSON table writer class
+JSON writer class
 -------------------------------
 .. autoclass:: pytablewriter.JsonTableWriter
     :inherited-members:
@@ -61,17 +61,17 @@ JSON table writer class
 Source code writer classes
 -------------------------------
 
-JavaScript table writer class
+JavaScript table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.JavaScriptTableWriter
     :inherited-members:
 
-Pandas DataFrame writer class
+Pandas DataFrame writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.PandasDataFrameWriter
     :inherited-members:
 
-Python code table writer class
+Python code table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.PythonCodeTableWriter
     :inherited-members:
@@ -80,21 +80,25 @@ Python code table writer class
 reStructuredText writer classes
 -------------------------------
 
-reStructuredText CSV table writer class
+reStructuredText CSV table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.RstCsvTableWriter
     :inherited-members:
 
-reStructuredText grid table writer class
+reStructuredText grid table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.RstGridTableWriter
     :inherited-members:
 
-reStructuredText simple table writer class
+reStructuredText simple table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.RstSimpleTableWriter
     :inherited-members:
 
+SQLite writer class
+-------------------------------
+.. autoclass:: pytablewriter.SqliteTableWriter
+    :inherited-members:
 
 TOML table writer class
 -------------------------------

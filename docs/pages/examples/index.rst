@@ -2,7 +2,7 @@ Examples
 ========
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    basic
    table_format/index

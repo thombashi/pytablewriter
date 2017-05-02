@@ -13,4 +13,5 @@ Write a table
    mediawiki
    rst/index
    sourcecode/index
+   sqlite
    toml

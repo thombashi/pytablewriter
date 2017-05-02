@@ -1,7 +1,7 @@
-﻿LTSV
-----------------------------
+﻿.. _example-ltsv-table-writer:
 
-.. _example-ltsv-table-writer:
+LTSV
+----------------------------
 
 |LtsvTableWriter| class can write a 
 `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ 

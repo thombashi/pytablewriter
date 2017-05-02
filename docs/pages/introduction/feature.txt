@@ -9,11 +9,12 @@ Features
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - Markdown
     - MediaWiki
+    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     - Source code
         - `Pandas <http://pandas.pydata.org/>`__ (Definition of a DataFrame variable)
         - Python code (Definition of a nested list variable)
-        - JavaScript (Definition of a nested list variable)
-    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
+        - JavaScript code (Definition of a nested list variable)
+    - SQLite database file
     - Tab-separated values (TSV)
     - `TOML <https://github.com/toml-lang/toml>`__
 - Automatic tabular data formatting
