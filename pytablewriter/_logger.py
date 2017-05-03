@@ -56,7 +56,7 @@ class WriterLogger(object):
 
     def logging_write(self):
         log_entry_list = [
-            "type={:s}".format(self.__writer.format_name),
+            "format={:s}".format(self.__writer.format_name),
             "table-name='{}'".format(self.__writer.table_name),
             "header={}".format(self.__writer.header_list),
         ]
