@@ -112,6 +112,18 @@ exception_test_data_list = [
         value=value_matrix,
         expected=ptw.EmptyHeaderError
     ),
+    Data(
+        table="dummy",
+        header=[],
+        value=[],
+        expected=ptw.EmptyTableDataError
+    ),
+    Data(
+        table="dummy",
+        header=header_list,
+        value=[],
+        expected=ptw.EmptyValueError
+    ),
 ]
 
 
