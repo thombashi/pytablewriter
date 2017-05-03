@@ -48,6 +48,7 @@ table_name_ho_ge.columns = [
     "dd",
     "e",
 ]
+
 """),
     Data(
         table="tablename",
@@ -56,6 +57,7 @@ table_name_ho_ge.columns = [
         value=None,
         expected="""tablename = pandas.DataFrame([
 ])
+
 """),
     Data(
         table="table with%null-value",
@@ -75,6 +77,7 @@ table_with_null_value.columns = [
     "dd",
     "e",
 ]
+
 """),
     Data(
         table="tablename",
@@ -98,6 +101,7 @@ tablename.columns = [
     "mix_num",
     "time",
 ]
+
 """),
 ]
 
@@ -207,6 +211,7 @@ tablename.columns = [
     "hb",
     "hc",
 ]
+
 """,
         ],
     ])

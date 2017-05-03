@@ -43,6 +43,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.0|cccc
+
 """),
     Data(
         table="",
@@ -52,6 +53,7 @@ normal_test_data_list = [
         is_float_formatting=True,
         expected=""" a | b | c |dd | e 
 ---|---|---|---|---
+
 """),
     Data(
         table="",
@@ -68,6 +70,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.3|cccc
+
 """),
     Data(
         table="tablename",
@@ -81,6 +84,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.0|cccc
+
 """),
     Data(
         table="tablename",
@@ -94,6 +98,7 @@ normal_test_data_list = [
   1|123.1|a  |  1|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|  3|cccc
+
 """),
     Data(
         table="tablename",
@@ -107,6 +112,7 @@ normal_test_data_list = [
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
   3|  3.3|ccc|3.0|cccc
+
 """),
     Data(
         table="",
@@ -120,6 +126,7 @@ normal_test_data_list = [
    |2.2|   |2.2|2.2 
   3|3.3|ccc|   |cccc
    |   |   |   |    
+
 """),
     Data(
         table="",
@@ -132,6 +139,7 @@ normal_test_data_list = [
   1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      
   2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
   3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      
+
 """),
     Data(
         table="",
@@ -144,6 +152,7 @@ normal_test_data_list = [
 0.01|  9.123|0.000
 1.00| 99.123|0.010
 1.20|999.123|0.001
+
 """),
     Data(
         table="",
@@ -162,6 +171,7 @@ normal_test_data_list = [
         expected=""" Name  |xUnit|Source|                                                      Remarks                                                       
 -------|-----|------|--------------------------------------------------------------------------------------------------------------------
 Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.
+
 """),
     Data(
         table="",
@@ -178,6 +188,7 @@ Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal w
 ----|----|--------|--------|--------------------------|------------
 山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678
 山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999
+
 """),
     Data(
         table="quoted values",
@@ -193,6 +204,7 @@ quote|abc efg
 ----:|-------
     1|abc    
    -1|efg    
+
 """),
 ]
 
@@ -318,6 +330,7 @@ html       |HtmlTableFileLoader
 markdown   |MarkdownTableFileLoader 
 mediawiki  |MediaWikiTableFileLoader
 json       |JsonTableFileLoader     
+
 """
         out, _err = capsys.readouterr()
         assert out == expected
@@ -356,6 +369,7 @@ ha |hb |hc
  11| 12| 13
  101| 102| 103
 1001|1002|1003
+
 """,
         ],
     ])

@@ -43,6 +43,8 @@ class RstTableWriter(IndentationTextTableWriter):
 
         self._write_line(self._get_table_directive())
         self._write_table()
+        if self.is_write_null_line_after_table:
+            self.write_null_line()
 
     def _get_table_directive(self):
         if typepy.is_null_string(self.table_name):
@@ -105,6 +107,8 @@ class RstCsvTableWriter(RstTableWriter):
         self._logger.logging_write()
 
         super(RstCsvTableWriter, self)._write_table()
+        if self.is_write_null_line_after_table:
+            self.write_null_line()
 
     def _get_opening_row_item_list(self):
         directive = ".. csv-table:: "

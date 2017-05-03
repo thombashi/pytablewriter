@@ -8,8 +8,9 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import pytablewriter as ptw
 import pytest
+
+import pytablewriter as ptw
 
 from .data import (
     Data,
@@ -35,6 +36,7 @@ normal_test_data_list = [
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"],
 ]
+
 """),
     Data(
         table="TABLENAME",
@@ -44,6 +46,7 @@ normal_test_data_list = [
         expected="""tablename = [
     ["a", "b", "c", "dd", "e"],
 ]
+
 """),
     Data(
         table="TableName",
@@ -56,6 +59,7 @@ normal_test_data_list = [
         [2, 2.2, "bb", 2.2, 2.2],
         [3, 3.3, "ccc", 3.0, "cccc"],
     ]
+
 """),
     Data(
         table="TABLE Name",
@@ -69,6 +73,7 @@ normal_test_data_list = [
     [3, 3.3, "ccc", None, "cccc"],
     [None, None, None, None, None],
 ]
+
 """),
     Data(
         table="tablename",
@@ -81,6 +86,7 @@ normal_test_data_list = [
     [2, 2.20, "bbb", 2.2, 2.2, False, float("inf"), float("nan"), float("inf"), "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
+
 """),
     Data(
         table="quoted values",
@@ -95,6 +101,7 @@ normal_test_data_list = [
     [1, "abc"],
     [-1, "efg"],
 ]
+
 """),
 ]
 
@@ -148,6 +155,7 @@ class Test_PythonCodeTableWriter_write_table:
     [2, 2.20, "bbb", 2.2, 2.2, False, float("inf"), float("nan"), float("inf"), "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", True, float("inf"), float("nan"), float("nan"), dateutil.parser.parse("2017-01-01T00:00:00")],
 ]
+
 """
 
         out, _err = capsys.readouterr()
@@ -195,6 +203,7 @@ class Test_PythonCodeTableWriter_write_table_iter:
     [101, 102, 103],
     [1001, 1002, 1003],
 ]
+
 """,
         ],
     ])

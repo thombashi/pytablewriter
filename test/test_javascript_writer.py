@@ -44,6 +44,7 @@ normal_test_data_list = [
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
+
 """),
     Data(
         table="null value",
@@ -55,6 +56,7 @@ normal_test_data_list = [
         expected="""const null_value = [
     ["a", "b", "c", "dd", "e"]
 ];
+
 """),
     Data(
         table="null table",
@@ -65,6 +67,7 @@ normal_test_data_list = [
         is_dti_fmt=True,
         expected="""const null_table = [
 ];
+
 """),
     Data(
         table="table name",
@@ -78,6 +81,7 @@ normal_test_data_list = [
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
+
 """),
     Data(
         table="tablename",
@@ -92,6 +96,7 @@ normal_test_data_list = [
         [2, 2.2, "bb", 2.2, 2.2],
         [3, 3.3, "ccc", 3.0, "cccc"]
     ];
+
 """),
     Data(
         table="tablename",
@@ -107,6 +112,7 @@ normal_test_data_list = [
     [3, 3.3, "ccc", null, "cccc"],
     [null, null, null, null, null]
 ];
+
 """),
     Data(
         table="tablename",
@@ -121,6 +127,7 @@ normal_test_data_list = [
     [2, 2.20, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
 ];
+
 """),
     Data(
         table="tablename",
@@ -135,6 +142,7 @@ normal_test_data_list = [
     [2, 2.20, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3.0, "ccc", true, Infinity, NaN, NaN, "2017-01-01T00:00:00"]
 ];
+
 """),
 ]
 
@@ -195,6 +203,7 @@ class Test_JavaScriptTableWriter_type_hint:
     ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
     ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")]
 ];
+
 """,
             ],
             [
@@ -207,6 +216,7 @@ class Test_JavaScriptTableWriter_type_hint:
     [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
     [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
 ];
+
 """,
             ],
         ]
@@ -275,6 +285,7 @@ class Test_JavaScriptTableWriter_write_table:
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3.0, "cccc"]
 ];
+
 """
 
         out, _err = capsys.readouterr()
@@ -327,6 +338,7 @@ class Test_JavaScriptTableWriter_write_table_iter:
     [101, 102, 103],
     [1001, 1002, 1003]
 ];
+
 """,
             ],
             [
@@ -341,6 +353,7 @@ class Test_JavaScriptTableWriter_write_table_iter:
     [1, 2, 3],
     [11, 12, 13]
 ];
+
 """,
             ],
         ])

@@ -57,6 +57,7 @@ normal_test_data_list = [
 | style="text-align:right"| 3.0
 | cccc
 |}
+
 """),
     Data(
         table=None,
@@ -70,6 +71,7 @@ normal_test_data_list = [
 ! e
 |-
 |}
+
 """),
     Data(
         table=None,
@@ -102,6 +104,7 @@ a # b ## c ###
 |  a # b
 a * b ** c ***
 |}
+
 """),
     Data(
         table=None,
@@ -126,6 +129,7 @@ a * b ** c ***
 | style="text-align:right"| 3.0
 | cccc
 |}
+
 """),
     Data(
         table="test table",
@@ -163,6 +167,7 @@ a * b ** c ***
 | 
 | 
 |}
+
 """),
     Data(
         table="test table",
@@ -214,6 +219,7 @@ a * b ** c ***
 | NaN
 | 2017-01-01 00:00:00
 |}
+
 """),
 ]
 
@@ -311,6 +317,7 @@ class Test_MediaWikiTableWriter_write_table_iter:
 | style="text-align:right"| 1002
 | style="text-align:right"| 1003
 |}
+
 """,
         ],
         [
@@ -346,6 +353,7 @@ class Test_MediaWikiTableWriter_write_table_iter:
 | style="text-align:right"| 1003
 |}
 3/3
+
 """,
         ],
     ])

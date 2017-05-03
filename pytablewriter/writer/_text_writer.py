@@ -66,11 +66,15 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     .. py:attribute:: is_write_opening_row
 
-        Write opening line of the table if the value is |True|.
+        Write an opening line of the table if the value is |True|.
 
     .. py:attribute:: is_write_closing_row
 
-        Write closing line of the table if the value is |True|.
+        Write a closing line of the table if the value is |True|.
+
+    .. py:attribute:: is_write_null_line_after_table
+
+        Write a blank line of after writing a table if the value is |True|.
 
     .. figure:: ss/table_char.png
        :scale: 60%
@@ -92,6 +96,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_value_row_separator = "-"
         self.char_closing_row = "-"
 
+        self.is_write_null_line_after_table = True
+
     def write_null_line(self):
         """
         Write a null line to the |stream|.
@@ -110,6 +116,38 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._logger.logging_write()
         self._write_table()
+        if self.is_write_null_line_after_table:
+            self.write_null_line()
+
+    def write_table_iter(self):
+        """
+        Write a table with iteration.
+        "Iteration" means that divide the table writing into multiple process.
+        This method is useful especially for large data.
+        The following is premise to execute this method:
+
+        - set iterator to the |value_matrix|
+        - set the number of iterations to the |iteration_length| attribute
+
+        Call back function (Optional):
+        Callback function is called when for each of the iteration of writing
+        a table is completed. To set call back function,
+        set a callback function to the |write_callback| attribute.
+
+        :raises pytablewriter.NotSupportedError:
+            If the class does not support this method.
+
+        .. note::
+
+            Following classes do not support this method:
+            |HtmlTableWriter|, |RstGridTableWriter|, |RstSimpleTableWriter|.
+            ``support_split_write`` attribute will return |True| if the class
+            is supported this method.
+        """
+
+        super(TextTableWriter, self).write_table_iter()
+        if self.is_write_null_line_after_table:
+            self.write_null_line()
 
     def _write_table(self):
         self._verify_property()
@@ -305,4 +343,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         self._write_raw_string(self._get_indent_string() + text)
 
     def _write_line(self, text=""):
-        self._write_raw_line(self._get_indent_string() + text)
+        if typepy.is_not_null_string(text):
+            self._write_raw_line(self._get_indent_string() + text)
+        else:
+            self._write_raw_line("")
