@@ -254,7 +254,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             self.stream.write(self.first_header_row, col, value)
 
     def _write_cell(self, row, col, value_dp):
-        if value_dp.typecode in [typepy.Typecode.FLOAT]:
+        if value_dp.typecode in [typepy.Typecode.REAL_NUMBER]:
             try:
                 cell_style = self.__get_cell_style(col)
             except ValueError:
@@ -280,7 +280,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         except KeyError:
             return {}
 
-        if col_dp.typecode not in [typepy.Typecode.FLOAT]:
+        if col_dp.typecode not in [typepy.Typecode.REAL_NUMBER]:
             raise ValueError()
 
         if not Integer(col_dp.minmax_decimal_places.max_value).is_type():
@@ -394,7 +394,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         base_props = dict(self.__cell_format_property)
         format_key = "{:d}_{:d}".format(col, value_dp.typecode)
 
-        if value_dp.typecode in [typepy.Typecode.INTEGER, typepy.Typecode.FLOAT]:
+        if value_dp.typecode in [
+                typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
             num_props = self.__get_number_property(col)
             base_props.update(num_props)
             cell_format = self.__get_cell_format(format_key, base_props)
@@ -422,7 +423,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         except KeyError:
             return {}
 
-        if col_dp.typecode not in [typepy.Typecode.INTEGER, typepy.Typecode.FLOAT]:
+        if col_dp.typecode not in [
+                typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
             return {}
 
         num_props = {}

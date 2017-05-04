@@ -134,7 +134,8 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     @staticmethod
     def __get_data_helper(dp):
-        if dp.typecode == typepy.Typecode.FLOAT and isinstance(dp.data, Decimal):
+        if (dp.typecode == typepy.Typecode.REAL_NUMBER and
+                isinstance(dp.data, Decimal)):
             return float(dp.data)
 
         if dp.typecode == typepy.Typecode.DATETIME:

@@ -184,11 +184,11 @@ class AbstractTableWriter(TableWriterInterface):
         self._quote_flag_mapping = {
             Typecode.NONE: False,
             Typecode.INTEGER: False,
-            Typecode.FLOAT: False,
+            Typecode.REAL_NUMBER: False,
             Typecode.STRING: True,
             Typecode.NULL_STRING: True,
             Typecode.DATETIME: True,
-            Typecode.FLOAT: False,
+            Typecode.REAL_NUMBER: False,
             Typecode.NAN: False,
             Typecode.BOOL: False,
         }
@@ -425,8 +425,8 @@ class AbstractTableWriter(TableWriterInterface):
     def __get_to_string_format(self, col_dp, value_dp):
         if any([
             all([
-                col_dp.typecode == Typecode.FLOAT,
-                value_dp.typecode in [Typecode.INTEGER, Typecode.FLOAT],
+                col_dp.typecode == Typecode.REAL_NUMBER,
+                value_dp.typecode in [Typecode.INTEGER, Typecode.REAL_NUMBER],
                 not self.is_float_formatting
             ]),
             value_dp.typecode == Typecode.NONE,
