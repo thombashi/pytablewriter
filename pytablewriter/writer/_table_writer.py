@@ -419,16 +419,14 @@ class AbstractTableWriter(TableWriterInterface):
             ]),
             value_dp.typecode == Typecode.NONE,
         ]):
-            col_format_str = "{}"
-        else:
-            col_format_str = col_dp.format_str
+            return "{}"
 
         try:
-            col_format_str.format(value_dp.data)
+            col_dp.format_str.format(value_dp.data)
         except (TypeError, ValueError):
             return "{}"
 
-        return col_format_str
+        return col_dp.format_str
 
     def __get_align_format(self, col_dp, value_dp):
         align_func_table = {
