@@ -54,12 +54,8 @@ class WriterLogger(object):
         logger.debug(
             "created WriterLogger: format={}".format(writer.format_name))
 
-    def logging_write(self):
-        log_entry_list = [
-            "format={:s}".format(self.__writer.format_name),
-            "table-name='{}'".format(self.__writer.table_name),
-            "header={}".format(self.__writer.header_list),
-        ]
+    def logging_write(self, extra_message_list=None):
+        log_entry_list = self.__get_log_entry_base()
 
         try:
             log_entry_list.append(
@@ -67,12 +63,25 @@ class WriterLogger(object):
         except (TypeError, AttributeError):
             pass
 
+        log_entry_list.append(self.__get_typehint_log_message())
+
+        if extra_message_list:
+            log_entry_list.extend(extra_message_list)
+
+        logger.debug("write table: {}".format(", ".join(log_entry_list)))
+
+    def __get_log_entry_base(self):
+        return [
+            "format={:s}".format(self.__writer.format_name),
+            "table-name='{}'".format(self.__writer.table_name),
+            "header={}".format(self.__writer.header_list),
+        ]
+
+    def __get_typehint_log_message(self):
         try:
-            log_entry_list.append("type-hint={}".format([
+            return "type-hint={}".format([
                 type_hint(None).typename
                 for type_hint in self.__writer.type_hint_list
-            ]))
+            ])
         except (TypeError, AttributeError):
-            pass
-
-        logger.debug("write table: " + ", ".join(log_entry_list))
+            return "type-hint=[]"
