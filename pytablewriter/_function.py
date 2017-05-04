@@ -7,20 +7,8 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from decimal import Decimal
 
 import dataproperty
-from typepy import Typecode
-
-
-def _get_data_helper(dp):
-    if dp.typecode == Typecode.FLOAT:
-        if isinstance(dp.data, Decimal):
-            return float(dp.data)
-    elif dp.typecode == Typecode.DATETIME:
-        return dp.to_str()
-
-    return dp.data
 
 
 def quote_datetime_formatter(value):

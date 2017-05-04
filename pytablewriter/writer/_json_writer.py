@@ -8,6 +8,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import copy
+from decimal import Decimal
 import json
 
 import dataproperty
@@ -18,7 +19,6 @@ from six.moves import zip
 
 from .._const import FormatName
 from .._converter import strip_quote
-from .._function import _get_data_helper
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -121,7 +121,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             dp_matrix = []
 
         value_matrix = [
-            [_get_data_helper(dp) for dp in dp_list]
+            [self.__get_data_helper(dp) for dp in dp_list]
             for dp_list in dp_matrix
         ]
 
@@ -131,6 +131,16 @@ class JsonTableWriter(IndentationTextTableWriter):
         ]
 
         self._preprocessed_value_matrix = True
+
+    @staticmethod
+    def __get_data_helper(dp):
+        if dp.typecode == typepy.Typecode.FLOAT and isinstance(dp.data, Decimal):
+            return float(dp.data)
+
+        if dp.typecode == typepy.Typecode.DATETIME:
+            return dp.to_str()
+
+        return dp.data
 
     def _get_opening_row_item_list(self):
         if typepy.is_not_null_string(self.table_name):
