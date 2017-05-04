@@ -337,6 +337,10 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_closing_row = False
         iter_count = 1
 
+        self._logger.logging_write([
+            "iteration-length={:d}".format(self.iteration_length)
+        ])
+
         for work_matrix in self.value_matrix:
             is_final_iter = all([
                 self.iteration_length > 0,
@@ -359,6 +363,14 @@ class AbstractTableWriter(TableWriterInterface):
                 self.write_callback(iter_count, self.iteration_length)
             except TypeError:
                 pass
+
+            # update typehint for the next iteration
+            """
+            if self.type_hint_list is None:
+                self.type_hint_list = [
+                    column_dp.type_class for column_dp in self._column_dp_list
+                ]
+            """
 
             if is_final_iter:
                 break
