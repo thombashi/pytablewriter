@@ -1,4 +1,4 @@
-DataProperty>=0.20.4
+DataProperty>=0.21.0
 dominate>=2.3.1
 logbook>=1.0.0
 mbstrdecoder
