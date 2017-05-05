@@ -147,25 +147,16 @@ class Test_SqliteTableWriter_write_table:
         writer.write_table()
         writer.close()
 
-        print("!!", value)
-
         loader = ptr.SqliteFileLoader(str(test_file_path))
 
         for tabledata in loader.load():
-            #expected_dump = ptw.dump_tabledata(expected)
-            #actual_dump = ptw.dump_tabledata(tabledata)
+            expected_dump = ptw.dump_tabledata(expected)
+            actual_dump = ptw.dump_tabledata(tabledata)
 
-            print("expected:\n{}".format(expected))
-            print("actual:\n{}".format(tabledata))
-
-            assert tabledata == expected
-
-            """
-            print("expected:\n{}".format(expected_dump))
-            print("actual:\n{}".format(actual_dump))
+            print("[expected]\n{}".format(expected_dump))
+            print("[actual]\n{}".format(actual_dump))
 
             assert actual_dump == expected_dump
-            """
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
@@ -226,25 +217,3 @@ class Test_SqliteTableWriter_write_table_iter:
 
         for tabledata in loader.load():
             assert tabledata == expected
-
-    """
-    @pytest.mark.parametrize(
-        ["table", "header", "value", "expected"],
-        [
-            [data.table, data.header, data.value, data.expected]
-            for data in normal_test_data_list
-        ]
-    )
-    def test_exception_null_sheet(
-            self, tmpdir, table, header, value, expected):
-        test_file_path = tmpdir.join("test.sqlite")
-
-        writer = ptw.SqliteTableWriter()
-        writer.table_name = table
-        writer.open(str(test_file_path))
-        writer.header_list = header
-        writer.value_matrix = value
-
-        with pytest.raises(IOError):
-            writer.write_table_iter()
-    """
