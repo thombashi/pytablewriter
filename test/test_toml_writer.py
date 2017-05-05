@@ -21,9 +21,6 @@ import pytablewriter as ptw
 from .data import (
     header_list,
     value_matrix,
-    value_matrix_with_none,
-    mix_header_list,
-    mix_value_matrix,
 )
 
 

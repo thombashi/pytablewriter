@@ -10,7 +10,6 @@ from __future__ import unicode_literals
 
 import collections
 from decimal import Decimal
-import itertools
 
 from pytablereader import TableData
 import pytest
