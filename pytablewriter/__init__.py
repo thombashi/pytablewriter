@@ -12,7 +12,10 @@ from typepy.type import (
     Dictionary,
     Infinity,
     Integer,
+    List,
     Nan,
+    NoneType,
+    NullString,
     RealNumber,
     String,
 )
