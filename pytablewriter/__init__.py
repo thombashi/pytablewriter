@@ -27,7 +27,7 @@ from ._error import (
     EmptyTableNameError,
     EmptyValueError,
     EmptyTableDataError,
-    WriterNotFoundError
+    WriterNotFoundError,
 )
 from ._factory import TableWriterFactory
 from ._function import dump_tabledata
@@ -38,7 +38,7 @@ from ._logger import (
 from .writer._csv_writer import CsvTableWriter
 from .writer._excel_writer import (
     ExcelXlsTableWriter,
-    ExcelXlsxTableWriter
+    ExcelXlsxTableWriter,
 )
 from .writer._html_writer import HtmlTableWriter
 from .writer._javascript_writer import JavaScriptTableWriter
@@ -52,7 +52,7 @@ from .writer._python_code_writer import PythonCodeTableWriter
 from .writer._rst_writer import (
     RstCsvTableWriter,
     RstGridTableWriter,
-    RstSimpleTableWriter
+    RstSimpleTableWriter,
 )
 from .writer._sqlite_writer import SqliteTableWriter
 from .writer._toml_writer import TomlTableWriter
