@@ -515,7 +515,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.header_list = self.header_list
         self._dp_extractor.data_matrix = self.__value_matrix_org
 
-        self._column_dp_list = self._dp_extractor.to_col_dataproperty_list()
+        self._column_dp_list = self._dp_extractor.to_col_dataproperty_list(
+            self._column_dp_list)
         self._header_dp_list = self._dp_extractor.to_header_dataproperty_list()
 
         try:
