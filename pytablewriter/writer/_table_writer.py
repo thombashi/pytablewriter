@@ -56,27 +56,32 @@ class AbstractTableWriter(TableWriterInterface):
     .. py:attribute:: type_hint_list
 
         A list of type hints for each columns of data.
-        Acceptable values are:
+        Acceptable values are as follows:
 
-            - |None| (detect column type automatically)
-            - :py:class:`pytablewriter.String`
-            - :py:class:`pytablewriter.Integer`
-            - :py:class:`pytablewriter.Float`
-            - :py:class:`pytablewriter.DateTime`
+            - |None| (detect column type automatically from values in the column)
             - :py:class:`pytablewriter.Bool`
-            - :py:class:`pytablewriter.Infinity`
-            - :py:class:`pytablewriter.Nan`
+            - :py:class:`pytablewriter.DateTime`
             - :py:class:`pytablewriter.Dictionary`
+            - :py:class:`pytablewriter.Infinity`
+            - :py:class:`pytablewriter.Integer`
+            - :py:class:`pytablewriter.List`
+            - :py:class:`pytablewriter.Nan`
+            - :py:class:`pytablewriter.NoneType`
+            - :py:class:`pytablewriter.NullString`
+            - :py:class:`pytablewriter.RealNumber`
+            - :py:class:`pytablewriter.String`
 
-        A writer will write data with appropriate type from the these
-        information when you call `write` method.
-        The writer will try to convert data type for each data in a column to
-        designated type if the type hint is not |None|.
-        If the type hint is |None| or failed to convert data,
-        writer try to detect column type from data with corresponding column.
+        A writer will convert data for each column using type-hint
+        information before writing tables when you call ``write_xxx`` methods.
+        If a type-hint value is not |None|, the writer will try to
+        convert data for each data in a column to type-hint class.
+        If the type-hint value is |None| or failed to convert data,
+        the writer will automatically detect column data type from
+        the column data.
 
-        If the list is |None|, the writer will detect types all of the columns
-        automatically and write a table.
+        If ``type_hint_list`` is |None|, the writer will detect
+        column data types for  all of the columns automatically and write a
+        table.
         Defaults to |None|.
 
         :Examples:
