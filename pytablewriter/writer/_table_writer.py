@@ -549,6 +549,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocessed_property = False
         self._preprocessed_value_matrix = False
 
+        self._column_dp_list = []
+
     def __remove_line_break(self, text):
         if not self._is_remove_line_break:
             return text
