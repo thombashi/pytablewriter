@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from dataproperty import DefaultValue
+from dataproperty import (DataProperty, DefaultValue)
 import six
 from typepy import Typecode
 
@@ -66,6 +66,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     """
 
     __VALID_VAR_DECLARATION = ("var", "let", "const")
+    __NONE_VALUE_DP = DataProperty("null")
 
     @property
     def format_name(self):
@@ -92,7 +93,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
         self.variable_declaration = "const"
         self._dp_extractor.type_value_mapping = {
-            Typecode.NONE: "null",
+            # Typecode.NONE: "null",
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
@@ -140,3 +141,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
     def _get_closing_row_item_list(self):
         return "];"
+
+    def _get_row_item(self, col_dp, value_dp):
+        if value_dp.data is None:
+            value_dp = self.__NONE_VALUE_DP
+
+        return super(JavaScriptTableWriter, self)._get_row_item(
+            col_dp, value_dp)
