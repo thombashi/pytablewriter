@@ -120,17 +120,18 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
         super(JavaScriptTableWriter, self)._write_table()
         self.dec_indent_level()
-        data_frame_text = self.stream.getvalue().rstrip("\n")
+        js_matrix_var_def_text = self.stream.getvalue().rstrip("\n")
         if self.is_write_closing_row:
-            data_frame_line_list = data_frame_text.splitlines()
-            data_frame_line_list[-2] = data_frame_line_list[-2].rstrip(",")
-            data_frame_text = "\n".join(data_frame_line_list)
+            js_matrix_var_def_line_list = js_matrix_var_def_text.splitlines()
+            js_matrix_var_def_line_list[-2] = (
+                js_matrix_var_def_line_list[-2].rstrip(","))
+            js_matrix_var_def_text = "\n".join(js_matrix_var_def_line_list)
 
         self.stream.close()
         self.stream = org_stream
 
         self.dec_indent_level()
-        self._write_line(data_frame_text)
+        self._write_line(js_matrix_var_def_text)
         self.inc_indent_level()
 
     def _get_opening_row_item_list(self):
