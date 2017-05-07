@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import dataproperty
 import logbook
 import pytablereader
 import simplesqlite
@@ -17,6 +18,7 @@ logger.disable()
 
 
 def set_logger(is_enable):
+    dataproperty.set_logger(is_enable)
     pytablereader.set_logger(is_enable)
     simplesqlite.set_logger(is_enable)
 
@@ -37,6 +39,7 @@ def set_log_level(log_level):
         Disabled logging if ``log_level`` is ``logbook.NOTSET``.
     """
 
+    dataproperty.set_log_level(log_level)
     pytablereader.set_log_level(log_level)
     simplesqlite.set_log_level(log_level)
 
