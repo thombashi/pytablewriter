@@ -53,6 +53,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
+        self.is_float_formatting = False
         self.is_datetime_instance_formatting = True
 
         self._quote_flag_mapping[typepy.Typecode.DATETIME] = False
