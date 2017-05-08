@@ -388,14 +388,14 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_closing_row = old_is_write_closing_row
 
     def _get_padding_len(self, column_property, value_dp=None):
-        if self.is_padding:
-            try:
-                return value_dp.get_padding_len(
-                    column_property.ascii_char_width)
-            except AttributeError:
-                return column_property.ascii_char_width
+        if not self.is_padding:
+            return 0
 
-        return 0
+        try:
+            return value_dp.get_padding_len(
+                column_property.ascii_char_width)
+        except AttributeError:
+            return column_property.ascii_char_width
 
     def _get_left_align_formatformat(self):
         return "<"
