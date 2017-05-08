@@ -19,14 +19,17 @@ logger.disable()
 
 
 def set_logger(is_enable):
-    dataproperty.set_logger(is_enable)
-    pytablereader.set_logger(is_enable)
-    simplesqlite.set_logger(is_enable)
+    if is_enable != logger.disabled:
+        return
 
     if is_enable:
         logger.enable()
     else:
         logger.disable()
+
+    dataproperty.set_logger(is_enable)
+    pytablereader.set_logger(is_enable)
+    simplesqlite.set_logger(is_enable)
 
 
 def set_log_level(log_level):
@@ -40,15 +43,18 @@ def set_log_level(log_level):
         Disabled logging if ``log_level`` is ``logbook.NOTSET``.
     """
 
-    dataproperty.set_log_level(log_level)
-    pytablereader.set_log_level(log_level)
-    simplesqlite.set_log_level(log_level)
+    if log_level == logger.level:
+        return
 
     if log_level == logbook.NOTSET:
         set_logger(is_enable=False)
     else:
         set_logger(is_enable=True)
         logger.level = log_level
+
+    dataproperty.set_log_level(log_level)
+    pytablereader.set_log_level(log_level)
+    simplesqlite.set_log_level(log_level)
 
 
 class WriterLogger(object):
