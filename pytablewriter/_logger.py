@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 
 import dataproperty
 import logbook
+from mbstrdecoder import MultiByteStrDecoder
 import pytablereader
 import simplesqlite
 
@@ -74,9 +75,15 @@ class WriterLogger(object):
         logger.debug("write table: {}".format(", ".join(log_entry_list)))
 
     def __get_log_entry_base(self):
+        if self.__writer.table_name:
+            table_name = MultiByteStrDecoder(
+                self.__writer.table_name).unicode_str
+        else:
+            table_name = None
+
         return [
             "format={:s}".format(self.__writer.format_name),
-            "table-name='{}'".format(self.__writer.table_name),
+            "table-name='{}'".format(table_name),
             "header={}".format(self.__writer.header_list),
         ]
 
