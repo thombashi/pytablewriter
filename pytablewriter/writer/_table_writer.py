@@ -392,8 +392,7 @@ class AbstractTableWriter(TableWriterInterface):
             return 0
 
         try:
-            return value_dp.get_padding_len(
-                column_dp.ascii_char_width)
+            return value_dp.get_padding_len(column_dp.ascii_char_width)
         except AttributeError:
             return column_dp.ascii_char_width
 
