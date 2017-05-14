@@ -51,7 +51,7 @@ class TomlTableWriter(TextTableWriter):
 
         self._logger.logging_write()
 
-        self.stream.write(toml.dumps(self.tabledata.asdict()))
+        self.stream.write(toml.dumps(self.tabledata.as_dict()))
 
     def _verify_header(self):
         self._validate_empty_header()

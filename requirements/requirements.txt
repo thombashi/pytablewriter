@@ -3,7 +3,7 @@ dominate>=2.3.1
 logbook
 mbstrdecoder
 pathvalidate>=0.15.0
-pytablereader>=0.9.2
+pytablereader>=0.9.3
 SimpleSQLite>=0.8.1
 six
 toml>=0.9.2
