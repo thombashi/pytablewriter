@@ -486,7 +486,8 @@ class AbstractTableWriter(TableWriterInterface):
                 typepy.is_null_string(self.table_name),
         ]):
             raise EmptyTableNameError(
-                "table_name must be string, with at least one character or more length.")
+                "table_name must be a string, with at least one or "
+                "more character.")
 
     def _verify_stream(self):
         if self.stream is None:
