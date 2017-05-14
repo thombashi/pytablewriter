@@ -38,7 +38,7 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         is_float_formatting=True,
-        expected=""" a |  b  | c |dd | e  
+        expected="""a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
@@ -51,7 +51,7 @@ normal_test_data_list = [
         header=header_list,
         value=None,
         is_float_formatting=True,
-        expected=""" a | b | c |dd | e 
+        expected="""a  | b | c |dd | e 
 ---|---|---|---|---
 
 """),
@@ -65,7 +65,7 @@ normal_test_data_list = [
             [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
         ],
         is_float_formatting=True,
-        expected=""" a |  b  | c |dd | e  
+        expected="""a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
@@ -79,7 +79,7 @@ normal_test_data_list = [
         value=value_matrix,
         is_float_formatting=True,
         expected="""# tablename
- a |  b  | c |dd | e  
+a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
@@ -93,7 +93,7 @@ normal_test_data_list = [
         value=value_matrix,
         is_float_formatting=False,
         expected="""# tablename
- a |  b  | c |dd | e  
+a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |  1|1   
   2|  2.2|bb |2.2|2.2 
@@ -107,7 +107,7 @@ normal_test_data_list = [
         value=value_matrix,
         is_float_formatting=True,
         expected="""## tablename
- a |  b  | c |dd | e  
+a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |1.0|1   
   2|  2.2|bb |2.2|2.2 
@@ -120,7 +120,7 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix_with_none,
         is_float_formatting=True,
-        expected=""" a | b | c |dd | e  
+        expected="""a  | b | c |dd | e  
 --:|--:|---|--:|----
   1|   |a  |1.0|    
    |2.2|   |2.2|2.2 
@@ -134,7 +134,7 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         is_float_formatting=True,
-        expected=""" i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           
+        expected="""i  | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           
 --:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
   1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      
   2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
@@ -147,7 +147,7 @@ normal_test_data_list = [
         header=float_header_list,
         value=float_value_matrix,
         is_float_formatting=True,
-        expected=""" a  |   b   |  c  
+        expected="""a   |   b   |  c  
 ---:|------:|----:
 0.01|  9.123|0.000
 1.00| 99.123|0.010
@@ -168,7 +168,7 @@ normal_test_data_list = [
             ]
         ],
         is_float_formatting=True,
-        expected=""" Name  |xUnit|Source|                                                      Remarks                                                       
+        expected="""Name   |xUnit|Source|                                                      Remarks                                                       
 -------|-----|------|--------------------------------------------------------------------------------------------------------------------
 Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.
 
@@ -184,7 +184,7 @@ Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal w
              "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
         ],
         is_float_formatting=True,
-        expected=""" 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  
+        expected="""姓  | 名 |生年月日|郵便番号|           住所           |  電話番号  
 ----|----|--------|--------|--------------------------|------------
 山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678
 山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999
@@ -309,7 +309,7 @@ class Test_MarkdownTableWriter_write_table:
 
         tabledata = ptr.TableData(
             table_name="loader_mapping",
-            header_list=['Format name', 'Loader'],
+            header_list=['Name', 'Loader'],
             record_list=[
                 ['csv', 'CsvTableFileLoader'],
                 ['excel', 'ExcelTableFileLoader'],
@@ -317,22 +317,28 @@ class Test_MarkdownTableWriter_write_table:
                 ['markdown', 'MarkdownTableFileLoader'],
                 ['mediawiki', 'MediaWikiTableFileLoader'],
                 ['json', 'JsonTableFileLoader'],
+                ['Long Format Name', 'Loader'],
             ])
         writer.from_tabledata(tabledata)
         writer.write_table()
 
         expected = """# loader_mapping
-Format name|         Loader         
------------|------------------------
-csv        |CsvTableFileLoader      
-excel      |ExcelTableFileLoader    
-html       |HtmlTableFileLoader     
-markdown   |MarkdownTableFileLoader 
-mediawiki  |MediaWikiTableFileLoader
-json       |JsonTableFileLoader     
+Name            |         Loader         
+----------------|------------------------
+csv             |CsvTableFileLoader      
+excel           |ExcelTableFileLoader    
+html            |HtmlTableFileLoader     
+markdown        |MarkdownTableFileLoader 
+mediawiki       |MediaWikiTableFileLoader
+json            |JsonTableFileLoader     
+Long Format Name|Loader                  
 
 """
         out, _err = capsys.readouterr()
+
+        print("expected:\n{}".format(expected))
+        print("actual:\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(
