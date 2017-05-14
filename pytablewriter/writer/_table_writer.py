@@ -58,7 +58,7 @@ class AbstractTableWriter(TableWriterInterface):
         A list of type hints for each columns of data.
         Acceptable values are as follows:
 
-            - |None| (detect column type automatically from values in the column)
+            - |None| (automatically detect column type from values in the column)
             - :py:class:`pytablewriter.Bool`
             - :py:class:`pytablewriter.DateTime`
             - :py:class:`pytablewriter.Dictionary`
