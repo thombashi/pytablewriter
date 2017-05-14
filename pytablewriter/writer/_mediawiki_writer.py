@@ -82,7 +82,7 @@ class MediaWikiTableWriter(TextTableWriter):
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "! {{:{:s}{:s}}}".format(
-            self._get_center_align_formatformat(),
+            self._get_align_char(dp.Align.CENTER),
             str(self._get_padding_len(col_dp, value_dp)))
 
     def __modify_table_element(self, value, value_dp):

@@ -15,7 +15,6 @@ from mbstrdecoder import MultiByteStrDecoder
 from typepy import Typecode
 import typepy
 
-import dataproperty as dp
 import pytablereader as ptr
 from six.moves import zip
 
@@ -159,6 +158,11 @@ class AbstractTableWriter(TableWriterInterface):
         pass
 
     def __init__(self):
+        from dataproperty import (
+            Align,
+            DataPropertyExtractor,
+        )
+
         self.stream = sys.stdout
         self.table_name = None
         self.header_list = None
@@ -180,7 +184,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._logger = WriterLogger(self)
 
-        self._dp_extractor = dp.DataPropertyExtractor()
+        self._dp_extractor = DataPropertyExtractor()
         self._dp_extractor.min_padding_len = 1
         self._dp_extractor.strip_str_header = '"'
         self._dp_extractor.strip_str_value = '"'
@@ -205,6 +209,13 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.iteration_length = -1
         self.write_callback = None
+
+        self.__align_char_mapping = {
+            Align.AUTO: "<",
+            Align.LEFT: "<",
+            Align.RIGHT: ">",
+            Align.CENTER: "^",
+        }
 
     def close(self):
         """
@@ -396,15 +407,6 @@ class AbstractTableWriter(TableWriterInterface):
         except AttributeError:
             return column_dp.ascii_char_width
 
-    def _get_left_align_formatformat(self):
-        return "<"
-
-    def _get_right_align_formatformat(self):
-        return ">"
-
-    def _get_center_align_formatformat(self):
-        return "^"
-
     def _get_row_item(self, col_dp, value_dp):
         to_string_format_str = self.__get_to_string_format(
             col_dp, value_dp)
@@ -445,17 +447,11 @@ class AbstractTableWriter(TableWriterInterface):
 
         return col_dp.format_str
 
+    def _get_align_char(self, align):
+        return self.__align_char_mapping[align]
+
     def __get_align_format(self, col_dp, value_dp):
-        align_func_table = {
-            dp.Align.AUTO: self._get_left_align_formatformat,
-            dp.Align.LEFT: self._get_left_align_formatformat,
-            dp.Align.RIGHT: self._get_right_align_formatformat,
-            dp.Align.CENTER: self._get_center_align_formatformat,
-        }
-
-        align = align_func_table[col_dp.align]()
-
-        format_list = ["{:" + align]
+        format_list = ["{:" + self._get_align_char(col_dp.align)]
         col_padding_len = self._get_padding_len(col_dp, value_dp)
         if col_padding_len > 0:
             format_list.append(str(col_padding_len))

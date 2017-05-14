@@ -7,6 +7,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import dataproperty
 import typepy
 
 from six.moves import zip
@@ -200,7 +201,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(
-            self._get_center_align_formatformat(),
+            self._get_align_char(dataproperty.Align.CENTER),
             str(self._get_padding_len(col_dp, value_dp)))
 
     def _write_raw_string(self, unicode_text):
