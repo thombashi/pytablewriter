@@ -127,7 +127,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     @value_matrix.setter
     def value_matrix(self, value_matrix):
-        self.__value_matrix_org = value_matrix
+        self.__set_value_matrix(value_matrix)
         self.__clear_preprocessed_data()
 
     @property
@@ -141,7 +141,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     @type_hint_list.setter
     def type_hint_list(self, value):
-        self._dp_extractor.col_type_hint_list = value
+        self.__set_type_hint_list(value)
         self.__clear_preprocessed_data()
 
     @property
@@ -367,7 +367,9 @@ class AbstractTableWriter(TableWriterInterface):
             if is_final_iter:
                 self.is_write_closing_row = True
 
-            self.value_matrix = work_matrix
+            self.__set_value_matrix(work_matrix)
+            self.__clear_preprocessed_flag()
+
             self._write_table()
 
             if not is_final_iter:
@@ -384,9 +386,9 @@ class AbstractTableWriter(TableWriterInterface):
             # update typehint for the next iteration
             """
             if self.type_hint_list is None:
-                self.type_hint_list = [
+                self.__set_type_hint_list([
                     column_dp.type_class for column_dp in self._column_dp_list
-                ]
+                ])
             """
 
             if is_final_iter:
@@ -474,6 +476,12 @@ class AbstractTableWriter(TableWriterInterface):
             self._verify_value_matrix()
         except EmptyValueError:
             pass
+
+    def __set_value_matrix(self, value_matrix):
+        self.__value_matrix_org = value_matrix
+
+    def __set_type_hint_list(self, type_hint_list):
+        self._dp_extractor.col_type_hint_list = type_hint_list
 
     def _verify_table_name(self):
         if all([
