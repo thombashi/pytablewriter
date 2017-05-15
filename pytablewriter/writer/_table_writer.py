@@ -128,7 +128,7 @@ class AbstractTableWriter(TableWriterInterface):
     @value_matrix.setter
     def value_matrix(self, value_matrix):
         self.__value_matrix_org = value_matrix
-        self.__clear_preprocessed_flag()
+        self.__clear_preprocessed_data()
 
     @property
     def tabledata(self):
@@ -142,7 +142,7 @@ class AbstractTableWriter(TableWriterInterface):
     @type_hint_list.setter
     def type_hint_list(self, value):
         self._dp_extractor.col_type_hint_list = value
-        self.__clear_preprocessed_flag()
+        self.__clear_preprocessed_data()
 
     @property
     def _quote_flag_mapping(self):
@@ -151,7 +151,7 @@ class AbstractTableWriter(TableWriterInterface):
     @_quote_flag_mapping.setter
     def _quote_flag_mapping(self, value):
         self._dp_extractor.quote_flag_mapping = value
-        self.__clear_preprocessed_flag()
+        self.__clear_preprocessed_data()
 
     @abc.abstractmethod
     def _write_table(self):
@@ -549,6 +549,9 @@ class AbstractTableWriter(TableWriterInterface):
     def __clear_preprocessed_flag(self):
         self._preprocessed_property = False
         self._preprocessed_value_matrix = False
+
+    def __clear_preprocessed_data(self):
+        self.__clear_preprocessed_flag()
 
         self._column_dp_list = []
 
