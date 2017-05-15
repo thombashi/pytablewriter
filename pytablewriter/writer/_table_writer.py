@@ -25,7 +25,10 @@ from .._error import (
     EmptyHeaderError,
     EmptyTableDataError
 )
-from .._logger import WriterLogger
+from .._logger import (
+    logger,
+    WriterLogger,
+)
 from ._interface import TableWriterInterface
 
 
@@ -555,12 +558,15 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocess_value_matrix()
 
     def __clear_preprocessed_flag(self):
+        logger.debug("__clear_preprocessed_flag")
+
         self._preprocessed_property = False
         self._preprocessed_value_matrix = False
 
     def __clear_preprocessed_data(self):
-        self.__clear_preprocessed_flag()
+        logger.debug("__clear_preprocessed_data")
 
+        self.__clear_preprocessed_flag()
         self._column_dp_list = []
 
     def __remove_line_break(self, text):
