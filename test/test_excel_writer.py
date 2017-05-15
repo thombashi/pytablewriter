@@ -157,8 +157,8 @@ class Test_ExcelTableWriter_write_table:
             expected_dump = ptw.dump_tabledata(expected)
             actual_dump = ptw.dump_tabledata(tabledata)
 
-            print("expected:\n{}".format(expected_dump))
-            print("actual:\n{}".format(actual_dump))
+            print("[expected]\n{}".format(expected_dump))
+            print("[actual]\n{}".format(actual_dump))
 
             assert actual_dump == expected_dump
 

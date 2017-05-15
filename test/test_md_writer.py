@@ -24,7 +24,8 @@ from .data import (
     mix_value_matrix,
     float_header_list,
     float_value_matrix,
-    value_matrix_iter
+    value_matrix_iter,
+    value_matrix_iter_1,
 )
 
 
@@ -299,8 +300,8 @@ class Test_MarkdownTableWriter_write_table:
 
         out, _err = capsys.readouterr()
 
-        print("expected:\n{}".format(expected))
-        print("actual:\n{}".format(out))
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
 
         assert out == expected
 
@@ -336,8 +337,8 @@ Long Format Name|Loader
 """
         out, _err = capsys.readouterr()
 
-        print("expected:\n{}".format(expected))
-        print("actual:\n{}".format(out))
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
 
         assert out == expected
 
@@ -378,6 +379,22 @@ ha |hb |hc
 
 """,
         ],
+        [
+            "mix length",
+            ["string", "hb", "hc"],
+            value_matrix_iter_1,
+            """# mix length
+string                 | hb |hc 
+-----------------------|---:|--:
+a b c d e f g h i jklmn| 2.1|  3
+aaaaa                  |12.1| 13
+bbb                    |   2|  3
+cc                     |  12| 13
+a                      | 102| 103
+                       |1002|1003
+
+"""
+        ],
     ])
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
@@ -388,6 +405,10 @@ ha |hb |hc
         writer.write_table_iter()
 
         out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
         assert out == expected
 
     @pytest.mark.parametrize(

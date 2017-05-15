@@ -80,6 +80,21 @@ value_matrix_iter = [
     ],
 ]
 
+value_matrix_iter_1 = [
+    [
+        ["a b c d e f g h i jklmn", 2.1, 3],
+        ["aaaaa", 12.1, 13],
+    ],
+    [
+        ["bbb", 2, 3],
+        ["cc", 12, 13],
+    ],
+    [
+        ["a", 102, 103],
+        ["", 1002, 1003],
+
+    ],
+]
 
 Data = collections.namedtuple("Data", "table indent header value expected")
 null_test_data_list = [
