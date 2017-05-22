@@ -272,9 +272,9 @@ class Test_PandasDataFrameWriter_from_dataframe:
             ["ha", "hb", "hc"],
             value_matrix_iter,
             """tablename = pandas.DataFrame([
-    [1, 1.1, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [1, 0.125, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
-    [3, 3.33, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [3, 3333.3, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
 ])
 tablename.columns = [
     "i",
@@ -288,36 +288,63 @@ tablename.columns = [
     "mix_num",
     "time",
 ]
+
 """,
         ],
     ])
     def test_normal(self, capsys, table, header, value, expected):
         import dateutil
+        from typepy.type import (
+            Integer,
+            RealNumber,
+        )
 
-        df = pandas.DataFrame([
-            [1, 1.10, "aa", 1.0, "1", True, numpy.inf, numpy.nan,
-                1, dateutil.parser.parse("2017-01-01T00:00:00")],
-            [2, 1, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan,
-                numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
-            [3, 3.33, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan,
-                numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
-        ])
-        df.columns = [
-            "i",
-            "f",
-            "c",
-            "if",
-            "ifc",
-            "bool",
-            "inf",
-            "nan",
-            "mix_num",
-            "time",
-        ]
+        df = pandas.DataFrame(
+            [
+                [
+                    1, 0.125, "aa", 1.0, "1", True, numpy.inf, numpy.nan,
+                    1, dateutil.parser.parse("2017-01-01T00:00:00"),
+                ],
+                [
+                    2, 2.2, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan,
+                    numpy.inf, dateutil.parser.parse(
+                        "2017-01-02T03:04:05+0900"),
+                ],
+                [
+                    3, 3333.3, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan,
+                    numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00"),
+                ],
+            ],
+            columns=[
+                "i",
+                "f",
+                "c",
+                "if",
+                "ifc",
+                "bool",
+                "inf",
+                "nan",
+                "mix_num",
+                "time",
+            ])
 
         writer = table_writer_class()
         writer.table_name = table
         writer.from_dataframe(df)
+
+        assert writer.type_hint_list == [
+            Integer,
+            RealNumber,
+            None,
+            RealNumber,
+            None,
+            None,
+            RealNumber,
+            RealNumber,
+            RealNumber,
+            None,
+        ]
+
         writer.write_table()
 
         out, _err = capsys.readouterr()

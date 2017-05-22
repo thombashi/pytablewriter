@@ -308,6 +308,10 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.header_list = list(dataframe.columns.values)
         self.value_matrix = dataframe.values.tolist()
+        self.type_hint_list = [
+            self.__get_typehint_from_dtype(dtype)
+            for dtype in dataframe.dtypes
+        ]
 
     def write_table_iter(self):
         """
@@ -463,6 +467,17 @@ class AbstractTableWriter(TableWriterInterface):
         format_list.append("s}")
 
         return "".join(format_list)
+
+    def __get_typehint_from_dtype(self, col_dtype):
+        col_dtype = str(col_dtype)
+
+        if re.search("^float", col_dtype):
+            return typepy.type.RealNumber
+
+        if re.search("^int", col_dtype):
+            return typepy.type.Integer
+
+        return None
 
     def _verify_property(self):
         self._verify_table_name()
