@@ -46,7 +46,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._quote_flag_mapping = copy.deepcopy(dp.NULL_QUOTE_FLAG_MAPPING)
         self._is_remove_line_break = True
 
-        self._dp_extractor.min_padding_len = 3
+        self._dp_extractor.min_column_width = 3
 
     def write_table(self):
         """

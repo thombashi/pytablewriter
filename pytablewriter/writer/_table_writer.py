@@ -188,7 +188,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._logger = WriterLogger(self)
 
         self._dp_extractor = DataPropertyExtractor()
-        self._dp_extractor.min_padding_len = 1
+        self._dp_extractor.min_column_width = 1
         self._dp_extractor.strip_str_header = '"'
         self._dp_extractor.strip_str_value = '"'
         self._dp_extractor.type_value_mapping[Typecode.NONE] = ""
