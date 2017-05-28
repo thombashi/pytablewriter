@@ -17,7 +17,6 @@ install:
   - "%PYTHON%/python.exe C:/get-pip.py"
   - "%PYTHON%/Scripts/pip.exe --version"
   - "%PYTHON%/Scripts/pip.exe install pytest"
-  - "%PYTHON%/Scripts/pip.exe install requests==2.14.2"
 
 test_script:
   - "%PYTHON%/python.exe setup.py test"
