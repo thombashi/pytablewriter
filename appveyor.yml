@@ -1,5 +1,8 @@
 build: false
 environment:
+
+  PYTHONIOENCODING: "UTF-8"
+
   matrix:
     - PYTHON: "C:/Python27-x64"
     - PYTHON: "C:/Python35-x64"
@@ -14,6 +17,7 @@ install:
   - "%PYTHON%/python.exe C:/get-pip.py"
   - "%PYTHON%/Scripts/pip.exe --version"
   - "%PYTHON%/Scripts/pip.exe install pytest"
+  - "%PYTHON%/Scripts/pip.exe install requests==2.14.2"
 
 test_script:
   - "%PYTHON%/python.exe setup.py test"
