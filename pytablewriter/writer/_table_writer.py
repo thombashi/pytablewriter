@@ -212,6 +212,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.iteration_length = -1
         self.write_callback = None
+        self.__iter_count = None
 
         self.__align_char_mapping = {
             Align.AUTO: "<",
@@ -359,7 +360,7 @@ class AbstractTableWriter(TableWriterInterface):
         old_is_write_closing_row = self.is_write_closing_row
 
         self.is_write_closing_row = False
-        iter_count = 1
+        self.__iter_count = 1
 
         self._logger.logging_write([
             "iteration-length={:d}".format(self.iteration_length)
@@ -368,7 +369,7 @@ class AbstractTableWriter(TableWriterInterface):
         for work_matrix in self.value_matrix:
             is_final_iter = all([
                 self.iteration_length > 0,
-                iter_count >= self.iteration_length
+                self.__iter_count >= self.iteration_length
             ])
 
             if is_final_iter:
@@ -386,7 +387,7 @@ class AbstractTableWriter(TableWriterInterface):
             self.is_write_header = False
 
             try:
-                self.write_callback(iter_count, self.iteration_length)
+                self.write_callback(self.__iter_count, self.iteration_length)
             except TypeError:
                 pass
 
@@ -401,11 +402,12 @@ class AbstractTableWriter(TableWriterInterface):
             if is_final_iter:
                 break
 
-            iter_count += 1
+            self.__iter_count += 1
 
         self.is_write_header = old_is_write_header
         self.is_write_opening_row = old_is_write_opening_row
         self.is_write_closing_row = old_is_write_closing_row
+        self.__iter_count = None
 
     def _get_padding_len(self, column_dp, value_dp=None):
         if not self.is_padding:
@@ -545,6 +547,13 @@ class AbstractTableWriter(TableWriterInterface):
         self._column_dp_list = self._dp_extractor.to_col_dataproperty_list(
             self._column_dp_list)
         self._header_dp_list = self._dp_extractor.to_header_dataproperty_list()
+
+        if self.__iter_count == 1:
+            import math
+
+            for column_dp in self._column_dp_list:
+                column_dp.extend_width(int(
+                    math.ceil(column_dp.ascii_char_width * 0.25)))
 
         try:
             self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()

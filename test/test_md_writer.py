@@ -368,12 +368,12 @@ class Test_MarkdownTableWriter_write_table_iter:
             ["ha", "hb", "hc"],
             value_matrix_iter,
             """# tablename
-ha |hb |hc 
---:|--:|--:
-  1|  2|  3
- 11| 12| 13
-  1|  2|  3
- 11| 12| 13
+ha  | hb | hc 
+---:|---:|---:
+   1|   2|   3
+  11|  12|  13
+   1|   2|   3
+  11|  12|  13
  101| 102| 103
 1001|1002|1003
 
@@ -384,14 +384,14 @@ ha |hb |hc
             ["string", "hb", "hc"],
             value_matrix_iter_1,
             """# mix length
-string                 | hb |hc 
------------------------|---:|--:
-a b c d e f g h i jklmn| 2.1|  3
-aaaaa                  |12.1| 13
-bbb                    |   2|  3
-cc                     |  12| 13
-a                      | 102| 103
-                       |1002|1003
+string                       | hb  | hc 
+-----------------------------|----:|---:
+a b c d e f g h i jklmn      |  2.1|   3
+aaaaa                        | 12.1|  13
+bbb                          |    2|   3
+cc                           |   12|  13
+a                            |  102| 103
+                             | 1002|1003
 
 """
         ],

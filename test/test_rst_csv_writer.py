@@ -170,7 +170,7 @@ class Test_RstCsvTableWriter_write_table_iter:
             value_matrix_iter,
             """.. csv-table:: tablename
     :header: "ha", "hb", "hc"
-    :widths: 4, 4, 4
+    :widths: 5, 5, 5
 
     1, 2, 3
     11, 12, 13
