@@ -41,14 +41,11 @@ from .writer._excel_writer import (
     ExcelXlsxTableWriter,
 )
 from .writer._html_writer import HtmlTableWriter
-from .writer._javascript_writer import JavaScriptTableWriter
 from .writer._json_writer import JsonTableWriter
 from .writer._ltsv_writer import LtsvTableWriter
 from .writer._md_writer import MarkdownTableWriter
 from .writer._mediawiki_writer import MediaWikiTableWriter
 from .writer._null_writer import NullTableWriter
-from .writer._pandas_writer import PandasDataFrameWriter
-from .writer._python_code_writer import PythonCodeTableWriter
 from .writer._rst_writer import (
     RstCsvTableWriter,
     RstGridTableWriter,
@@ -57,3 +54,6 @@ from .writer._rst_writer import (
 from .writer._sqlite_writer import SqliteTableWriter
 from .writer._toml_writer import TomlTableWriter
 from .writer._tsv_writer import TsvTableWriter
+from .writer.sourcecode._javascript_writer import JavaScriptTableWriter
+from .writer.sourcecode._pandas_writer import PandasDataFrameWriter
+from .writer.sourcecode._python_code_writer import PythonCodeTableWriter

@@ -11,7 +11,7 @@ import abc
 
 import typepy
 
-from ._text_writer import IndentationTextTableWriter
+from .._text_writer import IndentationTextTableWriter
 
 
 class SourceCodeTableWriter(IndentationTextTableWriter):
