@@ -40,14 +40,7 @@ normal_test_data_list = [
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3, "cccc"],
-])
-table_name_ho_ge.columns = [
-    "a",
-    "b",
-    "c",
-    "dd",
-    "e",
-]
+], columns=["a", "b", "c", "dd", "e"])
 
 """),
     Data(
@@ -56,7 +49,7 @@ table_name_ho_ge.columns = [
         header=header_list,
         value=None,
         expected="""tablename = pandas.DataFrame([
-])
+], columns=["a", "b", "c", "dd", "e"])
 
 """),
     Data(
@@ -69,14 +62,7 @@ table_name_ho_ge.columns = [
     [None, 2.2, None, 2.2, 2.2],
     [3, 3.3, "ccc", None, "cccc"],
     [None, None, None, None, None],
-])
-table_with_null_value.columns = [
-    "a",
-    "b",
-    "c",
-    "dd",
-    "e",
-]
+], columns=["a", "b", "c", "dd", "e"])
 
 """),
     Data(
@@ -88,19 +74,7 @@ table_with_null_value.columns = [
     [1, 1.1, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
-])
-tablename.columns = [
-    "i",
-    "f",
-    "c",
-    "if",
-    "ifc",
-    "bool",
-    "inf",
-    "nan",
-    "mix_num",
-    "time",
-]
+], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
 """),
     Data(
@@ -116,11 +90,7 @@ tablename.columns = [
     [0.03785679191278808, 826.21158713263],
     [None, 826.21158713263],
     [0.1, 1.0499675627886724],
-])
-float_with_null.columns = [
-    "a",
-    "b",
-]
+], columns=["a", "b"])
 
 """),
 ]
@@ -225,12 +195,7 @@ class Test_PandasDataFrameWriter_write_table_iter:
     [11, 12, 13],
     [101, 102, 103],
     [1001, 1002, 1003],
-])
-tablename.columns = [
-    "ha",
-    "hb",
-    "hc",
-]
+], columns=["ha", "hb", "hc"])
 
 """,
         ],
@@ -244,6 +209,7 @@ tablename.columns = [
         writer.write_table_iter()
 
         out, _err = capsys.readouterr()
+
         assert out == expected
 
     @pytest.mark.parametrize(

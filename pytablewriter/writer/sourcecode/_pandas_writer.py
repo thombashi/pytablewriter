@@ -92,25 +92,14 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         super(PandasDataFrameWriter, self)._write_table()
         self.dec_indent_level()
 
-        if any([
-            typepy.is_empty_sequence(self.value_matrix),
-            not self.is_write_closing_row,
-        ]):
-            return
-
-        self._write_line("{}.columns = [".format(self.variable_name))
-        self.inc_indent_level()
-        for header in self.header_list:
-            self._write_line(
-                '"{}",'.format(MultiByteStrDecoder(header).unicode_str))
-        self.dec_indent_level()
-        self._write_line("]")
-
     def _get_opening_row_item_list(self):
-        return [self.variable_name + " = pandas.DataFrame(["]
+        return ["{} = pandas.DataFrame([".format(self.variable_name)]
 
     def _get_closing_row_item_list(self):
-        return "])"
+        return "], columns=[{}])".format(", ".join([
+            '"{}"'.format(MultiByteStrDecoder(header).unicode_str)
+            for header in self.header_list
+        ]))
 
     def _verify_property(self):
         super(PandasDataFrameWriter, self)._verify_property()
