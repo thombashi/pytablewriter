@@ -13,6 +13,7 @@ import typepy
 from six.moves import zip
 
 from .._error import EmptyHeaderError
+from .._logger import logger
 from ._interface import (
     IndentationInterface,
     TextWriterInterface
@@ -120,6 +121,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
+        logger.debug("complete write_table")
+
     def write_table_iter(self):
         """
         Write a table with iteration.
@@ -149,6 +152,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         super(TextTableWriter, self).write_table_iter()
         if self.is_write_null_line_after_table:
             self.write_null_line()
+
+        logger.debug("complete write_table_iter")
 
     def _write_table(self):
         self._verify_property()
