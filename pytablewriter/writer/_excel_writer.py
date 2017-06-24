@@ -392,7 +392,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     def _write_cell(self, row, col, value_dp):
         base_props = dict(self.__cell_format_property)
-        format_key = "{:d}_{:d}".format(col, value_dp.typecode)
+        format_key = "{:d}_{:s}".format(col, value_dp.typecode.name)
 
         if value_dp.typecode in [
                 typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
