@@ -228,7 +228,7 @@ class Test_JsonTableWriter_write_table:
         [data.table, data.header, data.value, data.expected]
         for data in exception_test_data_list
     ])
-    def test_exception(self, capsys, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header
@@ -296,7 +296,7 @@ class Test_JsonTableWriter_write_table_iter:
             for data in exception_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header

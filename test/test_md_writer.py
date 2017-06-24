@@ -251,7 +251,7 @@ class Test_MarkdownTableWriter_write_new_line:
 
 class Test_MarkdownTableWriter_set_table_data:
 
-    def test_normal(self, capsys):
+    def test_normal(self):
         writer = table_writer_class()
 
         tabledata = ptr.TableData(
@@ -349,7 +349,7 @@ Long Format Name|Loader
             for data in exception_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, indent, header, value, expected):
+    def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -418,7 +418,7 @@ a                            |  102| 103
             for data in exception_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header

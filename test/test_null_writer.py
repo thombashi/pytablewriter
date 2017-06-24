@@ -16,21 +16,21 @@ table_writer_class = pytablewriter.NullTableWriter
 
 class Test_NullTableWriter_set_indent_level:
 
-    def test_smoke(self, capsys):
+    def test_smoke(self):
         writer = table_writer_class()
         writer.set_indent_level(0)
 
 
 class Test_NullTableWriter_inc_indent_level:
 
-    def test_smoke(self, capsys):
+    def test_smoke(self):
         writer = table_writer_class()
         writer.inc_indent_level()
 
 
 class Test_NullTableWriter_dec_indent_level:
 
-    def test_smoke(self, capsys):
+    def test_smoke(self):
         writer = table_writer_class()
         writer.dec_indent_level()
 

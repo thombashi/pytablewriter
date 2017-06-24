@@ -188,7 +188,7 @@ class Test_CsvTableWriter_write_table:
         [data.header, data.value, data.expected]
         for data in exception_test_data_list
     ])
-    def test_exception(self, capsys, header, value, expected):
+    def test_exception(self, header, value, expected):
         writer = table_writer_class()
         writer.header_list = header
         writer.value_matrix = value
@@ -232,7 +232,7 @@ class Test_CsvTableWriter_write_table_iter:
             for data in exception_test_data_list
         ]
     )
-    def test_exception(self, capsys, header, value, expected):
+    def test_exception(self, header, value, expected):
         writer = table_writer_class()
         writer.header_list = header
         writer.value_matrix = value

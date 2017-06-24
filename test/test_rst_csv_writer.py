@@ -150,7 +150,7 @@ class Test_RstCsvTableWriter_write_table:
             for data in null_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, indent, header, value, expected):
+    def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -204,7 +204,7 @@ class Test_RstCsvTableWriter_write_table_iter:
             for data in null_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header

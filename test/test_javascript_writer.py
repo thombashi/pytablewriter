@@ -325,8 +325,7 @@ class Test_JavaScriptTableWriter_write_table:
         ]
     )
     def test_exception(
-            self, capsys, table, indent, header, value,
-            is_write_header, expected):
+            self, table, indent, header, value, is_write_header, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -394,7 +393,7 @@ class Test_JavaScriptTableWriter_write_table_iter:
             for data in exception_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.header_list = header

@@ -228,7 +228,7 @@ class Test_RstGridTableWriter_write_table:
             for data in null_test_data_list
         ]
     )
-    def test_exception(self, capsys, table, indent, header, value, expected):
+    def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
