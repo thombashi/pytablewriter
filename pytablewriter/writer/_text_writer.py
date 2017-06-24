@@ -197,7 +197,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         format_string = self._get_header_format_string(col_dp, value_dp)
 
-        return format_string.format(String(value_dp.data).convert())
+        return format_string.format(String(value_dp.data).force_convert())
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(

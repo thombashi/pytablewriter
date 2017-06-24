@@ -207,6 +207,20 @@ quote|abc efg
    -1|efg    
 
 """),
+    Data(
+        table="not str headers",
+        indent=0,
+        header=[None, 1, 0.1],
+        value=[
+            [None, 1, 0.1],
+        ],
+        is_float_formatting=True,
+        expected="""# not str headers
+   | 1 |0.1
+---|--:|--:
+   |  1|0.1
+
+"""),
 ]
 
 exception_test_data_list = [
