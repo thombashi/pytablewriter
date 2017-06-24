@@ -241,19 +241,7 @@ class Test_PandasDataFrameWriter_from_dataframe:
     [1, 0.125, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
     [3, 3333.3, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
-])
-tablename.columns = [
-    "i",
-    "f",
-    "c",
-    "if",
-    "ifc",
-    "bool",
-    "inf",
-    "nan",
-    "mix_num",
-    "time",
-]
+], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
 """,
         ],
