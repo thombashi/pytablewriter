@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 """
-.. codeauthor:: Tsuyoshi Hombashi <gogogo.vm@gmail.com>
+.. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
 from __future__ import unicode_literals
@@ -38,7 +38,7 @@ setuptools.setup(
     name="pytablewriter",
     version="0.19.9",
     author="Tsuyoshi Hombashi",
-    author_email="gogogo.vm@gmail.com",
+    author_email="tsuyoshi.hombashi@gmail.com",
     url="https://github.com/thombashi/pytablewriter",
     license="MIT License",
     description=summary,
