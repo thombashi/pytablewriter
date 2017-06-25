@@ -208,7 +208,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_required_table_name = False
         self._is_remove_line_break = False
-        self._preprocessed_property = False
+        self._is_complete_table_property_preprocess = False
 
         self.iteration_length = -1
         self.write_callback = None
@@ -547,7 +547,7 @@ class AbstractTableWriter(TableWriterInterface):
             return
 
     def _preprocess_table_property(self):
-        if self._preprocessed_property:
+        if self._is_complete_table_property_preprocess:
             return
 
         self._value_matrix = []
@@ -571,7 +571,7 @@ class AbstractTableWriter(TableWriterInterface):
         except TypeError:
             self._value_dp_matrix = []
 
-        self._preprocessed_property = True
+        self._is_complete_table_property_preprocess = True
 
     def _preprocess_value_matrix(self):
         if self._is_complete_value_matrix_preprocess:
@@ -595,7 +595,7 @@ class AbstractTableWriter(TableWriterInterface):
     def __clear_preprocessed_flag(self):
         logger.debug("__clear_preprocessed_flag")
 
-        self._preprocessed_property = False
+        self._is_complete_table_property_preprocess = False
         self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocessed_data(self):
