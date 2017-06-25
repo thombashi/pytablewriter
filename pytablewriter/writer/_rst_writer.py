@@ -104,11 +104,7 @@ class RstCsvTableWriter(RstTableWriter):
             - |None| values will be written as an empty string.
         """
 
-        self._logger.logging_start_write()
-
-        super(RstCsvTableWriter, self)._write_table()
-        if self.is_write_null_line_after_table:
-            self.write_null_line()
+        IndentationTextTableWriter.write_table(self)
 
     def _get_opening_row_item_list(self):
         directive = ".. csv-table:: "
