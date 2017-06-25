@@ -198,6 +198,7 @@ class AbstractTableWriter(TableWriterInterface):
             Typecode.BOOL: False,
             Typecode.DATETIME: True,
             Typecode.DICTIONARY: False,
+            Typecode.INFINITY: False,
             Typecode.INTEGER: False,
             Typecode.IP_ADDRESS: True,
             Typecode.LIST: False,
