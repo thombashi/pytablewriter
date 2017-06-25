@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 
 import typepy
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._text_writer import TextTableWriter
 
 
@@ -25,7 +25,7 @@ class CsvTableWriter(TextTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.CSV
+        return TableFormat.CSV
 
     @property
     def support_split_write(self):

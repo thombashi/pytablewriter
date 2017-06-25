@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._interface import (
     TableWriterInterface,
     TextWriterInterface,
@@ -19,7 +19,7 @@ class NullTableWriter(
 
     @property
     def format_name(self):
-        return FormatName.NULL
+        return TableFormat.NULL
 
     @property
     def support_split_write(self):

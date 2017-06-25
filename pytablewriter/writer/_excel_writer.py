@@ -15,7 +15,7 @@ import xlwt
 
 from six.moves import range
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx
@@ -31,7 +31,7 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
 
     @property
     def format_name(self):
-        return FormatName.EXCEL
+        return TableFormat.EXCEL
 
     @property
     def support_split_write(self):
@@ -318,7 +318,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     MAX_CELL_WIDTH = 60
 
-    class FormatName(object):
+    class TableFormat(object):
         HEADER = "header"
         CELL = "cell"
         NAN = "nan"
@@ -357,20 +357,20 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     @property
     def __nan_format_property(self):
-        return self.format_table.get(self.FormatName.NAN, self.default_format)
+        return self.format_table.get(self.TableFormat.NAN, self.default_format)
 
     @property
     def __cell_format_property(self):
-        return self.format_table.get(self.FormatName.CELL, self.default_format)
+        return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
     def __init__(self):
         super(ExcelXlsxTableWriter, self).__init__()
 
         self.default_format = self.Default.CELL_FORMAT
         self.format_table = {
-            self.FormatName.CELL: self.Default.CELL_FORMAT,
-            self.FormatName.HEADER: self.Default.HEADER_FORMAT,
-            self.FormatName.NAN: self.Default.NAN_FORMAT,
+            self.TableFormat.CELL: self.Default.CELL_FORMAT,
+            self.TableFormat.HEADER: self.Default.HEADER_FORMAT,
+            self.TableFormat.NAN: self.Default.NAN_FORMAT,
         }
 
         self.__col_cell_format_cache = {}
@@ -387,7 +387,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             return
 
         header_format_props = self.format_table.get(
-            self.FormatName.HEADER, self.default_format)
+            self.TableFormat.HEADER, self.default_format)
         header_format = self.__add_format(header_format_props)
 
         self.stream.write_row(

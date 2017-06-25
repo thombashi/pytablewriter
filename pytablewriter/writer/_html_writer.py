@@ -17,7 +17,7 @@ import typepy
 import dominate.tags as tags
 from six.moves import zip
 
-from .._const import FormatName
+from .._const import TableFormat
 from .._error import EmptyHeaderError
 from ._text_writer import TextTableWriter
 
@@ -33,7 +33,7 @@ class HtmlTableWriter(TextTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.HTML
+        return TableFormat.HTML
 
     @property
     def support_split_write(self):

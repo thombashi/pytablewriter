@@ -7,7 +7,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._csv_writer import CsvTableWriter
 
 
@@ -22,7 +22,7 @@ class TsvTableWriter(CsvTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.TSV
+        return TableFormat.TSV
 
     def __init__(self):
         super(TsvTableWriter, self).__init__()

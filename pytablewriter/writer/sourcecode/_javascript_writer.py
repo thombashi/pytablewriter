@@ -11,7 +11,7 @@ from dataproperty import (DataProperty, DefaultValue)
 import six
 from typepy import Typecode
 
-from ..._const import FormatName
+from ..._const import TableFormat
 from ..._function import quote_datetime_formatter
 from ._sourcecode_writer import SourceCodeTableWriter
 
@@ -70,7 +70,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.JAVASCRIPT
+        return TableFormat.JAVASCRIPT
 
     @property
     def support_split_write(self):

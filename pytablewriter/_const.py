@@ -11,7 +11,7 @@ import enum
 
 
 @enum.unique
-class FormatName(enum.Enum):
+class TableFormat(enum.Enum):
     CSV = "csv"
     ELASTICSEARCH = "elasticsearch"
     EXCEL = "excel"

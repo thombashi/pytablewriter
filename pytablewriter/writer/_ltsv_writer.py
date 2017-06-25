@@ -12,7 +12,7 @@ import typepy
 
 from six.moves import zip
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._csv_writer import CsvTableWriter
 
 
@@ -28,7 +28,7 @@ class LtsvTableWriter(CsvTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.LTSV
+        return TableFormat.LTSV
 
     @property
     def support_split_write(self):

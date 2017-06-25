@@ -14,7 +14,7 @@ import typepy
 
 import dataproperty as dp
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -39,7 +39,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.MARKDOWN
+        return TableFormat.MARKDOWN
 
     @property
     def support_split_write(self):

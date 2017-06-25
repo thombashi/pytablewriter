@@ -12,7 +12,7 @@ import copy
 import dataproperty
 from typepy import Typecode
 
-from .._const import FormatName
+from .._const import TableFormat
 from .._logger import logger
 from ._table_writer import AbstractTableWriter
 
@@ -24,7 +24,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.ELASTICSEARCH
+        return TableFormat.ELASTICSEARCH
 
     @property
     def support_split_write(self):

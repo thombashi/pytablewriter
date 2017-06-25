@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 
 import toml
 
-from .._const import FormatName
+from .._const import TableFormat
 from ._text_writer import TextTableWriter
 
 
@@ -25,7 +25,7 @@ class TomlTableWriter(TextTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.TOML
+        return TableFormat.TOML
 
     @property
     def support_split_write(self):

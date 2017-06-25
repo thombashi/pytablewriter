@@ -12,7 +12,7 @@ import os
 
 import typepy
 
-from ._const import FormatName
+from ._const import TableFormat
 from ._error import WriterNotFoundError
 from .writer._csv_writer import CsvTableWriter
 from .writer._elasticsearch import ElasticsearchWriter
@@ -45,16 +45,16 @@ class TableWriterFactory(object):
     """
 
     __COMMON_WRITER_TABLE = {
-        FormatName.CSV.value: CsvTableWriter,
-        FormatName.HTML.value: HtmlTableWriter,
-        FormatName.JSON.value: JsonTableWriter,
-        FormatName.JAVASCRIPT_ABBR.value: JavaScriptTableWriter,
-        FormatName.LTSV.value: LtsvTableWriter,
-        FormatName.PYTHON_ABBR.value: PythonCodeTableWriter,
-        FormatName.RST.value: RstGridTableWriter,
-        FormatName.SQLITE.value: SqliteTableWriter,
-        FormatName.TSV.value: TsvTableWriter,
-        FormatName.TOML.value: TomlTableWriter,
+        TableFormat.CSV.value: CsvTableWriter,
+        TableFormat.HTML.value: HtmlTableWriter,
+        TableFormat.JSON.value: JsonTableWriter,
+        TableFormat.JAVASCRIPT_ABBR.value: JavaScriptTableWriter,
+        TableFormat.LTSV.value: LtsvTableWriter,
+        TableFormat.PYTHON_ABBR.value: PythonCodeTableWriter,
+        TableFormat.RST.value: RstGridTableWriter,
+        TableFormat.SQLITE.value: SqliteTableWriter,
+        TableFormat.TSV.value: TsvTableWriter,
+        TableFormat.TOML.value: TomlTableWriter,
     }
 
     @classmethod
@@ -244,17 +244,17 @@ class TableWriterFactory(object):
 
         writer_mapping = copy.deepcopy(cls.__COMMON_WRITER_TABLE)
         writer_mapping.update({
-            FormatName.ELASTICSEARCH.value: ElasticsearchWriter,
-            FormatName.EXCEL.value: ExcelXlsxTableWriter,
-            FormatName.JAVASCRIPT.value: JavaScriptTableWriter,
-            FormatName.MARKDOWN.value: MarkdownTableWriter,
-            FormatName.MEDIAWIKI.value: MediaWikiTableWriter,
-            FormatName.NULL.value: NullTableWriter,
-            FormatName.PANDAS.value: PandasDataFrameWriter,
-            FormatName.PYTHON.value: PythonCodeTableWriter,
-            FormatName.RST_GRID_TABBLE.value: RstGridTableWriter,
-            FormatName.RST_SIMPLE_TABBLE.value: RstSimpleTableWriter,
-            FormatName.RST_CSV_TABBLE.value: RstCsvTableWriter,
+            TableFormat.ELASTICSEARCH.value: ElasticsearchWriter,
+            TableFormat.EXCEL.value: ExcelXlsxTableWriter,
+            TableFormat.JAVASCRIPT.value: JavaScriptTableWriter,
+            TableFormat.MARKDOWN.value: MarkdownTableWriter,
+            TableFormat.MEDIAWIKI.value: MediaWikiTableWriter,
+            TableFormat.NULL.value: NullTableWriter,
+            TableFormat.PANDAS.value: PandasDataFrameWriter,
+            TableFormat.PYTHON.value: PythonCodeTableWriter,
+            TableFormat.RST_GRID_TABBLE.value: RstGridTableWriter,
+            TableFormat.RST_SIMPLE_TABBLE.value: RstSimpleTableWriter,
+            TableFormat.RST_CSV_TABBLE.value: RstCsvTableWriter,
         })
 
         return writer_mapping

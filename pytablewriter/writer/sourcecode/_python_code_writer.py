@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 
 import typepy
 
-from ..._const import FormatName
+from ..._const import TableFormat
 from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
@@ -55,7 +55,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
     @property
     def format_name(self):
-        return FormatName.PYTHON
+        return TableFormat.PYTHON
 
     @property
     def support_split_write(self):

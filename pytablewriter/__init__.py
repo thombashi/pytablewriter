@@ -20,7 +20,7 @@ from typepy.type import (
     String,
 )
 
-from ._const import FormatName
+from ._const import TableFormat
 from ._error import (
     NotSupportedError,
     EmptyHeaderError,
