@@ -22,13 +22,14 @@ pytablewriter
 Summary
 -------
 
-A python library to write a table in various formats: CSV / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
 
 - Write a table in various formats:
     - CSV
+    - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
     - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
     - HTML
     - JSON
@@ -37,7 +38,7 @@ Features
     - MediaWiki
     - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     - Source code
-        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a DataFrame variable)
+        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a - `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
         - Python code (Definition of a nested list variable)
         - JavaScript code (Definition of a nested list variable)
     - SQLite database file
@@ -287,6 +288,7 @@ Python 2.7+ or 3.3+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
 - `dominate <http://github.com/Knio/dominate/>`__
+- `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
