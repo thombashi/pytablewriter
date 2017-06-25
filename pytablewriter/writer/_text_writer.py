@@ -116,12 +116,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             - |None| values will be written as an empty string.
         """
 
-        self._logger.logging_write()
-        self._write_table()
+        super(TextTableWriter, self).write_table()
         if self.is_write_null_line_after_table:
             self.write_null_line()
-
-        logger.debug("complete write_table")
 
     def write_table_iter(self):
         """
