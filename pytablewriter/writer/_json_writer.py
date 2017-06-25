@@ -110,7 +110,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._validate_empty_header()
 
     def _preprocess_value_matrix(self):
-        if self._preprocessed_value_matrix:
+        if self._is_complete_value_matrix_preprocess:
             return
 
         self._dp_extractor.data_matrix = self.value_matrix
@@ -130,7 +130,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             for value_list in value_matrix
         ]
 
-        self._preprocessed_value_matrix = True
+        self._is_complete_value_matrix_preprocess = True
 
     @staticmethod
     def __get_data_helper(dp):

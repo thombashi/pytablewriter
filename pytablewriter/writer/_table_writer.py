@@ -574,7 +574,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocessed_property = True
 
     def _preprocess_value_matrix(self):
-        if self._preprocessed_value_matrix:
+        if self._is_complete_value_matrix_preprocess:
             return
 
         self._value_matrix = [
@@ -586,7 +586,7 @@ class AbstractTableWriter(TableWriterInterface):
             for value_dp_list in self._value_dp_matrix
         ]
 
-        self._preprocessed_value_matrix = True
+        self._is_complete_value_matrix_preprocess = True
 
     def _preprocess(self):
         self._preprocess_table_property()
@@ -596,7 +596,7 @@ class AbstractTableWriter(TableWriterInterface):
         logger.debug("__clear_preprocessed_flag")
 
         self._preprocessed_property = False
-        self._preprocessed_value_matrix = False
+        self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocessed_data(self):
         logger.debug("__clear_preprocessed_data")
