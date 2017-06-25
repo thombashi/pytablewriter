@@ -321,8 +321,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._logger.logging_start_write()
         self._write_table()
-
-        logger.debug("complete write_table")
+        self._logger.logging_complete_write()
 
     def write_table_iter(self):
         """
@@ -419,7 +418,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_closing_row = old_is_write_closing_row
         self.__iter_count = None
 
-        logger.debug("complete write_table_iter")
+        self._logger.logging_complete_write()
 
     def _get_padding_len(self, column_dp, value_dp=None):
         if not self.is_padding:
