@@ -147,7 +147,7 @@ exception_test_data_list = [
 table_writer_class = ptw.TomlTableWriter
 
 
-class Test_TomlTableWriter_write_new_line:
+class Test_TomlTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -157,7 +157,7 @@ class Test_TomlTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_TomlTableWriter_write_table:
+class Test_TomlTableWriter_write_table(object):
 
     @pytest.mark.parametrize(["table_name", "header", "value", "expected"], [
         [data.table_name, data.header, data.value, data.expected]

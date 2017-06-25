@@ -187,7 +187,7 @@ normal_test_data_list = [
 table_writer_class = pytablewriter.RstGridTableWriter
 
 
-class Test_RstGridTableWriter_write_new_line:
+class Test_RstGridTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -197,7 +197,7 @@ class Test_RstGridTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_RstGridTableWriter_write_table:
+class Test_RstGridTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
@@ -239,7 +239,7 @@ class Test_RstGridTableWriter_write_table:
             writer.write_table()
 
 
-class Test_RstGridTableWriter_write_table_iter:
+class Test_RstGridTableWriter_write_table_iter(object):
 
     def test_exception(self):
         writer = table_writer_class()

@@ -253,7 +253,7 @@ exception_test_data_list = [
 table_writer_class = ptw.MarkdownTableWriter
 
 
-class Test_MarkdownTableWriter_write_new_line:
+class Test_MarkdownTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -263,7 +263,7 @@ class Test_MarkdownTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_MarkdownTableWriter_set_table_data:
+class Test_MarkdownTableWriter_set_table_data(object):
 
     def test_normal(self):
         writer = table_writer_class()
@@ -288,7 +288,7 @@ class Test_MarkdownTableWriter_set_table_data:
         ]
 
 
-class Test_MarkdownTableWriter_write_table:
+class Test_MarkdownTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value",
@@ -374,7 +374,7 @@ Long Format Name|Loader
             writer.write_table()
 
 
-class Test_MarkdownTableWriter_write_table_iter:
+class Test_MarkdownTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [

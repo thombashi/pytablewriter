@@ -129,7 +129,7 @@ exception_test_data_list = [
 table_writer_class = pytablewriter.PandasDataFrameWriter
 
 
-class Test_PandasDataFrameWriter_write_new_line:
+class Test_PandasDataFrameWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -139,7 +139,7 @@ class Test_PandasDataFrameWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_PandasDataFrameWriter_write_table:
+class Test_PandasDataFrameWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
@@ -181,7 +181,7 @@ class Test_PandasDataFrameWriter_write_table:
             writer.write_table()
 
 
-class Test_PandasDataFrameWriter_write_table_iter:
+class Test_PandasDataFrameWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [
@@ -230,7 +230,7 @@ class Test_PandasDataFrameWriter_write_table_iter:
 
 
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
-class Test_PandasDataFrameWriter_from_dataframe:
+class Test_PandasDataFrameWriter_from_dataframe(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [

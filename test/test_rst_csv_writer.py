@@ -109,7 +109,7 @@ normal_test_data_list = [
 table_writer_class = pytablewriter.RstCsvTableWriter
 
 
-class Test_RstCsvTableWriter_write_new_line:
+class Test_RstCsvTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -119,7 +119,7 @@ class Test_RstCsvTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_RstCsvTableWriter_write_table:
+class Test_RstCsvTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
@@ -161,7 +161,7 @@ class Test_RstCsvTableWriter_write_table:
             writer.write_table()
 
 
-class Test_RstCsvTableWriter_write_table_iter:
+class Test_RstCsvTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [

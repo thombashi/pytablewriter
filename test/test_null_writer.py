@@ -14,28 +14,28 @@ import pytablewriter
 table_writer_class = pytablewriter.NullTableWriter
 
 
-class Test_NullTableWriter_set_indent_level:
+class Test_NullTableWriter_set_indent_level(object):
 
     def test_smoke(self):
         writer = table_writer_class()
         writer.set_indent_level(0)
 
 
-class Test_NullTableWriter_inc_indent_level:
+class Test_NullTableWriter_inc_indent_level(object):
 
     def test_smoke(self):
         writer = table_writer_class()
         writer.inc_indent_level()
 
 
-class Test_NullTableWriter_dec_indent_level:
+class Test_NullTableWriter_dec_indent_level(object):
 
     def test_smoke(self):
         writer = table_writer_class()
         writer.dec_indent_level()
 
 
-class Test_NullTableWriter_write_new_line:
+class Test_NullTableWriter_write_new_line(object):
 
     def test_smoke(self, capsys):
         writer = table_writer_class()
@@ -45,7 +45,7 @@ class Test_NullTableWriter_write_new_line:
         assert out == ""
 
 
-class Test_NullTableWriter_write_table:
+class Test_NullTableWriter_write_table(object):
 
     def test_smoke(self, capsys):
         writer = table_writer_class()
@@ -55,7 +55,7 @@ class Test_NullTableWriter_write_table:
         assert out == ""
 
 
-class Test_NullTableWriter_write_table_iter:
+class Test_NullTableWriter_write_table_iter(object):
 
     def test_smoke(self, capsys):
         writer = table_writer_class()

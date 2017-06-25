@@ -191,7 +191,7 @@ exception_test_data_list = [
 table_writer_class = pytablewriter.JavaScriptTableWriter
 
 
-class Test_JavaScriptTableWriter_write_new_line:
+class Test_JavaScriptTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -201,7 +201,7 @@ class Test_JavaScriptTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_JavaScriptTableWriter_type_hint:
+class Test_JavaScriptTableWriter_type_hint(object):
     DATATIME_DATA = datetime.datetime(2017, 1, 2, 3, 4, 5)
     STR_DATA = "2017-01-02 03:04:05"
     DATA_MATRIX = [
@@ -257,7 +257,7 @@ class Test_JavaScriptTableWriter_type_hint:
         assert out == expected
 
 
-class Test_JavaScriptTableWriter_write_table:
+class Test_JavaScriptTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         [
@@ -337,7 +337,7 @@ class Test_JavaScriptTableWriter_write_table:
             writer.write_table()
 
 
-class Test_JavaScriptTableWriter_write_table_iter:
+class Test_JavaScriptTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "iter_len", "expected"],

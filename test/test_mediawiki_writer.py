@@ -226,7 +226,7 @@ a * b ** c ***
 table_writer_class = pytablewriter.MediaWikiTableWriter
 
 
-class Test_MediaWikiTableWriter_write_new_line:
+class Test_MediaWikiTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -236,7 +236,7 @@ class Test_MediaWikiTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_MediaWikiTableWriter_write_table:
+class Test_MediaWikiTableWriter_write_table(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [data.table, data.header, data.value, data.expected]
@@ -279,7 +279,7 @@ def simple_write_callback(iter_count, iteration_length):
     six.print_("{:d}/{:d}".format(iter_count, iteration_length))
 
 
-class Test_MediaWikiTableWriter_write_table_iter:
+class Test_MediaWikiTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "callback", "expected"], [
         [

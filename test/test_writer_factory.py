@@ -15,7 +15,7 @@ import pytest
 import pytablewriter as ptw
 
 
-class Test_WriterFactory_create_from_file_extension:
+class Test_WriterFactory_create_from_file_extension(object):
 
     @pytest.mark.parametrize(
         ["value", "expected"],
@@ -78,7 +78,7 @@ class Test_WriterFactory_create_from_file_extension:
             ptw.TableWriterFactory.create_from_file_extension(value)
 
 
-class Test_FileLoaderFactory_create_from_format_name:
+class Test_FileLoaderFactory_create_from_format_name(object):
 
     @pytest.mark.parametrize(["format_name", "expected"], [
         ["csv", ptw.CsvTableWriter],

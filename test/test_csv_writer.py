@@ -95,7 +95,7 @@ exception_test_data_list = [
 table_writer_class = ptw.CsvTableWriter
 
 
-class Test_CsvTableWriter_write_new_line:
+class Test_CsvTableWriter_write_new_line(object):
 
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -105,7 +105,7 @@ class Test_CsvTableWriter_write_new_line:
         assert out == "\n"
 
 
-class Test_CsvTableWriter_from_csv:
+class Test_CsvTableWriter_from_csv(object):
 
     __CSV_TEXT_INPUT = """"a","b","c","dd","e"
 1,1.1,"a",1.0,
@@ -164,7 +164,7 @@ class Test_CsvTableWriter_from_csv:
         assert out == self.__CSV_EXPECTED
 
 
-class Test_CsvTableWriter_write_table:
+class Test_CsvTableWriter_write_table(object):
 
     @pytest.mark.parametrize(["col_delim", "header", "value", "expected"], [
         [data.col_delim, data.header, data.value, data.expected]
@@ -197,7 +197,7 @@ class Test_CsvTableWriter_write_table:
             writer.write_table()
 
 
-class Test_CsvTableWriter_write_table_iter:
+class Test_CsvTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [

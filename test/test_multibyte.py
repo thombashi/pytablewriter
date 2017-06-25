@@ -13,7 +13,7 @@ import pytest
 import pytablewriter as ptw
 
 
-class Test_CsvTableWriter_write_table:
+class Test_CsvTableWriter_write_table(object):
 
     @pytest.mark.parametrize(["format_name"], [
         [format_name]

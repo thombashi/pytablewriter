@@ -126,7 +126,7 @@ exception_test_data_list = [
 ]
 
 
-class Test_SqliteTableWriter_write_table:
+class Test_SqliteTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
@@ -177,7 +177,7 @@ class Test_SqliteTableWriter_write_table:
             writer.write_table()
 
 
-class Test_SqliteTableWriter_write_table_iter:
+class Test_SqliteTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],

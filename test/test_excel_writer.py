@@ -119,7 +119,7 @@ table_writer_class_list = [
 ]
 
 
-class Test_ExcelTableWriter_write_new_line:
+class Test_ExcelTableWriter_write_new_line(object):
 
     @pytest.mark.parametrize(["writer_class"], [
         [writer_class] for writer_class in table_writer_class_list
@@ -129,7 +129,7 @@ class Test_ExcelTableWriter_write_new_line:
         writer.write_null_line()
 
 
-class Test_ExcelTableWriter_write_table:
+class Test_ExcelTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
@@ -204,7 +204,7 @@ class Test_ExcelTableWriter_write_table:
             writer.write_table()
 
 
-class Test_ExcelTableWriter_write_table_iter:
+class Test_ExcelTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
