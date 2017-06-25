@@ -48,10 +48,9 @@ class TomlTableWriter(TextTableWriter):
         """
 
         self._logger.logging_start_write()
-
         self._verify_property()
-
         self.stream.write(toml.dumps(self.tabledata.as_dict()))
+        self._logger.logging_complete_write()
 
     def _verify_header(self):
         self._validate_empty_header()

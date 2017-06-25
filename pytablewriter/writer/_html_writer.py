@@ -78,6 +78,8 @@ class HtmlTableWriter(TextTableWriter):
 
         self._write_body()
 
+        self._logger.logging_complete_write()
+
     def _write_header(self):
         if not self.is_write_header:
             return

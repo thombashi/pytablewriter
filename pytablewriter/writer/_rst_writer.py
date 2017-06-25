@@ -46,6 +46,8 @@ class RstTableWriter(IndentationTextTableWriter):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
+        self._logger.logging_complete_write()
+
     def _get_table_directive(self):
         if typepy.is_null_string(self.table_name):
             return ".. table:: \n"
