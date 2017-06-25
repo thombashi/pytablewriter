@@ -45,16 +45,16 @@ class TableWriterFactory(object):
     """
 
     __COMMON_WRITER_TABLE = {
-        FormatName.CSV: CsvTableWriter,
-        FormatName.HTML: HtmlTableWriter,
-        FormatName.JSON: JsonTableWriter,
-        FormatName.JAVASCRIPT_ABBR: JavaScriptTableWriter,
-        FormatName.LTSV: LtsvTableWriter,
-        FormatName.PYTHON_ABBR: PythonCodeTableWriter,
-        FormatName.RST: RstGridTableWriter,
-        FormatName.SQLITE: SqliteTableWriter,
-        FormatName.TSV: TsvTableWriter,
-        FormatName.TOML: TomlTableWriter,
+        FormatName.CSV.value: CsvTableWriter,
+        FormatName.HTML.value: HtmlTableWriter,
+        FormatName.JSON.value: JsonTableWriter,
+        FormatName.JAVASCRIPT_ABBR.value: JavaScriptTableWriter,
+        FormatName.LTSV.value: LtsvTableWriter,
+        FormatName.PYTHON_ABBR.value: PythonCodeTableWriter,
+        FormatName.RST.value: RstGridTableWriter,
+        FormatName.SQLITE.value: SqliteTableWriter,
+        FormatName.TSV.value: TsvTableWriter,
+        FormatName.TOML.value: TomlTableWriter,
     }
 
     @classmethod
@@ -244,17 +244,17 @@ class TableWriterFactory(object):
 
         writer_mapping = copy.deepcopy(cls.__COMMON_WRITER_TABLE)
         writer_mapping.update({
-            FormatName.ELASTICSEARCH: ElasticsearchWriter,
-            FormatName.EXCEL: ExcelXlsxTableWriter,
-            FormatName.JAVASCRIPT: JavaScriptTableWriter,
-            FormatName.MARKDOWN: MarkdownTableWriter,
-            FormatName.MEDIAWIKI: MediaWikiTableWriter,
-            FormatName.NULL: NullTableWriter,
-            FormatName.PANDAS: PandasDataFrameWriter,
-            FormatName.PYTHON: PythonCodeTableWriter,
-            FormatName.RST_GRID_TABBLE: RstGridTableWriter,
-            FormatName.RST_SIMPLE_TABBLE: RstSimpleTableWriter,
-            FormatName.RST_CSV_TABBLE: RstCsvTableWriter,
+            FormatName.ELASTICSEARCH.value: ElasticsearchWriter,
+            FormatName.EXCEL.value: ExcelXlsxTableWriter,
+            FormatName.JAVASCRIPT.value: JavaScriptTableWriter,
+            FormatName.MARKDOWN.value: MarkdownTableWriter,
+            FormatName.MEDIAWIKI.value: MediaWikiTableWriter,
+            FormatName.NULL.value: NullTableWriter,
+            FormatName.PANDAS.value: PandasDataFrameWriter,
+            FormatName.PYTHON.value: PythonCodeTableWriter,
+            FormatName.RST_GRID_TABBLE.value: RstGridTableWriter,
+            FormatName.RST_SIMPLE_TABBLE.value: RstSimpleTableWriter,
+            FormatName.RST_CSV_TABBLE.value: RstCsvTableWriter,
         })
 
         return writer_mapping

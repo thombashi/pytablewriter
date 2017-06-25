@@ -7,8 +7,11 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import enum
 
-class FormatName(object):
+
+@enum.unique
+class FormatName(enum.Enum):
     CSV = "csv"
     ELASTICSEARCH = "elasticsearch"
     EXCEL = "excel"
