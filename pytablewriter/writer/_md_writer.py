@@ -20,7 +20,7 @@ from ._text_writer import IndentationTextTableWriter
 
 class MarkdownTableWriter(IndentationTextTableWriter):
     """
-    Atable writer class for Markdown format.
+    A table writer class for Markdown format.
 
     :Examples:
 
