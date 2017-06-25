@@ -65,7 +65,11 @@ class WriterLogger(object):
             "created WriterLogger: format={}".format(writer.format_name))
 
     def logging_start_write(self, extra_message_list=None):
-        log_entry_list = self.__get_log_entry_base()
+        log_entry_list = [
+            self.__get_format_name_message(),
+            self.__get_table_name_message(),
+            "header={}".format(self.__writer.header_list),
+        ]
 
         try:
             log_entry_list.append(
@@ -73,27 +77,35 @@ class WriterLogger(object):
         except (TypeError, AttributeError):
             pass
 
-        log_entry_list.append(self.__get_typehint_log_message())
+        log_entry_list.append(self.__get_typehint_message())
 
         if extra_message_list:
             log_entry_list.extend(extra_message_list)
 
         logger.debug("write table: {}".format(", ".join(log_entry_list)))
 
-    def __get_log_entry_base(self):
+    def logging_complete_write(self, extra_message_list=None):
+        log_entry_list = [
+            self.__get_format_name_message(),
+            self.__get_table_name_message(),
+        ]
+
+        logger.debug(
+            "complete write table: {}".format(", ".join(log_entry_list)))
+
+    def __get_format_name_message(self):
+        return "format={:s}".format(self.__writer.format_name)
+
+    def __get_table_name_message(self):
         if self.__writer.table_name:
             table_name = MultiByteStrDecoder(
                 self.__writer.table_name).unicode_str
         else:
             table_name = None
 
-        return [
-            "format={:s}".format(self.__writer.format_name),
-            "table-name='{}'".format(table_name),
-            "header={}".format(self.__writer.header_list),
-        ]
+        return "table-name='{}'".format(table_name)
 
-    def __get_typehint_log_message(self):
+    def __get_typehint_message(self):
         try:
             return "type-hint={}".format([
                 type_hint(None).typename
