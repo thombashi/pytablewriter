@@ -15,6 +15,7 @@ import typepy
 from ._const import FormatName
 from ._error import WriterNotFoundError
 from .writer._csv_writer import CsvTableWriter
+from .writer._elasticsearch import ElasticsearchWriter
 from .writer._excel_writer import (
     ExcelXlsxTableWriter,
     ExcelXlsTableWriter
@@ -179,6 +180,7 @@ class TableWriterFactory(object):
                 ...
                 csv
                 excel
+                elasticsearch
                 html
                 javascript
                 js
@@ -242,6 +244,7 @@ class TableWriterFactory(object):
 
         writer_mapping = copy.deepcopy(cls.__COMMON_WRITER_TABLE)
         writer_mapping.update({
+            FormatName.ELASTICSEARCH: ElasticsearchWriter,
             FormatName.EXCEL: ExcelXlsxTableWriter,
             FormatName.JAVASCRIPT: JavaScriptTableWriter,
             FormatName.MARKDOWN: MarkdownTableWriter,

@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 
 class FormatName(object):
     CSV = "csv"
+    ELASTICSEARCH = "elasticsearch"
     EXCEL = "excel"
     HTML = "html"
     JAVASCRIPT = "javascript"

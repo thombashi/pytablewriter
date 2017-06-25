@@ -36,6 +36,7 @@ from ._logger import (
     set_log_level,
 )
 from .writer._csv_writer import CsvTableWriter
+from .writer._elasticsearch import ElasticsearchWriter
 from .writer._excel_writer import (
     ExcelXlsTableWriter,
     ExcelXlsxTableWriter,

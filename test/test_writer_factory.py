@@ -85,6 +85,8 @@ class Test_FileLoaderFactory_create_from_format_name(object):
         ["CSV", ptw.CsvTableWriter],
         ["excel", ptw.ExcelXlsxTableWriter],
         ["Excel", ptw.ExcelXlsxTableWriter],
+        ["elasticsearch", ptw.ElasticsearchWriter],
+        ["Elasticsearch", ptw.ElasticsearchWriter],
         ["html", ptw.HtmlTableWriter],
         ["HTML", ptw.HtmlTableWriter],
         ["javascript", ptw.JavaScriptTableWriter],
