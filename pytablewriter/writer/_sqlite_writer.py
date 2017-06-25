@@ -48,6 +48,8 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         super(SqliteTableWriter, self).__init__()
 
         self.stream = None
+        self.is_padding = False
+        self.is_float_formatting = False
         self._is_required_table_name = True
 
     def __del__(self):
