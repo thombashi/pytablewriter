@@ -195,15 +195,17 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.type_hint_list = None
         self._quote_flag_mapping = {
-            Typecode.NONE: False,
+            Typecode.BOOL: False,
+            Typecode.DATETIME: True,
+            Typecode.DICTIONARY: False,
             Typecode.INTEGER: False,
+            Typecode.IP_ADDRESS: True,
+            Typecode.LIST: False,
+            Typecode.NAN: False,
+            Typecode.NONE: False,
+            Typecode.NULL_STRING: True,
             Typecode.REAL_NUMBER: False,
             Typecode.STRING: True,
-            Typecode.NULL_STRING: True,
-            Typecode.DATETIME: True,
-            Typecode.REAL_NUMBER: False,
-            Typecode.NAN: False,
-            Typecode.BOOL: False,
         }
 
         self._is_required_table_name = False
