@@ -180,22 +180,6 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
     def write_null_line(self):
         pass
 
-    def write_table(self):
-        """
-        Write a table to the current worksheet.
-
-        :raises IOError: If failed to write data to the worksheet.
-
-        .. note::
-
-            - |None| values will be written as an empty string.
-            - |inf| values will be written as `Inf`
-            - |nan| values will be written as ``NaN``
-        """
-
-        self._logger.logging_write()
-        self._write_table()
-
     def _write_table(self):
         self._verify_property()
         self._preprocess_property()
@@ -233,6 +217,18 @@ class ExcelXlsTableWriter(ExcelTableWriter):
     """
     A table writer class for Excel file format: ``.xls``
     (older or equal to Office 2003).
+
+    .. py:method:: write_table()
+
+        Write a table to the current opened worksheet.
+
+        :raises IOError: If failed to write data to the worksheet.
+
+        .. note::
+
+            - |None| values will be written as an empty string.
+            - |inf| values will be written as `Inf`
+            - |nan| values will be written as ``NaN``
     """
 
     def __init__(self):
@@ -302,6 +298,18 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     """
     A table writer class for Excel file format: ``.xlsx``
     (newer or equal to Office 2007).
+
+    .. py:method:: write_table()
+
+        Write a table to the current opened worksheet.
+
+        :raises IOError: If failed to write data to the worksheet.
+
+        .. note::
+
+            - |None| values will be written as an empty string.
+            - |inf| values will be written as `Inf`
+            - |nan| values will be written as ``NaN``
 
     :Examples:
 

@@ -314,6 +314,16 @@ class AbstractTableWriter(TableWriterInterface):
             for dtype in dataframe.dtypes
         ]
 
+    def write_table(self):
+        """
+        |write_table|.
+        """
+
+        self._logger.logging_write()
+        self._write_table()
+
+        logger.debug("complete write_table")
+
     def write_table_iter(self):
         """
         Write a table with iteration.

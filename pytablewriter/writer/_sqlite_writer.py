@@ -20,6 +20,17 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
     """
     A table writer class for SQLite database.
 
+    .. py:method:: write_table()
+
+        Write a table to a SQLite database.
+
+        :raises pytablewriter.EmptyTableNameError:
+            If the |table_name| is empty.
+        :raises pytablewriter.EmptyHeaderError:
+            If the |header_list| is empty.
+        :raises pytablewriter.EmptyValueError:
+            If the |value_matrix| is empty.
+
     :Examples:
 
         :ref:`example-sqlite-table-writer`
@@ -46,21 +57,6 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self.close()
 
         self.stream = simplesqlite.SimpleSQLite(database_path, "w")
-
-    def write_table(self):
-        """
-        Write a table to a SQLite database.
-
-        :raises pytablewriter.EmptyTableNameError:
-            If the |table_name| is empty.
-        :raises pytablewriter.EmptyHeaderError:
-            If the |header_list| is empty.
-        :raises pytablewriter.EmptyValueError:
-            If the |value_matrix| is empty.
-        """
-
-        self._logger.logging_write()
-        self._write_table()
 
     def _verify_header(self):
         self._validate_empty_header()

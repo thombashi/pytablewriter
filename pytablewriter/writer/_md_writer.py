@@ -22,6 +22,16 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     """
     A table writer class for Markdown format.
 
+    .. py:method:: write_table()
+
+        |write_table| with Markdown table format.
+
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+
+        .. note::
+
+            - |None| values will be written as an empty string.
+
     :Examples:
 
         :ref:`example-markdown-table-writer`
@@ -47,19 +57,6 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._is_remove_line_break = True
 
         self._dp_extractor.min_column_width = 3
-
-    def write_table(self):
-        """
-        |write_table| with Markdown table format.
-
-        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
-
-        .. note::
-
-            - |None| values will be written as an empty string.
-        """
-
-        super(MarkdownTableWriter, self).write_table()
 
     def _verify_header(self):
         self._validate_empty_header()
