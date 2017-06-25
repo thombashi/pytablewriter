@@ -13,6 +13,7 @@ Python 2.7+ or 3.3+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
 - `dominate <http://github.com/Knio/dominate/>`__
+- `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__

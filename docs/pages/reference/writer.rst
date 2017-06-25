@@ -19,6 +19,12 @@ LTSV writer
     :inherited-members:
 
 
+Elasticsearch writer
+-------------------------------
+.. autoclass:: pytablewriter.ElasticsearchWriter
+    :inherited-members:
+
+
 Excel writer classes
 -------------------------------
 
@@ -95,15 +101,18 @@ reStructuredText simple table writer
 .. autoclass:: pytablewriter.RstSimpleTableWriter
     :inherited-members:
 
+
 SQLite writer class
 -------------------------------
 .. autoclass:: pytablewriter.SqliteTableWriter
     :inherited-members:
 
+
 TOML table writer class
 -------------------------------
 .. autoclass:: pytablewriter.TomlTableWriter
     :inherited-members:
+
 
 Base table writer class
 -------------------------------
