@@ -153,8 +153,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-        logger.debug("complete write_table_iter")
-
     def _write_table(self):
         self._verify_property()
         self._preprocess()

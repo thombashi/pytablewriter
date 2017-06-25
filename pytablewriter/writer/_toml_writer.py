@@ -47,9 +47,9 @@ class TomlTableWriter(TextTableWriter):
             If the |header_list| is empty.
         """
 
-        self._verify_property()
-
         self._logger.logging_write()
+
+        self._verify_property()
 
         self.stream.write(toml.dumps(self.tabledata.as_dict()))
 
