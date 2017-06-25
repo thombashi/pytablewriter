@@ -182,7 +182,7 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _write_table(self):
         self._verify_property()
-        self._preprocess_property()
+        self._preprocess_table_property()
 
         self._write_header()
         self._write_value_matrix()
@@ -473,8 +473,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             )
             self.stream.set_column(col_idx, col_idx, width=width)
 
-    def _preprocess_property(self):
-        super(ExcelXlsxTableWriter, self)._preprocess_property()
+    def _preprocess_table_property(self):
+        super(ExcelXlsxTableWriter, self)._preprocess_table_property()
 
         self.__set_cell_width()
 

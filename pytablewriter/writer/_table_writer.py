@@ -546,7 +546,7 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.header_list):
             return
 
-    def _preprocess_property(self):
+    def _preprocess_table_property(self):
         if self._preprocessed_property:
             return
 
@@ -589,7 +589,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocessed_value_matrix = True
 
     def _preprocess(self):
-        self._preprocess_property()
+        self._preprocess_table_property()
         self._preprocess_value_matrix()
 
     def __clear_preprocessed_flag(self):
