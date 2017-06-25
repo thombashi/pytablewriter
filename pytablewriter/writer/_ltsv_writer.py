@@ -48,7 +48,7 @@ class LtsvTableWriter(CsvTableWriter):
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         """
 
-        self._logger.logging_write()
+        self._logger.logging_start_write()
 
         self._verify_property()
         self._preprocess()

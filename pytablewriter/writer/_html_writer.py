@@ -58,7 +58,7 @@ class HtmlTableWriter(TextTableWriter):
             - |None| is not written
         """
 
-        self._logger.logging_write()
+        self._logger.logging_start_write()
 
         self._verify_property()
         self._preprocess()

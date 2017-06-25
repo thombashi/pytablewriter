@@ -47,7 +47,7 @@ class TomlTableWriter(TextTableWriter):
             If the |header_list| is empty.
         """
 
-        self._logger.logging_write()
+        self._logger.logging_start_write()
 
         self._verify_property()
 

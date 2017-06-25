@@ -39,7 +39,7 @@ class RstTableWriter(IndentationTextTableWriter):
         self._is_remove_line_break = True
 
     def write_table(self):
-        self._logger.logging_write()
+        self._logger.logging_start_write()
 
         self._write_line(self._get_table_directive())
         self._write_table()
@@ -104,7 +104,7 @@ class RstCsvTableWriter(RstTableWriter):
             - |None| values will be written as an empty string.
         """
 
-        self._logger.logging_write()
+        self._logger.logging_start_write()
 
         super(RstCsvTableWriter, self)._write_table()
         if self.is_write_null_line_after_table:

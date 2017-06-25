@@ -64,7 +64,7 @@ class WriterLogger(object):
         logger.debug(
             "created WriterLogger: format={}".format(writer.format_name))
 
-    def logging_write(self, extra_message_list=None):
+    def logging_start_write(self, extra_message_list=None):
         log_entry_list = self.__get_log_entry_base()
 
         try:

@@ -77,7 +77,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._verify_property()
         self._preprocess_value_matrix()
 
-        self._logger.logging_write()
+        self._logger.logging_start_write()
         self._write_opening_row()
         self.inc_indent_level()
 

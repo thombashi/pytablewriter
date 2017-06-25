@@ -319,7 +319,7 @@ class AbstractTableWriter(TableWriterInterface):
         |write_table|.
         """
 
-        self._logger.logging_write()
+        self._logger.logging_start_write()
         self._write_table()
 
         logger.debug("complete write_table")
@@ -372,7 +372,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_closing_row = False
         self.__iter_count = 1
 
-        self._logger.logging_write([
+        self._logger.logging_start_write([
             "iteration-length={:d}".format(self.iteration_length)
         ])
 
