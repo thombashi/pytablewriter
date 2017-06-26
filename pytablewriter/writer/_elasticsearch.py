@@ -19,7 +19,22 @@ from ._table_writer import AbstractTableWriter
 
 class ElasticsearchWriter(AbstractTableWriter):
     """
-    [Experimental] A table writer class for Elasticsearch.
+    A table writer class for Elasticsearch.
+
+    .. py:method:: write_table()
+
+        Create an index and put documents for each row to Elasticsearch.
+
+        :raises ValueError:
+            If the |stream| has not elasticsearch.Elasticsearch instance.
+
+    .. py:attribute:: document_type
+
+        Specify document type for indices. Defaults to ``"table"``.
+
+    :Examples:
+
+        :ref:`example-elasticsearch-table-writer`
     """
 
     @property
