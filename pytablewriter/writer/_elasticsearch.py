@@ -45,14 +45,6 @@ class ElasticsearchWriter(AbstractTableWriter):
     def write_null_line(self):
         pass
 
-    def write_table(self):
-        """
-        Make a index and put data to a Elastisearch cluster.
-        """
-
-        self._logger.logging_start_write()
-        self._write_table()
-
     def __get_es_datatype(self, column_dp):
         if column_dp.typecode in (Typecode.STRING, Typecode.NULL_STRING):
             return {"type": "string"}
