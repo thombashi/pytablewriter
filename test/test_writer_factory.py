@@ -15,6 +15,26 @@ import pytest
 import pytablewriter as ptw
 
 
+class Test_WriterFactory_get_format_name_list(object):
+
+    def test_normal(self):
+        assert ptw.TableWriterFactory.get_format_name_list() == [
+            "csv", "elasticsearch", "excel", "html", "javascript", "js",
+            "json", "ltsv", "markdown", "mediawiki", "null", "pandas",
+            "py", "python", "rst", "rst_csv_table", "rst_grid_table",
+            "rst_simple_table", "sqlite", "toml", "tsv",
+        ]
+
+
+class Test_WriterFactory_get_extension_list(object):
+
+    def test_normal(self):
+        assert ptw.TableWriterFactory.get_extension_list() == [
+            "csv", "htm", "html", "js", "json", "ltsv", "md", "py", "rst",
+            "sqlite", "sqlite3", "toml", "tsv", "xls", "xlsx",
+        ]
+
+
 class Test_WriterFactory_create_from_file_extension(object):
 
     @pytest.mark.parametrize(
