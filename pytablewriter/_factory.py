@@ -120,6 +120,7 @@ class TableWriterFactory(object):
             Format name                     Loader                             
             ==============================  ===================================
             ``"csv"``                       :py:class:`~.CsvTableWriter`       
+            ``"elasticsearch"``             :py:class:`~.ElasticsearchWriter`  
             ``"excel"``                     :py:class:`~.ExcelXlsxTableWriter` 
             ``"html"``                      :py:class:`~.HtmlTableWriter`      
             ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
