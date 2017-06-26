@@ -12,9 +12,11 @@ import collections
 import datetime
 from decimal import Decimal
 import json
+import platform
 
 from pytablereader import TableData
 import pytest
+import six
 
 import pytablewriter as ptw
 
@@ -129,6 +131,7 @@ exception_test_data_list = [
 
 class Test_ElasticsearchWriter__get_mappings(object):
 
+    @pytest.mark.skipif("platform.system() != 'Windows' and six.PY2")
     def test_normal(self):
         writer = ptw.ElasticsearchWriter()
 
@@ -157,43 +160,21 @@ class Test_ElasticsearchWriter__get_mappings(object):
             "mappings": {
                 "table": {
                     "properties": {
-                        "str": {
-                            "type": "string"
-                        },
-                        "byte": {
-                            "type": "byte"
-                        },
-                        "short": {
-                            "type": "short"
-                        },
-                        "int": {
-                            "type": "integer"
-                        },
-                        "long": {
-                            "type": "long"
-                        },
-                        "float": {
-                            "type": "double"
-                        },
+                        "str": {"type": "string"},
+                        "byte": {"type": "byte"},
+                        "short": {"type": "short"},
+                        "int": {"type": "integer"},
+                        "long": {"type": "long"},
+                        "float": {"type": "double"},
                         "date": {
                             "type": "date",
                             "format": "date_optional_time"
                         },
-                        "bool": {
-                            "type": "boolean"
-                        },
-                        "ip": {
-                            "type": "ip"
-                        },
-                        "none": {
-                            "type": "string"
-                        },
-                        "inf": {
-                            "type": "keyword"
-                        },
-                        "nan": {
-                            "type": "keyword"
-                        },
+                        "bool": {"type": "boolean"},
+                        "ip": {"type": "ip"},
+                        "none": {"type": "string"},
+                        "inf": {"type": "keyword"},
+                        "nan": {"type": "keyword"},
                     }
                 }
             }
