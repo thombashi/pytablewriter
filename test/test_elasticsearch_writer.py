@@ -131,7 +131,7 @@ exception_test_data_list = [
 
 class Test_ElasticsearchWriter__get_mappings(object):
 
-    @pytest.mark.skipif("platform.system() != 'Windows' and six.PY2")
+    @pytest.mark.skipif("platform.system() == 'Windows' and six.PY2")
     def test_normal(self):
         writer = ptw.ElasticsearchWriter()
 
