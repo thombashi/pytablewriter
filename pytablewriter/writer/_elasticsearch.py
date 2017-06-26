@@ -39,6 +39,8 @@ class ElasticsearchWriter(AbstractTableWriter):
         self._is_required_table_name = True
         self._quote_flag_mapping = copy.deepcopy(
             dataproperty.NULL_QUOTE_FLAG_MAPPING)
+        self._dp_extractor.type_value_mapping = copy.deepcopy(
+            dataproperty.DefaultValue.TYPE_VALUE_MAPPING)
 
         self.document_type = "table"
 
@@ -75,6 +77,9 @@ class ElasticsearchWriter(AbstractTableWriter):
                 "too large integer bits: "
                 "expected<=64bits, actual={:d}bits".format(
                     column_dp.bit_length))
+
+        if column_dp.typecode == Typecode.NONE:
+            return {"type": "string"}
 
         if column_dp.typecode in (Typecode.INFINITY, Typecode.NAN):
             return {"type": "keyword"}
