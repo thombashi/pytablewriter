@@ -6,6 +6,7 @@ Write a table
 
    csv
    ltsv
+   elasticsearch
    spreadsheet/index
    html
    json

@@ -320,6 +320,7 @@ rp_class = u"""
 .. |EmptyHeaderError| replace:: :py:class:`~pytablewriter.EmptyHeaderError`
 
 .. |CsvTableWriter| replace:: :py:class:`~pytablewriter.CsvTableWriter`
+.. |ElasticsearchWriter| replace:: :py:class:`~pytablewriter.ElasticsearchWriter`
 .. |ExcelXlsxTableWriter| replace:: :py:class:`~pytablewriter.ExcelXlsxTableWriter`
 .. |HtmlTableWriter| replace:: :py:class:`~pytablewriter.HtmlTableWriter`
 .. |JavaScriptTableWriter| replace:: :py:class:`~pytablewriter.JavaScriptTableWriter`
