@@ -237,3 +237,25 @@ class Test_ElasticsearchWriter__get_mappings(object):
         print("[actual]\n{}\n".format(body))
 
         assert body == expected_body
+
+
+class Test_ElasticsearchWriter_write_table(object):
+
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
+        [
+            [data.table, data.header, data.value, data.expected]
+            for data in exception_test_data_list
+        ]
+    )
+    def test_exception(self, tmpdir, table, header, value, expected):
+        test_file_path = tmpdir.join("test.sqlite")
+
+        writer = ptw.SqliteTableWriter()
+        writer.open(str(test_file_path))
+        writer.table_name = table
+        writer.header_list = header
+        writer.value_matrix = value
+
+        with pytest.raises(expected):
+            writer.write_table()
