@@ -13,7 +13,6 @@ import typepy
 from six.moves import zip
 
 from .._error import EmptyHeaderError
-from .._logger import logger
 from ._interface import (
     IndentationInterface,
     TextWriterInterface
