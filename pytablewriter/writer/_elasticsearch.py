@@ -52,7 +52,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         if column_dp.typecode == Typecode.DATETIME:
             return {"type": "date", "format": "date_optional_time"}
 
-        if column_dp.typecode in [Typecode.REAL_NUMBER, Typecode.INFINITY, Typecode.NAN]:
+        if column_dp.typecode == Typecode.REAL_NUMBER:
             return {"type": "double"}
 
         if column_dp.typecode == Typecode.BOOL:
@@ -76,6 +76,9 @@ class ElasticsearchWriter(AbstractTableWriter):
                 "expected<=64bits, actual={:d}bits".format(
                     column_dp.bit_length))
 
+        if column_dp.typecode in (Typecode.INFINITY, Typecode.NAN):
+            return {"type": "keyword"}
+
         raise ValueError("unknown typecode: {}".format(column_dp.typecode))
 
     def _get_mappings(self):
@@ -93,10 +96,14 @@ class ElasticsearchWriter(AbstractTableWriter):
         }
 
     def _get_body(self):
+        str_datatype = (
+            Typecode.DATETIME, Typecode.IP_ADDRESS,
+            Typecode.INFINITY, Typecode.NAN,
+        )
+
         for value_dp_list in self._value_dp_matrix:
             value_list = [
-                value_dp.data if value_dp.typecode not in (
-                    Typecode.DATETIME, Typecode.IP_ADDRESS) else value_dp.to_str()
+                value_dp.data if value_dp.typecode not in str_datatype else value_dp.to_str()
                 for value_dp in value_dp_list
             ]
 

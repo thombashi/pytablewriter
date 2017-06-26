@@ -135,16 +135,18 @@ class Test_ElasticsearchWriter__get_mappings(object):
         writer.table_name = "es mappings"
         writer.header_list = [
             "str", "byte", "short", "int", "long", "float",
-            "date", "bool", "ip",
+            "date", "bool", "ip", "inf", "nan",
         ]
         writer.value_matrix = [
             [
                 "abc", 100, 10000, 2000000000, 200000000000, 0.1,
                 datetime.datetime(2017, 1, 3, 4, 5, 6), True, "127.0.0.1",
+                float("inf"), float("nan"),
             ],
             [
                 "def", -10, -1000, -200000000, -20000000000, 100.1,
                 datetime.datetime(2017, 1, 3, 4, 5, 6), False, "::1",
+                float("inf"), float("nan"),
             ],
         ]
         writer._preprocess()
@@ -182,7 +184,13 @@ class Test_ElasticsearchWriter__get_mappings(object):
                         },
                         "ip": {
                             "type": "ip"
-                        }
+                        },
+                        "inf": {
+                            "type": "keyword"
+                        },
+                        "nan": {
+                            "type": "keyword"
+                        },
                     }
                 }
             }
@@ -204,6 +212,8 @@ class Test_ElasticsearchWriter__get_mappings(object):
                 'date': '2017-01-03T04:05:06',
                 'bool': True,
                 'ip': '127.0.0.1',
+                'inf': 'Infinity',
+                'nan': 'NaN',
             },
             {
                 'str': 'def',
@@ -213,6 +223,8 @@ class Test_ElasticsearchWriter__get_mappings(object):
                 'date': '2017-01-03T04:05:06',
                 'bool': False,
                 'ip': '::1',
+                'inf': 'Infinity',
+                'nan': 'NaN',
             },
         ]
 
