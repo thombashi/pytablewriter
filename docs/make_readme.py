@@ -41,17 +41,18 @@ def write_examples(maker):
     maker.write_file(examples_root.joinpath(
         "table_format", "spreadsheet", "exel_single_example.txt"))
 
-    maker.write_chapter("Write a table from ``pandas.DataFrame`` instance")
+    maker.write_chapter(
+        "Write a Markdown table from ``pandas.DataFrame`` instance")
     maker.write_file(examples_root.joinpath(
         "datasource", "from_pandas_dataframe_example.txt"))
-
-    maker.write_chapter("Write a table using multibyte character")
-    maker.write_file(examples_root.joinpath(
-        "multibyte", "multibyte_table_example.txt"))
 
     maker.write_chapter("Create Elasticsearch index and put data")
     maker.write_file(examples_root.joinpath(
         "table_format", "elasticsearch_example.txt"))
+
+    maker.write_chapter("Write a table using multibyte character")
+    maker.write_file(examples_root.joinpath(
+        "multibyte", "multibyte_table_example.txt"))
 
     maker.write_chapter("For more information")
     maker.write_line_list([
