@@ -48,7 +48,7 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 setuptools.setup(
     name="pytablewriter",
-    version="0.20.1",
+    version="0.20.2",
     author="Tsuyoshi Hombashi",
     author_email="tsuyoshi.hombashi@gmail.com",
     url="https://github.com/thombashi/pytablewriter",
