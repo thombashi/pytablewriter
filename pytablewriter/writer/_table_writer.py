@@ -164,6 +164,7 @@ class AbstractTableWriter(TableWriterInterface):
         from dataproperty import (
             Align,
             DataPropertyExtractor,
+            MatrixFormatting,
         )
 
         self.stream = sys.stdout
@@ -192,6 +193,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.strip_str_header = '"'
         self._dp_extractor.strip_str_value = '"'
         self._dp_extractor.type_value_mapping[Typecode.NONE] = ""
+        self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
 
         self.type_hint_list = None
         self._quote_flag_mapping = {
