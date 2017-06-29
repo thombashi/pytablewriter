@@ -5,9 +5,7 @@
     import json
 
     from elasticsearch import Elasticsearch
-
     import pytablewriter as ptw
-
 
     es = Elasticsearch(hosts="localhost:9200")
     index_name = "es_writer_example"
