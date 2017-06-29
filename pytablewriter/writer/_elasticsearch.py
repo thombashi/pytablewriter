@@ -24,6 +24,8 @@ class ElasticsearchWriter(AbstractTableWriter):
     .. py:method:: write_table()
 
         Create an index and put documents for each row to Elasticsearch.
+        Document data types for documents are automatically detected
+        from the data.
 
         :raises ValueError:
             If the |stream| has not elasticsearch.Elasticsearch instance.
