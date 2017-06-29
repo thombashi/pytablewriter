@@ -221,6 +221,24 @@ quote|abc efg
    |  1|0.1
 
 """),
+    Data(
+        table="nouniform matrix",
+        indent=0,
+        header=["a", "b", "c"],
+        value=[
+            ["a", 0],
+            ["b", 1, "bb"],
+            ["c", 2, "ccc", 0.1],
+        ],
+        is_float_formatting=True,
+        expected="""# nouniform matrix
+a  | b | c 
+---|--:|---
+a  |  0|   
+b  |  1|bb 
+c  |  2|ccc
+
+"""),
 ]
 
 exception_test_data_list = [
