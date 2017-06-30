@@ -14,29 +14,27 @@ import typepy
 
 from ._error import WriterNotFoundError
 from ._table_format import TableFormat
-from .writer._csv import CsvTableWriter
-from .writer._elasticsearch import ElasticsearchWriter
-from .writer._excel import (
+from .writer import (
+    CsvTableWriter,
+    ElasticsearchWriter,
     ExcelXlsxTableWriter,
-    ExcelXlsTableWriter
-)
-from .writer._html import HtmlTableWriter
-from .writer._json import JsonTableWriter
-from .writer._ltsv import LtsvTableWriter
-from .writer._markdown import MarkdownTableWriter
-from .writer._mediawiki import MediaWikiTableWriter
-from .writer._null import NullTableWriter
-from .writer._rst import (
+    ExcelXlsTableWriter,
+    HtmlTableWriter,
+    JsonTableWriter,
+    LtsvTableWriter,
+    MarkdownTableWriter,
+    MediaWikiTableWriter,
+    NullTableWriter,
     RstCsvTableWriter,
     RstGridTableWriter,
-    RstSimpleTableWriter
+    RstSimpleTableWriter,
+    SqliteTableWriter,
+    TomlTableWriter,
+    TsvTableWriter,
+    JavaScriptTableWriter,
+    PandasDataFrameWriter,
+    PythonCodeTableWriter,
 )
-from .writer._sqlite import SqliteTableWriter
-from .writer._toml import TomlTableWriter
-from .writer._tsv import TsvTableWriter
-from .writer.sourcecode._javascript import JavaScriptTableWriter
-from .writer.sourcecode._pandas import PandasDataFrameWriter
-from .writer.sourcecode._python import PythonCodeTableWriter
 
 
 class TableWriterFactory(object):
