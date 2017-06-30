@@ -8,7 +8,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 from .._const import TableFormat
-from ._csv_writer import CsvTableWriter
+from ._csv import CsvTableWriter
 
 
 class TsvTableWriter(CsvTableWriter):

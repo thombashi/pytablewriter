@@ -13,7 +13,7 @@ from typepy import Typecode
 
 from ..._const import TableFormat
 from ..._function import quote_datetime_formatter
-from ._sourcecode_writer import SourceCodeTableWriter
+from ._sourcecode import SourceCodeTableWriter
 
 
 def js_datetime_formatter(value):

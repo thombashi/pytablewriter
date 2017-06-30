@@ -13,7 +13,7 @@ import typepy
 from six.moves import zip
 
 from .._const import TableFormat
-from ._csv_writer import CsvTableWriter
+from ._csv import CsvTableWriter
 
 
 class LtsvTableWriter(CsvTableWriter):

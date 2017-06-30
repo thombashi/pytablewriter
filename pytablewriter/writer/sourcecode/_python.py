@@ -7,35 +7,34 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
 from ..._const import TableFormat
-from ..._error import EmptyTableNameError
 from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
 )
-from ._sourcecode_writer import SourceCodeTableWriter
+from ._sourcecode import SourceCodeTableWriter
 
 
-class PandasDataFrameWriter(SourceCodeTableWriter):
+class PythonCodeTableWriter(SourceCodeTableWriter):
     """
-    A writer class for Pandas DataFrame format.
+    A table writer class for Python source code format.
 
     :Examples:
 
-        :ref:`example-pandas-dataframe-writer`
+        :ref:`example-python-code-table-writer`
 
     .. py:method:: write_table
 
-        |write_table| with Pandas DataFrame format.
-        The tabular data will be written as ``pandas.DataFrame`` class
-        variable definition.
+        |write_table| with Python format.
+        The tabular data will be written as nested list variable definition
+        for Python format.
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
-        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :raises pytablewriter.EmptyTableDataError:
+            If the |header_list| and the |value_matrix| is empty.
 
         .. note::
 
@@ -43,8 +42,8 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             when writing:
 
             - |None|: written as ``None``
-            - |inf|: written as ``numpy.inf``
-            - |nan|: written as ``numpy.nan``
+            - |inf|: written as ``float("inf")``
+            - |nan|: written as ``float("nan")``
             - |datetime| instances determined by |is_datetime_instance_formatting| attribute:
                 - |True|: written as `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
                 - |False|: written as |str|
@@ -56,22 +55,20 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.PANDAS
+        return TableFormat.PYTHON
 
     @property
     def support_split_write(self):
         return True
 
     def __init__(self):
-        super(PandasDataFrameWriter, self).__init__()
+        super(PythonCodeTableWriter, self).__init__()
 
-        self.table_name = u""
-
-        self.is_write_header = False
+        self.table_name = ""
         self._dp_extractor.type_value_mapping = {
             typepy.Typecode.NONE: None,
-            typepy.Typecode.INFINITY: 'numpy.inf',
-            typepy.Typecode.NAN: 'numpy.nan',
+            typepy.Typecode.INFINITY: 'float("inf")',
+            typepy.Typecode.NAN: 'float("nan")',
         }
 
     def get_variable_name(self, value):
@@ -89,24 +86,14 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         self.inc_indent_level()
-        super(PandasDataFrameWriter, self)._write_table()
+        super(PythonCodeTableWriter, self)._write_table()
         self.dec_indent_level()
 
     def _get_opening_row_item_list(self):
-        return ["{} = pandas.DataFrame([".format(self.variable_name)]
+        if typepy.is_not_null_string(self.table_name):
+            return [self.variable_name + " = ["]
+
+        return "["
 
     def _get_closing_row_item_list(self):
-        return "], columns=[{}])".format(", ".join([
-            '"{}"'.format(MultiByteStrDecoder(header).unicode_str)
-            for header in self.header_list
-        ]))
-
-    def _verify_property(self):
-        super(PandasDataFrameWriter, self)._verify_property()
-
-        if typepy.is_null_string(self.table_name):
-            raise EmptyTableNameError(
-                "table_name must be a string of one or more characters")
-
-    def _verify_header(self):
-        self._validate_empty_header()
+        return "]"
