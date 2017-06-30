@@ -12,6 +12,8 @@ import copy
 import dataproperty
 from typepy import Typecode
 
+from six.moves import zip
+
 from .._logger import logger
 from .._table_format import TableFormat
 from ._table_writer import AbstractTableWriter
