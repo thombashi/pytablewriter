@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 
 import typepy
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._text_writer import TextTableWriter
 
 

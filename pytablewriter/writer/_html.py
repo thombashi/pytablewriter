@@ -17,8 +17,8 @@ import typepy
 import dominate.tags as tags
 from six.moves import zip
 
-from .._const import TableFormat
 from .._error import EmptyHeaderError
+from .._table_format import TableFormat
 from ._text_writer import TextTableWriter
 
 

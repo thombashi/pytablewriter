@@ -16,7 +16,7 @@ import typepy
 import dataproperty as dp
 from six.moves import zip
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._text_writer import TextTableWriter
 
 

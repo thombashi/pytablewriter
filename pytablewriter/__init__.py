@@ -20,7 +20,6 @@ from typepy.type import (
     String,
 )
 
-from ._const import TableFormat
 from ._error import (
     NotSupportedError,
     EmptyHeaderError,
@@ -35,6 +34,7 @@ from ._logger import (
     set_logger,
     set_log_level,
 )
+from ._table_format import TableFormat
 from .writer._csv import CsvTableWriter
 from .writer._elasticsearch import ElasticsearchWriter
 from .writer._excel import (

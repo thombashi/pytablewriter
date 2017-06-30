@@ -14,7 +14,7 @@ import typepy
 
 import dataproperty as dp
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._text_writer import IndentationTextTableWriter
 
 

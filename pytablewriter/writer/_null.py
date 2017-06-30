@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._interface import (
     TableWriterInterface,
     TextWriterInterface,

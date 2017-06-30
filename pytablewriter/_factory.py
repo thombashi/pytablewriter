@@ -12,8 +12,8 @@ import os
 
 import typepy
 
-from ._const import TableFormat
 from ._error import WriterNotFoundError
+from ._table_format import TableFormat
 from .writer._csv import CsvTableWriter
 from .writer._elasticsearch import ElasticsearchWriter
 from .writer._excel import (

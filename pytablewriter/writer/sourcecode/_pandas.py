@@ -10,12 +10,12 @@ from __future__ import unicode_literals
 from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
-from ..._const import TableFormat
 from ..._error import EmptyTableNameError
 from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
 )
+from ..._table_format import TableFormat
 from ._sourcecode import SourceCodeTableWriter
 
 

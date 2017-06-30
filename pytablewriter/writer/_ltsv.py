@@ -12,7 +12,7 @@ import typepy
 
 from six.moves import zip
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._csv import CsvTableWriter
 
 

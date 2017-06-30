@@ -11,8 +11,8 @@ from dataproperty import (DataProperty, DefaultValue)
 import six
 from typepy import Typecode
 
-from ..._const import TableFormat
 from ..._function import quote_datetime_formatter
+from ..._table_format import TableFormat
 from ._sourcecode import SourceCodeTableWriter
 
 

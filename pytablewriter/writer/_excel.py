@@ -15,7 +15,7 @@ import xlwt
 
 from six.moves import range
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx

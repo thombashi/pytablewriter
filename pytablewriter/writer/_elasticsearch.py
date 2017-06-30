@@ -12,8 +12,8 @@ import copy
 import dataproperty
 from typepy import Typecode
 
-from .._const import TableFormat
 from .._logger import logger
+from .._table_format import TableFormat
 from ._table_writer import AbstractTableWriter
 
 

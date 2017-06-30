@@ -13,7 +13,7 @@ import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._text_writer import IndentationTextTableWriter
 
 

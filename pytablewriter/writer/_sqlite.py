@@ -11,7 +11,7 @@ import simplesqlite
 
 import pytablereader as ptr
 
-from .._const import TableFormat
+from .._table_format import TableFormat
 from ._interface import BinaryWriterInterface
 from ._table_writer import AbstractTableWriter
 
