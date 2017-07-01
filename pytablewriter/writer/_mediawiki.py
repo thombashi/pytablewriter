@@ -16,7 +16,6 @@ import typepy
 import dataproperty as dp
 from six.moves import zip
 
-from .._table_format import TableFormat
 from ._text_writer import TextTableWriter
 
 
@@ -33,7 +32,7 @@ class MediaWikiTableWriter(TextTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.MEDIAWIKI
+        return "mediawiki"
 
     @property
     def support_split_write(self):

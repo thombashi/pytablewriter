@@ -5,8 +5,8 @@
 """
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from .._table_format import TableFormat
 from ._interface import (
     TableWriterInterface,
     TextWriterInterface,
@@ -19,7 +19,7 @@ class NullTableWriter(
 
     @property
     def format_name(self):
-        return TableFormat.NULL
+        return "null"
 
     @property
     def support_split_write(self):

@@ -18,7 +18,6 @@ import typepy
 from six.moves import zip
 
 from .._converter import strip_quote
-from .._table_format import TableFormat
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -45,7 +44,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.JSON
+        return "json"
 
     @property
     def support_split_write(self):

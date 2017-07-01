@@ -15,7 +15,6 @@ from typepy import Typecode
 from six.moves import zip
 
 from .._logger import logger
-from .._table_format import TableFormat
 from ._table_writer import AbstractTableWriter
 
 
@@ -43,7 +42,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.ELASTICSEARCH
+        return "elasticsearch"
 
     @property
     def support_split_write(self):

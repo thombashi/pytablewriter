@@ -15,7 +15,6 @@ from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
 )
-from ..._table_format import TableFormat
 from ._sourcecode import SourceCodeTableWriter
 
 
@@ -56,7 +55,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.PANDAS
+        return "pandas"
 
     @property
     def support_split_write(self):

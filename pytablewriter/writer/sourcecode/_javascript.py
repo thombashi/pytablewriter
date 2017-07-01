@@ -12,7 +12,6 @@ import six
 from typepy import Typecode
 
 from ..._function import quote_datetime_formatter
-from ..._table_format import TableFormat
 from ._sourcecode import SourceCodeTableWriter
 
 
@@ -70,7 +69,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.JAVASCRIPT
+        return "javascript"
 
     @property
     def support_split_write(self):

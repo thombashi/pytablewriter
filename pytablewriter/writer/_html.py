@@ -18,7 +18,6 @@ import dominate.tags as tags
 from six.moves import zip
 
 from .._error import EmptyHeaderError
-from .._table_format import TableFormat
 from ._text_writer import TextTableWriter
 
 
@@ -33,7 +32,7 @@ class HtmlTableWriter(TextTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.HTML
+        return "html"
 
     @property
     def support_split_write(self):

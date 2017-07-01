@@ -15,7 +15,6 @@ import xlwt
 
 from six.moves import range
 
-from .._table_format import TableFormat
 from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx
@@ -31,7 +30,7 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
 
     @property
     def format_name(self):
-        return TableFormat.EXCEL
+        return "excel"
 
     @property
     def support_split_write(self):

@@ -13,7 +13,6 @@ from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
 )
-from ..._table_format import TableFormat
 from ._sourcecode import SourceCodeTableWriter
 
 
@@ -55,7 +54,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.PYTHON
+        return "python"
 
     @property
     def support_split_write(self):

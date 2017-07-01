@@ -13,7 +13,6 @@ import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
-from .._table_format import TableFormat
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -76,7 +75,7 @@ class RstCsvTableWriter(RstTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.RST_CSV_TABBLE
+        return "rst_csv_table"
 
     @property
     def support_split_write(self):
@@ -167,7 +166,7 @@ class RstGridTableWriter(RstTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.RST_GRID_TABBLE
+        return "rst_grid_table"
 
     @property
     def support_split_write(self):
@@ -201,7 +200,7 @@ class RstSimpleTableWriter(RstTableWriter):
 
     @property
     def format_name(self):
-        return TableFormat.RST_SIMPLE_TABBLE
+        return "rst_simple_table"
 
     @property
     def support_split_write(self):

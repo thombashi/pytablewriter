@@ -11,7 +11,6 @@ import simplesqlite
 
 import pytablereader as ptr
 
-from .._table_format import TableFormat
 from ._interface import BinaryWriterInterface
 from ._table_writer import AbstractTableWriter
 
@@ -38,7 +37,7 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
     @property
     def format_name(self):
-        return TableFormat.SQLITE
+        return "sqlite"
 
     @property
     def support_split_write(self):
