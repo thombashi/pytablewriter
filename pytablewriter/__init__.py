@@ -12,6 +12,7 @@ from typepy.type import (
     Dictionary,
     Infinity,
     Integer,
+    IpAddress,
     List,
     Nan,
     NoneType,
