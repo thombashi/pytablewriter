@@ -119,8 +119,13 @@ class TableWriterFactory(object):
         format_name = format_name.lower()
 
         for table_format in TableFormat:
-            if format_name in table_format.name_list:
-                return table_format.writer_class()
+            if any([
+                format_name not in table_format.name_list,
+                table_format.format_attribute & FormatAttr.SECONDARY_NAME,
+            ]):
+                continue
+
+            return table_format.writer_class()
 
         raise WriterNotFoundError("\n".join([
             "{} (unknown format name).".format(format_name),
