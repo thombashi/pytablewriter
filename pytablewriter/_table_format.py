@@ -40,6 +40,7 @@ class FormatAttr(object):
     SOURCECODE = 1 << 5
     API = 1 << 6
     SECONDARY = 1 << 10
+    SECONDARY_NAME = 1 << 11
 
 
 @enum.unique
@@ -55,7 +56,7 @@ class TableFormat(enum.Enum):
         FormatAttr.FILE | FormatAttr.BIN, ["xlsx"])
     EXCEL_XLS = (
         [ExcelXlsTableWriter().format_name], ExcelXlsTableWriter,
-        FormatAttr.FILE | FormatAttr.BIN, ["xls"])
+        FormatAttr.FILE | FormatAttr.BIN | FormatAttr.SECONDARY_NAME, ["xls"])
     HTML = (
         [HtmlTableWriter().format_name], HtmlTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["html", "htm"])
