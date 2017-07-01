@@ -48,6 +48,23 @@ class ElasticsearchWriter(AbstractTableWriter):
     def support_split_write(self):
         return True
 
+    @property
+    def table_name(self):
+        return super(ElasticsearchWriter, self).table_name
+
+    @table_name.setter
+    def table_name(self, value):
+        from pathvalidate import (
+            ElasticsearchIndexNameSanitizer,
+            NullNameError,
+        )
+
+        try:
+            self._table_name = ElasticsearchIndexNameSanitizer(
+                value).sanitize(replacement_text="_")
+        except NullNameError:
+            self._table_name = None
+
     def __init__(self):
         super(ElasticsearchWriter, self).__init__()
 
