@@ -34,7 +34,10 @@ from ._logger import (
     set_logger,
     set_log_level,
 )
-from ._table_format import TableFormat
+from ._table_format import (
+    FormatAttr,
+    TableFormat,
+)
 from .writer import (
     CsvTableWriter,
     ElasticsearchWriter,
