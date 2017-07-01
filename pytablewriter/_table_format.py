@@ -70,7 +70,7 @@ class TableFormat(enum.Enum):
         [LtsvTableWriter().format_name], LtsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["ltsv"])
     MARKDOWN = (
-        [MarkdownTableWriter().format_name], MarkdownTableWriter,
+        [MarkdownTableWriter().format_name, "md"], MarkdownTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["md"])
     MEDIAWIKI = (
         [MediaWikiTableWriter().format_name], MediaWikiTableWriter,

@@ -19,8 +19,8 @@ class Test_WriterFactory_get_format_name_list(object):
 
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_name_list() == [
-            "json", "ltsv", "markdown", "mediawiki", "null", "pandas",
             "csv", "elasticsearch", "excel", "htm", "html", "javascript", "js",
+            "json", "ltsv", "markdown", "md", "mediawiki", "null", "pandas",
             "py", "python", "rst", "rst_csv_table", "rst_grid_table",
             "rst_simple_table", "sqlite", "toml", "tsv",
         ]
@@ -121,6 +121,8 @@ class Test_FileLoaderFactory_create_from_format_name(object):
         ["LTSV", ptw.LtsvTableWriter],
         ["markdown", ptw.MarkdownTableWriter],
         ["Markdown", ptw.MarkdownTableWriter],
+        ["md", ptw.MarkdownTableWriter],
+        ["MD", ptw.MarkdownTableWriter],
         ["mediawiki", ptw.MediaWikiTableWriter],
         ["MediaWiki", ptw.MediaWikiTableWriter],
         ["null", ptw.NullTableWriter],
