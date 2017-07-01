@@ -14,11 +14,10 @@ import pytablewriter as ptw
 
 
 es = Elasticsearch(hosts="localhost:9200")
-index_name = "es_writer_example"
 
 writer = ptw.ElasticsearchWriter()
 writer.stream = es
-writer.table_name = index_name
+writer.index_name = "es writer example"
 writer.header_list = [
     "str", "byte", "short", "int", "long", "float", "date", "bool", "ip",
 ]
@@ -34,21 +33,21 @@ writer.value_matrix = [
 ]
 
 # delete existing index ---
-es.indices.delete(index=index_name, ignore=404)
+es.indices.delete(index=writer.index_name, ignore=404)
 
 # create an index and put data ---
 writer.write_table()
 
 # display the result ---
-es.indices.refresh(index=index_name)
+es.indices.refresh(index=writer.index_name)
 
 print("----- mappings -----")
-response = es.indices.get_mapping(index=index_name, doc_type="table")
+response = es.indices.get_mapping(index=writer.index_name, doc_type="table")
 print("{}\n".format(json.dumps(response, indent=4)))
 
 print("----- documents -----")
 response = es.search(
-    index=index_name,
+    index=writer.index_name,
     doc_type="table",
     body={
         "query": {"match_all": {}}
