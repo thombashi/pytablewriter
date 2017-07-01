@@ -65,6 +65,14 @@ class ElasticsearchWriter(AbstractTableWriter):
         except NullNameError:
             self._table_name = None
 
+    @property
+    def index_name(self):
+        return self.table_name
+
+    @index_name.setter
+    def index_name(self, value):
+        self.table_name = value
+
     def __init__(self):
         super(ElasticsearchWriter, self).__init__()
 
@@ -160,12 +168,11 @@ class ElasticsearchWriter(AbstractTableWriter):
         self._verify_value_matrix()
         self._preprocess()
 
-        index_name = self.table_name
         mappings = self._get_mappings()
 
         try:
             result = self.stream.indices.create(
-                index=index_name, body=mappings)
+                index=self.index_name, body=mappings)
             logger.debug(result)
         except es.TransportError as e:
             if e.error == "index_already_exists_exception":
@@ -177,7 +184,8 @@ class ElasticsearchWriter(AbstractTableWriter):
         for body in self._get_body():
             try:
                 self.stream.index(
-                    index=index_name, body=body, doc_type=self.document_type)
+                    index=self.index_name, body=body,
+                    doc_type=self.document_type)
             except es.exceptions.RequestError as e:
                 logger.error("message={}, body={}".format(e, body))
 
