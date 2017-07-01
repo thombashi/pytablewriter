@@ -39,7 +39,7 @@ class FormatAttr(object):
     BIN = 1 << 4
     SOURCECODE = 1 << 5
     API = 1 << 6
-    SECONDARY = 1 << 10
+    SECONDARY_EXT = 1 << 10
     SECONDARY_NAME = 1 << 11
 
 
@@ -80,20 +80,20 @@ class TableFormat(enum.Enum):
         NullTableWriter, FormatAttr.NONE, [])
     PANDAS = (
         [PandasDataFrameWriter().format_name], PandasDataFrameWriter,
-        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY,
+        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY_EXT,
         ["py"])
     PYTHON = (
         [PythonCodeTableWriter().format_name, "py"], PythonCodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE, ["py"])
     RST_CSV_TABBLE = (
         [RstCsvTableWriter().format_name], RstCsvTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY, ["rst"])
+        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT, ["rst"])
     RST_GRID_TABBLE = (
         [RstGridTableWriter().format_name, "rst"], RstGridTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["rst"])
     RST_SIMPLE_TABBLE = (
         [RstSimpleTableWriter().format_name], RstSimpleTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY, ["rst"])
+        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT, ["rst"])
     SQLITE = (
         [SqliteTableWriter().format_name], SqliteTableWriter,
         FormatAttr.FILE | FormatAttr.BIN, ["sqlite", "sqlite3"])

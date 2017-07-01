@@ -69,7 +69,7 @@ class TableWriterFactory(object):
             if file_extension not in table_format.file_extension_list:
                 continue
 
-            if table_format.format_attribute & FormatAttr.SECONDARY:
+            if table_format.format_attribute & FormatAttr.SECONDARY_EXT:
                 continue
 
             return table_format.writer_class()
