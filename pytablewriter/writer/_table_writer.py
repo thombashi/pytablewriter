@@ -125,6 +125,14 @@ class AbstractTableWriter(TableWriterInterface):
     __RE_LINE_BREAK = re.compile("[\s\0\t\r\n]+")
 
     @property
+    def table_name(self):
+        return self._table_name
+
+    @table_name.setter
+    def table_name(self, value):
+        self._table_name = value
+
+    @property
     def value_matrix(self):
         return self.__value_matrix_org
 
@@ -168,7 +176,7 @@ class AbstractTableWriter(TableWriterInterface):
         )
 
         self.stream = sys.stdout
-        self.table_name = None
+        self._table_name = None
         self.header_list = None
         self.value_matrix = None
 
