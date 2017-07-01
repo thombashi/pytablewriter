@@ -127,3 +127,20 @@ class TableFormat(enum.Enum):
         self.__writer_class = writer_class
         self.__format_attribute = file_attribute
         self.__file_extension_list = file_extension_list
+
+    @classmethod
+    def search_table_format(cls, format_attribute):
+        """
+        Searching table formats which have specific attributes.
+
+        :param FormatAttr format_attribute:
+            Table format attributes looking for.
+        :return: Table format List.
+        :rtype: list
+        """
+
+        return [
+            table_format
+            for table_format in TableFormat
+            if table_format.format_attribute & format_attribute
+        ]
