@@ -26,13 +26,14 @@ class TableWriterFactory(object):
     @classmethod
     def create_from_file_extension(cls, file_extension):
         """
-        Create a writer class instance from a file extension.
+        Create a table writer class instance from a file extension.
         Supported file extensions are as follows:
 
             ==================  ===================================
-            Format name         Writer                             
+            Extension           Writer Class                       
             ==================  ===================================
             ``".csv"``          :py:class:`~.CsvTableWriter`       
+            ``".htm"``          :py:class:`~.HtmlTableWriter`      
             ``".html"``         :py:class:`~.HtmlTableWriter`      
             ``".js"``           :py:class:`~.JavaScriptTableWriter`
             ``".json"``         :py:class:`~.JsonTableWriter`      
@@ -84,20 +85,20 @@ class TableWriterFactory(object):
     @classmethod
     def create_from_format_name(cls, format_name):
         """
-        Create a writer class instance from a format name.
+        Create a table writer class instance from a format name.
         Supported file format names are as follows:
 
             ==============================  ===================================
-            Format name                     Loader                             
+            Format name                     Writer Class                       
             ==============================  ===================================
             ``"csv"``                       :py:class:`~.CsvTableWriter`       
             ``"elasticsearch"``             :py:class:`~.ElasticsearchWriter`  
             ``"excel"``                     :py:class:`~.ExcelXlsxTableWriter` 
-            ``"html"``                      :py:class:`~.HtmlTableWriter`      
+            ``"html"``/``"htm"``            :py:class:`~.HtmlTableWriter`      
             ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
             ``"json"``                      :py:class:`~.JsonTableWriter`      
             ``"ltsv"``                      :py:class:`~.LtsvTableWriter`       
-            ``"markdown"``                  :py:class:`~.MarkdownTableWriter`  
+            ``"markdown"``/``"md"``         :py:class:`~.MarkdownTableWriter`  
             ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter` 
             ``"null"``                      :py:class:`~.NullTableWriter`      
             ``"pandas"``                    :py:class:`~.PandasDataFrameWriter`
@@ -147,14 +148,16 @@ class TableWriterFactory(object):
                 ...     print(name)
                 ...
                 csv
-                excel
                 elasticsearch
+                excel
+                htm
                 html
                 javascript
                 js
                 json
                 ltsv
                 markdown
+                md
                 mediawiki
                 null
                 pandas
