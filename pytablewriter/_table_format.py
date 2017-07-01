@@ -51,12 +51,12 @@ class TableFormat(enum.Enum):
     ELASTICSEARCH = (
         [ElasticsearchWriter().format_name], ElasticsearchWriter,
         FormatAttr.API, [])
-    EXCEL_XLSX = (
-        [ExcelXlsxTableWriter().format_name], ExcelXlsxTableWriter,
-        FormatAttr.FILE | FormatAttr.BIN, ["xlsx"])
     EXCEL_XLS = (
         [ExcelXlsTableWriter().format_name], ExcelXlsTableWriter,
         FormatAttr.FILE | FormatAttr.BIN | FormatAttr.SECONDARY_NAME, ["xls"])
+    EXCEL_XLSX = (
+        [ExcelXlsxTableWriter().format_name], ExcelXlsxTableWriter,
+        FormatAttr.FILE | FormatAttr.BIN, ["xlsx"])
     HTML = (
         [HtmlTableWriter().format_name, "htm"], HtmlTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["html", "htm"])
@@ -97,12 +97,12 @@ class TableFormat(enum.Enum):
     SQLITE = (
         [SqliteTableWriter().format_name], SqliteTableWriter,
         FormatAttr.FILE | FormatAttr.BIN, ["sqlite", "sqlite3"])
-    TSV = (
-        [TsvTableWriter().format_name], TsvTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT, ["tsv"])
     TOML = (
         [TomlTableWriter().format_name], TomlTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["toml"])
+    TSV = (
+        [TsvTableWriter().format_name], TsvTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT, ["tsv"])
 
     @property
     def name_list(self):
