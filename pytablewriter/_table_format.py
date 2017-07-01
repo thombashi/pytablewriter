@@ -58,7 +58,7 @@ class TableFormat(enum.Enum):
         [ExcelXlsTableWriter().format_name], ExcelXlsTableWriter,
         FormatAttr.FILE | FormatAttr.BIN | FormatAttr.SECONDARY_NAME, ["xls"])
     HTML = (
-        [HtmlTableWriter().format_name], HtmlTableWriter,
+        [HtmlTableWriter().format_name, "htm"], HtmlTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["html", "htm"])
     JAVASCRIPT = (
         [JavaScriptTableWriter().format_name, "js"], JavaScriptTableWriter,

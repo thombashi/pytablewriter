@@ -19,8 +19,8 @@ class Test_WriterFactory_get_format_name_list(object):
 
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_name_list() == [
-            "csv", "elasticsearch", "excel", "html", "javascript", "js",
             "json", "ltsv", "markdown", "mediawiki", "null", "pandas",
+            "csv", "elasticsearch", "excel", "htm", "html", "javascript", "js",
             "py", "python", "rst", "rst_csv_table", "rst_grid_table",
             "rst_simple_table", "sqlite", "toml", "tsv",
         ]
@@ -108,6 +108,8 @@ class Test_FileLoaderFactory_create_from_format_name(object):
         ["elasticsearch", ptw.ElasticsearchWriter],
         ["Elasticsearch", ptw.ElasticsearchWriter],
         ["html", ptw.HtmlTableWriter],
+        ["HTML", ptw.HtmlTableWriter],
+        ["htm", ptw.HtmlTableWriter],
         ["HTML", ptw.HtmlTableWriter],
         ["javascript", ptw.JavaScriptTableWriter],
         ["JAVASCRIPT", ptw.JavaScriptTableWriter],
