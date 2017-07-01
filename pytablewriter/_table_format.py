@@ -85,13 +85,13 @@ class TableFormat(enum.Enum):
     PYTHON = (
         [PythonCodeTableWriter().format_name, "py"], PythonCodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE, ["py"])
-    RST_CSV_TABBLE = (
+    RST_CSV_TABLE = (
         [RstCsvTableWriter().format_name], RstCsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT, ["rst"])
-    RST_GRID_TABBLE = (
+    RST_GRID_TABLE = (
         [RstGridTableWriter().format_name, "rst"], RstGridTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["rst"])
-    RST_SIMPLE_TABBLE = (
+    RST_SIMPLE_TABLE = (
         [RstSimpleTableWriter().format_name], RstSimpleTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT, ["rst"])
     SQLITE = (
