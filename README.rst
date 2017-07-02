@@ -22,7 +22,7 @@ pytablewriter
 Summary
 -------
 
-A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
@@ -38,9 +38,10 @@ Features
     - MediaWiki
     - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     - Source code
+        - JavaScript code (Definition of a nested list variable)
+        - `NumPy <http://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
         - `Pandas <http://pandas.pydata.org/>`__ (Definition of a - `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
         - Python code (Definition of a nested list variable)
-        - JavaScript code (Definition of a nested list variable)
     - SQLite database file
     - Tab-separated values (TSV)
     - `TOML <https://github.com/toml-lang/toml>`__
