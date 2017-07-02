@@ -360,7 +360,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     @property
     def __cell_format_property(self):
-        return self.format_table.get(self.TableFormat.CELL, self.default_format)
+        return self.format_table.get(
+            self.TableFormat.CELL, self.default_format)
 
     def __init__(self):
         super(ExcelXlsxTableWriter, self).__init__()
