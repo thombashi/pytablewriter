@@ -23,7 +23,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     .. py:method:: write_table
 
         |write_table| with Python format.
-        The tabular data will be written as nested list variable definition
+        The tabular data will be written as a nested list variable definition
         for Python format.
 
         :raises pytablewriter.EmptyTableNameError:

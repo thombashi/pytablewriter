@@ -33,8 +33,8 @@ class PandasDataFrameWriter(PythonCodeTableWriter):
     .. py:method:: write_table
 
         |write_table| with Pandas DataFrame format.
-        The tabular data will be written as ``pandas.DataFrame`` class
-        variable definition.
+        The tabular data will be written as a ``pandas.DataFrame`` class
+        instance definition.
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.

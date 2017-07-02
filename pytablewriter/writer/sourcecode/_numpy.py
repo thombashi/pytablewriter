@@ -18,13 +18,13 @@ from ._python import PythonCodeTableWriter
 
 class NumpyTableWriter(PythonCodeTableWriter):
     """
-    A table writer class for ``numpy`` source code format.
+    A table writer class for ``NumPy`` source code format.
 
     .. py:method:: write_table
 
-        |write_table| with ``numpy.array`` format.
-        The tabular data will be written as nested list variable definition
-        for ``numpy.array`` format.
+        |write_table| with ``NumPy`` format.
+        The tabular data will be written as a variable definition of
+        ``numpy.array``.
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
