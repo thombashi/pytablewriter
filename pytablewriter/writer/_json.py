@@ -25,15 +25,13 @@ class JsonTableWriter(IndentationTextTableWriter):
     """
     A table writer class for JSON format.
 
-    :Examples:
-
-        :ref:`example-json-table-writer`
-
     .. py:method:: write_table
 
         |write_table| with JSON format.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :Examples:
+            :ref:`example-json-table-writer`
 
         .. note::
 

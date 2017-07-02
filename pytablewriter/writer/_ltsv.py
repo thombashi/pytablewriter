@@ -19,10 +19,6 @@ class LtsvTableWriter(CsvTableWriter):
     """
     A table writer class for
     `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.
-
-    :Examples:
-
-        :ref:`example-ltsv-table-writer`
     """
 
     @property
@@ -45,6 +41,8 @@ class LtsvTableWriter(CsvTableWriter):
         Invalid characters in labels/data will be removed.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :Examples:
+            :ref:`example-ltsv-table-writer`
         """
 
         self._logger.logging_start_write()

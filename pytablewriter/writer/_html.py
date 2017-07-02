@@ -24,10 +24,6 @@ from ._text_writer import TextTableWriter
 class HtmlTableWriter(TextTableWriter):
     """
     A table writer class for HTML format.
-
-    :Examples:
-
-        :ref:`example-html-table-writer`
     """
 
     @property
@@ -51,6 +47,9 @@ class HtmlTableWriter(TextTableWriter):
     def write_table(self):
         """
         |write_table| with HTML table format.
+
+        :Examples:
+            :ref:`example-html-table-writer`
 
         .. note::
 

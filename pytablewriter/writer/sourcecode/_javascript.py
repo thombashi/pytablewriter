@@ -28,10 +28,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     """
     A table writer for class JavaScript format.
 
-    :Examples:
-
-        :ref:`example-js-table-writer`
-
     .. py:attribute:: variable_declaration
 
         JavaScript variable declarations type.
@@ -46,6 +42,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+        :Examples:
+            :ref:`example-js-table-writer`
 
         .. note::
 

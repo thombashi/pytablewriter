@@ -15,10 +15,10 @@ from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
 )
-from ._sourcecode import SourceCodeTableWriter
+from ._python import PythonCodeTableWriter
 
 
-class PandasDataFrameWriter(SourceCodeTableWriter):
+class PandasDataFrameWriter(PythonCodeTableWriter):
     """
     A writer class for Pandas DataFrame format.
 
@@ -39,6 +39,8 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :Examples:
+            :ref:`example-pandas-dataframe-writer`
 
         .. note::
 
@@ -55,10 +57,6 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             .. seealso::
 
                 :ref:`example-type-hint-python`
-
-    :Examples:
-
-        :ref:`example-pandas-dataframe-writer`
     """
 
     @property

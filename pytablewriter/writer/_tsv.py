@@ -15,7 +15,6 @@ class TsvTableWriter(CsvTableWriter):
     A table writer class for tab separated values (TSV) format.
 
     :Examples:
-
         :ref:`example-tsv-table-writer`
     """
 

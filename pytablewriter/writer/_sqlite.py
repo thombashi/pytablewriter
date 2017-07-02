@@ -29,10 +29,8 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
             If the |header_list| is empty.
         :raises pytablewriter.EmptyValueError:
             If the |value_matrix| is empty.
-
-    :Examples:
-
-        :ref:`example-sqlite-table-writer`
+        :Examples:
+            :ref:`example-sqlite-table-writer`
     """
 
     @property

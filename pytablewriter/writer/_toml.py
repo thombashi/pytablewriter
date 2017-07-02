@@ -16,10 +16,6 @@ class TomlTableWriter(TextTableWriter):
     """
     A table writer class for
     `TOML <https://github.com/toml-lang/toml>`__ data format.
-
-    :Examples:
-
-        :ref:`example-toml-table-writer`
     """
 
     @property
@@ -44,6 +40,8 @@ class TomlTableWriter(TextTableWriter):
             If the |header_list| is empty.
         :raises pytablewriter.EmptyHeaderError:
             If the |header_list| is empty.
+        :Examples:
+            :ref:`example-toml-table-writer`
         """
 
         self._logger.logging_start_write()

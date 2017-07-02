@@ -45,10 +45,8 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         :raises ValueError:
             If the |stream| has not elasticsearch.Elasticsearch instance.
-
-    :Examples:
-
-        :ref:`example-elasticsearch-table-writer`
+        :Examples:
+            :ref:`example-elasticsearch-table-writer`
     """
 
     @property

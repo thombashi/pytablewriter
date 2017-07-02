@@ -20,20 +20,18 @@ class NumpyTableWriter(PythonCodeTableWriter):
     """
     A table writer class for ``numpy`` source code format.
 
-    :Examples:
-
-        :ref:`example-python-code-table-writer`
-
     .. py:method:: write_table
 
         |write_table| with ``numpy.array`` format.
         The tabular data will be written as nested list variable definition
-        for Python format.
+        for ``numpy.array`` format.
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+        :Examples:
+            :ref:`example-numpy-table-writer`
 
         .. note::
 
@@ -41,8 +39,8 @@ class NumpyTableWriter(PythonCodeTableWriter):
             when writing:
 
             - |None|: written as ``None``
-            - |inf|: written as ``float("inf")``
-            - |nan|: written as ``float("nan")``
+            - |inf|: written as ``numpy.inf``
+            - |nan|: written as ``numpy.nan``
             - |datetime| instances determined by |is_datetime_instance_formatting| attribute:
                 - |True|: written as `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
                 - |False|: written as |str|

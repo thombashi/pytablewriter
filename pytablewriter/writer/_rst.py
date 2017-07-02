@@ -67,10 +67,6 @@ class RstCsvTableWriter(RstTableWriter):
     A table class writer for reStructuredText
     `CSV table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     format.
-
-    :Examples:
-
-        :ref:`example-rst-csv-table-writer`
     """
 
     @property
@@ -99,6 +95,8 @@ class RstCsvTableWriter(RstTableWriter):
 
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+        :Examples:
+            :ref:`example-rst-csv-table-writer`
 
         .. note::
 
@@ -185,13 +183,12 @@ class RstSimpleTableWriter(RstTableWriter):
     `Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
     format.
 
-    :Examples:
-
-        :ref:`example-rst-simple-table-writer`
-
     .. py:method:: write_table
 
         |write_table| with reStructuredText simple tables format.
+
+        :Examples:
+            :ref:`example-rst-simple-table-writer`
 
         .. note::
 

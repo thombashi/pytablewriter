@@ -20,10 +20,6 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     """
     A table writer class for Python source code format.
 
-    :Examples:
-
-        :ref:`example-python-code-table-writer`
-
     .. py:method:: write_table
 
         |write_table| with Python format.
@@ -34,6 +30,8 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
+        :Examples:
+            :ref:`example-python-code-table-writer`
 
         .. note::
 

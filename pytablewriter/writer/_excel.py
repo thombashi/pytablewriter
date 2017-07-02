@@ -303,16 +303,14 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         Write a table to the current opened worksheet.
 
         :raises IOError: If failed to write data to the worksheet.
+        :Examples:
+            :ref:`example-excel-table-writer`
 
         .. note::
 
             - |None| values will be written as an empty string.
             - |inf| values will be written as `Inf`
             - |nan| values will be written as ``NaN``
-
-    :Examples:
-
-        :ref:`example-excel-table-writer`
     """
 
     MAX_CELL_WIDTH = 60

@@ -18,7 +18,6 @@ class CsvTableWriter(TextTableWriter):
     The default separated character is a comma (``","``).
 
     :Examples:
-
         :ref:`example-csv-table-writer`
     """
 
