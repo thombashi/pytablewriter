@@ -72,7 +72,7 @@ JavaScript writer
 .. autoclass:: pytablewriter.JavaScriptTableWriter
     :inherited-members:
 
-numpy table writer
+NumPy table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.NumpyTableWriter
     :inherited-members:

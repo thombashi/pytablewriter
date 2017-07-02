@@ -1,1 +1,1 @@
-A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.

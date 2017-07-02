@@ -1,13 +1,13 @@
 .. _example-numpy-table-writer:
 
-numpy array
+NumPy array
 ----------------------------
 
 |NumpyTableWriter| the class can write a variable definition of ``numpy.array`` to the |stream| from a matrix of data.
 
 :Sample Code:
     .. code-block:: python
-        :caption: Write a numpy array definition
+        :caption: Write a NumPy array definition
 
         import pytablewriter
 
