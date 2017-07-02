@@ -73,7 +73,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             typepy.Typecode.NAN: "numpy.nan",
         }
 
-        self.import_as = "pd"
+        self.import_pandas_as = "pd"
 
     def get_variable_name(self, value):
         import pathvalidate
@@ -95,7 +95,7 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
 
     def _get_opening_row_item_list(self):
         return ["{} = {}.DataFrame([".format(
-            self.variable_name, self.import_as)]
+            self.variable_name, self.import_pandas_as)]
 
     def _get_closing_row_item_list(self):
         return "], columns=[{}])".format(", ".join([
