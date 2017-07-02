@@ -63,10 +63,6 @@ class PandasDataFrameWriter(PythonCodeTableWriter):
     def format_name(self):
         return "pandas"
 
-    @property
-    def support_split_write(self):
-        return True
-
     def __init__(self):
         super(PandasDataFrameWriter, self).__init__()
 
@@ -74,29 +70,10 @@ class PandasDataFrameWriter(PythonCodeTableWriter):
         self.import_pandas_as = "pd"
         self.import_numpy_as = "np"
         self.is_write_header = False
-        self._dp_extractor.type_value_mapping = {
-            typepy.Typecode.NONE: None,
-            typepy.Typecode.INFINITY: "{:s}.inf".format(self.import_numpy_as),
-            typepy.Typecode.NAN: "{:s}.nan".format(self.import_numpy_as),
-        }
-
-    def get_variable_name(self, value):
-        import pathvalidate
-
-        return pathvalidate.sanitize_python_var_name(
-            self.table_name, "_").lower()
-
-    def _write_table(self):
-        self._verify_property()
-
-        if self.is_datetime_instance_formatting:
-            self._dp_extractor.datetime_formatter = dateutil_datetime_formatter
-        else:
-            self._dp_extractor.datetime_formatter = quote_datetime_formatter
-
-        self.inc_indent_level()
-        super(PandasDataFrameWriter, self)._write_table()
-        self.dec_indent_level()
+        self._dp_extractor.type_value_mapping[typepy.Typecode.INFINITY] = (
+            "{:s}.inf".format(self.import_numpy_as))
+        self._dp_extractor.type_value_mapping[typepy.Typecode.NAN] = (
+            "{:s}.nan".format(self.import_numpy_as))
 
     def _get_opening_row_item_list(self):
         return ["{} = {}.DataFrame([".format(
