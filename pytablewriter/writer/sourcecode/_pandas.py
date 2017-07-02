@@ -64,13 +64,13 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
     def __init__(self):
         super(PandasDataFrameWriter, self).__init__()
 
-        self.table_name = u""
+        self.table_name = ""
 
         self.is_write_header = False
         self._dp_extractor.type_value_mapping = {
             typepy.Typecode.NONE: None,
-            typepy.Typecode.INFINITY: 'numpy.inf',
-            typepy.Typecode.NAN: 'numpy.nan',
+            typepy.Typecode.INFINITY: "numpy.inf",
+            typepy.Typecode.NAN: "numpy.nan",
         }
 
     def get_variable_name(self, value):
