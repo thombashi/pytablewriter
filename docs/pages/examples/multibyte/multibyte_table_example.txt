@@ -1,26 +1,28 @@
 ﻿You can use multibyte character as table data.
 
-.. code-block:: python
-    :caption: Sample code that writes a table with multibyte character
+:Sample Code:
+    .. code-block:: python
+        :caption: Write a table with multi-byte character
 
-    import pytablewriter
+        import pytablewriter
 
-    writer = pytablewriter.RstSimpleTableWriter()
-    writer.table_name = "生成に関するパターン"
-    writer.header_list = ["パターン名", "概要", "GoF", "Code Complete[1]"]
-    writer.value_matrix = [
-        ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
-        ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
-        ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
-        ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
-        ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
-    ]
-    writer.write_table()
+        writer = pytablewriter.RstSimpleTableWriter()
+        writer.table_name = "生成に関するパターン"
+        writer.header_list = ["パターン名", "概要", "GoF", "Code Complete[1]"]
+        writer.value_matrix = [
+            ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
+            ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
+            ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
+            ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
+            ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
+        ]
+        writer.write_table()
 
 
-.. figure:: ss/multi_byte_char.png
-   :scale: 100%
-   :alt: multi_byte_char_table
-   
-   Output of multi-byte character table
+:Output:
+    .. figure:: ss/multi_byte_char.png
+       :scale: 100%
+       :alt: multi_byte_char_table
+       
+       Output of multi-byte character table
 

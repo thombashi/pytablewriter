@@ -5,5 +5,6 @@ Source Code
    :maxdepth: 2
 
    javascript
+   numpy
    pandas_dataframe
    python_code

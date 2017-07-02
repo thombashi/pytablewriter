@@ -1,29 +1,28 @@
-.. code-block:: python
-    :caption: Sample code that writes a Excel sheets
+:Sample Code:
+    .. code-block:: python
+        :caption: Write a Excel sheets
 
-    import pytablewriter
+        import pytablewriter
 
-    writer = pytablewriter.ExcelXlsxTableWriter()
-    writer.open_workbook("sample.xlsx")
+        writer = pytablewriter.ExcelXlsxTableWriter()
+        writer.open_workbook("sample.xlsx")
 
-    writer.make_worksheet("example")
-    writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
-    writer.value_matrix = [
-        [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-        [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
-        [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
-        [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-    ]
-    writer.write_table()
+        writer.make_worksheet("example")
+        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.value_matrix = [
+            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
+            [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
+            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+        ]
+        writer.write_table()
 
-    writer.close()
+        writer.close()
 
 
-Output of Excel book
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. figure:: ss/excel_single.png
-   :scale: 100%
-   :alt: excel_single
-   
-   Output excel file (``sample_single.xlsx``)
+:Output:
+    .. figure:: ss/excel_single.png
+       :scale: 100%
+       :alt: excel_single
+       
+       Output excel file (``sample_single.xlsx``)

@@ -67,9 +67,14 @@ JSON writer class
 Source code writer classes
 -------------------------------
 
-JavaScript table writer
+JavaScript writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.JavaScriptTableWriter
+    :inherited-members:
+
+numpy table writer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: pytablewriter.NumpyTableWriter
     :inherited-members:
 
 Pandas DataFrame writer
@@ -77,7 +82,7 @@ Pandas DataFrame writer
 .. autoclass:: pytablewriter.PandasDataFrameWriter
     :inherited-members:
 
-Python code table writer
+Python table writer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: pytablewriter.PythonCodeTableWriter
     :inherited-members:

@@ -15,40 +15,41 @@ Write a table to the standard output (defaults)
 The standard output is the default output stream of writers
 (except the |ExcelXlsxTableWriter|).
 
-.. code-block:: python
-    :caption: Sample code that writes a table to stdout
+:Sample Code:
+    .. code-block:: python
+        :caption: Write a table to stdout
 
-    import pytablewriter
+        import pytablewriter
 
-    writer = pytablewriter.RstGridTableWriter()
-    writer.table_name = "zone"
-    writer.header_list = ["zone_id", "country_code", "zone_name"]
-    writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
-    ]
-    
-    writer.write_table()
+        writer = pytablewriter.RstGridTableWriter()
+        writer.table_name = "zone"
+        writer.header_list = ["zone_id", "country_code", "zone_name"]
+        writer.value_matrix = [
+            ["1", "AD", "Europe/Andorra"],
+            ["2", "AE", "Asia/Dubai"],
+            ["3", "AF", "Asia/Kabul"],
+            ["4", "AG", "America/Antigua"],
+            ["5", "AI", "America/Anguilla"],
+        ]
+        
+        writer.write_table()
 
 
-.. code-block:: none
-    :caption: Output
-    
-    .. table:: zone
+:Output:
+    .. code-block:: ReST
+        
+        .. table:: zone
 
-        +-------+------------+----------------+
-        |zone_id|country_code|   zone_name    |
-        +=======+============+================+
-        |      1|AD          |Europe/Andorra  |
-        +-------+------------+----------------+
-        |      2|AE          |Asia/Dubai      |
-        +-------+------------+----------------+
-        |      3|AF          |Asia/Kabul      |
-        +-------+------------+----------------+
-        |      4|AG          |America/Antigua |
-        +-------+------------+----------------+
-        |      5|AI          |America/Anguilla|
-        +-------+------------+----------------+
+            +-------+------------+----------------+
+            |zone_id|country_code|   zone_name    |
+            +=======+============+================+
+            |      1|AD          |Europe/Andorra  |
+            +-------+------------+----------------+
+            |      2|AE          |Asia/Dubai      |
+            +-------+------------+----------------+
+            |      3|AF          |Asia/Kabul      |
+            +-------+------------+----------------+
+            |      4|AG          |America/Antigua |
+            +-------+------------+----------------+
+            |      5|AI          |America/Anguilla|
+            +-------+------------+----------------+
