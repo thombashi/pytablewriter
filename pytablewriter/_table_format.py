@@ -21,6 +21,7 @@ from .writer import (
     MarkdownTableWriter,
     MediaWikiTableWriter,
     NullTableWriter,
+    NumpyTableWriter,
     PandasDataFrameWriter,
     PythonCodeTableWriter,
     RstCsvTableWriter,
@@ -78,6 +79,10 @@ class TableFormat(enum.Enum):
     NULL = (
         [NullTableWriter().format_name],
         NullTableWriter, FormatAttr.NONE, [])
+    NUMPY = (
+        [NumpyTableWriter().format_name], NumpyTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY_EXT,
+        ["py"])
     PANDAS = (
         [PandasDataFrameWriter().format_name], PandasDataFrameWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY_EXT,

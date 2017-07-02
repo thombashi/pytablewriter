@@ -50,6 +50,7 @@ from .writer import (
     MarkdownTableWriter,
     MediaWikiTableWriter,
     NullTableWriter,
+    NumpyTableWriter,
     RstCsvTableWriter,
     RstGridTableWriter,
     RstSimpleTableWriter,

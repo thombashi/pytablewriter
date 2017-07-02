@@ -26,6 +26,7 @@ class Test_TableFormat_search_table_format(object):
                 TableFormat.LTSV,
                 TableFormat.MARKDOWN,
                 TableFormat.MEDIAWIKI,
+                TableFormat.NUMPY,
                 TableFormat.PANDAS,
                 TableFormat.PYTHON,
                 TableFormat.RST_CSV_TABLE,

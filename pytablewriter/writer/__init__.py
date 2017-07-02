@@ -28,5 +28,6 @@ from ._sqlite import SqliteTableWriter
 from ._toml import TomlTableWriter
 from ._tsv import TsvTableWriter
 from .sourcecode._javascript import JavaScriptTableWriter
+from .sourcecode._numpy import NumpyTableWriter
 from .sourcecode._pandas import PandasDataFrameWriter
 from .sourcecode._python import PythonCodeTableWriter
