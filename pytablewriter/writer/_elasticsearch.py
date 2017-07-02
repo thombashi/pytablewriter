@@ -22,6 +22,14 @@ class ElasticsearchWriter(AbstractTableWriter):
     """
     A table writer class for Elasticsearch.
 
+    .. py:attribute:: index_name
+
+        Alias attribute for |table_name|.
+
+    .. py:attribute:: document_type
+
+        Specify document type for indices. Defaults to ``"table"``.
+
     .. py:method:: write_table()
 
         Create an index and put documents for each row to Elasticsearch.
@@ -37,14 +45,6 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         :raises ValueError:
             If the |stream| has not elasticsearch.Elasticsearch instance.
-
-    .. py:attribute:: index_name
-
-        Alias attribute for |table_name|.
-
-    .. py:attribute:: document_type
-
-        Specify document type for indices. Defaults to ``"table"``.
 
     :Examples:
 

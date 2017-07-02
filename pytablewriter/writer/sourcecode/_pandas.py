@@ -22,9 +22,13 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
     """
     A writer class for Pandas DataFrame format.
 
-    :Examples:
+    .. py:attribute:: import_pandas_as
 
-        :ref:`example-pandas-dataframe-writer`
+        Specify ``pandas`` module import name. Defaults to ``"pd"``.
+
+    .. py:attribute:: import_numpy_as
+
+        Specify ``numpy`` module import name. Defaults to ``"np"``.
 
     .. py:method:: write_table
 
@@ -51,6 +55,10 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
             .. seealso::
 
                 :ref:`example-type-hint-python`
+
+    :Examples:
+
+        :ref:`example-pandas-dataframe-writer`
     """
 
     @property
