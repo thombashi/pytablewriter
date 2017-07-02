@@ -25,11 +25,22 @@ class ElasticsearchWriter(AbstractTableWriter):
     .. py:method:: write_table()
 
         Create an index and put documents for each row to Elasticsearch.
+
+        You need to pass an 
+        `elasticsearch.Elasticsearch <http://elasticsearch-py.readthedocs.io/en/master/api.html#elasticsearch>`__
+        instance to |stream| before calling this method.
+        |table_name|/:py:attr:`~pytablewriter.ElasticsearchWriter.index_name`
+        will be used as the creating index name,
+        invalid characters in the name are replaced with underscore (``'_'``).
         Document data types for documents are automatically detected
         from the data.
 
         :raises ValueError:
             If the |stream| has not elasticsearch.Elasticsearch instance.
+
+    .. py:attribute:: index_name
+
+        Alias attribute for |table_name|.
 
     .. py:attribute:: document_type
 
