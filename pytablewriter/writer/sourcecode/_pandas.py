@@ -65,15 +65,14 @@ class PandasDataFrameWriter(SourceCodeTableWriter):
         super(PandasDataFrameWriter, self).__init__()
 
         self.table_name = ""
-
+        self.import_pandas_as = "pd"
+        self.import_numpy_as = "np"
         self.is_write_header = False
         self._dp_extractor.type_value_mapping = {
             typepy.Typecode.NONE: None,
-            typepy.Typecode.INFINITY: "numpy.inf",
-            typepy.Typecode.NAN: "numpy.nan",
+            typepy.Typecode.INFINITY: "{:s}.inf".format(self.import_numpy_as),
+            typepy.Typecode.NAN: "{:s}.nan".format(self.import_numpy_as),
         }
-
-        self.import_pandas_as = "pd"
 
     def get_variable_name(self, value):
         import pathvalidate

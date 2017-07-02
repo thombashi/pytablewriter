@@ -23,7 +23,7 @@ from .data import (
 )
 
 try:
-    import numpy
+    import numpy as np
     import pandas
     SKIP_DATAFRAME_TEST = False
 except ImportError:
@@ -71,9 +71,9 @@ normal_test_data_list = [
         header=mix_header_list,
         value=mix_value_matrix,
         expected="""tablename = pd.DataFrame([
-    [1, 1.1, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-    [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, "2017-01-02 03:04:05+09:00"],
-    [3, 3.33, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [1, 1.1, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
+    [3, 3.33, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
 ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
 """),
@@ -238,9 +238,9 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
             ["ha", "hb", "hc"],
             value_matrix_iter,
             """tablename = pd.DataFrame([
-    [1, 0.125, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-    [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
-    [3, 3333.3, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [1, 0.125, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+    [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+    [3, 3333.3, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
 ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
 """,
@@ -256,17 +256,17 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
         df = pandas.DataFrame(
             [
                 [
-                    1, 0.125, "aa", 1.0, "1", True, numpy.inf, numpy.nan,
+                    1, 0.125, "aa", 1.0, "1", True, np.inf, np.nan,
                     1, dateutil.parser.parse("2017-01-01T00:00:00"),
                 ],
                 [
-                    2, 2.2, "bbb", 2.2, "2.2", False, numpy.inf, numpy.nan,
-                    numpy.inf, dateutil.parser.parse(
+                    2, 2.2, "bbb", 2.2, "2.2", False, np.inf, np.nan,
+                    np.inf, dateutil.parser.parse(
                         "2017-01-02T03:04:05+0900"),
                 ],
                 [
-                    3, 3333.3, "cccc", -3.0, "ccc", True, numpy.inf, numpy.nan,
-                    numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00"),
+                    3, 3333.3, "cccc", -3.0, "ccc", True, np.inf, np.nan,
+                    np.nan, dateutil.parser.parse("2017-01-01T00:00:00"),
                 ],
             ],
             columns=[
