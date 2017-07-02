@@ -36,7 +36,7 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected="""table_name_ho_ge = pandas.DataFrame([
+        expected="""table_name_ho_ge = pd.DataFrame([
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3, "cccc"],
@@ -48,7 +48,7 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=None,
-        expected="""tablename = pandas.DataFrame([
+        expected="""tablename = pd.DataFrame([
 ], columns=["a", "b", "c", "dd", "e"])
 
 """),
@@ -57,7 +57,7 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix_with_none,
-        expected="""table_with_null_value = pandas.DataFrame([
+        expected="""table_with_null_value = pd.DataFrame([
     [1, None, "a", 1, None],
     [None, 2.2, None, 2.2, 2.2],
     [3, 3.3, "ccc", None, "cccc"],
@@ -70,7 +70,7 @@ normal_test_data_list = [
         indent=0,
         header=mix_header_list,
         value=mix_value_matrix,
-        expected="""tablename = pandas.DataFrame([
+        expected="""tablename = pd.DataFrame([
     [1, 1.1, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
@@ -86,7 +86,7 @@ normal_test_data_list = [
             [None, "826.21158713263"],
             [0.1, "1.0499675627886724"],
         ],
-        expected="""float_with_null = pandas.DataFrame([
+        expected="""float_with_null = pd.DataFrame([
     [0.03785679191278808, 826.21158713263],
     [None, 826.21158713263],
     [0.1, 1.0499675627886724],
@@ -188,7 +188,7 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
             "tablename",
             ["ha", "hb", "hc"],
             value_matrix_iter,
-            """tablename = pandas.DataFrame([
+            """tablename = pd.DataFrame([
     [1, 2, 3],
     [11, 12, 13],
     [1, 2, 3],
@@ -237,7 +237,7 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
             "tablename",
             ["ha", "hb", "hc"],
             value_matrix_iter,
-            """tablename = pandas.DataFrame([
+            """tablename = pd.DataFrame([
     [1, 0.125, "aa", 1, 1, True, numpy.inf, numpy.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, numpy.inf, numpy.nan, numpy.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
     [3, 3333.3, "cccc", -3, "ccc", True, numpy.inf, numpy.nan, numpy.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
