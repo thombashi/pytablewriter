@@ -2,7 +2,6 @@
 
 JavaScript Code
 -----------------------------
-
 You can specify type hints to a writer via 
 :py:attr:`~AbstractTableWriter.type_hint_list`.
 
@@ -24,7 +23,6 @@ You can specify type hints to a writer via
         writer.table_name = "without type hint"
         writer.write_table()
         print()
-
 
         print("// with type hints: Integer, DateTime, String")
         writer.table_name = "with type hint"

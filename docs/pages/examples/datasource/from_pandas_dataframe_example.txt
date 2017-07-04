@@ -1,6 +1,6 @@
 :Sample Code:
     .. code-block:: python
-        :caption: Write a markdown table from pandas DataFrame
+        :caption: Write a markdown table from a pandas DataFrame
 
         import pandas as pd
         import pytablewriter

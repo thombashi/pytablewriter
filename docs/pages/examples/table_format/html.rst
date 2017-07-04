@@ -2,7 +2,6 @@
 
 HTML
 ----------------------------
-
 |HtmlTableWriter| class can write a table to a stream with 
 ``table`` tag format from a matrix of data.
 

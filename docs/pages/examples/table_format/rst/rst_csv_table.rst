@@ -2,8 +2,7 @@
 
 reStructuredText CSV Table
 -------------------------------------------
-
-|RstCsvTableWriter| the class can writes a table 
+|RstCsvTableWriter| class can writes a table 
 with reStructuredText CSV table format to the |stream| from a matrix of data.
 
 :Sample Code:

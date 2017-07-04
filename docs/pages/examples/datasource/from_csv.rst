@@ -44,7 +44,7 @@ from a CSV file
 
 :Sample Code:
     .. code-block:: python
-        :caption: Wite a table from CSV file
+        :caption: Write a table from a CSV file
 
         import io
         import pytablewriter

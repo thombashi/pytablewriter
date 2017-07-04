@@ -2,8 +2,7 @@
 
 reStructuredText Simple Tables
 -------------------------------------------
-
-|RstSimpleTableWriter| the class can write a table 
+|RstSimpleTableWriter| class can write a table 
 with reStructuredText simple table format to the |stream| from a matrix of data.
 
 :Sample Code:

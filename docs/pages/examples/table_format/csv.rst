@@ -2,7 +2,6 @@
 
 CSV
 ----------------------------
-
 |CsvTableWriter| class can write a Comma-Separated Values (CSV) table to the |stream| from a matrix of data.
 
 :Sample Code:
@@ -37,7 +36,6 @@ CSV
 
 TSV
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 |TsvTableWriter| class can write a Tab-Separated Values (TSV) table to the |stream| from a matrix of data.
 
 :Sample Code:

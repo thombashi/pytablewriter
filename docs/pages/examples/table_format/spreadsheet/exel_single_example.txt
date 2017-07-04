@@ -1,6 +1,6 @@
 :Sample Code:
     .. code-block:: python
-        :caption: Write a Excel sheets
+        :caption: Write an Excel sheet
 
         import pytablewriter
 

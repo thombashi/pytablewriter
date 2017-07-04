@@ -2,7 +2,6 @@
 
 LTSV
 ----------------------------
-
 |LtsvTableWriter| class can write a 
 `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ 
 table to the |stream| from a matrix of data.

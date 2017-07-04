@@ -1,6 +1,5 @@
 Basic usage
 --------------
-
 Basic usage of the ``pytablewriter`` is as follows:
 
 1. Create a writer instance that corresponds to the format you want to write
@@ -9,9 +8,9 @@ Basic usage of the ``pytablewriter`` is as follows:
 
 Next examples show how to write a table to the standard output/file with reStructuredText format.
 
+
 Write a table to the standard output (defaults)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 The standard output is the default output stream of writers
 (except the |ExcelXlsxTableWriter|).
 

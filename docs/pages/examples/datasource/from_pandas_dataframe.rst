@@ -3,6 +3,6 @@
 Using pandas DataFrame as tabular data source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use :py:class:`pandas.DataFrame` as a data source.
+You can use :py:class:`pandas.DataFrame` as a data source to write a table.
 
 .. include:: from_pandas_dataframe_example.txt

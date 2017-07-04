@@ -2,14 +2,12 @@
 
 JSON
 ----------------------------
-
 |JsonTableWriter| class can write a table to the |stream| with JSON format 
 from a matrix of data.
-JSON format will change if the |table_name| has a valid value or not.
+JSON format change if the |table_name| has a valid value or not.
 
-With a table name
+JSON with a table name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 :Sample Code:
     .. code-block:: python
         :caption: JSON w/ table name
@@ -67,9 +65,8 @@ With a table name
         }]}
 
 
-Without a table name
+JSON without a table name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 :Sample Code:
     .. code-block:: python
         :caption: JSON w/o table name

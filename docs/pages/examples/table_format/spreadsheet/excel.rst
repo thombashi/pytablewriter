@@ -2,7 +2,6 @@
 
 Excel Sheet
 -------------------------------------------
-
 |ExcelXlsxTableWriter| class can write a table to worksheet(s) in 
 an Excel workbook file (``.xlsx`` format) from a matrix of data.
 
@@ -11,7 +10,6 @@ an Excel workbook file (``.xlsx`` format) from a matrix of data.
 
 Excel Sheets
 -------------------------------------------
-
 :Sample Code:
     .. code-block:: python
         :caption: Write two Excel sheets

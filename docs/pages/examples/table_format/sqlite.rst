@@ -2,7 +2,6 @@
 
 SQLite
 ----------------------------
-
 |SqliteTableWriter| class can write a table to 
 a SQLite database file from a matrix of data.
 
