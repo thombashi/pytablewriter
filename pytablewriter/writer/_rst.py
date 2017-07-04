@@ -18,7 +18,7 @@ from ._text_writer import IndentationTextTableWriter
 
 class RstTableWriter(IndentationTextTableWriter):
     """
-    Base class of reStructuredText table writer.
+    A base class of reStructuredText table writer.
     """
 
     def __init__(self):
@@ -99,7 +99,6 @@ class RstCsvTableWriter(RstTableWriter):
             :ref:`example-rst-csv-table-writer`
 
         .. note::
-
             - |None| values will be written as an empty string.
         """
 
@@ -150,7 +149,6 @@ class RstGridTableWriter(RstTableWriter):
     format.
 
     :Examples:
-
         :ref:`example-rst-grid-table-writer`
 
     .. py:method:: write_table
@@ -158,7 +156,6 @@ class RstGridTableWriter(RstTableWriter):
         |write_table| with reStructuredText grid tables format.
 
         .. note::
-
             - |None| values will be written as an empty string.
     """
 
@@ -191,7 +188,6 @@ class RstSimpleTableWriter(RstTableWriter):
             :ref:`example-rst-simple-table-writer`
 
         .. note::
-
             - |None| values will be written as an empty string.
     """
 

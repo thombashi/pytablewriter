@@ -139,7 +139,7 @@ class TableFormat(enum.Enum):
         Searching table formats which have specific attributes.
 
         :param FormatAttr format_attribute:
-            Table format attributes looking for.
+            Table format attributes to look for.
         :return: Table format List.
         :rtype: list
         """

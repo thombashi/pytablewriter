@@ -23,7 +23,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
     .. py:method:: write_table
 
         |write_table| with ``NumPy`` format.
-        The tabular data will be written as a variable definition of
+        The tabular data are written as a variable definition of
         ``numpy.array``.
 
         :raises pytablewriter.EmptyTableNameError:
@@ -34,7 +34,6 @@ class NumpyTableWriter(PythonCodeTableWriter):
             :ref:`example-numpy-table-writer`
 
         .. note::
-
             Values in the tabular data which described below will be converted
             when writing:
 
@@ -46,7 +45,6 @@ class NumpyTableWriter(PythonCodeTableWriter):
                 - |False|: written as |str|
 
             .. seealso::
-
                 :ref:`example-type-hint-python`
     """
 

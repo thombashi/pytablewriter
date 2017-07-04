@@ -33,7 +33,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
     .. py:method:: write_table
 
         |write_table| with Pandas DataFrame format.
-        The tabular data will be written as a ``pandas.DataFrame`` class
+        The tabular data are written as a ``pandas.DataFrame`` class
         instance definition.
 
         :raises pytablewriter.EmptyTableNameError:
@@ -43,7 +43,6 @@ class PandasDataFrameWriter(NumpyTableWriter):
             :ref:`example-pandas-dataframe-writer`
 
         .. note::
-
             Values in the tabular data which described below will be converted
             when writing:
 
@@ -55,7 +54,6 @@ class PandasDataFrameWriter(NumpyTableWriter):
                 - |False|: written as |str|
 
             .. seealso::
-
                 :ref:`example-type-hint-python`
     """
 

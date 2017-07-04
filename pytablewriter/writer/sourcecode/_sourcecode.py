@@ -16,11 +16,11 @@ from .._text_writer import IndentationTextTableWriter
 
 class SourceCodeTableWriter(IndentationTextTableWriter):
     """
-    Base class of table writer with source code (variable definition) format.
+    Base class of table writer with a source code (variable definition) format.
 
     .. py:attribute:: is_datetime_instance_formatting
 
-        Write |datetime| values in the table as definition of date time class
+        Write |datetime| values in the table as definition of |datetime| class
         instances coincide with specific language if this value is |True|.
         Write as |str| if this value is |False|.
     """

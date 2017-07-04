@@ -24,7 +24,6 @@ class MediaWikiTableWriter(TextTableWriter):
     A table writer class for MediaWiki format.
 
     :Examples:
-
         :ref:`example-mediawiki-table-writer`
     """
 

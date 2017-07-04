@@ -14,7 +14,7 @@ import six
 @six.add_metaclass(abc.ABCMeta)
 class TableWriterInterface(object):
     """
-    Interface class of writing table.
+    Interface class for a writing table.
     """
 
     @abc.abstractproperty
@@ -45,7 +45,7 @@ class TableWriterInterface(object):
 @six.add_metaclass(abc.ABCMeta)
 class TextWriterInterface(object):
     """
-    Interface class of writing texts.
+    Interface class for writing texts.
     """
 
     @abc.abstractmethod
@@ -64,7 +64,7 @@ class BinaryWriterInterface(object):
 @six.add_metaclass(abc.ABCMeta)
 class IndentationInterface(object):
     """
-    Interface class of indentation methods.
+    Interface class for indentation methods.
     """
 
     @abc.abstractmethod

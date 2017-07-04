@@ -34,13 +34,13 @@ from ._interface import TableWriterInterface
 
 class AbstractTableWriter(TableWriterInterface):
     """
-    Base abstract class of table writer classes.
+    An abstract base class of table writer classes.
 
     .. py:attribute:: stream
 
         Stream to write tables.
         You can use arbitrary stream which supported ``write`` method
-        such as ``sys.stdout``, file stream, ``StringIO``, etc.
+        such as ``sys.stdout``, file stream, ``StringIO``, and so forth.
         Defaults to ``sys.stdout``.
 
     .. py:attribute:: table_name
@@ -57,7 +57,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     .. py:attribute:: type_hint_list
 
-        A list of type hints for each columns of data.
+        A list of type hints for each column of data.
         Acceptable values are as follows:
 
             - |None| (automatically detect column type from values in the column)
@@ -73,12 +73,12 @@ class AbstractTableWriter(TableWriterInterface):
             - :py:class:`pytablewriter.RealNumber`
             - :py:class:`pytablewriter.String`
 
-        A writer will convert data for each column using type-hint
+        A writer converts data for each column using type-hint
         information before writing tables when you call ``write_xxx`` methods.
-        If a type-hint value is not |None|, the writer will try to
+        If a type-hint value is not |None|, the writer tries to
         convert data for each data in a column to type-hint class.
         If the type-hint value is |None| or failed to convert data,
-        the writer will automatically detect column data type from
+        the writer automatically detect column data type from
         the column data.
 
         If ``type_hint_list`` is |None|, the writer will detect
@@ -87,7 +87,6 @@ class AbstractTableWriter(TableWriterInterface):
         Defaults to |None|.
 
         :Examples:
-
             :ref:`example-type-hint-js`
 
     .. py:attribute:: is_write_header
@@ -109,7 +108,7 @@ class AbstractTableWriter(TableWriterInterface):
         The value expected to a function.
         The function called when for each of the iteration of writing a table
         completed. (defaults to |None|)
-        Example callback function definition is as follows:
+        Example, callback function definition is as follows:
 
         .. code:: python
 
@@ -118,8 +117,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         Arguments that passed to the callback is:
 
-        - first argument: current iteration number (start from 1)
-        - second argument: total number of iteration
+        - first argument: current iteration number (start from ``1``)
+        - second argument: a total number of iteration
     """
 
     __RE_LINE_BREAK = re.compile("[\s\0\t\r\n]+")
@@ -255,14 +254,14 @@ class AbstractTableWriter(TableWriterInterface):
     def from_tabledata(self, tabledata):
         """
         Set tabular attributes to the writer from
-        :py:class:`pytablereader.TableData`. Following attributes will be set:
+        :py:class:`pytablereader.TableData`. Following attributes are set:
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
 
-        :py:class:`pytablereader.TableData` can be create from various data
-        formats, for more detailed information can be found in
+        :py:class:`pytablereader.TableData` can be created from various data
+        formats, for more detailed information, can be found in
         http://pytablereader.readthedocs.io/en/latest/
 
         :param pytablereader.TableData tabledata: Input table data.
@@ -274,22 +273,20 @@ class AbstractTableWriter(TableWriterInterface):
 
     def from_csv(self, csv_source):
         """
-        Set tabular attributes to the writer from
-        from CSV data source. Following attributes will be set:
+        Set tabular attributes to the writer from a CSV data source.
+        Following attributes are set:
 
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
 
-        :py:attr:`~.table_name` will be also setting if the CSV data source
-        is a file. In that case, :py:attr:`~.table_name` is as same as
-        the filename.
+        :py:attr:`~.table_name` also be set if the CSV data source is a file.
+        In that case, :py:attr:`~.table_name` is as same as the filename.
 
         :param str csv_source:
-            Input CSV data source, either can be designated CSV text or
+            Input CSV data source either can be designated CSV text or
             CSV file path.
 
         :Examples:
-
             :ref:`example-from-csv`
         """
 
@@ -308,7 +305,7 @@ class AbstractTableWriter(TableWriterInterface):
     def from_dataframe(self, dataframe):
         """
         Set tabular attributes to the writer from
-        from :py:class:`pandas.DataFrame`. Following attributes will be set:
+        :py:class:`pandas.DataFrame`. Following attributes are set:
 
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
@@ -316,7 +313,6 @@ class AbstractTableWriter(TableWriterInterface):
         :param pandas.DataFrame dataframe: Input dataframe.
 
         :Examples:
-
             :ref:`example-from-pandas-dataframe`
         """
 
@@ -338,10 +334,10 @@ class AbstractTableWriter(TableWriterInterface):
 
     def write_table_iter(self):
         """
-        Write a table with iteration.
-        "Iteration" means that divide the table writing into multiple process.
-        This method is useful especially for large data.
-        The following is premise to execute this method:
+        Write a table with iteration. "Iteration" means that divide the table
+        writing into multiple processes.
+        This method is useful, especially for large data.
+        The following are premises to execute this method:
 
         - set iterator to the |value_matrix|
         - set the number of iterations to the |iteration_length| attribute
@@ -355,7 +351,6 @@ class AbstractTableWriter(TableWriterInterface):
             If the class does not support this method.
 
         .. note::
-
             Following classes do not support this method:
             |HtmlTableWriter|, |RstGridTableWriter|, |RstSimpleTableWriter|.
             ``support_split_write`` attribute will return |True| if the class
@@ -550,7 +545,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         if typepy.is_empty_sequence(self.header_list):
             raise EmptyHeaderError(
-                "header_list expected to have one ore more header names")
+                "header_list expected to have one or more header names")
 
     def _verify_value_matrix(self):
         if typepy.is_empty_sequence(self.value_matrix):

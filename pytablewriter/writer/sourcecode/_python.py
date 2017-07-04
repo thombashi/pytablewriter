@@ -34,7 +34,6 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             :ref:`example-python-code-table-writer`
 
         .. note::
-
             Values in the tabular data which described below will be converted
             when writing:
 
@@ -46,7 +45,6 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
                 - |False|: written as |str|
 
             .. seealso::
-
                 :ref:`example-type-hint-python`
     """
 

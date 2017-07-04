@@ -37,7 +37,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     .. py:method:: write_table
 
         |write_table| with JavaScript format.
-        The tabular data will be written as a nested list variable definition.
+        The tabular data are written as a nested list variable definition.
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
@@ -47,7 +47,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             :ref:`example-js-table-writer`
 
         .. note::
-
             Values in the tabular data which described below will be converted
             when writing:
 
@@ -59,7 +58,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
                 - |False|: written as |str|
 
             .. seealso::
-
                 :ref:`example-type-hint-js`
     """
 

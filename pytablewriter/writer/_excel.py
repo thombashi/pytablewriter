@@ -25,7 +25,7 @@ from ._table_writer import AbstractTableWriter
 
 class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
     """
-    Abstract class of a table writer for Excel file format.
+    An abstract class of a table writer for Excel file format.
     """
 
     @property
@@ -224,7 +224,6 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         :raises IOError: If failed to write data to the worksheet.
 
         .. note::
-
             - |None| values will be written as an empty string.
             - |inf| values will be written as `Inf`
             - |nan| values will be written as ``NaN``
@@ -307,7 +306,6 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             :ref:`example-excel-table-writer`
 
         .. note::
-
             - |None| values will be written as an empty string.
             - |inf| values will be written as `Inf`
             - |nan| values will be written as ``NaN``

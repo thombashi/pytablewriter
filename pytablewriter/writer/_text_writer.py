@@ -22,7 +22,7 @@ from ._table_writer import AbstractTableWriter
 
 class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     """
-    Base class of table writer with text format.
+    A base class of table writer with the text format.
 
     .. py:attribute:: column_delimiter
 
@@ -30,15 +30,16 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     .. py:attribute:: char_left_side_row
 
-        A character of a left sides of a row.
+        A character of a left side of a row.
 
     .. py:attribute:: char_right_side_row
 
-        A character of a right sides of a row.
+        A character of a right side of a row.
 
     .. py:attribute:: char_cross_point
 
-        A character of crossing point of column delimiter and row delimiter.
+        A character of the crossing point of column delimiter and row
+        delimiter.
 
     .. py:attribute:: char_opening_row
 
@@ -111,8 +112,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         |write_table|.
 
         .. note::
-
-            - |None| values will be written as an empty string.
+            - |None| values are written as an empty string.
         """
 
         super(TextTableWriter, self).write_table()
@@ -121,10 +121,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def write_table_iter(self):
         """
-        Write a table with iteration.
-        "Iteration" means that divide the table writing into multiple process.
-        This method is useful especially for large data.
-        The following is premise to execute this method:
+        Write a table with iteration. "Iteration" means that divide the table
+        writing into multiple processes.
+        This method is useful, especially for large data.
+        The following are premises to execute this method:
 
         - set iterator to the |value_matrix|
         - set the number of iterations to the |iteration_length| attribute
@@ -138,7 +138,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             If the class does not support this method.
 
         .. note::
-
             Following classes do not support this method:
             |HtmlTableWriter|, |RstGridTableWriter|, |RstSimpleTableWriter|.
             ``support_split_write`` attribute will return |True| if the class
@@ -301,7 +300,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
 class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     """
-    Base class of table writer with indentation text format.
+    A base class of table writer with indentation text format.
 
     .. py:attribute:: indent_string
 

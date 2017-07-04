@@ -52,7 +52,6 @@ class HtmlTableWriter(TextTableWriter):
             :ref:`example-html-table-writer`
 
         .. note::
-
             - |None| is not written
         """
 

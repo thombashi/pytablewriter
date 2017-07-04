@@ -53,7 +53,7 @@ class TableWriterFactory(object):
         :param str file_extension:
             File extension string (case insensitive).
         :return:
-            Writer instance that coincide with the ``file_extension``.
+            Writer instance that coincides with the ``file_extension``.
         :raises pytablewriter.WriterNotFoundError:
             If appropriate writer not found.
         """
@@ -112,7 +112,7 @@ class TableWriterFactory(object):
             ==============================  ===================================
 
         :param str format_name: Format name string (case insensitive).
-        :return: Writer instance that coincide with the ``format_name``:
+        :return: Writer instance that coincides with the ``format_name``:
         :raises pytablewriter.WriterNotFoundError:
             If appropriate writer not found.
         """
