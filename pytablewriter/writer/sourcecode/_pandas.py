@@ -15,10 +15,10 @@ from ..._function import (
     quote_datetime_formatter,
     dateutil_datetime_formatter
 )
-from ._python import PythonCodeTableWriter
+from ._numpy import NumpyTableWriter
 
 
-class PandasDataFrameWriter(PythonCodeTableWriter):
+class PandasDataFrameWriter(NumpyTableWriter):
     """
     A writer class for Pandas DataFrame format.
 
@@ -68,12 +68,7 @@ class PandasDataFrameWriter(PythonCodeTableWriter):
 
         self.table_name = ""
         self.import_pandas_as = "pd"
-        self.import_numpy_as = "np"
         self.is_write_header = False
-        self._dp_extractor.type_value_mapping[typepy.Typecode.INFINITY] = (
-            "{:s}.inf".format(self.import_numpy_as))
-        self._dp_extractor.type_value_mapping[typepy.Typecode.NAN] = (
-            "{:s}.nan".format(self.import_numpy_as))
 
     def _get_opening_row_item_list(self):
         return ["{} = {}.DataFrame([".format(
