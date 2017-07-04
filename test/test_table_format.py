@@ -53,4 +53,4 @@ class Test_TableFormat_search_table_format(object):
         [0, []],
     ])
     def test_normal(self, value, expected):
-        assert set(TableFormat.search_table_format(value)) == set(expected)
+        assert set(TableFormat.find_all_attr(value)) == set(expected)

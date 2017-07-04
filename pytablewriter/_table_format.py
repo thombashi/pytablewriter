@@ -134,7 +134,7 @@ class TableFormat(enum.Enum):
         self.__file_extension_list = file_extension_list
 
     @classmethod
-    def search_table_format(cls, format_attribute):
+    def find_all_attr(cls, format_attribute):
         """
         Searching table formats which have specific attributes.
 
@@ -149,3 +149,15 @@ class TableFormat(enum.Enum):
             for table_format in TableFormat
             if table_format.format_attribute & format_attribute
         ]
+
+    @classmethod
+    def search_table_format(cls, format_attribute):
+        import warnings
+
+        warnings.warn(
+            "search_table_format will be deleted in the future, "
+            "use find_all_attr instead.",
+            DeprecationWarning
+        )
+
+        return cls.find_all_attr(format_attribute)
