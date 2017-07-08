@@ -38,7 +38,7 @@ class HtmlTableWriter(TextTableWriter):
         super(HtmlTableWriter, self).__init__()
 
         self.is_padding = False
-        self.indent_string = u"    "
+        self.indent_string = "    "
 
         self._quote_flag_mapping = copy.deepcopy(
             dataproperty.NULL_QUOTE_FLAG_MAPPING)

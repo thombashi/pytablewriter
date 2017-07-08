@@ -211,8 +211,8 @@ class Test_ExcelTableWriter_write_table_iter(object):
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 TableData(
-                    table_name=u'tablename',
-                    header_list=[u'ha', u'hb', u'hc'],
+                    table_name='tablename',
+                    header_list=['ha', 'hb', 'hc'],
                     record_list=[
                         [1.0, 2.0, 3.0],
                         [11.0, 12.0, 13.0],

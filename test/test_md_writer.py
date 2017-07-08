@@ -158,14 +158,14 @@ a  |  b  | c |dd | e
     Data(
         table="",
         indent=0,
-        header=[u'Name', u'xUnit', u'Source', u'Remarks'],
+        header=['Name', 'xUnit', 'Source', 'Remarks'],
         value=[
             [
-                u'Crotest',
-                u'',
-                u'[160]',
-                u'MIT License. A tiny and simple test framework for Crystal\nwith common assertions and no pollution into Object class.',
-                u'',
+                'Crotest',
+                '',
+                '[160]',
+                'MIT License. A tiny and simple test framework for Crystal\nwith common assertions and no pollution into Object class.',
+                '',
             ]
         ],
         is_float_formatting=True,
