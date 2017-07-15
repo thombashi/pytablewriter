@@ -67,7 +67,7 @@ class MediaWikiTableWriter(TextTableWriter):
         ])
 
     def _get_opening_row_item_list(self):
-        return '{| class="wikitable"'
+        return ['{| class="wikitable"']
 
     def _get_header_row_separator_item_list(self):
         return ["|-"]
@@ -76,7 +76,7 @@ class MediaWikiTableWriter(TextTableWriter):
         return self._get_header_row_separator_item_list()
 
     def _get_closing_row_item_list(self):
-        return "|}"
+        return ["|}"]
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "! {{:{:s}{:s}}}".format(

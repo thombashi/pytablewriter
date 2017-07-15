@@ -67,7 +67,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
         if typepy.is_not_null_string(self.table_name):
             return ["{} = {}".format(self.variable_name, array_def)]
 
-        return array_def
+        return [array_def]
 
     def _get_closing_row_item_list(self):
-        return "])"
+        return ["])"]

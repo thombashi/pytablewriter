@@ -132,11 +132,11 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
 
     def _get_opening_row_item_list(self):
-        return "{:s} {:s} = [".format(
-            self.variable_declaration, self.variable_name)
+        return ["{:s} {:s} = [".format(
+            self.variable_declaration, self.variable_name)]
 
     def _get_closing_row_item_list(self):
-        return "];"
+        return ["];"]
 
     def _get_row_item(self, col_dp, value_dp):
         if value_dp.data is None:
