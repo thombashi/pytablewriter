@@ -148,11 +148,24 @@ a  |  b  | c |dd | e
         header=float_header_list,
         value=float_value_matrix,
         is_formatting_float=True,
-        expected="""a   |   b   |  c  
----:|------:|----:
-0.01|  9.123|0.000
-1.00| 99.123|0.010
-1.20|999.123|0.001
+        expected="""a   |     b     |  c  
+---:|----------:|----:
+0.01|     0.0012|0.000
+1.00|    99.9000|0.010
+1.20|999999.1230|0.001
+
+"""),
+    Data(
+        table="",
+        indent=0,
+        header=float_header_list,
+        value=float_value_matrix,
+        is_formatting_float=False,
+        expected="""a   |     b     |  c  
+---:|----------:|----:
+0.01|    0.00125|    0
+   1|       99.9| 0.01
+ 1.2| 999999.123|0.001
 
 """),
     Data(

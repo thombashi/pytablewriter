@@ -45,23 +45,24 @@ mix_header_list = [
 ]
 mix_value_matrix = [
     [
-        1, 1.1,  "aa",   1,   1,     True,
-        _inf,       _nan,  1.0,  _time
+        1, 1.1, "aa", 1, 1, True,
+        _inf, _nan, 1.0, _time,
     ],
     [
-        2, 2.2,  "bbb",  2.2, 2.2,   False,
-        "inf",      "nan", _inf, "2017-01-02 03:04:05+09:00",
+        2, 2.2, "bbb", 2.2, 2.2, False,
+        "inf", "nan", _inf, "2017-01-02 03:04:05+09:00",
     ],
     [
-        3, 3.33, "cccc", -3,  "ccc", "true",
-        "infinity", "NAN", _nan, _time],
+        3, 3.33, "cccc", -3, "ccc", "true",
+        "infinity", "NAN", _nan, _time,
+    ],
 ]
 
 float_header_list = ["a", "b", "c"]
 float_value_matrix = [
-    [0.01, 9.123,   0.0],
-    [1.0, 99.123,  0.01],
-    [1.2, 999.123, 0.001],
+    [0.01, 0.00125, 0.0],
+    [1.0, 99.9,  0.01],
+    [1.2, 999999.123, 0.001],
 ]
 
 value_matrix_iter = [
@@ -76,7 +77,6 @@ value_matrix_iter = [
     [
         [101, 102, 103],
         [1001, 1002, 1003],
-
     ],
 ]
 
@@ -92,7 +92,6 @@ value_matrix_iter_1 = [
     [
         ["a", 102, 103],
         ["", 1002, 1003],
-
     ],
 ]
 

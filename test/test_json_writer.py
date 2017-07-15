@@ -15,12 +15,14 @@ import pytablewriter
 import pytest
 
 from .data import (
+    float_header_list,
+    float_value_matrix,
     header_list,
-    value_matrix,
-    value_matrix_with_none,
     mix_header_list,
     mix_value_matrix,
+    value_matrix,
     value_matrix_iter,
+    value_matrix_with_none,
 )
 
 
@@ -94,11 +96,11 @@ normal_test_data_list = [
         """)
     ),
     Data(
-        table="table name",
+        table="with none values",
         header=header_list,
         value=value_matrix_with_none,
         expected=json.loads("""{
-            "table name": [
+            "with none values": [
                 {
                     "a": 1,
                     "b": null,
@@ -132,10 +134,10 @@ normal_test_data_list = [
         """)
     ),
     Data(
-        table="table name",
+        table="mixed values",
         header=mix_header_list,
         value=mix_value_matrix,
-        expected=json.loads("""{ "table name" : [
+        expected=json.loads("""{ "mixed values" : [
             {
                 "bool": true,
                 "c": "aa",
@@ -174,6 +176,28 @@ normal_test_data_list = [
             }]}
         """)
     ),
+    Data(
+        table="float",
+        header=float_header_list,
+        value=float_value_matrix,
+        expected=json.loads("""{ "float" : [
+{
+    "a": 0.01,
+    "b": 0.00125,
+    "c": 0
+},
+{
+    "a": 1,
+    "b": 99.9,
+    "c": 0.01
+},
+{
+    "a": 1.2,
+    "b": 999999.123,
+    "c": 0.001
+}]}
+
+""")),
 ]
 
 exception_test_data_list = [

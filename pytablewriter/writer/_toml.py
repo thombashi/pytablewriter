@@ -30,6 +30,7 @@ class TomlTableWriter(TextTableWriter):
         super(TomlTableWriter, self).__init__()
 
         self._is_required_table_name = True
+        self.is_formatting_float = False
 
     def write_table(self):
         """

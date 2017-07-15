@@ -19,6 +19,8 @@ import toml
 import pytablewriter as ptw
 
 from .data import (
+    float_header_list,
+    float_value_matrix,
     header_list,
     value_matrix,
 )
@@ -118,6 +120,24 @@ float = 4.4
 datetime = 2022-01-01T00:00:00Z
 int = -1
 bool = false
+"""),
+    Data(
+        table_name="float",
+        header=float_header_list,
+        value=float_value_matrix,
+        expected="""[[float]]
+a = 0.01
+b = 0.00125
+c = 0
+[[float]]
+a = 1
+b = 99.9
+c = 0.01
+[[float]]
+a = 1.2
+b = 999999.123
+c = 0.001
+
 """),
 ]
 
