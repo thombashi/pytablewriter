@@ -5,6 +5,7 @@ Write a table
    :maxdepth: 2
 
    csv
+   latex/index
    ltsv
    elasticsearch
    spreadsheet/index

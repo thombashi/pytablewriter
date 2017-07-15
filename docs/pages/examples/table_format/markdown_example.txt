@@ -16,7 +16,6 @@
         
         writer.write_table()
 
-
 :Output:
     .. code-block:: none
 
@@ -28,12 +27,9 @@
           3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900
         -10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900
 
-
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. figure:: ss/markdown.png
-   :scale: 80%
-   :alt: markdown_ss
-   
-   Rendered markdown at GitHub
+:Rendering Result:
+    .. figure:: ss/markdown.png
+       :scale: 80%
+       :alt: markdown_ss
+       
+       Rendered markdown at GitHub

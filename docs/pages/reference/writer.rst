@@ -39,6 +39,20 @@ Xls table writer
     :inherited-members:
 
 
+LaTeX writer classes
+-------------------------------
+
+LaTeX matrix writer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: pytablewriter.LatexMatrixWriter
+    :inherited-members:
+
+LaTeX table writer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: pytablewriter.LatexTableWriter
+    :inherited-members:
+
+
 Markup language writer classes
 -------------------------------
 

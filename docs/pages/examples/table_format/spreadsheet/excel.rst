@@ -46,7 +46,6 @@ Excel Sheets
 
         writer.close()
 
-
 :Output:
     .. figure:: ss/excel_multi.png
        :scale: 100%

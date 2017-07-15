@@ -19,7 +19,6 @@
 
         writer.close()
 
-
 :Output:
     .. figure:: ss/excel_single.png
        :scale: 100%

@@ -23,7 +23,6 @@ with reStructuredText CSV table format to the |stream| from a matrix of data.
         
         writer.write_table()
 
-
 :Output:
     .. code-block:: ReST
 
@@ -36,15 +35,12 @@ with reStructuredText CSV table format to the |stream| from a matrix of data.
             3, 0.00, "bar", True, Infinity, "2017-03-03 22:44:55+0900"
             -10, -9.90, , False, NaN, "2017-01-01 00:00:00+0900"
 
-
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. csv-table:: example_table
-    :header: "int", "float", "str", "bool", "mix", "time"
-    :widths: 5, 7, 6, 6, 8, 26
-    
-    0, 0.10, "hoge", True, 0, "2017-01-01 03:04:05+0900"
-    2, -2.23, "foo", False, , "2017-12-23 12:34:51+0900"
-    3, 0.00, "bar", True, Infinity, "2017-03-03 22:44:55+0900"
-    -10, -9.90, , False, NaN, "2017-01-01 00:00:00+0900"
+:Rendering Result:
+    .. csv-table:: example_table
+        :header: "int", "float", "str", "bool", "mix", "time"
+        :widths: 5, 7, 6, 6, 8, 26
+        
+        0, 0.10, "hoge", True, 0, "2017-01-01 03:04:05+0900"
+        2, -2.23, "foo", False, , "2017-12-23 12:34:51+0900"
+        3, 0.00, "bar", True, Infinity, "2017-03-03 22:44:55+0900"
+        -10, -9.90, , False, NaN, "2017-01-01 00:00:00+0900"

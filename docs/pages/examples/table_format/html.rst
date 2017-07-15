@@ -23,7 +23,6 @@ HTML
         
         writer.write_table()
 
-
 :Output:
     .. code-block:: html
 
@@ -75,56 +74,53 @@ HTML
             </tbody>
         </table>
 
+:Rendering Result:
+    .. raw:: html
 
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-    <table id="example_table">
-        <caption>example_table</caption>
-        <thead>
-            <tr>
-                <th>int</th>
-                <th>float</th>
-                <th>str</th>
-                <th>bool</th>
-                <th>mix</th>
-                <th>time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td align="right">0</td>
-                <td align="right">0.1</td>
-                <td align="left">hoge</td>
-                <td align="left">True</td>
-                <td align="right">0</td>
-                <td align="left">2017-01-01 03:04:05+0900</td>
-            </tr>
-            <tr>
-                <td align="right">2</td>
-                <td align="right">-2.2</td>
-                <td align="left">foo</td>
-                <td align="left">False</td>
-                <td align="left"></td>
-                <td align="left">2017-12-23 12:34:51+0900</td>
-            </tr>
-            <tr>
-                <td align="right">3</td>
-                <td align="right">0.0</td>
-                <td align="left">bar</td>
-                <td align="left">True</td>
-                <td align="left">inf</td>
-                <td align="left">2017-03-03 22:44:55+0900</td>
-            </tr>
-            <tr>
-                <td align="right">-10</td>
-                <td align="right">-9.9</td>
-                <td align="left"></td>
-                <td align="left">False</td>
-                <td align="left">nan</td>
-                <td align="left">2017-01-01 00:00:00+0900</td>
-            </tr>
-        </tbody>
-    </table>
+        <table id="example_table">
+            <caption>example_table</caption>
+            <thead>
+                <tr>
+                    <th>int</th>
+                    <th>float</th>
+                    <th>str</th>
+                    <th>bool</th>
+                    <th>mix</th>
+                    <th>time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="right">0</td>
+                    <td align="right">0.1</td>
+                    <td align="left">hoge</td>
+                    <td align="left">True</td>
+                    <td align="right">0</td>
+                    <td align="left">2017-01-01 03:04:05+0900</td>
+                </tr>
+                <tr>
+                    <td align="right">2</td>
+                    <td align="right">-2.2</td>
+                    <td align="left">foo</td>
+                    <td align="left">False</td>
+                    <td align="left"></td>
+                    <td align="left">2017-12-23 12:34:51+0900</td>
+                </tr>
+                <tr>
+                    <td align="right">3</td>
+                    <td align="right">0.0</td>
+                    <td align="left">bar</td>
+                    <td align="left">True</td>
+                    <td align="left">inf</td>
+                    <td align="left">2017-03-03 22:44:55+0900</td>
+                </tr>
+                <tr>
+                    <td align="right">-10</td>
+                    <td align="right">-9.9</td>
+                    <td align="left"></td>
+                    <td align="left">False</td>
+                    <td align="left">nan</td>
+                    <td align="left">2017-01-01 00:00:00+0900</td>
+                </tr>
+            </tbody>
+        </table>

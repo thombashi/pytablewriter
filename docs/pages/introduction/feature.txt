@@ -1,6 +1,5 @@
 Features
 --------
-
 - Write a table in various formats:
     - CSV
     - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
@@ -8,6 +7,7 @@ Features
     - HTML
     - JSON
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
+    - LaTeX: ``tabular``/``array`` environment
     - Markdown
     - MediaWiki
     - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__

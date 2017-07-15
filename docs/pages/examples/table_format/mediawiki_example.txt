@@ -16,7 +16,6 @@
         
         writer.write_table()
 
-
 :Output:
     .. code-block:: none
 
@@ -58,11 +57,8 @@
         | 2017-01-01 00:00:00+0900
         |}
 
-
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. figure:: ss/mediawiki.png
-   :alt: mediawiki_ss
-   
-   Rendered at Wikia
+:Rendering Result:
+    .. figure:: ss/mediawiki.png
+       :alt: mediawiki_ss
+       
+       Rendered at Wikia
