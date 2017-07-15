@@ -25,7 +25,6 @@ from .data import (
     value_matrix,
     mix_header_list,
     mix_value_matrix,
-    value_matrix_iter
 )
 
 

@@ -9,10 +9,6 @@ from __future__ import unicode_literals
 
 import typepy
 
-from ..._function import (
-    quote_datetime_formatter,
-    dateutil_datetime_formatter
-)
 from ._python import PythonCodeTableWriter
 
 
