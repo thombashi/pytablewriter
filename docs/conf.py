@@ -377,6 +377,9 @@ rp_attr = u"""
 
 rp_method = u"""
 .. |write_table| replace:: Write a table to the |stream|
+
+.. |WriterNotFoundError_desc| replace::
+    If an appropriate writer not found for 
 """
 
 rp_raises = u"""

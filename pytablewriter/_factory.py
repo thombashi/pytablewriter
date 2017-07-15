@@ -55,7 +55,7 @@ class TableWriterFactory(object):
         :return:
             Writer instance that coincides with the ``file_extension``.
         :raises pytablewriter.WriterNotFoundError:
-            If appropriate writer not found.
+            |WriterNotFoundError_desc| the file extension.
         """
 
         ext = os.path.splitext(file_extension)[1]
@@ -114,7 +114,7 @@ class TableWriterFactory(object):
         :param str format_name: Format name string (case insensitive).
         :return: Writer instance that coincides with the ``format_name``:
         :raises pytablewriter.WriterNotFoundError:
-            If appropriate writer not found.
+            |WriterNotFoundError_desc| for the format.
         """
 
         format_name = format_name.lower()
