@@ -22,7 +22,7 @@ pytablewriter
 Summary
 -------
 
-A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
