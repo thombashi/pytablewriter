@@ -64,7 +64,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             True: "true", False: "false"}
 
         self._quote_flag_mapping = copy.deepcopy(
-            dataproperty.NULL_QUOTE_FLAG_MAPPING)
+            dataproperty.NOT_QUOTING_FLAGS)
 
     def write_null_line(self):
         self._verify_stream()

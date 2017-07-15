@@ -156,11 +156,11 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def _quote_flag_mapping(self):
-        return self._dp_extractor.quote_flag_mapping
+        return self._dp_extractor.quoting_flags
 
     @_quote_flag_mapping.setter
     def _quote_flag_mapping(self, value):
-        self._dp_extractor.quote_flag_mapping = value
+        self._dp_extractor.quoting_flags = value
         self.__clear_preprocessed_data()
 
     @abc.abstractmethod

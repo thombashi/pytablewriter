@@ -41,7 +41,7 @@ class HtmlTableWriter(TextTableWriter):
         self.indent_string = "    "
 
         self._quote_flag_mapping = copy.deepcopy(
-            dataproperty.NULL_QUOTE_FLAG_MAPPING)
+            dataproperty.NOT_QUOTING_FLAGS)
         self._table_tag = None
 
     def write_table(self):
