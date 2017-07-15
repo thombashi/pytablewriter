@@ -34,7 +34,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         Create an index and put documents for each row to Elasticsearch.
 
-        You need to pass an 
+        You need to pass an
         `elasticsearch.Elasticsearch <http://elasticsearch-py.readthedocs.io/en/master/api.html#elasticsearch>`__
         instance to |stream| before calling this method.
         |table_name|/:py:attr:`~pytablewriter.ElasticsearchWriter.index_name`
@@ -45,7 +45,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         :raises ValueError:
             If the |stream| has not elasticsearch.Elasticsearch instance.
-        :Examples:
+        :Example:
             :ref:`example-elasticsearch-table-writer`
     """
 

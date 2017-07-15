@@ -26,24 +26,10 @@ def dump_tabledata(tabledata, format_name="rst_grid_table"):
     :param pytablereader.TableData tabledata: Tabular data to dump.
     :param str format_name:
         Dumped format name of tabular data.
-        Available formats are as follows:
+        Available formats are described in
+        :py:meth:`~pytablewriter.TableWriterFactory.create_from_format_name`
 
-            - ``csv``
-            - ``excel``
-            - ``html``
-            - ``javascript``
-            - ``js``
-            - ``json``
-            - ``markdown``
-            - ``mediawiki``
-            - ``null``
-            - ``pandas``
-            - ``py``/``python``
-            - ``rst``/``rst_grid_table``
-            - ``rst_csv_table``
-            - ``rst_simple_table``
-
-    :Examples:
+    :Example:
         .. code:: python
 
             >>>dump_tabledata(tabledata)

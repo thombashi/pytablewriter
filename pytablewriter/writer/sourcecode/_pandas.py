@@ -35,7 +35,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
-        :Examples:
+        :Example:
             :ref:`example-pandas-dataframe-writer`
 
         .. note::

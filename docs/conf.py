@@ -325,6 +325,8 @@ rp_class = u"""
 .. |HtmlTableWriter| replace:: :py:class:`~pytablewriter.HtmlTableWriter`
 .. |JavaScriptTableWriter| replace:: :py:class:`~pytablewriter.JavaScriptTableWriter`
 .. |JsonTableWriter| replace:: :py:class:`~pytablewriter.JsonTableWriter`
+.. |LatexMatrixWriter| replace:: :py:class:`~pytablewriter.LatexMatrixWriter`
+.. |LatexTableWriter| replace:: :py:class:`~pytablewriter.LatexTableWriter`
 .. |LtsvTableWriter| replace:: :py:class:`~pytablewriter.LtsvTableWriter`
 .. |MarkdownTableWriter| replace:: :py:class:`~pytablewriter.MarkdownTableWriter`
 .. |MediaWikiTableWriter| replace:: :py:class:`~pytablewriter.MediaWikiTableWriter`

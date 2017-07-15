@@ -41,7 +41,7 @@ class LtsvTableWriter(CsvTableWriter):
         Invalid characters in labels/data will be removed.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
-        :Examples:
+        :Example:
             :ref:`example-ltsv-table-writer`
         """
 

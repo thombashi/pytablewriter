@@ -41,7 +41,7 @@ class TomlTableWriter(TextTableWriter):
             If the |header_list| is empty.
         :raises pytablewriter.EmptyHeaderError:
             If the |header_list| is empty.
-        :Examples:
+        :Example:
             :ref:`example-toml-table-writer`
         """
 

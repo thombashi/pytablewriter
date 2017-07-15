@@ -48,7 +48,7 @@ class HtmlTableWriter(TextTableWriter):
         """
         |write_table| with HTML table format.
 
-        :Examples:
+        :Example:
             :ref:`example-html-table-writer`
 
         .. note::

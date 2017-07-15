@@ -90,7 +90,7 @@ class LatexMatrixWriter(LatexWriter):
         |write_table| with LaTeX ``array`` environment.
 
         :Example:
-            :ref:`example-latex-matrix`
+            :ref:`example-latex-matrix-writer`
     """
 
     _RE_VAR = re.compile("^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
@@ -151,6 +151,16 @@ class LatexMatrixWriter(LatexWriter):
 
 
 class LatexTableWriter(LatexWriter):
+    """
+    A matrix writer class for LaTeX environment.
+
+    .. py:method:: write_table
+
+        |write_table| with LaTeX ``tabular`` environment.
+
+        :Example:
+            :ref:`example-latex-table-writer`
+    """
 
     @property
     def format_name(self):

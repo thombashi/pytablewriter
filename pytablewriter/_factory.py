@@ -30,24 +30,24 @@ class TableWriterFactory(object):
         Supported file extensions are as follows:
 
             ==================  ===================================
-            Extension           Writer Class                       
+            Extension           Writer Class
             ==================  ===================================
-            ``".csv"``          :py:class:`~.CsvTableWriter`       
-            ``".htm"``          :py:class:`~.HtmlTableWriter`      
-            ``".html"``         :py:class:`~.HtmlTableWriter`      
+            ``".csv"``          :py:class:`~.CsvTableWriter`
+            ``".htm"``          :py:class:`~.HtmlTableWriter`
+            ``".html"``         :py:class:`~.HtmlTableWriter`
             ``".js"``           :py:class:`~.JavaScriptTableWriter`
-            ``".json"``         :py:class:`~.JsonTableWriter`      
-            ``".ltsv"``         :py:class:`~.LtsvTableWriter`       
-            ``".md"``           :py:class:`~.MarkdownTableWriter`  
+            ``".json"``         :py:class:`~.JsonTableWriter`
+            ``".ltsv"``         :py:class:`~.LtsvTableWriter`
+            ``".md"``           :py:class:`~.MarkdownTableWriter`
             ``".py"``           :py:class:`~.PythonCodeTableWriter`
-            ``".rst"``          :py:class:`~.RstGridTableWriter`   
-            ``".tsv"``          :py:class:`~.TsvTableWriter`       
-            ``".xls"``          :py:class:`~.ExcelXlsTableWriter`  
-            ``".xlsx"``         :py:class:`~.ExcelXlsxTableWriter` 
-            ``".sqlite"``       :py:class:`~.SqliteTableWriter`    
-            ``".sqlite3"``      :py:class:`~.SqliteTableWriter`    
-            ``".tsv"``          :py:class:`~.TsvTableWriter`       
-            ``".toml"``         :py:class:`~.TomlTableWriter`      
+            ``".rst"``          :py:class:`~.RstGridTableWriter`
+            ``".tsv"``          :py:class:`~.TsvTableWriter`
+            ``".xls"``          :py:class:`~.ExcelXlsTableWriter`
+            ``".xlsx"``         :py:class:`~.ExcelXlsxTableWriter`
+            ``".sqlite"``       :py:class:`~.SqliteTableWriter`
+            ``".sqlite3"``      :py:class:`~.SqliteTableWriter`
+            ``".tsv"``          :py:class:`~.TsvTableWriter`
+            ``".toml"``         :py:class:`~.TomlTableWriter`
             ==================  ===================================
 
         :param str file_extension:
@@ -89,28 +89,28 @@ class TableWriterFactory(object):
         Supported file format names are as follows:
 
             ==============================  ===================================
-            Format name                     Writer Class                       
+            Format name                     Writer Class
             ==============================  ===================================
-            ``"csv"``                       :py:class:`~.CsvTableWriter`       
-            ``"elasticsearch"``             :py:class:`~.ElasticsearchWriter`  
-            ``"excel"``                     :py:class:`~.ExcelXlsxTableWriter` 
-            ``"html"``/``"htm"``            :py:class:`~.HtmlTableWriter`      
+            ``"csv"``                       :py:class:`~.CsvTableWriter`
+            ``"elasticsearch"``             :py:class:`~.ElasticsearchWriter`
+            ``"excel"``                     :py:class:`~.ExcelXlsxTableWriter`
+            ``"html"``/``"htm"``            :py:class:`~.HtmlTableWriter`
             ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
-            ``"json"``                      :py:class:`~.JsonTableWriter`      
-            ``"ltsv"``                      :py:class:`~.LtsvTableWriter`       
+            ``"json"``                      :py:class:`~.JsonTableWriter`
             ``"latex_matrix"``              :py:class:`~.LatexMatrixWriter`
             ``"latex_table"``               :py:class:`~.LatexTableWriter`
-            ``"markdown"``/``"md"``         :py:class:`~.MarkdownTableWriter`  
-            ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter` 
-            ``"null"``                      :py:class:`~.NullTableWriter`      
+            ``"ltsv"``                      :py:class:`~.LtsvTableWriter`
+            ``"markdown"``/``"md"``         :py:class:`~.MarkdownTableWriter`
+            ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter`
+            ``"null"``                      :py:class:`~.NullTableWriter`
             ``"pandas"``                    :py:class:`~.PandasDataFrameWriter`
             ``"py"``/``"python"``           :py:class:`~.PythonCodeTableWriter`
-            ``"rst"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`   
-            ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter` 
-            ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`    
-            ``"sqlite"``                    :py:class:`~.SqliteTableWriter`    
-            ``"tsv"``                       :py:class:`~.TsvTableWriter`       
-            ``"toml"``                      :py:class:`~.TomlTableWriter`      
+            ``"rst"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`
+            ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter`
+            ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`
+            ``"sqlite"``                    :py:class:`~.SqliteTableWriter`
+            ``"tsv"``                       :py:class:`~.TsvTableWriter`
+            ``"toml"``                      :py:class:`~.TomlTableWriter`
             ==============================  ===================================
 
         :param str format_name: Format name string (case insensitive).
@@ -142,7 +142,7 @@ class TableWriterFactory(object):
         :return: Available format name List.
         :rtype: list
 
-        :Examples:
+        :Example:
             .. code:: python
 
                 >>> import pytablewriter as ptw
@@ -157,11 +157,14 @@ class TableWriterFactory(object):
                 javascript
                 js
                 json
+                latex_matrix
+                latex_table
                 ltsv
                 markdown
                 md
                 mediawiki
                 null
+                numpy
                 pandas
                 py
                 python
@@ -172,6 +175,7 @@ class TableWriterFactory(object):
                 sqlite
                 toml
                 tsv
+
         """
 
         format_name_set = set()
@@ -187,7 +191,7 @@ class TableWriterFactory(object):
         :return: Available file extension list.
         :rtype: list
 
-        :Examples:
+        :Example:
             .. code:: python
 
                 >>> import pytablewriter as ptw
@@ -205,6 +209,7 @@ class TableWriterFactory(object):
                 rst
                 sqlite
                 sqlite3
+                tex
                 toml
                 tsv
                 xls

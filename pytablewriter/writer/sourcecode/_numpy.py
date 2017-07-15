@@ -26,7 +26,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
             If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
             If the |header_list| and the |value_matrix| is empty.
-        :Examples:
+        :Example:
             :ref:`example-numpy-table-writer`
 
         .. note::

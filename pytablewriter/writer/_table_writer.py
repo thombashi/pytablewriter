@@ -312,7 +312,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         :param pandas.DataFrame dataframe: Input dataframe.
 
-        :Examples:
+        :Example:
             :ref:`example-from-pandas-dataframe`
         """
 

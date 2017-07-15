@@ -26,7 +26,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         |write_table| with Markdown table format.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
-        :Examples:
+        :Example:
             :ref:`example-markdown-table-writer`
 
         .. note::
