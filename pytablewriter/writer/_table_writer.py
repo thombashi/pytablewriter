@@ -155,11 +155,11 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocessed_data()
 
     @property
-    def _quote_flag_mapping(self):
+    def _quoting_flags(self):
         return self._dp_extractor.quoting_flags
 
-    @_quote_flag_mapping.setter
-    def _quote_flag_mapping(self, value):
+    @_quoting_flags.setter
+    def _quoting_flags(self, value):
         self._dp_extractor.quoting_flags = value
         self.__clear_preprocessed_data()
 
@@ -203,7 +203,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
 
         self.type_hint_list = None
-        self._quote_flag_mapping = {
+        self._quoting_flags = {
             Typecode.BOOL: False,
             Typecode.DATETIME: True,
             Typecode.DICTIONARY: False,

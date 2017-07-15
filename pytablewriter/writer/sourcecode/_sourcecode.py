@@ -56,7 +56,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self.is_formatting_float = False
         self.is_datetime_instance_formatting = True
 
-        self._quote_flag_mapping[typepy.Typecode.DATETIME] = False
+        self._quoting_flags[typepy.Typecode.DATETIME] = False
         self._is_required_table_name = True
         self._is_remove_line_break = True
 

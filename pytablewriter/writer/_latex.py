@@ -39,8 +39,7 @@ class LatexWriter(IndentationTextTableWriter):
         self.column_delimiter = " & "
         self.char_right_side_row = r" \\"
 
-        self._quote_flag_mapping = copy.deepcopy(
-            dp.NOT_QUOTING_FLAGS)
+        self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
         self._is_remove_line_break = True
 
     def _is_math_parts(self, value_dp):

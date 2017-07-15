@@ -33,8 +33,7 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
-        self._quote_flag_mapping = copy.deepcopy(
-            dataproperty.NOT_QUOTING_FLAGS)
+        self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self._is_remove_line_break = True
 
     def write_table(self):
@@ -87,7 +86,7 @@ class RstCsvTableWriter(RstTableWriter):
         self.is_write_value_separator_row = False
         self.is_write_closing_row = False
 
-        self._quote_flag_mapping[typepy.Typecode.STRING] = True
+        self._quoting_flags[typepy.Typecode.STRING] = True
 
     def write_table(self):
         """

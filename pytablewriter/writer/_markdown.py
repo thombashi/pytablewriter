@@ -49,7 +49,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self.char_cross_point = "|"
         self.is_write_opening_row = True
 
-        self._quote_flag_mapping = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
+        self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
         self._is_remove_line_break = True
 
         self._dp_extractor.min_column_width = 3
