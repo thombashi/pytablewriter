@@ -23,6 +23,8 @@ class Test_TableFormat_search_table_format(object):
                 TableFormat.HTML,
                 TableFormat.JAVASCRIPT,
                 TableFormat.JSON,
+                TableFormat.LATEX_MATRIX,
+                TableFormat.LATEX_TABLE,
                 TableFormat.LTSV,
                 TableFormat.MARKDOWN,
                 TableFormat.MEDIAWIKI,

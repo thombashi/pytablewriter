@@ -20,9 +20,10 @@ class Test_WriterFactory_get_format_name_list(object):
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_name_list() == [
             "csv", "elasticsearch", "excel", "htm", "html", "javascript", "js",
-            "json", "ltsv", "markdown", "md", "mediawiki", "null", "numpy",
-            "pandas", "py", "python", "rst", "rst_csv_table", "rst_grid_table",
-            "rst_simple_table", "sqlite", "toml", "tsv",
+            "json", "latex_matrix", "latex_table", "ltsv", "markdown", "md",
+            "mediawiki", "null", "numpy", "pandas", "py", "python", "rst",
+            "rst_csv_table", "rst_grid_table", "rst_simple_table", "sqlite",
+            "toml", "tsv",
         ]
 
 
@@ -31,7 +32,7 @@ class Test_WriterFactory_get_extension_list(object):
     def test_normal(self):
         assert ptw.TableWriterFactory.get_extension_list() == [
             "csv", "htm", "html", "js", "json", "ltsv", "md", "py", "rst",
-            "sqlite", "sqlite3", "toml", "tsv", "xls", "xlsx",
+            "sqlite", "sqlite3", "tex", "toml", "tsv", "xls", "xlsx",
         ]
 
 
@@ -69,6 +70,9 @@ class Test_WriterFactory_create_from_file_extension(object):
         ) + list(itertools.product(
             ["valid_ext.sqlite", "valid_ext.sqlite3", ".sqlite", "SQLITE"],
             [ptw.SqliteTableWriter])
+        ) + list(itertools.product(
+            ["valid_ext.tex", "valid_ext.TEX", ".tex", "TEX"],
+            [ptw.LatexMatrixWriter])
         ) + list(itertools.product(
             ["valid_ext.tsv", "valid_ext.TSV", ".tsv", "TSV"],
             [ptw.TsvTableWriter])
@@ -117,6 +121,8 @@ class Test_FileLoaderFactory_create_from_format_name(object):
         ["JS", ptw.JavaScriptTableWriter],
         ["json", ptw.JsonTableWriter],
         ["JSON", ptw.JsonTableWriter],
+        ["latex_matrix", ptw.LatexMatrixWriter],
+        ["latex_table", ptw.LatexTableWriter],
         ["ltsv", ptw.LtsvTableWriter],
         ["LTSV", ptw.LtsvTableWriter],
         ["markdown", ptw.MarkdownTableWriter],

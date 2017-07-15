@@ -15,6 +15,10 @@ from ._excel import (
 )
 from ._html import HtmlTableWriter
 from ._json import JsonTableWriter
+from ._latex import (
+    LatexMatrixWriter,
+    LatexTableWriter,
+)
 from ._ltsv import LtsvTableWriter
 from ._markdown import MarkdownTableWriter
 from ._mediawiki import MediaWikiTableWriter

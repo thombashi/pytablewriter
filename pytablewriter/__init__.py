@@ -55,6 +55,8 @@ from .writer import (
     RstGridTableWriter,
     RstSimpleTableWriter,
     SqliteTableWriter,
+    LatexMatrixWriter,
+    LatexTableWriter,
     TomlTableWriter,
     TsvTableWriter,
     JavaScriptTableWriter,

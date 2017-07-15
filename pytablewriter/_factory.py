@@ -98,6 +98,8 @@ class TableWriterFactory(object):
             ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
             ``"json"``                      :py:class:`~.JsonTableWriter`      
             ``"ltsv"``                      :py:class:`~.LtsvTableWriter`       
+            ``"latex_matrix"``              :py:class:`~.LatexMatrixWriter`
+            ``"latex_table"``               :py:class:`~.LatexTableWriter`
             ``"markdown"``/``"md"``         :py:class:`~.MarkdownTableWriter`  
             ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter` 
             ``"null"``                      :py:class:`~.NullTableWriter`      

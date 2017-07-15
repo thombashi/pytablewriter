@@ -17,6 +17,8 @@ from .writer import (
     HtmlTableWriter,
     JavaScriptTableWriter,
     JsonTableWriter,
+    LatexTableWriter,
+    LatexMatrixWriter,
     LtsvTableWriter,
     MarkdownTableWriter,
     MediaWikiTableWriter,
@@ -67,6 +69,12 @@ class TableFormat(enum.Enum):
     JSON = (
         [JsonTableWriter().format_name], JsonTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["json"])
+    LATEX_MATRIX = (
+        [LatexMatrixWriter().format_name], LatexMatrixWriter,
+        FormatAttr.FILE | FormatAttr.TEXT, ["tex"])
+    LATEX_TABLE = (
+        [LatexTableWriter().format_name], LatexTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT, ["tex"])
     LTSV = (
         [LtsvTableWriter().format_name], LtsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["ltsv"])
