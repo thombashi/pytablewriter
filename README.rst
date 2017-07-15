@@ -22,11 +22,10 @@ pytablewriter
 Summary
 -------
 
-A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
-
 - Write a table in various formats:
     - CSV
     - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
@@ -34,6 +33,7 @@ Features
     - HTML
     - JSON
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
+    - LaTeX: ``tabular``/``array`` environment
     - Markdown
     - MediaWiki
     - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
@@ -75,7 +75,6 @@ Write a Markdown table
 
         writer.write_table()
 
-
 :Output:
     .. code::
 
@@ -87,15 +86,12 @@ Write a Markdown table
           3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900
         -10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900
 
+:Rendering Result:
+    .. figure:: ss/markdown.png
+       :scale: 80%
+       :alt: markdown_ss
 
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. figure:: ss/markdown.png
-   :scale: 80%
-   :alt: markdown_ss
-
-   Rendered markdown at GitHub
+       Rendered markdown at GitHub
 
 Write a reStructuredText table (Grid Tables)
 --------------------------------------------
@@ -117,7 +113,6 @@ Write a reStructuredText table (Grid Tables)
 
         writer.write_table()
 
-
 :Output:
     .. code:: ReST
 
@@ -135,22 +130,20 @@ Write a reStructuredText table (Grid Tables)
             |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
             +---+-----+----+-----+--------+------------------------+
 
-Rendering result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:Rendering Result:
+    .. table:: example_table
 
-.. table:: example_table
-
-    +---+-----+----+-----+--------+------------------------+
-    |int|float|str |bool |  mix   |          time          |
-    +===+=====+====+=====+========+========================+
-    |  0| 0.10|hoge|True |       0|2017-01-01 03:04:05+0900|
-    +---+-----+----+-----+--------+------------------------+
-    |  2|-2.23|foo |False|        |2017-12-23 12:34:51+0900|
-    +---+-----+----+-----+--------+------------------------+
-    |  3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900|
-    +---+-----+----+-----+--------+------------------------+
-    |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
-    +---+-----+----+-----+--------+------------------------+
+        +---+-----+----+-----+--------+------------------------+
+        |int|float|str |bool |  mix   |          time          |
+        +===+=====+====+=====+========+========================+
+        |  0| 0.10|hoge|True |       0|2017-01-01 03:04:05+0900|
+        +---+-----+----+-----+--------+------------------------+
+        |  2|-2.23|foo |False|        |2017-12-23 12:34:51+0900|
+        +---+-----+----+-----+--------+------------------------+
+        |  3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900|
+        +---+-----+----+-----+--------+------------------------+
+        |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
+        +---+-----+----+-----+--------+------------------------+
 
 Write a table with JavaScript format (as a nested list variable definition)
 ---------------------------------------------------------------------------
@@ -206,7 +199,6 @@ Write a table to an Excel sheet
         writer.write_table()
 
         writer.close()
-
 
 :Output:
     .. figure:: ss/excel_single.png
