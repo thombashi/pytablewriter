@@ -11,10 +11,6 @@ from mbstrdecoder import MultiByteStrDecoder
 import typepy
 
 from ..._error import EmptyTableNameError
-from ..._function import (
-    quote_datetime_formatter,
-    dateutil_datetime_formatter
-)
 from ._numpy import NumpyTableWriter
 
 
