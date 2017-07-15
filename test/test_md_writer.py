@@ -30,7 +30,7 @@ from .data import (
 
 
 Data = collections.namedtuple(
-    "Data", "table indent header value is_float_formatting expected")
+    "Data", "table indent header value is_formatting_float expected")
 
 normal_test_data_list = [
     Data(
@@ -38,7 +38,7 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |1.0|1   
@@ -51,7 +51,7 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=None,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""a  | b | c |dd | e 
 ---|---|---|---|---
 
@@ -65,7 +65,7 @@ normal_test_data_list = [
             [2, 2.2000000000000002, "bb", "2.2", 2.2000000000000002],
             [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
         ],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""a  |  b  | c |dd | e  
 --:|----:|---|--:|----
   1|123.1|a  |1.0|1   
@@ -78,7 +78,7 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""# tablename
 a  |  b  | c |dd | e  
 --:|----:|---|--:|----
@@ -92,7 +92,7 @@ a  |  b  | c |dd | e
         indent=0,
         header=header_list,
         value=value_matrix,
-        is_float_formatting=False,
+        is_formatting_float=False,
         expected="""# tablename
 a  |  b  | c |dd | e  
 --:|----:|---|--:|----
@@ -106,7 +106,7 @@ a  |  b  | c |dd | e
         indent=1,
         header=header_list,
         value=value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""## tablename
 a  |  b  | c |dd | e  
 --:|----:|---|--:|----
@@ -120,7 +120,7 @@ a  |  b  | c |dd | e
         indent=0,
         header=header_list,
         value=value_matrix_with_none,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""a  | b | c |dd | e  
 --:|--:|---|--:|----
   1|   |a  |1.0|    
@@ -134,7 +134,7 @@ a  |  b  | c |dd | e
         indent=0,
         header=mix_header_list,
         value=mix_value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""i  | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           
 --:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
   1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      
@@ -147,7 +147,7 @@ a  |  b  | c |dd | e
         indent=0,
         header=float_header_list,
         value=float_value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""a   |   b   |  c  
 ---:|------:|----:
 0.01|  9.123|0.000
@@ -168,7 +168,7 @@ a  |  b  | c |dd | e
                 '',
             ]
         ],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""Name   |xUnit|Source|                                                      Remarks                                                       
 -------|-----|------|--------------------------------------------------------------------------------------------------------------------
 Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.
@@ -184,7 +184,7 @@ Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal w
             ["山田", "次郎", "2001/1/2", "251-0036",
              "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
         ],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""姓  | 名 |生年月日|郵便番号|           住所           |  電話番号  
 ----|----|--------|--------|--------------------------|------------
 山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678
@@ -199,7 +199,7 @@ Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal w
             ['"1"', '"abc"'],
             ['"-1"', '"efg"'],
         ],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""# quoted values
 quote|abc efg
 ----:|-------
@@ -214,7 +214,7 @@ quote|abc efg
         value=[
             [None, 1, 0.1],
         ],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""# not str headers
    | 1 |0.1
 ---|--:|--:
@@ -230,7 +230,7 @@ quote|abc efg
             ["b", 1, "bb"],
             ["c", 2, "ccc", 0.1],
         ],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected="""# nouniform matrix
 a  | b | c 
 ---|--:|---
@@ -247,7 +247,7 @@ exception_test_data_list = [
         indent=0,
         header=[],
         value=[],
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected=ptw.EmptyTableDataError
     ),
     Data(
@@ -255,7 +255,7 @@ exception_test_data_list = [
         indent=0,
         header=[],
         value=value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected=ptw.EmptyHeaderError
     ),
     Data(
@@ -263,7 +263,7 @@ exception_test_data_list = [
         indent=0,
         header=None,
         value=value_matrix,
-        is_float_formatting=True,
+        is_formatting_float=True,
         expected=ptw.EmptyHeaderError
     ),
 ]
@@ -310,24 +310,24 @@ class Test_MarkdownTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value",
-            "is_float_formatting", "expected"],
+            "is_formatting_float", "expected"],
         [
             [
                 data.table, data.indent, data.header, data.value,
-                data.is_float_formatting, data.expected
+                data.is_formatting_float, data.expected
             ]
             for data in normal_test_data_list
         ]
     )
     def test_normal(
             self, capsys, table, indent, header, value,
-            is_float_formatting, expected):
+            is_formatting_float, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
         writer.header_list = header
         writer.value_matrix = value
-        writer.is_float_formatting = is_float_formatting
+        writer.is_formatting_float = is_formatting_float
         writer.write_table()
 
         out, _err = capsys.readouterr()

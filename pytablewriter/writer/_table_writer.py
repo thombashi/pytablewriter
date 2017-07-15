@@ -187,7 +187,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_opening_row = False
         self.is_write_closing_row = False
 
-        self.is_float_formatting = True
+        self.is_formatting_float = True
 
         self._value_matrix = []
         self._column_dp_list = []
@@ -464,7 +464,7 @@ class AbstractTableWriter(TableWriterInterface):
             all([
                 col_dp.typecode == Typecode.REAL_NUMBER,
                 value_dp.typecode in [Typecode.INTEGER, Typecode.REAL_NUMBER],
-                not self.is_float_formatting
+                not self.is_formatting_float
             ]),
             value_dp.typecode == Typecode.NONE,
         ]):

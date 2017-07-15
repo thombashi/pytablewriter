@@ -87,7 +87,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         self.stream = None
         self.is_padding = False
-        self.is_float_formatting = False
+        self.is_formatting_float = False
         self._is_required_table_name = True
         self._quote_flag_mapping = copy.deepcopy(
             dataproperty.NULL_QUOTE_FLAG_MAPPING)
