@@ -148,7 +148,7 @@ class TableFormat(enum.Enum):
 
         :param FormatAttr format_attribute:
             Table format attributes to look for.
-        :return: Table format List.
+        :return: Table formats that matched the attribute.
         :rtype: list
         """
 

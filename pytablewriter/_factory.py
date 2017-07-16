@@ -139,7 +139,7 @@ class TableWriterFactory(object):
     @classmethod
     def get_format_name_list(cls):
         """
-        :return: Available format name List.
+        :return: Available format names.
         :rtype: list
 
         :Example:
@@ -188,7 +188,7 @@ class TableWriterFactory(object):
     @classmethod
     def get_extension_list(cls):
         """
-        :return: Available file extension list.
+        :return: Available file extensions.
         :rtype: list
 
         :Example:
