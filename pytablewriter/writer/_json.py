@@ -91,8 +91,8 @@ class JsonTableWriter(IndentationTextTableWriter):
         joint_text = self.char_right_side_row + "\n"
         json_text = joint_text.join(json_text_list)
         if all([
-            not self.is_write_closing_row,
-            typepy.is_not_null_string(json_text),
+                not self.is_write_closing_row,
+                typepy.is_not_null_string(json_text),
         ]):
             json_text += joint_text
 

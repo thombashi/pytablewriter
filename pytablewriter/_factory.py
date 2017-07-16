@@ -123,8 +123,8 @@ class TableWriterFactory(object):
 
         for table_format in TableFormat:
             if any([
-                format_name not in table_format.name_list,
-                table_format.format_attribute & FormatAttr.SECONDARY_NAME,
+                    format_name not in table_format.name_list,
+                    table_format.format_attribute & FormatAttr.SECONDARY_NAME,
             ]):
                 continue
 

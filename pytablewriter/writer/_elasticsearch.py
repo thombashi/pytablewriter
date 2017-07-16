@@ -98,7 +98,8 @@ class ElasticsearchWriter(AbstractTableWriter):
     def write_null_line(self):
         pass
 
-    def __get_es_datatype(self, column_dp):
+    @staticmethod
+    def __get_es_datatype(column_dp):
         if column_dp.typecode in (Typecode.STRING, Typecode.NULL_STRING):
             return {"type": "string"}
 

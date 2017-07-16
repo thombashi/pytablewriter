@@ -165,7 +165,6 @@ class TableFormat(enum.Enum):
         warnings.warn(
             "search_table_format will be deleted in the future, "
             "use find_all_attr instead.",
-            DeprecationWarning
-        )
+            DeprecationWarning)
 
         return cls.find_all_attr(format_attribute)

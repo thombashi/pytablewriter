@@ -239,8 +239,8 @@ class ExcelXlsTableWriter(ExcelTableWriter):
 
     def _write_header(self):
         if any([
-            not self.is_write_header,
-            typepy.is_empty_sequence(self.header_list),
+                not self.is_write_header,
+                typepy.is_empty_sequence(self.header_list),
         ]):
             return
 
@@ -377,8 +377,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     def _write_header(self):
         if any([
-            not self.is_write_header,
-            typepy.is_empty_sequence(self.header_list),
+                not self.is_write_header,
+                typepy.is_empty_sequence(self.header_list),
         ]):
             return
 

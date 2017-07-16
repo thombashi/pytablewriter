@@ -365,8 +365,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all([
-            typepy.is_empty_sequence(self.header_list),
-            typepy.is_empty_sequence(self.value_matrix),
+                typepy.is_empty_sequence(self.header_list),
+                typepy.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
 
@@ -461,12 +461,13 @@ class AbstractTableWriter(TableWriterInterface):
 
     def __get_to_string_format(self, col_dp, value_dp):
         if any([
-            all([
-                col_dp.typecode == Typecode.REAL_NUMBER,
-                value_dp.typecode in [Typecode.INTEGER, Typecode.REAL_NUMBER],
-                not self.is_formatting_float
-            ]),
-            value_dp.typecode == Typecode.NONE,
+                all([
+                    col_dp.typecode == Typecode.REAL_NUMBER,
+                    value_dp.typecode in [
+                        Typecode.INTEGER, Typecode.REAL_NUMBER],
+                    not self.is_formatting_float
+                ]),
+                value_dp.typecode == Typecode.NONE,
         ]):
             return "{}"
 
@@ -489,7 +490,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         return "".join(format_list)
 
-    def __get_typehint_from_dtype(self, col_dtype):
+    @staticmethod
+    def __get_typehint_from_dtype(col_dtype):
         col_dtype = str(col_dtype)
 
         if re.search("^float", col_dtype):
@@ -505,8 +507,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all([
-            typepy.is_empty_sequence(self.header_list),
-            typepy.is_empty_sequence(self.value_matrix),
+                typepy.is_empty_sequence(self.header_list),
+                typepy.is_empty_sequence(self.value_matrix),
         ]):
             raise EmptyTableDataError()
 

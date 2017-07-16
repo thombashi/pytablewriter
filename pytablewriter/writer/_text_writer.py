@@ -275,8 +275,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def __write_header_row_separator(self):
         if any([
-            not self.is_write_header,
-            not self.is_write_header_separator_row,
+                not self.is_write_header,
+                not self.is_write_header_separator_row,
         ]):
             return
 
