@@ -14,19 +14,35 @@ import six
 @six.add_metaclass(abc.ABCMeta)
 class TableWriterInterface(object):
     """
-    Interface class for a writing table.
+    Interface class for writing a table.
     """
 
     @abc.abstractproperty
     def format_name(self):  # pragma: no cover
+        """
+        :return: Format name for the writer.
+        :rtype: str
+        """
+
         pass
 
     @abc.abstractproperty
     def support_split_write(self):  # pragma: no cover
+        """
+        :return:
+            |True| if the writer supported iterative write
+            ``write_table_iter``.
+        :rtype: bool
+        """
+
         pass
 
     @abc.abstractmethod
     def write_table(self):  # pragma: no cover
+        """
+        |write_table|.
+        """
+
         pass
 
     @abc.abstractmethod

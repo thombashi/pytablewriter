@@ -36,18 +36,38 @@ from .writer import (
 
 
 class FormatAttr(object):
+    """
+    Bitmaps to represent table attributes.
+    """
+
     NONE = 1 << 1
+
+    #: Can create a file with the format.
     FILE = 1 << 2
+
+    #: Table format that can represent as a text.
     TEXT = 1 << 3
+
+    #: Table format that can represent as a binary file.
     BIN = 1 << 4
+
+    #: Can create a source code (variables definition)
+    #: one of the programming language.
     SOURCECODE = 1 << 5
+
+    #: Can call API for external service.
     API = 1 << 6
+
     SECONDARY_EXT = 1 << 10
     SECONDARY_NAME = 1 << 11
 
 
 @enum.unique
 class TableFormat(enum.Enum):
+    """
+    Enum to represent table format attributes.
+    """
+
     CSV = (
         [CsvTableWriter().format_name], CsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
@@ -119,18 +139,39 @@ class TableFormat(enum.Enum):
 
     @property
     def name_list(self):
+        """
+        :return: Names associated with the table format.
+        :rtype: list
+        """
+
         return self.__name_list
 
     @property
     def writer_class(self):
+        """
+        :return: Table writer class associated with the table format.
+        :rtype:
+            :py:class:`~pytablewriter.writer._table_writer.TableWriterInterface`
+        """
+
         return self.__writer_class
 
     @property
     def format_attribute(self):
+        """
+        :return: Table attributes bitmap.
+        :rtype: :py:class:`pytablewriter.FormatAttr`
+        """
+
         return self.__format_attribute
 
     @property
     def file_extension_list(self):
+        """
+        :return: File extensions associated with the table format.
+        :rtype: list
+        """
+
         return self.__file_extension_list
 
     def __init__(
