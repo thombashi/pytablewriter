@@ -19,11 +19,10 @@ from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx
 )
-from ._interface import TextWriterInterface
 from ._table_writer import AbstractTableWriter
 
 
-class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
+class ExcelTableWriter(AbstractTableWriter):
     """
     An abstract class of a table writer for Excel file format.
     """
@@ -175,9 +174,6 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
             sheet_name = ""
         self.stream = self.workbook.add_worksheet(sheet_name)
         self._current_data_row = self._first_data_row
-
-    def write_null_line(self):
-        pass
 
     def _write_table(self):
         self._verify_property()

@@ -119,16 +119,6 @@ table_writer_class_list = [
 ]
 
 
-class Test_ExcelTableWriter_write_new_line(object):
-
-    @pytest.mark.parametrize(["writer_class"], [
-        [writer_class] for writer_class in table_writer_class_list
-    ])
-    def test_smoke(self, writer_class):
-        writer = writer_class()
-        writer.write_null_line()
-
-
 class Test_ExcelTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
