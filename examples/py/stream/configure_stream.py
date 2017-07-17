@@ -22,16 +22,16 @@ writer.value_matrix = [
     ["5", "AI", "America/Anguilla"],
 ]
 
-# writer instance will write a table to stdout in default
+# writer instance writes a table to stdout by default
 writer.write_table()
 
-# change stream to string buffer to get output as a string
+# change the stream to a string buffer to get the output as a string
 writer.stream = six.StringIO()
 writer.write_table()
 print()
 print(writer.stream.getvalue())
 
-# change output stream to a file
+# change the output stream to a file
 with open("sample.md", "w") as f:
     writer.stream = f
     writer.write_table()
