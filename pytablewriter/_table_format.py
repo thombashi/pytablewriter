@@ -134,11 +134,11 @@ class TableFormat(enum.Enum):
         return self.__file_extension_list
 
     def __init__(
-            self, name_list, writer_class, file_attribute,
+        self, name_list, writer_class, format_attribute,
             file_extension_list):
         self.__name_list = name_list
         self.__writer_class = writer_class
-        self.__format_attribute = file_attribute
+        self.__format_attribute = format_attribute
         self.__file_extension_list = file_extension_list
 
     @classmethod
