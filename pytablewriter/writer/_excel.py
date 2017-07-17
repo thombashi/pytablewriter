@@ -19,10 +19,11 @@ from ._excel_workbook import (
     ExcelWorkbookXls,
     ExcelWorkbookXlsx
 )
+from ._interface import BinaryWriterInterface
 from ._table_writer import AbstractTableWriter
 
 
-class ExcelTableWriter(AbstractTableWriter):
+class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
     """
     An abstract class of a table writer for Excel file format.
     """
@@ -125,13 +126,28 @@ class ExcelTableWriter(AbstractTableWriter):
 
         self._current_data_row = self._first_data_row
 
-    @abc.abstractproperty
-    def open_workbook(self, workbook_path):
+    def open(self, file_path):
         """
-        Open workbook.
+        Open an Excel workbook file.
 
-        :param str workbook_path: File path to open.
+        :param str file_path: Excel workbook file path to open.
         """
+
+        self._open(file_path)
+
+    @abc.abstractproperty
+    def _open(self, workbook_path):  # pragma: no cover
+        pass
+
+    def open_workbook(self, workbook_path):
+        import warnings
+
+        warnings.warn(
+            "open_workbook method deleted in the future, "
+            "use open method instead.",
+            DeprecationWarning)
+
+        self.open(workbook_path)
 
     def close(self):
         """
@@ -232,7 +248,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
 
         self.__col_style_table = {}
 
-    def open_workbook(self, workbook_path):
+    def _open(self, workbook_path):
         self._workbook = ExcelWorkbookXls(workbook_path)
 
     def _write_header(self):
@@ -372,7 +388,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         self.__col_cell_format_cache = {}
         self.__col_numprops_table = {}
 
-    def open_workbook(self, workbook_path):
+    def _open(self, workbook_path):
         self._workbook = ExcelWorkbookXlsx(workbook_path)
 
     def _write_header(self):

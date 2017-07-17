@@ -5,7 +5,7 @@
         import pytablewriter
 
         writer = pytablewriter.ExcelXlsxTableWriter()
-        writer.open_workbook("sample.xlsx")
+        writer.open("sample.xlsx")
 
         writer.make_worksheet("example")
         writer.header_list = ["int", "float", "str", "bool", "mix", "time"]

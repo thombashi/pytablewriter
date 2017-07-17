@@ -17,7 +17,7 @@ Excel Sheets
         import pytablewriter
         
         writer = pytablewriter.ExcelXlsxTableWriter()
-        writer.open_workbook("sample.xlsx")
+        writer.open("sample.xlsx")
 
         # write the first worksheet
         writer.make_worksheet("example")

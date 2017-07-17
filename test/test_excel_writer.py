@@ -134,7 +134,7 @@ class Test_ExcelTableWriter_write_table(object):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
-        writer.open_workbook(str(test_file_path))
+        writer.open(str(test_file_path))
         writer.make_worksheet(table)
         writer.header_list = header
         writer.value_matrix = value
@@ -165,7 +165,7 @@ class Test_ExcelTableWriter_write_table(object):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
-        writer.open_workbook(str(test_file_path))
+        writer.open(str(test_file_path))
         writer.make_worksheet(table)
         writer.header_list = header
         writer.value_matrix = value
@@ -182,7 +182,7 @@ class Test_ExcelTableWriter_write_table(object):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
-        writer.open_workbook(str(test_file_path))
+        writer.open(str(test_file_path))
         writer.header_list = header
         writer.value_matrix = value
 
@@ -219,7 +219,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
-        writer.open_workbook(str(test_file_path))
+        writer.open(str(test_file_path))
         writer.make_worksheet(table)
         writer.header_list = header
         writer.value_matrix = value
@@ -245,7 +245,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
-        writer.open_workbook(str(test_file_path))
+        writer.open(str(test_file_path))
         writer.header_list = header
         writer.value_matrix = value
 

@@ -17,7 +17,7 @@ value_matrix = [
 ]
 
 writer = pytablewriter.ExcelXlsxTableWriter()
-writer.open_workbook("sample.xlsx")
+writer.open("sample.xlsx")
 writer.make_worksheet("example")
 writer.header_list = header_list
 writer.value_matrix = value_matrix
