@@ -332,31 +332,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._write_table()
         self._logger.logging_complete_write()
 
-    def write_table_iter(self):
-        """
-        Write a table with iteration. "Iteration" means that divide the table
-        writing into multiple processes.
-        This method is useful, especially for large data.
-        The following are premises to execute this method:
-
-        - set iterator to the |value_matrix|
-        - set the number of iterations to the |iteration_length| attribute
-
-        Call back function (Optional):
-        Callback function is called when for each of the iteration of writing
-        a table is completed. To set call back function,
-        set a callback function to the |write_callback| attribute.
-
-        :raises pytablewriter.NotSupportedError:
-            If the class does not support this method.
-
-        .. note::
-            Following classes do not support this method:
-            |HtmlTableWriter|, |RstGridTableWriter|, |RstSimpleTableWriter|.
-            ``support_split_write`` attribute will return |True| if the class
-            is supported this method.
-        """
-
+    def _write_table_iter(self):
         if not self.support_split_write:
             raise NotSupportedError(
                 "the class not supported the write_table_iter method")

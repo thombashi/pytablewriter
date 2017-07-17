@@ -40,7 +40,7 @@ class NullTableWriter(
     def write_table(self):
         pass
 
-    def write_table_iter(self):
+    def _write_table_iter(self):
         pass
 
     def close(self):
