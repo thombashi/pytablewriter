@@ -133,6 +133,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
         :param str file_path: Excel workbook file path to open.
         """
 
+        self.close()
         self._open(file_path)
 
     @abc.abstractproperty
