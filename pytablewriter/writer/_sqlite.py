@@ -52,10 +52,15 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
     def __del__(self):
         self.close()
 
-    def open(self, database_path):
-        self.close()
+    def open(self, file_path):
+        """
+        Open a SQLite database file.
 
-        self.stream = simplesqlite.SimpleSQLite(database_path, "w")
+        :param str file_path: SQLite database file path to open.
+        """
+
+        self.close()
+        self.stream = simplesqlite.SimpleSQLite(file_path, "w")
 
     def _verify_header(self):
         self._validate_empty_header()
