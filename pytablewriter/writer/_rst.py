@@ -98,7 +98,7 @@ class RstCsvTableWriter(RstTableWriter):
             :ref:`example-rst-csv-table-writer`
 
         .. note::
-            - |None| values will be written as an empty string.
+            - |None| values are written as an empty string
         """
 
         IndentationTextTableWriter.write_table(self)
@@ -153,7 +153,7 @@ class RstGridTableWriter(RstTableWriter):
             :ref:`example-rst-grid-table-writer`
 
         .. note::
-            - |None| values will be written as an empty string.
+            - |None| values are written as an empty string
     """
 
     @property
@@ -185,7 +185,7 @@ class RstSimpleTableWriter(RstTableWriter):
             :ref:`example-rst-simple-table-writer`
 
         .. note::
-            - |None| values will be written as an empty string.
+            - |None| values are written as an empty string
     """
 
     @property

@@ -23,7 +23,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     .. py:method:: write_table
 
         |write_table| with Python format.
-        The tabular data will be written as a nested list variable definition
+        The tabular data are written as a nested list variable definition
         for Python format.
 
         :raises pytablewriter.EmptyTableNameError:
@@ -34,8 +34,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             :ref:`example-python-code-table-writer`
 
         .. note::
-            Values in the tabular data which described below will be converted
-            when writing:
+            Specific values in the tabular data are converted when writing:
 
             - |None|: written as ``None``
             - |inf|: written as ``float("inf")``

@@ -30,7 +30,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             :ref:`example-markdown-table-writer`
 
         .. note::
-            - |None| values will be written as an empty string.
+            - |None| values are written as an empty string
     """
 
     @property

@@ -66,8 +66,8 @@ class TableWriterInterface(object):
         .. note::
             Following classes do not support this method:
             |HtmlTableWriter|, |RstGridTableWriter|, |RstSimpleTableWriter|.
-            ``support_split_write`` attribute will return |True| if the class
-            is supported this method.
+            ``support_split_write`` attribute return |True| if the class
+            is supporting this method.
         """
 
         self._write_table_iter()

@@ -38,7 +38,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         `elasticsearch.Elasticsearch <http://elasticsearch-py.readthedocs.io/en/master/api.html#elasticsearch>`__
         instance to |stream| before calling this method.
         |table_name|/:py:attr:`~pytablewriter.ElasticsearchWriter.index_name`
-        will be used as the creating index name,
+        used as the creating index name,
         invalid characters in the name are replaced with underscore (``'_'``).
         Document data types for documents are automatically detected
         from the data.

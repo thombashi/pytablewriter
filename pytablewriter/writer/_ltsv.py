@@ -38,7 +38,7 @@ class LtsvTableWriter(CsvTableWriter):
         """
         |write_table| with
         `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.
-        Invalid characters in labels/data will be removed.
+        Invalid characters in labels/data are removed.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         :Example:

@@ -47,8 +47,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             :ref:`example-js-table-writer`
 
         .. note::
-            Values in the tabular data which described below will be converted
-            when writing:
+            Specific values in the tabular data are converted when writing:
 
             - |None|: written as ``null``
             - |inf|: written as ``Infinity``

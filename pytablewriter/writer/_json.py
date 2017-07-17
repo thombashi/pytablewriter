@@ -34,9 +34,11 @@ class JsonTableWriter(IndentationTextTableWriter):
             :ref:`example-json-table-writer`
 
         .. note::
-            - |None| values will be written as ``null``
-            - |inf| values will be written as ``"Infinity"``
-            - |nan| values will be written as ``"NaN"``
+            Specific values in the tabular data are converted when writing:
+
+            - |None|: written as ``null``
+            - |inf|: written as ``Infinity``
+            - |nan|: written as ``NaN``
     """
 
     @property

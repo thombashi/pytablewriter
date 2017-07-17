@@ -54,6 +54,8 @@ class TableWriterFactory(object):
             File extension string (case insensitive).
         :return:
             Writer instance that coincides with the ``file_extension``.
+        :rtype:
+            :py:class:`~pytablewriter.writer._table_writer.TableWriterInterface`
         :raises pytablewriter.WriterNotFoundError:
             |WriterNotFoundError_desc| the file extension.
         """
@@ -115,6 +117,8 @@ class TableWriterFactory(object):
 
         :param str format_name: Format name string (case insensitive).
         :return: Writer instance that coincides with the ``format_name``:
+        :rtype:
+            :py:class:`~pytablewriter.writer._table_writer.TableWriterInterface`
         :raises pytablewriter.WriterNotFoundError:
             |WriterNotFoundError_desc| for the format.
         """

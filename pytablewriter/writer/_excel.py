@@ -166,7 +166,7 @@ class ExcelTableWriter(AbstractTableWriter, TextWriterInterface):
         Make a worksheet to the current workbook.
 
         :param str sheet_name:
-            Name of the worksheet to create. Name of the work sheet will
+            Name of the worksheet to create. Name of the work sheet
             automatically decided (like ``"Sheet1"``)
             if the ``sheet_name`` is empty.
         """
@@ -224,9 +224,11 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         :raises IOError: If failed to write data to the worksheet.
 
         .. note::
-            - |None| values will be written as an empty string.
-            - |inf| values will be written as `Inf`
-            - |nan| values will be written as ``NaN``
+            Specific values in the tabular data are converted when writing:
+
+            - |None|: written as an empty string
+            - |inf|: written as ``Inf``
+            - |nan|: written as ``NaN``
     """
 
     def __init__(self):
@@ -306,9 +308,11 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             :ref:`example-excel-table-writer`
 
         .. note::
-            - |None| values will be written as an empty string.
-            - |inf| values will be written as `Inf`
-            - |nan| values will be written as ``NaN``
+            Specific values in the tabular data are converted when writing:
+
+            - |None|: written as an empty string
+            - |inf|: written as ``Inf``
+            - |nan|: written as ``NaN``
     """
 
     MAX_CELL_WIDTH = 60

@@ -81,9 +81,9 @@ class AbstractTableWriter(TableWriterInterface):
         the writer automatically detect column data type from
         the column data.
 
-        If ``type_hint_list`` is |None|, the writer will detect
-        column data types for  all of the columns automatically and write a
-        table.
+        If ``type_hint_list`` is |None|, the writer detects data types for all
+        of the columns automatically and writes a table by using detected
+        column types.
         Defaults to |None|.
 
         :Examples:
