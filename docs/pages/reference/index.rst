@@ -4,7 +4,8 @@ Reference
 .. toctree::
    :maxdepth: 4
    
-   error
    writer
-   function
    writer_factory
+   table_format
+   error
+   function

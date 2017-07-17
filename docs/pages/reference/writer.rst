@@ -1,3 +1,5 @@
+Table Writer Classes
+====================================
 
 CSV table writer classes
 -------------------------------
@@ -135,4 +137,8 @@ TOML table writer class
 
 Base table writer class
 -------------------------------
+
+.. autoclass:: pytablewriter.writer._table_writer.TableWriterInterface
+    :members:
+
 .. autoclass:: pytablewriter.writer._table_writer.AbstractTableWriter

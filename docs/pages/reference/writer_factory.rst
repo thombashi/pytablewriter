@@ -1,4 +1,4 @@
-Writer Factory class
+Table Writer Factory
 -------------------------------
 
 .. autoclass:: pytablewriter.TableWriterFactory

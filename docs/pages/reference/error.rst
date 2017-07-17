@@ -1,22 +1,22 @@
 Errors
 -------------------------------
 
-.. autoclass:: pytablewriter.EmptyTableNameError
+.. autoexception:: pytablewriter.EmptyTableNameError
     :undoc-members:
     :show-inheritance:
 
-.. autoclass:: pytablewriter.EmptyHeaderError
+.. autoexception:: pytablewriter.EmptyHeaderError
     :undoc-members:
     :show-inheritance:
 
-.. autoclass:: pytablewriter.EmptyValueError
+.. autoexception:: pytablewriter.EmptyValueError
     :undoc-members:
     :show-inheritance:
 
-.. autoclass:: pytablewriter.EmptyTableDataError
+.. autoexception:: pytablewriter.EmptyTableDataError
     :undoc-members:
     :show-inheritance:
 
-.. autoclass:: pytablewriter.WriterNotFoundError
+.. autoexception:: pytablewriter.WriterNotFoundError
     :undoc-members:
     :show-inheritance:

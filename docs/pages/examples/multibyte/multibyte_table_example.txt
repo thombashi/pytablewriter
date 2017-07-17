@@ -1,4 +1,4 @@
-﻿You can use multibyte character as table data.
+﻿You can use multibyte characters as table data.
 
 :Sample Code:
     .. code-block:: python
@@ -18,11 +18,9 @@
         ]
         writer.write_table()
 
-
 :Output:
     .. figure:: ss/multi_byte_char.png
        :scale: 100%
        :alt: multi_byte_char_table
        
        Output of multi-byte character table
-
