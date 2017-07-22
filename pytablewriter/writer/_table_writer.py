@@ -43,51 +43,9 @@ class AbstractTableWriter(TableWriterInterface):
         such as ``sys.stdout``, file stream, ``StringIO``, and so forth.
         Defaults to ``sys.stdout``.
 
-    .. py:attribute:: table_name
-
-        Name of the table.
-
     .. py:attribute:: header_list
 
         List of table header to write.
-
-    .. py:attribute:: value_matrix
-
-        Table data (nested list) to write.
-
-    .. py:attribute:: type_hint_list
-
-        A list of type hints for each column of data.
-        Acceptable values are as follows:
-
-            - |None| (automatically detect column type from values in the column)
-            - :py:class:`pytablewriter.Bool`
-            - :py:class:`pytablewriter.DateTime`
-            - :py:class:`pytablewriter.Dictionary`
-            - :py:class:`pytablewriter.Infinity`
-            - :py:class:`pytablewriter.Integer`
-            - :py:class:`pytablewriter.List`
-            - :py:class:`pytablewriter.Nan`
-            - :py:class:`pytablewriter.NoneType`
-            - :py:class:`pytablewriter.NullString`
-            - :py:class:`pytablewriter.RealNumber`
-            - :py:class:`pytablewriter.String`
-
-        A writer converts data for each column using type-hint
-        information before writing tables when you call ``write_xxx`` methods.
-        If a type-hint value is not |None|, the writer tries to
-        convert data for each data in a column to type-hint class.
-        If the type-hint value is |None| or failed to convert data,
-        the writer automatically detect column data type from
-        the column data.
-
-        If ``type_hint_list`` is |None|, the writer detects data types for all
-        of the columns automatically and writes a table by using detected
-        column types.
-        Defaults to |None|.
-
-        :Examples:
-            :ref:`example-type-hint-js`
 
     .. py:attribute:: is_write_header
 
@@ -125,6 +83,10 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def table_name(self):
+        """
+        Name of the table.
+        """
+
         return self._table_name
 
     @table_name.setter
@@ -133,6 +95,10 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def value_matrix(self):
+        """
+        Tabular data to write.
+        """
+
         return self.__value_matrix_org
 
     @value_matrix.setter
@@ -142,11 +108,50 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def tabledata(self):
+        """
+        :return: Table data.
+        :rtype: pytablereader.TableData
+        """
+
         return ptr.TableData(
             self.table_name, self.header_list, self.value_matrix)
 
     @property
     def type_hint_list(self):
+        """
+        List of type hints for each column of the tabular data.
+        Acceptable values are as follows:
+
+            - |None| (automatically detect column type from values in the column)
+            - :py:class:`pytablewriter.Bool`
+            - :py:class:`pytablewriter.DateTime`
+            - :py:class:`pytablewriter.Dictionary`
+            - :py:class:`pytablewriter.Infinity`
+            - :py:class:`pytablewriter.Integer`
+            - :py:class:`pytablewriter.List`
+            - :py:class:`pytablewriter.Nan`
+            - :py:class:`pytablewriter.NoneType`
+            - :py:class:`pytablewriter.NullString`
+            - :py:class:`pytablewriter.RealNumber`
+            - :py:class:`pytablewriter.String`
+
+        A writer converts data for each column using type-hint
+        information before writing tables when you call ``write_xxx`` methods.
+        If a type-hint value is not |None|, the writer tries to
+        convert data for each data in a column to type-hint class.
+        If the type-hint value is |None| or failed to convert data,
+        the writer automatically detect column data type from
+        the column data.
+
+        If ``type_hint_list`` is |None|, the writer detects data types for all
+        of the columns automatically and writes a table by using detected
+        column types.
+        Defaults to |None|.
+
+        :Examples:
+            :ref:`example-type-hint-js`
+        """
+
         return self._dp_extractor.col_type_hint_list
 
     @type_hint_list.setter
