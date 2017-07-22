@@ -104,7 +104,7 @@ class AbstractTableWriter(TableWriterInterface):
     @value_matrix.setter
     def value_matrix(self, value_matrix):
         self.__set_value_matrix(value_matrix)
-        self.__clear_preprocessed_data()
+        self.__clear_preprocessed_status()
 
     @property
     def tabledata(self):
@@ -157,7 +157,7 @@ class AbstractTableWriter(TableWriterInterface):
     @type_hint_list.setter
     def type_hint_list(self, value):
         self.__set_type_hint_list(value)
-        self.__clear_preprocessed_data()
+        self.__clear_preprocessed_status()
 
     @property
     def _quoting_flags(self):
@@ -166,7 +166,7 @@ class AbstractTableWriter(TableWriterInterface):
     @_quoting_flags.setter
     def _quoting_flags(self, value):
         self._dp_extractor.quoting_flags = value
-        self.__clear_preprocessed_data()
+        self.__clear_preprocessed_status()
 
     @abc.abstractmethod
     def _write_table(self):
@@ -593,8 +593,11 @@ class AbstractTableWriter(TableWriterInterface):
     def __clear_preprocessed_data(self):
         logger.debug("__clear_preprocessed_data")
 
-        self.__clear_preprocessed_flag()
         self._column_dp_list = []
+
+    def __clear_preprocessed_status(self):
+        self.__clear_preprocessed_flag()
+        self.__clear_preprocessed_data()
 
     def __remove_line_break(self, text):
         if not self._is_remove_line_break:
