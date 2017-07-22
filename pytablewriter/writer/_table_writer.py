@@ -195,7 +195,6 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_formatting_float = True
 
         self._value_matrix = []
-        self._column_dp_list = []
         self._value_dp_matrix = []
 
         self._logger = WriterLogger(self)
@@ -225,7 +224,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_required_table_name = False
         self._is_remove_line_break = False
-        self._is_complete_table_property_preprocess = False
 
         self.iteration_length = -1
         self.write_callback = None
@@ -237,6 +235,8 @@ class AbstractTableWriter(TableWriterInterface):
             Align.RIGHT: ">",
             Align.CENTER: "^",
         }
+
+        self.__clear_preprocessed_status()
 
     def close(self):
         """
