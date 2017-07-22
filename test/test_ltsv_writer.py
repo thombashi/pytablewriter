@@ -51,7 +51,7 @@ a:3\tb:3.3\tc:"ccc"\te:"cccc"
         value=[
             ["a\0b", "c   d", "e\tf", "g\nh", "i\r\nj"],
         ],
-        expected="""a0:"a b"\ta1:"c d"\ta.2:"e f"\ta_3:"g h"\ta-4:"i j"
+        expected="""a0:"a b"\ta1:"c   d"\ta.2:"e  f"\ta_3:"g h"\ta-4:"i j"
 """),
     Data(
         header=float_header_list,
