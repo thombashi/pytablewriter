@@ -171,7 +171,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         if not isinstance(self.stream, es.Elasticsearch):
             raise ValueError(
-                "stream must be a elasticsearch.Elasticsearch instance")
+                "stream must be an elasticsearch.Elasticsearch instance")
 
         self._verify_property()
         self._verify_value_matrix()
