@@ -194,8 +194,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.is_formatting_float = True
 
-        self._value_matrix = []
-        self._value_dp_matrix = []
 
         self._logger = WriterLogger(self)
 
@@ -541,8 +539,6 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_table_property_preprocess:
             return
 
-        self._value_matrix = []
-
         self._dp_extractor.header_list = self.header_list
         self._dp_extractor.data_matrix = self.__value_matrix_org
 
@@ -594,6 +590,8 @@ class AbstractTableWriter(TableWriterInterface):
         logger.debug("__clear_preprocessed_data")
 
         self._column_dp_list = []
+        self._value_matrix = []
+        self._value_dp_matrix = []
 
     def __clear_preprocessed_status(self):
         self.__clear_preprocessed_flag()
