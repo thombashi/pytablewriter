@@ -241,8 +241,7 @@ class Test_CsvTableWriter_write_table_iter(object):
         [
             [data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, header, value, expected):
         writer = table_writer_class()
         writer.header_list = header

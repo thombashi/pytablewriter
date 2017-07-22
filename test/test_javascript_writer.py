@@ -238,8 +238,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
 
 """,
             ],
-        ]
-    )
+        ])
     def test_normal(self, capsys, table, header, value, type_hint, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -270,8 +269,7 @@ class Test_JavaScriptTableWriter_write_table(object):
                 data.is_write_header, data.is_dti_fmt, data.expected
             ]
             for data in normal_test_data_list
-        ]
-    )
+        ])
     def test_normal_single(
             self, capsys, table, indent, header, value,
             is_write_header, is_dti_fmt, expected):
@@ -322,8 +320,7 @@ class Test_JavaScriptTableWriter_write_table(object):
                 data.is_write_header, data.expected
             ]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(
             self, table, indent, header, value, is_write_header, expected):
         writer = table_writer_class()
@@ -391,8 +388,7 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
         [
             [data.table, data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

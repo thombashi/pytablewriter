@@ -133,8 +133,7 @@ class Test_SqliteTableWriter_write_table(object):
         [
             [data.table, data.header, data.value, data.expected]
             for data in normal_test_data_list
-        ]
-    )
+        ])
     def test_normal(self, tmpdir, table, header, value, expected):
         test_file_path = tmpdir.join("test.sqlite")
 
@@ -162,8 +161,7 @@ class Test_SqliteTableWriter_write_table(object):
         [
             [data.table, data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, tmpdir, table, header, value, expected):
         test_file_path = tmpdir.join("test.sqlite")
 

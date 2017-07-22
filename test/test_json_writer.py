@@ -318,8 +318,7 @@ class Test_JsonTableWriter_write_table_iter(object):
         [
             [data.table, data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

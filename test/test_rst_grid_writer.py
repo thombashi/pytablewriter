@@ -204,8 +204,7 @@ class Test_RstGridTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in normal_test_data_list
-        ]
-    )
+        ])
     def test_normal(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -226,8 +225,7 @@ class Test_RstGridTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in null_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

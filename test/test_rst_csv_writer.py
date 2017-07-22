@@ -126,8 +126,7 @@ class Test_RstCsvTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in normal_test_data_list
-        ]
-    )
+        ])
     def test_normal(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -148,8 +147,7 @@ class Test_RstCsvTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in null_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -202,8 +200,7 @@ class Test_RstCsvTableWriter_write_table_iter(object):
         [
             [data.table, data.header, data.value, data.expected]
             for data in null_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

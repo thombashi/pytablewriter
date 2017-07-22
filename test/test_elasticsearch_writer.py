@@ -89,8 +89,7 @@ normal_test_data_list = [
                 [inf, nan],
                 [inf, nan],
                 [inf, inf],
-            ]
-        )
+            ])
     ),
 ]
 
@@ -226,8 +225,7 @@ class Test_ElasticsearchWriter_write_table(object):
         [
             [data.table, data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, tmpdir, table, header, value, expected):
         test_file_path = tmpdir.join("test.sqlite")
 

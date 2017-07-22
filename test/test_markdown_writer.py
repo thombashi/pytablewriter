@@ -330,8 +330,7 @@ class Test_MarkdownTableWriter_write_table(object):
                 data.is_formatting_float, data.expected
             ]
             for data in normal_test_data_list
-        ]
-    )
+        ])
     def test_normal(
             self, capsys, table, indent, header, value,
             is_formatting_float, expected):
@@ -392,8 +391,7 @@ Long Format Name|Loader
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -461,8 +459,7 @@ a                            |  102| 103
         [
             [data.table, data.header, data.value, data.expected]
             for data in exception_test_data_list
-        ]
-    )
+        ])
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

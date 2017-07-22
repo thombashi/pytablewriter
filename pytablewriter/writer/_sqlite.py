@@ -75,8 +75,7 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
             [
                 [value_dp.data for value_dp in value_dp_list]
                 for value_dp_list in self._value_dp_matrix
-            ]
-        ))
+            ]))
 
     def _write_value_row_separator(self):
         pass

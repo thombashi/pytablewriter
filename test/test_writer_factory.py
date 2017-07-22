@@ -85,8 +85,7 @@ class Test_WriterFactory_create_from_file_extension(object):
         ) + list(itertools.product(
             ["valid_ext.xlsx", "valid_ext.XLSX", ".xlsx"],
             [ptw.ExcelXlsxTableWriter])
-        )
-    )
+        ))
     def test_normal(self, value, expected):
         writer = ptw.TableWriterFactory.create_from_file_extension(value)
 
