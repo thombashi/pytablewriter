@@ -35,6 +35,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         self.indent_string = ""
         self.column_delimiter = "|"
+        self.char_left_side_row = "|"
+        self.char_right_side_row = "|"
         self.char_cross_point = "|"
         self.is_write_opening_row = True
 
@@ -43,18 +45,6 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     def _verify_header(self):
         self._validate_empty_header()
-
-    def _get_header_format_string(self, col_dp, value_dp):
-        if col_dp.column_index == 0:
-            # if the first column header has five or more spaces at
-            # the beginning, the table data not properly rendered at GitHub.
-
-            return "{{:{:s}{:s}}}".format(
-                self._get_align_char(dp.Align.LEFT),
-                str(self._get_padding_len(col_dp, value_dp)))
-
-        return super(MarkdownTableWriter, self)._get_header_format_string(
-            col_dp, value_dp)
 
     def _get_opening_row_item_list(self):
         return []

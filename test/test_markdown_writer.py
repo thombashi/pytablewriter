@@ -39,11 +39,11 @@ normal_test_data_list = [
         header=header_list,
         value=value_matrix,
         is_formatting_float=True,
-        expected="""a  |  b  | c |dd | e  
---:|----:|---|--:|----
-  1|123.1|a  |1.0|1   
-  2|  2.2|bb |2.2|2.2 
-  3|  3.3|ccc|3.0|cccc
+        expected="""| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |1.0|1   |
+|  2|  2.2|bb |2.2|2.2 |
+|  3|  3.3|ccc|3.0|cccc|
 
 """),
     Data(
@@ -52,8 +52,8 @@ normal_test_data_list = [
         header=header_list,
         value=None,
         is_formatting_float=True,
-        expected="""a  | b | c |dd | e 
----|---|---|---|---
+        expected="""| a | b | c |dd | e |
+|---|---|---|---|---|
 
 """),
     Data(
@@ -66,39 +66,39 @@ normal_test_data_list = [
             [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
         ],
         is_formatting_float=True,
-        expected="""a  |  b  | c |dd | e  
---:|----:|---|--:|----
-  1|123.1|a  |1.0|1   
-  2|  2.2|bb |2.2|2.2 
-  3|  3.3|ccc|3.3|cccc
+        expected="""| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |1.0|1   |
+|  2|  2.2|bb |2.2|2.2 |
+|  3|  3.3|ccc|3.3|cccc|
 
 """),
     Data(
-        table="tablename",
+        table="formatting float",
         indent=0,
         header=header_list,
         value=value_matrix,
         is_formatting_float=True,
-        expected="""# tablename
-a  |  b  | c |dd | e  
---:|----:|---|--:|----
-  1|123.1|a  |1.0|1   
-  2|  2.2|bb |2.2|2.2 
-  3|  3.3|ccc|3.0|cccc
+        expected="""# formatting float
+| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |1.0|1   |
+|  2|  2.2|bb |2.2|2.2 |
+|  3|  3.3|ccc|3.0|cccc|
 
 """),
     Data(
-        table="tablename",
+        table="not formatting float",
         indent=0,
         header=header_list,
         value=value_matrix,
         is_formatting_float=False,
-        expected="""# tablename
-a  |  b  | c |dd | e  
---:|----:|---|--:|----
-  1|123.1|a  |  1|1   
-  2|  2.2|bb |2.2|2.2 
-  3|  3.3|ccc|  3|cccc
+        expected="""# not formatting float
+| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |  1|1   |
+|  2|  2.2|bb |2.2|2.2 |
+|  3|  3.3|ccc|  3|cccc|
 
 """),
     Data(
@@ -108,11 +108,11 @@ a  |  b  | c |dd | e
         value=value_matrix,
         is_formatting_float=True,
         expected="""## tablename
-a  |  b  | c |dd | e  
---:|----:|---|--:|----
-  1|123.1|a  |1.0|1   
-  2|  2.2|bb |2.2|2.2 
-  3|  3.3|ccc|3.0|cccc
+| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |1.0|1   |
+|  2|  2.2|bb |2.2|2.2 |
+|  3|  3.3|ccc|3.0|cccc|
 
 """),
     Data(
@@ -121,12 +121,12 @@ a  |  b  | c |dd | e
         header=header_list,
         value=value_matrix_with_none,
         is_formatting_float=True,
-        expected="""a  | b | c |dd | e  
---:|--:|---|--:|----
-  1|   |a  |1.0|    
-   |2.2|   |2.2|2.2 
-  3|3.3|ccc|   |cccc
-   |   |   |   |    
+        expected="""| a | b | c |dd | e  |
+|--:|--:|---|--:|----|
+|  1|   |a  |1.0|    |
+|   |2.2|   |2.2|2.2 |
+|  3|3.3|ccc|   |cccc|
+|   |   |   |   |    |
 
 """),
     Data(
@@ -135,11 +135,11 @@ a  |  b  | c |dd | e
         header=mix_header_list,
         value=mix_value_matrix,
         is_formatting_float=True,
-        expected="""i  | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           
---:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
-  1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      
-  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
-  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      
+        expected="""| i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
+|--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------|
+|  1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      |
+|  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
+|  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      |
 
 """),
     Data(
@@ -148,11 +148,11 @@ a  |  b  | c |dd | e
         header=float_header_list,
         value=float_value_matrix,
         is_formatting_float=True,
-        expected="""a   |     b     |  c  
----:|----------:|----:
-0.01|     0.0012|0.000
-1.00|    99.9000|0.010
-1.20|999999.1230|0.001
+        expected="""| a  |     b     |  c  |
+|---:|----------:|----:|
+|0.01|     0.0012|0.000|
+|1.00|    99.9000|0.010|
+|1.20|999999.1230|0.001|
 
 """),
     Data(
@@ -161,11 +161,11 @@ a  |  b  | c |dd | e
         header=float_header_list,
         value=float_value_matrix,
         is_formatting_float=False,
-        expected="""a   |     b     |  c  
----:|----------:|----:
-0.01|    0.00125|    0
-   1|       99.9| 0.01
- 1.2| 999999.123|0.001
+        expected="""| a  |     b     |  c  |
+|---:|----------:|----:|
+|0.01|    0.00125|    0|
+|   1|       99.9| 0.01|
+| 1.2| 999999.123|0.001|
 
 """),
     Data(
@@ -182,9 +182,9 @@ a  |  b  | c |dd | e
             ]
         ],
         is_formatting_float=True,
-        expected="""Name   |xUnit|Source|                                                      Remarks                                                       
--------|-----|------|--------------------------------------------------------------------------------------------------------------------
-Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.
+        expected="""| Name  |xUnit|Source|                                                      Remarks                                                       |
+|-------|-----|------|--------------------------------------------------------------------------------------------------------------------|
+|Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.|
 
 """),
     Data(
@@ -198,10 +198,10 @@ Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal w
              "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
         ],
         is_formatting_float=True,
-        expected="""姓  | 名 |生年月日|郵便番号|           住所           |  電話番号  
-----|----|--------|--------|--------------------------|------------
-山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678
-山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999
+        expected="""| 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  |
+|----|----|--------|--------|--------------------------|------------|
+|山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678|
+|山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999|
 
 """),
     Data(
@@ -214,10 +214,10 @@ Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal w
         ],
         is_formatting_float=True,
         expected="""# quoted values
-quote|abc efg
-----:|-------
-    1|abc    
-   -1|efg    
+|quote|abc efg|
+|----:|-------|
+|    1|abc    |
+|   -1|efg    |
 
 """),
     Data(
@@ -229,9 +229,9 @@ quote|abc efg
         ],
         is_formatting_float=True,
         expected="""# not str headers
-   | 1 |0.1
----|--:|--:
-   |  1|0.1
+|   | 1 |0.1|
+|---|--:|--:|
+|   |  1|0.1|
 
 """),
     Data(
@@ -245,11 +245,11 @@ quote|abc efg
         ],
         is_formatting_float=True,
         expected="""# no uniform matrix
-a  | b | c 
----|--:|---
-a  |  0|   
-b  |  1|bb 
-c  |  2|ccc
+| a | b | c |
+|---|--:|---|
+|a  |  0|   |
+|b  |  1|bb |
+|c  |  2|ccc|
 
 """),
     Data(
@@ -259,9 +259,9 @@ c  |  2|ccc
         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
         is_formatting_float=True,
         expected="""# line breaks
-a b  | c d  | e f  
------|------|------
-v1 v1|v2 v2 |v3 v3 
+| a b | c d  | e f  |
+|-----|------|------|
+|v1 v1|v2 v2 |v3 v3 |
 
 """),
 ]
@@ -380,15 +380,15 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.write_table()
 
         expected = """# loader_mapping
-Name            |         Loader         
-----------------|------------------------
-csv             |CsvTableFileLoader      
-excel           |ExcelTableFileLoader    
-html            |HtmlTableFileLoader     
-markdown        |MarkdownTableFileLoader 
-mediawiki       |MediaWikiTableFileLoader
-json            |JsonTableFileLoader     
-Long Format Name|Loader                  
+|      Name      |         Loader         |
+|----------------|------------------------|
+|csv             |CsvTableFileLoader      |
+|excel           |ExcelTableFileLoader    |
+|html            |HtmlTableFileLoader     |
+|markdown        |MarkdownTableFileLoader |
+|mediawiki       |MediaWikiTableFileLoader|
+|json            |JsonTableFileLoader     |
+|Long Format Name|Loader                  |
 
 """
         out, _err = capsys.readouterr()
@@ -423,14 +423,14 @@ class Test_MarkdownTableWriter_write_table_iter(object):
             ["ha", "hb", "hc"],
             value_matrix_iter,
             """# tablename
-ha  | hb | hc 
----:|---:|---:
-   1|   2|   3
-  11|  12|  13
-   1|   2|   3
-  11|  12|  13
- 101| 102| 103
-1001|1002|1003
+| ha | hb | hc |
+|---:|---:|---:|
+|   1|   2|   3|
+|  11|  12|  13|
+|   1|   2|   3|
+|  11|  12|  13|
+| 101| 102| 103|
+|1001|1002|1003|
 
 """,
         ],
@@ -439,14 +439,14 @@ ha  | hb | hc
             ["string", "hb", "hc"],
             value_matrix_iter_1,
             """# mix length
-string                       | hb  | hc 
------------------------------|----:|---:
-a b c d e f g h i jklmn      |  2.1|   3
-aaaaa                        | 12.1|  13
-bbb                          |    2|   3
-cc                           |   12|  13
-a                            |  102| 103
-                             | 1002|1003
+|           string            | hb  | hc |
+|-----------------------------|----:|---:|
+|a b c d e f g h i jklmn      |  2.1|   3|
+|aaaaa                        | 12.1|  13|
+|bbb                          |    2|   3|
+|cc                           |   12|  13|
+|a                            |  102| 103|
+|                             | 1002|1003|
 
 """
         ],
