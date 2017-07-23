@@ -102,7 +102,6 @@ null_test_data_list = [
         indent=0,
         header=header,
         value=value,
-        expected=EmptyTableDataError
-    )
+        expected=EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]

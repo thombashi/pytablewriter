@@ -56,14 +56,12 @@ normal_test_data_list = [
                 "e": "cccc"
             }
         ]
-        """)
-    ),
+        """)),
     Data(
         table="",
         header=header_list,
         value=None,
-        expected=json.loads("[]")
-    ),
+        expected=json.loads("[]")),
     Data(
         table="tablename",
         header=header_list,
@@ -93,8 +91,7 @@ normal_test_data_list = [
                 }
             ]
         }
-        """)
-    ),
+        """)),
     Data(
         table="with none values",
         header=header_list,
@@ -131,8 +128,7 @@ normal_test_data_list = [
                 }
             ]
         }
-        """)
-    ),
+        """)),
     Data(
         table="mixed values",
         header=mix_header_list,
@@ -174,8 +170,7 @@ normal_test_data_list = [
                 "nan": "NaN",
                 "time": "2017-01-01T00:00:00"
             }]}
-        """)
-    ),
+        """)),
     Data(
         table="float",
         header=float_header_list,
@@ -205,14 +200,12 @@ exception_test_data_list = [
         table="",
         header=[],
         value=[],
-        expected=pytablewriter.EmptyTableDataError
-    ),
+        expected=pytablewriter.EmptyTableDataError),
     Data(
         table="",
         header=[],
         value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
+        expected=pytablewriter.EmptyHeaderError),
 ]
 
 table_writer_class = pytablewriter.JsonTableWriter

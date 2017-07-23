@@ -146,22 +146,19 @@ exception_test_data_list = [
         table_name="dummy",
         header=header,
         value=value,
-        expected=ptw.EmptyTableDataError
-    )
+        expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ] + [
     Data(
         table_name="empty_header",
         header=None,
         value=value_matrix,
-        expected=ptw.EmptyHeaderError
-    ),
+        expected=ptw.EmptyHeaderError),
     Data(
         table_name=None,
         header=header_list,
         value=value_matrix,
-        expected=ptw.EmptyTableNameError
-    ),
+        expected=ptw.EmptyTableNameError),
 ]
 
 table_writer_class = ptw.TomlTableWriter

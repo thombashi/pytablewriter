@@ -186,8 +186,7 @@ exception_test_data_list = [
         value=normal_test_data_list[0].value,
         is_write_header=True,
         is_dti_fmt=True,
-        expected=pytablewriter.EmptyTableNameError
-    )
+        expected=pytablewriter.EmptyTableNameError)
 ] + [
     Data(
         table="dummy",
@@ -196,8 +195,7 @@ exception_test_data_list = [
         value=value,
         is_write_header=True,
         is_dti_fmt=True,
-        expected=pytablewriter.EmptyTableDataError
-    )
+        expected=pytablewriter.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 

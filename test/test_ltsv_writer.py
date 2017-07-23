@@ -66,15 +66,13 @@ exception_test_data_list = [
     Data(
         header=header,
         value=value,
-        expected=ptw.EmptyTableDataError
-    )
+        expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ] + [
     Data(
         header=None,
         value=value_matrix,
-        expected=ptw.EmptyHeaderError
-    ),
+        expected=ptw.EmptyHeaderError),
 ]
 
 table_writer_class = ptw.LtsvTableWriter

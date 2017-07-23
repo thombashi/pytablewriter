@@ -43,8 +43,7 @@ normal_test_data_list = [
                 [1, 123.1, "a", 1,   1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3,   "cccc"],
-            ])
-    ),
+            ])),
     Data(
         table="mix_data",
         header=mix_header_list,
@@ -68,8 +67,7 @@ normal_test_data_list = [
                     3, "3.33", 'cccc', -3, 'ccc', 1, inf,
                     nan, nan, '2017-01-01T00:00:00',
                 ],
-            ])
-    ),
+            ])),
     Data(
         table="infnan",
         header=["inf", "nan"],
@@ -87,9 +85,7 @@ normal_test_data_list = [
                 [inf, nan],
                 [inf, nan],
                 [inf, inf],
-            ]
-        )
-    ),
+            ])),
     Data(
         table="line breaks",
         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
@@ -97,9 +93,7 @@ normal_test_data_list = [
         expected=TableData(
             "line_breaks",
             ["ab", "cd", "ef"],
-            [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]]
-        )
-    ),
+            [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]])),
     Data(
         table="empty header",
         header=[],
@@ -119,20 +113,17 @@ exception_test_data_list = [
         table="",
         header=header_list,
         value=value_matrix,
-        expected=ptw.EmptyTableNameError
-    ),
+        expected=ptw.EmptyTableNameError),
     Data(
         table="dummy",
         header=[],
         value=[],
-        expected=ptw.EmptyTableDataError
-    ),
+        expected=ptw.EmptyTableDataError),
     Data(
         table="dummy",
         header=header_list,
         value=[],
-        expected=ptw.EmptyValueError
-    ),
+        expected=ptw.EmptyValueError),
 ]
 
 

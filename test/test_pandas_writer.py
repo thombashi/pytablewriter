@@ -104,8 +104,7 @@ normal_test_data_list = [
     [3, 3.3, "ccc", 3, "cccc"],
 ])
 
-"""
-    ),
+"""),
 ]
 
 exception_test_data_list = [
@@ -114,15 +113,13 @@ exception_test_data_list = [
         indent=normal_test_data_list[0].indent,
         header=[],
         value=[],
-        expected=pytablewriter.EmptyTableDataError
-    ),
+        expected=pytablewriter.EmptyTableDataError),
     Data(
         table="",
         indent=normal_test_data_list[0].indent,
         header=normal_test_data_list[0].header,
         value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyTableNameError
-    ),
+        expected=pytablewriter.EmptyTableNameError),
 ]
 
 table_writer_class = pytablewriter.PandasDataFrameWriter

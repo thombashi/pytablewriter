@@ -44,8 +44,7 @@ normal_test_data_list = [
                 [1, 123.1, "a", 1,   1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3,   "cccc"],
-            ])
-    ),
+            ])),
     Data(
         table="tablename",
         header=header_list,
@@ -53,9 +52,7 @@ normal_test_data_list = [
         expected=TableData(
             "tablename",
             ["a", "b", "c", "dd", "e"],
-            []
-        )
-    ),
+            [])),
     Data(
         table="",
         header=mix_header_list,
@@ -79,8 +76,7 @@ normal_test_data_list = [
                     3, "3.33", 'cccc', -3, 'ccc', 1, inf,
                     nan, nan, '2017-01-01T00:00:00',
                 ],
-            ])
-    ),
+            ])),
     Data(
         table="infnan",
         header=["inf", "nan"],
@@ -98,9 +94,7 @@ normal_test_data_list = [
                 [inf, nan],
                 [inf, nan],
                 [inf, inf],
-            ]
-        )
-    ),
+            ])),
     Data(
         table="line breaks",
         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
@@ -109,8 +103,7 @@ normal_test_data_list = [
             "line breaks",
             ["a\nb", "\nc\n\nd\n", "e\r\nf"],
             [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]]
-        )
-    ),
+        )),
 ]
 
 invalid_test_data_list = [
@@ -118,8 +111,7 @@ invalid_test_data_list = [
         table="",
         header=header,
         value=value,
-        expected=ptw.EmptyTableDataError
-    )
+        expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
@@ -137,8 +129,7 @@ class Test_ExcelTableWriter_write_table(object):
             [writer_class, data.table, data.header, data.value, data.expected]
             for writer_class, data in itertools.product(
                 table_writer_class_list, normal_test_data_list)
-        ]
-    )
+        ])
     def test_normal(
             self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")
@@ -168,8 +159,7 @@ class Test_ExcelTableWriter_write_table(object):
             [writer_class, data.table, data.header, data.value, data.expected]
             for writer_class, data in itertools.product(
                 table_writer_class_list, invalid_test_data_list)
-        ]
-    )
+        ])
     def test_exception(
             self, tmpdir, writer_class, table, header, value, expected):
         test_file_path = tmpdir.join("test.xlsx")

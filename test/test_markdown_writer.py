@@ -287,8 +287,7 @@ exception_test_data_list = [
         header=[],
         value=[],
         is_formatting_float=True,
-        expected=ptw.EmptyTableDataError
-    ),
+        expected=ptw.EmptyTableDataError),
 ]
 
 table_writer_class = ptw.MarkdownTableWriter

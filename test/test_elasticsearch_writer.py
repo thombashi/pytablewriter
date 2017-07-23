@@ -45,8 +45,7 @@ normal_test_data_list = [
                 [1, 123.1, "a", 1,   1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3,   "cccc"],
-            ])
-    ),
+            ])),
     Data(
         table="mix_data",
         header=mix_header_list,
@@ -70,8 +69,7 @@ normal_test_data_list = [
                     3, "3.33", 'cccc', -3, 'ccc', 1, inf,
                     nan, nan, '2017-01-01T00:00:00',
                 ],
-            ])
-    ),
+            ])),
     Data(
         table="infnan",
         header=["inf", "nan"],
@@ -89,8 +87,7 @@ normal_test_data_list = [
                 [inf, nan],
                 [inf, nan],
                 [inf, inf],
-            ])
-    ),
+            ])),
 ]
 
 exception_test_data_list = [
@@ -98,20 +95,17 @@ exception_test_data_list = [
         table="",
         header=header_list,
         value=value_matrix,
-        expected=ptw.EmptyTableNameError
-    ),
+        expected=ptw.EmptyTableNameError),
     Data(
         table="dummy",
         header=[],
         value=[],
-        expected=ptw.EmptyTableDataError
-    ),
+        expected=ptw.EmptyTableDataError),
     Data(
         table="dummy",
         header=header_list,
         value=[],
-        expected=ptw.EmptyValueError
-    ),
+        expected=ptw.EmptyValueError),
 ]
 
 table_writer_class = ptw.ElasticsearchWriter

@@ -67,8 +67,7 @@ exception_test_data_list = [
     Data(
         header=header,
         value=value,
-        expected=ptw.EmptyTableDataError
-    )
+        expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
