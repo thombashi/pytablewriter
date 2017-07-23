@@ -40,11 +40,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self.char_cross_point = "|"
         self.is_write_opening_row = True
 
+        self._is_require_header = True
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
         self._dp_extractor.min_column_width = 3
-
-    def _verify_header(self):
-        self._validate_empty_header()
 
     def _get_opening_row_item_list(self):
         return []

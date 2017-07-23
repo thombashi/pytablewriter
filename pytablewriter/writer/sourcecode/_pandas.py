@@ -63,6 +63,8 @@ class PandasDataFrameWriter(NumpyTableWriter):
         self.import_pandas_as = "pd"
         self.is_write_header = False
 
+        self._is_require_header = True
+
     def _get_opening_row_item_list(self):
         return ["{} = {}.DataFrame([".format(
             self.variable_name, self.import_pandas_as)]
@@ -81,6 +83,3 @@ class PandasDataFrameWriter(NumpyTableWriter):
         if typepy.is_null_string(self.table_name):
             raise EmptyTableNameError(
                 "table_name must be a string of one or more characters")
-
-    def _verify_header(self):
-        self._validate_empty_header()

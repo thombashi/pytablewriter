@@ -29,8 +29,10 @@ class TomlTableWriter(TextTableWriter):
     def __init__(self):
         super(TomlTableWriter, self).__init__()
 
-        self._is_require_table_name = True
         self.is_formatting_float = False
+
+        self._is_require_table_name = True
+        self._is_require_header = True
 
     def write_table(self):
         """
@@ -49,6 +51,3 @@ class TomlTableWriter(TextTableWriter):
         self._verify_property()
         self.stream.write(toml.dumps(self.tabledata.as_dict()))
         self._logger.logging_complete_write()
-
-    def _verify_header(self):
-        self._validate_empty_header()

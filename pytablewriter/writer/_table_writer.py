@@ -217,6 +217,7 @@ class AbstractTableWriter(TableWriterInterface):
         }
 
         self._is_require_table_name = False
+        self._is_require_header = False
         self._is_remove_line_break = False
 
         self.iteration_length = -1
@@ -525,7 +526,8 @@ class AbstractTableWriter(TableWriterInterface):
             raise IOError("null output stream")
 
     def _verify_header(self):
-        pass
+        if self._is_require_header:
+            self._validate_empty_header()
 
     def _validate_empty_header(self):
         """

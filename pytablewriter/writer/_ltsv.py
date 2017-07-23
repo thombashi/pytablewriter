@@ -34,6 +34,8 @@ class LtsvTableWriter(CsvTableWriter):
 
         self.is_write_header = False
 
+        self._is_require_header = True
+
     def write_table(self):
         """
         |write_table| with
@@ -64,6 +66,3 @@ class LtsvTableWriter(CsvTableWriter):
             self.stream.write("\t".join(ltsv_item_list) + "\n")
 
         self._logger.logging_complete_write()
-
-    def _verify_header(self):
-        self._validate_empty_header()

@@ -57,6 +57,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
         self.char_right_side_row = ","
 
+        self._is_require_header = True
         self._dp_extractor.type_value_mapping = {
             typepy.Typecode.NONE: "null",
             typepy.Typecode.INFINITY: "Infinity",
@@ -101,9 +102,6 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         self.dec_indent_level()
         self._write_closing_row()
-
-    def _verify_header(self):
-        self._validate_empty_header()
 
     def _preprocess_value_matrix(self):
         if self._is_complete_value_matrix_preprocess:

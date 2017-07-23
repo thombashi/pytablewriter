@@ -47,7 +47,9 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self.stream = None
         self.is_padding = False
         self.is_formatting_float = False
+
         self._is_require_table_name = True
+        self._is_require_header = True
 
     def __del__(self):
         self.close()
@@ -61,9 +63,6 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
         self.close()
         self.stream = simplesqlite.SimpleSQLite(file_path, "w")
-
-    def _verify_header(self):
-        self._validate_empty_header()
 
     def _write_table(self):
         self._verify_value_matrix()
