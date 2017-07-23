@@ -532,9 +532,6 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-        if typepy.is_empty_sequence(self.header_list):
-            return
-
     def _preprocess_table_property(self):
         if self._is_complete_table_property_preprocess:
             return
