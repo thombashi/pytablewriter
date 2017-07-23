@@ -49,7 +49,8 @@ normal_test_data_list = [
 0.01\t0.00125\t0
 1\t99.9\t0.01
 1.2\t999999.123\t0.001
-"""), ]
+"""),
+]
 
 exception_test_data_list = [
     Data(
@@ -69,6 +70,7 @@ class Test_TsvTableWriter_write_new_line(object):
         writer.write_null_line()
 
         out, _err = capsys.readouterr()
+
         assert out == "\n"
 
 
