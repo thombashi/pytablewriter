@@ -1,6 +1,6 @@
 .. _example-type-hint-js:
 
-JavaScript Code
+Type Hint: JavaScript Code
 -----------------------------
 You can specify type hints to a writer via 
 :py:attr:`~AbstractTableWriter.type_hint_list`.

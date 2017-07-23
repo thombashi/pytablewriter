@@ -104,6 +104,8 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 
 
+autodoc_default_flags = ['inherited-members', 'show-inheritance']
+
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
