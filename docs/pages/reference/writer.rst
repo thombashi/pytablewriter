@@ -105,6 +105,11 @@ reStructuredText simple table writer
 .. autoclass:: pytablewriter.RstSimpleTableWriter
 
 
+Space aligned table writer
+-------------------------------
+.. autoclass:: pytablewriter.SpaceAlignedTableWriter
+
+
 SQLite writer class
 -------------------------------
 .. autoclass:: pytablewriter.SqliteTableWriter

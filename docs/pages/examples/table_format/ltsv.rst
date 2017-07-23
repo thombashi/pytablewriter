@@ -23,7 +23,6 @@ table to the |stream| from a matrix of data.
         
         writer.write_table()
 
-
 :Output:
     .. code-block:: none
 

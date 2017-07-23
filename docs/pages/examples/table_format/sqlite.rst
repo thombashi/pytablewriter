@@ -41,7 +41,6 @@ a SQLite database file from a matrix of data.
 
         writer.close()
 
-
 :Output:
     .. code-block:: none
 
