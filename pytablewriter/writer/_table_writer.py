@@ -23,12 +23,9 @@ from .._error import (
     EmptyValueError,
     EmptyTableNameError,
     EmptyHeaderError,
-    EmptyTableDataError
+    EmptyTableDataError,
 )
-from .._logger import (
-    logger,
-    WriterLogger,
-)
+from .._logger import WriterLogger
 from ._interface import TableWriterInterface
 
 
@@ -179,6 +176,8 @@ class AbstractTableWriter(TableWriterInterface):
             MatrixFormatting,
         )
 
+        self._logger = WriterLogger(self)
+
         self.stream = sys.stdout
         self._table_name = None
         self.header_list = None
@@ -193,8 +192,6 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_closing_row = False
 
         self.is_formatting_float = True
-
-        self._logger = WriterLogger(self)
 
         self._dp_extractor = DataPropertyExtractor()
         self._dp_extractor.min_column_width = 1
@@ -563,7 +560,7 @@ class AbstractTableWriter(TableWriterInterface):
         try:
             self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError as e:
-            logger.debug(e)
+            self._logger.logger.debug(e)
             self._value_dp_matrix = []
 
         self._is_complete_table_property_preprocess = True
@@ -601,14 +598,14 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocess_value_matrix()
 
     def __clear_preprocessed_flag(self):
-        logger.debug("__clear_preprocessed_flag")
+        self._logger.logger.debug("__clear_preprocessed_flag")
 
         self._is_complete_table_property_preprocess = False
         self._is_complete_header_preprocess = False
         self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocessed_data(self):
-        logger.debug("__clear_preprocessed_data")
+        self._logger.logger.debug("__clear_preprocessed_data")
 
         self._column_dp_list = []
         self._header_list = []

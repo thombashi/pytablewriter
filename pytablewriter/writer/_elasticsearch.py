@@ -14,7 +14,6 @@ from typepy import Typecode
 
 from six.moves import zip
 
-from .._logger import logger
 from ._table_writer import AbstractTableWriter
 
 
@@ -182,11 +181,11 @@ class ElasticsearchWriter(AbstractTableWriter):
         try:
             result = self.stream.indices.create(
                 index=self.index_name, body=mappings)
-            logger.debug(result)
+            self._logger.logger.debug(result)
         except es.TransportError as e:
             if e.error == "index_already_exists_exception":
                 # ignore already existing index
-                logger.debug(e)
+                self._logger.logger.debug(e)
             else:
                 raise
 
@@ -196,7 +195,8 @@ class ElasticsearchWriter(AbstractTableWriter):
                     index=self.index_name, body=body,
                     doc_type=self.document_type)
             except es.exceptions.RequestError as e:
-                logger.error("message={}, body={}".format(e, body))
+                self._logger.logger.error(
+                    "message={}, body={}".format(e, body))
 
     def _write_value_row_separator(self):
         pass
