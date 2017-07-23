@@ -100,6 +100,18 @@ normal_test_data_list = [
             [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]]
         )
     ),
+    Data(
+        table="empty header",
+        header=[],
+        value=value_matrix,
+        expected=TableData(
+            "empty_header",
+            ["A", "B", "C", "D", "E"],
+            [
+                [1, 123.1, "a", 1,   1],
+                [2, 2.2, "bb", 2.2, 2.2],
+                [3, 3.3, "ccc", 3,   "cccc"],
+            ])),
 ]
 
 exception_test_data_list = [
@@ -108,18 +120,6 @@ exception_test_data_list = [
         header=header_list,
         value=value_matrix,
         expected=ptw.EmptyTableNameError
-    ),
-    Data(
-        table="dummy",
-        header=[],
-        value=value_matrix,
-        expected=ptw.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        header=None,
-        value=value_matrix,
-        expected=ptw.EmptyHeaderError
     ),
     Data(
         table="dummy",

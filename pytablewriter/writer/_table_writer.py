@@ -25,6 +25,7 @@ from .._error import (
     EmptyHeaderError,
     EmptyTableDataError,
 )
+from .._function import convert_idx_to_alphabet
 from .._logger import WriterLogger
 from ._interface import TableWriterInterface
 
@@ -184,14 +185,14 @@ class AbstractTableWriter(TableWriterInterface):
         self.value_matrix = None
 
         self.is_write_header = True
-        self.is_padding = True
-
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = False
         self.is_write_opening_row = False
         self.is_write_closing_row = False
 
+        self.is_padding = True
         self.is_formatting_float = True
+        self._use_default_header = False
 
         self._dp_extractor = DataPropertyExtractor()
         self._dp_extractor.min_column_width = 1
@@ -526,7 +527,7 @@ class AbstractTableWriter(TableWriterInterface):
             raise IOError("null output stream")
 
     def _verify_header(self):
-        if self._is_require_header:
+        if self._is_require_header and not self._use_default_header:
             self._validate_empty_header()
 
     def _validate_empty_header(self):
@@ -546,7 +547,13 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_table_property_preprocess:
             return
 
-        self._dp_extractor.header_list = self.header_list
+        if typepy.is_empty_sequence(self.header_list) and self._use_default_header:
+            self._dp_extractor.header_list = [
+                convert_idx_to_alphabet(col_idx)
+                for col_idx in range(len(self.__value_matrix_org[0]))
+            ]
+        else:
+            self._dp_extractor.header_list = self.header_list
         self._dp_extractor.data_matrix = self.__value_matrix_org
 
         self._column_dp_list = self._dp_extractor.to_col_dataproperty_list(

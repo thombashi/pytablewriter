@@ -47,6 +47,7 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self.stream = None
         self.is_padding = False
         self.is_formatting_float = False
+        self._use_default_header = True
 
         self._is_require_table_name = True
         self._is_require_header = True

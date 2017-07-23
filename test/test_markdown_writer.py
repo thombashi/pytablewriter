@@ -264,6 +264,20 @@ normal_test_data_list = [
 |v1 v1|v2 v2 |v3 v3 |
 
 """),
+    Data(
+        table="empty header",
+        indent=0,
+        header=[],
+        value=value_matrix,
+        is_formatting_float=True,
+        expected="""# empty header
+| A |  B  | C | D | E  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |1.0|1   |
+|  2|  2.2|bb |2.2|2.2 |
+|  3|  3.3|ccc|3.0|cccc|
+
+"""),
 ]
 
 exception_test_data_list = [
@@ -274,22 +288,6 @@ exception_test_data_list = [
         value=[],
         is_formatting_float=True,
         expected=ptw.EmptyTableDataError
-    ),
-    Data(
-        table="",
-        indent=0,
-        header=[],
-        value=value_matrix,
-        is_formatting_float=True,
-        expected=ptw.EmptyHeaderError
-    ),
-    Data(
-        table="",
-        indent=0,
-        header=None,
-        value=value_matrix,
-        is_formatting_float=True,
-        expected=ptw.EmptyHeaderError
     ),
 ]
 

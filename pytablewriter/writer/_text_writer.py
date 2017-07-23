@@ -197,7 +197,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if not self.is_write_header:
             return
 
-        if typepy.is_empty_sequence(self.header_list):
+        if typepy.is_empty_sequence(self._header_list):
             raise EmptyHeaderError("header is empty")
 
         self._write_row(self._header_list)
