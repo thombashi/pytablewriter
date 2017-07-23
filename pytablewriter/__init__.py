@@ -54,6 +54,7 @@ from .writer import (
     RstCsvTableWriter,
     RstGridTableWriter,
     RstSimpleTableWriter,
+    SpaceAlignedTableWriter,
     SqliteTableWriter,
     LatexMatrixWriter,
     LatexTableWriter,

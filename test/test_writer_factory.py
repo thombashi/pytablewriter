@@ -22,8 +22,8 @@ class Test_WriterFactory_get_format_name_list(object):
             "csv", "elasticsearch", "excel", "htm", "html", "javascript", "js",
             "json", "latex_matrix", "latex_table", "ltsv", "markdown", "md",
             "mediawiki", "null", "numpy", "pandas", "py", "python", "rst",
-            "rst_csv_table", "rst_grid_table", "rst_simple_table", "sqlite",
-            "toml", "tsv",
+            "rst_csv_table", "rst_grid_table", "rst_simple_table",
+            "space_aligned", "sqlite", "toml", "tsv",
         ]
 
 
@@ -140,6 +140,8 @@ class Test_FileLoaderFactory_create_from_format_name(object):
         ["rst_grid_table", ptw.RstGridTableWriter],
         ["rst_simple_table", ptw.RstSimpleTableWriter],
         ["rst_csv_table", ptw.RstCsvTableWriter],
+        ["space_aligned", ptw.SpaceAlignedTableWriter],
+        ["SPACE_ALIGNED", ptw.SpaceAlignedTableWriter],
         ["sqlite", ptw.SqliteTableWriter],
         ["SQLite", ptw.SqliteTableWriter],
         ["tsv", ptw.TsvTableWriter],

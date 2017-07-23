@@ -29,6 +29,7 @@ from .writer import (
     RstCsvTableWriter,
     RstGridTableWriter,
     RstSimpleTableWriter,
+    SpaceAlignedTableWriter,
     SqliteTableWriter,
     TomlTableWriter,
     TsvTableWriter,
@@ -127,6 +128,9 @@ class TableFormat(enum.Enum):
     RST_SIMPLE_TABLE = (
         [RstSimpleTableWriter().format_name], RstSimpleTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT, ["rst"])
+    SPACE_ALIGNED = (
+        [SpaceAlignedTableWriter().format_name], SpaceAlignedTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT, [])
     SQLITE = (
         [SqliteTableWriter().format_name], SqliteTableWriter,
         FormatAttr.FILE | FormatAttr.BIN, ["sqlite", "sqlite3"])

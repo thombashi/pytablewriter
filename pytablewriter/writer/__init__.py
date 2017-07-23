@@ -28,6 +28,7 @@ from ._rst import (
     RstGridTableWriter,
     RstSimpleTableWriter,
 )
+from ._spacealigned import SpaceAlignedTableWriter
 from ._sqlite import SqliteTableWriter
 from ._toml import TomlTableWriter
 from ._tsv import TsvTableWriter

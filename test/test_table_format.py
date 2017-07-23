@@ -34,6 +34,7 @@ class Test_TableFormat_search_table_format(object):
                 TableFormat.RST_CSV_TABLE,
                 TableFormat.RST_GRID_TABLE,
                 TableFormat.RST_SIMPLE_TABLE,
+                TableFormat.SPACE_ALIGNED,
                 TableFormat.TOML,
                 TableFormat.TSV,
             ],
