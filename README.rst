@@ -42,6 +42,7 @@ Features
         - `NumPy <http://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
         - `Pandas <http://pandas.pydata.org/>`__ (Definition of a - `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
         - Python code (Definition of a nested list variable)
+    - Space aligned values
     - SQLite database file
     - Tab-separated values (TSV)
     - `TOML <https://github.com/toml-lang/toml>`__
@@ -186,7 +187,7 @@ Write a table to an Excel sheet
         import pytablewriter
 
         writer = pytablewriter.ExcelXlsxTableWriter()
-        writer.open_workbook("sample.xlsx")
+        writer.open("sample.xlsx")
 
         writer.make_worksheet("example")
         writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
@@ -364,7 +365,7 @@ Create Elasticsearch index and put data
 Write a table using multibyte character
 ---------------------------------------
 
-﻿You can use multibyte character as table data.
+﻿You can use multibyte characters as table data.
 
 :Sample Code:
     .. code:: python
@@ -383,14 +384,12 @@ Write a table using multibyte character
         ]
         writer.write_table()
 
-
 :Output:
     .. figure:: ss/multi_byte_char.png
        :scale: 100%
        :alt: multi_byte_char_table
 
        Output of multi-byte character table
-
 
 For more information
 --------------------
