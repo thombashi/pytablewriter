@@ -20,17 +20,6 @@ from ._text_writer import IndentationTextTableWriter
 class MarkdownTableWriter(IndentationTextTableWriter):
     """
     A table writer class for Markdown format.
-
-    .. py:method:: write_table()
-
-        |write_table| with Markdown table format.
-
-        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
-        :Example:
-            :ref:`example-markdown-table-writer`
-
-        .. note::
-            - |None| values are written as an empty string
     """
 
     @property
@@ -68,13 +57,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             col_dp, value_dp)
 
     def _get_opening_row_item_list(self):
-        if typepy.is_null_string(self.table_name):
-            return []
-
-        return [
-            "#" * (self._indent_level + 1) + " " +
-            MultiByteStrDecoder(self.table_name).unicode_str
-        ]
+        return []
 
     def _get_header_row_separator_item_list(self):
         header_separator_list = []
@@ -97,3 +80,35 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     def _get_closing_row_item_list(self):
         return []
+
+    def write_table(self):
+        """
+        |write_table| with Markdown table format.
+
+        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :Example:
+            :ref:`example-markdown-table-writer`
+
+        .. note::
+            - |None| values are written as an empty string
+        """
+
+        self._logger.logging_start_write()
+        self._verify_property()
+        self.__write_chapter()
+        self._write_table()
+        if self.is_write_null_line_after_table:
+            self.write_null_line()
+        self._logger.logging_complete_write()
+
+    def _write_table_iter(self):
+        self.__write_chapter()
+        super(MarkdownTableWriter, self)._write_table_iter()
+
+    def __write_chapter(self):
+        if typepy.is_null_string(self.table_name):
+            return
+
+        self._write_line("{:s} {:s}".format(
+            "#" * (self._indent_level + 1),
+            MultiByteStrDecoder(self.table_name).unicode_str))
