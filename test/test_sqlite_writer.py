@@ -90,6 +90,16 @@ normal_test_data_list = [
             ]
         )
     ),
+    Data(
+        table="line breaks",
+        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+        expected=TableData(
+            "line_breaks",
+            ["ab", "cd", "ef"],
+            [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]]
+        )
+    ),
 ]
 
 exception_test_data_list = [

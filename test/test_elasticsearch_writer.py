@@ -103,18 +103,6 @@ exception_test_data_list = [
     Data(
         table="dummy",
         header=[],
-        value=value_matrix,
-        expected=ptw.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        header=None,
-        value=value_matrix,
-        expected=ptw.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        header=[],
         value=[],
         expected=ptw.EmptyTableDataError
     ),
@@ -126,13 +114,14 @@ exception_test_data_list = [
     ),
 ]
 
+table_writer_class = ptw.ElasticsearchWriter
+
 
 class Test_ElasticsearchWriter__get_mappings(object):
 
     @pytest.mark.skipif("platform.system() == 'Windows' and six.PY2")
     def test_normal(self):
-        writer = ptw.ElasticsearchWriter()
-
+        writer = table_writer_class()
         writer.table_name = "es mappings"
         writer.header_list = [
             "str", "byte", "short", "int", "long", "float",
@@ -227,10 +216,10 @@ class Test_ElasticsearchWriter_write_table(object):
             for data in exception_test_data_list
         ])
     def test_exception(self, tmpdir, table, header, value, expected):
-        test_file_path = tmpdir.join("test.sqlite")
+        import elasticsearch
 
-        writer = ptw.SqliteTableWriter()
-        writer.open(str(test_file_path))
+        writer = table_writer_class()
+        writer.stream = elasticsearch.Elasticsearch()
         writer.table_name = table
         writer.header_list = header
         writer.value_matrix = value
