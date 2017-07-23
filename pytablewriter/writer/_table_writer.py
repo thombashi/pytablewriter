@@ -216,7 +216,7 @@ class AbstractTableWriter(TableWriterInterface):
             Typecode.STRING: True,
         }
 
-        self._is_required_table_name = False
+        self._is_require_table_name = False
         self._is_remove_line_break = False
 
         self.iteration_length = -1
@@ -513,7 +513,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _verify_table_name(self):
         if all([
-                self._is_required_table_name,
+                self._is_require_table_name,
                 typepy.is_null_string(self.table_name),
         ]):
             raise EmptyTableNameError(
