@@ -182,6 +182,20 @@ normal_test_data_list = [
     +---+-----+----+-----+--------+------------------------+
 
 """),
+    Data(
+        table="line breaks",
+        indent=0,
+        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+        expected=""".. table:: line breaks
+
+    +-----+------+------+
+    | a b | c d  | e f  |
+    +=====+======+======+
+    |v1 v1|v2 v2 |v3 v3 |
+    +-----+------+------+
+
+"""),
 ]
 
 table_writer_class = pytablewriter.RstGridTableWriter

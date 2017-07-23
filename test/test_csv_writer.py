@@ -91,6 +91,13 @@ normal_test_data_list = [
 1,99.9,0.01
 1.2,999999.123,0.001
 """),
+    Data(
+        col_delim=",",
+        header=["a\nb", "c\n\nd", "e\r\nf"],
+        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+        expected=""""a b","c d","e f"
+"v1 v1","v2 v2","v3 v3"
+"""),
 ]
 
 exception_test_data_list = [

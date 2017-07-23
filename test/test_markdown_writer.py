@@ -235,7 +235,7 @@ quote|abc efg
 
 """),
     Data(
-        table="nouniform matrix",
+        table="no uniform matrix",
         indent=0,
         header=["a", "b", "c"],
         value=[
@@ -244,12 +244,24 @@ quote|abc efg
             ["c", 2, "ccc", 0.1],
         ],
         is_formatting_float=True,
-        expected="""# nouniform matrix
+        expected="""# no uniform matrix
 a  | b | c 
 ---|--:|---
 a  |  0|   
 b  |  1|bb 
 c  |  2|ccc
+
+"""),
+    Data(
+        table="line breaks",
+        indent=0,
+        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+        is_formatting_float=True,
+        expected="""# line breaks
+a b  | c d  | e f  
+-----|------|------
+v1 v1|v2 v2 |v3 v3 
 
 """),
 ]

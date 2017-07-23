@@ -194,7 +194,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.is_formatting_float = True
 
-
         self._logger = WriterLogger(self)
 
         self._dp_extractor = DataPropertyExtractor()
@@ -416,6 +415,17 @@ class AbstractTableWriter(TableWriterInterface):
         except AttributeError:
             return column_dp.ascii_char_width
 
+    def _get_header_item(self, col_dp, value_dp):
+        from typepy.type import String
+
+        format_string = self._get_header_format_string(col_dp, value_dp)
+        header = String(value_dp.data).force_convert().strip()
+
+        return format_string.format(self.__remove_line_break(header))
+
+    def _get_header_format_string(self, col_dp, value_dp):
+        return "{:s}"
+
     def _get_row_item(self, col_dp, value_dp):
         to_string_format_str = self.__get_to_string_format(
             col_dp, value_dp)
@@ -558,6 +568,18 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_property_preprocess = True
 
+    def _preprocess_header(self):
+        if self._is_complete_header_preprocess:
+            return
+
+        self._header_list = [
+            self._get_header_item(col_dp, header_dp)
+            for col_dp, header_dp in
+            zip(self._column_dp_list, self._header_dp_list)
+        ]
+
+        self._is_complete_header_preprocess = True
+
     def _preprocess_value_matrix(self):
         if self._is_complete_value_matrix_preprocess:
             return
@@ -575,18 +597,21 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _preprocess(self):
         self._preprocess_table_property()
+        self._preprocess_header()
         self._preprocess_value_matrix()
 
     def __clear_preprocessed_flag(self):
         logger.debug("__clear_preprocessed_flag")
 
         self._is_complete_table_property_preprocess = False
+        self._is_complete_header_preprocess = False
         self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocessed_data(self):
         logger.debug("__clear_preprocessed_data")
 
         self._column_dp_list = []
+        self._header_list = []
         self._value_matrix = []
         self._value_dp_matrix = []
 

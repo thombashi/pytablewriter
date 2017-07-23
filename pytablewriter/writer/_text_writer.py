@@ -166,13 +166,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
-    def _get_header_item(self, col_dp, value_dp):
-        from typepy.type import String
-
-        format_string = self._get_header_format_string(col_dp, value_dp)
-
-        return format_string.format(String(value_dp.data).force_convert())
-
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(
             self._get_align_char(dataproperty.Align.CENTER),
@@ -212,11 +205,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self._write_row(self.header_list)
             return
 
-        self._write_row([
-            self._get_header_item(col_dp, header_dp)
-            for col_dp, header_dp in
-            zip(self._column_dp_list, self._header_dp_list)
-        ])
+        self._write_row(self._header_list)
 
     def _write_value_row(self, value_list, value_dp_list):
         self._write_row(value_list)
