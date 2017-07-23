@@ -70,12 +70,14 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self._verify_value_matrix()
         self._preprocess()
 
-        self.stream.create_table_from_tabledata(ptr.TableData(
+        tabledata = ptr.TableData(
             self.table_name, self.header_list,
             [
                 [value_dp.data for value_dp in value_dp_list]
                 for value_dp_list in self._value_dp_matrix
-            ]))
+            ])
+        self.stream.create_table_from_tabledata(
+            ptr.SQLiteTableDataSanitizer(tabledata).sanitize())
 
     def _write_value_row_separator(self):
         pass
