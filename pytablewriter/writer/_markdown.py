@@ -50,8 +50,6 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
-        self._is_remove_line_break = True
-
         self._dp_extractor.min_column_width = 3
 
     def _verify_header(self):

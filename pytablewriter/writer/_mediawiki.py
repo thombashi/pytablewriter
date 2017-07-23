@@ -48,6 +48,7 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
+        self._is_remove_line_break = False
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 
     def _write_header(self):

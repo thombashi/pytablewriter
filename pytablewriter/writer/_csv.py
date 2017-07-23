@@ -40,7 +40,6 @@ class CsvTableWriter(TextTableWriter):
         self.is_write_null_line_after_table = False
 
         self._quoting_flags[typepy.Typecode.NULL_STRING] = False
-        self._is_remove_line_break = True
 
     def _write_header(self):
         if typepy.is_empty_sequence(self.header_list):

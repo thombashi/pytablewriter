@@ -40,7 +40,6 @@ class LatexWriter(IndentationTextTableWriter):
         self.char_right_side_row = r" \\"
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
-        self._is_remove_line_break = True
 
     def _is_math_parts(self, value_dp):
         if value_dp.typecode in [Typecode.INTEGER, Typecode.REAL_NUMBER]:

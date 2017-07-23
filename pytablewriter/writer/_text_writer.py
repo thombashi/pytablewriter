@@ -98,6 +98,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_value_row_separator = "-"
         self.char_closing_row = "-"
 
+        self._is_remove_line_break = True
         self.is_write_null_line_after_table = True
 
     def write_null_line(self):

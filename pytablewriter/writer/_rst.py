@@ -34,7 +34,6 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-        self._is_remove_line_break = True
 
     def write_table(self):
         self._logger.logging_start_write()
