@@ -126,9 +126,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.write_null_line()
 
     def _write_table(self):
-        self._verify_property()
         self._preprocess()
-
         self._write_opening_row()
 
         try:

@@ -328,6 +328,7 @@ class AbstractTableWriter(TableWriterInterface):
         """
 
         self._logger.logging_start_write()
+        self._verify_property()
         self._write_table()
         self._logger.logging_complete_write()
 

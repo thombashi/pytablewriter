@@ -39,6 +39,7 @@ class RstTableWriter(IndentationTextTableWriter):
         self._logger.logging_start_write()
 
         self._write_line(self._get_table_directive())
+        self._verify_property()
         self._write_table()
         if self.is_write_null_line_after_table:
             self.write_null_line()
@@ -53,8 +54,6 @@ class RstTableWriter(IndentationTextTableWriter):
             MultiByteStrDecoder(self.table_name).unicode_str)
 
     def _write_table(self):
-        self._verify_property()
-
         self.inc_indent_level()
         super(RstTableWriter, self)._write_table()
         self.dec_indent_level()

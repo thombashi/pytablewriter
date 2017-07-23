@@ -72,8 +72,6 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             self.table_name, "_").lower()
 
     def _write_table(self):
-        self._verify_property()
-
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = dateutil_datetime_formatter
         else:

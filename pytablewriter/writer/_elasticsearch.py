@@ -172,7 +172,6 @@ class ElasticsearchWriter(AbstractTableWriter):
             raise ValueError(
                 "stream must be an elasticsearch.Elasticsearch instance")
 
-        self._verify_property()
         self._verify_value_matrix()
         self._preprocess()
 

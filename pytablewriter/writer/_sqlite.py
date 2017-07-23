@@ -66,7 +66,6 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self._validate_empty_header()
 
     def _write_table(self):
-        self._verify_property()
         self._verify_value_matrix()
         self._preprocess()
 

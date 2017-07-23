@@ -101,8 +101,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         return pathvalidate.sanitize_js_var_name(value, "_").lower()
 
     def _write_table(self):
-        self._verify_property()
-
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = js_datetime_formatter
         else:
