@@ -59,9 +59,15 @@ def set_log_level(log_level):
 
 class WriterLogger(object):
 
+    @property
+    def logger(self):
+        return self.__logger
+
     def __init__(self, writer):
         self.__writer = writer
-        logger.debug(
+        self.__logger = logger
+
+        self.logger.debug(
             "created WriterLogger: format={}".format(writer.format_name))
 
     def logging_start_write(self, extra_message_list=None):
