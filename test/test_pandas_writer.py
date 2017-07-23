@@ -93,6 +93,19 @@ normal_test_data_list = [
 ], columns=["a", "b"])
 
 """),
+    Data(
+        table="empty header",
+        indent=0,
+        header=[],
+        value=value_matrix,
+        expected="""empty_header = pd.DataFrame([
+    [1, 123.1, "a", 1, 1],
+    [2, 2.2, "bb", 2.2, 2.2],
+    [3, 3.3, "ccc", 3, "cccc"],
+])
+
+"""
+    ),
 ]
 
 exception_test_data_list = [
@@ -102,20 +115,6 @@ exception_test_data_list = [
         header=[],
         value=[],
         expected=pytablewriter.EmptyTableDataError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
-    ),
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=None,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError
     ),
     Data(
         table="",
