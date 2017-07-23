@@ -11,7 +11,7 @@ from pytablewriter._function import convert_idx_to_alphabet
 import pytest
 
 
-class Test_convert_idx_to_alphabet:
+class Test_convert_idx_to_alphabet(object):
 
     @pytest.mark.parametrize(["value", "expected"], [
         [
