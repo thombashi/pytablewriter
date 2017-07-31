@@ -45,6 +45,15 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
         self._dp_extractor.min_column_width = 3
 
+    def _get_header_item(self, col_dp, value_dp):
+        return self.__escape_vertical_bar_char(
+            super(MarkdownTableWriter, self)._get_header_item(
+                col_dp, value_dp))
+
+    def _get_row_item(self, col_dp, value_dp):
+        return self.__escape_vertical_bar_char(
+            super(MarkdownTableWriter, self)._get_row_item(col_dp, value_dp))
+
     def _get_opening_row_item_list(self):
         return []
 
@@ -80,6 +89,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         .. note::
             - |None| values are written as an empty string
+            - Vertical bar characters (``'|'``) in table items are escaped
         """
 
         self._logger.logging_start_write()
@@ -101,3 +111,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._write_line("{:s} {:s}".format(
             "#" * (self._indent_level + 1),
             MultiByteStrDecoder(self.table_name).unicode_str))
+
+    @staticmethod
+    def __escape_vertical_bar_char(value):
+        return value.replace("|", "\|")

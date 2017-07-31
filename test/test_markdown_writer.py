@@ -278,6 +278,18 @@ normal_test_data_list = [
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
+    Data(
+        table="vertical bar",
+        indent=1,
+        header=["a|b", "|c||d|"],
+        value=[["|v1|v1|", "v2|v2"]],
+        is_formatting_float=True,
+        expected="""## vertical bar
+|  a\|b  |\|c\|\|d\||
+|-------|------|
+|\|v1\|v1\||v2\|v2 |
+
+"""),
 ]
 
 exception_test_data_list = [
