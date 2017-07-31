@@ -4,9 +4,6 @@ pytablewriter
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
 
-.. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
-   :target: https://pypi.python.org/pypi/pytablewriter
-
 .. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux
     :target: https://travis-ci.org/thombashi/pytablewriter
 
@@ -407,7 +404,6 @@ Installation
 
 Dependencies
 ============
-
 Python 2.7+ or 3.3+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
@@ -424,10 +420,8 @@ Python 2.7+ or 3.3+
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
 - `xlwt <http://www.python-excel.org/>`__
 
-
 Test dependencies
 -----------------
-
 - `pytest <http://pytest.org/latest/>`__
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
