@@ -41,7 +41,7 @@ pytest_runner_require = ["pytest-runner"] if needs_pytest else []
 
 setuptools.setup(
     name=MODULE_NAME,
-    version="0.23.1",
+    version="0.23.2",
     url="https://github.com/thombashi/{}".format(MODULE_NAME),
 
     author="Tsuyoshi Hombashi",
