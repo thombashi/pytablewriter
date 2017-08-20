@@ -50,6 +50,10 @@ def write_examples(maker):
     maker.write_file(examples_root.joinpath(
         "table_format", "elasticsearch_example.txt"))
 
+    maker.write_chapter("Formatting a table for Jupyter Notebook")
+    maker.write_file(examples_root.joinpath(
+        "jupyter_notebook", "jupyter_notebook_example.txt"))
+
     maker.write_chapter("Write a table using multibyte character")
     maker.write_file(examples_root.joinpath(
         "multibyte", "multibyte_table_example.txt"))

@@ -1,6 +1,6 @@
-pytablewriter
-=============
 
+pytablewriter
+===============
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
 
@@ -16,10 +16,10 @@ pytablewriter
 .. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
    :target: https://github.com/thombashi/pytablewriter
 
-Summary
--------
 
-A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+Summary
+---------
+A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
@@ -29,6 +29,7 @@ Features
     - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
     - HTML
     - JSON
+    - Jupyter Notebook
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - LaTeX: ``tabular``/``array`` environment
     - Markdown
@@ -50,14 +51,14 @@ Features
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer
 
+
 Examples
-========
+==========
 
 Write a Markdown table
-----------------------
-
+------------------------
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import pytablewriter
 
@@ -74,7 +75,7 @@ Write a Markdown table
         writer.write_table()
 
 :Output:
-    .. code::
+    .. code-block:: none
 
         # example_table
         |int|float|str |bool |  mix   |          time          |
@@ -91,11 +92,11 @@ Write a Markdown table
 
        Rendered markdown at GitHub
 
-Write a reStructuredText table (Grid Tables)
---------------------------------------------
 
+Write a reStructuredText table (Grid Tables)
+----------------------------------------------
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import pytablewriter
 
@@ -112,7 +113,7 @@ Write a reStructuredText table (Grid Tables)
         writer.write_table()
 
 :Output:
-    .. code:: ReST
+    .. code-block:: ReST
 
         .. table:: example_table
 
@@ -143,11 +144,11 @@ Write a reStructuredText table (Grid Tables)
         |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
         +---+-----+----+-----+--------+------------------------+
 
-Write a table with JavaScript format (as a nested list variable definition)
----------------------------------------------------------------------------
 
+Write a table with JavaScript format (as a nested list variable definition)
+-----------------------------------------------------------------------------
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import pytablewriter
 
@@ -165,7 +166,7 @@ Write a table with JavaScript format (as a nested list variable definition)
 
 
 :Output:
-    .. code:: js
+    .. code-block:: js
 
         const example_table = [
             ["int", "float", "str", "bool", "mix", "time"],
@@ -175,11 +176,11 @@ Write a table with JavaScript format (as a nested list variable definition)
             [-10, -9.90, "", false, NaN, "2017-01-01 00:00:00+0900"]
         ];
 
-Write a table to an Excel sheet
--------------------------------
 
+Write a table to an Excel sheet
+---------------------------------
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import pytablewriter
 
@@ -205,11 +206,11 @@ Write a table to an Excel sheet
 
        Output excel file (``sample_single.xlsx``)
 
-Write a Markdown table from ``pandas.DataFrame`` instance
----------------------------------------------------------
 
+Write a Markdown table from ``pandas.DataFrame`` instance
+-----------------------------------------------------------
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import pandas as pd
         import pytablewriter
@@ -228,7 +229,7 @@ Write a Markdown table from ``pandas.DataFrame`` instance
 
 
 :Output:
-    .. code::
+    .. code-block:: none
 
          i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time
         --:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
@@ -236,11 +237,11 @@ Write a Markdown table from ``pandas.DataFrame`` instance
           2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
           3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00
 
-Create Elasticsearch index and put data
----------------------------------------
 
+Create Elasticsearch index and put data
+-----------------------------------------
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import datetime
         import json
@@ -293,7 +294,7 @@ Create Elasticsearch index and put data
 
 
 :Output:
-    .. code:: json
+    .. code-block:: json
 
         ----- mappings -----
         {
@@ -359,13 +360,24 @@ Create Elasticsearch index and put data
             "ip": "::1"
         }
 
-Write a table using multibyte character
----------------------------------------
 
+Formatting a table for Jupyter Notebook
+-----------------------------------------
+http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
+
+.. figure:: ss/jupyter_notebook.png
+   :scale: 100%
+   :alt: jupyter_notebook_table
+
+   Table formatting for Jupyter Notebook
+
+
+Write a table using multibyte character
+-----------------------------------------
 ﻿You can use multibyte characters as table data.
 
 :Sample Code:
-    .. code:: python
+    .. code-block:: python
 
         import pytablewriter
 
@@ -388,12 +400,11 @@ Write a table using multibyte character
 
        Output of multi-byte character table
 
-For more information
---------------------
 
+For more information
+----------------------
 More examples are available at 
 http://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
-
 Installation
 ============
 
@@ -426,14 +437,12 @@ Test dependencies
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
 
-Documentation
-=============
 
+Documentation
+===============
 http://pytablewriter.rtfd.io/
 
 Related Project
-===============
-
+=================
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
     - Tabular data loaded by ``pytablereader`` can be written another tabular data format with ``pytablewriter``.
-
