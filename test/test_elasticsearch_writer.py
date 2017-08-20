@@ -209,7 +209,7 @@ class Test_ElasticsearchWriter_write_table(object):
             [data.table, data.header, data.value, data.expected]
             for data in exception_test_data_list
         ])
-    def test_exception(self, tmpdir, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         import elasticsearch
 
         writer = table_writer_class()
