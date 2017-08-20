@@ -133,9 +133,42 @@ class Test_ElasticsearchWriter__get_mappings(object):
                 None, float("inf"), float("nan"),
             ],
         ]
-        writer._preprocess()
 
-        # mappings ---
+        # mappings w/o type hint ---
+        writer._preprocess()
+        mappings = writer._get_mappings()
+        expected_mappings = {
+            "mappings": {
+                "table": {
+                    "properties": {
+                        "str": {"type": "string"},
+                        "byte": {"type": "byte"},
+                        "short": {"type": "short"},
+                        "int": {"type": "integer"},
+                        "long": {"type": "long"},
+                        "float": {"type": "double"},
+                        "date": {
+                            "type": "date",
+                            "format": "date_optional_time"
+                        },
+                        "bool": {"type": "boolean"},
+                        "ip": {"type": "string"},
+                        "none": {"type": "string"},
+                        "inf": {"type": "keyword"},
+                        "nan": {"type": "keyword"},
+                    }
+                }
+            }
+        }
+
+        print("[expected]\n{}\n".format(expected_mappings))
+        print("[actual]\n{}\n".format(json.dumps(mappings, indent=4)))
+        assert mappings == expected_mappings
+
+        # mappings w/ type hint ---
+        writer.type_hint_list = [
+            None, None, None, None, None, None, None, None, ptw.IpAddress]
+        writer._preprocess()
         mappings = writer._get_mappings()
         expected_mappings = {
             "mappings": {
@@ -163,7 +196,6 @@ class Test_ElasticsearchWriter__get_mappings(object):
 
         print("[expected]\n{}\n".format(expected_mappings))
         print("[actual]\n{}\n".format(json.dumps(mappings, indent=4)))
-
         assert mappings == expected_mappings
 
         # body ---
@@ -197,7 +229,6 @@ class Test_ElasticsearchWriter__get_mappings(object):
 
         print("[expected]\n{}\n".format(expected_body))
         print("[actual]\n{}\n".format(body))
-
         assert body == expected_body
 
 
