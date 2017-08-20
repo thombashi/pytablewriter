@@ -6,6 +6,7 @@ Features
     - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
     - HTML
     - JSON
+    - Jupyter Notebook
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - LaTeX: ``tabular``/``array`` environment
     - Markdown
