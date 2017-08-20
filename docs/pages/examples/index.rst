@@ -9,4 +9,5 @@ Examples
    stream/index
    multibyte/index
    datasource/index
+   jupyter_notebook/index
    typehint/index
