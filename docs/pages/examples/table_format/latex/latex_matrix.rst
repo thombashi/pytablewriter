@@ -22,13 +22,13 @@ with LaTeX ``array`` environment to the |stream| from a matrix of data.
 :Output 1:
     .. code-block:: TeX
 
-        \[
+        \begin{equation}
             A = \left( \begin{array}{rrr}
                 0.01 & 0.0012 & 0.000 \\
                 1.00 & 99.9000 & 0.010 \\
                 1.20 & 999999.1230 & 0.001 \\
             \end{array} \right)
-        \]
+        \end{equation}
 
 :Rendering Result 1:
     .. figure:: ss/latex_matrix_num.png
@@ -44,22 +44,24 @@ with LaTeX ``array`` environment to the |stream| from a matrix of data.
         writer = pytablewriter.LatexMatrixWriter()
         writer.table_name = "B"
         writer.value_matrix = [
-            ["a_{11}", "a_{12}", "],
-            ["a_{21}", "a_{22}", r"\ldots", "a_{2n}"],
-            ["a_{31}", "a_{32}", r"\ldots", "a_{3n}"],
+            ["a_{11}", "a_{12}", "\\ldots", "a_{1n}"],
+            ["a_{21}", "a_{22}", "\\ldots", "a_{2n}"],
+            [r"\vdots", "\\vdots", "\\ddots", "\\vdots"],
+            ["a_{n1}", "a_{n2}", "\\ldots", "a_{nn}"],
         ]
         writer.write_table()
 
 :Output 2:
     .. code-block:: TeX
 
-        \[
+        \begin{equation}
             B = \left( \begin{array}{llll}
-                a_{11} & a_{12} & $\ldots$ & a_{1n} \\
-                a_{21} & a_{22} & $\ldots$ & a_{2n} \\
-                a_{31} & a_{32} & $\ldots$ & a_{3n} \\
+                a_{11} & a_{12} & \ldots & a_{1n} \\
+                a_{21} & a_{22} & \ldots & a_{2n} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                a_{n1} & a_{n2} & \ldots & a_{nn} \\
             \end{array} \right)
-        \]
+        \end{equation}
 
 :Rendering Result 2:
     .. figure:: ss/latex_matrix_var.png

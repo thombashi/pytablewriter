@@ -3,7 +3,7 @@
 LaTeX table
 -------------------------------------------
 |LatexTableWriter| class can writes a table 
-with LaTeX ``tabular`` environment to the |stream| from a matrix of data.
+with LaTeX ``array`` environment to the |stream| from a matrix of data.
 
 :Sample Code:
     .. code-block:: python
@@ -26,14 +26,14 @@ with LaTeX ``tabular`` environment to the |stream| from a matrix of data.
 :Output:
     .. code-block:: TeX
 
-        \begin{tabular}{r | r | l | l | l | l} \hline
+        \begin{array}{r | r | l | l | l | l} \hline
             \verb|int| & \verb|float| & \verb|str| & \verb|bool| & \verb|mix| & \verb|time| \\ \hline
             \hline
-            0 & 0.10 & $hoge$ & True & 0 & \verb|2017-01-01 03:04:05+0900| \\ \hline
-            2 & -2.23 & $foo$ & False &  & \verb|2017-12-23 12:34:51+0900| \\ \hline
-            3 & 0.00 & $bar$ & True & $\infty$ & \verb|2017-03-03 22:44:55+0900| \\ \hline
+            0 & 0.10 & hoge & True & 0 & \verb|2017-01-01 03:04:05+0900| \\ \hline
+            2 & -2.23 & foo & False &  & \verb|2017-12-23 12:34:51+0900| \\ \hline
+            3 & 0.00 & bar & True & \infty & \verb|2017-03-03 22:44:55+0900| \\ \hline
             -10 & -9.90 &  & False & NaN & \verb|2017-01-01 00:00:00+0900| \\ \hline
-        \end{tabular}
+        \end{array}
 
 :Rendering Result:
     .. figure:: ss/latex_table.png
