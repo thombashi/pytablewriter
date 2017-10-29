@@ -5,11 +5,11 @@ enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
 logbook>=1.1.0
 mbstrdecoder
-pathvalidate>=0.16.1
-pytablereader>=0.13.3
-SimpleSQLite>=0.15.0
+pathvalidate>=0.16.2
+pytablereader>=0.13.5
+SimpleSQLite>=0.16.0
 six
-toml>=0.9.2
+toml>=0.9.3
 typepy>=0.0.20
-XlsxWriter>=0.9.8
+XlsxWriter>=1.0.2
 xlwt
