@@ -29,26 +29,26 @@ normal_test_data_list = [
         table="",
         header=float_header_list,
         value=float_value_matrix,
-        expected=r"""\[
+        expected=r"""\begin{equation}
     \left( \begin{array}{rrr}
         0.01 & 0.0012 & 0.000 \\
         1.00 & 99.9000 & 0.010 \\
         1.20 & 999999.1230 & 0.001 \\
     \end{array} \right)
-\]
+\end{equation}
 
 """),
     Data(
         table="A",
         header=float_header_list,
         value=float_value_matrix,
-        expected=r"""\[
+        expected=r"""\begin{equation}
     A = \left( \begin{array}{rrr}
         0.01 & 0.0012 & 0.000 \\
         1.00 & 99.9000 & 0.010 \\
         1.20 & 999999.1230 & 0.001 \\
     \end{array} \right)
-\]
+\end{equation}
 
 """),
     Data(
@@ -59,26 +59,26 @@ normal_test_data_list = [
             ["a_{21}", "a_{22}", r"\ldots", "a_{2n}"],
             ["a_{31}", "a_{32}", r"\ldots", "a_{3n}"],
         ],
-        expected=r"""\[
+        expected=r"""\begin{equation}
     B = \left( \begin{array}{llll}
-        a_{11} & a_{12} & $\ldots$ & a_{1n} \\
-        a_{21} & a_{22} & $\ldots$ & a_{2n} \\
-        a_{31} & a_{32} & $\ldots$ & a_{3n} \\
+        a_{11} & a_{12} & \ldots & a_{1n} \\
+        a_{21} & a_{22} & \ldots & a_{2n} \\
+        a_{31} & a_{32} & \ldots & a_{3n} \\
     \end{array} \right)
-\]
+\end{equation}
 
 """),
     Data(
         table="C",
         header="",
         value=value_matrix,
-        expected=r"""\[
+        expected=r"""\begin{equation}
     C = \left( \begin{array}{rrlrl}
-        1 & 123.1 & $a$ & 1.0 & 1 \\
-        2 & 2.2 & $bb$ & 2.2 & 2.2 \\
-        3 & 3.3 & $ccc$ & 3.0 & $cccc$ \\
+        1 & 123.1 & a & 1.0 & 1 \\
+        2 & 2.2 & bb & 2.2 & 2.2 \\
+        3 & 3.3 & ccc & 3.0 & cccc \\
     \end{array} \right)
-\]
+\end{equation}
 
 """),
 ]

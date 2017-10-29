@@ -76,7 +76,11 @@ class LatexWriter(IndentationTextTableWriter):
         super(LatexWriter, self)._write_closing_row()
 
     def _to_math_parts(self, value):
-        return r"${:s}$".format(value)
+        # dollar characters for both sides of math parts are not required in
+        # Jupyter latex.
+        # return r"${:s}$".format(value)
+
+        return value
 
 
 class LatexMatrixWriter(LatexWriter):
@@ -138,14 +142,14 @@ class LatexMatrixWriter(LatexWriter):
         return [r"\end{array} \right)"]
 
     def _write_opening_row(self):
-        self._write_line(r"\[")
+        self._write_line(r"\begin{equation}")
         self.inc_indent_level()
         super(LatexMatrixWriter, self)._write_opening_row()
 
     def _write_closing_row(self):
         super(LatexMatrixWriter, self)._write_closing_row()
         self.dec_indent_level()
-        self._write_line(r"\]")
+        self._write_line(r"\end{equation}")
 
 
 class LatexTableWriter(LatexWriter):
@@ -154,7 +158,7 @@ class LatexTableWriter(LatexWriter):
 
     .. py:method:: write_table
 
-        |write_table| with LaTeX ``tabular`` environment.
+        |write_table| with LaTeX ``array`` environment.
 
         :Example:
             :ref:`example-latex-table-writer`
@@ -173,7 +177,7 @@ class LatexTableWriter(LatexWriter):
     def _get_opening_row_item_list(self):
         return [
             "".join([
-                r"\begin{tabular}{",
+                r"\begin{array}{",
                 "{:s}".format(" | ".join(self._get_col_align_char_list())),
                 r"} \hline",
             ])
@@ -208,4 +212,4 @@ class LatexTableWriter(LatexWriter):
         return [r"\hline"]
 
     def _get_closing_row_item_list(self):
-        return [r"\end{tabular}"]
+        return [r"\end{array}"]
