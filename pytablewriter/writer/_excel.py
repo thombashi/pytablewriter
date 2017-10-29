@@ -8,7 +8,9 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import abc
+import copy
 
+import dataproperty
 import typepy
 from typepy.type import Integer
 import xlwt
@@ -125,6 +127,9 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self._last_data_col = None
 
         self._current_data_row = self._first_data_row
+
+        self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
+        self._quoting_flags[typepy.Typecode.DATETIME] = True
 
     def open(self, file_path):
         """
