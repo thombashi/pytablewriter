@@ -9,10 +9,10 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import collections
-import datetime
 from decimal import Decimal
 import itertools
 
+from dateutil.parser import parse
 import pytest
 import toml
 
@@ -101,23 +101,17 @@ e = "cccc"
         table_name="mixtype",
         header=["int", "float", "bool", "datetime"],
         value=[
-            [
-                0, 2.2, True,
-                datetime.datetime(2017, 1, 2, 3, 4, 5),
-            ],
-            [
-                -1, Decimal("4.4"), False,
-                datetime.datetime(2022, 1, 1, 0, 0, 0),
-            ],
+            [0, 2.2, True, parse("2017-01-02T03:04:05")],
+            [-1, Decimal("4.4"), False, parse("2022-01-01T00:00:00")],
         ],
         expected="""[[mixtype]]
 float = 2.2
-datetime = 2017-01-02T03:04:05Z
+datetime = 2017-01-02T03:04:05
 int = 0
 bool = true
 [[mixtype]]
 float = 4.4
-datetime = 2022-01-01T00:00:00Z
+datetime = 2022-01-01T00:00:00
 int = -1
 bool = false
 """),
