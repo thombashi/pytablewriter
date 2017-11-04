@@ -460,7 +460,12 @@ class AbstractTableWriter(TableWriterInterface):
         return self.__align_char_mapping[align]
 
     def __get_align_format(self, col_dp, value_dp):
-        format_list = ["{:" + self._get_align_char(col_dp.align)]
+        if (col_dp.typecode == Typecode.STRING and
+                value_dp.typecode in (Typecode.INTEGER, Typecode.REAL_NUMBER)):
+            align_char = self._get_align_char(value_dp.align)
+        else:
+            align_char = self._get_align_char(col_dp.align)
+        format_list = ["{:" + align_char]
         col_padding_len = self._get_padding_len(col_dp, value_dp)
         if col_padding_len > 0:
             format_list.append(str(col_padding_len))

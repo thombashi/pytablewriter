@@ -40,8 +40,8 @@ normal_test_data_list = [
          is_formatting_float=True,
          expected="""| a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|1   |
-|  2|  2.2|bb |2.2|2.2 |
+|  1|123.1|a  |1.0|   1|
+|  2|  2.2|bb |2.2| 2.2|
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
@@ -54,7 +54,7 @@ normal_test_data_list = [
 |---|---|---|---|---|
 
 """),
-    Data(table="",
+    Data(table="floating point",
          indent=0,
          header=header_list,
          value=[
@@ -63,37 +63,12 @@ normal_test_data_list = [
              [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
          ],
          is_formatting_float=True,
-         expected="""| a |  b  | c |dd | e  |
+         expected="""# floating point
+| a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|1   |
-|  2|  2.2|bb |2.2|2.2 |
+|  1|123.1|a  |1.0|   1|
+|  2|  2.2|bb |2.2| 2.2|
 |  3|  3.3|ccc|3.3|cccc|
-
-"""),
-    Data(table="formatting float",
-         indent=0,
-         header=header_list,
-         value=value_matrix,
-         is_formatting_float=True,
-         expected="""# formatting float
-| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|1   |
-|  2|  2.2|bb |2.2|2.2 |
-|  3|  3.3|ccc|3.0|cccc|
-
-"""),
-    Data(table="not formatting float",
-         indent=0,
-         header=header_list,
-         value=value_matrix,
-         is_formatting_float=False,
-         expected="""# not formatting float
-| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |  1|1   |
-|  2|  2.2|bb |2.2|2.2 |
-|  3|  3.3|ccc|  3|cccc|
 
 """),
     Data(table="tablename",
@@ -104,58 +79,82 @@ normal_test_data_list = [
          expected="""## tablename
 | a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|1   |
-|  2|  2.2|bb |2.2|2.2 |
+|  1|123.1|a  |1.0|   1|
+|  2|  2.2|bb |2.2| 2.2|
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        is_formatting_float=True,
-        expected="""| a | b | c |dd | e  |
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         is_formatting_float=True,
+         expected="""| a | b | c |dd | e  |
 |--:|--:|---|--:|----|
 |  1|   |a  |1.0|    |
-|   |2.2|   |2.2|2.2 |
+|   |2.2|   |2.2| 2.2|
 |  3|3.3|ccc|   |cccc|
 |   |   |   |   |    |
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        is_formatting_float=True,
-        expected="""| i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
+    Data(table="",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         is_formatting_float=True,
+         expected="""| i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
 |--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------|
-|  1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00      |
+|  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01 00:00:00      |
 |  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
 |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      |
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=float_header_list,
-        value=float_value_matrix,
-        is_formatting_float=True,
-        expected="""| a  |     b     |  c  |
+    Data(table="formatting float 1",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         is_formatting_float=True,
+         expected="""# formatting float 1
+| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |1.0|   1|
+|  2|  2.2|bb |2.2| 2.2|
+|  3|  3.3|ccc|3.0|cccc|
+
+"""),
+    Data(table="formatting float 2",
+         indent=0,
+         header=float_header_list,
+         value=float_value_matrix,
+         is_formatting_float=True,
+         expected="""# formatting float 2
+| a  |     b     |  c  |
 |---:|----------:|----:|
 |0.01|     0.0012|0.000|
 |1.00|    99.9000|0.010|
 |1.20|999999.1230|0.001|
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=float_header_list,
-        value=float_value_matrix,
-        is_formatting_float=False,
-        expected="""| a  |    b     |  c  |
+    Data(table="not formatting float 1",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         is_formatting_float=False,
+         expected="""# not formatting float 1
+| a |  b  | c |dd | e  |
+|--:|----:|---|--:|----|
+|  1|123.1|a  |  1|   1|
+|  2|  2.2|bb |2.2| 2.2|
+|  3|  3.3|ccc|  3|cccc|
+
+"""),
+    Data(table="not formatting float 2",
+         indent=0,
+         header=float_header_list,
+         value=float_value_matrix,
+         is_formatting_float=False,
+         expected="""# not formatting float 2
+| a  |    b     |  c  |
 |---:|---------:|----:|
 |0.01|   0.00125|    0|
 |   1|      99.9| 0.01|
@@ -260,8 +259,8 @@ normal_test_data_list = [
          expected="""# empty header
 | A |  B  | C | D | E  |
 |--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|1   |
-|  2|  2.2|bb |2.2|2.2 |
+|  1|123.1|a  |1.0|   1|
+|  2|  2.2|bb |2.2| 2.2|
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
@@ -290,9 +289,9 @@ normal_test_data_list = [
          expected="""# mixed value types
 |  data   |   v    |
 |---------|-------:|
-|3.437    |   65.54|
-|65.540   |  127.64|
-|189.744  |  189.74|
+|    3.437|   65.54|
+|   65.540|  127.64|
+|  189.744|  189.74|
 |10064.010|10001.91|
 |next     |10250.32|
 
