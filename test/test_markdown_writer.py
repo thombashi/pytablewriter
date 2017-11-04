@@ -33,53 +33,49 @@ Data = collections.namedtuple(
     "Data", "table indent header value is_formatting_float expected")
 
 normal_test_data_list = [
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        is_formatting_float=True,
-        expected="""| a |  b  | c |dd | e  |
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         is_formatting_float=True,
+         expected="""| a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
 |  1|123.1|a  |1.0|1   |
 |  2|  2.2|bb |2.2|2.2 |
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=None,
-        is_formatting_float=True,
-        expected="""| a | b | c |dd | e |
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=None,
+         is_formatting_float=True,
+         expected="""| a | b | c |dd | e |
 |---|---|---|---|---|
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=[
-            ["1", 123.09999999999999, "a", "1",   1],
-            [2, 2.2000000000000002, "bb", "2.2", 2.2000000000000002],
-            [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
-        ],
-        is_formatting_float=True,
-        expected="""| a |  b  | c |dd | e  |
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=[
+             ["1", 123.09999999999999, "a", "1",   1],
+             [2, 2.2000000000000002, "bb", "2.2", 2.2000000000000002],
+             [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
+         ],
+         is_formatting_float=True,
+         expected="""| a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
 |  1|123.1|a  |1.0|1   |
 |  2|  2.2|bb |2.2|2.2 |
 |  3|  3.3|ccc|3.3|cccc|
 
 """),
-    Data(
-        table="formatting float",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        is_formatting_float=True,
-        expected="""# formatting float
+    Data(table="formatting float",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         is_formatting_float=True,
+         expected="""# formatting float
 | a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
 |  1|123.1|a  |1.0|1   |
@@ -87,13 +83,12 @@ normal_test_data_list = [
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
-    Data(
-        table="not formatting float",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        is_formatting_float=False,
-        expected="""# not formatting float
+    Data(table="not formatting float",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         is_formatting_float=False,
+         expected="""# not formatting float
 | a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
 |  1|123.1|a  |  1|1   |
@@ -101,13 +96,12 @@ normal_test_data_list = [
 |  3|  3.3|ccc|  3|cccc|
 
 """),
-    Data(
-        table="tablename",
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        is_formatting_float=True,
-        expected="""## tablename
+    Data(table="tablename",
+         indent=1,
+         header=header_list,
+         value=value_matrix,
+         is_formatting_float=True,
+         expected="""## tablename
 | a |  b  | c |dd | e  |
 |--:|----:|---|--:|----|
 |  1|123.1|a  |1.0|1   |
@@ -168,21 +162,20 @@ normal_test_data_list = [
 | 1.2| 999999.123|0.001|
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=['Name', 'xUnit', 'Source', 'Remarks'],
-        value=[
-            [
-                'Crotest',
-                '',
-                '[160]',
-                'MIT License. A tiny and simple test framework for Crystal\nwith common assertions and no pollution into Object class.',
-                '',
-            ]
-        ],
-        is_formatting_float=True,
-        expected="""| Name  |xUnit|Source|                                                      Remarks                                                       |
+    Data(table="",
+         indent=0,
+         header=['Name', 'xUnit', 'Source', 'Remarks'],
+         value=[
+             [
+                 'Crotest',
+                 '',
+                 '[160]',
+                 'MIT License. A tiny and simple test framework for Crystal\nwith common assertions and no pollution into Object class.',
+                 '',
+             ]
+         ],
+         is_formatting_float=True,
+         expected="""| Name  |xUnit|Source|                                                      Remarks                                                       |
 |-------|-----|------|--------------------------------------------------------------------------------------------------------------------|
 |Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.|
 
@@ -252,25 +245,23 @@ normal_test_data_list = [
 |c  |  2|ccc|
 
 """),
-    Data(
-        table="line breaks",
-        indent=0,
-        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
-        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
-        is_formatting_float=True,
-        expected="""# line breaks
+    Data(table="line breaks",
+         indent=0,
+         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+         is_formatting_float=True,
+         expected="""# line breaks
 | a b | c d  | e f  |
 |-----|------|------|
 |v1 v1|v2 v2 |v3 v3 |
 
 """),
-    Data(
-        table="empty header",
-        indent=0,
-        header=[],
-        value=value_matrix,
-        is_formatting_float=True,
-        expected="""# empty header
+    Data(table="empty header",
+         indent=0,
+         header=[],
+         value=value_matrix,
+         is_formatting_float=True,
+         expected="""# empty header
 | A |  B  | C | D | E  |
 |--:|----:|---|--:|----|
 |  1|123.1|a  |1.0|1   |
@@ -278,13 +269,12 @@ normal_test_data_list = [
 |  3|  3.3|ccc|3.0|cccc|
 
 """),
-    Data(
-        table="vertical bar",
-        indent=1,
-        header=["a|b", "|c||d|"],
-        value=[["|v1|v1|", "v2|v2"]],
-        is_formatting_float=True,
-        expected="""## vertical bar
+    Data(table="vertical bar",
+         indent=1,
+         header=["a|b", "|c||d|"],
+         value=[["|v1|v1|", "v2|v2"]],
+         is_formatting_float=True,
+         expected="""## vertical bar
 |  a\|b  |\|c\|\|d\||
 |-------|------|
 |\|v1\|v1\||v2\|v2 |
