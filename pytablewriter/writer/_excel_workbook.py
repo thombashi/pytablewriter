@@ -82,7 +82,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
         try:
             self.workbook.save(self._file_path)
         except IndexError as e:
-            logger.debug(e)
+            logger.debug("{:s}: {}".format(e.__class__.__name__, e))
 
         self._clear()
 

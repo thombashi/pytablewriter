@@ -583,7 +583,8 @@ class AbstractTableWriter(TableWriterInterface):
         try:
             self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()
         except TypeError as e:
-            self._logger.logger.debug(e)
+            self._logger.logger.debug(
+                "{:s}: {}".format(e.__class__.__name__, e))
             self._value_dp_matrix = []
 
         self._is_complete_table_property_preprocess = True
