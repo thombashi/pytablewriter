@@ -24,8 +24,8 @@ with LaTeX ``array`` environment to the |stream| from a matrix of data.
 
         \begin{equation}
             A = \left( \begin{array}{rrr}
-                0.01 & 0.0012 & 0.000 \\
-                1.00 & 99.9000 & 0.010 \\
+                0.01 &      0.0012 & 0.000 \\
+                1.00 &     99.9000 & 0.010 \\
                 1.20 & 999999.1230 & 0.001 \\
             \end{array} \right)
         \end{equation}
