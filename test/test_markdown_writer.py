@@ -180,64 +180,60 @@ normal_test_data_list = [
 |Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.|
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=["姓", "名", "生年月日", "郵便番号", "住所", "電話番号"],
-        value=[
-            ["山田", "太郎", "2001/1/1", "100-0002",
-             "東京都千代田区皇居外苑", "03-1234-5678"],
-            ["山田", "次郎", "2001/1/2", "251-0036",
-             "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
-        ],
-        is_formatting_float=True,
-        expected="""| 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  |
+    Data(table="",
+         indent=0,
+         header=["姓", "名", "生年月日", "郵便番号", "住所", "電話番号"],
+         value=[
+             ["山田", "太郎", "2001/1/1", "100-0002",
+              "東京都千代田区皇居外苑", "03-1234-5678"],
+             ["山田", "次郎", "2001/1/2", "251-0036",
+                 "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
+         ],
+         is_formatting_float=True,
+         expected="""| 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  |
 |----|----|--------|--------|--------------------------|------------|
 |山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678|
 |山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999|
 
 """),
-    Data(
-        table="quoted values",
-        indent=0,
-        header=['"quote"', '"abc efg"'],
-        value=[
-            ['"1"', '"abc"'],
-            ['"-1"', '"efg"'],
-        ],
-        is_formatting_float=True,
-        expected="""# quoted values
+    Data(table="quoted values",
+         indent=0,
+         header=['"quote"', '"abc efg"'],
+         value=[
+             ['"1"', '"abc"'],
+             ['"-1"', '"efg"'],
+         ],
+         is_formatting_float=True,
+         expected="""# quoted values
 |quote|abc efg|
 |----:|-------|
 |    1|abc    |
 |   -1|efg    |
 
 """),
-    Data(
-        table="not str headers",
-        indent=0,
-        header=[None, 1, 0.1],
-        value=[
-            [None, 1, 0.1],
-        ],
-        is_formatting_float=True,
-        expected="""# not str headers
+    Data(table="not str headers",
+         indent=0,
+         header=[None, 1, 0.1],
+         value=[
+             [None, 1, 0.1],
+         ],
+         is_formatting_float=True,
+         expected="""# not str headers
 |   | 1 |0.1|
 |---|--:|--:|
 |   |  1|0.1|
 
 """),
-    Data(
-        table="no uniform matrix",
-        indent=0,
-        header=["a", "b", "c"],
-        value=[
-            ["a", 0],
-            ["b", 1, "bb"],
-            ["c", 2, "ccc", 0.1],
-        ],
-        is_formatting_float=True,
-        expected="""# no uniform matrix
+    Data(table="no uniform matrix",
+         indent=0,
+         header=["a", "b", "c"],
+         value=[
+             ["a", 0],
+             ["b", 1, "bb"],
+             ["c", 2, "ccc", 0.1],
+         ],
+         is_formatting_float=True,
+         expected="""# no uniform matrix
 | a | b | c |
 |---|--:|---|
 |a  |  0|   |
