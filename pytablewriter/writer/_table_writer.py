@@ -11,7 +11,6 @@ import abc
 import re
 import sys
 
-from mbstrdecoder import MultiByteStrDecoder
 from typepy import Typecode
 import typepy
 
@@ -78,6 +77,18 @@ class AbstractTableWriter(TableWriterInterface):
     """
 
     __RE_LINE_BREAK = re.compile("[\0\t\r\n]+")
+
+    @property
+    def is_formatting_float(self):
+        return self._dp_extractor.is_formatting_float
+
+    @is_formatting_float.setter
+    def is_formatting_float(self, value):
+        if self._dp_extractor.is_formatting_float == value:
+            return
+
+        self._dp_extractor.is_formatting_float = value
+        self.__clear_preprocessed_status()
 
     @property
     def table_name(self):
@@ -190,8 +201,6 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_write_opening_row = False
         self.is_write_closing_row = False
 
-        self.is_padding = True
-        self.is_formatting_float = True
         self._use_default_header = False
 
         self._dp_extractor = DataPropertyExtractor()
@@ -200,6 +209,9 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.strip_str_value = '"'
         self._dp_extractor.type_value_mapping[Typecode.NONE] = ""
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
+
+        self.is_formatting_float = True
+        self.is_padding = True
 
         self.type_hint_list = None
         self._quoting_flags = {
@@ -440,45 +452,9 @@ class AbstractTableWriter(TableWriterInterface):
         return "{:s}"
 
     def _get_row_item(self, col_dp, value_dp):
-        to_string_format_str = self.__get_to_string_format(
-            col_dp, value_dp)
-
-        if col_dp.typecode in [Typecode.BOOL, Typecode.DATETIME]:
-            item = to_string_format_str.format(value_dp.data)
-        else:
-            try:
-                value = col_dp.type_class(
-                    value_dp.data, strict_level=typepy.StrictLevel.MIN
-                ).convert()
-            except typepy.TypeConversionError:
-                value = value_dp.data
-
-            try:
-                item = to_string_format_str.format(value)
-            except ValueError:
-                item = MultiByteStrDecoder(value).unicode_str
-
         return self.__get_align_format(col_dp, value_dp).format(
-            self.__remove_line_break(item))
-
-    def __get_to_string_format(self, col_dp, value_dp):
-        if any([
-                all([
-                    col_dp.typecode == Typecode.REAL_NUMBER,
-                    value_dp.typecode in [
-                        Typecode.INTEGER, Typecode.REAL_NUMBER],
-                    not self.is_formatting_float
-                ]),
-                value_dp.typecode == Typecode.NONE,
-        ]):
-            return "{}"
-
-        try:
-            col_dp.format_str.format(value_dp.data)
-        except (TypeError, ValueError):
-            return "{}"
-
-        return col_dp.format_str
+            self.__remove_line_break(
+                col_dp.dp_to_str(value_dp)))
 
     def _get_align_char(self, align):
         return self.__align_char_mapping[align]

@@ -30,10 +30,10 @@ normal_test_data_list = [
     Data(
         header=mix_header_list,
         value=mix_value_matrix,
-        expected="""i   f     c     if   ifc  bool     inf     nan  mix_num             time           
-1   1.1  aa       1  1    True   Infinity  NaN         1  2017-01-01 00:00:00      
-2   2.2  bbb    2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
-3  3.33  cccc    -3  ccc  True   Infinity  NaN       NaN  2017-01-01 00:00:00      
+        expected="""i   f     c    if   ifc  bool     inf     nan  mix_num             time           
+1   1.1  aa      1  1    True   Infinity  NaN         1  2017-01-01 00:00:00      
+2   2.2  bbb   2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
+3  3.33  cccc   -3  ccc  True   Infinity  NaN       NaN  2017-01-01 00:00:00      
 """),
     Data(
         header=None,
@@ -45,10 +45,10 @@ normal_test_data_list = [
     Data(
         header=float_header_list,
         value=float_value_matrix,
-        expected=""" a         b         c  
-0.01      0.00125      0
-   1         99.9   0.01
- 1.2   999999.123  0.001
+        expected=""" a        b         c  
+0.01     0.00125      0
+   1        99.9   0.01
+ 1.2  999999.123  0.001
 """),
 ]
 
