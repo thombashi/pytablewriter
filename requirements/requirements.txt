@@ -1,4 +1,4 @@
-DataProperty>=0.25.6
+DataProperty>=0.26.0
 dominate>=2.3.1
 elasticsearch>=5.4.0
 enum34;python_version<"3.4"
@@ -7,7 +7,7 @@ logbook>=1.1.0
 mbstrdecoder
 pathvalidate>=0.16.2
 pytablereader>=0.13.5
-SimpleSQLite>=0.16.0
+SimpleSQLite>=0.17.0
 six
 toml>=0.9.3
 typepy>=0.0.20
