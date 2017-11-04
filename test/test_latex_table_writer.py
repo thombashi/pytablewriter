@@ -27,10 +27,9 @@ from .data import (
 Data = collections.namedtuple("Data", "header value expected")
 
 normal_test_data_list = [
-    Data(
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected=r"""\begin{array}{r | r | l | r | l | l | l | l | l | l} \hline
+    Data(header=mix_header_list,
+         value=mix_value_matrix,
+         expected=r"""\begin{array}{r | r | l | r | l | l | l | l | l | l} \hline
     \verb|i| & \verb|f| & \verb|c| & \verb|if| & \verb|ifc| & \verb|bool| & \verb|inf| & \verb|nan| & \verb|mix_num| & \verb|time| \\ \hline
     \hline
     1 & 1.10 & aa & 1.0 & 1 & True & \infty & NaN & 1 & 2017-01-01 00:00:00 \\ \hline
@@ -39,20 +38,18 @@ normal_test_data_list = [
 \end{array}
 
 """),
-    Data(
-        header=None,
-        value=value_matrix,
-        expected=r"""\begin{array}{r | r | l | r | l} \hline
+    Data(header=None,
+         value=value_matrix,
+         expected=r"""\begin{array}{r | r | l | r | l} \hline
     1 & 123.1 & a & 1.0 & 1 \\ \hline
     2 & 2.2 & bb & 2.2 & 2.2 \\ \hline
     3 & 3.3 & ccc & 3.0 & cccc \\ \hline
 \end{array}
 
 """),
-    Data(
-        header=float_header_list,
-        value=float_value_matrix,
-        expected=r"""\begin{array}{r | r | r} \hline
+    Data(header=float_header_list,
+         value=float_value_matrix,
+         expected=r"""\begin{array}{r | r | r} \hline
     \verb|a| & \verb|b| & \verb|c| \\ \hline
     \hline
     0.01 & 0.0012 & 0.000 \\ \hline

@@ -25,11 +25,10 @@ from .data import (
 Data = collections.namedtuple("Data", "table header value expected")
 
 normal_test_data_list = [
-    Data(
-        table="",
-        header=float_header_list,
-        value=float_value_matrix,
-        expected=r"""\begin{equation}
+    Data(table="",
+         header=float_header_list,
+         value=float_value_matrix,
+         expected=r"""\begin{equation}
     \left( \begin{array}{rrr}
         0.01 & 0.0012 & 0.000 \\
         1.00 & 99.9000 & 0.010 \\
@@ -38,11 +37,10 @@ normal_test_data_list = [
 \end{equation}
 
 """),
-    Data(
-        table="A",
-        header=float_header_list,
-        value=float_value_matrix,
-        expected=r"""\begin{equation}
+    Data(table="A",
+         header=float_header_list,
+         value=float_value_matrix,
+         expected=r"""\begin{equation}
     A = \left( \begin{array}{rrr}
         0.01 & 0.0012 & 0.000 \\
         1.00 & 99.9000 & 0.010 \\
@@ -51,15 +49,14 @@ normal_test_data_list = [
 \end{equation}
 
 """),
-    Data(
-        table="B",
-        header=None,
-        value=[
-            ["a_{11}", "a_{12}", r"\ldots", "a_{1n}"],
-            ["a_{21}", "a_{22}", r"\ldots", "a_{2n}"],
-            ["a_{31}", "a_{32}", r"\ldots", "a_{3n}"],
-        ],
-        expected=r"""\begin{equation}
+    Data(table="B",
+         header=None,
+         value=[
+             ["a_{11}", "a_{12}", r"\ldots", "a_{1n}"],
+             ["a_{21}", "a_{22}", r"\ldots", "a_{2n}"],
+             ["a_{31}", "a_{32}", r"\ldots", "a_{3n}"],
+         ],
+         expected=r"""\begin{equation}
     B = \left( \begin{array}{llll}
         a_{11} & a_{12} & \ldots & a_{1n} \\
         a_{21} & a_{22} & \ldots & a_{2n} \\
@@ -68,11 +65,10 @@ normal_test_data_list = [
 \end{equation}
 
 """),
-    Data(
-        table="C",
-        header="",
-        value=value_matrix,
-        expected=r"""\begin{equation}
+    Data(table="C",
+         header="",
+         value=value_matrix,
+         expected=r"""\begin{equation}
     C = \left( \begin{array}{rrlrl}
         1 & 123.1 & a & 1.0 & 1 \\
         2 & 2.2 & bb & 2.2 & 2.2 \\
