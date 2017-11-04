@@ -1,6 +1,5 @@
 Installation
 ============
-
 ::
 
     pip install pytablewriter
@@ -8,7 +7,7 @@ Installation
 
 Dependencies
 ============
-Python 2.7+ or 3.3+
+Python 2.7+ or 3.4+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
 - `dominate <http://github.com/Knio/dominate/>`__
