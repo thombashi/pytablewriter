@@ -30,8 +30,8 @@ normal_test_data_list = [
          value=float_value_matrix,
          expected=r"""\begin{equation}
     \left( \begin{array}{rrr}
-        0.01 & 0.0012 & 0.000 \\
-        1.00 & 99.9000 & 0.010 \\
+        0.01 &      0.0012 & 0.000 \\
+        1.00 &     99.9000 & 0.010 \\
         1.20 & 999999.1230 & 0.001 \\
     \end{array} \right)
 \end{equation}
@@ -42,8 +42,8 @@ normal_test_data_list = [
          value=float_value_matrix,
          expected=r"""\begin{equation}
     A = \left( \begin{array}{rrr}
-        0.01 & 0.0012 & 0.000 \\
-        1.00 & 99.9000 & 0.010 \\
+        0.01 &      0.0012 & 0.000 \\
+        1.00 &     99.9000 & 0.010 \\
         1.20 & 999999.1230 & 0.001 \\
     \end{array} \right)
 \end{equation}
@@ -70,9 +70,9 @@ normal_test_data_list = [
          value=value_matrix,
          expected=r"""\begin{equation}
     C = \left( \begin{array}{rrlrl}
-        1 & 123.1 & a & 1.0 & 1 \\
-        2 & 2.2 & bb & 2.2 & 2.2 \\
-        3 & 3.3 & ccc & 3.0 & cccc \\
+        1 & 123.1 & a   & 1.0 &    1 \\
+        2 &   2.2 & bb  & 2.2 &  2.2 \\
+        3 &   3.3 & ccc & 3.0 & cccc \\
     \end{array} \right)
 \end{equation}
 

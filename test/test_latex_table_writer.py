@@ -30,30 +30,30 @@ normal_test_data_list = [
     Data(header=mix_header_list,
          value=mix_value_matrix,
          expected=r"""\begin{array}{r | r | l | r | l | l | l | l | l | l} \hline
-    \verb|i| & \verb|f| & \verb|c| & \verb|if| & \verb|ifc| & \verb|bool| & \verb|inf| & \verb|nan| & \verb|mix_num| & \verb|time| \\ \hline
+    \verb|i| & \verb| f  | & \verb| c  | & \verb| if | & \verb|ifc| & \verb|bool | & \verb| inf  | & \verb|nan| & \verb|mix_num| & \verb|          time           | \\ \hline
     \hline
-    1 & 1.10 & aa & 1.0 & 1 & True & \infty & NaN & 1 & 2017-01-01 00:00:00 \\ \hline
-    2 & 2.20 & bbb & 2.2 & 2.2 & False & \infty & NaN & \infty & \verb|2017-01-02 03:04:05+09:00| \\ \hline
-    3 & 3.33 & cccc & -3.0 & ccc & True & \infty & NaN & NaN & 2017-01-01 00:00:00 \\ \hline
+    1 & 1.10 & aa   &  1.0 &   1 & True  & \infty & NaN &       1 & 2017-01-01 00:00:00       \\ \hline
+    2 & 2.20 & bbb  &  2.2 & 2.2 & False & \infty & NaN & \infty  & \verb|2017-01-02 03:04:05+09:00| \\ \hline
+    3 & 3.33 & cccc & -3.0 & ccc & True  & \infty & NaN & NaN     & 2017-01-01 00:00:00       \\ \hline
 \end{array}
 
 """),
     Data(header=None,
          value=value_matrix,
          expected=r"""\begin{array}{r | r | l | r | l} \hline
-    1 & 123.1 & a & 1.0 & 1 \\ \hline
-    2 & 2.2 & bb & 2.2 & 2.2 \\ \hline
-    3 & 3.3 & ccc & 3.0 & cccc \\ \hline
+    1 & 123.1 & a   & 1.0 &    1 \\ \hline
+    2 &   2.2 & bb  & 2.2 &  2.2 \\ \hline
+    3 &   3.3 & ccc & 3.0 & cccc \\ \hline
 \end{array}
 
 """),
     Data(header=float_header_list,
          value=float_value_matrix,
          expected=r"""\begin{array}{r | r | r} \hline
-    \verb|a| & \verb|b| & \verb|c| \\ \hline
+    \verb| a  | & \verb|     b     | & \verb|  c  | \\ \hline
     \hline
-    0.01 & 0.0012 & 0.000 \\ \hline
-    1.00 & 99.9000 & 0.010 \\ \hline
+    0.01 &      0.0012 & 0.000 \\ \hline
+    1.00 &     99.9000 & 0.010 \\ \hline
     1.20 & 999999.1230 & 0.001 \\ \hline
 \end{array}
 
