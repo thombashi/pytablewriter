@@ -70,6 +70,7 @@ def main():
     maker = readmemaker.ReadmeMaker(PROJECT_NAME, OUTPUT_DIR)
 
     maker.write_introduction_file("badges.txt")
+    maker.write_toc()
 
     maker.inc_indent_level()
     maker.write_chapter("Summary")

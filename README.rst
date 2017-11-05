@@ -16,6 +16,8 @@ pytablewriter
 .. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
    :target: https://github.com/thombashi/pytablewriter
 
+.. contents:: Table of Contents
+   :depth: 2
 
 Summary
 ---------
