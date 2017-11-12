@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 
 import collections
 import datetime
+from decimal import Decimal
 import itertools
 
 from pytablewriter import EmptyTableDataError
@@ -50,11 +51,11 @@ mix_value_matrix = [
     ],
     [
         2, 2.2, "bbb", 2.2, 2.2, False,
-        "inf", "nan", INF, "2017-01-02 03:04:05+09:00",
+        Decimal("inf"), Decimal("nan"), INF, "2017-01-02 03:04:05+09:00",
     ],
     [
-        3, 3.33, "cccc", -3, "ccc", "true",
-        "infinity", "NAN", NAN, TIME,
+        3, 3.33, "cccc", -3, "ccc", True,
+        float("infinity"), float("NAN"), NAN, TIME,
     ],
 ]
 

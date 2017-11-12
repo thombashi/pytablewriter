@@ -14,7 +14,6 @@ import sys
 from typepy import Typecode
 import typepy
 
-import pytablereader as ptr
 from six.moves import zip
 
 from .._error import (
@@ -119,10 +118,12 @@ class AbstractTableWriter(TableWriterInterface):
     def tabledata(self):
         """
         :return: Table data.
-        :rtype: pytablereader.TableData
+        :rtype: tabledata.TableData
         """
 
-        return ptr.TableData(
+        from tabledata import TableData
+
+        return TableData(
             self.table_name, self.header_list, self.value_matrix)
 
     @property
@@ -280,17 +281,17 @@ class AbstractTableWriter(TableWriterInterface):
     def from_tabledata(self, value):
         """
         Set tabular attributes to the writer from
-        :py:class:`pytablereader.TableData`. Following attributes are set:
+        :py:class:`tabledata.TableData`. Following attributes are set:
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
 
-        :py:class:`pytablereader.TableData` can be created from various data
+        :py:class:`tabledata.TableData` can be created from various data
         formats, for more detailed information, can be found in
         http://pytablereader.readthedocs.io/en/latest/
 
-        :param pytablereader.TableData tabledata: Input table data.
+        :param tabledata.TableData value: Input table data.
         """
 
         self.table_name = value.table_name
@@ -314,19 +315,24 @@ class AbstractTableWriter(TableWriterInterface):
 
         :Examples:
             :ref:`example-from-csv`
+
+        :Dependency Packages:
+            - `pytablereader <https://github.com/thombashi/pytablereader>`__
         """
+
+        import pytablereader as ptr
 
         loader = ptr.CsvTableTextLoader(csv_source)
         try:
-            for tabledata in loader.load():
-                self.from_tabledata(tabledata)
+            for table_data in loader.load():
+                self.from_tabledata(table_data)
             return
         except ptr.error.InvalidDataError:
             pass
 
         loader = ptr.CsvTableFileLoader(csv_source)
-        for tabledata in loader.load():
-            self.from_tabledata(tabledata)
+        for table_data in loader.load():
+            self.from_tabledata(table_data)
 
     def from_dataframe(self, dataframe):
         """

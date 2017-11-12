@@ -14,11 +14,11 @@ from decimal import Decimal
 import json
 import platform
 
-from pytablereader import TableData
 import pytest
 import six
 
 import pytablewriter as ptw
+from tabledata import TableData
 
 from .data import (
     header_list,

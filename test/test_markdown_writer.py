@@ -13,8 +13,8 @@ from decimal import Decimal
 
 import pytest
 
-import pytablereader as ptr
 import pytablewriter as ptw
+from tabledata import TableData
 
 from .data import (
     header_list,
@@ -325,17 +325,14 @@ class Test_MarkdownTableWriter_set_table_data(object):
 
     def test_normal(self):
         writer = table_writer_class()
-
-        tabledata = ptr.TableData(
+        writer.from_tabledata(TableData(
             "tmp",
             ["attr_a", "attr_b", "attr_c"],
             [
                 ["1", "4", "a"],
                 ["2", "2.1", "bb"],
                 ["3", "120.9", "ccc"],
-            ])
-
-        writer.from_tabledata(tabledata)
+            ]))
 
         assert writer.table_name == "tmp"
         assert writer.header_list == ["attr_a", "attr_b", "attr_c"]
@@ -378,8 +375,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_tabledata(self, capsys):
         writer = table_writer_class()
-
-        tabledata = ptr.TableData(
+        writer.from_tabledata(TableData(
             table_name="loader_mapping",
             header_list=['Name', 'Loader'],
             record_list=[
@@ -390,8 +386,7 @@ class Test_MarkdownTableWriter_write_table(object):
                 ['mediawiki', 'MediaWikiTableFileLoader'],
                 ['json', 'JsonTableFileLoader'],
                 ['Long Format Name', 'Loader'],
-            ])
-        writer.from_tabledata(tabledata)
+            ]))
         writer.write_table()
 
         expected = """# loader_mapping

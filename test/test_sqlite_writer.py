@@ -11,11 +11,11 @@ from __future__ import unicode_literals
 import collections
 from decimal import Decimal
 
-from pytablereader import TableData
 import pytest
 
 import pytablereader as ptr
 import pytablewriter as ptw
+from tabledata import TableData
 
 from .data import (
     header_list,
@@ -148,9 +148,9 @@ class Test_SqliteTableWriter_write_table(object):
 
         loader = ptr.SqliteFileLoader(str(test_file_path))
 
-        for tabledata in loader.load():
+        for table_data in loader.load():
             expected_dump = ptw.dump_tabledata(expected)
-            actual_dump = ptw.dump_tabledata(tabledata)
+            actual_dump = ptw.dump_tabledata(table_data)
 
             print("[expected]\n{}".format(expected_dump))
             print("[actual]\n{}".format(actual_dump))
@@ -213,5 +213,5 @@ class Test_SqliteTableWriter_write_table_iter(object):
 
         loader = ptr.SqliteFileLoader(str(test_file_path))
 
-        for tabledata in loader.load():
-            assert tabledata == expected
+        for table_data in loader.load():
+            assert table_data == expected

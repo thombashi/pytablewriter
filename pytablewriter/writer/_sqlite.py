@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 
 import simplesqlite
 
-import pytablereader as ptr
+import tabledata
 
 from ._interface import BinaryWriterInterface
 from ._table_writer import AbstractTableWriter
@@ -69,14 +69,14 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self._verify_value_matrix()
         self._preprocess()
 
-        tabledata = ptr.TableData(
+        table_data = tabledata.TableData(
             self.table_name, self.header_list,
             [
                 [value_dp.data for value_dp in value_dp_list]
                 for value_dp_list in self._value_dp_matrix
             ])
         self.stream.create_table_from_tabledata(
-            ptr.SQLiteTableDataSanitizer(tabledata).sanitize())
+            tabledata.SQLiteTableDataSanitizer(table_data).sanitize())
 
     def _write_value_row_separator(self):
         pass

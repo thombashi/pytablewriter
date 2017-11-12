@@ -31,7 +31,7 @@ def convert_idx_to_alphabet(column_idx):
 
 def dump_tabledata(value, format_name="rst_grid_table"):
     """
-    :param pytablereader.TableData tabledata: Tabular data to dump.
+    :param tabledata.TableData value: Tabular data to dump.
     :param str format_name:
         Dumped format name of tabular data.
         Available formats are described in

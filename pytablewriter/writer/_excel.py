@@ -10,11 +10,11 @@ from __future__ import unicode_literals
 import abc
 import copy
 
-import dataproperty
 import typepy
 from typepy.type import Integer
 import xlwt
 
+import dataproperty
 from six.moves import range
 
 from ._excel_workbook import (
@@ -166,7 +166,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
     def from_tabledata(self, value):
         """
-        Set following attributes from :py:class:`pytablereader.TableData`
+        Set following attributes from :py:class:`tabledata.TableData`
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.header_list`.
@@ -175,7 +175,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
         And create worksheet named from :py:attr:`~.table_name` ABC
         if not existed yet.
 
-        :param pytablereader.TableData tabledata: Input table data.
+        :param tabledata.TableData value: Input table data.
         """
 
         super(ExcelTableWriter, self).from_tabledata(value)
