@@ -164,7 +164,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
             self.workbook.close()
             self._workbook = None
 
-    def from_tabledata(self, tabledata):
+    def from_tabledata(self, value):
         """
         Set following attributes from :py:class:`pytablereader.TableData`
 
@@ -178,7 +178,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
         :param pytablereader.TableData tabledata: Input table data.
         """
 
-        super(ExcelTableWriter, self).from_tabledata(tabledata)
+        super(ExcelTableWriter, self).from_tabledata(value)
 
         self.make_worksheet(self.table_name)
 

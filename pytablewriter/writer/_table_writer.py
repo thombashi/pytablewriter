@@ -277,7 +277,7 @@ class AbstractTableWriter(TableWriterInterface):
         finally:
             self.stream = None
 
-    def from_tabledata(self, tabledata):
+    def from_tabledata(self, value):
         """
         Set tabular attributes to the writer from
         :py:class:`pytablereader.TableData`. Following attributes are set:
@@ -293,9 +293,9 @@ class AbstractTableWriter(TableWriterInterface):
         :param pytablereader.TableData tabledata: Input table data.
         """
 
-        self.table_name = tabledata.table_name
-        self.header_list = tabledata.header_list
-        self.value_matrix = tabledata.value_matrix
+        self.table_name = value.table_name
+        self.header_list = value.header_list
+        self.value_matrix = value.value_matrix
 
     def from_csv(self, csv_source):
         """

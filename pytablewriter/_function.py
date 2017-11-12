@@ -29,7 +29,7 @@ def convert_idx_to_alphabet(column_idx):
         convert_idx_to_alphabet(column_idx % 26))
 
 
-def dump_tabledata(tabledata, format_name="rst_grid_table"):
+def dump_tabledata(value, format_name="rst_grid_table"):
     """
     :param pytablereader.TableData tabledata: Tabular data to dump.
     :param str format_name:
@@ -40,7 +40,7 @@ def dump_tabledata(tabledata, format_name="rst_grid_table"):
     :Example:
         .. code:: python
 
-            >>>dump_tabledata(tabledata)
+            >>>dump_tabledata(value)
             .. table:: sample_data
 
                 ======  ======  ======
@@ -57,7 +57,7 @@ def dump_tabledata(tabledata, format_name="rst_grid_table"):
     from ._factory import TableWriterFactory
 
     writer = TableWriterFactory.create_from_format_name(format_name)
-    writer.from_tabledata(tabledata)
+    writer.from_tabledata(value)
     writer.stream = six.StringIO()
     writer.write_table()
 
