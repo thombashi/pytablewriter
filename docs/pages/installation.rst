@@ -15,13 +15,17 @@ Python 2.7+ or 3.4+
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.python.org/pypi/six/>`__
+- `tabledata <https://github.com/thombashi/tabledata>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
 - `xlwt <http://www.python-excel.org/>`__
+
+Optional Dependencies
+----------------------------------
+- `pytablereader <https://github.com/thombashi/pytablereader>`__
 
 Test dependencies
 -----------------
