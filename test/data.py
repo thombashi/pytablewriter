@@ -14,9 +14,9 @@ import itertools
 from pytablewriter import EmptyTableDataError
 
 
-_time = datetime.datetime(2017, 1, 1, 0, 0, 0)
-_inf = float("inf")
-_nan = float("nan")
+TIME = datetime.datetime(2017, 1, 1, 0, 0, 0)
+INF = float("inf")
+NAN = float("nan")
 
 header_list = ["a", "b", "c", "dd", "e"]
 value_matrix = [
@@ -46,15 +46,15 @@ mix_header_list = [
 mix_value_matrix = [
     [
         1, 1.1, "aa", 1, 1, True,
-        _inf, _nan, 1.0, _time,
+        INF, NAN, 1.0, TIME,
     ],
     [
         2, 2.2, "bbb", 2.2, 2.2, False,
-        "inf", "nan", _inf, "2017-01-02 03:04:05+09:00",
+        "inf", "nan", INF, "2017-01-02 03:04:05+09:00",
     ],
     [
         3, 3.33, "cccc", -3, "ccc", "true",
-        "infinity", "NAN", _nan, _time,
+        "infinity", "NAN", NAN, TIME,
     ],
 ]
 
