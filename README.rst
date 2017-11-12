@@ -1,4 +1,3 @@
-
 pytablewriter
 ===============
 .. image:: https://badge.fury.io/py/pytablewriter.svg
@@ -53,10 +52,8 @@ Features
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer
 
-
 Examples
 ==========
-
 Write a Markdown table
 ------------------------
 :Sample Code:
@@ -93,7 +90,6 @@ Write a Markdown table
        :alt: markdown_ss
 
        Rendered markdown at GitHub
-
 
 Write a reStructuredText table (Grid Tables)
 ----------------------------------------------
@@ -146,7 +142,6 @@ Write a reStructuredText table (Grid Tables)
         |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
         +---+-----+----+-----+--------+------------------------+
 
-
 Write a table with JavaScript format (as a nested list variable definition)
 -----------------------------------------------------------------------------
 :Sample Code:
@@ -178,7 +173,6 @@ Write a table with JavaScript format (as a nested list variable definition)
             [-10, -9.90, "", false, NaN, "2017-01-01 00:00:00+0900"]
         ];
 
-
 Write a table to an Excel sheet
 ---------------------------------
 :Sample Code:
@@ -207,7 +201,6 @@ Write a table to an Excel sheet
        :alt: excel_single
 
        Output excel file (``sample_single.xlsx``)
-
 
 Write a Markdown table from ``pandas.DataFrame`` instance
 -----------------------------------------------------------
@@ -238,7 +231,6 @@ Write a Markdown table from ``pandas.DataFrame`` instance
           1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00+09:00
           2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
           3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00
-
 
 Create Elasticsearch index and put data
 -----------------------------------------
@@ -362,7 +354,6 @@ Create Elasticsearch index and put data
             "ip": "::1"
         }
 
-
 Formatting a table for Jupyter Notebook
 -----------------------------------------
 http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
@@ -372,7 +363,6 @@ http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/
    :alt: jupyter_notebook_table
 
    Table formatting for Jupyter Notebook
-
 
 Write a table using multibyte character
 -----------------------------------------
@@ -402,11 +392,11 @@ Write a table using multibyte character
 
        Output of multi-byte character table
 
-
 For more information
 ----------------------
 More examples are available at 
 http://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
+
 Installation
 ============
 ::
@@ -424,20 +414,23 @@ Python 2.7+ or 3.4+
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.python.org/pypi/six/>`__
+- `tabledata <https://github.com/thombashi/tabledata>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
 - `xlwt <http://www.python-excel.org/>`__
+
+Optional Dependencies
+----------------------------------
+- `pytablereader <https://github.com/thombashi/pytablereader>`__
 
 Test dependencies
 -----------------
 - `pytest <http://pytest.org/latest/>`__
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
-
 
 Documentation
 ===============
@@ -447,3 +440,4 @@ Related Project
 =================
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
     - Tabular data loaded by ``pytablereader`` can be written another tabular data format with ``pytablewriter``.
+
