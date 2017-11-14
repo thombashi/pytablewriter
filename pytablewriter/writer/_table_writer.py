@@ -454,7 +454,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         return format_string.format(self.__remove_line_break(header))
 
-    def _get_header_format_string(self, col_dp, value_dp):
+    @staticmethod
+    def _get_header_format_string(_col_dp, _value_dp):
         return "{:s}"
 
     def _get_row_item(self, col_dp, value_dp):
