@@ -6,7 +6,7 @@ ipaddress;python_version<"3.3"
 logbook
 mbstrdecoder
 pathvalidate>=0.16.2
-SimpleSQLite>=0.18.0
+SimpleSQLite>=0.18.1
 six
 tabledata>=0.0.2
 toml>=0.9.3
