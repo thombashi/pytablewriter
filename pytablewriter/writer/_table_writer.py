@@ -162,7 +162,7 @@ class AbstractTableWriter(TableWriterInterface):
             :ref:`example-type-hint-js`
         """
 
-        return self._dp_extractor.col_type_hint_list
+        return self._dp_extractor.column_type_hint_list
 
     @type_hint_list.setter
     def type_hint_list(self, value):
@@ -327,7 +327,7 @@ class AbstractTableWriter(TableWriterInterface):
             for table_data in loader.load():
                 self.from_tabledata(table_data)
             return
-        except ptr.error.InvalidDataError:
+        except ptr.InvalidDataError:
             pass
 
         loader = ptr.CsvTableFileLoader(csv_source)
@@ -512,7 +512,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.__value_matrix_org = value_matrix
 
     def __set_type_hint_list(self, type_hint_list):
-        self._dp_extractor.col_type_hint_list = type_hint_list
+        self._dp_extractor.column_type_hint_list = type_hint_list
 
     def _verify_table_name(self):
         if all([
@@ -555,11 +555,17 @@ class AbstractTableWriter(TableWriterInterface):
             ]
         else:
             self._dp_extractor.header_list = self.header_list
-        self._dp_extractor.data_matrix = self.__value_matrix_org
 
-        self._column_dp_list = self._dp_extractor.to_col_dataproperty_list(
-            self._column_dp_list)
-        self._header_dp_list = self._dp_extractor.to_header_dataproperty_list()
+        try:
+            self._value_dp_matrix = self._dp_extractor.to_dp_matrix(
+                self.__value_matrix_org)
+        except TypeError as e:
+            self._logger.logger.debug(
+                "{:s}: {}".format(e.__class__.__name__, e))
+            self._value_dp_matrix = []
+
+        self._column_dp_list = self._dp_extractor.to_column_dp_list(
+            self._value_dp_matrix, self._column_dp_list)
 
         if self.__iter_count == 1:
             import math
@@ -567,13 +573,6 @@ class AbstractTableWriter(TableWriterInterface):
             for column_dp in self._column_dp_list:
                 column_dp.extend_width(int(
                     math.ceil(column_dp.ascii_char_width * 0.25)))
-
-        try:
-            self._value_dp_matrix = self._dp_extractor.to_dataproperty_matrix()
-        except TypeError as e:
-            self._logger.logger.debug(
-                "{:s}: {}".format(e.__class__.__name__, e))
-            self._value_dp_matrix = []
 
         self._is_complete_table_property_preprocess = True
 
@@ -584,7 +583,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._header_list = [
             self._get_header_item(col_dp, header_dp)
             for col_dp, header_dp in
-            zip(self._column_dp_list, self._header_dp_list)
+            zip(self._column_dp_list, self._dp_extractor.to_header_dp_list())
         ]
 
         self._is_complete_header_preprocess = True

@@ -107,10 +107,8 @@ class JsonTableWriter(IndentationTextTableWriter):
         if self._is_complete_value_matrix_preprocess:
             return
 
-        self._dp_extractor.data_matrix = self.value_matrix
-
         try:
-            dp_matrix = self._dp_extractor.to_dataproperty_matrix()
+            dp_matrix = self._dp_extractor.to_dp_matrix(self.value_matrix)
         except TypeError:
             dp_matrix = []
 
