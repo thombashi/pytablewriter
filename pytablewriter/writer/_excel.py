@@ -198,6 +198,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
         self._current_data_row = self._first_data_row
 
     def _write_table(self):
+        self._preprocess_table_dp()
         self._preprocess_table_property()
         self._write_header()
         self._write_value_matrix()

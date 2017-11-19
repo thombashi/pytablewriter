@@ -544,8 +544,8 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-    def _preprocess_table_property(self):
-        if self._is_complete_table_property_preprocess:
+    def _preprocess_table_dp(self):
+        if self._is_complete_table_dp_preprocess:
             return
 
         if typepy.is_empty_sequence(self.header_list) and self._use_default_header:
@@ -553,8 +553,6 @@ class AbstractTableWriter(TableWriterInterface):
                 convert_idx_to_alphabet(col_idx)
                 for col_idx in range(len(self.__value_matrix_org[0]))
             ]
-        else:
-            self._dp_extractor.header_list = self.header_list
 
         try:
             self._value_dp_matrix = self._dp_extractor.to_dp_matrix(
@@ -566,6 +564,12 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
             self._value_dp_matrix, self._column_dp_list)
+
+        self._is_complete_table_dp_preprocess = True
+
+    def _preprocess_table_property(self):
+        if self._is_complete_table_property_preprocess:
+            return
 
         if self.__iter_count == 1:
             import math
@@ -604,6 +608,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._is_complete_value_matrix_preprocess = True
 
     def _preprocess(self):
+        self._preprocess_table_dp()
         self._preprocess_table_property()
         self._preprocess_header()
         self._preprocess_value_matrix()
@@ -611,6 +616,7 @@ class AbstractTableWriter(TableWriterInterface):
     def __clear_preprocessed_flag(self):
         self._logger.logger.debug("__clear_preprocessed_flag")
 
+        self._is_complete_table_dp_preprocess = False
         self._is_complete_table_property_preprocess = False
         self._is_complete_header_preprocess = False
         self._is_complete_value_matrix_preprocess = False
