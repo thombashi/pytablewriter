@@ -304,7 +304,11 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.table_name = value.table_name
         self.header_list = value.header_list
-        self.value_matrix = value.value_matrix
+        self._value_dp_matrix = value.value_dp_matrix
+        self._column_dp_list = self._dp_extractor.to_column_dp_list(
+            self._value_dp_matrix, self._column_dp_list)
+
+        self._is_complete_table_dp_preprocess = True
 
     def from_csv(self, csv_source):
         """
@@ -331,6 +335,7 @@ class AbstractTableWriter(TableWriterInterface):
         import pytablereader as ptr
 
         loader = ptr.CsvTableTextLoader(csv_source)
+        loader.quoting_flags = self._quoting_flags
         try:
             for table_data in loader.load():
                 self.from_tabledata(table_data)
@@ -339,6 +344,7 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         loader = ptr.CsvTableFileLoader(csv_source)
+        loader.quoting_flags = self._quoting_flags
         for table_data in loader.load():
             self.from_tabledata(table_data)
 
@@ -507,6 +513,7 @@ class AbstractTableWriter(TableWriterInterface):
         if all([
                 typepy.is_empty_sequence(self.header_list),
                 typepy.is_empty_sequence(self.value_matrix),
+                typepy.is_empty_sequence(self._value_dp_matrix),
         ]):
             raise EmptyTableDataError()
 

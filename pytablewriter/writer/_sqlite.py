@@ -42,6 +42,9 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
         return True
 
     def __init__(self):
+        import copy
+        import dataproperty
+
         super(SqliteTableWriter, self).__init__()
 
         self.stream = None
@@ -51,6 +54,8 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
         self._is_require_table_name = True
         self._is_require_header = True
+
+        self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
     def __del__(self):
         self.close()
