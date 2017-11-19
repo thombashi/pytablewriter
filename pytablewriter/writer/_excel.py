@@ -10,11 +10,11 @@ from __future__ import unicode_literals
 import abc
 import copy
 
+import dataproperty
 import typepy
 from typepy.type import Integer
 import xlwt
 
-import dataproperty
 from six.moves import range
 
 from ._excel_workbook import (
