@@ -39,10 +39,6 @@ class AbstractTableWriter(TableWriterInterface):
         such as ``sys.stdout``, file stream, ``StringIO``, and so forth.
         Defaults to ``sys.stdout``.
 
-    .. py:attribute:: header_list
-
-        List of table header to write.
-
     .. py:attribute:: is_write_header
 
         Write headers of the table if the value is |True|.
@@ -100,6 +96,18 @@ class AbstractTableWriter(TableWriterInterface):
     @table_name.setter
     def table_name(self, value):
         self._table_name = value
+
+    @property
+    def header_list(self):
+        """
+        List of table header to write.
+        """
+
+        return self._dp_extractor.header_list
+
+    @header_list.setter
+    def header_list(self, value):
+        self._dp_extractor.header_list = value
 
     @property
     def value_matrix(self):
@@ -193,7 +201,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.stream = sys.stdout
         self._table_name = None
-        self.header_list = None
         self.value_matrix = None
 
         self.is_write_header = True
@@ -214,6 +221,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_formatting_float = True
         self.is_padding = True
 
+        self.header_list = None
         self.type_hint_list = None
         self._quoting_flags = {
             Typecode.BOOL: False,
