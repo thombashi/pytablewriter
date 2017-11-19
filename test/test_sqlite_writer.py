@@ -12,10 +12,10 @@ import collections
 from decimal import Decimal
 
 import pytest
+from tabledata import TableData
 
 import pytablereader as ptr
 import pytablewriter as ptw
-from tabledata import TableData
 
 from .data import (
     header_list,
@@ -57,7 +57,7 @@ normal_test_data_list = [
             [
                 [
                     1, "1.1", 'aa', 1, 1, 1, inf,
-                    nan, 1, '2017-01-01T00:00:00',
+                    nan, 1, '2017-01-01 00:00:00',
                 ],
                 [
                     2, "2.2", 'bbb', "2.2", "2.2", 0, inf, nan,
@@ -65,7 +65,7 @@ normal_test_data_list = [
                 ],
                 [
                     3, "3.33", 'cccc', -3, 'ccc', 1, inf,
-                    nan, nan, '2017-01-01T00:00:00',
+                    nan, nan, '2017-01-01 00:00:00',
                 ],
             ])),
     Data(

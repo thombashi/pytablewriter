@@ -12,9 +12,9 @@ import collections
 from decimal import Decimal
 
 import pytest
+from tabledata import TableData
 
 import pytablewriter as ptw
-from tabledata import TableData
 
 from .data import (
     header_list,
@@ -319,28 +319,6 @@ class Test_MarkdownTableWriter_write_new_line(object):
 
         out, _err = capsys.readouterr()
         assert out == "\n"
-
-
-class Test_MarkdownTableWriter_set_table_data(object):
-
-    def test_normal(self):
-        writer = table_writer_class()
-        writer.from_tabledata(TableData(
-            "tmp",
-            ["attr_a", "attr_b", "attr_c"],
-            [
-                ["1", "4", "a"],
-                ["2", "2.1", "bb"],
-                ["3", "120.9", "ccc"],
-            ]))
-
-        assert writer.table_name == "tmp"
-        assert writer.header_list == ["attr_a", "attr_b", "attr_c"]
-        assert writer.value_matrix == [
-            [1, 4, "a"],
-            [2, Decimal("2.1"), "bb"],
-            [3, Decimal("120.9"), "ccc"],
-        ]
 
 
 class Test_MarkdownTableWriter_write_table(object):
