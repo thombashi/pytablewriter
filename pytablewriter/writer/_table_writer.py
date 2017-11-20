@@ -416,7 +416,7 @@ class AbstractTableWriter(TableWriterInterface):
                 self.is_write_closing_row = True
 
             self.__set_value_matrix(work_matrix)
-            self.__clear_preprocessed_flag()
+            self.__clear_preprocess_status()
 
             self._write_table()
 
@@ -628,8 +628,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocess_header()
         self._preprocess_value_matrix()
 
-    def __clear_preprocessed_flag(self):
-        self._logger.logger.debug("__clear_preprocessed_flag")
+    def __clear_preprocess_status(self):
+        self._logger.logger.debug("__clear_preprocess_status")
 
         self._is_complete_table_dp_preprocess = False
         self._is_complete_table_property_preprocess = False
@@ -645,7 +645,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._value_dp_matrix = []
 
     def __clear_preprocess(self):
-        self.__clear_preprocessed_flag()
+        self.__clear_preprocess_status()
         self.__clear_preprocess_data()
 
     def __remove_line_break(self, text):
