@@ -636,8 +636,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._is_complete_header_preprocess = False
         self._is_complete_value_matrix_preprocess = False
 
-    def __clear_preprocessed_data(self):
-        self._logger.logger.debug("__clear_preprocessed_data")
+    def __clear_preprocess_data(self):
+        self._logger.logger.debug("__clear_preprocess_data")
 
         self._column_dp_list = []
         self._header_list = []
@@ -646,7 +646,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def __clear_preprocess(self):
         self.__clear_preprocessed_flag()
-        self.__clear_preprocessed_data()
+        self.__clear_preprocess_data()
 
     def __remove_line_break(self, text):
         if not self._is_remove_line_break:
