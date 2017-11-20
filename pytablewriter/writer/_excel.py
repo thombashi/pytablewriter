@@ -166,7 +166,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
     def from_tabledata(self, value):
         """
-        Set following attributes from :py:class:`tabledata.TableData`
+        Set following attributes from |TableData|
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.header_list`.

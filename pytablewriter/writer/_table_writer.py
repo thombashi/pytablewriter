@@ -288,15 +288,15 @@ class AbstractTableWriter(TableWriterInterface):
 
     def from_tabledata(self, value):
         """
-        Set tabular attributes to the writer from
-        :py:class:`tabledata.TableData`. Following attributes are set:
+        Set tabular attributes to the writer from |TableData|.
+        Following attributes are configured:
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
 
-        :py:class:`tabledata.TableData` can be created from various data
-        formats, for more detailed information, can be found in
+        |TableData| can be created from various data formats by
+        ``pytablereader``. More detailed information can be found in
         http://pytablereader.readthedocs.io/en/latest/
 
         :param tabledata.TableData value: Input table data.
