@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'pytablewriter'
-copyright = u'2016, Tsuyoshi Hombashi'
+copyright = u'2016-2017, Tsuyoshi Hombashi'
 author = u'Tsuyoshi Hombashi'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -313,6 +313,7 @@ rp_class = u"""
 .. |datetime| replace:: :py:class:`datetime.datetime`
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
 
+.. |TableData| replace:: `TableData <http://tabledata.rtfd.io/en/latest/pages/reference/data.html#tabledata>`__
 .. |Typecode| replace:: :py:class:`typepy.Typecode`
 
 .. |EmptyHeaderError| replace:: :py:class:`~pytablewriter.EmptyHeaderError`
