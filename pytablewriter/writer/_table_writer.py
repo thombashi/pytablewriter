@@ -613,7 +613,7 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_value_matrix_preprocess:
             return
 
-        self._value_matrix = [
+        self._table_value_matrix = [
             [
                 self._get_row_item(col_dp, value_dp)
                 for col_dp, value_dp in
@@ -643,7 +643,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._column_dp_list = []
         self._header_list = []
-        self._value_matrix = []
+        self._table_value_matrix = []
         self._value_dp_matrix = []
 
     def __clear_preprocess(self):

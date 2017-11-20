@@ -95,7 +95,8 @@ class HtmlTableWriter(TextTableWriter):
     def _write_body(self):
         tbody_tag = tags.tbody()
 
-        for value_list, value_dp_list in zip(self._value_matrix, self._value_dp_matrix):
+        for value_list, value_dp_list in zip(
+                self._table_value_matrix, self._value_dp_matrix):
             tr_tag = tags.tr()
             for value, value_dp in zip(value_list, value_dp_list):
                 td_tag = tags.td(MultiByteStrDecoder(value).unicode_str)

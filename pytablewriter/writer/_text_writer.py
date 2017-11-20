@@ -137,7 +137,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         is_first_value_row = True
         for value_list, value_dp_list in zip(
-                self._value_matrix, self._value_dp_matrix):
+                self._table_value_matrix, self._value_dp_matrix):
             try:
                 if is_first_value_row:
                     is_first_value_row = False

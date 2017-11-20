@@ -79,7 +79,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.inc_indent_level()
 
         json_text_list = []
-        for json_data in self._value_matrix:
+        for json_data in self._table_value_matrix:
             json_text = json.dumps(
                 json_data, sort_keys=True, indent=4 * self._indent_level)
             json_text = strip_quote(
@@ -117,7 +117,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             for dp_list in dp_matrix
         ]
 
-        self._value_matrix = [
+        self._table_value_matrix = [
             dict(zip(self.header_list, value_list))
             for value_list in value_matrix
         ]

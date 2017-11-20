@@ -52,7 +52,7 @@ class LtsvTableWriter(CsvTableWriter):
         self._verify_property()
         self._preprocess()
 
-        for value_list in self._value_matrix:
+        for value_list in self._table_value_matrix:
             ltsv_item_list = [
                 "{:s}:{}".format(
                     pathvalidate.sanitize_ltsv_label(header_name), value)
