@@ -350,7 +350,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
-    def test_normal_tabledata(self, capsys):
+    def test_normal_single_tabledata(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData(
             table_name="loader_mapping",
@@ -376,6 +376,46 @@ class Test_MarkdownTableWriter_write_table(object):
 |mediawiki       |MediaWikiTableFileLoader|
 |json            |JsonTableFileLoader     |
 |Long Format Name|Loader                  |
+
+"""
+        out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+
+        assert out == expected
+
+    def test_normal_double_tabledata(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(TableData(
+            table_name="first",
+            header_list=['Name', 'Loader'],
+            record_list=[
+                ['csv', 'CsvTableFileLoader'],
+                ['excel', 'ExcelTableFileLoader'],
+            ]))
+        writer.write_table()
+
+        writer.from_tabledata(TableData(
+            table_name="second",
+            header_list=['a', 'b', 'c'],
+            record_list=[
+                ['1', 'AA', 'abc'],
+                ['2', 'BB', 'zzz'],
+            ]))
+        writer.write_table()
+
+        expected = """# first
+|Name |       Loader       |
+|-----|--------------------|
+|csv  |CsvTableFileLoader  |
+|excel|ExcelTableFileLoader|
+
+# second
+| a | b | c |
+|--:|---|---|
+|  1|AA |abc|
+|  2|BB |zzz|
 
 """
         out, _err = capsys.readouterr()

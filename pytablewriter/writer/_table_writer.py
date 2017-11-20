@@ -302,6 +302,8 @@ class AbstractTableWriter(TableWriterInterface):
         :param tabledata.TableData value: Input table data.
         """
 
+        self.__clear_preprocess()
+
         self.table_name = value.table_name
         self.header_list = value.header_list
         self._value_dp_matrix = value.value_dp_matrix
