@@ -9,7 +9,6 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import collections
-from decimal import Decimal
 
 import pytest
 from tabledata import TableData
