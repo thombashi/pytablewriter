@@ -306,9 +306,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.table_name = value.table_name
         self.header_list = value.header_list
-        self._value_dp_matrix = value.value_dp_matrix
+        self._table_value_dp_matrix = value.value_dp_matrix
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
-            self._value_dp_matrix, self._column_dp_list)
+            self._table_value_dp_matrix, self._column_dp_list)
 
         self._is_complete_table_dp_preprocess = True
 
@@ -515,7 +515,7 @@ class AbstractTableWriter(TableWriterInterface):
         if all([
                 typepy.is_empty_sequence(self.header_list),
                 typepy.is_empty_sequence(self.value_matrix),
-                typepy.is_empty_sequence(self._value_dp_matrix),
+                typepy.is_empty_sequence(self._table_value_dp_matrix),
         ]):
             raise EmptyTableDataError()
 
@@ -572,15 +572,15 @@ class AbstractTableWriter(TableWriterInterface):
             ]
 
         try:
-            self._value_dp_matrix = self._dp_extractor.to_dp_matrix(
+            self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(
                 self.__value_matrix_org)
         except TypeError as e:
             self._logger.logger.debug(
                 "{:s}: {}".format(e.__class__.__name__, e))
-            self._value_dp_matrix = []
+            self._table_value_dp_matrix = []
 
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
-            self._value_dp_matrix, self._column_dp_list)
+            self._table_value_dp_matrix, self._column_dp_list)
 
         self._is_complete_table_dp_preprocess = True
 
@@ -619,7 +619,7 @@ class AbstractTableWriter(TableWriterInterface):
                 for col_dp, value_dp in
                 zip(self._column_dp_list, value_dp_list)
             ]
-            for value_dp_list in self._value_dp_matrix
+            for value_dp_list in self._table_value_dp_matrix
         ]
 
         self._is_complete_value_matrix_preprocess = True
@@ -644,7 +644,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._column_dp_list = []
         self._table_header_list = []
         self._table_value_matrix = []
-        self._value_dp_matrix = []
+        self._table_value_dp_matrix = []
 
     def __clear_preprocess(self):
         self.__clear_preprocess_status()

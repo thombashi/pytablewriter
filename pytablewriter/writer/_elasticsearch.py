@@ -157,7 +157,7 @@ class ElasticsearchWriter(AbstractTableWriter):
             Typecode.INFINITY, Typecode.NAN,
         )
 
-        for value_dp_list in self._value_dp_matrix:
+        for value_dp_list in self._table_value_dp_matrix:
             value_list = [
                 value_dp.data if value_dp.typecode not in str_datatype else value_dp.to_str()
                 for value_dp in value_dp_list

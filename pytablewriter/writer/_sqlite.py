@@ -78,7 +78,7 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
             self.table_name, self.header_list,
             [
                 [value_dp.data for value_dp in value_dp_list]
-                for value_dp_list in self._value_dp_matrix
+                for value_dp_list in self._table_value_dp_matrix
             ])
         self.stream.create_table_from_tabledata(
             tabledata.SQLiteTableDataSanitizer(table_data).sanitize())
