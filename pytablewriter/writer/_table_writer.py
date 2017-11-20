@@ -601,7 +601,7 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_header_preprocess:
             return
 
-        self._header_list = [
+        self._table_header_list = [
             self._get_header_item(col_dp, header_dp)
             for col_dp, header_dp in
             zip(self._column_dp_list, self._dp_extractor.to_header_dp_list())
@@ -642,7 +642,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._logger.logger.debug("__clear_preprocess_data")
 
         self._column_dp_list = []
-        self._header_list = []
+        self._table_header_list = []
         self._table_value_matrix = []
         self._value_dp_matrix = []
 
