@@ -566,7 +566,7 @@ class AbstractTableWriter(TableWriterInterface):
             return
 
         if typepy.is_empty_sequence(self.header_list) and self._use_default_header:
-            self._dp_extractor.header_list = [
+            self.header_list = [
                 convert_idx_to_alphabet(col_idx)
                 for col_idx in range(len(self.__value_matrix_org[0]))
             ]
