@@ -31,33 +31,30 @@ except ImportError:
 
 
 normal_test_data_list = [
-    Data(
-        table="table-name ho'ge",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected="""table_name_ho_ge = pd.DataFrame([
+    Data(table="table-name ho'ge",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         expected="""table_name_ho_ge = pd.DataFrame([
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3, "cccc"],
 ], columns=["a", "b", "c", "dd", "e"])
 
 """),
-    Data(
-        table="tablename",
-        indent=0,
-        header=header_list,
-        value=None,
-        expected="""tablename = pd.DataFrame([
+    Data(table="tablename",
+         indent=0,
+         header=header_list,
+         value=None,
+         expected="""tablename = pd.DataFrame([
 ], columns=["a", "b", "c", "dd", "e"])
 
 """),
-    Data(
-        table="table with%null-value",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        expected="""table_with_null_value = pd.DataFrame([
+    Data(table="table with%null-value",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         expected="""table_with_null_value = pd.DataFrame([
     [1, None, "a", 1, None],
     [None, 2.2, None, 2.2, 2.2],
     [3, 3.3, "ccc", None, "cccc"],
@@ -65,40 +62,37 @@ normal_test_data_list = [
 ], columns=["a", "b", "c", "dd", "e"])
 
 """),
-    Data(
-        table="tablename",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected="""tablename = pd.DataFrame([
+    Data(table="tablename",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected="""tablename = pd.DataFrame([
     [1, 1.1, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
 ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
 """),
-    Data(
-        table="float-with-null",
-        indent=0,
-        header=["a", "b"],
-        value=[
-            ["0.03785679191278808", "826.21158713263"],
-            [None, "826.21158713263"],
-            [0.1, "1.0499675627886724"],
-        ],
-        expected="""float_with_null = pd.DataFrame([
+    Data(table="float-with-null",
+         indent=0,
+         header=["a", "b"],
+         value=[
+             ["0.03785679191278808", "826.21158713263"],
+             [None, "826.21158713263"],
+             [0.1, "1.0499675627886724"],
+         ],
+         expected="""float_with_null = pd.DataFrame([
     [0.03785679191278808, 826.21158713263],
     [None, 826.21158713263],
     [0.1, 1.0499675627886724],
 ], columns=["a", "b"])
 
 """),
-    Data(
-        table="empty header",
-        indent=0,
-        header=[],
-        value=value_matrix,
-        expected="""empty_header = pd.DataFrame([
+    Data(table="empty header",
+         indent=0,
+         header=[],
+         value=value_matrix,
+         expected="""empty_header = pd.DataFrame([
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3, "cccc"],
@@ -108,18 +102,16 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyTableDataError),
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyTableNameError),
+    Data(table="dummy",
+         indent=normal_test_data_list[0].indent,
+         header=[],
+         value=[],
+         expected=pytablewriter.EmptyTableDataError),
+    Data(table="",
+         indent=normal_test_data_list[0].indent,
+         header=normal_test_data_list[0].header,
+         value=normal_test_data_list[0].value,
+         expected=pytablewriter.EmptyTableNameError),
 ]
 
 table_writer_class = pytablewriter.PandasDataFrameWriter

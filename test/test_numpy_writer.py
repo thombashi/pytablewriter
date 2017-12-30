@@ -32,12 +32,11 @@ except ImportError:
 
 
 normal_test_data_list = [
-    Data(
-        table="table-name ho'ge",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected="""table_name_ho_ge = np.array([
+    Data(table="table-name ho'ge",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         expected="""table_name_ho_ge = np.array([
     ["a", "b", "c", "dd", "e"],
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
@@ -45,22 +44,20 @@ normal_test_data_list = [
 ])
 
 """),
-    Data(
-        table="empty value",
-        indent=0,
-        header=header_list,
-        value=None,
-        expected="""empty_value = np.array([
+    Data(table="empty value",
+         indent=0,
+         header=header_list,
+         value=None,
+         expected="""empty_value = np.array([
     ["a", "b", "c", "dd", "e"],
 ])
 
 """),
-    Data(
-        table="table with%null-value",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        expected="""table_with_null_value = np.array([
+    Data(table="table with%null-value",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         expected="""table_with_null_value = np.array([
     ["a", "b", "c", "dd", "e"],
     [1, None, "a", 1, None],
     [None, 2.2, None, 2.2, 2.2],
@@ -69,12 +66,11 @@ normal_test_data_list = [
 ])
 
 """),
-    Data(
-        table="mix data types",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected="""mix_data_types = np.array([
+    Data(table="mix data types",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected="""mix_data_types = np.array([
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.1, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
@@ -82,28 +78,26 @@ normal_test_data_list = [
 ])
 
 """),
-    Data(
-        table="mix data types wo header",
-        indent=0,
-        header=None,
-        value=mix_value_matrix,
-        expected="""mix_data_types_wo_header = np.array([
+    Data(table="mix data types wo header",
+         indent=0,
+         header=None,
+         value=mix_value_matrix,
+         expected="""mix_data_types_wo_header = np.array([
     [1, 1.1, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
     [3, 3.33, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
 ])
 
 """),
-    Data(
-        table="float-with-null",
-        indent=0,
-        header=["a", "b"],
-        value=[
-            ["0.03785679191278808", "826.21158713263"],
-            [None, "826.21158713263"],
-            [0.1, "1.0499675627886724"],
-        ],
-        expected="""float_with_null = np.array([
+    Data(table="float-with-null",
+         indent=0,
+         header=["a", "b"],
+         value=[
+             ["0.03785679191278808", "826.21158713263"],
+             [None, "826.21158713263"],
+             [0.1, "1.0499675627886724"],
+         ],
+         expected="""float_with_null = np.array([
     ["a", "b"],
     [0.03785679191278808, 826.21158713263],
     [None, 826.21158713263],

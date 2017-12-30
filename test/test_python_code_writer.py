@@ -25,12 +25,11 @@ from .data import (
 
 
 normal_test_data_list = [
-    Data(
-        table="Table-Name ho'ge",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected="""table_name_ho_ge = [
+    Data(table="Table-Name ho'ge",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         expected="""table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
@@ -38,22 +37,20 @@ normal_test_data_list = [
 ]
 
 """),
-    Data(
-        table="TABLENAME",
-        indent=0,
-        header=header_list,
-        value=None,
-        expected="""tablename = [
+    Data(table="TABLENAME",
+         indent=0,
+         header=header_list,
+         value=None,
+         expected="""tablename = [
     ["a", "b", "c", "dd", "e"],
 ]
 
 """),
-    Data(
-        table="TableName",
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        expected="""    tablename = [
+    Data(table="TableName",
+         indent=1,
+         header=header_list,
+         value=value_matrix,
+         expected="""    tablename = [
         ["a", "b", "c", "dd", "e"],
         [1, 123.1, "a", 1, 1],
         [2, 2.2, "bb", 2.2, 2.2],
@@ -61,12 +58,11 @@ normal_test_data_list = [
     ]
 
 """),
-    Data(
-        table="TABLE Name",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        expected="""table_name = [
+    Data(table="TABLE Name",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         expected="""table_name = [
     ["a", "b", "c", "dd", "e"],
     [1, None, "a", 1, None],
     [None, 2.2, None, 2.2, 2.2],
@@ -75,12 +71,11 @@ normal_test_data_list = [
 ]
 
 """),
-    Data(
-        table="tablename",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected="""tablename = [
+    Data(table="tablename",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected="""tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.1, "aa", 1, 1, True, float("inf"), float("nan"), 1, dateutil.parser.parse("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, False, float("inf"), float("nan"), float("inf"), "2017-01-02 03:04:05+09:00"],
@@ -88,31 +83,29 @@ normal_test_data_list = [
 ]
 
 """),
-    Data(
-        table="quoted values",
-        indent=0,
-        header=['"quote"', '"abc efg"'],
-        value=[
-            ['"1', '"abc"'],
-            ['"-1', '"efg"'],
-        ],
-        expected="""quoted_values = [
+    Data(table="quoted values",
+         indent=0,
+         header=['"quote"', '"abc efg"'],
+         value=[
+             ['"1', '"abc"'],
+             ['"-1', '"efg"'],
+         ],
+         expected="""quoted_values = [
     ["quote", "abc efg"],
     [1, "abc"],
     [-1, "efg"],
 ]
 
 """),
-    Data(
-        table="float-with-null",
-        indent=0,
-        header=["a", "b"],
-        value=[
-            ["0.03785679191278808", "826.21158713263"],
-            [None, "826.21158713263"],
-            [0.1, "1.0499675627886724"],
-        ],
-        expected="""float_with_null = [
+    Data(table="float-with-null",
+         indent=0,
+         header=["a", "b"],
+         value=[
+             ["0.03785679191278808", "826.21158713263"],
+             [None, "826.21158713263"],
+             [0.1, "1.0499675627886724"],
+         ],
+         expected="""float_with_null = [
     ["a", "b"],
     [0.03785679191278808, 826.21158713263],
     [None, 826.21158713263],

@@ -23,12 +23,11 @@ from .data import (
 
 
 normal_test_data_list = [
-    Data(
-        table="",
-        indent="  ",
-        header=header_list,
-        value=value_matrix,
-        expected="""<table>
+    Data(table="",
+         indent="  ",
+         header=header_list,
+         value=value_matrix,
+         expected="""<table>
   <thead>
     <tr>
       <th>a</th>
@@ -63,12 +62,11 @@ normal_test_data_list = [
   </tbody>
 </table>
 """),
-    Data(
-        table=None,
-        indent="  ",
-        header=None,
-        value=value_matrix,
-        expected="""<table>
+    Data(table=None,
+         indent="  ",
+         header=None,
+         value=value_matrix,
+         expected="""<table>
   <tbody>
     <tr>
       <td align="right">1</td>
@@ -94,12 +92,11 @@ normal_test_data_list = [
   </tbody>
 </table>
 """),
-    Data(
-        table="tablename",
-        indent="    ",
-        header=header_list,
-        value=[],
-        expected="""<table id="tablename">
+    Data(table="tablename",
+         indent="    ",
+         header=header_list,
+         value=[],
+         expected="""<table id="tablename">
     <caption>tablename</caption>
     <thead>
         <tr>
@@ -113,12 +110,11 @@ normal_test_data_list = [
     <tbody></tbody>
 </table>
 """),
-    Data(
-        table=None,
-        indent="    ",
-        header=header_list,
-        value=None,
-        expected="""<table>
+    Data(table=None,
+         indent="    ",
+         header=header_list,
+         value=None,
+         expected="""<table>
     <thead>
         <tr>
             <th>a</th>
@@ -131,12 +127,11 @@ normal_test_data_list = [
     <tbody></tbody>
 </table>
 """),
-    Data(
-        table="",
-        indent="  ",
-        header=header_list,
-        value=value_matrix_with_none,
-        expected="""<table>
+    Data(table="",
+         indent="  ",
+         header=header_list,
+         value=value_matrix_with_none,
+         expected="""<table>
   <thead>
     <tr>
       <th>a</th>
@@ -178,12 +173,11 @@ normal_test_data_list = [
   </tbody>
 </table>
 """),
-    Data(
-        table="tablename",
-        indent="    ",
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected="""<table id="tablename">
+    Data(table="tablename",
+         indent="    ",
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected="""<table id="tablename">
     <caption>tablename</caption>
     <thead>
         <tr>

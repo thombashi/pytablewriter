@@ -27,11 +27,10 @@ from .data import (
 Data = collections.namedtuple("Data", "table header value expected")
 
 normal_test_data_list = [
-    Data(
-        table="test table",
-        header=header_list,
-        value=value_matrix,
-        expected="""{| class="wikitable"
+    Data(table="test table",
+         header=header_list,
+         value=value_matrix,
+         expected="""{| class="wikitable"
 |+test table
 ! a
 ! b
@@ -59,11 +58,10 @@ normal_test_data_list = [
 |}
 
 """),
-    Data(
-        table=None,
-        header=header_list,
-        value=None,
-        expected="""{| class="wikitable"
+    Data(table=None,
+         header=header_list,
+         value=None,
+         expected="""{| class="wikitable"
 ! a
 ! b
 ! c
@@ -73,16 +71,15 @@ normal_test_data_list = [
 |}
 
 """),
-    Data(
-        table=None,
-        header=["ho ge", "foo - bar"],
-        value=[
-            [1, "\n".join([" # a b c", "# h o g e"])],
-            [2, "\n".join([" *hoge", "* abc"])],
-            [3, "\n".join([" a * b", "a # b ## c ###"])],
-            [3, "\n".join([" a # b", "a * b ** c ***"])],
-        ],
-        expected="""{| class="wikitable"
+    Data(table=None,
+         header=["ho ge", "foo - bar"],
+         value=[
+             [1, "\n".join([" # a b c", "# h o g e"])],
+             [2, "\n".join([" *hoge", "* abc"])],
+             [3, "\n".join([" a * b", "a # b ## c ###"])],
+             [3, "\n".join([" a # b", "a * b ** c ***"])],
+         ],
+         expected="""{| class="wikitable"
 ! ho ge
 ! foo - bar
 |-
@@ -106,11 +103,10 @@ a * b ** c ***
 |}
 
 """),
-    Data(
-        table=None,
-        header=None,
-        value=value_matrix,
-        expected="""{| class="wikitable"
+    Data(table=None,
+         header=None,
+         value=value_matrix,
+         expected="""{| class="wikitable"
 | style="text-align:right"| 1
 | style="text-align:right"| 123.1
 | a
@@ -131,11 +127,10 @@ a * b ** c ***
 |}
 
 """),
-    Data(
-        table="test table",
-        header=header_list,
-        value=value_matrix_with_none,
-        expected="""{| class="wikitable"
+    Data(table="test table",
+         header=header_list,
+         value=value_matrix_with_none,
+         expected="""{| class="wikitable"
 |+test table
 ! a
 ! b
@@ -169,11 +164,10 @@ a * b ** c ***
 |}
 
 """),
-    Data(
-        table="test table",
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected="""{| class="wikitable"
+    Data(table="test table",
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected="""{| class="wikitable"
 |+test table
 ! i
 ! f

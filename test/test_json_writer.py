@@ -29,11 +29,10 @@ from .data import (
 Data = collections.namedtuple("Data", "table header value expected")
 
 normal_test_data_list = [
-    Data(
-        table="",
-        header=header_list,
-        value=value_matrix,
-        expected=json.loads("""[
+    Data(table="",
+         header=header_list,
+         value=value_matrix,
+         expected=json.loads("""[
             {
                 "a": 1,
                 "b": 123.1,
@@ -57,16 +56,14 @@ normal_test_data_list = [
             }
         ]
         """)),
-    Data(
-        table="",
-        header=header_list,
-        value=None,
-        expected=json.loads("[]")),
-    Data(
-        table="tablename",
-        header=header_list,
-        value=value_matrix,
-        expected=json.loads("""{
+    Data(table="",
+         header=header_list,
+         value=None,
+         expected=json.loads("[]")),
+    Data(table="tablename",
+         header=header_list,
+         value=value_matrix,
+         expected=json.loads("""{
             "tablename": [
                 {
                     "a": 1,
@@ -92,11 +89,10 @@ normal_test_data_list = [
             ]
         }
         """)),
-    Data(
-        table="with none values",
-        header=header_list,
-        value=value_matrix_with_none,
-        expected=json.loads("""{
+    Data(table="with none values",
+         header=header_list,
+         value=value_matrix_with_none,
+         expected=json.loads("""{
             "with none values": [
                 {
                     "a": 1,
@@ -129,11 +125,10 @@ normal_test_data_list = [
             ]
         }
         """)),
-    Data(
-        table="mixed values",
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected=json.loads("""{ "mixed values" : [
+    Data(table="mixed values",
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected=json.loads("""{ "mixed values" : [
             {
                 "bool": true,
                 "c": "aa",
@@ -171,11 +166,10 @@ normal_test_data_list = [
                 "time": "2017-01-01T00:00:00"
             }]}
         """)),
-    Data(
-        table="float",
-        header=float_header_list,
-        value=float_value_matrix,
-        expected=json.loads("""{ "float" : [
+    Data(table="float",
+         header=float_header_list,
+         value=float_value_matrix,
+         expected=json.loads("""{ "float" : [
 {
     "a": 0.01,
     "b": 0.00125,
@@ -196,16 +190,14 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(
-        table="",
-        header=[],
-        value=[],
-        expected=pytablewriter.EmptyTableDataError),
-    Data(
-        table="",
-        header=[],
-        value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyHeaderError),
+    Data(table="",
+         header=[],
+         value=[],
+         expected=pytablewriter.EmptyTableDataError),
+    Data(table="",
+         header=[],
+         value=normal_test_data_list[0].value,
+         expected=pytablewriter.EmptyHeaderError),
 ]
 
 table_writer_class = pytablewriter.JsonTableWriter

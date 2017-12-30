@@ -23,12 +23,11 @@ from .data import (
 
 
 normal_test_data_list = [
-    Data(
-        table="tablename",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected=""".. table:: tablename
+    Data(table="tablename",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         expected=""".. table:: tablename
 
     =  =====  ===  ===  ====
     a    b     c   dd    e  
@@ -39,12 +38,11 @@ normal_test_data_list = [
     =  =====  ===  ===  ====
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=None,
-        expected=""".. table:: 
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=None,
+         expected=""".. table:: 
 
     =  =  =  ==  =
     a  b  c  dd  e
@@ -52,12 +50,11 @@ normal_test_data_list = [
     =  =  =  ==  =
 
 """),
-    Data(
-        table=None,
-        indent=0,
-        header=None,
-        value=value_matrix,
-        expected=""".. table:: 
+    Data(table=None,
+         indent=0,
+         header=None,
+         value=value_matrix,
+         expected=""".. table:: 
 
     =  =====  ===  ===  ====
     1  123.1  a    1.0     1
@@ -66,12 +63,11 @@ normal_test_data_list = [
     =  =====  ===  ===  ====
 
 """),
-    Data(
-        table="",
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        expected="""    .. table:: 
+    Data(table="",
+         indent=1,
+         header=header_list,
+         value=value_matrix,
+         expected="""    .. table:: 
 
         =  =====  ===  ===  ====
         a    b     c   dd    e  
@@ -82,12 +78,11 @@ normal_test_data_list = [
         =  =====  ===  ===  ====
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        expected=""".. table:: table name
+    Data(table="table name",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         expected=""".. table:: table name
 
     =  ===  ===  ===  ====
     a   b    c   dd    e  
@@ -99,12 +94,11 @@ normal_test_data_list = [
     =  ===  ===  ===  ====
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected=""".. table:: table name
+    Data(table="table name",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected=""".. table:: table name
 
     =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
     i   f     c     if   ifc  bool     inf     nan  mix_num             time           

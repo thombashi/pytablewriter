@@ -22,12 +22,11 @@ from .data import (
 )
 
 normal_test_data_list = [
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected=""".. table:: table name
+    Data(table="table name",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         expected=""".. table:: table name
 
     +-+-----+---+---+----+
     |a|  b  | c |dd | e  |
@@ -40,12 +39,11 @@ normal_test_data_list = [
     +-+-----+---+---+----+
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=None,
-        expected=""".. table:: 
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=None,
+         expected=""".. table:: 
 
     +-+-+-+--+-+
     |a|b|c|dd|e|
@@ -53,12 +51,11 @@ normal_test_data_list = [
     +-+-+-+--+-+
 
 """),
-    Data(
-        table=None,
-        indent=0,
-        header=None,
-        value=value_matrix,
-        expected=""".. table:: 
+    Data(table=None,
+         indent=0,
+         header=None,
+         value=value_matrix,
+         expected=""".. table:: 
 
     +-+-----+---+---+----+
     |1|123.1|a  |1.0|   1|
@@ -69,12 +66,11 @@ normal_test_data_list = [
     +-+-----+---+---+----+
 
 """),
-    Data(
-        table=None,
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        expected="""    .. table:: 
+    Data(table=None,
+         indent=1,
+         header=header_list,
+         value=value_matrix,
+         expected="""    .. table:: 
 
         +-+-----+---+---+----+
         |a|  b  | c |dd | e  |
@@ -87,18 +83,17 @@ normal_test_data_list = [
         +-+-----+---+---+----+
 
 """),
-    Data(
-        table="zone",
-        indent=0,
-        header=["zone_id", "country_code", "zone_name"],
-        value=[
-            ["1", "AD", "Europe/Andorra"],
-            ["2", "AE", "Asia/Dubai"],
-            ["3", "AF", "Asia/Kabul"],
-            ["4", "AG", "America/Antigua"],
-            ["5", "AI", "America\nAnguilla"],
-        ],
-        expected=""".. table:: zone
+    Data(table="zone",
+         indent=0,
+         header=["zone_id", "country_code", "zone_name"],
+         value=[
+             ["1", "AD", "Europe/Andorra"],
+             ["2", "AE", "Asia/Dubai"],
+             ["3", "AF", "Asia/Kabul"],
+             ["4", "AG", "America/Antigua"],
+             ["5", "AI", "America\nAnguilla"],
+         ],
+         expected=""".. table:: zone
 
     +-------+------------+----------------+
     |zone_id|country_code|   zone_name    |
@@ -115,12 +110,11 @@ normal_test_data_list = [
     +-------+------------+----------------+
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        expected=""".. table:: table name
+    Data(table="table name",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         expected=""".. table:: table name
 
     +-+---+---+---+----+
     |a| b | c |dd | e  |
@@ -135,12 +129,11 @@ normal_test_data_list = [
     +-+---+---+---+----+
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected=""".. table:: table name
+    Data(table="table name",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected=""".. table:: table name
 
     +-+----+----+----+---+-----+--------+---+--------+-------------------------+
     |i| f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
@@ -153,21 +146,20 @@ normal_test_data_list = [
     +-+----+----+----+---+-----+--------+---+--------+-------------------------+
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=["int", "float", "str", "bool", "mix", "time"],
-        value=[
-            [0,   0.1,      "hoge", True,   0,
-                "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,
-                "2017-12-23 12:01:23+0900"],
-            [3,   0,        "bar",  "true",
-                "inf", "2017-03-03 22:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE",
-                "nan", "2017-01-01 00:00:00+0900"],
-        ],
-        expected=""".. table:: table name
+    Data(table="table name",
+         indent=0,
+         header=["int", "float", "str", "bool", "mix", "time"],
+         value=[
+             [0,   0.1,      "hoge", True,   0,
+              "2017-01-01 03:04:05+0900"],
+             [2,   "-2.23",  "foo",  False,  None,
+              "2017-12-23 12:01:23+0900"],
+             [3,   0,        "bar",  "true",
+              "inf", "2017-03-03 22:44:55+0900"],
+             [-10, -9.9,     "",     "FALSE",
+              "nan", "2017-01-01 00:00:00+0900"],
+         ],
+         expected=""".. table:: table name
 
     +---+-----+----+-----+--------+------------------------+
     |int|float|str |bool |  mix   |          time          |
@@ -182,12 +174,11 @@ normal_test_data_list = [
     +---+-----+----+-----+--------+------------------------+
 
 """),
-    Data(
-        table="line breaks",
-        indent=0,
-        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
-        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
-        expected=""".. table:: line breaks
+    Data(table="line breaks",
+         indent=0,
+         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+         expected=""".. table:: line breaks
 
     +-----+------+------+
     | a b | c d  | e f  |

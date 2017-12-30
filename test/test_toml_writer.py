@@ -29,11 +29,10 @@ from .data import (
 Data = collections.namedtuple("Data", "table_name header value expected")
 
 normal_test_data_list = [
-    Data(
-        table_name="normal",
-        header=header_list,
-        value=value_matrix,
-        expected="""[[normal]]
+    Data(table_name="normal",
+         header=header_list,
+         value=value_matrix,
+         expected="""[[normal]]
 a = 1
 c = "a"
 b = 123.1
@@ -52,17 +51,16 @@ b = 3.3
 e = "cccc"
 dd = 3
 """),
-    Data(
-        table_name="sparse",
-        header=header_list,
-        value=[
-            ["1", "", "a", "1",   None],
-            [None, 2.2, None, "2.2", 2.2],
-            [None, None, None, None,   None],
-            [3, 3.3, "ccc", None,   "cccc"],
-            [None, None, None, None,   None],
-        ],
-        expected="""[[sparse]]
+    Data(table_name="sparse",
+         header=header_list,
+         value=[
+             ["1", "", "a", "1",   None],
+             [None, 2.2, None, "2.2", 2.2],
+             [None, None, None, None,   None],
+             [3, 3.3, "ccc", None,   "cccc"],
+             [None, None, None, None,   None],
+         ],
+         expected="""[[sparse]]
 a = 1
 c = "a"
 b = ""
@@ -77,14 +75,13 @@ c = "ccc"
 b = 3.3
 e = "cccc"
 """),
-    Data(
-        table_name="symbols",
-        header=["a!0", "a#1", "a.2$", "a_%3", "a-&4"],
-        value=[
-            ["a?b", "c   d", "e+f", "g=h", "i*j"],
-            [1, 2.0, 3.3, Decimal("4.4"), ""],
-        ],
-        expected="""[[symbols]]
+    Data(table_name="symbols",
+         header=["a!0", "a#1", "a.2$", "a_%3", "a-&4"],
+         value=[
+             ["a?b", "c   d", "e+f", "g=h", "i*j"],
+             [1, 2.0, 3.3, Decimal("4.4"), ""],
+         ],
+         expected="""[[symbols]]
 "a-&4" = "i*j"
 "a#1" = "c   d"
 "a_%3" = "g=h"
@@ -97,14 +94,13 @@ e = "cccc"
 "a!0" = 1
 "a.2$" = 3.3
 """),
-    Data(
-        table_name="mixtype",
-        header=["int", "float", "bool", "datetime"],
-        value=[
-            [0, 2.2, True, parse("2017-01-02T03:04:05")],
-            [-1, Decimal("4.4"), False, parse("2022-01-01T00:00:00")],
-        ],
-        expected="""[[mixtype]]
+    Data(table_name="mixtype",
+         header=["int", "float", "bool", "datetime"],
+         value=[
+             [0, 2.2, True, parse("2017-01-02T03:04:05")],
+             [-1, Decimal("4.4"), False, parse("2022-01-01T00:00:00")],
+         ],
+         expected="""[[mixtype]]
 float = 2.2
 datetime = 2017-01-02T03:04:05
 int = 0
@@ -115,11 +111,10 @@ datetime = 2022-01-01T00:00:00
 int = -1
 bool = false
 """),
-    Data(
-        table_name="float",
-        header=float_header_list,
-        value=float_value_matrix,
-        expected="""[[float]]
+    Data(table_name="float",
+         header=float_header_list,
+         value=float_value_matrix,
+         expected="""[[float]]
 a = 0.01
 b = 0.00125
 c = 0
@@ -136,23 +131,20 @@ c = 0.001
 ]
 
 exception_test_data_list = [
-    Data(
-        table_name="dummy",
-        header=header,
-        value=value,
-        expected=ptw.EmptyTableDataError)
+    Data(table_name="dummy",
+         header=header,
+         value=value,
+         expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ] + [
-    Data(
-        table_name="empty_header",
-        header=None,
-        value=value_matrix,
-        expected=ptw.EmptyHeaderError),
-    Data(
-        table_name=None,
-        header=header_list,
-        value=value_matrix,
-        expected=ptw.EmptyTableNameError),
+    Data(table_name="empty_header",
+         header=None,
+         value=value_matrix,
+         expected=ptw.EmptyHeaderError),
+    Data(table_name=None,
+         header=header_list,
+         value=value_matrix,
+         expected=ptw.EmptyTableNameError),
 ]
 
 table_writer_class = ptw.TomlTableWriter

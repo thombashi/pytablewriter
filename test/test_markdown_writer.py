@@ -298,13 +298,12 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(
-        table="",
-        indent=0,
-        header=[],
-        value=[],
-        is_formatting_float=True,
-        expected=ptw.EmptyTableDataError),
+    Data(table="",
+         indent=0,
+         header=[],
+         value=[],
+         is_formatting_float=True,
+         expected=ptw.EmptyTableDataError),
 ]
 
 table_writer_class = ptw.MarkdownTableWriter

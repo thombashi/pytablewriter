@@ -23,12 +23,11 @@ from .data import (
 )
 
 normal_test_data_list = [
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        expected=""".. csv-table:: table name
+    Data(table="table name",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
     :widths: 3, 5, 5, 4, 6
 
@@ -37,23 +36,21 @@ normal_test_data_list = [
     3, 3.3, "ccc", 3.0, "cccc"
 
 """),
-    Data(
-        table="",
-        indent=0,
-        header=header_list,
-        value=None,
-        expected=""".. csv-table:: 
+    Data(table="",
+         indent=0,
+         header=header_list,
+         value=None,
+         expected=""".. csv-table:: 
     :header: "a", "b", "c", "dd", "e"
     :widths: 3, 3, 3, 4, 3
 
 
 """),
-    Data(
-        table=None,
-        indent=0,
-        header=None,
-        value=value_matrix,
-        expected=""".. csv-table:: 
+    Data(table=None,
+         indent=0,
+         header=None,
+         value=value_matrix,
+         expected=""".. csv-table:: 
     :widths: 1, 5, 5, 3, 6
 
     1, 123.1, "a", 1.0, 1
@@ -61,12 +58,11 @@ normal_test_data_list = [
     3, 3.3, "ccc", 3.0, "cccc"
 
 """),
-    Data(
-        table="",
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        expected="""    .. csv-table:: 
+    Data(table="",
+         indent=1,
+         header=header_list,
+         value=value_matrix,
+         expected="""    .. csv-table:: 
         :header: "a", "b", "c", "dd", "e"
         :widths: 3, 5, 5, 4, 6
 
@@ -75,12 +71,11 @@ normal_test_data_list = [
         3, 3.3, "ccc", 3.0, "cccc"
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        expected=""".. csv-table:: table name
+    Data(table="table name",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
     :widths: 3, 3, 5, 4, 6
 
@@ -90,12 +85,11 @@ normal_test_data_list = [
     , , , , 
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        expected=""".. csv-table:: table name
+    Data(table="table name",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         expected=""".. csv-table:: table name
     :header: "i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"
     :widths: 3, 4, 6, 4, 5, 6, 8, 5, 9, 27
 

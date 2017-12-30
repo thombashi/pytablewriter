@@ -31,14 +31,13 @@ Data = collections.namedtuple(
     "table indent header value is_write_header is_dti_fmt expected")
 
 normal_test_data_list = [
-    Data(
-        table="table-name ho'ge",
-        indent=0,
-        header=header_list,
-        value=value_matrix,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected="""const table_name_ho_ge = [
+    Data(table="table-name ho'ge",
+         indent=0,
+         header=header_list,
+         value=value_matrix,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected="""const table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
@@ -46,51 +45,47 @@ normal_test_data_list = [
 ];
 
 """),
-    Data(
-        table="null value",
-        indent=0,
-        header=header_list,
-        value=None,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected="""const null_value = [
+    Data(table="null value",
+         indent=0,
+         header=header_list,
+         value=None,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected="""const null_value = [
     ["a", "b", "c", "dd", "e"]
 ];
 
 """),
-    Data(
-        table="null table",
-        indent=0,
-        header=header_list,
-        value=None,
-        is_write_header=False,
-        is_dti_fmt=True,
-        expected="""const null_table = [
+    Data(table="null table",
+         indent=0,
+         header=header_list,
+         value=None,
+         is_write_header=False,
+         is_dti_fmt=True,
+         expected="""const null_table = [
 ];
 
 """),
-    Data(
-        table="table name",
-        indent=0,
-        header=None,
-        value=value_matrix,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected="""const table_name = [
+    Data(table="table name",
+         indent=0,
+         header=None,
+         value=value_matrix,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected="""const table_name = [
     [1, 123.1, "a", 1, 1],
     [2, 2.2, "bb", 2.2, 2.2],
     [3, 3.3, "ccc", 3, "cccc"]
 ];
 
 """),
-    Data(
-        table="tablename",
-        indent=1,
-        header=header_list,
-        value=value_matrix,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected="""    const tablename = [
+    Data(table="tablename",
+         indent=1,
+         header=header_list,
+         value=value_matrix,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected="""    const tablename = [
         ["a", "b", "c", "dd", "e"],
         [1, 123.1, "a", 1, 1],
         [2, 2.2, "bb", 2.2, 2.2],
@@ -98,14 +93,13 @@ normal_test_data_list = [
     ];
 
 """),
-    Data(
-        table="tablename",
-        indent=0,
-        header=header_list,
-        value=value_matrix_with_none,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected="""const tablename = [
+    Data(table="tablename",
+         indent=0,
+         header=header_list,
+         value=value_matrix_with_none,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected="""const tablename = [
     ["a", "b", "c", "dd", "e"],
     [1, null, "a", 1, null],
     [null, 2.2, null, 2.2, 2.2],
@@ -114,14 +108,13 @@ normal_test_data_list = [
 ];
 
 """),
-    Data(
-        table="tablename",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected="""const tablename = [
+    Data(table="tablename",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected="""const tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
     [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
@@ -129,14 +122,13 @@ normal_test_data_list = [
 ];
 
 """),
-    Data(
-        table="tablename",
-        indent=0,
-        header=mix_header_list,
-        value=mix_value_matrix,
-        is_write_header=True,
-        is_dti_fmt=False,
-        expected="""const tablename = [
+    Data(table="tablename",
+         indent=0,
+         header=mix_header_list,
+         value=mix_value_matrix,
+         is_write_header=True,
+         is_dti_fmt=False,
+         expected="""const tablename = [
     ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
     [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, "2017-01-01T00:00:00"],
     [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
@@ -144,18 +136,17 @@ normal_test_data_list = [
 ];
 
 """),
-    Data(
-        table="float-with-null",
-        indent=0,
-        header=["a", "b"],
-        value=[
-            ["0.03785679191278808", "826.21158713263"],
-            [None, "826.21158713263"],
-            [0.1, "1.0499675627886724"],
-        ],
-        is_write_header=True,
-        is_dti_fmt=False,
-        expected="""const float_with_null = [
+    Data(table="float-with-null",
+         indent=0,
+         header=["a", "b"],
+         value=[
+             ["0.03785679191278808", "826.21158713263"],
+             [None, "826.21158713263"],
+             [0.1, "1.0499675627886724"],
+         ],
+         is_write_header=True,
+         is_dti_fmt=False,
+         expected="""const float_with_null = [
     ["a", "b"],
     [0.03785679191278808, 826.21158713263],
     [null, 826.21158713263],
@@ -163,14 +154,13 @@ normal_test_data_list = [
 ];
 
 """),
-    Data(
-        table="line breaks",
-        indent=0,
-        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
-        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
-        is_write_header=True,
-        is_dti_fmt=False,
-        expected="""const line_breaks = [
+    Data(table="line breaks",
+         indent=0,
+         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+         is_write_header=True,
+         is_dti_fmt=False,
+         expected="""const line_breaks = [
     ["a b", " c d ", "e f"],
     ["v1 v1", "v2 v2", "v3 v3"]
 ];
@@ -179,23 +169,21 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(
-        table="",
-        indent=normal_test_data_list[0].indent,
-        header=normal_test_data_list[0].header,
-        value=normal_test_data_list[0].value,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected=pytablewriter.EmptyTableNameError)
+    Data(table="",
+         indent=normal_test_data_list[0].indent,
+         header=normal_test_data_list[0].header,
+         value=normal_test_data_list[0].value,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected=pytablewriter.EmptyTableNameError)
 ] + [
-    Data(
-        table="dummy",
-        indent=0,
-        header=header,
-        value=value,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected=pytablewriter.EmptyTableDataError)
+    Data(table="dummy",
+         indent=0,
+         header=header,
+         value=value,
+         is_write_header=True,
+         is_dti_fmt=True,
+         expected=pytablewriter.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
