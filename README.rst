@@ -313,7 +313,7 @@ Create Elasticsearch index and put data
                                 "type": "integer"
                             },
                             "ip": {
-                                "type": "ip"
+                                "type": "text"
                             },
                             "long": {
                                 "type": "long"
@@ -332,17 +332,6 @@ Create Elasticsearch index and put data
 
         ----- documents -----
         {
-            "str": "abc",
-            "byte": 100,
-            "short": 10000,
-            "int": 2000000000,
-            "long": 200000000000,
-            "float": 0.1,
-            "date": "2017-01-02T03:04:05",
-            "bool": true,
-            "ip": "127.0.0.1"
-        }
-        {
             "str": "def",
             "byte": -10,
             "short": -1000,
@@ -352,6 +341,17 @@ Create Elasticsearch index and put data
             "date": "2017-06-05T04:05:02",
             "bool": false,
             "ip": "::1"
+        }
+        {
+            "str": "abc",
+            "byte": 100,
+            "short": 10000,
+            "int": 2000000000,
+            "long": 200000000000,
+            "float": 0.1,
+            "date": "2017-01-02T03:04:05",
+            "bool": true,
+            "ip": "127.0.0.1"
         }
 
 Formatting a table for Jupyter Notebook
