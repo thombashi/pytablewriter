@@ -99,8 +99,12 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @staticmethod
     def __get_es_datatype(column_dp):
-        if column_dp.typecode in (Typecode.STRING, Typecode.NULL_STRING):
-            return {"type": "string"}
+        if column_dp.typecode in (Typecode.NONE, Typecode.NULL_STRING,
+                                  Typecode.INFINITY, Typecode.NAN):
+            return {"type": "keyword"}
+
+        if column_dp.typecode == Typecode.STRING:
+            return {"type": "text"}
 
         if column_dp.typecode == Typecode.DATETIME:
             return {"type": "date", "format": "date_optional_time"}
@@ -128,12 +132,6 @@ class ElasticsearchWriter(AbstractTableWriter):
                 "too large integer bits: "
                 "expected<=64bits, actual={:d}bits".format(
                     column_dp.bit_length))
-
-        if column_dp.typecode == Typecode.NONE:
-            return {"type": "string"}
-
-        if column_dp.typecode in (Typecode.INFINITY, Typecode.NAN):
-            return {"type": "keyword"}
 
         raise ValueError("unknown typecode: {}".format(column_dp.typecode))
 

@@ -58,17 +58,17 @@ class Test_ElasticsearchWriter__get_mappings(object):
         writer = table_writer_class()
         writer.table_name = "es mappings"
         writer.header_list = [
-            "str", "byte", "short", "int", "long", "float",
+            "text", "byte", "short", "int", "long", "float",
             "date", "bool", "ip", "none", "inf", "nan",
         ]
         writer.value_matrix = [
             [
-                "abc", 100, 10000, 2000000000, 200000000000, 0.1,
+                "This is XXX", 100, 10000, 2000000000, 200000000000, 0.1,
                 datetime.datetime(2017, 1, 3, 4, 5, 6), True, "127.0.0.1",
                 None, float("inf"), float("nan"),
             ],
             [
-                "def", -10, -1000, -200000000, -20000000000, 100.1,
+                "What is it", -10, -1000, -200000000, -20000000000, 100.1,
                 datetime.datetime(2017, 1, 3, 4, 5, 6), False, "::1",
                 None, float("inf"), float("nan"),
             ],
@@ -81,7 +81,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
             "mappings": {
                 "table": {
                     "properties": {
-                        "str": {"type": "string"},
+                        "text": {"type": "text"},
                         "byte": {"type": "byte"},
                         "short": {"type": "short"},
                         "int": {"type": "integer"},
@@ -92,8 +92,8 @@ class Test_ElasticsearchWriter__get_mappings(object):
                             "format": "date_optional_time"
                         },
                         "bool": {"type": "boolean"},
-                        "ip": {"type": "string"},
-                        "none": {"type": "string"},
+                        "ip": {"type": "text"},
+                        "none": {"type": "keyword"},
                         "inf": {"type": "keyword"},
                         "nan": {"type": "keyword"},
                     }
@@ -114,7 +114,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
             "mappings": {
                 "table": {
                     "properties": {
-                        "str": {"type": "string"},
+                        "text": {"type": "text"},
                         "byte": {"type": "byte"},
                         "short": {"type": "short"},
                         "int": {"type": "integer"},
@@ -126,7 +126,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
                         },
                         "bool": {"type": "boolean"},
                         "ip": {"type": "ip"},
-                        "none": {"type": "string"},
+                        "none": {"type": "keyword"},
                         "inf": {"type": "keyword"},
                         "nan": {"type": "keyword"},
                     }
@@ -142,7 +142,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
         body = list(writer._get_body())
         expected_body = [
             {
-                'str': 'abc',
+                'text': 'This is XXX',
                 'byte': 100, 'short': 10000, 'int': 2000000000,
                 'long': 200000000000,
                 'float': Decimal('0.1'),
@@ -154,7 +154,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
                 'nan': 'NaN',
             },
             {
-                'str': 'def',
+                'text': 'What is it',
                 'byte': -10, 'short': -1000, 'int': -200000000,
                 'long': -20000000000,
                 'float': Decimal('100.1'),
