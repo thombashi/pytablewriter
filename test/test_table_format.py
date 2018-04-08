@@ -6,11 +6,9 @@
 
 from __future__ import absolute_import
 
-from pytablewriter import (
-    TableFormat,
-    FormatAttr,
-)
 import pytest
+
+from pytablewriter import FormatAttr, TableFormat
 
 
 class Test_TableFormat_search_table_format(object):

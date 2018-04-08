@@ -4,11 +4,10 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
-from dataproperty import (DataProperty, DefaultValue)
 import six
+from dataproperty import DataProperty, DefaultValue
 from typepy import Typecode
 
 from ..._function import quote_datetime_formatter

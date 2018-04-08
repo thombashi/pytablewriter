@@ -4,9 +4,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 
@@ -16,16 +14,8 @@ from tabledata import TableData
 import pytablewriter as ptw
 
 from .data import (
-    header_list,
-    value_matrix,
-    value_matrix_with_none,
-    mix_header_list,
-    mix_value_matrix,
-    float_header_list,
-    float_value_matrix,
-    value_matrix_iter,
-    value_matrix_iter_1,
-)
+    float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,
+    value_matrix, value_matrix_iter, value_matrix_iter_1, value_matrix_with_none)
 
 
 Data = collections.namedtuple(

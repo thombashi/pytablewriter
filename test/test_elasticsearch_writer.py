@@ -4,15 +4,13 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import datetime
-from decimal import Decimal
 import json
 import platform
+from decimal import Decimal
 
 import pytest
 import six
@@ -20,12 +18,7 @@ from tabledata import TableData
 
 import pytablewriter as ptw
 
-from .data import (
-    header_list,
-    value_matrix,
-    mix_header_list,
-    mix_value_matrix,
-)
+from .data import header_list, mix_header_list, mix_value_matrix, value_matrix
 
 
 inf = Decimal('Infinity')

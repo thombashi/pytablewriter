@@ -4,26 +4,19 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
-from decimal import Decimal
 import itertools
+from decimal import Decimal
 
-from dateutil.parser import parse
 import pytest
-import toml
+from dateutil.parser import parse
 
 import pytablewriter as ptw
+import toml
 
-from .data import (
-    float_header_list,
-    float_value_matrix,
-    header_list,
-    value_matrix,
-)
+from .data import float_header_list, float_value_matrix, header_list, value_matrix
 
 
 Data = collections.namedtuple("Data", "table_name header value expected")

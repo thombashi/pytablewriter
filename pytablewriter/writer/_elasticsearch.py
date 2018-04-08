@@ -4,15 +4,13 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import copy
 
 import dataproperty
-from typepy import Typecode
-
 from six.moves import zip
+from typepy import Typecode
 
 from ._table_writer import AbstractTableWriter
 

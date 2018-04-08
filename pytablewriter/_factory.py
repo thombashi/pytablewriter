@@ -4,18 +4,14 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import os
 
 import typepy
 
 from ._error import WriterNotFoundError
-from ._table_format import (
-    FormatAttr,
-    TableFormat,
-)
+from ._table_format import FormatAttr, TableFormat
 
 
 class TableWriterFactory(object):

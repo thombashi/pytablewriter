@@ -4,9 +4,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
@@ -16,12 +14,7 @@ import pytest
 import pytablewriter as ptw
 
 from .data import (
-    float_header_list,
-    float_value_matrix,
-    mix_header_list,
-    mix_value_matrix,
-    value_matrix,
-)
+    float_header_list, float_value_matrix, mix_header_list, mix_value_matrix, value_matrix)
 
 
 Data = collections.namedtuple("Data", "header value expected")

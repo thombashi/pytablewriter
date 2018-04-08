@@ -4,16 +4,14 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import copy
 import re
 
-from typepy import Typecode
-import typepy
-
 import dataproperty as dp
+import typepy
+from typepy import Typecode
 
 from ._text_writer import IndentationTextTableWriter
 

@@ -4,25 +4,18 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import abc
 import re
 import sys
 
-from typepy import Typecode
 import typepy
-
 from six.moves import zip
+from typepy import Typecode
 
 from .._error import (
-    NotSupportedError,
-    EmptyValueError,
-    EmptyTableNameError,
-    EmptyHeaderError,
-    EmptyTableDataError,
-)
+    EmptyHeaderError, EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError)
 from .._function import convert_idx_to_alphabet
 from .._logger import WriterLogger
 from ._interface import TableWriterInterface

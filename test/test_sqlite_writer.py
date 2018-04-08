@@ -4,26 +4,18 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 from decimal import Decimal
 
+import pytablereader as ptr
 import pytest
 from tabledata import TableData
 
-import pytablereader as ptr
 import pytablewriter as ptw
 
-from .data import (
-    header_list,
-    value_matrix,
-    mix_header_list,
-    mix_value_matrix,
-    value_matrix_iter
-)
+from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 
 
 inf = Decimal('Infinity')

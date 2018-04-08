@@ -4,11 +4,10 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
-from mbstrdecoder import MultiByteStrDecoder
 import typepy
+from mbstrdecoder import MultiByteStrDecoder
 
 from ..._error import EmptyTableNameError
 from ._numpy import NumpyTableWriter

@@ -4,18 +4,17 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import copy
 
 import dataproperty
-from mbstrdecoder import MultiByteStrDecoder
 import pathvalidate
 import typepy
+from mbstrdecoder import MultiByteStrDecoder
+from six.moves import zip
 
 import dominate.tags as tags
-from six.moves import zip
 
 from .._error import EmptyHeaderError
 from ._text_writer import TextTableWriter

@@ -4,17 +4,15 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import copy
-from decimal import Decimal
 import json
+from decimal import Decimal
 
 import dataproperty
-from mbstrdecoder import MultiByteStrDecoder
 import typepy
-
+from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from .._converter import strip_quote

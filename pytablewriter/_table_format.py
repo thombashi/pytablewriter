@@ -4,36 +4,17 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 import enum
 
 from .writer import (
-    CsvTableWriter,
-    ElasticsearchWriter,
-    ExcelXlsxTableWriter,
-    ExcelXlsTableWriter,
-    HtmlTableWriter,
-    JavaScriptTableWriter,
-    JsonTableWriter,
-    LatexTableWriter,
-    LatexMatrixWriter,
-    LtsvTableWriter,
-    MarkdownTableWriter,
-    MediaWikiTableWriter,
-    NullTableWriter,
-    NumpyTableWriter,
-    PandasDataFrameWriter,
-    PythonCodeTableWriter,
-    RstCsvTableWriter,
-    RstGridTableWriter,
-    RstSimpleTableWriter,
-    SpaceAlignedTableWriter,
-    SqliteTableWriter,
-    TomlTableWriter,
-    TsvTableWriter,
-)
+    CsvTableWriter, ElasticsearchWriter, ExcelXlsTableWriter, ExcelXlsxTableWriter, HtmlTableWriter,
+    JavaScriptTableWriter, JsonTableWriter, LatexMatrixWriter, LatexTableWriter, LtsvTableWriter,
+    MarkdownTableWriter, MediaWikiTableWriter, NullTableWriter, NumpyTableWriter,
+    PandasDataFrameWriter, PythonCodeTableWriter, RstCsvTableWriter, RstGridTableWriter,
+    RstSimpleTableWriter, SpaceAlignedTableWriter, SqliteTableWriter, TomlTableWriter,
+    TsvTableWriter)
 
 
 class FormatAttr(object):

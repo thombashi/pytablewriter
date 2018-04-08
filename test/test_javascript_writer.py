@@ -4,26 +4,20 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import datetime
 import itertools
 
-import pytablewriter
 import pytest
 import typepy.type
 
+import pytablewriter
+
 from .data import (
-    header_list,
-    value_matrix,
-    value_matrix_with_none,
-    mix_header_list,
-    mix_value_matrix,
-    value_matrix_iter,
-)
+    header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter,
+    value_matrix_with_none)
 
 
 Data = collections.namedtuple(
