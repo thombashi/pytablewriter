@@ -38,4 +38,6 @@ deploy:
   on:
     tags: true
     repo: thombashi/pytablewriter
+    branch: master
+    python: 3.6
   distributions: "sdist bdist_wheel"
