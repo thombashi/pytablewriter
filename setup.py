@@ -17,6 +17,10 @@ REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
 
+def need_pytest():
+    return set(["pytest", "test", "ptr"]).intersection(sys.argv)
+
+
 with io.open("README.rst", encoding=ENCODING) as f:
     long_description = f.read()
 
@@ -33,9 +37,8 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
     docs_requires = [line.strip() for line in f if line.strip()]
 
 MODULE_NAME = "pytablewriter"
-setuptools_require = ["setuptools>=20.2.2"]
-needs_pytest = set(["pytest", "test", "ptr"]).intersection(sys.argv)
-pytest_runner_require = ["pytest-runner"] if needs_pytest else []
+setuptools_require = ["setuptools>=38.3.0"]
+pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 setuptools.setup(
     name=MODULE_NAME,
