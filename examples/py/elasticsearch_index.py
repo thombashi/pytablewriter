@@ -10,9 +10,8 @@ import datetime
 import json
 import sys
 
-from elasticsearch import Elasticsearch
-
 import pytablewriter as ptw
+from elasticsearch import Elasticsearch
 
 
 def parse_option():

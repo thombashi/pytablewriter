@@ -8,9 +8,8 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 
-import pytest
-
 import pytablewriter
+import pytest
 
 from .data import (
     header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,

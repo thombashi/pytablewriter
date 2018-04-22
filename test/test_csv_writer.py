@@ -11,9 +11,8 @@ import io
 import itertools
 from decimal import Decimal
 
-import pytest
-
 import pytablewriter as ptw
+import pytest
 
 from .data import (
     float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,

@@ -10,10 +10,9 @@ import collections
 import datetime
 import itertools
 
+import pytablewriter
 import pytest
 import typepy.type
-
-import pytablewriter
 
 from .data import (
     header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter,

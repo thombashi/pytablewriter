@@ -7,7 +7,6 @@
 from __future__ import absolute_import
 
 import pytest
-
 from pytablewriter import FormatAttr, TableFormat
 
 

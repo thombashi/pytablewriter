@@ -6,6 +6,7 @@
 """
 
 import io
+
 import pytablewriter
 
 

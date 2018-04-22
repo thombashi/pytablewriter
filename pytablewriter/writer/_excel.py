@@ -11,10 +11,9 @@ import copy
 
 import dataproperty
 import typepy
+import xlwt
 from six.moves import range
 from typepy.type import Integer
-
-import xlwt
 
 from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import BinaryWriterInterface

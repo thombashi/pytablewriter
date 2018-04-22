@@ -11,7 +11,6 @@ import abc
 import pathvalidate
 import six
 import typepy
-
 import xlsxwriter
 import xlwt
 

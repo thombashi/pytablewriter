@@ -9,12 +9,11 @@ from __future__ import absolute_import, unicode_literals
 import copy
 
 import dataproperty
+import dominate.tags as tags
 import pathvalidate
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
-
-import dominate.tags as tags
 
 from .._error import EmptyHeaderError
 from ._text_writer import TextTableWriter

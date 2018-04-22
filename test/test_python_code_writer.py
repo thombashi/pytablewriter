@@ -6,9 +6,8 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 
-import pytest
-
 import pytablewriter as ptw
+import pytest
 
 from .data import (
     Data, header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,

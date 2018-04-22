@@ -11,10 +11,9 @@ import itertools
 from decimal import Decimal
 
 import pytablereader as ptr
+import pytablewriter as ptw
 import pytest
 from tabledata import TableData
-
-import pytablewriter as ptw
 
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 

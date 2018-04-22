@@ -5,9 +5,11 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-import pandas as pd
-import pytablewriter
 from StringIO import StringIO
+
+import pytablewriter
+
+import pandas as pd
 
 
 csv_data = StringIO(u""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"

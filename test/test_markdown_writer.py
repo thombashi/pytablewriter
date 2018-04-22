@@ -8,10 +8,9 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 
+import pytablewriter as ptw
 import pytest
 from tabledata import TableData
-
-import pytablewriter as ptw
 
 from .data import (
     float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,

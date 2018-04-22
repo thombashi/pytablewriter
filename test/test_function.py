@@ -7,7 +7,6 @@
 from __future__ import print_function, unicode_literals
 
 import pytest
-
 from pytablewriter._function import convert_idx_to_alphabet
 
 

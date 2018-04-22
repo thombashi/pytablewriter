@@ -9,9 +9,8 @@ from __future__ import absolute_import, print_function, unicode_literals
 import collections
 import json
 
-import pytest
-
 import pytablewriter
+import pytest
 
 from .data import (
     float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,

@@ -10,11 +10,10 @@ import collections
 import itertools
 from decimal import Decimal
 
-import pytest
-from dateutil.parser import parse
-
 import pytablewriter as ptw
+import pytest
 import toml
+from dateutil.parser import parse
 
 from .data import float_header_list, float_value_matrix, header_list, value_matrix
 
