@@ -66,7 +66,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             else:
                 separator_item = "-" * padding_len
 
-            header_separator_list.append(separator_item)
+            header_separator_list.append(self._margin_format.format(separator_item))
 
         return header_separator_list
 

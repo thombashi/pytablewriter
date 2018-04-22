@@ -80,6 +80,17 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
        Character attributes that compose a table
     """
 
+    @property
+    def margin(self):
+        return self.__margin
+
+    @margin.setter
+    def margin(self, value):
+        self.__margin = value
+
+        margin_str = " " * self.__margin
+        self._margin_format = margin_str + "{:s}" + margin_str
+
     def __init__(self):
         super(TextTableWriter, self).__init__()
 
@@ -92,6 +103,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_header_row_separator = "-"
         self.char_value_row_separator = "-"
         self.char_closing_row = "-"
+
+        self.margin = 0
 
         self._is_remove_line_break = True
         self.is_write_null_line_after_table = True
@@ -158,10 +171,24 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_closing_row)
 
+    def __get_row_separator_item_list(self, separator_char):
+        return [
+            self._margin_format.format(separator_char * self._get_padding_len(col_dp))
+            for col_dp in self._column_dp_list
+        ]
+
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(
             self._get_align_char(dataproperty.Align.CENTER),
             str(self._get_padding_len(col_dp, value_dp)))
+
+    def _get_header_item(self, col_dp, value_dp):
+        return self._margin_format.format(
+            super(TextTableWriter, self)._get_header_item(col_dp, value_dp))
+
+    def _get_row_item(self, col_dp, value_dp):
+        return self._margin_format.format(
+            super(TextTableWriter, self)._get_row_item(col_dp, value_dp))
 
     def _write_raw_string(self, unicode_text):
         self._verify_stream()
@@ -197,12 +224,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _write_value_row(self, value_list, value_dp_list):
         self._write_row(value_list)
-
-    def __get_row_separator_item_list(self, separator_char):
-        return [
-            separator_char * self._get_padding_len(col_dp)
-            for col_dp in self._column_dp_list
-        ]
 
     def __write_separator_row(self, value_list):
         if typepy.is_empty_sequence(value_list):
