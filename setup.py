@@ -20,9 +20,7 @@ ENCODING = "utf8"
 with io.open("README.rst", encoding=ENCODING) as f:
     long_description = f.read()
 
-with io.open(
-        os.path.join("docs", "pages", "introduction", "summary.txt"),
-        encoding=ENCODING) as f:
+with io.open(os.path.join("docs", "pages", "introduction", "summary.txt"), encoding=ENCODING) as f:
     summary = f.read().strip()
 
 with open(os.path.join(REQUIREMENT_DIR, "requirements.txt")) as f:
@@ -49,9 +47,8 @@ setuptools.setup(
     description=summary,
     include_package_data=True,
     keywords=[
-        "table", "CSV", "Excel", "JavaScript", "JSON", "LTSV",
-        "Markdown", "MediaWiki", "HTML", "pandas", "reStructuredText",
-        "SQLite", "TSV", "TOML",
+        "table", "CSV", "Excel", "JavaScript", "JSON", "LTSV", "Markdown", "MediaWiki", "HTML",
+        "pandas", "reStructuredText", "SQLite", "TSV", "TOML",
     ],
     license="MIT License",
     long_description=long_description,

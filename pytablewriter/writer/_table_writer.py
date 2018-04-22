@@ -124,8 +124,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         from tabledata import TableData
 
-        return TableData(
-            self.table_name, self.header_list, self.value_matrix)
+        return TableData(self.table_name, self.header_list, self.value_matrix)
 
     @property
     def type_hint_list(self):
@@ -184,11 +183,7 @@ class AbstractTableWriter(TableWriterInterface):
         pass
 
     def __init__(self):
-        from dataproperty import (
-            Align,
-            DataPropertyExtractor,
-            MatrixFormatting,
-        )
+        from dataproperty import (Align, DataPropertyExtractor, MatrixFormatting)
 
         self._logger = WriterLogger(self)
 
@@ -382,10 +377,8 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_table_name()
         self._verify_stream()
 
-        if all([
-                typepy.is_empty_sequence(self.header_list),
-                typepy.is_empty_sequence(self.value_matrix),
-        ]):
+        if all([typepy.is_empty_sequence(self.header_list),
+                typepy.is_empty_sequence(self.value_matrix)]):
             raise EmptyTableDataError()
 
         self._verify_header()
@@ -469,8 +462,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _get_row_item(self, col_dp, value_dp):
         return self.__get_align_format(col_dp, value_dp).format(
-            self.__remove_line_break(
-                col_dp.dp_to_str(value_dp)))
+            self.__remove_line_break(col_dp.dp_to_str(value_dp)))
 
     def _get_align_char(self, align):
         return self.__align_char_mapping[align]
@@ -525,13 +517,10 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.column_type_hint_list = type_hint_list
 
     def _verify_table_name(self):
-        if all([
-                self._is_require_table_name,
-                typepy.is_null_string(self.table_name),
-        ]):
+        if all([self._is_require_table_name,
+                typepy.is_null_string(self.table_name)]):
             raise EmptyTableNameError(
-                "table_name must be a string, with at least one or "
-                "more character.")
+                "table_name must be a string, with at least one or more character.")
 
     def _verify_stream(self):
         if self.stream is None:
@@ -565,11 +554,9 @@ class AbstractTableWriter(TableWriterInterface):
             ]
 
         try:
-            self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(
-                self.__value_matrix_org)
+            self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(self.__value_matrix_org)
         except TypeError as e:
-            self._logger.logger.debug(
-                "{:s}: {}".format(e.__class__.__name__, e))
+            self._logger.logger.debug("{:s}: {}".format(e.__class__.__name__, e))
             self._table_value_dp_matrix = []
 
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
@@ -585,8 +572,7 @@ class AbstractTableWriter(TableWriterInterface):
             import math
 
             for column_dp in self._column_dp_list:
-                column_dp.extend_width(int(
-                    math.ceil(column_dp.ascii_char_width * 0.25)))
+                column_dp.extend_width(int(math.ceil(column_dp.ascii_char_width * 0.25)))
 
         self._is_complete_table_property_preprocess = True
 
@@ -609,8 +595,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._table_value_matrix = [
             [
                 self._get_row_item(col_dp, value_dp)
-                for col_dp, value_dp in
-                zip(self._column_dp_list, value_dp_list)
+                for col_dp, value_dp in zip(self._column_dp_list, value_dp_list)
             ]
             for value_dp_list in self._table_value_dp_matrix
         ]

@@ -150,12 +150,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         return self.__get_row_separator_item_list(self.char_opening_row)
 
     def _get_header_row_separator_item_list(self):
-        return self.__get_row_separator_item_list(
-            self.char_header_row_separator)
+        return self.__get_row_separator_item_list(self.char_header_row_separator)
 
     def _get_value_row_separator_item_list(self):
-        return self.__get_row_separator_item_list(
-            self.char_value_row_separator)
+        return self.__get_row_separator_item_list(self.char_value_row_separator)
 
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(self.char_closing_row)
@@ -229,10 +227,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.__write_separator_row(self._get_opening_row_item_list())
 
     def __write_header_row_separator(self):
-        if any([
-                not self.is_write_header,
-                not self.is_write_header_separator_row,
-        ]):
+        if any([not self.is_write_header,
+                not self.is_write_header_separator_row]):
             return
 
         self.__write_separator_row(self._get_header_row_separator_item_list())
