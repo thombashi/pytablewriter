@@ -11,6 +11,7 @@ import collections
 import pytablewriter as ptw
 import pytest
 from tabledata import TableData
+from textwrap import dedent
 
 from .data import (
     float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,
@@ -26,22 +27,24 @@ normal_test_data_list = [
          header=header_list,
          value=value_matrix,
          is_formatting_float=True,
-         expected="""| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|   1|
-|  2|  2.2|bb |2.2| 2.2|
-|  3|  3.3|ccc|3.0|cccc|
+         expected=dedent("""\
+            | a |  b  | c |dd | e  |
+            |--:|----:|---|--:|----|
+            |  1|123.1|a  |1.0|   1|
+            |  2|  2.2|bb |2.2| 2.2|
+            |  3|  3.3|ccc|3.0|cccc|
 
-"""),
+            """)),
     Data(table="",
          indent=0,
          header=header_list,
          value=None,
          is_formatting_float=True,
-         expected="""| a | b | c |dd | e |
-|---|---|---|---|---|
+         expected=dedent("""\
+            | a | b | c |dd | e |
+            |---|---|---|---|---|
 
-"""),
+            """)),
     Data(table="floating point",
          indent=0,
          header=header_list,
@@ -51,104 +54,112 @@ normal_test_data_list = [
              [3, 3.2999999999999998, "ccc", "3.2999999999999998",   "cccc"],
          ],
          is_formatting_float=True,
-         expected="""# floating point
-| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|   1|
-|  2|  2.2|bb |2.2| 2.2|
-|  3|  3.3|ccc|3.3|cccc|
+         expected=dedent("""\
+            # floating point
+            | a |  b  | c |dd | e  |
+            |--:|----:|---|--:|----|
+            |  1|123.1|a  |1.0|   1|
+            |  2|  2.2|bb |2.2| 2.2|
+            |  3|  3.3|ccc|3.3|cccc|
 
-"""),
+            """)),
     Data(table="tablename",
          indent=1,
          header=header_list,
          value=value_matrix,
          is_formatting_float=True,
-         expected="""## tablename
-| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|   1|
-|  2|  2.2|bb |2.2| 2.2|
-|  3|  3.3|ccc|3.0|cccc|
+         expected=dedent("""\
+            ## tablename
+            | a |  b  | c |dd | e  |
+            |--:|----:|---|--:|----|
+            |  1|123.1|a  |1.0|   1|
+            |  2|  2.2|bb |2.2| 2.2|
+            |  3|  3.3|ccc|3.0|cccc|
 
-"""),
+            """)),
     Data(table="",
          indent=0,
          header=header_list,
          value=value_matrix_with_none,
          is_formatting_float=True,
-         expected="""| a | b | c |dd | e  |
-|--:|--:|---|--:|----|
-|  1|   |a  |1.0|    |
-|   |2.2|   |2.2| 2.2|
-|  3|3.3|ccc|   |cccc|
-|   |   |   |   |    |
+         expected=dedent("""\
+            | a | b | c |dd | e  |
+            |--:|--:|---|--:|----|
+            |  1|   |a  |1.0|    |
+            |   |2.2|   |2.2| 2.2|
+            |  3|3.3|ccc|   |cccc|
+            |   |   |   |   |    |
 
-"""),
+            """)),
     Data(table="",
          indent=0,
          header=mix_header_list,
          value=mix_value_matrix,
          is_formatting_float=True,
-         expected="""| i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
-|--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------|
-|  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01 00:00:00      |
-|  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
-|  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      |
+         expected=dedent("""\
+            | i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
+            |--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------|
+            |  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01 00:00:00      |
+            |  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
+            |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00      |
 
-"""),
+            """)),
     Data(table="formatting float 1",
          indent=0,
          header=header_list,
          value=value_matrix,
          is_formatting_float=True,
-         expected="""# formatting float 1
-| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|   1|
-|  2|  2.2|bb |2.2| 2.2|
-|  3|  3.3|ccc|3.0|cccc|
+         expected=dedent("""\
+            # formatting float 1
+            | a |  b  | c |dd | e  |
+            |--:|----:|---|--:|----|
+            |  1|123.1|a  |1.0|   1|
+            |  2|  2.2|bb |2.2| 2.2|
+            |  3|  3.3|ccc|3.0|cccc|
 
-"""),
+            """)),
     Data(table="formatting float 2",
          indent=0,
          header=float_header_list,
          value=float_value_matrix,
          is_formatting_float=True,
-         expected="""# formatting float 2
-| a  |     b     |  c  |
-|---:|----------:|----:|
-|0.01|     0.0012|0.000|
-|1.00|    99.9000|0.010|
-|1.20|999999.1230|0.001|
+         expected=dedent("""\
+            # formatting float 2
+            | a  |     b     |  c  |
+            |---:|----------:|----:|
+            |0.01|     0.0012|0.000|
+            |1.00|    99.9000|0.010|
+            |1.20|999999.1230|0.001|
 
-"""),
+            """)),
     Data(table="not formatting float 1",
          indent=0,
          header=header_list,
          value=value_matrix,
          is_formatting_float=False,
-         expected="""# not formatting float 1
-| a |  b  | c |dd | e  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |  1|   1|
-|  2|  2.2|bb |2.2| 2.2|
-|  3|  3.3|ccc|  3|cccc|
+         expected=dedent("""\
+            # not formatting float 1
+            | a |  b  | c |dd | e  |
+            |--:|----:|---|--:|----|
+            |  1|123.1|a  |  1|   1|
+            |  2|  2.2|bb |2.2| 2.2|
+            |  3|  3.3|ccc|  3|cccc|
 
-"""),
+            """)),
     Data(table="not formatting float 2",
          indent=0,
          header=float_header_list,
          value=float_value_matrix,
          is_formatting_float=False,
-         expected="""# not formatting float 2
-| a  |    b     |  c  |
-|---:|---------:|----:|
-|0.01|   0.00125|    0|
-|   1|      99.9| 0.01|
-| 1.2|999999.123|0.001|
+         expected=dedent("""\
+            # not formatting float 2
+            | a  |    b     |  c  |
+            |---:|---------:|----:|
+            |0.01|   0.00125|    0|
+            |   1|      99.9| 0.01|
+            | 1.2|999999.123|0.001|
 
-"""),
+            """)),
     Data(table="",
          indent=0,
          header=['Name', 'xUnit', 'Source', 'Remarks'],
@@ -162,11 +173,12 @@ normal_test_data_list = [
              ]
          ],
          is_formatting_float=True,
-         expected="""| Name  |xUnit|Source|                                                      Remarks                                                       |
-|-------|-----|------|--------------------------------------------------------------------------------------------------------------------|
-|Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.|
+         expected=dedent("""\
+            | Name  |xUnit|Source|                                                      Remarks                                                       |
+            |-------|-----|------|--------------------------------------------------------------------------------------------------------------------|
+            |Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.|
 
-"""),
+            """)),
     Data(table="",
          indent=0,
          header=["姓", "名", "生年月日", "郵便番号", "住所", "電話番号"],
@@ -177,12 +189,13 @@ normal_test_data_list = [
                  "神奈川県藤沢市江の島１丁目", "03-9999-9999"],
          ],
          is_formatting_float=True,
-         expected="""| 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  |
-|----|----|--------|--------|--------------------------|------------|
-|山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678|
-|山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999|
+         expected=dedent("""\
+            | 姓 | 名 |生年月日|郵便番号|           住所           |  電話番号  |
+            |----|----|--------|--------|--------------------------|------------|
+            |山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678|
+            |山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999|
 
-"""),
+            """)),
     Data(table="quoted values",
          indent=0,
          header=['"quote"', '"abc efg"'],
@@ -191,13 +204,14 @@ normal_test_data_list = [
              ['"-1"', '"efg"'],
          ],
          is_formatting_float=True,
-         expected="""# quoted values
-|quote|abc efg|
-|----:|-------|
-|    1|abc    |
-|   -1|efg    |
+         expected=dedent("""\
+            # quoted values
+            |quote|abc efg|
+            |----:|-------|
+            |    1|abc    |
+            |   -1|efg    |
 
-"""),
+            """)),
     Data(table="not str headers",
          indent=0,
          header=[None, 1, 0.1],
@@ -205,12 +219,13 @@ normal_test_data_list = [
              [None, 1, 0.1],
          ],
          is_formatting_float=True,
-         expected="""# not str headers
-|   | 1 |0.1|
-|---|--:|--:|
-|   |  1|0.1|
+         expected=dedent("""\
+            # not str headers
+            |   | 1 |0.1|
+            |---|--:|--:|
+            |   |  1|0.1|
 
-"""),
+            """)),
     Data(table="no uniform matrix",
          indent=0,
          header=["a", "b", "c"],
@@ -220,49 +235,53 @@ normal_test_data_list = [
              ["c", 2, "ccc", 0.1],
          ],
          is_formatting_float=True,
-         expected="""# no uniform matrix
-| a | b | c |
-|---|--:|---|
-|a  |  0|   |
-|b  |  1|bb |
-|c  |  2|ccc|
+         expected=dedent("""\
+            # no uniform matrix
+            | a | b | c |
+            |---|--:|---|
+            |a  |  0|   |
+            |b  |  1|bb |
+            |c  |  2|ccc|
 
-"""),
+            """)),
     Data(table="line breaks",
          indent=0,
          header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
          value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
          is_formatting_float=True,
-         expected="""# line breaks
-| a b | c d  | e f  |
-|-----|------|------|
-|v1 v1|v2 v2 |v3 v3 |
+         expected=dedent("""\
+            # line breaks
+            | a b | c d  | e f  |
+            |-----|------|------|
+            |v1 v1|v2 v2 |v3 v3 |
 
-"""),
+            """)),
     Data(table="empty header",
          indent=0,
          header=[],
          value=value_matrix,
          is_formatting_float=True,
-         expected="""# empty header
-| A |  B  | C | D | E  |
-|--:|----:|---|--:|----|
-|  1|123.1|a  |1.0|   1|
-|  2|  2.2|bb |2.2| 2.2|
-|  3|  3.3|ccc|3.0|cccc|
+         expected=dedent("""\
+            # empty header
+            | A |  B  | C | D | E  |
+            |--:|----:|---|--:|----|
+            |  1|123.1|a  |1.0|   1|
+            |  2|  2.2|bb |2.2| 2.2|
+            |  3|  3.3|ccc|3.0|cccc|
 
-"""),
+            """)),
     Data(table="vertical bar",
          indent=1,
          header=["a|b", "|c||d|"],
          value=[["|v1|v1|", "v2|v2"]],
          is_formatting_float=True,
-         expected="""## vertical bar
-|  a\|b  |\|c\|\|d\||
-|-------|------|
-|\|v1\|v1\||v2\|v2 |
+         expected=dedent("""\
+            ## vertical bar
+            |  a\|b  |\|c\|\|d\||
+            |-------|------|
+            |\|v1\|v1\||v2\|v2 |
 
-"""),
+            """)),
     Data(table="mixed value types",
          indent=0,
          header=["data", "v"],
@@ -274,16 +293,17 @@ normal_test_data_list = [
              ["next", 10250.3166474],
          ],
          is_formatting_float=True,
-         expected="""# mixed value types
-|  data   |   v    |
-|---------|-------:|
-|    3.437|   65.54|
-|   65.540|  127.64|
-|  189.744|  189.74|
-|10064.010|10001.91|
-|next     |10250.32|
+         expected=dedent("""\
+            # mixed value types
+            |  data   |   v    |
+            |---------|-------:|
+            |    3.437|   65.54|
+            |   65.540|  127.64|
+            |  189.744|  189.74|
+            |10064.010|10001.91|
+            |next     |10250.32|
 
-"""),
+            """)),
 ]
 
 exception_test_data_list = [
@@ -311,8 +331,7 @@ class Test_MarkdownTableWriter_write_new_line(object):
 class Test_MarkdownTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
-        ["table", "indent", "header", "value",
-            "is_formatting_float", "expected"],
+        ["table", "indent", "header", "value", "is_formatting_float", "expected"],
         [
             [
                 data.table, data.indent, data.header, data.value,
@@ -320,9 +339,7 @@ class Test_MarkdownTableWriter_write_table(object):
             ]
             for data in normal_test_data_list
         ])
-    def test_normal(
-            self, capsys, table, indent, header, value,
-            is_formatting_float, expected):
+    def test_normal(self, capsys, table, indent, header, value, is_formatting_float, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -354,18 +371,19 @@ class Test_MarkdownTableWriter_write_table(object):
             ]))
         writer.write_table()
 
-        expected = """# loader_mapping
-|      Name      |         Loader         |
-|----------------|------------------------|
-|csv             |CsvTableFileLoader      |
-|excel           |ExcelTableFileLoader    |
-|html            |HtmlTableFileLoader     |
-|markdown        |MarkdownTableFileLoader |
-|mediawiki       |MediaWikiTableFileLoader|
-|json            |JsonTableFileLoader     |
-|Long Format Name|Loader                  |
+        expected = dedent("""\
+            # loader_mapping
+            |      Name      |         Loader         |
+            |----------------|------------------------|
+            |csv             |CsvTableFileLoader      |
+            |excel           |ExcelTableFileLoader    |
+            |html            |HtmlTableFileLoader     |
+            |markdown        |MarkdownTableFileLoader |
+            |mediawiki       |MediaWikiTableFileLoader|
+            |json            |JsonTableFileLoader     |
+            |Long Format Name|Loader                  |
 
-"""
+            """)
         out, _err = capsys.readouterr()
 
         print("[expected]\n{}".format(expected))
@@ -373,7 +391,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
-    def test_normal_double_tabledata(self, capsys):
+    def test_normal_multiple_write(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData(
             table_name="first",
@@ -393,25 +411,51 @@ class Test_MarkdownTableWriter_write_table(object):
             ]))
         writer.write_table()
 
-        expected = """# first
-|Name |       Loader       |
-|-----|--------------------|
-|csv  |CsvTableFileLoader  |
-|excel|ExcelTableFileLoader|
+        expected = dedent("""\
+            # first
+            |Name |       Loader       |
+            |-----|--------------------|
+            |csv  |CsvTableFileLoader  |
+            |excel|ExcelTableFileLoader|
 
-# second
-| a | b | c |
-|--:|---|---|
-|  1|AA |abc|
-|  2|BB |zzz|
+            # second
+            | a | b | c |
+            |--:|---|---|
+            |  1|AA |abc|
+            |  2|BB |zzz|
 
-"""
+            """)
+        out, _err = capsys.readouterr()
+
+        print("[expected]\n{}".format(expected))
+        print("[actual]\n{}".format(out))
+        print(_err)
+
+        assert out == expected
+
+    def test_normal_margin(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(TableData(
+            table_name="", header_list=header_list, record_list=value_matrix))
+        writer.margin = 1
+        writer.write_table()
+
+        expected = dedent("""\
+            |  a  |   b   |  c  | dd  |  e   |
+            | --: | ----: | --- | --: | ---- |
+            |   1 | 123.1 | a   | 1.0 |    1 |
+            |   2 |   2.2 | bb  | 2.2 |  2.2 |
+            |   3 |   3.3 | ccc | 3.0 | cccc |
+
+            """)
+
         out, _err = capsys.readouterr()
 
         print("[expected]\n{}".format(expected))
         print("[actual]\n{}".format(out))
 
         assert out == expected
+
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
@@ -437,33 +481,35 @@ class Test_MarkdownTableWriter_write_table_iter(object):
             "tablename",
             ["ha", "hb", "hc"],
             value_matrix_iter,
-            """# tablename
-| ha | hb | hc |
-|---:|---:|---:|
-|   1|   2|   3|
-|  11|  12|  13|
-|   1|   2|   3|
-|  11|  12|  13|
-| 101| 102| 103|
-|1001|1002|1003|
+            dedent("""\
+                # tablename
+                | ha | hb | hc |
+                |---:|---:|---:|
+                |   1|   2|   3|
+                |  11|  12|  13|
+                |   1|   2|   3|
+                |  11|  12|  13|
+                | 101| 102| 103|
+                |1001|1002|1003|
 
-""",
+                """),
         ],
         [
             "mix length",
             ["string", "hb", "hc"],
             value_matrix_iter_1,
-            """# mix length
-|           string            | hb  | hc |
-|-----------------------------|----:|---:|
-|a b c d e f g h i jklmn      |  2.1|   3|
-|aaaaa                        | 12.1|  13|
-|bbb                          |    2|   3|
-|cc                           |   12|  13|
-|a                            |  102| 103|
-|                             | 1002|1003|
+            dedent("""\
+                # mix length
+                |           string            | hb  | hc |
+                |-----------------------------|----:|---:|
+                |a b c d e f g h i jklmn      |  2.1|   3|
+                |aaaaa                        | 12.1|  13|
+                |bbb                          |    2|   3|
+                |cc                           |   12|  13|
+                |a                            |  102| 103|
+                |                             | 1002|1003|
 
-"""
+                """)
         ],
     ])
     def test_normal(self, capsys, table, header, value, expected):
