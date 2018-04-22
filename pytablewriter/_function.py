@@ -19,15 +19,6 @@ def dateutil_datetime_formatter(value):
         value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 
 
-def convert_idx_to_alphabet(column_idx):
-    if column_idx < 26:
-        return chr(65 + column_idx)
-
-    return (
-        convert_idx_to_alphabet(int(column_idx / 26 - 1)) +
-        convert_idx_to_alphabet(column_idx % 26))
-
-
 def dump_tabledata(value, format_name="rst_grid_table"):
     """
     :param tabledata.TableData value: Tabular data to dump.

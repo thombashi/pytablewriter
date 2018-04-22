@@ -13,11 +13,11 @@ import sys
 import msgfy
 import typepy
 from six.moves import zip
+from tabledata import convert_idx_to_alphabet
 from typepy import Typecode
 
 from .._error import (
     EmptyHeaderError, EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError)
-from .._function import convert_idx_to_alphabet
 from .._logger import WriterLogger
 from ._interface import TableWriterInterface
 
