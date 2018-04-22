@@ -1,5 +1,8 @@
-pytablewriter
-===============
+**pytablewriter**
+
+.. contents:: Table of Contents
+   :depth: 2
+
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
 
@@ -15,11 +18,8 @@ pytablewriter
 .. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
    :target: https://github.com/thombashi/pytablewriter
 
-.. contents:: Table of Contents
-   :depth: 2
-
 Summary
----------
+=========
 A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
@@ -39,7 +39,7 @@ Features
     - Source code
         - JavaScript code (Definition of a nested list variable)
         - `NumPy <http://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a - `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
+        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
         - Python code (Definition of a nested list variable)
     - Space aligned values
     - SQLite database file
@@ -74,7 +74,7 @@ Write a Markdown table
         writer.write_table()
 
 :Output:
-    .. code-block:: none
+    .. code-block::
 
         # example_table
         |int|float|str |bool |  mix   |          time          |
@@ -90,6 +90,39 @@ Write a Markdown table
        :alt: markdown_ss
 
        Rendered markdown at GitHub
+
+Write a Markdown table with a margin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:Sample Code:
+    .. code-block:: python
+
+        import pytablewriter
+
+        writer = pytablewriter.MarkdownTableWriter()
+        writer.table_name = "write example with a margin"
+        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.value_matrix = [
+            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+        ]
+        writer.margin = 1  # add a whitespace for both sides of each cell
+
+        writer.write_table()
+
+:Output:
+    .. code-block::
+
+        # write example with a margin
+        | int | float | str  | bool  |   mix    |           time           |
+        | --: | ----: | ---- | ----- | -------: | ------------------------ |
+        |   0 |  0.10 | hoge | True  |        0 | 2017-01-01 03:04:05+0900 |
+        |   2 | -2.23 | foo  | False |          | 2017-12-23 12:34:51+0900 |
+        |   3 |  0.00 | bar  | True  | Infinity | 2017-03-03 22:44:55+0900 |
+        | -10 | -9.90 |      | False |      NaN | 2017-01-01 00:00:00+0900 |
+
+``margin`` attribute can be available for all of the text format writer classes.
 
 Write a reStructuredText table (Grid Tables)
 ----------------------------------------------
@@ -224,7 +257,7 @@ Write a Markdown table from ``pandas.DataFrame`` instance
 
 
 :Output:
-    .. code-block:: none
+    .. code-block::
 
          i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time
         --:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
@@ -367,6 +400,7 @@ http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/
 Write a table using multibyte character
 -----------------------------------------
 ﻿You can use multibyte characters as table data.
+Multibyte characters also properly padded and aligned.
 
 :Sample Code:
     .. code-block:: python
@@ -413,6 +447,7 @@ Python 2.7+ or 3.4+
 - `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
+- `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.python.org/pypi/six/>`__
