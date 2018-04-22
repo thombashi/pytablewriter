@@ -271,7 +271,7 @@ class AbstractTableWriter(TableWriterInterface):
         try:
             self.stream.close()
         except AttributeError:
-            pass
+            self._logger.logger.warn("the stream has no close method implementation")
         finally:
             self.stream = None
 
