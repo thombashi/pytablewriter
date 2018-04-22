@@ -384,59 +384,60 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._verify_header()
 
-        stash_is_write_header = self.is_write_header
-        stach_is_write_opening_row = self.is_write_opening_row
-        stash_is_write_closing_row = self.is_write_closing_row
-
-        self.is_write_closing_row = False
-        self.__iter_count = 1
-
         self._logger.logging_start_write([
             "iteration-length={:d}".format(self.iteration_length)
         ])
 
-        for work_matrix in self.value_matrix:
-            is_final_iter = all([
-                self.iteration_length > 0,
-                self.__iter_count >= self.iteration_length
-            ])
+        stash_is_write_header = self.is_write_header
+        stach_is_write_opening_row = self.is_write_opening_row
+        stash_is_write_closing_row = self.is_write_closing_row
 
-            if is_final_iter:
-                self.is_write_closing_row = True
+        try:
+            self.is_write_closing_row = False
+            self.__iter_count = 1
 
-            self.__set_value_matrix(work_matrix)
-            self.__clear_preprocess_status()
-
-            self._write_table()
-
-            if not is_final_iter:
-                self._write_value_row_separator()
-
-            self.is_write_opening_row = False
-            self.is_write_header = False
-
-            try:
-                self.write_callback(self.__iter_count, self.iteration_length)
-            except TypeError:
-                pass
-
-            # update typehint for the next iteration
-            """
-            if self.type_hint_list is None:
-                self.__set_type_hint_list([
-                    column_dp.type_class for column_dp in self._column_dp_list
+            for work_matrix in self.value_matrix:
+                is_final_iter = all([
+                    self.iteration_length > 0,
+                    self.__iter_count >= self.iteration_length
                 ])
-            """
 
-            if is_final_iter:
-                break
+                if is_final_iter:
+                    self.is_write_closing_row = True
 
-            self.__iter_count += 1
+                self.__set_value_matrix(work_matrix)
+                self.__clear_preprocess_status()
 
-        self.is_write_header = stash_is_write_header
-        self.is_write_opening_row = stach_is_write_opening_row
-        self.is_write_closing_row = stash_is_write_closing_row
-        self.__iter_count = None
+                self._write_table()
+
+                if not is_final_iter:
+                    self._write_value_row_separator()
+
+                self.is_write_opening_row = False
+                self.is_write_header = False
+
+                try:
+                    self.write_callback(self.__iter_count, self.iteration_length)
+                except TypeError:
+                    pass
+
+                # update typehint for the next iteration
+                """
+                if self.type_hint_list is None:
+                    self.__set_type_hint_list([
+                        column_dp.type_class for column_dp in self._column_dp_list
+                    ])
+                """
+
+                if is_final_iter:
+                    break
+
+                self.__iter_count += 1
+        finally:
+            self.is_write_header = stash_is_write_header
+            self.is_write_opening_row = stach_is_write_opening_row
+            self.is_write_closing_row = stash_is_write_closing_row
+            self.__iter_count = None
 
         self._logger.logging_complete_write()
 
