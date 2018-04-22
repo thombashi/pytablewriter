@@ -71,6 +71,10 @@ setuptools.setup(
     license=pkg_info["__license__"],
     long_description=long_description,
     packages=setuptools.find_packages(exclude=["test*"]),
+    project_urls={
+        "Documentation": "http://{:s}.rtfd.io/".format(MODULE_NAME),
+        "Tracker": "{:s}/issues".format(REPOSITORY_URL),
+    },
 
     install_requires=setuptools_require + install_requires,
     setup_requires=setuptools_require + pytest_runner_require,
@@ -80,10 +84,6 @@ setuptools.setup(
         "docs": docs_requires,
         "release": "releasecmd>=0.0.9",
         "test": tests_requires,
-    },
-    project_urls={
-        "Documentation": "http://{:s}.rtfd.io/".format(MODULE_NAME),
-        "Tracker": "{:s}/issues".format(REPOSITORY_URL),
     },
 
     classifiers=[
