@@ -2,7 +2,7 @@
 
 JSON
 ----------------------------
-|JsonTableWriter| class can write a table to the |stream| with JSON format 
+|JsonTableWriter| class can write a table to the |stream| with JSON format
 from a matrix of data.
 JSON format change if the |table_name| has a valid value or not.
 
@@ -23,7 +23,7 @@ JSON with a table name
             [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
             [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
         ]
-        
+
         writer.write_table()
 
 
@@ -32,35 +32,35 @@ JSON with a table name
 
         { "example_table" : [
         {
-            "bool": true, 
-            "float": 0.1, 
-            "int": 0, 
-            "mix": 0, 
-            "str": "hoge", 
+            "bool": true,
+            "float": 0.1,
+            "int": 0,
+            "mix": 0,
+            "str": "hoge",
             "time": "2017-01-01 03:04:05+0900"
         },
         {
-            "bool": false, 
-            "float": -2.23, 
-            "int": 2, 
-            "mix": null, 
-            "str": "foo", 
+            "bool": false,
+            "float": -2.23,
+            "int": 2,
+            "mix": null,
+            "str": "foo",
             "time": "2017-12-23 12:34:51+0900"
         },
         {
-            "bool": true, 
-            "float": 0, 
-            "int": 3, 
-            "mix": "Infinity", 
-            "str": "bar", 
+            "bool": true,
+            "float": 0,
+            "int": 3,
+            "mix": "Infinity",
+            "str": "bar",
             "time": "2017-03-03 22:44:55+0900"
         },
         {
-            "bool": false, 
-            "float": -9.9, 
-            "int": -10, 
-            "mix": "NaN", 
-            "str": "", 
+            "bool": false,
+            "float": -9.9,
+            "int": -10,
+            "mix": "NaN",
+            "str": "",
             "time": "2017-01-01 00:00:00+0900"
         }]}
 
@@ -81,7 +81,7 @@ JSON without a table name
             [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
             [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
         ]
-        
+
         writer.write_table()
 
 
@@ -90,34 +90,34 @@ JSON without a table name
 
         [
         {
-            "bool": true, 
-            "float": 0.1, 
-            "int": 0, 
-            "mix": 0, 
-            "str": "hoge", 
+            "bool": true,
+            "float": 0.1,
+            "int": 0,
+            "mix": 0,
+            "str": "hoge",
             "time": "2017-01-01 03:04:05+0900"
         },
         {
-            "bool": false, 
-            "float": -2.23, 
-            "int": 2, 
-            "mix": null, 
-            "str": "foo", 
+            "bool": false,
+            "float": -2.23,
+            "int": 2,
+            "mix": null,
+            "str": "foo",
             "time": "2017-12-23 12:34:51+0900"
         },
         {
-            "bool": true, 
-            "float": 0, 
-            "int": 3, 
-            "mix": "Infinity", 
-            "str": "bar", 
+            "bool": true,
+            "float": 0,
+            "int": 3,
+            "mix": "Infinity",
+            "str": "bar",
             "time": "2017-03-03 22:44:55+0900"
         },
         {
-            "bool": false, 
-            "float": -9.9, 
-            "int": -10, 
-            "mix": "NaN", 
-            "str": "", 
+            "bool": false,
+            "float": -9.9,
+            "int": -10,
+            "mix": "NaN",
+            "str": "",
             "time": "2017-01-01 00:00:00+0900"
         }]

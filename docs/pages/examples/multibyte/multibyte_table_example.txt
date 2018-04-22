@@ -1,4 +1,5 @@
 ﻿You can use multibyte characters as table data.
+Multibyte characters also properly padded and aligned.
 
 :Sample Code:
     .. code-block:: python
@@ -22,5 +23,5 @@
     .. figure:: ss/multi_byte_char.png
        :scale: 100%
        :alt: multi_byte_char_table
-       
+
        Output of multi-byte character table

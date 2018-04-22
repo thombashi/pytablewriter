@@ -15,7 +15,7 @@ Features
     - Source code
         - JavaScript code (Definition of a nested list variable)
         - `NumPy <http://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a - `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
+        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
         - Python code (Definition of a nested list variable)
     - Space aligned values
     - SQLite database file
