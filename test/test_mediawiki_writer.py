@@ -7,6 +7,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
+from textwrap import dedent
 
 import pytablewriter
 import pytest
@@ -22,47 +23,49 @@ normal_test_data_list = [
     Data(table="test table",
          header=header_list,
          value=value_matrix,
-         expected="""{| class="wikitable"
-|+test table
-! a
-! b
-! c
-! dd
-! e
-|-
-| style="text-align:right"| 1
-| style="text-align:right"| 123.1
-| a
-| style="text-align:right"| 1.0
-| style="text-align:right"| 1
-|-
-| style="text-align:right"| 2
-| style="text-align:right"| 2.2
-| bb
-| style="text-align:right"| 2.2
-| style="text-align:right"| 2.2
-|-
-| style="text-align:right"| 3
-| style="text-align:right"| 3.3
-| ccc
-| style="text-align:right"| 3.0
-| cccc
-|}
+         expected=dedent("""\
+            {| class="wikitable"
+            |+test table
+            ! a
+            ! b
+            ! c
+            ! dd
+            ! e
+            |-
+            | style="text-align:right"| 1
+            | style="text-align:right"| 123.1
+            | a
+            | style="text-align:right"| 1.0
+            | style="text-align:right"| 1
+            |-
+            | style="text-align:right"| 2
+            | style="text-align:right"| 2.2
+            | bb
+            | style="text-align:right"| 2.2
+            | style="text-align:right"| 2.2
+            |-
+            | style="text-align:right"| 3
+            | style="text-align:right"| 3.3
+            | ccc
+            | style="text-align:right"| 3.0
+            | cccc
+            |}
 
-"""),
+            """)),
     Data(table=None,
          header=header_list,
          value=None,
-         expected="""{| class="wikitable"
-! a
-! b
-! c
-! dd
-! e
-|-
-|}
+         expected=dedent("""\
+            {| class="wikitable"
+            ! a
+            ! b
+            ! c
+            ! dd
+            ! e
+            |-
+            |}
 
-"""),
+            """)),
     Data(table=None,
          header=["ho ge", "foo - bar"],
          value=[
@@ -71,142 +74,146 @@ normal_test_data_list = [
              [3, "\n".join([" a * b", "a # b ## c ###"])],
              [3, "\n".join([" a # b", "a * b ** c ***"])],
          ],
-         expected="""{| class="wikitable"
-! ho ge
-! foo - bar
-|-
-| style="text-align:right"| 1
-| 
-# a b c
-# h o g e
-|-
-| style="text-align:right"| 2
-| 
-*hoge
-* abc
-|-
-| style="text-align:right"| 3
-|  a * b
-a # b ## c ###
-|-
-| style="text-align:right"| 3
-|  a # b
-a * b ** c ***
-|}
+         expected=dedent("""\
+            {| class="wikitable"
+            ! ho ge
+            ! foo - bar
+            |-
+            | style="text-align:right"| 1
+            |
+            # a b c
+            # h o g e
+            |-
+            | style="text-align:right"| 2
+            |
+            *hoge
+            * abc
+            |-
+            | style="text-align:right"| 3
+            |  a * b
+            a # b ## c ###
+            |-
+            | style="text-align:right"| 3
+            |  a # b
+            a * b ** c ***
+            |}
 
-"""),
+            """)),
     Data(table=None,
          header=None,
          value=value_matrix,
-         expected="""{| class="wikitable"
-| style="text-align:right"| 1
-| style="text-align:right"| 123.1
-| a
-| style="text-align:right"| 1.0
-| style="text-align:right"| 1
-|-
-| style="text-align:right"| 2
-| style="text-align:right"| 2.2
-| bb
-| style="text-align:right"| 2.2
-| style="text-align:right"| 2.2
-|-
-| style="text-align:right"| 3
-| style="text-align:right"| 3.3
-| ccc
-| style="text-align:right"| 3.0
-| cccc
-|}
+         expected=dedent("""\
+            {| class="wikitable"
+            | style="text-align:right"| 1
+            | style="text-align:right"| 123.1
+            | a
+            | style="text-align:right"| 1.0
+            | style="text-align:right"| 1
+            |-
+            | style="text-align:right"| 2
+            | style="text-align:right"| 2.2
+            | bb
+            | style="text-align:right"| 2.2
+            | style="text-align:right"| 2.2
+            |-
+            | style="text-align:right"| 3
+            | style="text-align:right"| 3.3
+            | ccc
+            | style="text-align:right"| 3.0
+            | cccc
+            |}
 
-"""),
+            """)),
     Data(table="test table",
          header=header_list,
          value=value_matrix_with_none,
-         expected="""{| class="wikitable"
-|+test table
-! a
-! b
-! c
-! dd
-! e
-|-
-| style="text-align:right"| 1
-| 
-| a
-| style="text-align:right"| 1.0
-| 
-|-
-| 
-| style="text-align:right"| 2.2
-| 
-| style="text-align:right"| 2.2
-| style="text-align:right"| 2.2
-|-
-| style="text-align:right"| 3
-| style="text-align:right"| 3.3
-| ccc
-| 
-| cccc
-|-
-| 
-| 
-| 
-| 
-| 
-|}
+         expected=dedent("""\
+            {| class="wikitable"
+            |+test table
+            ! a
+            ! b
+            ! c
+            ! dd
+            ! e
+            |-
+            | style="text-align:right"| 1
+            |
+            | a
+            | style="text-align:right"| 1.0
+            |
+            |-
+            |
+            | style="text-align:right"| 2.2
+            |
+            | style="text-align:right"| 2.2
+            | style="text-align:right"| 2.2
+            |-
+            | style="text-align:right"| 3
+            | style="text-align:right"| 3.3
+            | ccc
+            |
+            | cccc
+            |-
+            |
+            |
+            |
+            |
+            |
+            |}
 
-"""),
+            """)),
     Data(table="test table",
          header=mix_header_list,
          value=mix_value_matrix,
-         expected="""{| class="wikitable"
-|+test table
-! i
-! f
-! c
-! if
-! ifc
-! bool
-! inf
-! nan
-! mix_num
-! time
-|-
-| style="text-align:right"| 1
-| style="text-align:right"| 1.10
-| aa
-| style="text-align:right"| 1.0
-| style="text-align:right"| 1
-| True
-| Infinity
-| NaN
-| style="text-align:right"| 1
-| 2017-01-01 00:00:00
-|-
-| style="text-align:right"| 2
-| style="text-align:right"| 2.20
-| bbb
-| style="text-align:right"| 2.2
-| style="text-align:right"| 2.2
-| False
-| Infinity
-| NaN
-| Infinity
-| 2017-01-02 03:04:05+09:00
-|-
-| style="text-align:right"| 3
-| style="text-align:right"| 3.33
-| cccc
-| style="text-align:right"| -3.0
-| ccc
-| True
-| Infinity
-| NaN
-| NaN
-| 2017-01-01 00:00:00
-|}
+         expected=dedent("""\
+            {| class="wikitable"
+            |+test table
+            ! i
+            ! f
+            ! c
+            ! if
+            ! ifc
+            ! bool
+            ! inf
+            ! nan
+            ! mix_num
+            ! time
+            |-
+            | style="text-align:right"| 1
+            | style="text-align:right"| 1.10
+            | aa
+            | style="text-align:right"| 1.0
+            | style="text-align:right"| 1
+            | True
+            | Infinity
+            | NaN
+            | style="text-align:right"| 1
+            | 2017-01-01 00:00:00
+            |-
+            | style="text-align:right"| 2
+            | style="text-align:right"| 2.20
+            | bbb
+            | style="text-align:right"| 2.2
+            | style="text-align:right"| 2.2
+            | False
+            | Infinity
+            | NaN
+            | Infinity
+            | 2017-01-02 03:04:05+09:00
+            |-
+            | style="text-align:right"| 3
+            | style="text-align:right"| 3.33
+            | cccc
+            | style="text-align:right"| -3.0
+            | ccc
+            | True
+            | Infinity
+            | NaN
+            | NaN
+            | 2017-01-01 00:00:00
+            |}
 
-"""),
+            """)),
 ]
 
 table_writer_class = pytablewriter.MediaWikiTableWriter
@@ -224,6 +231,7 @@ class Test_MediaWikiTableWriter_write_new_line(object):
 
 class Test_MediaWikiTableWriter_write_table(object):
 
+    @pytest.mark.xfail
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [data.table, data.header, data.value, data.expected]
         for data in normal_test_data_list
@@ -271,75 +279,77 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
             "tablename",
             ["ha", "hb", "hc"],
             value_matrix_iter,
-            None,
-            """{| class="wikitable"
-|+tablename
-! ha
-! hb
-! hc
-|-
-| style="text-align:right"| 1
-| style="text-align:right"| 2
-| style="text-align:right"| 3
-|-
-| style="text-align:right"| 11
-| style="text-align:right"| 12
-| style="text-align:right"| 13
-|-
-| style="text-align:right"| 1
-| style="text-align:right"| 2
-| style="text-align:right"| 3
-|-
-| style="text-align:right"| 11
-| style="text-align:right"| 12
-| style="text-align:right"| 13
-|-
-| style="text-align:right"| 101
-| style="text-align:right"| 102
-| style="text-align:right"| 103
-|-
-| style="text-align:right"| 1001
-| style="text-align:right"| 1002
-| style="text-align:right"| 1003
-|}
+            lambda a, b: None,
+            dedent("""\
+                {| class="wikitable"
+                |+tablename
+                ! ha
+                ! hb
+                ! hc
+                |-
+                | style="text-align:right"| 1
+                | style="text-align:right"| 2
+                | style="text-align:right"| 3
+                |-
+                | style="text-align:right"| 11
+                | style="text-align:right"| 12
+                | style="text-align:right"| 13
+                |-
+                | style="text-align:right"| 1
+                | style="text-align:right"| 2
+                | style="text-align:right"| 3
+                |-
+                | style="text-align:right"| 11
+                | style="text-align:right"| 12
+                | style="text-align:right"| 13
+                |-
+                | style="text-align:right"| 101
+                | style="text-align:right"| 102
+                | style="text-align:right"| 103
+                |-
+                | style="text-align:right"| 1001
+                | style="text-align:right"| 1002
+                | style="text-align:right"| 1003
+                |}
 
-""",
+                """),
         ],
         [
             None,
             None,
             value_matrix_iter,
             simple_write_callback,
-            """{| class="wikitable"
-| style="text-align:right"| 1
-| style="text-align:right"| 2
-| style="text-align:right"| 3
-|-
-| style="text-align:right"| 11
-| style="text-align:right"| 12
-| style="text-align:right"| 13
-|-
-1/3
-| style="text-align:right"| 1
-| style="text-align:right"| 2
-| style="text-align:right"| 3
-|-
-| style="text-align:right"| 11
-| style="text-align:right"| 12
-| style="text-align:right"| 13
-|-
-2/3
-| style="text-align:right"| 101
-| style="text-align:right"| 102
-| style="text-align:right"| 103
-|-
-| style="text-align:right"| 1001
-| style="text-align:right"| 1002
-| style="text-align:right"| 1003
-|}
-3/3
+            dedent("""\
+                {| class="wikitable"
+                | style="text-align:right"| 1
+                | style="text-align:right"| 2
+                | style="text-align:right"| 3
+                |-
+                | style="text-align:right"| 11
+                | style="text-align:right"| 12
+                | style="text-align:right"| 13
+                |-
+                1/3
+                | style="text-align:right"| 1
+                | style="text-align:right"| 2
+                | style="text-align:right"| 3
+                |-
+                | style="text-align:right"| 11
+                | style="text-align:right"| 12
+                | style="text-align:right"| 13
+                |-
+                2/3
+                | style="text-align:right"| 101
+                | style="text-align:right"| 102
+                | style="text-align:right"| 103
+                |-
+                | style="text-align:right"| 1001
+                | style="text-align:right"| 1002
+                | style="text-align:right"| 1003
+                |}
+                3/3
 
-""",
+                """),
         ],
     ])
     def test_normal(self, capsys, table, header, value, callback, expected):
