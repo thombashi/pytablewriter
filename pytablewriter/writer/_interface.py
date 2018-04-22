@@ -30,8 +30,7 @@ class TableWriterInterface(object):
     def support_split_write(self):  # pragma: no cover
         """
         :return:
-            |True| if the writer supported iterative write
-            ``write_table_iter``.
+            |True| if the writer supported iterative table writing (``write_table_iter`` method).
         :rtype: bool
         """
 

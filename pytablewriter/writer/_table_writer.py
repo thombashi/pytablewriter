@@ -35,7 +35,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     .. py:attribute:: is_write_header
 
-        Write headers of the table if the value is |True|.
+        Write headers of a table if the value is |True|.
 
     .. py:attribute:: is_padding
 
