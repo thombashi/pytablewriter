@@ -16,10 +16,9 @@ os:
 
 install:
   - pip install setuptools --upgrade
-  - pip install tox
-  - pip install coveralls
+  - pip install tox coveralls
 
-script: 
+script:
   - tox
   - python setup.py test --addopts "-v --cov pytablewriter --cov-report term-missing"
 
