@@ -60,10 +60,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @table_name.setter
     def table_name(self, value):
-        from pathvalidate import (
-            ElasticsearchIndexNameSanitizer,
-            NullNameError,
-        )
+        from pathvalidate import (ElasticsearchIndexNameSanitizer, NullNameError)
 
         try:
             self._table_name = ElasticsearchIndexNameSanitizer(
@@ -148,10 +145,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         }
 
     def _get_body(self):
-        str_datatype = (
-            Typecode.DATETIME, Typecode.IP_ADDRESS,
-            Typecode.INFINITY, Typecode.NAN,
-        )
+        str_datatype = (Typecode.DATETIME, Typecode.IP_ADDRESS, Typecode.INFINITY, Typecode.NAN)
 
         for value_dp_list in self._table_value_dp_matrix:
             value_list = [
@@ -174,8 +168,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         mappings = self._get_mappings()
 
         try:
-            result = self.stream.indices.create(
-                index=self.index_name, body=mappings)
+            result = self.stream.indices.create(index=self.index_name, body=mappings)
             self._logger.logger.debug(result)
         except es.TransportError as e:
             if e.error == "index_already_exists_exception":
@@ -187,12 +180,9 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         for body in self._get_body():
             try:
-                self.stream.index(
-                    index=self.index_name, body=body,
-                    doc_type=self.document_type)
+                self.stream.index(index=self.index_name, body=body, doc_type=self.document_type)
             except es.exceptions.RequestError as e:
-                self._logger.logger.error(
-                    "message={}, body={}".format(e, body))
+                self._logger.logger.error("message={}, body={}".format(e, body))
 
     def _write_value_row_separator(self):
         pass
