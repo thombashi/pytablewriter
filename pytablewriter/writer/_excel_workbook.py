@@ -8,6 +8,7 @@ from __future__ import absolute_import, unicode_literals
 
 import abc
 
+import msgfy
 import pathvalidate
 import six
 import typepy
@@ -81,7 +82,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
         try:
             self.workbook.save(self._file_path)
         except IndexError as e:
-            logger.debug("{:s}: {}".format(e.__class__.__name__, e))
+            logger.debug(msgfy.to_error_message(e))
 
         self._clear()
 

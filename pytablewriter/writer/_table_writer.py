@@ -10,6 +10,7 @@ import abc
 import re
 import sys
 
+import msgfy
 import typepy
 from six.moves import zip
 from typepy import Typecode
@@ -556,7 +557,7 @@ class AbstractTableWriter(TableWriterInterface):
         try:
             self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(self.__value_matrix_org)
         except TypeError as e:
-            self._logger.logger.debug("{:s}: {}".format(e.__class__.__name__, e))
+            self._logger.logger.debug(msgfy.to_error_message(e))
             self._table_value_dp_matrix = []
 
         self._column_dp_list = self._dp_extractor.to_column_dp_list(

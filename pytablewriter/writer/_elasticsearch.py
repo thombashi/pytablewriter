@@ -9,6 +9,7 @@ from __future__ import absolute_import, unicode_literals
 import copy
 
 import dataproperty
+import msgfy
 from six.moves import zip
 from typepy import Typecode
 
@@ -173,8 +174,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         except es.TransportError as e:
             if e.error == "index_already_exists_exception":
                 # ignore already existing index
-                self._logger.logger.debug(
-                    "{:s}: {}".format(e.__class__.__name__, e))
+                self._logger.logger.debug(msgfy.to_error_message(e))
             else:
                 raise
 
