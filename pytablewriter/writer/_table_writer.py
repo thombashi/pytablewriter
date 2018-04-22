@@ -384,9 +384,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._verify_header()
 
-        old_is_write_header = self.is_write_header
-        old_is_write_opening_row = self.is_write_opening_row
-        old_is_write_closing_row = self.is_write_closing_row
+        stash_is_write_header = self.is_write_header
+        stach_is_write_opening_row = self.is_write_opening_row
+        stash_is_write_closing_row = self.is_write_closing_row
 
         self.is_write_closing_row = False
         self.__iter_count = 1
@@ -433,9 +433,9 @@ class AbstractTableWriter(TableWriterInterface):
 
             self.__iter_count += 1
 
-        self.is_write_header = old_is_write_header
-        self.is_write_opening_row = old_is_write_opening_row
-        self.is_write_closing_row = old_is_write_closing_row
+        self.is_write_header = stash_is_write_header
+        self.is_write_opening_row = stach_is_write_opening_row
+        self.is_write_closing_row = stash_is_write_closing_row
         self.__iter_count = None
 
         self._logger.logging_complete_write()
