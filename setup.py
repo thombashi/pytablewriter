@@ -13,13 +13,20 @@ import sys
 import setuptools
 
 
+MODULE_NAME = "pytablewriter"
+REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
+
+pkg_info = {}
 
 
 def need_pytest():
     return set(["pytest", "test", "ptr"]).intersection(sys.argv)
 
+
+with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
+    exec(f.read(), pkg_info)
 
 with io.open("README.rst", encoding=ENCODING) as f:
     long_description = f.read()
@@ -36,24 +43,23 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
     docs_requires = [line.strip() for line in f if line.strip()]
 
-MODULE_NAME = "pytablewriter"
 setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 setuptools.setup(
     name=MODULE_NAME,
-    version="0.27.2",
-    url="https://github.com/thombashi/{}".format(MODULE_NAME),
+    version=pkg_info["__version__"],
+    url=REPOSITORY_URL,
 
-    author="Tsuyoshi Hombashi",
-    author_email="tsuyoshi.hombashi@gmail.com",
+    author=pkg_info["__author__"],
+    author_email=pkg_info["__email__"],
     description=summary,
     include_package_data=True,
     keywords=[
         "table", "CSV", "Excel", "JavaScript", "JSON", "LTSV", "Markdown", "MediaWiki", "HTML",
         "pandas", "reStructuredText", "SQLite", "TSV", "TOML",
     ],
-    license="MIT License",
+    license=pkg_info["__license__"],
     long_description=long_description,
     packages=setuptools.find_packages(exclude=["test*"]),
 
@@ -64,6 +70,10 @@ setuptools.setup(
         "build": "wheel",
         "test": tests_requires,
         "docs": docs_requires,
+    },
+    project_urls={
+        "Documentation": "http://{:s}.rtfd.io/".format(MODULE_NAME),
+        "Tracker": "{:s}/issues".format(REPOSITORY_URL),
     },
 
     classifiers=[
