@@ -232,7 +232,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._is_remove_line_break = False
 
         self.iteration_length = -1
-        self.write_callback = None
+        self.write_callback = lambda _iter_count, _iter_length: None  # NOP
         self.__iter_count = None
 
         self.__align_char_mapping = {
@@ -416,10 +416,7 @@ class AbstractTableWriter(TableWriterInterface):
                 self.is_write_opening_row = False
                 self.is_write_header = False
 
-                try:
-                    self.write_callback(self.__iter_count, self.iteration_length)
-                except TypeError:
-                    pass
+                self.write_callback(self.__iter_count, self.iteration_length)
 
                 # update typehint for the next iteration
                 """
