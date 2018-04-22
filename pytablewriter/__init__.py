@@ -4,64 +4,24 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from .__version__ import __author__, __copyright__, __email__, __license__, __version__
 from __future__ import absolute_import
 
 from typepy.type import (
-    Bool,
-    DateTime,
-    Dictionary,
-    Infinity,
-    Integer,
-    IpAddress,
-    List,
-    Nan,
-    NoneType,
-    NullString,
-    RealNumber,
-    String,
-)
+    Bool, DateTime, Dictionary, Infinity, Integer, IpAddress, List, Nan, NoneType, NullString,
+    RealNumber, String)
 
+from .__version__ import __author__, __copyright__, __email__, __license__, __version__
 from ._error import (
-    NotSupportedError,
-    EmptyHeaderError,
-    EmptyTableNameError,
-    EmptyValueError,
-    EmptyTableDataError,
-    WriterNotFoundError,
-)
+    EmptyHeaderError, EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError,
+    WriterNotFoundError)
 from ._factory import TableWriterFactory
 from ._function import dump_tabledata
-from ._logger import (
-    set_logger,
-    set_log_level,
-)
-from ._table_format import (
-    FormatAttr,
-    TableFormat,
-)
+from ._logger import set_log_level, set_logger
+from ._table_format import FormatAttr, TableFormat
 from .writer import (
-    CsvTableWriter,
-    ElasticsearchWriter,
-    ExcelXlsxTableWriter,
-    ExcelXlsTableWriter,
-    HtmlTableWriter,
-    JsonTableWriter,
-    LtsvTableWriter,
-    MarkdownTableWriter,
-    MediaWikiTableWriter,
-    NullTableWriter,
-    NumpyTableWriter,
-    RstCsvTableWriter,
-    RstGridTableWriter,
-    RstSimpleTableWriter,
-    SpaceAlignedTableWriter,
-    SqliteTableWriter,
-    LatexMatrixWriter,
-    LatexTableWriter,
-    TomlTableWriter,
-    TsvTableWriter,
-    JavaScriptTableWriter,
-    PandasDataFrameWriter,
-    PythonCodeTableWriter,
-)
+    CsvTableWriter, ElasticsearchWriter, ExcelXlsTableWriter, ExcelXlsxTableWriter, HtmlTableWriter,
+    JavaScriptTableWriter, JsonTableWriter, LatexMatrixWriter, LatexTableWriter, LtsvTableWriter,
+    MarkdownTableWriter, MediaWikiTableWriter, NullTableWriter, NumpyTableWriter,
+    PandasDataFrameWriter, PythonCodeTableWriter, RstCsvTableWriter, RstGridTableWriter,
+    RstSimpleTableWriter, SpaceAlignedTableWriter, SqliteTableWriter, TomlTableWriter,
+    TsvTableWriter)

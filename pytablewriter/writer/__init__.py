@@ -4,30 +4,19 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 from ._csv import CsvTableWriter
 from ._elasticsearch import ElasticsearchWriter
-from ._excel import (
-    ExcelXlsxTableWriter,
-    ExcelXlsTableWriter,
-)
+from ._excel import ExcelXlsTableWriter, ExcelXlsxTableWriter
 from ._html import HtmlTableWriter
 from ._json import JsonTableWriter
-from ._latex import (
-    LatexMatrixWriter,
-    LatexTableWriter,
-)
+from ._latex import LatexMatrixWriter, LatexTableWriter
 from ._ltsv import LtsvTableWriter
 from ._markdown import MarkdownTableWriter
 from ._mediawiki import MediaWikiTableWriter
 from ._null import NullTableWriter
-from ._rst import (
-    RstCsvTableWriter,
-    RstGridTableWriter,
-    RstSimpleTableWriter,
-)
+from ._rst import RstCsvTableWriter, RstGridTableWriter, RstSimpleTableWriter
 from ._spacealigned import SpaceAlignedTableWriter
 from ._sqlite import SqliteTableWriter
 from ._toml import TomlTableWriter
