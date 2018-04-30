@@ -9,7 +9,6 @@ from __future__ import absolute_import, print_function, unicode_literals
 import collections
 import io
 import itertools
-from decimal import Decimal
 
 import pytablewriter as ptw
 import pytest
