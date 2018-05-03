@@ -121,7 +121,7 @@ class LatexMatrixWriter(LatexWriter):
     def _get_opening_row_item_list(self):
         row_item_list = []
 
-        if typepy.is_not_empty_string(self.table_name):
+        if typepy.is_not_null_string(self.table_name):
             row_item_list.append(self.table_name + r" = \left( ")
         else:
             row_item_list.append(r"\left( ")
