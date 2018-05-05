@@ -49,8 +49,7 @@ class RstTableWriter(IndentationTextTableWriter):
         if typepy.is_null_string(self.table_name):
             return ".. table:: \n"
 
-        return ".. table:: {}\n".format(
-            MultiByteStrDecoder(self.table_name).unicode_str)
+        return ".. table:: {}\n".format(MultiByteStrDecoder(self.table_name).unicode_str)
 
     def _write_table(self):
         self.inc_indent_level()
@@ -119,13 +118,11 @@ class RstCsvTableWriter(RstTableWriter):
 
         if typepy.is_not_empty_sequence(self.header_list):
             self._write_line(':header: "{:s}"'.format('", "'.join([
-                MultiByteStrDecoder(header).unicode_str
-                for header in self.header_list
+                MultiByteStrDecoder(header).unicode_str for header in self.header_list
             ])))
 
         self._write_line(":widths: " + ", ".join([
-            str(col_dp.ascii_char_width)
-            for col_dp in self._column_dp_list
+            str(col_dp.ascii_char_width) for col_dp in self._column_dp_list
         ]))
         self._write_line()
 

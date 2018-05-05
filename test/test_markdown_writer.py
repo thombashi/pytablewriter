@@ -456,7 +456,6 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
-
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
