@@ -341,11 +341,12 @@ class AbstractTableWriter(TableWriterInterface):
 
     def from_dataframe(self, dataframe):
         """
-        Set tabular attributes to the writer from
-        :py:class:`pandas.DataFrame`. Following attributes are set:
+        Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
+        Following attributes are set by the method:
 
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
+        - :py:attr:`~.type_hint_list`.
 
         :param pandas.DataFrame dataframe: Input dataframe.
 
