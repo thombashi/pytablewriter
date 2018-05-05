@@ -15,7 +15,6 @@ from decimal import Decimal
 import pytablewriter as ptw
 import pytest
 import six
-from tabledata import TableData
 
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix
 
