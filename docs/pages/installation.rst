@@ -22,11 +22,11 @@ Python 2.7+ or 3.4+
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
-- `xlwt <http://www.python-excel.org/>`__
 
 Optional Dependencies
 ----------------------------------
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
+- `xlwt <http://www.python-excel.org/>`__
 
 Test dependencies
 -----------------

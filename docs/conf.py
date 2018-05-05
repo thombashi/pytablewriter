@@ -3,7 +3,7 @@
 import os
 import sys
 
-import pkg_resources
+from pytablewriter import __author__, __copyright__, __version__
 import sphinx_rtd_theme
 
 
@@ -42,15 +42,15 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'pytablewriter'
-copyright = u'2016-2017, Tsuyoshi Hombashi'
-author = u'Tsuyoshi Hombashi'
+copyright = __copyright__
+author = __author__
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = pkg_resources.get_distribution("pytablewriter").version
+version = __version__
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -223,7 +223,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'pytablewriter.tex', u'pytablewriter Documentation',
-     u'Tsuyoshi Hombashi', 'manual'),
+     __author__, 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
