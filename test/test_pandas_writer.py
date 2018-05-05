@@ -234,7 +234,9 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
         import dateutil
         from typepy import Integer, RealNumber
 
-        df = pandas.DataFrame(
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.from_dataframe(pandas.DataFrame(
             [
                 [
                     1, 0.125, "aa", 1.0, "1", True, np.inf, np.nan, 1,
@@ -249,12 +251,9 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
                     dateutil.parser.parse("2017-01-01T00:00:00"),
                 ],
             ],
-            columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
+            columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"]))
 
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.from_dataframe(df)
-
+        assert writer.value_matrix is not None
         assert writer.type_hint_list == [
             Integer,
             RealNumber,
