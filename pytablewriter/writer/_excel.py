@@ -251,10 +251,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         self._workbook = ExcelWorkbookXls(workbook_path)
 
     def _write_header(self):
-        if any([
-                not self.is_write_header,
-                typepy.is_empty_sequence(self.header_list),
-        ]):
+        if not self.is_write_header or typepy.is_empty_sequence(self.header_list):
             return
 
         for col, value in enumerate(self.header_list):
@@ -391,10 +388,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         self._workbook = ExcelWorkbookXlsx(workbook_path)
 
     def _write_header(self):
-        if any([
-                not self.is_write_header,
-                typepy.is_empty_sequence(self.header_list),
-        ]):
+        if not self.is_write_header or typepy.is_empty_sequence(self.header_list):
             return
 
         header_format_props = self.format_table.get(
