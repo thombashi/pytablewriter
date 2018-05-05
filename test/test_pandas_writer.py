@@ -208,10 +208,9 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
 class Test_PandasDataFrameWriter_from_dataframe(object):
 
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
+    @pytest.mark.parametrize(["table", "value", "expected"], [
         [
             "tablename",
-            ["ha", "hb", "hc"],
             value_matrix_iter,
             """tablename = pd.DataFrame([
     [1, 0.125, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
@@ -222,7 +221,7 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
 """,
         ],
     ])
-    def test_normal(self, capsys, table, header, value, expected):
+    def test_normal(self, capsys, table, value, expected):
         import dateutil
         from typepy import Integer, RealNumber
 
