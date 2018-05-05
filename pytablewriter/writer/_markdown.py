@@ -57,7 +57,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _get_header_row_separator_item_list(self):
         header_separator_list = []
         for col_dp in self._column_dp_list:
-            padding_len = self._get_padding_len(col_dp)
+            padding_len = self._get_padding_len(col_dp) + self.margin * 2
 
             if col_dp.align == dp.Align.RIGHT:
                 separator_item = "-" * (padding_len - 1) + ":"
@@ -66,7 +66,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             else:
                 separator_item = "-" * padding_len
 
-            header_separator_list.append(self._margin_format.format(separator_item))
+            header_separator_list.append(separator_item)
 
         return header_separator_list
 

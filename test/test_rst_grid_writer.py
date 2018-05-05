@@ -10,12 +10,12 @@ from textwrap import dedent
 
 import pytablewriter
 import pytest
+from tabledata import TableData
 
 from ._common import print_test_result
 from .data import (
     Data, header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,
     value_matrix_with_none)
-
 
 normal_test_data_list = [
     Data(table="table name",
@@ -220,7 +220,60 @@ class Test_RstGridTableWriter_write_table(object):
         writer.write_table()
 
         out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
 
+        assert out == expected
+
+    def test_normal_margin_1(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(TableData(
+            table_name="margin 1", header_list=header_list, record_list=value_matrix))
+        writer.margin = 1
+        writer.write_table()
+
+        expected = dedent("""\
+            .. table:: margin 1
+
+                +---+-------+-----+-----+------+
+                | a |   b   |  c  | dd  |  e   |
+                +===+=======+=====+=====+======+
+                | 1 | 123.1 | a   | 1.0 |    1 |
+                +---+-------+-----+-----+------+
+                | 2 |   2.2 | bb  | 2.2 |  2.2 |
+                +---+-------+-----+-----+------+
+                | 3 |   3.3 | ccc | 3.0 | cccc |
+                +---+-------+-----+-----+------+
+
+            """)
+
+        out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_normal_margin_2(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(TableData(
+            table_name="margin 2", header_list=header_list, record_list=value_matrix))
+        writer.margin = 2
+        writer.write_table()
+
+        expected = dedent("""\
+            .. table:: margin 2
+
+                +-----+---------+-------+-------+--------+
+                |  a  |    b    |   c   |  dd   |   e    |
+                +=====+=========+=======+=======+========+
+                |  1  |  123.1  |  a    |  1.0  |     1  |
+                +-----+---------+-------+-------+--------+
+                |  2  |    2.2  |  bb   |  2.2  |   2.2  |
+                +-----+---------+-------+-------+--------+
+                |  3  |    3.3  |  ccc  |  3.0  |  cccc  |
+                +-----+---------+-------+-------+--------+
+
+            """)
+
+        out, _err = capsys.readouterr()
         print_test_result(expected=expected, actual=out)
 
         assert out == expected

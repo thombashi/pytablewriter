@@ -430,7 +430,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
-    def test_normal_margin(self, capsys):
+    def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData(
             table_name="", header_list=header_list, record_list=value_matrix))
@@ -439,10 +439,31 @@ class Test_MarkdownTableWriter_write_table(object):
 
         expected = dedent("""\
             |  a  |   b   |  c  | dd  |  e   |
-            | --: | ----: | --- | --: | ---- |
+            |----:|------:|-----|----:|------|
             |   1 | 123.1 | a   | 1.0 |    1 |
             |   2 |   2.2 | bb  | 2.2 |  2.2 |
             |   3 |   3.3 | ccc | 3.0 | cccc |
+
+            """)
+
+        out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_normal_margin_2(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(TableData(
+            table_name="", header_list=header_list, record_list=value_matrix))
+        writer.margin = 2
+        writer.write_table()
+
+        expected = dedent("""\
+            |   a   |    b    |   c   |  dd   |   e    |
+            |------:|--------:|-------|------:|--------|
+            |    1  |  123.1  |  a    |  1.0  |     1  |
+            |    2  |    2.2  |  bb   |  2.2  |   2.2  |
+            |    3  |    3.3  |  ccc  |  3.0  |  cccc  |
 
             """)
 

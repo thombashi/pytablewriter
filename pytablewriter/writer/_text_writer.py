@@ -88,8 +88,13 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def margin(self, value):
         self.__margin = value
 
-        margin_str = " " * self.__margin
-        self._margin_format = margin_str + "{:s}" + margin_str
+        self.__value_cell_margin_format = self.__make_margin_format(" ")
+        self.__opening_row_cell_format = self.__make_margin_format(self.char_opening_row)
+        self._header_row_separator_cell_format = self.__make_margin_format(
+            self.char_header_row_separator)
+        self.__value_row_separator_cell_format = self.__make_margin_format(
+            self.char_value_row_separator)
+        self.__closing_row_cell_format = self.__make_margin_format(self.char_closing_row)
 
     def __init__(self):
         super(TextTableWriter, self).__init__()
@@ -160,20 +165,24 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self._write_closing_row()
 
     def _get_opening_row_item_list(self):
-        return self.__get_row_separator_item_list(self.char_opening_row)
+        return self.__get_row_separator_item_list(
+            self.__opening_row_cell_format, self.char_opening_row)
 
     def _get_header_row_separator_item_list(self):
-        return self.__get_row_separator_item_list(self.char_header_row_separator)
+        return self.__get_row_separator_item_list(
+            self._header_row_separator_cell_format, self.char_header_row_separator)
 
     def _get_value_row_separator_item_list(self):
-        return self.__get_row_separator_item_list(self.char_value_row_separator)
+        return self.__get_row_separator_item_list(
+            self.__value_row_separator_cell_format, self.char_value_row_separator)
 
     def _get_closing_row_item_list(self):
-        return self.__get_row_separator_item_list(self.char_closing_row)
+        return self.__get_row_separator_item_list(
+            self.__closing_row_cell_format, self.char_closing_row)
 
-    def __get_row_separator_item_list(self, separator_char):
+    def __get_row_separator_item_list(self, margin_format, separator_char):
         return [
-            self._margin_format.format(separator_char * self._get_padding_len(col_dp))
+            margin_format.format(separator_char * self._get_padding_len(col_dp))
             for col_dp in self._column_dp_list
         ]
 
@@ -183,11 +192,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             str(self._get_padding_len(col_dp, value_dp)))
 
     def _get_header_item(self, col_dp, value_dp):
-        return self._margin_format.format(
+        return self.__value_cell_margin_format.format(
             super(TextTableWriter, self)._get_header_item(col_dp, value_dp))
 
     def _get_row_item(self, col_dp, value_dp):
-        return self._margin_format.format(
+        return self.__value_cell_margin_format.format(
             super(TextTableWriter, self)._get_row_item(col_dp, value_dp))
 
     def _write_raw_string(self, unicode_text):
@@ -268,6 +277,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             return
 
         self.__write_separator_row(self._get_closing_row_item_list())
+
+    def __make_margin_format(self, margin_char):
+        margin_str = margin_char * self.__margin
+
+        return margin_str + "{:s}" + margin_str
 
 
 class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
