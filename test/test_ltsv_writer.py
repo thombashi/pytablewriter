@@ -12,6 +12,7 @@ import itertools
 import pytablewriter as ptw
 import pytest
 
+from ._common import print_test_result
 from .data import float_header_list, float_value_matrix, header_list, value_matrix
 
 
@@ -87,9 +88,7 @@ class Test_LtsvTableWriter_write_table(object):
         writer.write_table()
 
         out, _err = capsys.readouterr()
-
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

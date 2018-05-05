@@ -13,6 +13,7 @@ import pytest
 from tabledata import TableData
 from textwrap import dedent
 
+from ._common import print_test_result
 from .data import (
     float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,
     value_matrix, value_matrix_iter, value_matrix_iter_1, value_matrix_with_none)
@@ -349,9 +350,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.write_table()
 
         out, _err = capsys.readouterr()
-
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 
@@ -384,10 +383,9 @@ class Test_MarkdownTableWriter_write_table(object):
             |Long Format Name|Loader                  |
 
             """)
-        out, _err = capsys.readouterr()
 
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 
@@ -425,10 +423,9 @@ class Test_MarkdownTableWriter_write_table(object):
             |  2|BB |zzz|
 
             """)
-        out, _err = capsys.readouterr()
 
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
         print(_err)
 
         assert out == expected
@@ -450,9 +447,7 @@ class Test_MarkdownTableWriter_write_table(object):
             """)
 
         out, _err = capsys.readouterr()
-
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 
@@ -520,9 +515,7 @@ class Test_MarkdownTableWriter_write_table_iter(object):
         writer.write_table_iter()
 
         out, _err = capsys.readouterr()
-
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

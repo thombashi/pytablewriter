@@ -11,6 +11,7 @@ from textwrap import dedent
 import pytablewriter
 import pytest
 
+from ._common import print_test_result
 from .data import (
     Data, header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,
     value_matrix_with_none)
@@ -220,8 +221,7 @@ class Test_RstGridTableWriter_write_table(object):
 
         out, _err = capsys.readouterr()
 
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

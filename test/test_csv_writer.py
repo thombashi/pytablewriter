@@ -14,6 +14,7 @@ from textwrap import dedent
 import pytablewriter as ptw
 import pytest
 
+from ._common import print_test_result
 from .data import (
     float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,
     value_matrix, value_matrix_iter, value_matrix_with_none)
@@ -137,8 +138,7 @@ class Test_CsvTableWriter_from_csv(object):
         assert writer.table_name == "csv1"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
 
-        print("[expected]\n{}".format(self.__CSV_EXPECTED))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=self.__CSV_EXPECTED, actual=out)
 
         assert out == self.__CSV_EXPECTED
 
@@ -156,8 +156,7 @@ class Test_CsvTableWriter_from_csv(object):
         assert writer.table_name == "test_data"
         assert writer.header_list == ["a", "b", "c", "dd", "e"]
 
-        print("[expected]\n{}".format(self.__CSV_EXPECTED))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=self.__CSV_EXPECTED, actual=out)
 
         assert out == self.__CSV_EXPECTED
 
@@ -177,8 +176,7 @@ class Test_CsvTableWriter_write_table(object):
 
         out, _err = capsys.readouterr()
 
-        print("[expected]\n{}".format(expected))
-        print("[actual]\n{}".format(out))
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

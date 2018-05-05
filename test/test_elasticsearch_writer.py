@@ -16,6 +16,7 @@ import pytablewriter as ptw
 import pytest
 import six
 
+from ._common import print_test_result
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix
 
 
@@ -92,8 +93,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
             }
         }
 
-        print("[expected]\n{}\n".format(expected_mappings))
-        print("[actual]\n{}\n".format(json.dumps(mappings, indent=4)))
+        print_test_result(expected=expected_mappings, actual=json.dumps(mappings, indent=4))
         assert mappings == expected_mappings
 
         # mappings w/ type hint ---
@@ -125,8 +125,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
             }
         }
 
-        print("[expected]\n{}\n".format(expected_mappings))
-        print("[actual]\n{}\n".format(json.dumps(mappings, indent=4)))
+        print_test_result(expected=expected_mappings, actual=json.dumps(mappings, indent=4))
         assert mappings == expected_mappings
 
         # body ---
@@ -158,8 +157,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
             },
         ]
 
-        print("[expected]\n{}\n".format(expected_body))
-        print("[actual]\n{}\n".format(body))
+        print_test_result(expected=expected_body, actual=body)
         assert body == expected_body
 
 

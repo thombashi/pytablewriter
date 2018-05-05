@@ -15,6 +15,7 @@ import pytablewriter as ptw
 import pytest
 from tabledata import TableData
 
+from ._common import print_test_result
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 
 
@@ -133,8 +134,7 @@ class Test_ExcelTableWriter_write_table(object):
             expected_dump = ptw.dump_tabledata(expected)
             actual_dump = ptw.dump_tabledata(table_data)
 
-            print("[expected]\n{}".format(expected_dump))
-            print("[actual]\n{}".format(actual_dump))
+            print_test_result(expected=expected_dump, actual=actual_dump)
 
             assert actual_dump == expected_dump
 
