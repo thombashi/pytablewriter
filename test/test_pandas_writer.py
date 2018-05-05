@@ -6,6 +6,8 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 
+from textwrap import dedent
+
 import pytablewriter
 import pytest
 
@@ -28,44 +30,48 @@ normal_test_data_list = [
          indent=0,
          header=header_list,
          value=value_matrix,
-         expected="""table_name_ho_ge = pd.DataFrame([
-    [1, 123.1, "a", 1, 1],
-    [2, 2.2, "bb", 2.2, 2.2],
-    [3, 3.3, "ccc", 3, "cccc"],
-], columns=["a", "b", "c", "dd", "e"])
+         expected=dedent("""\
+            table_name_ho_ge = pd.DataFrame([
+                [1, 123.1, "a", 1, 1],
+                [2, 2.2, "bb", 2.2, 2.2],
+                [3, 3.3, "ccc", 3, "cccc"],
+            ], columns=["a", "b", "c", "dd", "e"])
 
-"""),
+            """)),
     Data(table="tablename",
          indent=0,
          header=header_list,
          value=None,
-         expected="""tablename = pd.DataFrame([
-], columns=["a", "b", "c", "dd", "e"])
+         expected=dedent("""\
+            tablename = pd.DataFrame([
+            ], columns=["a", "b", "c", "dd", "e"])
 
-"""),
+            """)),
     Data(table="table with%null-value",
          indent=0,
          header=header_list,
          value=value_matrix_with_none,
-         expected="""table_with_null_value = pd.DataFrame([
-    [1, None, "a", 1, None],
-    [None, 2.2, None, 2.2, 2.2],
-    [3, 3.3, "ccc", None, "cccc"],
-    [None, None, None, None, None],
-], columns=["a", "b", "c", "dd", "e"])
+         expected=dedent("""\
+            table_with_null_value = pd.DataFrame([
+                [1, None, "a", 1, None],
+                [None, 2.2, None, 2.2, 2.2],
+                [3, 3.3, "ccc", None, "cccc"],
+                [None, None, None, None, None],
+            ], columns=["a", "b", "c", "dd", "e"])
 
-"""),
+            """)),
     Data(table="tablename",
          indent=0,
          header=mix_header_list,
          value=mix_value_matrix,
-         expected="""tablename = pd.DataFrame([
-    [1, 1.1, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-    [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
-    [3, 3.33, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
-], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
+         expected=dedent("""\
+            tablename = pd.DataFrame([
+                [1, 1.1, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+                [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
+                [3, 3.33, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+            ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
-"""),
+            """)),
     Data(table="float-with-null",
          indent=0,
          header=["a", "b"],
@@ -74,24 +80,26 @@ normal_test_data_list = [
              [None, "826.21158713263"],
              [0.1, "1.0499675627886724"],
          ],
-         expected="""float_with_null = pd.DataFrame([
-    [0.03785679191278808, 826.21158713263],
-    [None, 826.21158713263],
-    [0.1, 1.0499675627886724],
-], columns=["a", "b"])
+         expected=dedent("""\
+            float_with_null = pd.DataFrame([
+                [0.03785679191278808, 826.21158713263],
+                [None, 826.21158713263],
+                [0.1, 1.0499675627886724],
+            ], columns=["a", "b"])
 
-"""),
+            """)),
     Data(table="empty header",
          indent=0,
          header=[],
          value=value_matrix,
-         expected="""empty_header = pd.DataFrame([
-    [1, 123.1, "a", 1, 1],
-    [2, 2.2, "bb", 2.2, 2.2],
-    [3, 3.3, "ccc", 3, "cccc"],
-])
+         expected=dedent("""\
+            empty_header = pd.DataFrame([
+                [1, 123.1, "a", 1, 1],
+                [2, 2.2, "bb", 2.2, 2.2],
+                [3, 3.3, "ccc", 3, "cccc"],
+            ])
 
-"""),
+            """)),
 ]
 
 exception_test_data_list = [
@@ -165,16 +173,17 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
             "tablename",
             ["ha", "hb", "hc"],
             value_matrix_iter,
-            """tablename = pd.DataFrame([
-    [1, 2, 3],
-    [11, 12, 13],
-    [1, 2, 3],
-    [11, 12, 13],
-    [101, 102, 103],
-    [1001, 1002, 1003],
-], columns=["ha", "hb", "hc"])
+            dedent("""\
+                tablename = pd.DataFrame([
+                    [1, 2, 3],
+                    [11, 12, 13],
+                    [1, 2, 3],
+                    [11, 12, 13],
+                    [101, 102, 103],
+                    [1001, 1002, 1003],
+                ], columns=["ha", "hb", "hc"])
 
-""",
+                """),
         ],
     ])
     def test_normal(self, capsys, table, header, value, expected):
@@ -212,13 +221,14 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
         [
             "tablename",
             value_matrix_iter,
-            """tablename = pd.DataFrame([
-    [1, 0.125, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-    [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
-    [3, 3333.3, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
-], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
+            dedent("""\
+                tablename = pd.DataFrame([
+                    [1, 0.125, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+                    [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+                    [3, 3333.3, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+                ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
-""",
+                """),
         ],
     ])
     def test_normal(self, capsys, table, value, expected):
@@ -228,31 +238,19 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
         df = pandas.DataFrame(
             [
                 [
-                    1, 0.125, "aa", 1.0, "1", True, np.inf, np.nan,
-                    1, dateutil.parser.parse("2017-01-01T00:00:00"),
+                    1, 0.125, "aa", 1.0, "1", True, np.inf, np.nan, 1,
+                    dateutil.parser.parse("2017-01-01T00:00:00"),
                 ],
                 [
-                    2, 2.2, "bbb", 2.2, "2.2", False, np.inf, np.nan,
-                    np.inf, dateutil.parser.parse(
-                        "2017-01-02T03:04:05+0900"),
+                    2, 2.2, "bbb", 2.2, "2.2", False, np.inf, np.nan, np.inf,
+                    dateutil.parser.parse("2017-01-02T03:04:05+0900"),
                 ],
                 [
-                    3, 3333.3, "cccc", -3.0, "ccc", True, np.inf, np.nan,
-                    np.nan, dateutil.parser.parse("2017-01-01T00:00:00"),
+                    3, 3333.3, "cccc", -3.0, "ccc", True, np.inf, np.nan, np.nan,
+                    dateutil.parser.parse("2017-01-01T00:00:00"),
                 ],
             ],
-            columns=[
-                "i",
-                "f",
-                "c",
-                "if",
-                "ifc",
-                "bool",
-                "inf",
-                "nan",
-                "mix_num",
-                "time",
-            ])
+            columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
 
         writer = table_writer_class()
         writer.table_name = table
