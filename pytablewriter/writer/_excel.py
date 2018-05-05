@@ -223,8 +223,9 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
 class ExcelXlsTableWriter(ExcelTableWriter):
     """
-    A table writer class for Excel file format: ``.xls``
-    (older or equal to Office 2003).
+    A table writer class for Excel file format: ``.xls`` (older or equal to Office 2003).
+
+    ``xlwt`` package required to use this class.
 
     .. py:method:: write_table()
 
@@ -302,8 +303,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
 
 class ExcelXlsxTableWriter(ExcelTableWriter):
     """
-    A table writer class for Excel file format: ``.xlsx``
-    (newer or equal to Office 2007).
+    A table writer class for Excel file format: ``.xlsx`` (newer or equal to Office 2007).
 
     .. py:method:: write_table()
 
