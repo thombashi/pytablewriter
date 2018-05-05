@@ -182,7 +182,7 @@ class ElasticsearchWriter(AbstractTableWriter):
             try:
                 self.stream.index(index=self.index_name, body=body, doc_type=self.document_type)
             except es.exceptions.RequestError as e:
-                self._logger.logger.error("message={}, body={}".format(e, body))
+                self._logger.logger.error("{}, body={}".format(msgfy.to_error_message(e), body))
 
     def _write_value_row_separator(self):
         pass
