@@ -3,6 +3,10 @@
 .. contents:: Table of Contents
    :depth: 2
 
+Summary
+=========
+A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
 
@@ -17,10 +21,6 @@
 
 .. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
    :target: https://github.com/thombashi/pytablewriter
-
-Summary
-=========
-A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 Features
 --------
@@ -116,7 +116,7 @@ Write a Markdown table with a margin
 
         # write example with a margin
         | int | float | str  | bool  |   mix    |           time           |
-        | --: | ----: | ---- | ----- | -------: | ------------------------ |
+        |----:|------:|------|-------|---------:|--------------------------|
         |   0 |  0.10 | hoge | True  |        0 | 2017-01-01 03:04:05+0900 |
         |   2 | -2.23 | foo  | False |          | 2017-12-23 12:34:51+0900 |
         |   3 |  0.00 | bar  | True  | Infinity | 2017-03-03 22:44:55+0900 |
@@ -455,11 +455,11 @@ Python 2.7+ or 3.4+
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 - `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
-- `xlwt <http://www.python-excel.org/>`__
 
 Optional Dependencies
 ----------------------------------
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
+- `xlwt <http://www.python-excel.org/>`__
 
 Test dependencies
 -----------------

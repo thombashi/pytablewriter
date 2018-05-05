@@ -71,10 +71,9 @@ def write_examples(maker):
 def main():
     maker = readmemaker.ReadmeMaker(PROJECT_NAME, OUTPUT_DIR, is_make_toc=True)
 
-    maker.write_introduction_file("badges.txt")
-
     maker.write_chapter("Summary")
     maker.write_introduction_file("summary.txt")
+    maker.write_introduction_file("badges.txt")
     maker.write_introduction_file("feature.txt")
 
     write_examples(maker)
