@@ -144,8 +144,7 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
         import warnings
 
         warnings.warn(
-            "open_workbook method deleted in the future, "
-            "use open method instead.",
+            "open_workbook method deleted in the future, use open method instead.",
             DeprecationWarning)
 
         self.open(workbook_path)
@@ -264,8 +263,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             except ValueError:
                 pass
             else:
-                self.stream.write(
-                    row, col, value_dp.data, cell_style)
+                self.stream.write(row, col, value_dp.data, cell_style)
                 return
 
         self.stream.write(row, col, value_dp.data)
@@ -294,8 +292,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         if float_digit <= 0:
             raise ValueError()
 
-        num_format_str = "#,{:s}0.{:s}".format(
-            "#" * int(float_digit), "0" * int(float_digit))
+        num_format_str = "#,{:s}0.{:s}".format("#" * int(float_digit), "0" * int(float_digit))
         cell_style = xlwt.easyxf(num_format_str=num_format_str)
         self.__col_style_table[col] = cell_style
 
@@ -391,8 +388,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         if not self.is_write_header or typepy.is_empty_sequence(self.header_list):
             return
 
-        header_format_props = self.format_table.get(
-            self.TableFormat.HEADER, self.default_format)
+        header_format_props = self.format_table.get(self.TableFormat.HEADER, self.default_format)
         header_format = self.__add_format(header_format_props)
 
         self.stream.write_row(
@@ -407,15 +403,13 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         base_props = dict(self.__cell_format_property)
         format_key = "{:d}_{:s}".format(col, value_dp.typecode.name)
 
-        if value_dp.typecode in [
-                typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
+        if value_dp.typecode in [typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
             num_props = self.__get_number_property(col)
             base_props.update(num_props)
             cell_format = self.__get_cell_format(format_key, base_props)
 
             try:
-                self.stream.write_number(
-                    row, col, float(value_dp.data), cell_format)
+                self.stream.write_number(row, col, float(value_dp.data), cell_format)
                 return
             except TypeError:
                 pass
@@ -424,8 +418,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             base_props = dict(self.__nan_format_property)
 
         cell_format = self.__get_cell_format(format_key, base_props)
-        self.stream.write(
-            row, col, value_dp.data, cell_format)
+        self.stream.write(row, col, value_dp.data, cell_format)
 
     def __get_number_property(self, col):
         if col in self.__col_numprops_table:
@@ -436,16 +429,14 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         except KeyError:
             return {}
 
-        if col_dp.typecode not in [
-                typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
+        if col_dp.typecode not in [typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
             return {}
 
         num_props = {}
         if Integer(col_dp.minmax_decimal_places.max_value).is_type():
             float_digit = col_dp.minmax_decimal_places.max_value
             if float_digit > 0:
-                num_props = {
-                    "num_format": "0.{:s}".format("0" * int(float_digit))}
+                num_props = {"num_format": "0.{:s}".format("0" * int(float_digit))}
 
         self.__col_numprops_table[col] = num_props
 
@@ -472,10 +463,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             return
 
         for col_idx, col_dp in enumerate(self._column_dp_list):
-            width = (
-                min(col_dp.ascii_char_width, self.MAX_CELL_WIDTH) *
-                (font_size / 10.0) + 2
-            )
+            width = min(col_dp.ascii_char_width, self.MAX_CELL_WIDTH) * (font_size / 10.0) + 2
             self.stream.set_column(col_idx, col_idx, width=width)
 
     def _preprocess_table_property(self):

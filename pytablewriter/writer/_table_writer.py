@@ -356,8 +356,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.header_list = list(dataframe.columns.values)
         self.value_matrix = dataframe.values.tolist()
         self.type_hint_list = [
-            self.__get_typehint_from_dtype(dtype)
-            for dtype in dataframe.dtypes
+            self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes
         ]
 
     def write_table(self):
