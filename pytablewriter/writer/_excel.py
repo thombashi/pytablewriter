@@ -13,7 +13,7 @@ import dataproperty
 import typepy
 import xlwt
 from six.moves import range
-from typepy.type import Integer
+from typepy import Integer
 
 from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import BinaryWriterInterface

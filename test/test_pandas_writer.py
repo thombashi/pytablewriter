@@ -224,10 +224,7 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
     ])
     def test_normal(self, capsys, table, header, value, expected):
         import dateutil
-        from typepy.type import (
-            Integer,
-            RealNumber,
-        )
+        from typepy import Integer, RealNumber
 
         df = pandas.DataFrame(
             [

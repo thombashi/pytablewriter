@@ -6,7 +6,7 @@
 
 from __future__ import absolute_import
 
-from typepy.type import (
+from typepy import (
     Bool, DateTime, Dictionary, Infinity, Integer, IpAddress, List, Nan, NoneType, NullString,
     RealNumber, String)
 

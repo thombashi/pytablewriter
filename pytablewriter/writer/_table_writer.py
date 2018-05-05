@@ -448,7 +448,7 @@ class AbstractTableWriter(TableWriterInterface):
             return column_dp.ascii_char_width
 
     def _get_header_item(self, col_dp, value_dp):
-        from typepy.type import String
+        from typepy import String
 
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
@@ -485,10 +485,10 @@ class AbstractTableWriter(TableWriterInterface):
         col_dtype = str(col_dtype)
 
         if re.search("^float", col_dtype):
-            return typepy.type.RealNumber
+            return typepy.RealNumber
 
         if re.search("^int", col_dtype):
-            return typepy.type.Integer
+            return typepy.Integer
 
         return None
 

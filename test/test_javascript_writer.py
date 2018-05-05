@@ -12,7 +12,7 @@ import itertools
 
 import pytablewriter
 import pytest
-import typepy.type
+import typepy
 
 from ._common import print_test_result
 from .data import (
@@ -222,7 +222,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
                 "th_none_none",
                 ["string", "datetime"],
                 DATA_MATRIX,
-                [typepy.type.DateTime, typepy.type.String],
+                [typepy.DateTime, typepy.String],
                 """const th_none_none = [
     ["string", "datetime"],
     [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
