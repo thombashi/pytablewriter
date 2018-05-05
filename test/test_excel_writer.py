@@ -18,6 +18,12 @@ from tabledata import TableData
 from ._common import print_test_result
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 
+try:
+    import xlwt
+    HAS_XLWT = True
+except ImportError:
+    HAS_XLWT = False
+
 
 inf = Decimal('Infinity')
 nan = Decimal('NaN')
@@ -118,6 +124,9 @@ class Test_ExcelTableWriter_write_table(object):
         ])
     def test_normal(
             self, tmpdir, writer_class, table, header, value, expected):
+        if writer_class == ptw.ExcelXlsTableWriter and not HAS_XLWT:
+            pytest.skip()
+
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
@@ -147,6 +156,9 @@ class Test_ExcelTableWriter_write_table(object):
         ])
     def test_exception(
             self, tmpdir, writer_class, table, header, value, expected):
+        if writer_class == ptw.ExcelXlsTableWriter and not HAS_XLWT:
+            pytest.skip()
+
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
@@ -164,6 +176,9 @@ class Test_ExcelTableWriter_write_table(object):
             table_writer_class_list, normal_test_data_list)
     ])
     def test_exception_null_sheet(self, tmpdir, writer_class, header, value):
+        if writer_class == ptw.ExcelXlsTableWriter and not HAS_XLWT:
+            pytest.skip()
+
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
@@ -201,6 +216,9 @@ class Test_ExcelTableWriter_write_table_iter(object):
         ])
     def test_normal(
             self, tmpdir, writer_class, table, header, value, expected):
+        if writer_class == ptw.ExcelXlsTableWriter and not HAS_XLWT:
+            pytest.skip()
+
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()
@@ -227,6 +245,9 @@ class Test_ExcelTableWriter_write_table_iter(object):
     ])
     def test_exception_null_sheet(
             self, tmpdir, writer_class, header, value):
+        if writer_class == ptw.ExcelXlsTableWriter and not HAS_XLWT:
+            pytest.skip()
+
         test_file_path = tmpdir.join("test.xlsx")
 
         writer = writer_class()

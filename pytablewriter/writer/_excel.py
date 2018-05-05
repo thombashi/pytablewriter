@@ -11,7 +11,6 @@ import copy
 
 import dataproperty
 import typepy
-import xlwt
 from six.moves import range
 from typepy import Integer
 
@@ -274,6 +273,8 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         self.__col_style_table = {}
 
     def __get_cell_style(self, col):
+        import xlwt
+
         if col in self.__col_style_table:
             return self.__col_style_table.get(col)
 

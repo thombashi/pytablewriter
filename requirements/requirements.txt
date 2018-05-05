@@ -13,4 +13,3 @@ tabledata>=0.0.8
 toml>=0.9.4
 typepy
 XlsxWriter>=1.0.4
-xlwt

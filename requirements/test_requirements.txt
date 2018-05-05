@@ -2,3 +2,4 @@ pytablereader>=0.17.1
 pytest-cov
 pytest
 tox
+xlwt

@@ -13,7 +13,6 @@ import pathvalidate
 import six
 import typepy
 import xlsxwriter
-import xlwt
 
 from .._logger import logger
 
@@ -73,6 +72,8 @@ class ExcelWorkbookXls(ExcelWorkbook):
         self.open(file_path)
 
     def open(self, file_path):
+        import xlwt
+
         self._workbook = xlwt.Workbook()
 
     def close(self):
