@@ -608,7 +608,16 @@ class AbstractTableWriter(TableWriterInterface):
         self._preprocess_value_matrix()
 
     def __clear_preprocess_status(self):
-        self._logger.logger.debug("__clear_preprocess_status")
+        try:
+            if any([
+                self._is_complete_table_dp_preprocess,
+                self._is_complete_table_property_preprocess,
+                self._is_complete_header_preprocess,
+                self._is_complete_value_matrix_preprocess,
+            ]):
+                self._logger.logger.debug("__clear_preprocess_status")
+        except AttributeError:
+            pass
 
         self._is_complete_table_dp_preprocess = False
         self._is_complete_table_property_preprocess = False
@@ -616,7 +625,16 @@ class AbstractTableWriter(TableWriterInterface):
         self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocess_data(self):
-        self._logger.logger.debug("__clear_preprocess_data")
+        try:
+            if any([
+                self._column_dp_list,
+                self._table_header_list,
+                self._table_value_matrix,
+                self._table_value_dp_matrix,
+            ]):
+                self._logger.logger.debug("__clear_preprocess_data")
+        except AttributeError:
+            pass
 
         self._column_dp_list = []
         self._table_header_list = []
