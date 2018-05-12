@@ -330,6 +330,7 @@ class AbstractTableWriter(TableWriterInterface):
         try:
             for table_data in loader.load():
                 self.from_tabledata(table_data)
+            self.table_name = ""
             return
         except ptr.InvalidDataError:
             pass
