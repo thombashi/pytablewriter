@@ -3,7 +3,7 @@
 import os
 import sys
 
-from pytablewriter import __author__, __copyright__, __version__
+from pytablewriter import __author__, __copyright__, __name__, __version__
 import sphinx_rtd_theme
 
 
@@ -41,7 +41,7 @@ source_encoding = 'utf-8'
 master_doc = 'index'
 
 # General information about the project.
-project = u'pytablewriter'
+project = __name__
 copyright = __copyright__
 author = __author__
 
