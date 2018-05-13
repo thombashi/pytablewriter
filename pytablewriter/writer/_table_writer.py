@@ -547,6 +547,8 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_table_dp_preprocess:
             return
 
+        self._logger.logger.debug("_preprocess_table_dp")
+
         if typepy.is_empty_sequence(self.header_list) and self._use_default_header:
             self.header_list = [
                 convert_idx_to_alphabet(col_idx)
@@ -568,6 +570,8 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_table_property_preprocess:
             return
 
+        self._logger.logger.debug("_preprocess_table_property")
+
         if self.__iter_count == 1:
             import math
 
@@ -580,6 +584,8 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_header_preprocess:
             return
 
+        self._logger.logger.debug("_preprocess_header")
+
         self._table_header_list = [
             self._get_header_item(col_dp, header_dp)
             for col_dp, header_dp in
@@ -591,6 +597,9 @@ class AbstractTableWriter(TableWriterInterface):
     def _preprocess_value_matrix(self):
         if self._is_complete_value_matrix_preprocess:
             return
+
+        self._logger.logger.debug("_preprocess_value_matrix: value-rows={}".format(
+            len(self._table_value_dp_matrix)))
 
         self._table_value_matrix = [
             [
