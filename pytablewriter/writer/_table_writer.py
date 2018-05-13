@@ -328,8 +328,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         import pytablereader as ptr
 
-        loader = ptr.CsvTableTextLoader(csv_source)
-        loader.quoting_flags = self._quoting_flags
+        loader = ptr.CsvTableTextLoader(csv_source, quoting_flags=self._quoting_flags)
         try:
             for table_data in loader.load():
                 self.from_tabledata(table_data, is_overwrite_table_name=False)
@@ -337,8 +336,7 @@ class AbstractTableWriter(TableWriterInterface):
         except ptr.InvalidDataError:
             pass
 
-        loader = ptr.CsvTableFileLoader(csv_source)
-        loader.quoting_flags = self._quoting_flags
+        loader = ptr.CsvTableFileLoader(csv_source, quoting_flags=self._quoting_flags)
         for table_data in loader.load():
             self.from_tabledata(table_data)
 
