@@ -304,7 +304,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_dp_preprocess = True
 
-    def from_csv(self, csv_source):
+    def from_csv(self, csv_source, delimiter=","):
         """
         Set tabular attributes to the writer from a character-separated values (CSV) data source.
         Following attributes are set to the writer by the method:
@@ -329,6 +329,7 @@ class AbstractTableWriter(TableWriterInterface):
         import pytablereader as ptr
 
         loader = ptr.CsvTableTextLoader(csv_source, quoting_flags=self._quoting_flags)
+        loader.delimiter = delimiter
         try:
             for table_data in loader.load():
                 self.from_tabledata(table_data, is_overwrite_table_name=False)
@@ -337,6 +338,7 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         loader = ptr.CsvTableFileLoader(csv_source, quoting_flags=self._quoting_flags)
+        loader.delimiter = delimiter
         for table_data in loader.load():
             self.from_tabledata(table_data)
 
