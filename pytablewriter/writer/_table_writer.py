@@ -275,7 +275,7 @@ class AbstractTableWriter(TableWriterInterface):
         finally:
             self.stream = None
 
-    def from_tabledata(self, value):
+    def from_tabledata(self, value, is_overwrite_table_name=True):
         """
         Set tabular attributes to the writer from |TableData|.
         Following attributes are configured:
@@ -293,7 +293,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.__clear_preprocess()
 
-        self.table_name = value.table_name
+        if is_overwrite_table_name:
+            self.table_name = value.table_name
+
         self.header_list = value.header_list
         self._table_value_dp_matrix = value.value_dp_matrix
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
@@ -330,8 +332,7 @@ class AbstractTableWriter(TableWriterInterface):
         loader.quoting_flags = self._quoting_flags
         try:
             for table_data in loader.load():
-                self.from_tabledata(table_data)
-            self.table_name = ""
+                self.from_tabledata(table_data, is_overwrite_table_name=False)
             return
         except ptr.InvalidDataError:
             pass
