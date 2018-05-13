@@ -89,7 +89,7 @@ class WriterLogger(object):
         try:
             log_entry_list.append("rows={}".format(len(self.__writer.value_matrix)))
         except (TypeError, AttributeError):
-            pass
+            log_entry_list.append("rows=0")
 
         log_entry_list.append(self.__get_typehint_message())
 
