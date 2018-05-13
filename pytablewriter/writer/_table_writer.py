@@ -298,6 +298,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._table_value_dp_matrix = value.value_dp_matrix
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
             self._table_value_dp_matrix, self._column_dp_list)
+        self.__set_type_hint_list([col_dp.type_class for col_dp in self._column_dp_list])
 
         self._is_complete_table_dp_preprocess = True
 
