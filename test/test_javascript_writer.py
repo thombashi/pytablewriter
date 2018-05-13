@@ -219,11 +219,11 @@ class Test_JavaScriptTableWriter_type_hint(object):
 """,
             ],
             [
-                "th_none_none",
+                "typehint_datetime-string",
                 ["string", "datetime"],
                 DATA_MATRIX,
                 [typepy.DateTime, typepy.String],
-                """const th_none_none = [
+                """const typehint_datetime_string = [
     ["string", "datetime"],
     [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
     [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
