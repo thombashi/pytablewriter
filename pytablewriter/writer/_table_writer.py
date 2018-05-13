@@ -303,8 +303,8 @@ class AbstractTableWriter(TableWriterInterface):
 
     def from_csv(self, csv_source):
         """
-        Set tabular attributes to the writer from a CSV data source.
-        Following attributes are set:
+        Set tabular attributes to the writer from a character-separated values (CSV) data source.
+        Following attributes are set to the writer by the method:
 
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
@@ -343,7 +343,7 @@ class AbstractTableWriter(TableWriterInterface):
     def from_dataframe(self, dataframe):
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
-        Following attributes are set by the method:
+        Following attributes are set to the writer by the method:
 
         - :py:attr:`~.header_list`.
         - :py:attr:`~.value_matrix`.
