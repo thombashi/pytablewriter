@@ -508,8 +508,7 @@ class Test_MarkdownTableWriter_write_table_iter(object):
                 |1001|1002|1003|
 
                 """),
-        ],
-        [
+        ], [
             "mix length",
             ["string", "hb", "hc"],
             value_matrix_iter_1,

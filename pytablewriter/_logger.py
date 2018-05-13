@@ -77,8 +77,7 @@ class WriterLogger(object):
         self.__writer = writer
         self.__logger = logger
 
-        self.logger.debug(
-            "created WriterLogger: format={}".format(writer.format_name))
+        self.logger.debug("created WriterLogger: format={}".format(writer.format_name))
 
     def logging_start_write(self, extra_message_list=None):
         log_entry_list = [
@@ -88,8 +87,7 @@ class WriterLogger(object):
         ]
 
         try:
-            log_entry_list.append(
-                "rows={}".format(len(self.__writer.value_matrix)))
+            log_entry_list.append("rows={}".format(len(self.__writer.value_matrix)))
         except (TypeError, AttributeError):
             pass
 
@@ -106,16 +104,14 @@ class WriterLogger(object):
             self.__get_table_name_message(),
         ]
 
-        logger.debug(
-            "complete write table: {}".format(", ".join(log_entry_list)))
+        logger.debug("complete write table: {}".format(", ".join(log_entry_list)))
 
     def __get_format_name_message(self):
         return "format={:s}".format(self.__writer.format_name)
 
     def __get_table_name_message(self):
         if self.__writer.table_name:
-            table_name = MultiByteStrDecoder(
-                self.__writer.table_name).unicode_str
+            table_name = MultiByteStrDecoder(self.__writer.table_name).unicode_str
         else:
             table_name = None
 
@@ -124,8 +120,7 @@ class WriterLogger(object):
     def __get_typehint_message(self):
         try:
             return "type-hint={}".format([
-                type_hint(None).typename
-                for type_hint in self.__writer.type_hint_list
+                type_hint(None).typename for type_hint in self.__writer.type_hint_list
             ])
         except (TypeError, AttributeError):
             return "type-hint=[]"

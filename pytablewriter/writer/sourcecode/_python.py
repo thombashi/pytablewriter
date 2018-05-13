@@ -64,8 +64,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     def get_variable_name(self, value):
         import pathvalidate
 
-        return pathvalidate.sanitize_python_var_name(
-            self.table_name, "_").lower()
+        return pathvalidate.sanitize_python_var_name(self.table_name, "_").lower()
 
     def _write_table(self):
         if self.is_datetime_instance_formatting:
