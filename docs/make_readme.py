@@ -24,6 +24,7 @@ def write_examples(maker):
     examples_root = Path("pages").joinpath("examples")
 
     maker.inc_indent_level()
+
     maker.write_chapter("Write a Markdown table")
     maker.write_file(examples_root.joinpath("table_format", "markdown_example.txt"))
 
@@ -48,6 +49,9 @@ def write_examples(maker):
         "Write a Markdown table from ``pandas.DataFrame`` instance")
     maker.write_file(examples_root.joinpath(
         "datasource", "from_pandas_dataframe_example.txt"))
+
+    maker.write_chapter("Write a markdown table from a space-separated values")
+    maker.write_file(examples_root.joinpath("datasource", "from_ssv_example.txt"))
 
     maker.write_chapter("Create Elasticsearch index and put data")
     maker.write_file(examples_root.joinpath(

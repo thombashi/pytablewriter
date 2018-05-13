@@ -240,30 +240,65 @@ Write a Markdown table from ``pandas.DataFrame`` instance
 :Sample Code:
     .. code-block:: python
 
+        from textwrap import dedent
         import pandas as pd
         import pytablewriter
-        from StringIO import StringIO
+        import six
 
-        csv_data = StringIO(u""""i","f","c","if","ifc","bool","inf","nan","mix_num","time"
-        1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00+09:00"
-        2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
-        3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00+09:00"
-        """)
+        csv_data = six.StringIO(dedent("""\
+            "i","f","c","if","ifc","bool","inf","nan","mix_num","time"
+            1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00+09:00"
+            2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
+            3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00+09:00"
+            """))
         df = pd.read_csv(csv_data, sep=',')
 
         writer = pytablewriter.MarkdownTableWriter()
         writer.from_dataframe(df)
         writer.write_table()
 
+:Output:
+    .. code-block::
+
+        | i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
+        |--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------|
+        |  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01 00:00:00+09:00|
+        |  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
+        |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00|
+
+Write a markdown table from a space-separated values
+------------------------------------------------------
+:Sample Code:
+    .. code-block:: python
+
+        from textwrap import dedent
+        import pytablewriter
+
+        writer = pytablewriter.MarkdownTableWriter()
+        writer.table_name = "ps"
+        writer.from_csv(
+            dedent("""\
+                USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+                root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init
+                root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]
+                root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]
+                root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]
+                root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]
+            """),
+            delimiter=" ")
+        writer.write_table()
 
 :Output:
     .. code-block::
 
-         i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time
-        --:|---:|----|---:|---|-----|--------|---|-------:|-------------------------
-          1|1.10|aa  | 1.0|1  |True |Infinity|NaN|       1|2017-01-01 00:00:00+09:00
-          2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00
-          3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00
+        # ps
+        |USER|PID|%CPU|%MEM| VSZ |RSS |TTY|STAT|START|TIME|   COMMAND    |
+        |----|--:|---:|---:|----:|---:|---|----|-----|----|--------------|
+        |root|  1|   0| 0.4|77664|8784|?  |Ss  |May11|0:02|/sbin/init    |
+        |root|  2|   0| 0.0|    0|   0|?  |S   |May11|0:00|[kthreadd]    |
+        |root|  4|   0| 0.0|    0|   0|?  |I<  |May11|0:00|[kworker/0:0H]|
+        |root|  6|   0| 0.0|    0|   0|?  |I<  |May11|0:00|[mm_percpu_wq]|
+        |root|  7|   0| 0.0|    0|   0|?  |S   |May11|0:01|[ksoftirqd/0] |
 
 Create Elasticsearch index and put data
 -----------------------------------------
