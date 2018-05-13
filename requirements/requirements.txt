@@ -1,4 +1,4 @@
-DataProperty>=0.30.4
+DataProperty>=0.30.6
 dominate>=2.3.1
 elasticsearch>=5.4.0
 enum34;python_version<"3.4"
@@ -9,7 +9,7 @@ msgfy>=0.0.2
 pathvalidate>=0.17.1
 SimpleSQLite>=0.20.3
 six
-tabledata>=0.0.8
+tabledata>=0.0.10
 toml>=0.9.4
 typepy
 XlsxWriter>=1.0.4
