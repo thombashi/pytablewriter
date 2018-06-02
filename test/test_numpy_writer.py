@@ -16,7 +16,7 @@ from .data import (
 
 
 try:
-    import numpy as np
+    import numpy as np  # noqa: W0611
     SKIP_DATAFRAME_TEST = False
 except ImportError:
     SKIP_DATAFRAME_TEST = True

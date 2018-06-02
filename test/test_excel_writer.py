@@ -19,7 +19,7 @@ from ._common import print_test_result
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 
 try:
-    import xlwt
+    import xlwt  # noqa: W0611
     HAS_XLWT = True
 except ImportError:
     HAS_XLWT = False

@@ -9,12 +9,12 @@ from __future__ import absolute_import, print_function, unicode_literals
 import collections
 import datetime
 import json
-import platform
+import platform  # noqa: W0611
 from decimal import Decimal
 
 import pytablewriter as ptw
 import pytest
-import six
+import six  # noqa: W0611
 
 from ._common import print_test_result
 from .data import header_list, mix_header_list, mix_value_matrix, value_matrix
