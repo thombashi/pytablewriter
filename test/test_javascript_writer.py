@@ -9,6 +9,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 import collections
 import datetime
 import itertools
+from textwrap import dedent
 
 import pytablewriter
 import pytest
@@ -31,55 +32,60 @@ normal_test_data_list = [
          value=value_matrix,
          is_write_header=True,
          is_dti_fmt=True,
-         expected="""const table_name_ho_ge = [
-    ["a", "b", "c", "dd", "e"],
-    [1, 123.1, "a", 1, 1],
-    [2, 2.2, "bb", 2.2, 2.2],
-    [3, 3.3, "ccc", 3, "cccc"]
-];
+         expected=dedent("""\
+            const table_name_ho_ge = [
+                ["a", "b", "c", "dd", "e"],
+                [1, 123.1, "a", 1, 1],
+                [2, 2.2, "bb", 2.2, 2.2],
+                [3, 3.3, "ccc", 3, "cccc"]
+            ];
 
-"""),
+            """)),
     Data(table="null value",
          indent=0,
          header=header_list,
          value=None,
          is_write_header=True,
          is_dti_fmt=True,
-         expected="""const null_value = [
-    ["a", "b", "c", "dd", "e"]
-];
+         expected=dedent("""\
+            const null_value = [
+                ["a", "b", "c", "dd", "e"]
+            ];
 
-"""),
+            """)),
     Data(table="null table",
          indent=0,
          header=header_list,
          value=None,
          is_write_header=False,
          is_dti_fmt=True,
-         expected="""const null_table = [
-];
+         expected=dedent("""\
+            const null_table = [
+            ];
 
-"""),
+            """)),
     Data(table="table name",
          indent=0,
          header=None,
          value=value_matrix,
          is_write_header=True,
          is_dti_fmt=True,
-         expected="""const table_name = [
-    [1, 123.1, "a", 1, 1],
-    [2, 2.2, "bb", 2.2, 2.2],
-    [3, 3.3, "ccc", 3, "cccc"]
-];
+         expected=dedent("""\
+            const table_name = [
+                [1, 123.1, "a", 1, 1],
+                [2, 2.2, "bb", 2.2, 2.2],
+                [3, 3.3, "ccc", 3, "cccc"]
+            ];
 
-"""),
+            """)),
     Data(table="tablename",
          indent=1,
          header=header_list,
          value=value_matrix,
          is_write_header=True,
          is_dti_fmt=True,
-         expected="""    const tablename = [
+         expected="""\
+    const tablename = [
         ["a", "b", "c", "dd", "e"],
         [1, 123.1, "a", 1, 1],
         [2, 2.2, "bb", 2.2, 2.2],
@@ -93,43 +99,46 @@ normal_test_data_list = [
          value=value_matrix_with_none,
          is_write_header=True,
          is_dti_fmt=True,
-         expected="""const tablename = [
-    ["a", "b", "c", "dd", "e"],
-    [1, null, "a", 1, null],
-    [null, 2.2, null, 2.2, 2.2],
-    [3, 3.3, "ccc", null, "cccc"],
-    [null, null, null, null, null]
-];
+         expected=dedent("""\
+            const tablename = [
+                ["a", "b", "c", "dd", "e"],
+                [1, null, "a", 1, null],
+                [null, 2.2, null, 2.2, 2.2],
+                [3, 3.3, "ccc", null, "cccc"],
+                [null, null, null, null, null]
+            ];
 
-"""),
+            """)),
     Data(table="tablename",
          indent=0,
          header=mix_header_list,
          value=mix_value_matrix,
          is_write_header=True,
          is_dti_fmt=True,
-         expected="""const tablename = [
-    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
-    [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
-    [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
-];
+         expected=dedent("""\
+            const tablename = [
+                ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
+                [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
+                [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
+                [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
+            ];
 
-"""),
+            """)),
     Data(table="tablename",
          indent=0,
          header=mix_header_list,
          value=mix_value_matrix,
          is_write_header=True,
          is_dti_fmt=False,
-         expected="""const tablename = [
-    ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-    [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, "2017-01-01T00:00:00"],
-    [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
-    [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, "2017-01-01T00:00:00"]
-];
+         expected=dedent("""\
+            const tablename = [
+                ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
+                [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, "2017-01-01T00:00:00"],
+                [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
+                [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, "2017-01-01T00:00:00"]
+            ];
 
-"""),
+            """)),
     Data(table="float-with-null",
          indent=0,
          header=["a", "b"],
@@ -140,26 +149,28 @@ normal_test_data_list = [
          ],
          is_write_header=True,
          is_dti_fmt=False,
-         expected="""const float_with_null = [
-    ["a", "b"],
-    [0.03785679191278808, 826.21158713263],
-    [null, 826.21158713263],
-    [0.1, 1.0499675627886724]
-];
+         expected=dedent("""\
+            const float_with_null = [
+                ["a", "b"],
+                [0.03785679191278808, 826.21158713263],
+                [null, 826.21158713263],
+                [0.1, 1.0499675627886724]
+            ];
 
-"""),
+            """)),
     Data(table="line breaks",
          indent=0,
          header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
          value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
          is_write_header=True,
          is_dti_fmt=False,
-         expected="""const line_breaks = [
-    ["a b", " c d ", "e f"],
-    ["v1 v1", "v2 v2", "v3 v3"]
-];
+         expected=dedent("""\
+            const line_breaks = [
+                ["a b", " c d ", "e f"],
+                ["v1 v1", "v2 v2", "v3 v3"]
+            ];
 
-"""),
+            """)),
 ]
 
 exception_test_data_list = [
@@ -210,26 +221,27 @@ class Test_JavaScriptTableWriter_type_hint(object):
                 ["string", "datetime"],
                 DATA_MATRIX,
                 [None, None],
-                """const th_none_none = [
-    ["string", "datetime"],
-    ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
-    ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")]
-];
+                dedent("""\
+                    const th_none_none = [
+                        ["string", "datetime"],
+                        ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
+                        ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")]
+                    ];
 
-""",
-            ],
-            [
+                    """),
+            ], [
                 "typehint_datetime-string",
                 ["string", "datetime"],
                 DATA_MATRIX,
                 [typepy.DateTime, typepy.String],
-                """const typehint_datetime_string = [
-    ["string", "datetime"],
-    [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
-    [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
-];
+                dedent("""\
+                    const typehint_datetime_string = [
+                        ["string", "datetime"],
+                        [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
+                        [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
+                    ];
 
-""",
+                    """),
             ],
         ])
     def test_normal(self, capsys, table, header, value, type_hint, expected):
@@ -282,13 +294,14 @@ class Test_JavaScriptTableWriter_write_table(object):
         writer.value_matrix = value_matrix
         writer.write_table()
 
-        expected = """var $change_variable_declaration = [
-    [1, 123.1, "a", 1, 1],
-    [2, 2.2, "bb", 2.2, 2.2],
-    [3, 3.3, "ccc", 3, "cccc"]
-];
+        expected = dedent("""\
+            var $change_variable_declaration = [
+                [1, 123.1, "a", 1, 1],
+                [2, 2.2, "bb", 2.2, 2.2],
+                [3, 3.3, "ccc", 3, "cccc"]
+            ];
 
-"""
+            """)
 
         out, _err = capsys.readouterr()
         print_test_result(expected=expected, actual=out)
@@ -326,32 +339,33 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 len(value_matrix_iter),
-                """const tablename = [
-    ["ha", "hb", "hc"],
-    [1, 2, 3],
-    [11, 12, 13],
-    [1, 2, 3],
-    [11, 12, 13],
-    [101, 102, 103],
-    [1001, 1002, 1003]
-];
+                dedent("""\
+                    const tablename = [
+                        ["ha", "hb", "hc"],
+                        [1, 2, 3],
+                        [11, 12, 13],
+                        [1, 2, 3],
+                        [11, 12, 13],
+                        [101, 102, 103],
+                        [1001, 1002, 1003]
+                    ];
 
-""",
-            ],
-            [
+                    """),
+            ], [
                 "tablename",
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 len(value_matrix_iter) - 1,
-                """const tablename = [
-    ["ha", "hb", "hc"],
-    [1, 2, 3],
-    [11, 12, 13],
-    [1, 2, 3],
-    [11, 12, 13]
-];
+                dedent("""\
+                    const tablename = [
+                        ["ha", "hb", "hc"],
+                        [1, 2, 3],
+                        [11, 12, 13],
+                        [1, 2, 3],
+                        [11, 12, 13]
+                    ];
 
-""",
+                    """),
             ],
         ])
     def test_normal(self, capsys, table, header, value, iter_len, expected):
