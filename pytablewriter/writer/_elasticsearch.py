@@ -127,10 +127,8 @@ class ElasticsearchWriter(AbstractTableWriter):
             elif column_dp.bit_length <= 64:
                 return {"type": "long"}
 
-            raise ValueError(
-                "too large integer bits: "
-                "expected<=64bits, actual={:d}bits".format(
-                    column_dp.bit_length))
+            raise ValueError("too large integer bits: expected<=64bits, actual={:d}bits".format(
+                column_dp.bit_length))
 
         raise ValueError("unknown typecode: {}".format(column_dp.typecode))
 
@@ -163,8 +161,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         import elasticsearch as es
 
         if not isinstance(self.stream, es.Elasticsearch):
-            raise ValueError(
-                "stream must be an elasticsearch.Elasticsearch instance")
+            raise ValueError("stream must be an elasticsearch.Elasticsearch instance")
 
         self._verify_value_matrix()
         self._preprocess()

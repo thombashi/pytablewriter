@@ -250,10 +250,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
 class Test_JavaScriptTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
-        [
-            "table", "indent", "header", "value",
-            "is_write_header", "is_dti_fmt", "expected"
-        ],
+        ["table", "indent", "header", "value", "is_write_header", "is_dti_fmt", "expected"],
         [
             [
                 data.table, data.indent, data.header, data.value,
@@ -262,8 +259,7 @@ class Test_JavaScriptTableWriter_write_table(object):
             for data in normal_test_data_list
         ])
     def test_normal_single(
-            self, capsys, table, indent, header, value,
-            is_write_header, is_dti_fmt, expected):
+            self, capsys, table, indent, header, value, is_write_header, is_dti_fmt, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -308,8 +304,7 @@ class Test_JavaScriptTableWriter_write_table(object):
             ]
             for data in exception_test_data_list
         ])
-    def test_exception(
-            self, table, indent, header, value, is_write_header, expected):
+    def test_exception(self, table, indent, header, value, is_write_header, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
