@@ -462,7 +462,7 @@ class AbstractTableWriter(TableWriterInterface):
     def _get_header_format_string(_col_dp, _value_dp):
         return "{:s}"
 
-    def _get_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp, value_dp):
         return self.__get_align_format(col_dp, value_dp).format(
             self.__remove_line_break(col_dp.dp_to_str(value_dp)))
 
@@ -605,7 +605,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._table_value_matrix = [
             [
-                self._get_row_item(col_dp, value_dp)
+                self._to_row_item(col_dp, value_dp)
                 for col_dp, value_dp in zip(self._column_dp_list, value_dp_list)
             ]
             for value_dp_list in self._table_value_dp_matrix

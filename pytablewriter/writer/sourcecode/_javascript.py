@@ -130,8 +130,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def _get_closing_row_item_list(self):
         return ["];"]
 
-    def _get_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp, value_dp):
         if value_dp.data is None:
             value_dp = self.__NONE_VALUE_DP
 
-        return super(JavaScriptTableWriter, self)._get_row_item(col_dp, value_dp)
+        return super(JavaScriptTableWriter, self)._to_row_item(col_dp, value_dp)
