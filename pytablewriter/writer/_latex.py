@@ -188,8 +188,8 @@ class LatexTableWriter(LatexWriter):
     def __verbatim(self, value):
         return r"\verb" + "|{:s}|".format(value)
 
-    def _get_header_item(self, col_dp, value_dp):
-        return self.__verbatim(super(LatexTableWriter, self)._get_header_item(
+    def _to_header_item(self, col_dp, value_dp):
+        return self.__verbatim(super(LatexTableWriter, self)._to_header_item(
             col_dp, value_dp))
 
     def _get_row_item(self, col_dp, value_dp):

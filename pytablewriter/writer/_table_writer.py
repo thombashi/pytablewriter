@@ -450,7 +450,7 @@ class AbstractTableWriter(TableWriterInterface):
         except AttributeError:
             return column_dp.ascii_char_width
 
-    def _get_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp, value_dp):
         from typepy import String
 
         format_string = self._get_header_format_string(col_dp, value_dp)
@@ -589,7 +589,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._logger.logger.debug("_preprocess_header")
 
         self._table_header_list = [
-            self._get_header_item(col_dp, header_dp)
+            self._to_header_item(col_dp, header_dp)
             for col_dp, header_dp in
             zip(self._column_dp_list, self._dp_extractor.to_header_dp_list())
         ]

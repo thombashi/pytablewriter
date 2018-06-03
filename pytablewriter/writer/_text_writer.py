@@ -191,9 +191,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self._get_align_char(dataproperty.Align.CENTER),
             str(self._get_padding_len(col_dp, value_dp)))
 
-    def _get_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp, value_dp):
         return self.__value_cell_margin_format.format(
-            super(TextTableWriter, self)._get_header_item(col_dp, value_dp))
+            super(TextTableWriter, self)._to_header_item(col_dp, value_dp))
 
     def _get_row_item(self, col_dp, value_dp):
         return self.__value_cell_margin_format.format(

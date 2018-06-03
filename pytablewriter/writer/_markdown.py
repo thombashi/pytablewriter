@@ -43,9 +43,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
         self._dp_extractor.min_column_width = 3
 
-    def _get_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp, value_dp):
         return self.__escape_vertical_bar_char(
-            super(MarkdownTableWriter, self)._get_header_item(col_dp, value_dp))
+            super(MarkdownTableWriter, self)._to_header_item(col_dp, value_dp))
 
     def _get_row_item(self, col_dp, value_dp):
         return self.__escape_vertical_bar_char(
