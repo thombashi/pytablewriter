@@ -20,6 +20,9 @@ class ElasticsearchWriter(AbstractTableWriter):
     """
     A table writer class for Elasticsearch.
 
+    :Dependency Packages:
+        - `elasticsearch-py <https://github.com/elastic/elasticsearch-py>`__
+
     .. py:attribute:: index_name
 
         Alias attribute for |table_name|.

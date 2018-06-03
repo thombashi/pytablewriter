@@ -1,6 +1,5 @@
 DataProperty>=0.30.6
 dominate>=2.3.1
-elasticsearch>=5.4.0
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
 logbook
