@@ -5,10 +5,11 @@ ipaddress;python_version<"3.3"
 logbook
 mbstrdecoder
 msgfy>=0.0.2
-pathvalidate>=0.17.1
-SimpleSQLite>=0.20.3
+pathvalidate>=0.17.3
+SimpleSQLite>=0.21.2
 six
-tabledata>=0.0.10
+tabledata>=0.0.12
 toml>=0.9.4
 typepy
-XlsxWriter>=1.0.4
+XlsxWriter>=1.0.5
+

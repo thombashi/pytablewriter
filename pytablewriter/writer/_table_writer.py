@@ -334,7 +334,7 @@ class AbstractTableWriter(TableWriterInterface):
             for table_data in loader.load():
                 self.from_tabledata(table_data, is_overwrite_table_name=False)
             return
-        except ptr.InvalidDataError:
+        except ptr.DataError:
             pass
 
         loader = ptr.CsvTableFileLoader(csv_source, quoting_flags=self._quoting_flags)

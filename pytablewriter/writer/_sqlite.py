@@ -79,7 +79,7 @@ class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
                 for value_dp_list in self._table_value_dp_matrix
             ])
         self.stream.create_table_from_tabledata(
-            tabledata.SQLiteTableDataSanitizer(table_data).sanitize())
+            simplesqlite.SQLiteTableDataSanitizer(table_data).sanitize())
 
     def _write_value_row_separator(self):
         pass

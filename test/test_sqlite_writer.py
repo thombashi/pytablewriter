@@ -80,7 +80,7 @@ normal_test_data_list = [
          value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
          expected=TableData(
              "line_breaks",
-             ["ab", "cd", "ef"],
+             ["a_b", "_c__d_", "e__f"],
              [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]])),
     Data(table="empty header",
          header=[],
