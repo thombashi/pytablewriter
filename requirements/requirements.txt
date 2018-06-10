@@ -1,4 +1,4 @@
-DataProperty>=0.30.6
+DataProperty>=0.31.0
 dominate>=2.3.1
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
@@ -6,9 +6,9 @@ logbook
 mbstrdecoder
 msgfy>=0.0.2
 pathvalidate>=0.17.3
-SimpleSQLite>=0.21.2
+SimpleSQLite>=0.22.0
 six
-tabledata>=0.0.12
+tabledata>=0.0.14
 toml>=0.9.4
 typepy
 XlsxWriter>=1.0.5
