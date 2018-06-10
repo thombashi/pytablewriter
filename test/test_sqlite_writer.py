@@ -171,7 +171,7 @@ class Test_SqliteTableWriter_write_table_iter(object):
                 TableData(
                     table_name='tablename',
                     header_list=['ha', 'hb', 'hc'],
-                    record_list=[
+                    row_list=[
                         [1.0, 2.0, 3.0],
                         [11.0, 12.0, 13.0],
                         [1.0, 2.0, 3.0],

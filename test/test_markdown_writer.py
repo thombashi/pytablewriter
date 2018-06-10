@@ -359,7 +359,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.from_tabledata(TableData(
             table_name="loader_mapping",
             header_list=['Name', 'Loader'],
-            record_list=[
+            row_list=[
                 ['csv', 'CsvTableFileLoader'],
                 ['excel', 'ExcelTableFileLoader'],
                 ['html', 'HtmlTableFileLoader'],
@@ -394,7 +394,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.from_tabledata(TableData(
             table_name="first",
             header_list=['Name', 'Loader'],
-            record_list=[
+            row_list=[
                 ['csv', 'CsvTableFileLoader'],
                 ['excel', 'ExcelTableFileLoader'],
             ]))
@@ -403,7 +403,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.from_tabledata(TableData(
             table_name="second",
             header_list=['a', 'b', 'c'],
-            record_list=[
+            row_list=[
                 ['1', 'AA', 'abc'],
                 ['2', 'BB', 'zzz'],
             ]))
@@ -433,7 +433,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData(
-            table_name="", header_list=header_list, record_list=value_matrix))
+            table_name="", header_list=header_list, row_list=value_matrix))
         writer.margin = 1
         writer.write_table()
 
@@ -454,7 +454,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_margin_2(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData(
-            table_name="", header_list=header_list, record_list=value_matrix))
+            table_name="", header_list=header_list, row_list=value_matrix))
         writer.margin = 2
         writer.write_table()
 
