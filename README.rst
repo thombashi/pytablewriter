@@ -479,7 +479,6 @@ Python 2.7+ or 3.4+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
 - `dominate <http://github.com/Knio/dominate/>`__
-- `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
 - `logbook <http://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
@@ -495,6 +494,8 @@ Optional Dependencies
 ----------------------------------
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `xlwt <http://www.python-excel.org/>`__
+- `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
+
 
 Test dependencies
 -----------------
