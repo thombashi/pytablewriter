@@ -297,6 +297,11 @@ class AbstractTableWriter(TableWriterInterface):
             self.table_name = value.table_name
 
         self.header_list = value.header_list
+        self.value_matrix = value.row_list
+
+        if not value.has_value_dp_matrix:
+            return
+
         self._table_value_dp_matrix = value.value_dp_matrix
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
             self._table_value_dp_matrix, self._column_dp_list)
