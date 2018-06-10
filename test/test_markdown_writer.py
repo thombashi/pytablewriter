@@ -599,3 +599,31 @@ class Test_MarkdownTableWriter_write_table_iter(object):
 
         with pytest.raises(expected):
             writer.write_table_iter()
+
+
+class Test_MarkdownTableWriter_from_tablib(object):
+
+    def test_normal_multiple_write(self, capsys):
+        import tablib
+
+        data = tablib.Dataset()
+        data.headers = ['a', 'b', 'c']
+        data.append(['1', 'AA', 'abc'])
+        data.append(['2', 'BB', 'zzz'])
+
+        writer = table_writer_class()
+        writer.from_tablib(data)
+        writer.write_table()
+
+        expected = dedent("""\
+            | a | b | c |
+            |--:|---|---|
+            |  1|AA |abc|
+            |  2|BB |zzz|
+
+            """)
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected

@@ -382,6 +382,14 @@ class AbstractTableWriter(TableWriterInterface):
             self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes
         ]
 
+    def from_tablib(self, tablib_dataset):
+        """
+        Set tabular attributes to the writer from :py:class:`tablib.Dataset`.
+        """
+
+        self.header_list = tablib_dataset.headers
+        self.value_matrix = [row for row in tablib_dataset]
+
     def write_table(self):
         """
         |write_table|.
