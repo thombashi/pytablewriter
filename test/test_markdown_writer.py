@@ -11,6 +11,7 @@ from textwrap import dedent
 
 import pytablewriter as ptw
 import pytest
+import six  # noqa: W0611
 from tabledata import TableData
 
 from ._common import print_test_result
@@ -463,6 +464,52 @@ class Test_MarkdownTableWriter_write_table(object):
             |    1  |  123.1  |  a    |  1.0  |     1  |
             |    2  |    2.2  |  bb   |  2.2  |   2.2  |
             |    3  |    3.3  |  ccc  |  3.0  |  cccc  |
+
+            """)
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
+    @pytest.mark.skipif("six.PY2")
+    def test_normal_escape_html_tag(self, capsys):
+        writer = table_writer_class()
+        writer.header_list = ["no", "text"]
+        writer.value_matrix = [
+            [1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"],
+        ]
+        writer.is_escape_html_tag = True
+        writer.write_table()
+
+        expected = dedent("""\
+            |no |                                   text                                    |
+            |--:|---------------------------------------------------------------------------|
+            |  1|&lt;caption&gt;Table &#x27;formatting for Jupyter Notebook.&lt;/caption&gt;|
+
+            """)
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
+    @pytest.mark.skipif("six.PY2")
+    def test_normal_escape_html_tag_from_tabledata(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(TableData(
+            table_name="",
+            header_list=["no", "text"],
+            row_list=[
+                [1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"],
+            ]))
+        writer.is_escape_html_tag = True
+        writer.write_table()
+
+        expected = dedent("""\
+            |no |                                   text                                    |
+            |--:|---------------------------------------------------------------------------|
+            |  1|&lt;caption&gt;Table &#x27;formatting for Jupyter Notebook.&lt;/caption&gt;|
 
             """)
 

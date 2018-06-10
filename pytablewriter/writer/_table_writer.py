@@ -11,6 +11,7 @@ import re
 import sys
 
 import msgfy
+import six
 import typepy
 from six.moves import zip
 from tabledata import convert_idx_to_alphabet
@@ -40,6 +41,10 @@ class AbstractTableWriter(TableWriterInterface):
     .. py:attribute:: is_padding
 
         Padding for each item in the table if the value is |True|.
+
+    .. py:attribute:: is_escape_html_tag
+
+        Escape HTML tags in cells in the table if the value is |True|.
 
     .. py:attribute:: iteration_length
 
@@ -171,6 +176,15 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def is_escape_html_tag(self):
+        return self._dp_extractor.is_escape_html_tag
+
+    @is_escape_html_tag.setter
+    def is_escape_html_tag(self, flag):
+        self._dp_extractor.is_escape_html_tag = flag
+        self.__clear_preprocess()
+
+    @property
     def _quoting_flags(self):
         return self._dp_extractor.quoting_flags
 
@@ -209,6 +223,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.is_formatting_float = True
         self.is_padding = True
+        self.is_escape_html_tag = False
 
         self.header_list = None
         self.type_hint_list = None
@@ -245,7 +260,6 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     def _repr_html_(self):
-        import six
         from ._html import HtmlTableWriter
 
         writer = HtmlTableWriter()

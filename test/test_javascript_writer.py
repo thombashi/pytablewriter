@@ -308,6 +308,72 @@ class Test_JavaScriptTableWriter_write_table(object):
 
         assert out == expected
 
+    def test_normal_escape_quotes_1(self, capsys):
+        writer = table_writer_class()
+
+        expected = r"""const escape_quotes_1 = [
+    [8, "data = ["],
+    [9, "    [0,   0.1,      \"hoge\", True,   0,      \"2017-01-01 03:04:05+0900\"],"],
+    [10, "    [2,   \"-2.23\",  \"foo\",  False,  None,   \"2017-12-23 12:34:51+0900\"],"],
+    [11, "    [3,   0,        \"bar\",  \"true\",  \"inf\", \"2017-03-03 22:44:55+0900\"],"],
+    [12, "    [-10, -9.9,     \"\",     \"FALSE\", \"nan\", \"2017-01-01 00:00:00+0900\"],"],
+    [13, "]"]
+];
+
+"""
+        writer.table_name = "escape quotes 1"
+        writer.value_matrix = [
+            [8, 'data = ['],
+            [9, '    [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],'],
+            [10, '    [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],'],
+            [11, '    [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],'],
+            [12, '    [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],'],
+            [13, ']'],
+        ]
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_normal_escape_quotes_2(self, capsys):
+        writer = table_writer_class()
+
+        expected = r"""const escape_quotes_2 = [
+    [2, "writer.from_csv("],
+    [3, "    dedent(\"\"\"\\"],
+    [4, "        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"],
+    [5, "        root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init"],
+    [6, "        root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]"],
+    [7, "        root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]"],
+    [8, "        root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]"],
+    [9, "        root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]"],
+    [10, "    \"\"\"),"],
+    [11, "    delimiter=\" \")"]
+];
+
+"""
+        writer.table_name = "escape quotes 2"
+        writer.value_matrix = [
+            [2, 'writer.from_csv('],
+            [3, '    dedent("""\\'],
+            [4, '        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND'],
+            [5, '        root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init'],
+            [6, '        root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]'],
+            [7, '        root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]'],
+            [8, '        root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]'],
+            [9, '        root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]'],
+            [10, '    """),'],
+            [11, '    delimiter=" ")'],
+        ]
+        writer.write_table()
+
+        out, _err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_write_header", "expected"],
         [
