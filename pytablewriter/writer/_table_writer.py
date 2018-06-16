@@ -401,8 +401,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _write_table_iter(self):
         if not self.support_split_write:
-            raise NotSupportedError(
-                "the class not supported the write_table_iter method")
+            raise NotSupportedError("the class not supported the write_table_iter method")
 
         self._verify_table_name()
         self._verify_stream()
