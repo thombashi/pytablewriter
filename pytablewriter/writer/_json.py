@@ -111,21 +111,18 @@ class JsonTableWriter(IndentationTextTableWriter):
             dp_matrix = []
 
         value_matrix = [
-            [self.__get_data_helper(dp) for dp in dp_list]
-            for dp_list in dp_matrix
+            [self.__get_data_helper(dp) for dp in dp_list] for dp_list in dp_matrix
         ]
 
         self._table_value_matrix = [
-            dict(zip(self.header_list, value_list))
-            for value_list in value_matrix
+            dict(zip(self.header_list, value_list)) for value_list in value_matrix
         ]
 
         self._is_complete_value_matrix_preprocess = True
 
     @staticmethod
     def __get_data_helper(dp):
-        if (dp.typecode == typepy.Typecode.REAL_NUMBER and
-                isinstance(dp.data, Decimal)):
+        if dp.typecode == typepy.Typecode.REAL_NUMBER and isinstance(dp.data, Decimal):
             return float(dp.data)
 
         if dp.typecode == typepy.Typecode.DATETIME:
@@ -135,8 +132,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def _get_opening_row_item_list(self):
         if typepy.is_not_null_string(self.table_name):
-            return ['{{ "{:s}" : ['.format(
-                MultiByteStrDecoder(self.table_name).unicode_str)]
+            return ['{{ "{:s}" : ['.format(MultiByteStrDecoder(self.table_name).unicode_str)]
 
         return ["["]
 

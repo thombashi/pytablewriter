@@ -312,8 +312,7 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
                 |}
 
                 """),
-        ],
-        [
+        ], [
             None,
             None,
             value_matrix_iter,
