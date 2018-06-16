@@ -81,12 +81,12 @@ normal_test_data_list = [
             ! foo - bar
             |-
             | style="text-align:right"| 1
-            |
+            | 
             # a b c
             # h o g e
             |-
             | style="text-align:right"| 2
-            |
+            | 
             *hoge
             * abc
             |-
@@ -138,28 +138,28 @@ normal_test_data_list = [
             ! e
             |-
             | style="text-align:right"| 1
-            |
+            | 
             | a
             | style="text-align:right"| 1.0
-            |
+            | 
             |-
-            |
+            | 
             | style="text-align:right"| 2.2
-            |
+            | 
             | style="text-align:right"| 2.2
             | style="text-align:right"| 2.2
             |-
             | style="text-align:right"| 3
             | style="text-align:right"| 3.3
             | ccc
-            |
+            | 
             | cccc
             |-
-            |
-            |
-            |
-            |
-            |
+            | 
+            | 
+            | 
+            | 
+            | 
             |}
 
             """)),
