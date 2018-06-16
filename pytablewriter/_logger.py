@@ -96,7 +96,7 @@ class WriterLogger(object):
         if extra_message_list:
             log_entry_list.extend(extra_message_list)
 
-        logger.debug("write table: {}".format(", ".join(log_entry_list)))
+        logger.debug("start write table: {}".format(", ".join(log_entry_list)))
 
     def logging_complete_write(self):
         log_entry_list = [
