@@ -100,9 +100,7 @@ class WriterLogger(object):
             log_entry_list.append("rows=NaN")
 
         log_entry_list.append(self.__get_typehint_message())
-
-        if extra_message_list:
-            log_entry_list.extend(extra_message_list)
+        log_entry_list.extend(self.__get_extra_log_entry_list())
 
         self.logger.debug("start write table: {}".format(", ".join(log_entry_list)))
 
@@ -111,6 +109,7 @@ class WriterLogger(object):
             self.__get_format_name_message(),
             self.__get_table_name_message(),
         ]
+        log_entry_list.extend(self.__get_extra_log_entry_list())
 
         self.logger.debug("complete write table: {}".format(", ".join(log_entry_list)))
 
@@ -124,6 +123,14 @@ class WriterLogger(object):
             table_name = None
 
         return "table-name='{}'".format(table_name)
+
+    def __get_extra_log_entry_list(self):
+        if self.__writer._iter_count is None:
+            return []
+
+        return [
+            "iteration={}/{}".format(self.__writer._iter_count, self.__writer.iteration_length)
+        ]
 
     def __get_typehint_message(self):
         try:

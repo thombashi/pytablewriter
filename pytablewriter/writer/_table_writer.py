@@ -248,7 +248,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.iteration_length = -1
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
-        self.__iter_count = None
+        self._iter_count = None
 
         self.__align_char_mapping = {
             Align.AUTO: "<",
@@ -412,9 +412,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._verify_header()
 
-        self._logger.logging_start_write([
-            "iteration-length={:d}".format(self.iteration_length)
-        ])
+        self._logger.logger.debug(
+            "_write_table_iter: iteration-length={:d}".format(self.iteration_length))
 
         stash_is_write_header = self.is_write_header
         stach_is_write_opening_row = self.is_write_opening_row
@@ -422,12 +421,12 @@ class AbstractTableWriter(TableWriterInterface):
 
         try:
             self.is_write_closing_row = False
-            self.__iter_count = 1
+            self._iter_count = 1
 
             for work_matrix in self.value_matrix:
                 is_final_iter = all([
                     self.iteration_length > 0,
-                    self.__iter_count >= self.iteration_length
+                    self._iter_count >= self.iteration_length
                 ])
 
                 if is_final_iter:
@@ -436,15 +435,16 @@ class AbstractTableWriter(TableWriterInterface):
                 self.__set_value_matrix(work_matrix)
                 self.__clear_preprocess_status()
 
-                self._write_table()
+                with self._logger:
+                    self._write_table()
 
-                if not is_final_iter:
-                    self._write_value_row_separator()
+                    if not is_final_iter:
+                        self._write_value_row_separator()
 
                 self.is_write_opening_row = False
                 self.is_write_header = False
 
-                self.write_callback(self.__iter_count, self.iteration_length)
+                self.write_callback(self._iter_count, self.iteration_length)
 
                 # update typehint for the next iteration
                 """
@@ -457,14 +457,12 @@ class AbstractTableWriter(TableWriterInterface):
                 if is_final_iter:
                     break
 
-                self.__iter_count += 1
+                self._iter_count += 1
         finally:
             self.is_write_header = stash_is_write_header
             self.is_write_opening_row = stach_is_write_opening_row
             self.is_write_closing_row = stash_is_write_closing_row
-            self.__iter_count = None
-
-        self._logger.logging_complete_write()
+            self._iter_count = None
 
     def _get_padding_len(self, column_dp, value_dp=None):
         if not self.is_padding:
@@ -599,7 +597,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._logger.logger.debug("_preprocess_table_property")
 
-        if self.__iter_count == 1:
+        if self._iter_count == 1:
             import math
 
             for column_dp in self._column_dp_list:
