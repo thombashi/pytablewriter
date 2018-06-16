@@ -257,8 +257,8 @@ class Test_HtmlTableWriter_write_table(object):
         writer.value_matrix = value
         writer.write_table()
 
-        out, _err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out)
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
 

@@ -253,8 +253,8 @@ class Test_JavaScriptTableWriter_type_hint(object):
 
         writer.write_table()
 
-        out, _err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out)
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
 
@@ -282,8 +282,8 @@ class Test_JavaScriptTableWriter_write_table(object):
 
         writer.write_table()
 
-        out, _err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out)
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
 
@@ -303,8 +303,8 @@ class Test_JavaScriptTableWriter_write_table(object):
 
             """)
 
-        out, _err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out)
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
 
@@ -332,8 +332,8 @@ class Test_JavaScriptTableWriter_write_table(object):
         ]
         writer.write_table()
 
-        out, _err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out)
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
 
@@ -369,8 +369,8 @@ class Test_JavaScriptTableWriter_write_table(object):
         ]
         writer.write_table()
 
-        out, _err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out)
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
 
