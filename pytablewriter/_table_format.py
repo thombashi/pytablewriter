@@ -159,9 +159,7 @@ class TableFormat(enum.Enum):
 
         return self.__file_extension_list
 
-    def __init__(
-            self, name_list, writer_class, format_attribute,
-            file_extension_list):
+    def __init__(self, name_list, writer_class, format_attribute, file_extension_list):
         self.__name_list = name_list
         self.__writer_class = writer_class
         self.__format_attribute = format_attribute
@@ -179,8 +177,7 @@ class TableFormat(enum.Enum):
         """
 
         return [
-            table_format
-            for table_format in TableFormat
+            table_format for table_format in TableFormat
             if table_format.format_attribute & format_attribute
         ]
 
