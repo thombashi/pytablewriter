@@ -8,6 +8,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
+from textwrap import dedent
 
 import pytablewriter as ptw
 import pytest
@@ -21,10 +22,11 @@ Data = collections.namedtuple("Data", "header value expected")
 normal_test_data_list = [
     Data(header=header_list,
          value=value_matrix,
-         expected="""a:1\tb:123.1\tc:"a"\tdd:1\te:1
-a:2\tb:2.2\tc:"bb"\tdd:2.2\te:2.2
-a:3\tb:3.3\tc:"ccc"\tdd:3\te:"cccc"
-"""),
+         expected=dedent("""\
+            a:1\tb:123.1\tc:"a"\tdd:1\te:1
+            a:2\tb:2.2\tc:"bb"\tdd:2.2\te:2.2
+            a:3\tb:3.3\tc:"ccc"\tdd:3\te:"cccc"
+            """)),
     Data(header=header_list,
          value=[
              ["1", "", "a", "1",   None],
@@ -33,22 +35,23 @@ a:3\tb:3.3\tc:"ccc"\tdd:3\te:"cccc"
              [3, 3.3, "ccc", None,   "cccc"],
              [None, None, None, None,   None],
          ],
-         expected="""a:1\tc:"a"\tdd:1
-b:2.2\tdd:2.2\te:2.2
-a:3\tb:3.3\tc:"ccc"\te:"cccc"
-"""),
+         expected=dedent("""\
+            a:1\tc:"a"\tdd:1
+            b:2.2\tdd:2.2\te:2.2
+            a:3\tb:3.3\tc:"ccc"\te:"cccc"
+            """)),
     Data(header=["a!0", "a#1", "a.2$", "a_%3", "a-&4"],
-         value=[
-        ["a\0b", "c   d", "e\tf", "g\nh", "i\r\nj"],
-    ],
-        expected="""a0:"a b"\ta1:"c   d"\ta.2:"e  f"\ta_3:"g h"\ta-4:"i j"
-"""),
+         value=[["a\0b", "c   d", "e\tf", "g\nh", "i\r\nj"]],
+         expected=dedent("""\
+            a0:"a b"\ta1:"c   d"\ta.2:"e  f"\ta_3:"g h"\ta-4:"i j"
+            """)),
     Data(header=float_header_list,
          value=float_value_matrix,
-         expected="""a:0.01\tb:0.00125\tc:0
-a:1\tb:99.9\tc:0.01
-a:1.2\tb:999999.123\tc:0.001
-"""),
+         expected=dedent("""\
+            a:0.01\tb:0.00125\tc:0
+            a:1\tb:99.9\tc:0.01
+            a:1.2\tb:999999.123\tc:0.001
+            """)),
 ]
 
 exception_test_data_list = [

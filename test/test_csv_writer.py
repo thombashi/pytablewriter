@@ -220,6 +220,7 @@ class Test_CsvTableWriter_write_table_iter(object):
         writer.write_table_iter()
 
         out, _err = capsys.readouterr()
+
         assert out == expected
 
     @pytest.mark.parametrize(
