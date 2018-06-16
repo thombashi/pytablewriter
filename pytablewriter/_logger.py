@@ -98,7 +98,7 @@ class WriterLogger(object):
 
         logger.debug("write table: {}".format(", ".join(log_entry_list)))
 
-    def logging_complete_write(self, extra_message_list=None):
+    def logging_complete_write(self):
         log_entry_list = [
             self.__get_format_name_message(),
             self.__get_table_name_message(),
