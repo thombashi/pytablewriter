@@ -79,6 +79,14 @@ class WriterLogger(object):
 
         self.logger.debug("created WriterLogger: format={}".format(writer.format_name))
 
+    def __enter__(self):
+        self.logging_start_write()
+        return self
+
+    def __exit__(self, *exc):
+        self.logging_complete_write()
+        return False
+
     def logging_start_write(self, extra_message_list=None):
         log_entry_list = [
             self.__get_format_name_message(),
