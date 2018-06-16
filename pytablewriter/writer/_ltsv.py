@@ -59,4 +59,4 @@ class LtsvTableWriter(CsvTableWriter):
                 if typepy.is_empty_sequence(ltsv_item_list):
                     continue
 
-                self.stream.write("\t".join(ltsv_item_list) + "\n")
+                self._write_line("\t".join(ltsv_item_list))
