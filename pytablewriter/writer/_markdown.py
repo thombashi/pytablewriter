@@ -89,13 +89,12 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             - Vertical bar characters (``'|'``) in table items are escaped
         """
 
-        self._logger.logging_start_write()
-        self._verify_property()
-        self.__write_chapter()
-        self._write_table()
-        if self.is_write_null_line_after_table:
-            self.write_null_line()
-        self._logger.logging_complete_write()
+        with self._logger:
+            self._verify_property()
+            self.__write_chapter()
+            self._write_table()
+            if self.is_write_null_line_after_table:
+                self.write_null_line()
 
     def _write_table_iter(self):
         self.__write_chapter()

@@ -395,10 +395,9 @@ class AbstractTableWriter(TableWriterInterface):
         |write_table|.
         """
 
-        self._logger.logging_start_write()
-        self._verify_property()
-        self._write_table()
-        self._logger.logging_complete_write()
+        with self._logger:
+            self._verify_property()
+            self._write_table()
 
     def _write_table_iter(self):
         if not self.support_split_write:

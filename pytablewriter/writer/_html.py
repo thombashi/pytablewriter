@@ -52,27 +52,24 @@ class HtmlTableWriter(TextTableWriter):
             - |None| is not written
         """
 
-        self._logger.logging_start_write()
+        with self._logger:
+            self._verify_property()
+            self._preprocess()
 
-        self._verify_property()
-        self._preprocess()
+            if typepy.is_not_null_string(self.table_name):
+                self._table_tag = tags.table(
+                    id=pathvalidate.sanitize_python_var_name(self.table_name))
+                self._table_tag += tags.caption(
+                    MultiByteStrDecoder(self.table_name).unicode_str)
+            else:
+                self._table_tag = tags.table()
 
-        if typepy.is_not_null_string(self.table_name):
-            self._table_tag = tags.table(
-                id=pathvalidate.sanitize_python_var_name(self.table_name))
-            self._table_tag += tags.caption(
-                MultiByteStrDecoder(self.table_name).unicode_str)
-        else:
-            self._table_tag = tags.table()
+            try:
+                self._write_header()
+            except EmptyHeaderError:
+                pass
 
-        try:
-            self._write_header()
-        except EmptyHeaderError:
-            pass
-
-        self._write_body()
-
-        self._logger.logging_complete_write()
+            self._write_body()
 
     def _write_header(self):
         if not self.is_write_header:

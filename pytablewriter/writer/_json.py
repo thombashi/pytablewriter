@@ -72,34 +72,33 @@ class JsonTableWriter(IndentationTextTableWriter):
     def _write_table(self):
         self._preprocess_value_matrix()
 
-        self._logger.logging_start_write()
-        self._write_opening_row()
-        self.inc_indent_level()
+        with self._logger:
+            self._write_opening_row()
+            self.inc_indent_level()
 
-        json_text_list = []
-        for json_data in self._table_value_matrix:
-            json_text = json.dumps(
-                json_data, sort_keys=True, indent=4 * self._indent_level)
-            json_text = strip_quote(
-                json_text,
-                self._dp_extractor.type_value_mapping.get(
-                    typepy.Typecode.NONE))
-            json_text = strip_quote(json_text, "true")
-            json_text = strip_quote(json_text, "false")
-            json_text_list.append(json_text)
+            json_text_list = []
+            for json_data in self._table_value_matrix:
+                json_text = json.dumps(
+                    json_data, sort_keys=True, indent=4 * self._indent_level)
+                json_text = strip_quote(
+                    json_text,
+                    self._dp_extractor.type_value_mapping.get(typepy.Typecode.NONE))
+                json_text = strip_quote(json_text, "true")
+                json_text = strip_quote(json_text, "false")
+                json_text_list.append(json_text)
 
-        joint_text = self.char_right_side_row + "\n"
-        json_text = joint_text.join(json_text_list)
-        if all([
-                not self.is_write_closing_row,
-                typepy.is_not_null_string(json_text),
-        ]):
-            json_text += joint_text
+            joint_text = self.char_right_side_row + "\n"
+            json_text = joint_text.join(json_text_list)
+            if all([
+                    not self.is_write_closing_row,
+                    typepy.is_not_null_string(json_text),
+            ]):
+                json_text += joint_text
 
-        self.stream.write(json_text)
+            self.stream.write(json_text)
 
-        self.dec_indent_level()
-        self._write_closing_row()
+            self.dec_indent_level()
+            self._write_closing_row()
 
     def _preprocess_value_matrix(self):
         if self._is_complete_value_matrix_preprocess:

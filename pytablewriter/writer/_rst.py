@@ -35,15 +35,12 @@ class RstTableWriter(IndentationTextTableWriter):
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
     def write_table(self):
-        self._logger.logging_start_write()
-
-        self._write_line(self._get_table_directive())
-        self._verify_property()
-        self._write_table()
-        if self.is_write_null_line_after_table:
-            self.write_null_line()
-
-        self._logger.logging_complete_write()
+        with self._logger:
+            self._write_line(self._get_table_directive())
+            self._verify_property()
+            self._write_table()
+            if self.is_write_null_line_after_table:
+                self.write_null_line()
 
     def _get_table_directive(self):
         if typepy.is_null_string(self.table_name):

@@ -46,7 +46,6 @@ class TomlTableWriter(TextTableWriter):
             :ref:`example-toml-table-writer`
         """
 
-        self._logger.logging_start_write()
-        self._verify_property()
-        self.stream.write(toml.dumps(self.tabledata.as_dict()))
-        self._logger.logging_complete_write()
+        with self._logger:
+            self._verify_property()
+            self.stream.write(toml.dumps(self.tabledata.as_dict()))

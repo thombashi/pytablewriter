@@ -45,22 +45,18 @@ class LtsvTableWriter(CsvTableWriter):
             :ref:`example-ltsv-table-writer`
         """
 
-        self._logger.logging_start_write()
+        with self._logger:
+            self._verify_property()
+            self._preprocess()
 
-        self._verify_property()
-        self._preprocess()
+            for value_list in self._table_value_matrix:
+                ltsv_item_list = [
+                    "{:s}:{}".format(pathvalidate.sanitize_ltsv_label(header_name), value)
+                    for header_name, value in zip(self.header_list, value_list)
+                    if typepy.is_not_null_string(value)
+                ]
 
-        for value_list in self._table_value_matrix:
-            ltsv_item_list = [
-                "{:s}:{}".format(
-                    pathvalidate.sanitize_ltsv_label(header_name), value)
-                for header_name, value in zip(self.header_list, value_list)
-                if typepy.is_not_null_string(value)
-            ]
+                if typepy.is_empty_sequence(ltsv_item_list):
+                    continue
 
-            if typepy.is_empty_sequence(ltsv_item_list):
-                continue
-
-            self.stream.write("\t".join(ltsv_item_list) + "\n")
-
-        self._logger.logging_complete_write()
+                self.stream.write("\t".join(ltsv_item_list) + "\n")
