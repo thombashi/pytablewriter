@@ -200,8 +200,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             super(TextTableWriter, self)._to_row_item(col_dp, value_dp))
 
     def _write_raw_string(self, unicode_text):
-        self._verify_stream()
-
         self.stream.write(unicode_text)
 
     def _write_raw_line(self, unicode_text=""):
