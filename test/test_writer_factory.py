@@ -17,9 +17,9 @@ class Test_WriterFactory_get_format_name_list(object):
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_name_list() == [
             "csv", "elasticsearch", "excel", "htm", "html", "javascript", "js",
-            "json", "latex_matrix", "latex_table", "ltsv", "markdown", "md",
-            "mediawiki", "null", "numpy", "pandas", "py", "python", "rst",
-            "rst_csv_table", "rst_grid_table", "rst_simple_table",
+            "json", "json_lines", "jsonl", "latex_matrix", "latex_table", "ldjson", "ltsv",
+            "markdown", "md", "mediawiki", "ndjson", "null", "numpy", "pandas", "py", "python",
+            "rst", "rst_csv_table", "rst_grid_table", "rst_simple_table",
             "space_aligned", "sqlite", "toml", "tsv",
         ]
 
@@ -28,8 +28,8 @@ class Test_WriterFactory_get_extension_list(object):
 
     def test_normal(self):
         assert ptw.TableWriterFactory.get_extension_list() == [
-            "csv", "htm", "html", "js", "json", "ltsv", "md", "py", "rst",
-            "sqlite", "sqlite3", "tex", "toml", "tsv", "xls", "xlsx",
+            "csv", "htm", "html", "js", "json", "jsonl", "ldjson", "ltsv", "md", "ndjson", "py",
+            "rst", "sqlite", "sqlite3", "tex", "toml", "tsv", "xls", "xlsx",
         ]
 
 

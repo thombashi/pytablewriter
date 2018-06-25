@@ -10,11 +10,11 @@ import enum
 
 from .writer import (
     CsvTableWriter, ElasticsearchWriter, ExcelXlsTableWriter, ExcelXlsxTableWriter, HtmlTableWriter,
-    JavaScriptTableWriter, JsonTableWriter, LatexMatrixWriter, LatexTableWriter, LtsvTableWriter,
-    MarkdownTableWriter, MediaWikiTableWriter, NullTableWriter, NumpyTableWriter,
-    PandasDataFrameWriter, PythonCodeTableWriter, RstCsvTableWriter, RstGridTableWriter,
-    RstSimpleTableWriter, SpaceAlignedTableWriter, SqliteTableWriter, TomlTableWriter,
-    TsvTableWriter)
+    JavaScriptTableWriter, JsonLinesTableWriter, JsonTableWriter, LatexMatrixWriter,
+    LatexTableWriter, LtsvTableWriter, MarkdownTableWriter, MediaWikiTableWriter, NullTableWriter,
+    NumpyTableWriter, PandasDataFrameWriter, PythonCodeTableWriter, RstCsvTableWriter,
+    RstGridTableWriter, RstSimpleTableWriter, SpaceAlignedTableWriter, SqliteTableWriter,
+    TomlTableWriter, TsvTableWriter)
 
 
 class FormatAttr(object):
@@ -71,6 +71,10 @@ class TableFormat(enum.Enum):
     JSON = (
         [JsonTableWriter().format_name], JsonTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["json"])
+    JSON_LINES = (
+        [JsonLinesTableWriter().format_name, "jsonl", "ldjson", "ndjson"],
+        JsonLinesTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT, ["jsonl", "ldjson", "ndjson"])
     LATEX_MATRIX = (
         [LatexMatrixWriter().format_name], LatexMatrixWriter,
         FormatAttr.FILE | FormatAttr.TEXT, ["tex"])

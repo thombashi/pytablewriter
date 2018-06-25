@@ -20,8 +20,8 @@ from ._logger import set_log_level, set_logger
 from ._table_format import FormatAttr, TableFormat
 from .writer import (
     CsvTableWriter, ElasticsearchWriter, ExcelXlsTableWriter, ExcelXlsxTableWriter, HtmlTableWriter,
-    JavaScriptTableWriter, JsonTableWriter, LatexMatrixWriter, LatexTableWriter, LtsvTableWriter,
-    MarkdownTableWriter, MediaWikiTableWriter, NullTableWriter, NumpyTableWriter,
-    PandasDataFrameWriter, PythonCodeTableWriter, RstCsvTableWriter, RstGridTableWriter,
-    RstSimpleTableWriter, SpaceAlignedTableWriter, SqliteTableWriter, TomlTableWriter,
-    TsvTableWriter)
+    JavaScriptTableWriter, JsonLinesTableWriter, JsonTableWriter, LatexMatrixWriter,
+    LatexTableWriter, LtsvTableWriter, MarkdownTableWriter, MediaWikiTableWriter, NullTableWriter,
+    NumpyTableWriter, PandasDataFrameWriter, PythonCodeTableWriter, RstCsvTableWriter,
+    RstGridTableWriter, RstSimpleTableWriter, SpaceAlignedTableWriter, SqliteTableWriter,
+    TomlTableWriter, TsvTableWriter)

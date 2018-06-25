@@ -14,7 +14,7 @@ import msgfy
 import six
 import typepy
 from six.moves import zip
-from tabledata import convert_idx_to_alphabet
+from tabledata import convert_idx_to_alphabet, to_value_matrix
 from typepy import Typecode
 
 from .._error import (
@@ -581,7 +581,8 @@ class AbstractTableWriter(TableWriterInterface):
             ]
 
         try:
-            self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(self.__value_matrix_org)
+            self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(
+                to_value_matrix(self.header_list, self.__value_matrix_org))
         except TypeError as e:
             self._logger.logger.debug(msgfy.to_error_message(e))
             self._table_value_dp_matrix = []

@@ -11,6 +11,7 @@ from ._elasticsearch import ElasticsearchWriter
 from ._excel import ExcelXlsTableWriter, ExcelXlsxTableWriter
 from ._html import HtmlTableWriter
 from ._json import JsonTableWriter
+from ._jsonlines import JsonLinesTableWriter
 from ._latex import LatexMatrixWriter, LatexTableWriter
 from ._ltsv import LtsvTableWriter
 from ._markdown import MarkdownTableWriter

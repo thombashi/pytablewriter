@@ -33,8 +33,11 @@ class TableWriterFactory(object):
             ``".html"``         :py:class:`~.HtmlTableWriter`
             ``".js"``           :py:class:`~.JavaScriptTableWriter`
             ``".json"``         :py:class:`~.JsonTableWriter`
+            ``".jsonl"``        :py:class:`~.JsonLinesTableWriter`
             ``".ltsv"``         :py:class:`~.LtsvTableWriter`
+            ``".ldjson"``       :py:class:`~.JsonLinesTableWriter`
             ``".md"``           :py:class:`~.MarkdownTableWriter`
+            ``".ndjson"``       :py:class:`~.JsonLinesTableWriter`
             ``".py"``           :py:class:`~.PythonCodeTableWriter`
             ``".rst"``          :py:class:`~.RstGridTableWriter`
             ``".tsv"``          :py:class:`~.TsvTableWriter`
@@ -95,8 +98,10 @@ class TableWriterFactory(object):
             ``"html"``/``"htm"``            :py:class:`~.HtmlTableWriter`
             ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
             ``"json"``                      :py:class:`~.JsonTableWriter`
+            ``"json_lines"``                :py:class:`~.JsonLinesTableWriter`
             ``"latex_matrix"``              :py:class:`~.LatexMatrixWriter`
             ``"latex_table"``               :py:class:`~.LatexTableWriter`
+            ``"ldjson"``                    :py:class:`~.JsonLinesTableWriter`
             ``"ltsv"``                      :py:class:`~.LtsvTableWriter`
             ``"markdown"``/``"md"``         :py:class:`~.MarkdownTableWriter`
             ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter`
