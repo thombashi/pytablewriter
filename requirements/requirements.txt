@@ -6,9 +6,9 @@ logbook
 mbstrdecoder
 msgfy>=0.0.2
 pathvalidate>=0.17.3
-SimpleSQLite>=0.22.0
+SimpleSQLite>=0.23.0
 six
-tabledata>=0.0.14
+tabledata>=0.0.18
 toml>=0.9.4
 typepy
 XlsxWriter>=1.0.5
