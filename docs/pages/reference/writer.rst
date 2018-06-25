@@ -69,6 +69,11 @@ JSON writer class
 .. autoclass:: pytablewriter.JsonTableWriter
 
 
+Line-delimited JSON(LDJSON) writer class
+--------------------------------------------------------------
+.. autoclass:: pytablewriter.JsonTableWriter
+
+
 Source code writer classes
 -------------------------------
 

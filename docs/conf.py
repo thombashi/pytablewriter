@@ -3,8 +3,8 @@
 import os
 import sys
 
-from pytablewriter import __author__, __copyright__, __name__, __version__
 import sphinx_rtd_theme
+from pytablewriter import __author__, __copyright__, __name__, __version__
 
 
 sys.path.insert(0, os.path.abspath('../pytablewriter'))

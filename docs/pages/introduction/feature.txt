@@ -8,6 +8,7 @@ Features
     - JSON
     - Jupyter Notebook
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
+    - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
     - LaTeX: ``tabular``/``array`` environment
     - Markdown
     - MediaWiki
