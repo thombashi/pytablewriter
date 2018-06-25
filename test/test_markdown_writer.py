@@ -306,6 +306,28 @@ normal_test_data_list = [
             |next     |10250.32|
 
             """)),
+    Data(table="list of dict",
+         indent=0,
+         header=["A", "B", "C"],
+         value=[
+             {'A': 1},
+             {'B': 2.1, 'C': 'hoge'},
+             {'A': 0, 'B': 0.1, 'C': 'foo'},
+             {},
+             {'A': -1, 'B': -0.1, 'C': 'bar', "D": "extra"},
+         ],
+         is_formatting_float=False,
+         expected=dedent("""\
+            # list of dict
+            | A | B  | C  |
+            |--:|---:|----|
+            |  1|    |    |
+            |   | 2.1|hoge|
+            |  0| 0.1|foo |
+            |   |    |    |
+            | -1|-0.1|bar |
+
+            """)),
 ]
 
 exception_test_data_list = [
