@@ -276,6 +276,9 @@ class AbstractTableWriter(TableWriterInterface):
         Close the current |stream|.
         """
 
+        if self.stream is None:
+            return
+
         try:
             if self.stream.name in ["<stdin>", "<stdout>", "<stderr>"]:
                 return
@@ -285,7 +288,8 @@ class AbstractTableWriter(TableWriterInterface):
         try:
             self.stream.close()
         except AttributeError:
-            self._logger.logger.warn("the stream has no close method implementation")
+            self._logger.logger.warn(
+                "the stream has no close method implementation: type={}".format(type(self.stream)))
         finally:
             self.stream = None
 
