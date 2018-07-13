@@ -232,7 +232,7 @@ class Test_MediaWikiTableWriter_write_new_line(object):
 
 class Test_MediaWikiTableWriter_write_table(object):
 
-    @pytest.mark.xfail
+    @pytest.mark.xfail(run=False)
     @pytest.mark.parametrize(["table", "header", "value", "expected"], [
         [data.table, data.header, data.value, data.expected]
         for data in normal_test_data_list
