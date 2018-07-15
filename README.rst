@@ -5,10 +5,13 @@
 
 Summary
 =========
-A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
+
+.. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
+   :target: https://pypi.python.org/pypi/pytablewriter
 
 .. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux
     :target: https://travis-ci.org/thombashi/pytablewriter
