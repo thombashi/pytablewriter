@@ -63,16 +63,19 @@ class PandasDataFrameWriter(NumpyTableWriter):
         self.is_write_header = False
 
     def _get_opening_row_item_list(self):
-        return ["{} = {}.DataFrame([".format(
-            self.variable_name, self.import_pandas_as)]
+        return ["{} = {}.DataFrame([".format(self.variable_name, self.import_pandas_as)]
 
     def _get_closing_row_item_list(self):
         if typepy.is_not_empty_sequence(self.header_list):
             return [
-                "], columns=[{}])".format(", ".join([
-                    '"{}"'.format(MultiByteStrDecoder(header).unicode_str)
-                    for header in self.header_list
-                ]))
+                "], columns=[{}])".format(
+                    ", ".join(
+                        [
+                            '"{}"'.format(MultiByteStrDecoder(header).unicode_str)
+                            for header in self.header_list
+                        ]
+                    )
+                )
             ]
 
         return ["])"]
@@ -81,5 +84,4 @@ class PandasDataFrameWriter(NumpyTableWriter):
         super(PandasDataFrameWriter, self)._verify_property()
 
         if typepy.is_null_string(self.table_name):
-            raise EmptyTableNameError(
-                "table_name must be a string of one or more characters")
+            raise EmptyTableNameError("table_name must be a string of one or more characters")

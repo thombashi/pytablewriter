@@ -114,7 +114,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         js_matrix_var_def_text = self.stream.getvalue().rstrip("\n")
         if self.is_write_closing_row:
             js_matrix_var_def_line_list = js_matrix_var_def_text.splitlines()
-            js_matrix_var_def_line_list[-2] = (js_matrix_var_def_line_list[-2].rstrip(","))
+            js_matrix_var_def_line_list[-2] = js_matrix_var_def_line_list[-2].rstrip(",")
             js_matrix_var_def_text = "\n".join(js_matrix_var_def_line_list)
 
         self.stream.close()

@@ -144,7 +144,8 @@ class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
         warnings.warn(
             "open_workbook method deleted in the future, use open method instead.",
-            DeprecationWarning)
+            DeprecationWarning,
+        )
 
         self.open(workbook_path)
 
@@ -366,8 +367,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     @property
     def __cell_format_property(self):
-        return self.format_table.get(
-            self.TableFormat.CELL, self.default_format)
+        return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
     def __init__(self):
         super(ExcelXlsxTableWriter, self).__init__()
@@ -393,12 +393,12 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         header_format = self.__add_format(header_format_props)
 
         self.stream.write_row(
-            row=self.first_header_row, col=0,
-            data=self.header_list, cell_format=header_format)
+            row=self.first_header_row, col=0, data=self.header_list, cell_format=header_format
+        )
         for row in range(self.first_header_row, self.last_header_row):
             self.stream.write_row(
-                row=row, col=0, data=[""] * len(self.header_list),
-                cell_format=header_format)
+                row=row, col=0, data=[""] * len(self.header_list), cell_format=header_format
+            )
 
     def _write_cell(self, row, col, value_dp):
         base_props = dict(self.__cell_format_property)
@@ -476,8 +476,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         super(ExcelXlsxTableWriter, self)._postprocess()
 
         self.stream.autofilter(
-            self.last_header_row, self.first_data_col,
-            self.last_data_row, self.last_data_col)
+            self.last_header_row, self.first_data_col, self.last_data_row, self.last_data_col
+        )
         self.stream.freeze_panes(self.first_data_row, self.first_data_col)
 
         self.__col_cell_format_cache = {}

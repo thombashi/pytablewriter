@@ -54,16 +54,17 @@ class MediaWikiTableWriter(TextTableWriter):
             return
 
         if typepy.is_not_null_string(self.table_name):
-            self._write_line(
-                "|+" + MultiByteStrDecoder(self.table_name).unicode_str)
+            self._write_line("|+" + MultiByteStrDecoder(self.table_name).unicode_str)
 
         super(MediaWikiTableWriter, self)._write_header()
 
     def _write_value_row(self, value_list, value_dp_list):
-        self._write_row([
-            self.__modify_table_element(value, value_dp)
-            for value, value_dp, in zip(value_list, value_dp_list)
-        ])
+        self._write_row(
+            [
+                self.__modify_table_element(value, value_dp)
+                for value, value_dp, in zip(value_list, value_dp_list)
+            ]
+        )
 
     def _get_opening_row_item_list(self):
         return ['{| class="wikitable"']
@@ -79,17 +80,16 @@ class MediaWikiTableWriter(TextTableWriter):
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "! {{:{:s}{:s}}}".format(
-            self._get_align_char(dp.Align.CENTER),
-            str(self._get_padding_len(col_dp, value_dp)))
+            self._get_align_char(dp.Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
+        )
 
     def __modify_table_element(self, value, value_dp):
         if value_dp.align is dp.Align.LEFT:
-            forma_stirng = '| {1:s}'
+            forma_stirng = "| {1:s}"
         else:
             forma_stirng = '| style="text-align:{0:s}"| {1:s}'
 
         if self.__RE_TABLE_SEQUENCE.search(value) is not None:
             value = "\n" + value.lstrip()
 
-        return forma_stirng.format(
-            value_dp.align.align_string, value)
+        return forma_stirng.format(value_dp.align.align_string, value)

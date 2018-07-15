@@ -29,6 +29,7 @@ def set_logger(is_enable):
     simplesqlite.set_logger(is_enable)
     try:
         import pytablereader
+
         pytablereader.set_logger(is_enable)
     except ImportError:
         pass
@@ -62,13 +63,13 @@ def set_log_level(log_level):
     simplesqlite.set_log_level(log_level)
     try:
         import pytablereader
+
         pytablereader.set_log_level(log_level)
     except ImportError:
         pass
 
 
 class WriterLogger(object):
-
     @property
     def logger(self):
         return self.__logger
@@ -105,10 +106,7 @@ class WriterLogger(object):
         self.logger.debug("start write table: {}".format(", ".join(log_entry_list)))
 
     def logging_complete_write(self):
-        log_entry_list = [
-            self.__get_format_name_message(),
-            self.__get_table_name_message(),
-        ]
+        log_entry_list = [self.__get_format_name_message(), self.__get_table_name_message()]
         log_entry_list.extend(self.__get_extra_log_entry_list())
 
         self.logger.debug("complete write table: {}".format(", ".join(log_entry_list)))
@@ -128,14 +126,12 @@ class WriterLogger(object):
         if self.__writer._iter_count is None:
             return []
 
-        return [
-            "iteration={}/{}".format(self.__writer._iter_count, self.__writer.iteration_length)
-        ]
+        return ["iteration={}/{}".format(self.__writer._iter_count, self.__writer.iteration_length)]
 
     def __get_typehint_message(self):
         try:
-            return "type-hint={}".format([
-                type_hint(None).typename for type_hint in self.__writer.type_hint_list
-            ])
+            return "type-hint={}".format(
+                [type_hint(None).typename for type_hint in self.__writer.type_hint_list]
+            )
         except (TypeError, AttributeError):
             return "type-hint=[]"

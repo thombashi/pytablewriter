@@ -76,12 +76,17 @@ class TableWriterFactory(object):
 
             return table_format.writer_class()
 
-        raise WriterNotFoundError("\n".join([
-            "{:s} (unknown file extension).".format(file_extension),
-            "",
-            "acceptable file extensions are: {}.".format(
-                ", ".join(cls.get_extension_list())),
-        ]))
+        raise WriterNotFoundError(
+            "\n".join(
+                [
+                    "{:s} (unknown file extension).".format(file_extension),
+                    "",
+                    "acceptable file extensions are: {}.".format(
+                        ", ".join(cls.get_extension_list())
+                    ),
+                ]
+            )
+        )
 
     @classmethod
     def create_from_format_name(cls, format_name):
@@ -127,19 +132,26 @@ class TableWriterFactory(object):
         format_name = format_name.lower()
 
         for table_format in TableFormat:
-            if any([
+            if any(
+                [
                     format_name not in table_format.name_list,
                     table_format.format_attribute & FormatAttr.SECONDARY_NAME,
-            ]):
+                ]
+            ):
                 continue
 
             return table_format.writer_class()
 
-        raise WriterNotFoundError("\n".join([
-            "{} (unknown format name).".format(format_name),
-            "acceptable format names are: {}.".format(
-                ", ".join(cls.get_format_name_list())),
-        ]))
+        raise WriterNotFoundError(
+            "\n".join(
+                [
+                    "{} (unknown format name).".format(format_name),
+                    "acceptable format names are: {}.".format(
+                        ", ".join(cls.get_format_name_list())
+                    ),
+                ]
+            )
+        )
 
     @classmethod
     def get_format_name_list(cls):

@@ -91,9 +91,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.__value_cell_margin_format = self.__make_margin_format(" ")
         self.__opening_row_cell_format = self.__make_margin_format(self.char_opening_row)
         self._header_row_separator_cell_format = self.__make_margin_format(
-            self.char_header_row_separator)
+            self.char_header_row_separator
+        )
         self.__value_row_separator_cell_format = self.__make_margin_format(
-            self.char_value_row_separator)
+            self.char_value_row_separator
+        )
         self.__closing_row_cell_format = self.__make_margin_format(self.char_closing_row)
 
     def __init__(self):
@@ -149,8 +151,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             pass
 
         is_first_value_row = True
-        for value_list, value_dp_list in zip(
-                self._table_value_matrix, self._table_value_dp_matrix):
+        for value_list, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
             try:
                 if is_first_value_row:
                     is_first_value_row = False
@@ -166,19 +167,23 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _get_opening_row_item_list(self):
         return self.__get_row_separator_item_list(
-            self.__opening_row_cell_format, self.char_opening_row)
+            self.__opening_row_cell_format, self.char_opening_row
+        )
 
     def _get_header_row_separator_item_list(self):
         return self.__get_row_separator_item_list(
-            self._header_row_separator_cell_format, self.char_header_row_separator)
+            self._header_row_separator_cell_format, self.char_header_row_separator
+        )
 
     def _get_value_row_separator_item_list(self):
         return self.__get_row_separator_item_list(
-            self.__value_row_separator_cell_format, self.char_value_row_separator)
+            self.__value_row_separator_cell_format, self.char_value_row_separator
+        )
 
     def _get_closing_row_item_list(self):
         return self.__get_row_separator_item_list(
-            self.__closing_row_cell_format, self.char_closing_row)
+            self.__closing_row_cell_format, self.char_closing_row
+        )
 
     def __get_row_separator_item_list(self, margin_format, separator_char):
         return [
@@ -189,15 +194,18 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(
             self._get_align_char(dataproperty.Align.CENTER),
-            str(self._get_padding_len(col_dp, value_dp)))
+            str(self._get_padding_len(col_dp, value_dp)),
+        )
 
     def _to_header_item(self, col_dp, value_dp):
         return self.__value_cell_margin_format.format(
-            super(TextTableWriter, self)._to_header_item(col_dp, value_dp))
+            super(TextTableWriter, self)._to_header_item(col_dp, value_dp)
+        )
 
     def _to_row_item(self, col_dp, value_dp):
         return self.__value_cell_margin_format.format(
-            super(TextTableWriter, self)._to_row_item(col_dp, value_dp))
+            super(TextTableWriter, self)._to_row_item(col_dp, value_dp)
+        )
 
     def _write_raw_string(self, unicode_text):
         self.stream.write(unicode_text)
@@ -216,9 +224,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             return
 
         self._write_line(
-            self.char_left_side_row +
-            self.column_delimiter.join(value_list) +
-            self.char_right_side_row)
+            self.char_left_side_row
+            + self.column_delimiter.join(value_list)
+            + self.char_right_side_row
+        )
 
     def _write_header(self):
         if not self.is_write_header:
@@ -244,9 +253,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             right_cross_point = ""
 
         self._write_line(
-            left_cross_point +
-            self.char_cross_point.join(value_list) +
-            right_cross_point)
+            left_cross_point + self.char_cross_point.join(value_list) + right_cross_point
+        )
 
     def _write_opening_row(self):
         if not self.is_write_opening_row:
@@ -255,8 +263,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.__write_separator_row(self._get_opening_row_item_list())
 
     def __write_header_row_separator(self):
-        if any([not self.is_write_header,
-                not self.is_write_header_separator_row]):
+        if any([not self.is_write_header, not self.is_write_header_separator_row]):
             return
 
         self.__write_separator_row(self._get_header_row_separator_item_list())

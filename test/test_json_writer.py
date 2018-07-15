@@ -14,17 +14,26 @@ import pytest
 
 from ._common import print_test_result
 from .data import (
-    float_header_list, float_value_matrix, header_list, mix_header_list, mix_value_matrix,
-    value_matrix, value_matrix_iter, value_matrix_with_none)
+    float_header_list,
+    float_value_matrix,
+    header_list,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix,
+    value_matrix_iter,
+    value_matrix_with_none,
+)
 
 
 Data = collections.namedtuple("Data", "table header value expected")
 
 normal_test_data_list = [
-    Data(table="",
-         header=header_list,
-         value=value_matrix,
-         expected=json.loads("""[
+    Data(
+        table="",
+        header=header_list,
+        value=value_matrix,
+        expected=json.loads(
+            """[
             {
                 "a": 1,
                 "b": 123.1,
@@ -47,15 +56,16 @@ normal_test_data_list = [
                 "e": "cccc"
             }
         ]
-        """)),
-    Data(table="",
-         header=header_list,
-         value=None,
-         expected=json.loads("[]")),
-    Data(table="tablename",
-         header=header_list,
-         value=value_matrix,
-         expected=json.loads("""{
+        """
+        ),
+    ),
+    Data(table="", header=header_list, value=None, expected=json.loads("[]")),
+    Data(
+        table="tablename",
+        header=header_list,
+        value=value_matrix,
+        expected=json.loads(
+            """{
             "tablename": [
                 {
                     "a": 1,
@@ -80,11 +90,15 @@ normal_test_data_list = [
                 }
             ]
         }
-        """)),
-    Data(table="with none values",
-         header=header_list,
-         value=value_matrix_with_none,
-         expected=json.loads("""{
+        """
+        ),
+    ),
+    Data(
+        table="with none values",
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=json.loads(
+            """{
             "with none values": [
                 {
                     "a": 1,
@@ -116,11 +130,15 @@ normal_test_data_list = [
                 }
             ]
         }
-        """)),
-    Data(table="mixed values",
-         header=mix_header_list,
-         value=mix_value_matrix,
-         expected=json.loads("""{ "mixed values" : [
+        """
+        ),
+    ),
+    Data(
+        table="mixed values",
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=json.loads(
+            """{ "mixed values" : [
             {
                 "bool": true,
                 "c": "aa",
@@ -157,11 +175,15 @@ normal_test_data_list = [
                 "nan": "NaN",
                 "time": "2017-01-01T00:00:00"
             }]}
-        """)),
-    Data(table="float",
-         header=float_header_list,
-         value=float_value_matrix,
-         expected=json.loads("""{ "float" : [
+        """
+        ),
+    ),
+    Data(
+        table="float",
+        header=float_header_list,
+        value=float_value_matrix,
+        expected=json.loads(
+            """{ "float" : [
 {
     "a": 0.01,
     "b": 0.00125,
@@ -178,25 +200,25 @@ normal_test_data_list = [
     "c": 0.001
 }]}
 
-""")),
+"""
+        ),
+    ),
 ]
 
 exception_test_data_list = [
-    Data(table="",
-         header=[],
-         value=[],
-         expected=pytablewriter.EmptyTableDataError),
-    Data(table="",
-         header=[],
-         value=normal_test_data_list[0].value,
-         expected=pytablewriter.EmptyHeaderError),
+    Data(table="", header=[], value=[], expected=pytablewriter.EmptyTableDataError),
+    Data(
+        table="",
+        header=[],
+        value=normal_test_data_list[0].value,
+        expected=pytablewriter.EmptyHeaderError,
+    ),
 ]
 
 table_writer_class = pytablewriter.JsonTableWriter
 
 
 class Test_JsonTableWriter_write_new_line(object):
-
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -206,11 +228,10 @@ class Test_JsonTableWriter_write_new_line(object):
 
 
 class Test_JsonTableWriter_write_table(object):
-
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
-        [data.table, data.header, data.value, data.expected]
-        for data in normal_test_data_list
-    ])
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
+        [[data.table, data.header, data.value, data.expected] for data in normal_test_data_list],
+    )
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -223,10 +244,10 @@ class Test_JsonTableWriter_write_table(object):
 
         assert json.loads(out) == expected
 
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
-        [data.table, data.header, data.value, data.expected]
-        for data in exception_test_data_list
-    ])
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
+        [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
+    )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -238,13 +259,15 @@ class Test_JsonTableWriter_write_table(object):
 
 
 class Test_JsonTableWriter_write_table_iter(object):
-
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
         [
-            "tablename",
-            ["ha", "hb", "hc"],
-            value_matrix_iter,
-            json.loads("""{ "tablename" : [
+            [
+                "tablename",
+                ["ha", "hb", "hc"],
+                value_matrix_iter,
+                json.loads(
+                    """{ "tablename" : [
                 {
                     "ha": 1,
                     "hb": 2,
@@ -274,9 +297,11 @@ class Test_JsonTableWriter_write_table_iter(object):
                     "ha": 1001,
                     "hb": 1002,
                     "hc": 1003
-                }]}"""),
+                }]}"""
+                ),
+            ]
         ],
-    ])
+    )
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -290,10 +315,8 @@ class Test_JsonTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
-        [
-            [data.table, data.header, data.value, data.expected]
-            for data in exception_test_data_list
-        ])
+        [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
+    )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

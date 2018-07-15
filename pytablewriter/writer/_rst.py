@@ -114,13 +114,18 @@ class RstCsvTableWriter(RstTableWriter):
             return
 
         if typepy.is_not_empty_sequence(self.header_list):
-            self._write_line(':header: "{:s}"'.format('", "'.join([
-                MultiByteStrDecoder(header).unicode_str for header in self.header_list
-            ])))
+            self._write_line(
+                ':header: "{:s}"'.format(
+                    '", "'.join(
+                        [MultiByteStrDecoder(header).unicode_str for header in self.header_list]
+                    )
+                )
+            )
 
-        self._write_line(":widths: " + ", ".join([
-            str(col_dp.ascii_char_width) for col_dp in self._column_dp_list
-        ]))
+        self._write_line(
+            ":widths: "
+            + ", ".join([str(col_dp.ascii_char_width) for col_dp in self._column_dp_list])
+        )
         self._write_line()
 
     def _get_value_row_separator_item_list(self):

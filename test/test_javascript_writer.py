@@ -17,22 +17,29 @@ import typepy
 
 from ._common import print_test_result
 from .data import (
-    header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter,
-    value_matrix_with_none)
+    header_list,
+    mix_header_list,
+    mix_value_matrix,
+    value_matrix,
+    value_matrix_iter,
+    value_matrix_with_none,
+)
 
 
 Data = collections.namedtuple(
-    "Data",
-    "table indent header value is_write_header is_dti_fmt expected")
+    "Data", "table indent header value is_write_header is_dti_fmt expected"
+)
 
 normal_test_data_list = [
-    Data(table="table-name ho'ge",
-         indent=0,
-         header=header_list,
-         value=value_matrix,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=dedent("""\
+    Data(
+        table="table-name ho'ge",
+        indent=0,
+        header=header_list,
+        value=value_matrix,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=dedent(
+            """\
             const table_name_ho_ge = [
                 ["a", "b", "c", "dd", "e"],
                 [1, 123.1, "a", 1, 1],
@@ -40,51 +47,66 @@ normal_test_data_list = [
                 [3, 3.3, "ccc", 3, "cccc"]
             ];
 
-            """)),
-    Data(table="null value",
-         indent=0,
-         header=header_list,
-         value=None,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="null value",
+        indent=0,
+        header=header_list,
+        value=None,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=dedent(
+            """\
             const null_value = [
                 ["a", "b", "c", "dd", "e"]
             ];
 
-            """)),
-    Data(table="null table",
-         indent=0,
-         header=header_list,
-         value=None,
-         is_write_header=False,
-         is_dti_fmt=True,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="null table",
+        indent=0,
+        header=header_list,
+        value=None,
+        is_write_header=False,
+        is_dti_fmt=True,
+        expected=dedent(
+            """\
             const null_table = [
             ];
 
-            """)),
-    Data(table="table name",
-         indent=0,
-         header=None,
-         value=value_matrix,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=None,
+        value=value_matrix,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=dedent(
+            """\
             const table_name = [
                 [1, 123.1, "a", 1, 1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"]
             ];
 
-            """)),
-    Data(table="tablename",
-         indent=1,
-         header=header_list,
-         value=value_matrix,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected="""\
+            """
+        ),
+    ),
+    Data(
+        table="tablename",
+        indent=1,
+        header=header_list,
+        value=value_matrix,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected="""\
     const tablename = [
         ["a", "b", "c", "dd", "e"],
         [1, 123.1, "a", 1, 1],
@@ -92,14 +114,17 @@ normal_test_data_list = [
         [3, 3.3, "ccc", 3, "cccc"]
     ];
 
-"""),
-    Data(table="tablename",
-         indent=0,
-         header=header_list,
-         value=value_matrix_with_none,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=dedent("""\
+""",
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=header_list,
+        value=value_matrix_with_none,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=dedent(
+            """\
             const tablename = [
                 ["a", "b", "c", "dd", "e"],
                 [1, null, "a", 1, null],
@@ -108,14 +133,18 @@ normal_test_data_list = [
                 [null, null, null, null, null]
             ];
 
-            """)),
-    Data(table="tablename",
-         indent=0,
-         header=mix_header_list,
-         value=mix_value_matrix,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=dedent(
+            """\
             const tablename = [
                 ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
                 [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, new Date("2017-01-01T00:00:00")],
@@ -123,14 +152,18 @@ normal_test_data_list = [
                 [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
             ];
 
-            """)),
-    Data(table="tablename",
-         indent=0,
-         header=mix_header_list,
-         value=mix_value_matrix,
-         is_write_header=True,
-         is_dti_fmt=False,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="tablename",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        is_write_header=True,
+        is_dti_fmt=False,
+        expected=dedent(
+            """\
             const tablename = [
                 ["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
                 [1, 1.1, "aa", 1, 1, true, Infinity, NaN, 1, "2017-01-01T00:00:00"],
@@ -138,18 +171,22 @@ normal_test_data_list = [
                 [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, "2017-01-01T00:00:00"]
             ];
 
-            """)),
-    Data(table="float-with-null",
-         indent=0,
-         header=["a", "b"],
-         value=[
-             ["0.03785679191278808", "826.21158713263"],
-             [None, "826.21158713263"],
-             [0.1, "1.0499675627886724"],
-         ],
-         is_write_header=True,
-         is_dti_fmt=False,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="float-with-null",
+        indent=0,
+        header=["a", "b"],
+        value=[
+            ["0.03785679191278808", "826.21158713263"],
+            [None, "826.21158713263"],
+            [0.1, "1.0499675627886724"],
+        ],
+        is_write_header=True,
+        is_dti_fmt=False,
+        expected=dedent(
+            """\
             const float_with_null = [
                 ["a", "b"],
                 [0.03785679191278808, 826.21158713263],
@@ -157,38 +194,48 @@ normal_test_data_list = [
                 [0.1, 1.0499675627886724]
             ];
 
-            """)),
-    Data(table="line breaks",
-         indent=0,
-         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
-         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
-         is_write_header=True,
-         is_dti_fmt=False,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="line breaks",
+        indent=0,
+        header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+        value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+        is_write_header=True,
+        is_dti_fmt=False,
+        expected=dedent(
+            """\
             const line_breaks = [
                 ["a b", " c d ", "e f"],
                 ["v1 v1", "v2 v2", "v3 v3"]
             ];
 
-            """)),
+            """
+        ),
+    ),
 ]
 
 exception_test_data_list = [
-    Data(table="",
-         indent=normal_test_data_list[0].indent,
-         header=normal_test_data_list[0].header,
-         value=normal_test_data_list[0].value,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=pytablewriter.EmptyTableNameError)
+    Data(
+        table="",
+        indent=normal_test_data_list[0].indent,
+        header=normal_test_data_list[0].header,
+        value=normal_test_data_list[0].value,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=pytablewriter.EmptyTableNameError,
+    )
 ] + [
-    Data(table="dummy",
-         indent=0,
-         header=header,
-         value=value,
-         is_write_header=True,
-         is_dti_fmt=True,
-         expected=pytablewriter.EmptyTableDataError)
+    Data(
+        table="dummy",
+        indent=0,
+        header=header,
+        value=value,
+        is_write_header=True,
+        is_dti_fmt=True,
+        expected=pytablewriter.EmptyTableDataError,
+    )
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
@@ -196,7 +243,6 @@ table_writer_class = pytablewriter.JavaScriptTableWriter
 
 
 class Test_JavaScriptTableWriter_write_new_line(object):
-
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -208,42 +254,45 @@ class Test_JavaScriptTableWriter_write_new_line(object):
 class Test_JavaScriptTableWriter_type_hint(object):
     DATATIME_DATA = datetime.datetime(2017, 1, 2, 3, 4, 5)
     STR_DATA = "2017-01-02 03:04:05"
-    DATA_MATRIX = [
-        [STR_DATA, DATATIME_DATA],
-        [STR_DATA, DATATIME_DATA],
-    ]
+    DATA_MATRIX = [[STR_DATA, DATATIME_DATA], [STR_DATA, DATATIME_DATA]]
 
     @pytest.mark.parametrize(
-        ["table",  "header", "value", "type_hint", "expected"],
+        ["table", "header", "value", "type_hint", "expected"],
         [
             [
                 "th_none_none",
                 ["string", "datetime"],
                 DATA_MATRIX,
                 [None, None],
-                dedent("""\
+                dedent(
+                    """\
                     const th_none_none = [
                         ["string", "datetime"],
                         ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
                         ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")]
                     ];
 
-                    """),
-            ], [
+                    """
+                ),
+            ],
+            [
                 "typehint_datetime-string",
                 ["string", "datetime"],
                 DATA_MATRIX,
                 [typepy.DateTime, typepy.String],
-                dedent("""\
+                dedent(
+                    """\
                     const typehint_datetime_string = [
                         ["string", "datetime"],
                         [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
                         [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
                     ];
 
-                    """),
+                    """
+                ),
             ],
-        ])
+        ],
+    )
     def test_normal(self, capsys, table, header, value, type_hint, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -260,18 +309,24 @@ class Test_JavaScriptTableWriter_type_hint(object):
 
 
 class Test_JavaScriptTableWriter_write_table(object):
-
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_write_header", "is_dti_fmt", "expected"],
         [
             [
-                data.table, data.indent, data.header, data.value,
-                data.is_write_header, data.is_dti_fmt, data.expected
+                data.table,
+                data.indent,
+                data.header,
+                data.value,
+                data.is_write_header,
+                data.is_dti_fmt,
+                data.expected,
             ]
             for data in normal_test_data_list
-        ])
+        ],
+    )
     def test_normal_single(
-            self, capsys, table, indent, header, value, is_write_header, is_dti_fmt, expected):
+        self, capsys, table, indent, header, value, is_write_header, is_dti_fmt, expected
+    ):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
@@ -294,14 +349,16 @@ class Test_JavaScriptTableWriter_write_table(object):
         writer.value_matrix = value_matrix
         writer.write_table()
 
-        expected = dedent("""\
+        expected = dedent(
+            """\
             var $change_variable_declaration = [
                 [1, 123.1, "a", 1, 1],
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"]
             ];
 
-            """)
+            """
+        )
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
@@ -323,12 +380,12 @@ class Test_JavaScriptTableWriter_write_table(object):
 """
         writer.table_name = "escape quotes 1"
         writer.value_matrix = [
-            [8, 'data = ['],
+            [8, "data = ["],
             [9, '    [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],'],
             [10, '    [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],'],
             [11, '    [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],'],
             [12, '    [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],'],
-            [13, ']'],
+            [13, "]"],
         ]
         writer.write_table()
 
@@ -356,14 +413,29 @@ class Test_JavaScriptTableWriter_write_table(object):
 """
         writer.table_name = "escape quotes 2"
         writer.value_matrix = [
-            [2, 'writer.from_csv('],
+            [2, "writer.from_csv("],
             [3, '    dedent("""\\'],
-            [4, '        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND'],
-            [5, '        root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init'],
-            [6, '        root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]'],
-            [7, '        root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]'],
-            [8, '        root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]'],
-            [9, '        root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]'],
+            [4, "        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"],
+            [
+                5,
+                "        root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init",
+            ],
+            [
+                6,
+                "        root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]",
+            ],
+            [
+                7,
+                "        root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]",
+            ],
+            [
+                8,
+                "        root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]",
+            ],
+            [
+                9,
+                "        root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]",
+            ],
             [10, '    """),'],
             [11, '    delimiter=" ")'],
         ]
@@ -377,12 +449,10 @@ class Test_JavaScriptTableWriter_write_table(object):
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_write_header", "expected"],
         [
-            [
-                data.table, data.indent, data.header, data.value,
-                data.is_write_header, data.expected
-            ]
+            [data.table, data.indent, data.header, data.value, data.is_write_header, data.expected]
             for data in exception_test_data_list
-        ])
+        ],
+    )
     def test_exception(self, table, indent, header, value, is_write_header, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -396,7 +466,6 @@ class Test_JavaScriptTableWriter_write_table(object):
 
 
 class Test_JavaScriptTableWriter_write_table_iter(object):
-
     @pytest.mark.parametrize(
         ["table", "header", "value", "iter_len", "expected"],
         [
@@ -405,7 +474,8 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 len(value_matrix_iter),
-                dedent("""\
+                dedent(
+                    """\
                     const tablename = [
                         ["ha", "hb", "hc"],
                         [1, 2, 3],
@@ -416,13 +486,16 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
                         [1001, 1002, 1003]
                     ];
 
-                    """),
-            ], [
+                    """
+                ),
+            ],
+            [
                 "tablename",
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 len(value_matrix_iter) - 1,
-                dedent("""\
+                dedent(
+                    """\
                     const tablename = [
                         ["ha", "hb", "hc"],
                         [1, 2, 3],
@@ -431,9 +504,11 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
                         [11, 12, 13]
                     ];
 
-                    """),
+                    """
+                ),
             ],
-        ])
+        ],
+    )
     def test_normal(self, capsys, table, header, value, iter_len, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -447,10 +522,8 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
-        [
-            [data.table, data.header, data.value, data.expected]
-            for data in exception_test_data_list
-        ])
+        [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
+    )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

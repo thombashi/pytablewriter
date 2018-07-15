@@ -45,11 +45,13 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     def _to_header_item(self, col_dp, value_dp):
         return self.__escape_vertical_bar_char(
-            super(MarkdownTableWriter, self)._to_header_item(col_dp, value_dp))
+            super(MarkdownTableWriter, self)._to_header_item(col_dp, value_dp)
+        )
 
     def _to_row_item(self, col_dp, value_dp):
         return self.__escape_vertical_bar_char(
-            super(MarkdownTableWriter, self)._to_row_item(col_dp, value_dp))
+            super(MarkdownTableWriter, self)._to_row_item(col_dp, value_dp)
+        )
 
     def _get_opening_row_item_list(self):
         return []
@@ -104,9 +106,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         if typepy.is_null_string(self.table_name):
             return
 
-        self._write_line("{:s} {:s}".format(
-            "#" * (self._indent_level + 1),
-            MultiByteStrDecoder(self.table_name).unicode_str))
+        self._write_line(
+            "{:s} {:s}".format(
+                "#" * (self._indent_level + 1), MultiByteStrDecoder(self.table_name).unicode_str
+            )
+        )
 
     @staticmethod
     def __escape_vertical_bar_char(value):

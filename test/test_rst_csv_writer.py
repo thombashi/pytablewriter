@@ -11,16 +11,24 @@ import pytest
 
 from ._common import print_test_result
 from .data import (
-    Data, header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,
-    value_matrix_iter, value_matrix_with_none)
+    Data,
+    header_list,
+    mix_header_list,
+    mix_value_matrix,
+    null_test_data_list,
+    value_matrix,
+    value_matrix_iter,
+    value_matrix_with_none,
+)
 
 
 normal_test_data_list = [
-    Data(table="table name",
-         indent=0,
-         header=header_list,
-         value=value_matrix,
-         expected=""".. csv-table:: table name
+    Data(
+        table="table name",
+        indent=0,
+        header=header_list,
+        value=value_matrix,
+        expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
     :widths: 3, 5, 5, 4, 6
 
@@ -28,34 +36,40 @@ normal_test_data_list = [
     2, 2.2, "bb", 2.2, 2.2
     3, 3.3, "ccc", 3.0, "cccc"
 
-"""),
-    Data(table="",
-         indent=0,
-         header=header_list,
-         value=None,
-         expected=""".. csv-table:: 
+""",
+    ),
+    Data(
+        table="",
+        indent=0,
+        header=header_list,
+        value=None,
+        expected=""".. csv-table:: 
     :header: "a", "b", "c", "dd", "e"
     :widths: 3, 3, 3, 4, 3
 
 
-"""),
-    Data(table=None,
-         indent=0,
-         header=None,
-         value=value_matrix,
-         expected=""".. csv-table:: 
+""",
+    ),
+    Data(
+        table=None,
+        indent=0,
+        header=None,
+        value=value_matrix,
+        expected=""".. csv-table:: 
     :widths: 1, 5, 5, 3, 6
 
     1, 123.1, "a", 1.0, 1
     2, 2.2, "bb", 2.2, 2.2
     3, 3.3, "ccc", 3.0, "cccc"
 
-"""),
-    Data(table="",
-         indent=1,
-         header=header_list,
-         value=value_matrix,
-         expected="""    .. csv-table:: 
+""",
+    ),
+    Data(
+        table="",
+        indent=1,
+        header=header_list,
+        value=value_matrix,
+        expected="""    .. csv-table:: 
         :header: "a", "b", "c", "dd", "e"
         :widths: 3, 5, 5, 4, 6
 
@@ -63,12 +77,14 @@ normal_test_data_list = [
         2, 2.2, "bb", 2.2, 2.2
         3, 3.3, "ccc", 3.0, "cccc"
 
-"""),
-    Data(table="table name",
-         indent=0,
-         header=header_list,
-         value=value_matrix_with_none,
-         expected=""".. csv-table:: table name
+""",
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=""".. csv-table:: table name
     :header: "a", "b", "c", "dd", "e"
     :widths: 3, 3, 5, 4, 6
 
@@ -77,12 +93,14 @@ normal_test_data_list = [
     3, 3.3, "ccc", , "cccc"
     , , , , 
 
-"""),
-    Data(table="table name",
-         indent=0,
-         header=mix_header_list,
-         value=mix_value_matrix,
-         expected=""".. csv-table:: table name
+""",
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=""".. csv-table:: table name
     :header: "i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"
     :widths: 3, 4, 6, 4, 5, 6, 8, 5, 9, 27
 
@@ -90,14 +108,14 @@ normal_test_data_list = [
     2, 2.20, "bbb", 2.2, 2.2, False, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"
     3, 3.33, "cccc", -3.0, "ccc", True, Infinity, NaN, NaN, 2017-01-01 00:00:00
 
-"""),
+""",
+    ),
 ]
 
 table_writer_class = pytablewriter.RstCsvTableWriter
 
 
 class Test_RstCsvTableWriter_write_new_line(object):
-
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -107,13 +125,13 @@ class Test_RstCsvTableWriter_write_new_line(object):
 
 
 class Test_RstCsvTableWriter_write_table(object):
-
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in normal_test_data_list
-        ])
+        ],
+    )
     def test_normal(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -132,7 +150,8 @@ class Test_RstCsvTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in null_test_data_list
-        ])
+        ],
+    )
     def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -145,13 +164,14 @@ class Test_RstCsvTableWriter_write_table(object):
 
 
 class Test_RstCsvTableWriter_write_table_iter(object):
-
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
         [
-            "tablename",
-            ["ha", "hb", "hc"],
-            value_matrix_iter,
-            """.. csv-table:: tablename
+            [
+                "tablename",
+                ["ha", "hb", "hc"],
+                value_matrix_iter,
+                """.. csv-table:: tablename
     :header: "ha", "hb", "hc"
     :widths: 5, 5, 5
 
@@ -163,8 +183,9 @@ class Test_RstCsvTableWriter_write_table_iter(object):
     1001, 1002, 1003
 
 """,
+            ]
         ],
-    ])
+    )
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -180,10 +201,8 @@ class Test_RstCsvTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
-        [
-            [data.table, data.header, data.value, data.expected]
-            for data in null_test_data_list
-        ])
+        [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
+    )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

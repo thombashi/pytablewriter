@@ -126,11 +126,9 @@ class LatexMatrixWriter(LatexWriter):
         else:
             row_item_list.append(r"\left( ")
 
-        row_item_list.extend([
-            r"\begin{array}{",
-            "{:s}".format("".join(self._get_col_align_char_list())),
-            "}",
-        ])
+        row_item_list.extend(
+            [r"\begin{array}{", "{:s}".format("".join(self._get_col_align_char_list())), "}"]
+        )
 
         return ["".join(row_item_list)]
 
@@ -172,11 +170,13 @@ class LatexTableWriter(LatexWriter):
 
     def _get_opening_row_item_list(self):
         return [
-            "".join([
-                r"\begin{array}{",
-                "{:s}".format(" | ".join(self._get_col_align_char_list())),
-                r"} \hline",
-            ])
+            "".join(
+                [
+                    r"\begin{array}{",
+                    "{:s}".format(" | ".join(self._get_col_align_char_list())),
+                    r"} \hline",
+                ]
+            )
         ]
 
     def __is_requre_verbatim(self, value_dp):
@@ -189,8 +189,7 @@ class LatexTableWriter(LatexWriter):
         return r"\verb" + "|{:s}|".format(value)
 
     def _to_header_item(self, col_dp, value_dp):
-        return self.__verbatim(super(LatexTableWriter, self)._to_header_item(
-            col_dp, value_dp))
+        return self.__verbatim(super(LatexTableWriter, self)._to_header_item(col_dp, value_dp))
 
     def _to_row_item(self, col_dp, value_dp):
         row_item = super(LatexTableWriter, self)._to_row_item(col_dp, value_dp)

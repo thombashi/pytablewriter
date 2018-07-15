@@ -18,7 +18,12 @@ from tabledata import convert_idx_to_alphabet, to_value_matrix
 from typepy import Typecode
 
 from .._error import (
-    EmptyHeaderError, EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError)
+    EmptyHeaderError,
+    EmptyTableDataError,
+    EmptyTableNameError,
+    EmptyValueError,
+    NotSupportedError,
+)
 from .._logger import WriterLogger
 from ._interface import TableWriterInterface
 
@@ -198,7 +203,7 @@ class AbstractTableWriter(TableWriterInterface):
         pass
 
     def __init__(self):
-        from dataproperty import (Align, DataPropertyExtractor, MatrixFormatting)
+        from dataproperty import Align, DataPropertyExtractor, MatrixFormatting
 
         self._logger = WriterLogger(self)
 
@@ -289,7 +294,8 @@ class AbstractTableWriter(TableWriterInterface):
             self.stream.close()
         except AttributeError:
             self._logger.logger.warn(
-                "the stream has no close method implementation: type={}".format(type(self.stream)))
+                "the stream has no close method implementation: type={}".format(type(self.stream))
+            )
         finally:
             self.stream = None
 
@@ -322,7 +328,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._table_value_dp_matrix = value.value_dp_matrix
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
-            self._table_value_dp_matrix, self._column_dp_list)
+            self._table_value_dp_matrix, self._column_dp_list
+        )
         self.__set_type_hint_list([col_dp.type_class for col_dp in self._column_dp_list])
 
         self._is_complete_table_dp_preprocess = True
@@ -382,9 +389,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.header_list = list(dataframe.columns.values)
         self.value_matrix = dataframe.values.tolist()
-        self.type_hint_list = [
-            self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes
-        ]
+        self.type_hint_list = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
 
     def from_tablib(self, tablib_dataset):
         """
@@ -410,14 +415,19 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_table_name()
         self._verify_stream()
 
-        if all([typepy.is_empty_sequence(self.header_list),
-                typepy.is_empty_sequence(self.value_matrix)]):
+        if all(
+            [
+                typepy.is_empty_sequence(self.header_list),
+                typepy.is_empty_sequence(self.value_matrix),
+            ]
+        ):
             raise EmptyTableDataError()
 
         self._verify_header()
 
         self._logger.logger.debug(
-            "_write_table_iter: iteration-length={:d}".format(self.iteration_length))
+            "_write_table_iter: iteration-length={:d}".format(self.iteration_length)
+        )
 
         stash_is_write_header = self.is_write_header
         stach_is_write_opening_row = self.is_write_opening_row
@@ -428,10 +438,9 @@ class AbstractTableWriter(TableWriterInterface):
             self._iter_count = 1
 
             for work_matrix in self.value_matrix:
-                is_final_iter = all([
-                    self.iteration_length > 0,
-                    self._iter_count >= self.iteration_length
-                ])
+                is_final_iter = all(
+                    [self.iteration_length > 0, self._iter_count >= self.iteration_length]
+                )
 
                 if is_final_iter:
                     self.is_write_closing_row = True
@@ -491,14 +500,17 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _to_row_item(self, col_dp, value_dp):
         return self.__get_align_format(col_dp, value_dp).format(
-            self.__remove_line_break(col_dp.dp_to_str(value_dp)))
+            self.__remove_line_break(col_dp.dp_to_str(value_dp))
+        )
 
     def _get_align_char(self, align):
         return self.__align_char_mapping[align]
 
     def __get_align_format(self, col_dp, value_dp):
-        if (col_dp.typecode == Typecode.STRING and
-                value_dp.typecode in (Typecode.INTEGER, Typecode.REAL_NUMBER)):
+        if col_dp.typecode == Typecode.STRING and value_dp.typecode in (
+            Typecode.INTEGER,
+            Typecode.REAL_NUMBER,
+        ):
             align_char = self._get_align_char(value_dp.align)
         else:
             align_char = self._get_align_char(col_dp.align)
@@ -526,11 +538,13 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_table_name()
         self._verify_stream()
 
-        if all([
+        if all(
+            [
                 typepy.is_empty_sequence(self.header_list),
                 typepy.is_empty_sequence(self.value_matrix),
                 typepy.is_empty_sequence(self._table_value_dp_matrix),
-        ]):
+            ]
+        ):
             raise EmptyTableDataError()
 
         self._verify_header()
@@ -546,10 +560,10 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.column_type_hint_list = type_hint_list
 
     def _verify_table_name(self):
-        if all([self._is_require_table_name,
-                typepy.is_null_string(self.table_name)]):
+        if all([self._is_require_table_name, typepy.is_null_string(self.table_name)]):
             raise EmptyTableNameError(
-                "table_name must be a string, with at least one or more character.")
+                "table_name must be a string, with at least one or more character."
+            )
 
     def _verify_stream(self):
         if self.stream is None:
@@ -565,8 +579,7 @@ class AbstractTableWriter(TableWriterInterface):
         """
 
         if typepy.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError(
-                "header_list expected to have one or more header names")
+            raise EmptyHeaderError("header_list expected to have one or more header names")
 
     def _verify_value_matrix(self):
         if typepy.is_empty_sequence(self.value_matrix):
@@ -586,13 +599,15 @@ class AbstractTableWriter(TableWriterInterface):
 
         try:
             self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(
-                to_value_matrix(self.header_list, self.__value_matrix_org))
+                to_value_matrix(self.header_list, self.__value_matrix_org)
+            )
         except TypeError as e:
             self._logger.logger.debug(msgfy.to_error_message(e))
             self._table_value_dp_matrix = []
 
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
-            self._table_value_dp_matrix, self._column_dp_list)
+            self._table_value_dp_matrix, self._column_dp_list
+        )
 
         self._is_complete_table_dp_preprocess = True
 
@@ -618,8 +633,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._table_header_list = [
             self._to_header_item(col_dp, header_dp)
-            for col_dp, header_dp in
-            zip(self._column_dp_list, self._dp_extractor.to_header_dp_list())
+            for col_dp, header_dp in zip(
+                self._column_dp_list, self._dp_extractor.to_header_dp_list()
+            )
         ]
 
         self._is_complete_header_preprocess = True
@@ -628,8 +644,9 @@ class AbstractTableWriter(TableWriterInterface):
         if self._is_complete_value_matrix_preprocess:
             return
 
-        self._logger.logger.debug("_preprocess_value_matrix: value-rows={}".format(
-            len(self._table_value_dp_matrix)))
+        self._logger.logger.debug(
+            "_preprocess_value_matrix: value-rows={}".format(len(self._table_value_dp_matrix))
+        )
 
         self._table_value_matrix = [
             [
@@ -649,12 +666,14 @@ class AbstractTableWriter(TableWriterInterface):
 
     def __clear_preprocess_status(self):
         try:
-            if any([
-                self._is_complete_table_dp_preprocess,
-                self._is_complete_table_property_preprocess,
-                self._is_complete_header_preprocess,
-                self._is_complete_value_matrix_preprocess,
-            ]):
+            if any(
+                [
+                    self._is_complete_table_dp_preprocess,
+                    self._is_complete_table_property_preprocess,
+                    self._is_complete_header_preprocess,
+                    self._is_complete_value_matrix_preprocess,
+                ]
+            ):
                 self._logger.logger.debug("__clear_preprocess_status")
         except AttributeError:
             pass
@@ -666,12 +685,14 @@ class AbstractTableWriter(TableWriterInterface):
 
     def __clear_preprocess_data(self):
         try:
-            if any([
-                self._column_dp_list,
-                self._table_header_list,
-                self._table_value_matrix,
-                self._table_value_dp_matrix,
-            ]):
+            if any(
+                [
+                    self._column_dp_list,
+                    self._table_header_list,
+                    self._table_value_matrix,
+                    self._table_value_dp_matrix,
+                ]
+            ):
                 self._logger.logger.debug("__clear_preprocess_data")
         except AttributeError:
             pass

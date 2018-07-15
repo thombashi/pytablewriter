@@ -64,11 +64,10 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @table_name.setter
     def table_name(self, value):
-        from pathvalidate import (ElasticsearchIndexNameSanitizer, NullNameError)
+        from pathvalidate import ElasticsearchIndexNameSanitizer, NullNameError
 
         try:
-            self._table_name = ElasticsearchIndexNameSanitizer(
-                value).sanitize(replacement_text="_")
+            self._table_name = ElasticsearchIndexNameSanitizer(value).sanitize(replacement_text="_")
         except NullNameError:
             self._table_name = None
 
@@ -89,7 +88,8 @@ class ElasticsearchWriter(AbstractTableWriter):
         self._is_require_table_name = True
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self._dp_extractor.type_value_mapping = copy.deepcopy(
-            dataproperty.DefaultValue.TYPE_VALUE_MAPPING)
+            dataproperty.DefaultValue.TYPE_VALUE_MAPPING
+        )
 
         self.document_type = "table"
 
@@ -98,8 +98,12 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @staticmethod
     def __get_es_datatype(column_dp):
-        if column_dp.typecode in (Typecode.NONE, Typecode.NULL_STRING,
-                                  Typecode.INFINITY, Typecode.NAN):
+        if column_dp.typecode in (
+            Typecode.NONE,
+            Typecode.NULL_STRING,
+            Typecode.INFINITY,
+            Typecode.NAN,
+        ):
             return {"type": "keyword"}
 
         if column_dp.typecode == Typecode.STRING:
@@ -127,8 +131,11 @@ class ElasticsearchWriter(AbstractTableWriter):
             elif column_dp.bit_length <= 64:
                 return {"type": "long"}
 
-            raise ValueError("too large integer bits: expected<=64bits, actual={:d}bits".format(
-                column_dp.bit_length))
+            raise ValueError(
+                "too large integer bits: expected<=64bits, actual={:d}bits".format(
+                    column_dp.bit_length
+                )
+            )
 
         raise ValueError("unknown typecode: {}".format(column_dp.typecode))
 
@@ -138,13 +145,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         for header, column_dp in zip(self.header_list, self._column_dp_list):
             properties[header] = self.__get_es_datatype(column_dp)
 
-        return {
-            "mappings": {
-                self.document_type: {
-                    "properties": properties
-                }
-            }
-        }
+        return {"mappings": {self.document_type: {"properties": properties}}}
 
     def _get_body(self):
         str_datatype = (Typecode.DATETIME, Typecode.IP_ADDRESS, Typecode.INFINITY, Typecode.NAN)

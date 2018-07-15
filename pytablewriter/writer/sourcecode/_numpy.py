@@ -50,10 +50,12 @@ class NumpyTableWriter(PythonCodeTableWriter):
         super(NumpyTableWriter, self).__init__()
 
         self.import_numpy_as = "np"
-        self._dp_extractor.type_value_mapping[typepy.Typecode.INFINITY] = (
-            "{:s}.inf".format(self.import_numpy_as))
-        self._dp_extractor.type_value_mapping[typepy.Typecode.NAN] = (
-            "{:s}.nan".format(self.import_numpy_as))
+        self._dp_extractor.type_value_mapping[typepy.Typecode.INFINITY] = "{:s}.inf".format(
+            self.import_numpy_as
+        )
+        self._dp_extractor.type_value_mapping[typepy.Typecode.NAN] = "{:s}.nan".format(
+            self.import_numpy_as
+        )
 
     def _get_opening_row_item_list(self):
         array_def = "{:s}.array([".format(self.import_numpy_as)

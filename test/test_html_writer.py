@@ -11,16 +11,23 @@ import pytest
 
 from ._common import print_test_result
 from .data import (
-    Data, header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,
-    value_matrix_with_none)
+    Data,
+    header_list,
+    mix_header_list,
+    mix_value_matrix,
+    null_test_data_list,
+    value_matrix,
+    value_matrix_with_none,
+)
 
 
 normal_test_data_list = [
-    Data(table="",
-         indent="  ",
-         header=header_list,
-         value=value_matrix,
-         expected="""<table>
+    Data(
+        table="",
+        indent="  ",
+        header=header_list,
+        value=value_matrix,
+        expected="""<table>
   <thead>
     <tr>
       <th>a</th>
@@ -54,12 +61,14 @@ normal_test_data_list = [
     </tr>
   </tbody>
 </table>
-"""),
-    Data(table=None,
-         indent="  ",
-         header=None,
-         value=value_matrix,
-         expected="""<table>
+""",
+    ),
+    Data(
+        table=None,
+        indent="  ",
+        header=None,
+        value=value_matrix,
+        expected="""<table>
   <tbody>
     <tr>
       <td align="right">1</td>
@@ -84,12 +93,14 @@ normal_test_data_list = [
     </tr>
   </tbody>
 </table>
-"""),
-    Data(table="tablename",
-         indent="    ",
-         header=header_list,
-         value=[],
-         expected="""<table id="tablename">
+""",
+    ),
+    Data(
+        table="tablename",
+        indent="    ",
+        header=header_list,
+        value=[],
+        expected="""<table id="tablename">
     <caption>tablename</caption>
     <thead>
         <tr>
@@ -102,12 +113,14 @@ normal_test_data_list = [
     </thead>
     <tbody></tbody>
 </table>
-"""),
-    Data(table=None,
-         indent="    ",
-         header=header_list,
-         value=None,
-         expected="""<table>
+""",
+    ),
+    Data(
+        table=None,
+        indent="    ",
+        header=header_list,
+        value=None,
+        expected="""<table>
     <thead>
         <tr>
             <th>a</th>
@@ -119,12 +132,14 @@ normal_test_data_list = [
     </thead>
     <tbody></tbody>
 </table>
-"""),
-    Data(table="",
-         indent="  ",
-         header=header_list,
-         value=value_matrix_with_none,
-         expected="""<table>
+""",
+    ),
+    Data(
+        table="",
+        indent="  ",
+        header=header_list,
+        value=value_matrix_with_none,
+        expected="""<table>
   <thead>
     <tr>
       <th>a</th>
@@ -165,12 +180,14 @@ normal_test_data_list = [
     </tr>
   </tbody>
 </table>
-"""),
-    Data(table="tablename",
-         indent="    ",
-         header=mix_header_list,
-         value=mix_value_matrix,
-         expected="""<table id="tablename">
+""",
+    ),
+    Data(
+        table="tablename",
+        indent="    ",
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected="""<table id="tablename">
     <caption>tablename</caption>
     <thead>
         <tr>
@@ -225,14 +242,14 @@ normal_test_data_list = [
         </tr>
     </tbody>
 </table>
-"""),
+""",
+    ),
 ]
 
 table_writer_class = pytablewriter.HtmlTableWriter
 
 
 class Test_HtmlTableWriter_write_new_line(object):
-
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -242,13 +259,13 @@ class Test_HtmlTableWriter_write_new_line(object):
 
 
 class Test_HtmlTableWriter_write_table(object):
-
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in normal_test_data_list
-        ])
+        ],
+    )
     def test_normal(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -267,7 +284,8 @@ class Test_HtmlTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in null_test_data_list
-        ])
+        ],
+    )
     def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -280,7 +298,6 @@ class Test_HtmlTableWriter_write_table(object):
 
 
 class Test_HtmlTableWriter_write_table_iter(object):
-
     def test_exception(self):
         writer = table_writer_class()
 

@@ -37,39 +37,37 @@ def write_examples(maker):
     maker.write_file(examples_root.joinpath("table_format", "rst", "rst_grid_table_example.txt"))
 
     maker.write_chapter(
-        "Write a table with JavaScript format (as a nested list variable definition)")
-    maker.write_file(examples_root.joinpath(
-        "table_format", "sourcecode", "javascript_example.txt"))
+        "Write a table with JavaScript format (as a nested list variable definition)"
+    )
+    maker.write_file(examples_root.joinpath("table_format", "sourcecode", "javascript_example.txt"))
 
     maker.write_chapter("Write a table to an Excel sheet")
-    maker.write_file(examples_root.joinpath(
-        "table_format", "spreadsheet", "exel_single_example.txt"))
+    maker.write_file(
+        examples_root.joinpath("table_format", "spreadsheet", "exel_single_example.txt")
+    )
 
-    maker.write_chapter(
-        "Write a Markdown table from ``pandas.DataFrame`` instance")
-    maker.write_file(examples_root.joinpath(
-        "datasource", "from_pandas_dataframe_example.txt"))
+    maker.write_chapter("Write a Markdown table from ``pandas.DataFrame`` instance")
+    maker.write_file(examples_root.joinpath("datasource", "from_pandas_dataframe_example.txt"))
 
     maker.write_chapter("Write a markdown table from a space-separated values")
     maker.write_file(examples_root.joinpath("datasource", "from_ssv_example.txt"))
 
     maker.write_chapter("Create Elasticsearch index and put data")
-    maker.write_file(examples_root.joinpath(
-        "table_format", "elasticsearch_example.txt"))
+    maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
 
     maker.write_chapter("Formatting a table for Jupyter Notebook")
-    maker.write_file(examples_root.joinpath(
-        "jupyter_notebook", "jupyter_notebook_example.txt"))
+    maker.write_file(examples_root.joinpath("jupyter_notebook", "jupyter_notebook_example.txt"))
 
     maker.write_chapter("Write a table using multibyte character")
-    maker.write_file(examples_root.joinpath(
-        "multibyte", "multibyte_table_example.txt"))
+    maker.write_file(examples_root.joinpath("multibyte", "multibyte_table_example.txt"))
 
     maker.write_chapter("For more information")
-    maker.write_line_list([
-        "More examples are available at ",
-        "http://{:s}.rtfd.io/en/latest/pages/examples/index.html".format(PROJECT_NAME),
-    ])
+    maker.write_line_list(
+        [
+            "More examples are available at ",
+            "http://{:s}.rtfd.io/en/latest/pages/examples/index.html".format(PROJECT_NAME),
+        ]
+    )
 
 
 def main():
@@ -86,19 +84,19 @@ def main():
 
     maker.set_indent_level(0)
     maker.write_chapter("Documentation")
-    maker.write_line_list([
-        "http://{:s}.rtfd.io/".format(PROJECT_NAME),
-    ])
+    maker.write_line_list(["http://{:s}.rtfd.io/".format(PROJECT_NAME)])
 
     maker.write_chapter("Related Project")
-    maker.write_line_list([
-        "- `pytablereader <https://github.com/thombashi/pytablereader>`__",
-        "    - Tabular data loaded by ``pytablereader`` can be written "
-        "another tabular data format with ``pytablewriter``.",
-    ])
+    maker.write_line_list(
+        [
+            "- `pytablereader <https://github.com/thombashi/pytablereader>`__",
+            "    - Tabular data loaded by ``pytablereader`` can be written "
+            "another tabular data format with ``pytablewriter``.",
+        ]
+    )
 
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

@@ -9,9 +9,7 @@ from __future__ import absolute_import, unicode_literals
 from ._interface import IndentationInterface, TableWriterInterface, TextWriterInterface
 
 
-class NullTableWriter(
-        IndentationInterface, TextWriterInterface, TableWriterInterface):
-
+class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInterface):
     @property
     def format_name(self):
         return "null"

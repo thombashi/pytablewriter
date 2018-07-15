@@ -14,17 +14,25 @@ import pytest
 
 from ._common import print_test_result
 from .data import (
-    header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,
-    value_matrix_iter, value_matrix_with_none)
+    header_list,
+    mix_header_list,
+    mix_value_matrix,
+    null_test_data_list,
+    value_matrix,
+    value_matrix_iter,
+    value_matrix_with_none,
+)
 
 
 Data = collections.namedtuple("Data", "table header value expected")
 
 normal_test_data_list = [
-    Data(table="test table",
-         header=header_list,
-         value=value_matrix,
-         expected=dedent("""\
+    Data(
+        table="test table",
+        header=header_list,
+        value=value_matrix,
+        expected=dedent(
+            """\
             {| class="wikitable"
             |+test table
             ! a
@@ -52,11 +60,15 @@ normal_test_data_list = [
             | cccc
             |}
 
-            """)),
-    Data(table=None,
-         header=header_list,
-         value=None,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table=None,
+        header=header_list,
+        value=None,
+        expected=dedent(
+            """\
             {| class="wikitable"
             ! a
             ! b
@@ -66,16 +78,20 @@ normal_test_data_list = [
             |-
             |}
 
-            """)),
-    Data(table=None,
-         header=["ho ge", "foo - bar"],
-         value=[
-             [1, "\n".join([" # a b c", "# h o g e"])],
-             [2, "\n".join([" *hoge", "* abc"])],
-             [3, "\n".join([" a * b", "a # b ## c ###"])],
-             [3, "\n".join([" a # b", "a * b ** c ***"])],
-         ],
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table=None,
+        header=["ho ge", "foo - bar"],
+        value=[
+            [1, "\n".join([" # a b c", "# h o g e"])],
+            [2, "\n".join([" *hoge", "* abc"])],
+            [3, "\n".join([" a * b", "a # b ## c ###"])],
+            [3, "\n".join([" a # b", "a * b ** c ***"])],
+        ],
+        expected=dedent(
+            """\
             {| class="wikitable"
             ! ho ge
             ! foo - bar
@@ -99,11 +115,15 @@ normal_test_data_list = [
             a * b ** c ***
             |}
 
-            """)),
-    Data(table=None,
-         header=None,
-         value=value_matrix,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table=None,
+        header=None,
+        value=value_matrix,
+        expected=dedent(
+            """\
             {| class="wikitable"
             | style="text-align:right"| 1
             | style="text-align:right"| 123.1
@@ -124,11 +144,15 @@ normal_test_data_list = [
             | cccc
             |}
 
-            """)),
-    Data(table="test table",
-         header=header_list,
-         value=value_matrix_with_none,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="test table",
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=dedent(
+            """\
             {| class="wikitable"
             |+test table
             ! a
@@ -162,11 +186,15 @@ normal_test_data_list = [
             | 
             |}
 
-            """)),
-    Data(table="test table",
-         header=mix_header_list,
-         value=mix_value_matrix,
-         expected=dedent("""\
+            """
+        ),
+    ),
+    Data(
+        table="test table",
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=dedent(
+            """\
             {| class="wikitable"
             |+test table
             ! i
@@ -214,14 +242,15 @@ normal_test_data_list = [
             | 2017-01-01 00:00:00
             |}
 
-            """)),
+            """
+        ),
+    ),
 ]
 
 table_writer_class = pytablewriter.MediaWikiTableWriter
 
 
 class Test_MediaWikiTableWriter_write_new_line(object):
-
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -231,12 +260,11 @@ class Test_MediaWikiTableWriter_write_new_line(object):
 
 
 class Test_MediaWikiTableWriter_write_table(object):
-
     @pytest.mark.xfail(run=False)
-    @pytest.mark.parametrize(["table", "header", "value", "expected"], [
-        [data.table, data.header, data.value, data.expected]
-        for data in normal_test_data_list
-    ])
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
+        [[data.table, data.header, data.value, data.expected] for data in normal_test_data_list],
+    )
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -251,10 +279,8 @@ class Test_MediaWikiTableWriter_write_table(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
-        [
-            [data.table, data.header, data.value, data.expected]
-            for data in null_test_data_list
-        ])
+        [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
+    )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -272,14 +298,16 @@ def simple_write_callback(iter_count, iteration_length):
 
 
 class Test_MediaWikiTableWriter_write_table_iter(object):
-
-    @pytest.mark.parametrize(["table", "header", "value", "callback", "expected"], [
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "callback", "expected"],
         [
-            "tablename",
-            ["ha", "hb", "hc"],
-            value_matrix_iter,
-            lambda a, b: None,
-            dedent("""\
+            [
+                "tablename",
+                ["ha", "hb", "hc"],
+                value_matrix_iter,
+                lambda a, b: None,
+                dedent(
+                    """\
                 {| class="wikitable"
                 |+tablename
                 ! ha
@@ -311,13 +339,16 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
                 | style="text-align:right"| 1003
                 |}
 
-                """),
-        ], [
-            None,
-            None,
-            value_matrix_iter,
-            simple_write_callback,
-            dedent("""\
+                """
+                ),
+            ],
+            [
+                None,
+                None,
+                value_matrix_iter,
+                simple_write_callback,
+                dedent(
+                    """\
                 {| class="wikitable"
                 | style="text-align:right"| 1
                 | style="text-align:right"| 2
@@ -347,9 +378,11 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
                 |}
                 3/3
 
-                """),
+                """
+                ),
+            ],
         ],
-    ])
+    )
     def test_normal(self, capsys, table, header, value, callback, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -364,10 +397,8 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
-        [
-            [data.table, data.header, data.value, data.expected]
-            for data in null_test_data_list
-        ])
+        [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
+    )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table

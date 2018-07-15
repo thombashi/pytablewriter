@@ -10,13 +10,13 @@ import dataproperty
 
 
 def quote_datetime_formatter(value):
-    return '"{:s}"'.format(
-        value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
+    return '"{:s}"'.format(value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 
 
 def dateutil_datetime_formatter(value):
     return 'dateutil.parser.parse("{:s}")'.format(
-        value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
+        value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT)
+    )
 
 
 def dump_tabledata(value, format_name="rst_grid_table"):

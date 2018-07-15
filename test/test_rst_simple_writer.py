@@ -11,16 +11,23 @@ import pytest
 
 from ._common import print_test_result
 from .data import (
-    Data, header_list, mix_header_list, mix_value_matrix, null_test_data_list, value_matrix,
-    value_matrix_with_none)
+    Data,
+    header_list,
+    mix_header_list,
+    mix_value_matrix,
+    null_test_data_list,
+    value_matrix,
+    value_matrix_with_none,
+)
 
 
 normal_test_data_list = [
-    Data(table="tablename",
-         indent=0,
-         header=header_list,
-         value=value_matrix,
-         expected=""".. table:: tablename
+    Data(
+        table="tablename",
+        indent=0,
+        header=header_list,
+        value=value_matrix,
+        expected=""".. table:: tablename
 
     =  =====  ===  ===  ====
     a    b     c   dd    e  
@@ -30,24 +37,28 @@ normal_test_data_list = [
     3    3.3  ccc  3.0  cccc
     =  =====  ===  ===  ====
 
-"""),
-    Data(table="",
-         indent=0,
-         header=header_list,
-         value=None,
-         expected=""".. table:: 
+""",
+    ),
+    Data(
+        table="",
+        indent=0,
+        header=header_list,
+        value=None,
+        expected=""".. table:: 
 
     =  =  =  ==  =
     a  b  c  dd  e
     =  =  =  ==  =
     =  =  =  ==  =
 
-"""),
-    Data(table=None,
-         indent=0,
-         header=None,
-         value=value_matrix,
-         expected=""".. table:: 
+""",
+    ),
+    Data(
+        table=None,
+        indent=0,
+        header=None,
+        value=value_matrix,
+        expected=""".. table:: 
 
     =  =====  ===  ===  ====
     1  123.1  a    1.0     1
@@ -55,12 +66,14 @@ normal_test_data_list = [
     3    3.3  ccc  3.0  cccc
     =  =====  ===  ===  ====
 
-"""),
-    Data(table="",
-         indent=1,
-         header=header_list,
-         value=value_matrix,
-         expected="""    .. table:: 
+""",
+    ),
+    Data(
+        table="",
+        indent=1,
+        header=header_list,
+        value=value_matrix,
+        expected="""    .. table:: 
 
         =  =====  ===  ===  ====
         a    b     c   dd    e  
@@ -70,12 +83,14 @@ normal_test_data_list = [
         3    3.3  ccc  3.0  cccc
         =  =====  ===  ===  ====
 
-"""),
-    Data(table="table name",
-         indent=0,
-         header=header_list,
-         value=value_matrix_with_none,
-         expected=""".. table:: table name
+""",
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=header_list,
+        value=value_matrix_with_none,
+        expected=""".. table:: table name
 
     =  ===  ===  ===  ====
     a   b    c   dd    e  
@@ -86,12 +101,14 @@ normal_test_data_list = [
 
     =  ===  ===  ===  ====
 
-"""),
-    Data(table="table name",
-         indent=0,
-         header=mix_header_list,
-         value=mix_value_matrix,
-         expected=""".. table:: table name
+""",
+    ),
+    Data(
+        table="table name",
+        indent=0,
+        header=mix_header_list,
+        value=mix_value_matrix,
+        expected=""".. table:: table name
 
     =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
     i   f     c     if   ifc  bool     inf     nan  mix_num             time           
@@ -101,14 +118,14 @@ normal_test_data_list = [
     3  3.33  cccc  -3.0  ccc  True   Infinity  NaN       NaN  2017-01-01 00:00:00      
     =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
 
-"""),
+""",
+    ),
 ]
 
 table_writer_class = pytablewriter.RstSimpleTableWriter
 
 
 class Test_RstSimpleTableWriter_write_new_line(object):
-
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -118,13 +135,13 @@ class Test_RstSimpleTableWriter_write_new_line(object):
 
 
 class Test_RstSimpleTableWriter_write_table(object):
-
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in normal_test_data_list
-        ])
+        ],
+    )
     def test_normal(self, capsys, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -143,7 +160,8 @@ class Test_RstSimpleTableWriter_write_table(object):
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in null_test_data_list
-        ])
+        ],
+    )
     def test_exception(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
@@ -156,7 +174,6 @@ class Test_RstSimpleTableWriter_write_table(object):
 
 
 class Test_RstSimpleTableWriter_write_table_iter(object):
-
     def test_exception(self):
         writer = table_writer_class()
 

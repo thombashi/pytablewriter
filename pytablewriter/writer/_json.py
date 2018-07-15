@@ -61,8 +61,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             typepy.Typecode.INFINITY: "Infinity",
             typepy.Typecode.NAN: "NaN",
         }
-        self._dp_extractor.const_value_mapping = {
-            True: "true", False: "false"}
+        self._dp_extractor.const_value_mapping = {True: "true", False: "false"}
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
     def write_null_line(self):
@@ -78,21 +77,17 @@ class JsonTableWriter(IndentationTextTableWriter):
 
             json_text_list = []
             for json_data in self._table_value_matrix:
-                json_text = json.dumps(
-                    json_data, sort_keys=True, indent=4 * self._indent_level)
+                json_text = json.dumps(json_data, sort_keys=True, indent=4 * self._indent_level)
                 json_text = strip_quote(
-                    json_text,
-                    self._dp_extractor.type_value_mapping.get(typepy.Typecode.NONE))
+                    json_text, self._dp_extractor.type_value_mapping.get(typepy.Typecode.NONE)
+                )
                 json_text = strip_quote(json_text, "true")
                 json_text = strip_quote(json_text, "false")
                 json_text_list.append(json_text)
 
             joint_text = self.char_right_side_row + "\n"
             json_text = joint_text.join(json_text_list)
-            if all([
-                    not self.is_write_closing_row,
-                    typepy.is_not_null_string(json_text),
-            ]):
+            if all([not self.is_write_closing_row, typepy.is_not_null_string(json_text)]):
                 json_text += joint_text
 
             self.stream.write(json_text)
@@ -109,9 +104,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         except TypeError:
             dp_matrix = []
 
-        value_matrix = [
-            [self.__get_data_helper(dp) for dp in dp_list] for dp_list in dp_matrix
-        ]
+        value_matrix = [[self.__get_data_helper(dp) for dp in dp_list] for dp_list in dp_matrix]
 
         self._table_value_matrix = [
             dict(zip(self.header_list, value_list)) for value_list in value_matrix

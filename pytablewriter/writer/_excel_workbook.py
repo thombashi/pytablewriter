@@ -19,7 +19,6 @@ from .._logger import logger
 
 @six.add_metaclass(abc.ABCMeta)
 class ExcelWorkbookInterface(object):
-
     @abc.abstractproperty
     def workbook(self):  # pragma: no cover
         pass
@@ -42,7 +41,6 @@ class ExcelWorkbookInterface(object):
 
 
 class ExcelWorkbook(ExcelWorkbookInterface):
-
     @property
     def workbook(self):
         return self._workbook
@@ -65,7 +63,6 @@ class ExcelWorkbook(ExcelWorkbookInterface):
 
 
 class ExcelWorkbookXls(ExcelWorkbook):
-
     def __init__(self, file_path):
         super(ExcelWorkbookXls, self).__init__(file_path)
 
@@ -109,7 +106,6 @@ class ExcelWorkbookXls(ExcelWorkbook):
 
 
 class ExcelWorkbookXlsx(ExcelWorkbook):
-
     def __init__(self, file_path):
         super(ExcelWorkbookXlsx, self).__init__(file_path)
 
