@@ -1,0 +1,15 @@
+[tool.black]
+line-length = 100
+exclude = """
+.eggs/
+| .git/
+| .tox/
+| .venv/
+| _build/
+| build/
+| dist/
+| examples/
+| _sandbox/
+| docs/conf.py
+| setup.py
+"""
