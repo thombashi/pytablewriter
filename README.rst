@@ -13,7 +13,7 @@ A Python library to write a table in various formats: CSV / Elasticsearch / HTML
 .. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
    :target: https://pypi.python.org/pypi/pytablewriter
 
-.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux
+.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS
     :target: https://travis-ci.org/thombashi/pytablewriter
 
 .. image:: https://img.shields.io/appveyor/ci/thombashi/pytablewriter/master.svg?label=Windows
