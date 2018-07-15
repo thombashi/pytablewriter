@@ -162,19 +162,19 @@ class TableFormat(enum.Enum):
         ["py"],
     )
     RST_CSV_TABLE = (
-        [RstCsvTableWriter().format_name],
+        [RstCsvTableWriter().format_name, "rst_csv"],
         RstCsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT,
         ["rst"],
     )
     RST_GRID_TABLE = (
-        [RstGridTableWriter().format_name, "rst"],
+        [RstGridTableWriter().format_name, "rst_grid", "rst"],
         RstGridTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["rst"],
     )
     RST_SIMPLE_TABLE = (
-        [RstSimpleTableWriter().format_name],
+        [RstSimpleTableWriter().format_name, "rst_simple"],
         RstSimpleTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT,
         ["rst"],

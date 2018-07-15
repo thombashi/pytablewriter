@@ -94,32 +94,32 @@ class TableWriterFactory(object):
         Create a table writer class instance from a format name.
         Supported file format names are as follows:
 
-            ==============================  ===================================
-            Format name                     Writer Class
-            ==============================  ===================================
-            ``"csv"``                       :py:class:`~.CsvTableWriter`
-            ``"elasticsearch"``             :py:class:`~.ElasticsearchWriter`
-            ``"excel"``                     :py:class:`~.ExcelXlsxTableWriter`
-            ``"html"``/``"htm"``            :py:class:`~.HtmlTableWriter`
-            ``"javascript"``/``"js"``       :py:class:`~.JavaScriptTableWriter`
-            ``"json"``                      :py:class:`~.JsonTableWriter`
-            ``"json_lines"``                :py:class:`~.JsonLinesTableWriter`
-            ``"latex_matrix"``              :py:class:`~.LatexMatrixWriter`
-            ``"latex_table"``               :py:class:`~.LatexTableWriter`
-            ``"ldjson"``                    :py:class:`~.JsonLinesTableWriter`
-            ``"ltsv"``                      :py:class:`~.LtsvTableWriter`
-            ``"markdown"``/``"md"``         :py:class:`~.MarkdownTableWriter`
-            ``"mediawiki"``                 :py:class:`~.MediaWikiTableWriter`
-            ``"null"``                      :py:class:`~.NullTableWriter`
-            ``"pandas"``                    :py:class:`~.PandasDataFrameWriter`
-            ``"py"``/``"python"``           :py:class:`~.PythonCodeTableWriter`
-            ``"rst"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`
-            ``"rst_simple_table"``          :py:class:`~.RstSimpleTableWriter`
-            ``"rst_csv_table"``             :py:class:`~.RstCsvTableWriter`
-            ``"sqlite"``                    :py:class:`~.SqliteTableWriter`
-            ``"tsv"``                       :py:class:`~.TsvTableWriter`
-            ``"toml"``                      :py:class:`~.TomlTableWriter`
-            ==============================  ===================================
+            =============================================  ===================================
+            Format name                                    Writer Class
+            =============================================  ===================================
+            ``"csv"``                                      :py:class:`~.CsvTableWriter`
+            ``"elasticsearch"``                            :py:class:`~.ElasticsearchWriter`
+            ``"excel"``                                    :py:class:`~.ExcelXlsxTableWriter`
+            ``"html"``/``"htm"``                           :py:class:`~.HtmlTableWriter`
+            ``"javascript"``/``"js"``                      :py:class:`~.JavaScriptTableWriter`
+            ``"json"``                                     :py:class:`~.JsonTableWriter`
+            ``"json_lines"``                               :py:class:`~.JsonLinesTableWriter`
+            ``"latex_matrix"``                             :py:class:`~.LatexMatrixWriter`
+            ``"latex_table"``                              :py:class:`~.LatexTableWriter`
+            ``"ldjson"``                                   :py:class:`~.JsonLinesTableWriter`
+            ``"ltsv"``                                     :py:class:`~.LtsvTableWriter`
+            ``"markdown"``/``"md"``                        :py:class:`~.MarkdownTableWriter`
+            ``"mediawiki"``                                :py:class:`~.MediaWikiTableWriter`
+            ``"null"``                                     :py:class:`~.NullTableWriter`
+            ``"pandas"``                                   :py:class:`~.PandasDataFrameWriter`
+            ``"py"``/``"python"``                          :py:class:`~.PythonCodeTableWriter`
+            ``"rst"``/``"rst_grid"``/``"rst_grid_table"``  :py:class:`~.RstGridTableWriter`
+            ``"rst_simple"``/``"rst_simple_table"``        :py:class:`~.RstSimpleTableWriter`
+            ``"rst_csv"``/``"rst_csv_table"``              :py:class:`~.RstCsvTableWriter`
+            ``"sqlite"``                                   :py:class:`~.SqliteTableWriter`
+            ``"tsv"``                                      :py:class:`~.TsvTableWriter`
+            ``"toml"``                                     :py:class:`~.TomlTableWriter`
+            =============================================  ===================================
 
         :param str format_name: Format name string (case insensitive).
         :return: Writer instance that coincides with the ``format_name``:
