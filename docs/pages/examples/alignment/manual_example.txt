@@ -1,0 +1,28 @@
+``pytablewriter`` will automatically set alignment for each column by data types.
+You can also set alignment for each column manually by ``align_list`` attribute of writer classes.
+
+:Sample Code:
+    .. code-block:: python
+
+        from pytablewriter import Align, MarkdownTableWriter
+
+        writer = MarkdownTableWriter()
+        writer.table_name = "specify alignment for each column manually"
+        writer.header_list = ["left", "right", "center", "auto (int)", "auto (str)", "None (auto)"]
+        writer.value_matrix = [
+            [0, "r", "center align", 0, "a", "n"],
+            [11, "right align", "c", 11, "auto", "none"],
+        ]
+        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
+        writer.write_table()
+
+:Output:
+    .. code-block::
+
+        # specify alignment for each column manually
+        |left|   right   |   center   |auto (int)|auto (str)|None (auto)|
+        |----|----------:|:----------:|---------:|----------|-----------|
+        |0   |          r|center align|         0|a         |n          |
+        |11  |right align|     c      |        11|auto      |none       |
+
+`Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/alignment/output.md>`__

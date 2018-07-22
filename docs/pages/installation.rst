@@ -15,6 +15,7 @@ Python 2.7+ or 3.4+
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
+- `simplejson <https://github.com/simplejson/simplejson>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.python.org/pypi/six/>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__

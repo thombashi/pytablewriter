@@ -30,13 +30,12 @@ The standard output is the default output stream of writers
             ["4", "AG", "America/Antigua"],
             ["5", "AI", "America/Anguilla"],
         ]
-        
-        writer.write_table()
 
+        writer.write_table()
 
 :Output:
     .. code-block:: ReST
-        
+
         .. table:: zone
 
             +-------+------------+----------------+

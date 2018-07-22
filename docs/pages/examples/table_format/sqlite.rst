@@ -2,7 +2,7 @@
 
 SQLite
 ----------------------------
-|SqliteTableWriter| class can write a table to 
+|SqliteTableWriter| class can write a table to
 a SQLite database file from a matrix of data.
 
 :Sample Code:
@@ -42,7 +42,7 @@ a SQLite database file from a matrix of data.
         writer.close()
 
 :Output:
-    .. code-block:: none
+    .. code-block:: sql
 
         $ sqlite3 sample.sqlite
         sqlite> .schema
