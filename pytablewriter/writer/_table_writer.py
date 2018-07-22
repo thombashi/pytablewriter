@@ -514,7 +514,7 @@ class AbstractTableWriter(TableWriterInterface):
             self.__remove_line_break(col_dp.dp_to_str(value_dp))
         )
 
-    def __get_align(self, col_idx, default):
+    def _get_align(self, col_idx, default):
         try:
             align = self.align_list[col_idx]
         except (IndexError, KeyError):
@@ -537,9 +537,9 @@ class AbstractTableWriter(TableWriterInterface):
             Typecode.INTEGER,
             Typecode.REAL_NUMBER,
         ):
-            align_char = self._get_align_char(self.__get_align(col_dp.column_index, value_dp.align))
+            align_char = self._get_align_char(self._get_align(col_dp.column_index, value_dp.align))
         else:
-            align_char = self._get_align_char(self.__get_align(col_dp.column_index, col_dp.align))
+            align_char = self._get_align_char(self._get_align(col_dp.column_index, col_dp.align))
         format_list = ["{:" + align_char]
         col_padding_len = self._get_padding_len(col_dp, value_dp)
         if col_padding_len > 0:

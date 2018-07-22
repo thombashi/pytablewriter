@@ -570,15 +570,15 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-        writer.table_name = "specify column align manually"
+        writer.table_name = "specify alignment for each column manually"
         writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
         writer.stream = six.StringIO()
         writer.write_table()
         expected = dedent(
             """\
-            # specify column align manually
+            # specify alignment for each column manually
             |left|   right   |   center   |auto|auto|   None    |
-            |---:|-----------|------------|---:|----|-----------|
+            |----|----------:|:----------:|---:|----|-----------|
             |0   |          r|center align|   0|a   |n          |
             |11  |right align|     bb     |  11|auto|none (auto)|
 
