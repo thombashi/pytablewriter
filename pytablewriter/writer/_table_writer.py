@@ -13,6 +13,7 @@ import sys
 import msgfy
 import six
 import typepy
+from dataproperty import Align
 from six.moves import zip
 from tabledata import convert_idx_to_alphabet, to_value_matrix
 from typepy import Typecode
@@ -181,6 +182,15 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def align_list(self):
+        return self.__align_list
+
+    @align_list.setter
+    def align_list(self, value):
+        self.__align_list = value
+        self.__clear_preprocess()
+
+    @property
     def is_escape_html_tag(self):
         return self._dp_extractor.is_escape_html_tag
 
@@ -203,7 +213,7 @@ class AbstractTableWriter(TableWriterInterface):
         pass
 
     def __init__(self):
-        from dataproperty import Align, DataPropertyExtractor, MatrixFormatting
+        from dataproperty import DataPropertyExtractor, MatrixFormatting
 
         self._logger = WriterLogger(self)
 
@@ -255,6 +265,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
         self._iter_count = None
 
+        self.__align_list = []
         self.__align_char_mapping = {
             Align.AUTO: "<",
             Align.LEFT: "<",
@@ -503,6 +514,21 @@ class AbstractTableWriter(TableWriterInterface):
             self.__remove_line_break(col_dp.dp_to_str(value_dp))
         )
 
+    def __get_align(self, col_idx, default):
+        try:
+            align = self.align_list[col_idx]
+        except (IndexError, KeyError):
+            return default
+
+        if align not in Align:
+            self._logger.logger.debug("invalid alignment: {}".format(align))
+            return default
+
+        if align == Align.AUTO:
+            return default
+
+        return align
+
     def _get_align_char(self, align):
         return self.__align_char_mapping[align]
 
@@ -511,9 +537,9 @@ class AbstractTableWriter(TableWriterInterface):
             Typecode.INTEGER,
             Typecode.REAL_NUMBER,
         ):
-            align_char = self._get_align_char(value_dp.align)
+            align_char = self._get_align_char(self.__get_align(col_dp.column_index, value_dp.align))
         else:
-            align_char = self._get_align_char(col_dp.align)
+            align_char = self._get_align_char(self.__get_align(col_dp.column_index, col_dp.align))
         format_list = ["{:" + align_char]
         col_padding_len = self._get_padding_len(col_dp, value_dp)
         if col_padding_len > 0:

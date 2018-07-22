@@ -540,6 +540,54 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
+    def test_normal_set_align(self):
+        from pytablewriter import Align
+
+        writer = table_writer_class()
+        writer.from_tabledata(
+            TableData(
+                table_name="auto align",
+                header_list=["left", "right", "center", "auto", "auto", "None"],
+                row_list=[
+                    [0, "r", "center align", 0, "a", "n"],
+                    [11, "right align", "bb", 11, "auto", "none (auto)"],
+                ],
+            )
+        )
+        writer.stream = six.StringIO()
+        writer.write_table()
+        expected = dedent(
+            """\
+            # auto align
+            |left|   right   |   center   |auto|auto|   None    |
+            |---:|-----------|------------|---:|----|-----------|
+            |   0|r          |center align|   0|a   |n          |
+            |  11|right align|bb          |  11|auto|none (auto)|
+
+            """
+        )
+        out = writer.stream.getvalue()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
+        writer.table_name = "specify column align manually"
+        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
+        writer.stream = six.StringIO()
+        writer.write_table()
+        expected = dedent(
+            """\
+            # specify column align manually
+            |left|   right   |   center   |auto|auto|   None    |
+            |---:|-----------|------------|---:|----|-----------|
+            |0   |          r|center align|   0|a   |n          |
+            |11  |right align|     bb     |  11|auto|none (auto)|
+
+            """
+        )
+        out = writer.stream.getvalue()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(

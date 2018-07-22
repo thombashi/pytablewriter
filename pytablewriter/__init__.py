@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 
+from dataproperty import Align
 from typepy import (
     Bool,
     DateTime,
