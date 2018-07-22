@@ -8,10 +8,10 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
-import json
 
 import pytablewriter as ptw
 import pytest
+import simplejson as json
 
 from ._common import print_test_result
 from .data import float_header_list, float_value_matrix, header_list, value_matrix

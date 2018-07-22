@@ -7,10 +7,10 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
-import json
 
 import pytablewriter
 import pytest
+import simplejson as json
 
 from ._common import print_test_result
 from .data import (

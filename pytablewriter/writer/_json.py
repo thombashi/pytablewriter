@@ -7,10 +7,10 @@
 from __future__ import absolute_import, unicode_literals
 
 import copy
-import json
 from decimal import Decimal
 
 import dataproperty
+import simplejson as json
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip

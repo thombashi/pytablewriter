@@ -6,6 +6,7 @@ logbook
 mbstrdecoder
 msgfy>=0.0.2
 pathvalidate>=0.20.0
+simplejson>=3.16.0
 SimpleSQLite>=0.28.1
 six
 tabledata>=0.0.22
