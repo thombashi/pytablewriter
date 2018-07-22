@@ -11,6 +11,7 @@ import re
 
 import dataproperty as dp
 import typepy
+from pytablewriter import Align
 from typepy import Typecode
 
 from ._text_writer import IndentationTextTableWriter
@@ -53,9 +54,9 @@ class LatexWriter(IndentationTextTableWriter):
     def _get_col_align_char_list(self):
         col_align_list = []
         for col_dp in self._column_dp_list:
-            if col_dp.align == dp.Align.RIGHT:
+            if col_dp.align == Align.RIGHT:
                 col_align = "r"
-            elif col_dp.align == dp.Align.CENTER:
+            elif col_dp.align == Align.CENTER:
                 col_align = "c"
             else:
                 col_align = "l"

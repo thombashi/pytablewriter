@@ -12,6 +12,7 @@ import re
 import dataproperty as dp
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
+from pytablewriter import Align
 from six.moves import zip
 
 from ._text_writer import TextTableWriter
@@ -80,11 +81,11 @@ class MediaWikiTableWriter(TextTableWriter):
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "! {{:{:s}{:s}}}".format(
-            self._get_align_char(dp.Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
+            self._get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )
 
     def __modify_table_element(self, value, value_dp):
-        if value_dp.align is dp.Align.LEFT:
+        if value_dp.align is Align.LEFT:
             forma_stirng = "| {1:s}"
         else:
             forma_stirng = '| style="text-align:{0:s}"| {1:s}'

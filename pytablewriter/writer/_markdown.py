@@ -11,6 +11,7 @@ import copy
 import dataproperty as dp
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
+from pytablewriter import Align
 
 from ._text_writer import IndentationTextTableWriter
 
@@ -61,9 +62,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         for col_dp in self._column_dp_list:
             padding_len = self._get_padding_len(col_dp) + self.margin * 2
 
-            if col_dp.align == dp.Align.RIGHT:
+            if col_dp.align == Align.RIGHT:
                 separator_item = "-" * (padding_len - 1) + ":"
-            elif col_dp.align == dp.Align.CENTER:
+            elif col_dp.align == Align.CENTER:
                 separator_item = ":" + "-" * (padding_len - 2) + ":"
             else:
                 separator_item = "-" * padding_len
