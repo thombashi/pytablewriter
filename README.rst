@@ -307,7 +307,7 @@ Write a markdown table from a space-separated values
 Set alignment for each column
 -------------------------------
 ``pytablewriter`` will automatically set alignment for each column by data types.
-You can also set alignment for each column manually by ``align_list`` attribute of writer classes.
+You can set alignment for each column manually by ``align_list`` attribute of writer classes.
 
 :Sample Code:
     .. code-block:: python
