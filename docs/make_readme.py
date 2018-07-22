@@ -52,6 +52,9 @@ def write_examples(maker):
     maker.write_chapter("Write a markdown table from a space-separated values")
     maker.write_file(examples_root.joinpath("datasource", "from_ssv_example.txt"))
 
+    maker.write_chapter("Set alignment for each column")
+    maker.write_file(examples_root.joinpath("alignment", "manual_example.txt"))
+
     maker.write_chapter("Create Elasticsearch index and put data")
     maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
 

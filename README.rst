@@ -304,6 +304,37 @@ Write a markdown table from a space-separated values
         |root|  6|   0| 0.0|    0|   0|?  |I<  |May11|0:00|[mm_percpu_wq]|
         |root|  7|   0| 0.0|    0|   0|?  |S   |May11|0:01|[ksoftirqd/0] |
 
+Set alignment for each column
+-------------------------------
+``pytablewriter`` will automatically set alignment for each column by data types.
+You can also set alignment for each column manually by ``align_list`` attribute of writer classes.
+
+:Sample Code:
+    .. code-block:: python
+
+        from pytablewriter import Align, MarkdownTableWriter
+
+        writer = MarkdownTableWriter()
+        writer.table_name = "specify alignment for each column manually"
+        writer.header_list = ["left", "right", "center", "auto (int)", "auto (str)", "None (auto)"]
+        writer.value_matrix = [
+            [0, "r", "center align", 0, "a", "n"],
+            [11, "right align", "c", 11, "auto", "none"],
+        ]
+        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
+        writer.write_table()
+
+:Output:
+    .. code-block::
+
+        # specify alignment for each column manually
+        |left|   right   |   center   |auto (int)|auto (str)|None (auto)|
+        |----|----------:|:----------:|---------:|----------|-----------|
+        |0   |          r|center align|         0|a         |n          |
+        |11  |right align|     c      |        11|auto      |none       |
+
+`Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/alignment/output.md>`__
+
 Create Elasticsearch index and put data
 -----------------------------------------
 :Sample Code:
@@ -487,6 +518,7 @@ Python 2.7+ or 3.4+
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
+- `simplejson <https://github.com/simplejson/simplejson>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.python.org/pypi/six/>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
