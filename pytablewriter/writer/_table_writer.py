@@ -321,7 +321,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         |TableData| can be created from various data formats by
         ``pytablereader``. More detailed information can be found in
-        http://pytablereader.readthedocs.io/en/latest/
+        https://pytablereader.rtfd.io/en/latest/
 
         :param tabledata.TableData value: Input table data.
         """
