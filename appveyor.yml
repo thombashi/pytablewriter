@@ -1,32 +1,31 @@
 build: false
 environment:
+    PYTHONIOENCODING: "UTF-8"
 
-  PYTHONIOENCODING: "UTF-8"
-
-  matrix:
-    - PYTHON: "C:/Python27-x64"
-    - PYTHON: "C:/Python35-x64"
-    - PYTHON: "C:/Python36-x64"
-    - PYTHON: "C:/Python37-x64"
+    matrix:
+        - PYTHON: "C:/Python27-x64"
+        - PYTHON: "C:/Python35-x64"
+        - PYTHON: "C:/Python36-x64"
+        - PYTHON: "C:/Python37-x64"
 
 init:
-  - "ECHO %PYTHON%"
-  - ps: "ls C:/Python*"
+    - "ECHO %PYTHON%"
+    - ps: "ls C:/Python*"
 
 install:
-  - ps: "[Net.ServicePointManager]::SecurityProtocol = 'Ssl3, Tls, Tls11, Tls12'"
-  - ps: (new-object net.webclient).DownloadFile('https://bootstrap.pypa.io/get-pip.py', 'C:/get-pip.py')
-  - "%PYTHON%/python.exe C:/get-pip.py"
-  - "%PYTHON%/Scripts/pip.exe --version"
-  - "%PYTHON%/Scripts/pip.exe install setuptools --upgrade"
-  - "%PYTHON%/Scripts/pip.exe install -r requirements/requirements.txt"
-  - "%PYTHON%/Scripts/pip.exe install -r requirements/test_requirements.txt"
+    - ps: "[Net.ServicePointManager]::SecurityProtocol = 'Ssl3, Tls, Tls11, Tls12'"
+    - ps: (new-object net.webclient).DownloadFile('https://bootstrap.pypa.io/get-pip.py', 'C:/get-pip.py')
+    - "%PYTHON%/python.exe C:/get-pip.py"
+    - "%PYTHON%/Scripts/pip.exe --version"
+    - "%PYTHON%/Scripts/pip.exe install setuptools --upgrade"
+    - "%PYTHON%/Scripts/pip.exe install -r requirements/requirements.txt"
+    - "%PYTHON%/Scripts/pip.exe install -r requirements/test_requirements.txt"
 
 test_script:
-  - "%PYTHON%/python.exe invoke_pytest.py"
+    - "%PYTHON%/python.exe invoke_pytest.py"
 
 notifications:
-  - provider: Slack
-    auth_token:
-      secure: JyTQAtBzpPYiWK3eRTz/U+rvmAKopqIWE19ti4vSL/IRygV3jUVUkwET1VyTlrqOeYfNx3Kfcp7eUmHCHxFCgw==
-    channel: notifications
+    - provider: Slack
+      auth_token:
+          secure: JyTQAtBzpPYiWK3eRTz/U+rvmAKopqIWE19ti4vSL/IRygV3jUVUkwET1VyTlrqOeYfNx3Kfcp7eUmHCHxFCgw==
+      channel: notifications
