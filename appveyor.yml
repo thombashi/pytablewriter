@@ -18,8 +18,7 @@ install:
     - "%PYTHON%/python.exe C:/get-pip.py"
     - "%PYTHON%/Scripts/pip.exe --version"
     - "%PYTHON%/Scripts/pip.exe install setuptools --upgrade"
-    - "%PYTHON%/Scripts/pip.exe install -r requirements/requirements.txt"
-    - "%PYTHON%/Scripts/pip.exe install -r requirements/test_requirements.txt"
+    - "%PYTHON%/Scripts/pip.exe install .[test]"
 
 test_script:
     - "%PYTHON%/python.exe invoke_pytest.py"
