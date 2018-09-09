@@ -36,7 +36,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         Create an index and put documents for each row to Elasticsearch.
 
         You need to pass an
-        `elasticsearch.Elasticsearch <http://elasticsearch-py.readthedocs.io/en/master/api.html#elasticsearch>`__
+        `elasticsearch.Elasticsearch <https://elasticsearch-py.rtfd.io/en/master/api.html#elasticsearch>`__
         instance to |stream| before calling this method.
         |table_name|/:py:attr:`~pytablewriter.ElasticsearchWriter.index_name`
         used as the creating index name,
