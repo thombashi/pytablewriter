@@ -23,7 +23,7 @@ extensions = [
     'sphinx.ext.viewcode',
 ]
 
-intersphinx_mapping = {'python': ('http://docs.python.org/', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -313,7 +313,7 @@ rp_class = u"""
 .. |datetime| replace:: :py:class:`datetime.datetime`
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
 
-.. |TableData| replace:: `TableData <http://tabledata.rtfd.io/en/latest/pages/reference/data.html#tabledata>`__
+.. |TableData| replace:: `TableData <https://tabledata.rtfd.io/en/latest/pages/reference/data.html#tabledata>`__
 .. |Typecode| replace:: :py:class:`typepy.Typecode`
 
 .. |EmptyHeaderError| replace:: :py:class:`~pytablewriter.EmptyHeaderError`
@@ -369,10 +369,10 @@ rp_attr = u"""
 .. |column_delimiter| replace::
     :py:attr:`~pytablewriter._text_writer.TextTableWriter.column_delimiter`
 
-.. |excel_attr| replace:: 
+.. |excel_attr| replace::
     This attributes available after execution of
     the :py:meth:`~.ExcelXlsxTableWriter.write_table` method.
-    
+
 .. |is_datetime_instance_formatting| replace::
     :py:attr:`~pytablewriter._text_writer.is_datetime_instance_formatting`
 """
@@ -381,7 +381,7 @@ rp_method = u"""
 .. |write_table| replace:: Write a table to the |stream|
 
 .. |WriterNotFoundError_desc| replace::
-    If an appropriate writer not found for 
+    If an appropriate writer not found for
 """
 
 rp_raises = u"""

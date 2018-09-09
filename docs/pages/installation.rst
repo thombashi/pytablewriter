@@ -10,8 +10,8 @@ Dependencies
 Python 2.7+ or 3.4+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
-- `dominate <http://github.com/Knio/dominate/>`__
-- `logbook <http://logbook.readthedocs.io/en/stable/>`__
+- `dominate <https://github.com/Knio/dominate/>`__
+- `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
@@ -21,7 +21,7 @@ Python 2.7+ or 3.4+
 - `tabledata <https://github.com/thombashi/tabledata>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
-- `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
+- `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
 
 Optional Dependencies
 ----------------------------------
@@ -32,6 +32,6 @@ Optional Dependencies
 
 Test dependencies
 -----------------
-- `pytest <http://pytest.org/latest/>`__
+- `pytest <https://docs.pytest.org/en/latest/>`__
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
