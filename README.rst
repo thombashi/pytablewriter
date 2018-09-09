@@ -42,8 +42,8 @@ Features
     - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     - Source code
         - JavaScript code (Definition of a nested list variable)
-        - `NumPy <http://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-        - `Pandas <http://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
+        - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
+        - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
         - Python code (Definition of a nested list variable)
     - Space aligned values
     - SQLite database file
@@ -459,7 +459,7 @@ Create Elasticsearch index and put data
 
 Formatting a table for Jupyter Notebook
 -----------------------------------------
-http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
+https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
 
 .. figure:: ss/jupyter_notebook.png
    :scale: 100%
@@ -499,7 +499,7 @@ Multibyte characters also properly padded and aligned.
 For more information
 ----------------------
 More examples are available at 
-http://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
+https://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 
 Installation
 ============
@@ -513,8 +513,8 @@ Dependencies
 Python 2.7+ or 3.4+
 
 - `DataPropery <https://github.com/thombashi/DataProperty>`__
-- `dominate <http://github.com/Knio/dominate/>`__
-- `logbook <http://logbook.readthedocs.io/en/stable/>`__
+- `dominate <https://github.com/Knio/dominate/>`__
+- `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
@@ -524,7 +524,7 @@ Python 2.7+ or 3.4+
 - `tabledata <https://github.com/thombashi/tabledata>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
-- `XlsxWriter <http://xlsxwriter.readthedocs.io/>`__
+- `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
 
 Optional Dependencies
 ----------------------------------
@@ -535,13 +535,13 @@ Optional Dependencies
 
 Test dependencies
 -----------------
-- `pytest <http://pytest.org/latest/>`__
+- `pytest <https://docs.pytest.org/en/latest/>`__
 - `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
 
 Documentation
 ===============
-http://pytablewriter.rtfd.io/
+https://pytablewriter.rtfd.io/
 
 Related Project
 =================

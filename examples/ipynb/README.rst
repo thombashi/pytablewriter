@@ -1,4 +1,4 @@
 - Table writing examples in various formats
-    - http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/pytablewriter_examples.ipynb
+    - https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/pytablewriter_examples.ipynb
 - Table formatting example for Jupyter Notebook
-    - http://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
+    - https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
