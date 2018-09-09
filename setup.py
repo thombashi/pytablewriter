@@ -85,7 +85,7 @@ setuptools.setup(
         "docs": docs_requires,
         "es5": "elasticsearch>=5.5.2,<6.0.0",
         "es6": "elasticsearch>=6.2.0,<7.0.0",
-        "release": "releasecmd>=0.0.10",
+        "release": "releasecmd>=0.0.12",
         "test": tests_requires,
     },
 
