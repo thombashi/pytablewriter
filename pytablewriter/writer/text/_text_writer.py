@@ -1,18 +1,14 @@
 # encoding: utf-8
 
-"""
-.. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
-"""
-
 from __future__ import absolute_import, unicode_literals
 
 import dataproperty
 import typepy
 from six.moves import zip
 
-from .._error import EmptyHeaderError
+from ..._error import EmptyHeaderError
+from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
-from ._table_writer import AbstractTableWriter
 
 
 class TextTableWriter(AbstractTableWriter, TextWriterInterface):

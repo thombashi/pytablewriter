@@ -6,7 +6,8 @@
 
 from __future__ import absolute_import, unicode_literals
 
-from ._interface import IndentationInterface, TableWriterInterface, TextWriterInterface
+from ._interface import TableWriterInterface
+from .text._interface import IndentationInterface, TextWriterInterface
 
 
 class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInterface):
