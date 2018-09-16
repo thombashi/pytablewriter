@@ -116,4 +116,4 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     @staticmethod
     def __escape_vertical_bar_char(value):
-        return value.replace("|", "\|")
+        return value.replace("|", r"\|")

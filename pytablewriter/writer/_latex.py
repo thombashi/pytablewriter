@@ -93,7 +93,7 @@ class LatexMatrixWriter(LatexWriter):
             :ref:`example-latex-matrix-writer`
     """
 
-    _RE_VAR = re.compile("^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
+    _RE_VAR = re.compile(r"^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
 
     @property
     def format_name(self):

@@ -26,7 +26,7 @@ class MediaWikiTableWriter(TextTableWriter):
         :ref:`example-mediawiki-table-writer`
     """
 
-    __RE_TABLE_SEQUENCE = re.compile("^[\s]+[*|#]+")
+    __RE_TABLE_SEQUENCE = re.compile(r"^[\s]+[*|#]+")
 
     @property
     def format_name(self):
