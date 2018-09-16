@@ -296,6 +296,8 @@ class AbstractTableWriter(TableWriterInterface):
             return
 
         try:
+            self.stream.isatty()
+
             if self.stream.name in ["<stdin>", "<stdout>", "<stderr>"]:
                 return
         except AttributeError:
