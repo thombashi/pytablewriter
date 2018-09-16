@@ -96,13 +96,6 @@ class TextWriterInterface(object):
 
 
 @six.add_metaclass(abc.ABCMeta)
-class BinaryWriterInterface(object):
-    @abc.abstractmethod
-    def open(self, file_path):  # pragma: no cover
-        pass
-
-
-@six.add_metaclass(abc.ABCMeta)
 class IndentationInterface(object):
     """
     Interface class for indentation methods.

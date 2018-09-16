@@ -8,7 +8,6 @@ from __future__ import absolute_import, unicode_literals
 
 from ._csv import CsvTableWriter
 from ._elasticsearch import ElasticsearchWriter
-from ._excel import ExcelXlsTableWriter, ExcelXlsxTableWriter
 from ._html import HtmlTableWriter
 from ._json import JsonTableWriter
 from ._jsonlines import JsonLinesTableWriter
@@ -19,9 +18,10 @@ from ._mediawiki import MediaWikiTableWriter
 from ._null import NullTableWriter
 from ._rst import RstCsvTableWriter, RstGridTableWriter, RstSimpleTableWriter
 from ._spacealigned import SpaceAlignedTableWriter
-from ._sqlite import SqliteTableWriter
 from ._toml import TomlTableWriter
 from ._tsv import TsvTableWriter
+from .binary import ExcelXlsTableWriter, ExcelXlsxTableWriter, SqliteTableWriter
+
 from .sourcecode._javascript import JavaScriptTableWriter
 from .sourcecode._numpy import NumpyTableWriter
 from .sourcecode._pandas import PandasDataFrameWriter

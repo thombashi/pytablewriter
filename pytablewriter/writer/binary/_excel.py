@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-"""
-.. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
-"""
-
 from __future__ import absolute_import, unicode_literals
 
 import abc
@@ -14,9 +10,9 @@ import typepy
 from six.moves import range
 from typepy import Integer
 
+from .._table_writer import AbstractTableWriter
 from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import BinaryWriterInterface
-from ._table_writer import AbstractTableWriter
 
 
 class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):

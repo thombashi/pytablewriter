@@ -1,16 +1,12 @@
 # encoding: utf-8
 
-"""
-.. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
-"""
-
 from __future__ import absolute_import, unicode_literals
 
 import simplesqlite
 import tabledata
 
+from .._table_writer import AbstractTableWriter
 from ._interface import BinaryWriterInterface
-from ._table_writer import AbstractTableWriter
 
 
 class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):

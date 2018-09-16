@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-"""
-.. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
-"""
-
 from __future__ import absolute_import, unicode_literals
 
 import abc
@@ -14,7 +10,7 @@ import six
 import typepy
 import xlsxwriter
 
-from .._logger import logger
+from ..._logger import logger
 
 
 @six.add_metaclass(abc.ABCMeta)
