@@ -26,9 +26,9 @@ writer.value_matrix = [
 writer.write_table()
 
 # change the stream to a string buffer to get the output as a string
+# you can also get tabular text by using dumps method
 writer.stream = six.StringIO()
 writer.write_table()
-print()
 print(writer.stream.getvalue())
 
 # change the output stream to a file
