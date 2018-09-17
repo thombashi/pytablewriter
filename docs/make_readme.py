@@ -23,6 +23,8 @@ def write_examples(maker):
 
     examples_root = Path("pages").joinpath("examples")
 
+    maker.set_indent_level(1)
+    maker.write_chapter("Write tables")
     maker.inc_indent_level()
 
     maker.write_chapter("Write a Markdown table")
@@ -52,8 +54,20 @@ def write_examples(maker):
     maker.write_chapter("Write a markdown table from a space-separated values")
     maker.write_file(examples_root.joinpath("datasource", "from_ssv_example.txt"))
 
+    maker.set_indent_level(1)
+    maker.write_chapter("Get rendered tabular text as str")
+    maker.write_file(examples_root.joinpath("dump", "dumps.txt"))
+
+    maker.set_indent_level(1)
+    maker.write_chapter("Configure table format")
+    maker.inc_indent_level()
+
     maker.write_chapter("Set alignment for each column")
     maker.write_file(examples_root.joinpath("alignment", "manual_example.txt"))
+
+    maker.set_indent_level(1)
+    maker.write_chapter("Make tables for specific applications")
+    maker.inc_indent_level()
 
     maker.write_chapter("Create Elasticsearch index and put data")
     maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
@@ -61,9 +75,14 @@ def write_examples(maker):
     maker.write_chapter("Formatting a table for Jupyter Notebook")
     maker.write_file(examples_root.joinpath("jupyter_notebook", "jupyter_notebook_example.txt"))
 
+    maker.set_indent_level(1)
+    maker.write_chapter("Multibyte charater support")
+    maker.inc_indent_level()
+
     maker.write_chapter("Write a table using multibyte character")
     maker.write_file(examples_root.joinpath("multibyte", "multibyte_table_example.txt"))
 
+    maker.set_indent_level(1)
     maker.write_chapter("For more information")
     maker.write_line_list(
         [

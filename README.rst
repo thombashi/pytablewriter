@@ -5,13 +5,13 @@
 
 Summary
 =========
-A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / Jupyter Notebook / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
 
 .. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
-   :target: https://pypi.python.org/pypi/pytablewriter
+   :target: https://pypi.org/project/pytablewriter/
 
 .. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS
     :target: https://travis-ci.org/thombashi/pytablewriter
@@ -28,7 +28,7 @@ A Python library to write a table in various formats: CSV / Elasticsearch / HTML
 Features
 --------
 - Write a table in various formats:
-    - CSV
+    - CSV / Tab-separated values (TSV)
     - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
     - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
     - HTML
@@ -47,7 +47,6 @@ Features
         - Python code (Definition of a nested list variable)
     - Space aligned values
     - SQLite database file
-    - Tab-separated values (TSV)
     - `TOML <https://github.com/toml-lang/toml>`__
 - Automatic tabular data formatting
     - Alignment
@@ -55,11 +54,14 @@ Features
     - Decimal places of numbers
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer
+- Get rendered tabular text
 
 Examples
 ==========
+Write tables
+--------------
 Write a Markdown table
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -96,7 +98,7 @@ Write a Markdown table
        Rendered markdown at GitHub
 
 Write a Markdown table with a margin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 :Sample Code:
     .. code-block:: python
 
@@ -129,7 +131,7 @@ Write a Markdown table with a margin
 ``margin`` attribute can be available for all of the text format writer classes.
 
 Write a reStructuredText table (Grid Tables)
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -180,7 +182,7 @@ Write a reStructuredText table (Grid Tables)
         +---+-----+----+-----+--------+------------------------+
 
 Write a table with JavaScript format (as a nested list variable definition)
------------------------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -211,7 +213,7 @@ Write a table with JavaScript format (as a nested list variable definition)
         ];
 
 Write a table to an Excel sheet
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -240,7 +242,7 @@ Write a table to an Excel sheet
        Output excel file (``sample_single.xlsx``)
 
 Write a Markdown table from ``pandas.DataFrame`` instance
------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -271,7 +273,7 @@ Write a Markdown table from ``pandas.DataFrame`` instance
         |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00|
 
 Write a markdown table from a space-separated values
-------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -304,8 +306,40 @@ Write a markdown table from a space-separated values
         |root|  6|   0| 0.0|    0|   0|?  |I<  |May11|0:00|[mm_percpu_wq]|
         |root|  7|   0| 0.0|    0|   0|?  |S   |May11|0:01|[ksoftirqd/0] |
 
+Get rendered tabular text as str
+----------------------------------
+``dumps`` method returns rendered tabular text.
+
+:Sample Code:
+    .. code-block:: python
+
+        import pytablewriter
+
+        writer = pytablewriter.MarkdownTableWriter()
+        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.value_matrix = [
+            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+        ]
+
+        print(writer.dumps())
+
+:Output:
+    .. code-block::
+
+        |int|float|str |bool |  mix   |          time          |
+        |--:|----:|----|-----|-------:|------------------------|
+        |  0| 0.10|hoge|True |       0|2017-01-01 03:04:05+0900|
+        |  2|-2.23|foo |False|        |2017-12-23 45:01:23+0900|
+        |  3| 0.00|bar |True |Infinity|2017-03-03 33:44:55+0900|
+        |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
+
+Configure table format
+------------------------
 Set alignment for each column
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ``pytablewriter`` will automatically set alignment for each column by data types.
 You can set alignment for each column manually by ``align_list`` attribute of writer classes.
 
@@ -335,8 +369,10 @@ You can set alignment for each column manually by ``align_list`` attribute of wr
 
 `Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/alignment/output.md>`__
 
+Make tables for specific applications
+---------------------------------------
 Create Elasticsearch index and put data
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -458,7 +494,7 @@ Create Elasticsearch index and put data
         }
 
 Formatting a table for Jupyter Notebook
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
 
 .. figure:: ss/jupyter_notebook.png
@@ -467,8 +503,10 @@ https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples
 
    Table formatting for Jupyter Notebook
 
+Multibyte charater support
+----------------------------
 Write a table using multibyte character
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ﻿You can use multibyte characters as table data.
 Multibyte characters also properly padded and aligned.
 
@@ -520,7 +558,7 @@ Python 2.7+ or 3.4+
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
-- `six <https://pypi.python.org/pypi/six/>`__
+- `six <https://pypi.org/project/six/>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
@@ -536,7 +574,7 @@ Optional Dependencies
 Test dependencies
 -----------------
 - `pytest <https://docs.pytest.org/en/latest/>`__
-- `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
+- `pytest-runner <https://github.com/pytest-dev/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
 
 Documentation
