@@ -306,6 +306,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
         print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
+        assert writer.dumps() == expected
 
 
 class Test_JavaScriptTableWriter_write_table(object):

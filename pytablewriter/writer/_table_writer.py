@@ -276,16 +276,14 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     def _repr_html_(self):
-        from ._html import HtmlTableWriter
+        from .text._html import HtmlTableWriter
 
         writer = HtmlTableWriter()
         writer.table_name = self.table_name
         writer.header_list = self.header_list
         writer.value_matrix = self.value_matrix
-        writer.stream = six.StringIO()
-        writer.write_table()
 
-        return writer.stream.getvalue()
+        return writer.dumps()
 
     def close(self):
         """

@@ -44,6 +44,10 @@ class TableWriterInterface(object):
 
         pass
 
+    @abc.abstractmethod
+    def dumps(self):  # pragma: no cover
+        pass
+
     def write_table_iter(self):  # pragma: no cover
         """
         Write a table with iteration. "Iteration" means that divide the table

@@ -115,6 +115,7 @@ class Test_LatexMatrixWriter_write_table(object):
         print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
+        assert writer.dumps() == expected
 
     @pytest.mark.parametrize(
         ["header", "value", "expected"],

@@ -48,7 +48,5 @@ def dump_tabledata(value, format_name="rst_grid_table"):
 
     writer = TableWriterFactory.create_from_format_name(format_name)
     writer.from_tabledata(value)
-    writer.stream = six.StringIO()
-    writer.write_table()
 
-    return writer.stream.getvalue()
+    return writer.dumps()

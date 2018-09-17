@@ -93,6 +93,9 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         self.document_type = "table"
 
+    def dumps(self):
+        raise NotImplementedError()
+
     def write_null_line(self):
         pass
 

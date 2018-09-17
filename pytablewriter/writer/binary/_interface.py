@@ -15,4 +15,5 @@ class BinaryWriterInterface(object):
 
 
 class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
-    pass
+    def dumps(self):
+        raise NotImplementedError()

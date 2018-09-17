@@ -166,3 +166,12 @@ class Test_SqliteTableWriter_write_table_iter(object):
 
         for table_data in loader.load():
             assert table_data == expected
+
+
+class Test_SqliteTableWriter_dumps(object):
+    def test_exception(self, tmpdir):
+        writer = ptw.SqliteTableWriter()
+        writer.open(":memory:")
+
+        with pytest.raises(NotImplementedError):
+            writer.dumps()

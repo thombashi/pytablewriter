@@ -48,6 +48,13 @@ class Test_NullTableWriter_write_table(object):
         assert out == ""
 
 
+class Test_NullTableWriter_dumps(object):
+    def test_smoke(self):
+        writer = table_writer_class()
+
+        assert writer.dumps() == ""
+
+
 class Test_NullTableWriter_write_table_iter(object):
     def test_smoke(self, capsys):
         writer = table_writer_class()

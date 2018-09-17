@@ -3,6 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import dataproperty
+import six
 import typepy
 from six.moves import zip
 
@@ -130,6 +131,17 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         super(TextTableWriter, self).write_table()
         if self.is_write_null_line_after_table:
             self.write_null_line()
+
+    def dumps(self):
+        """
+        :return: Rendered tabular text.
+        :rtype: str
+        """
+
+        self.stream = six.StringIO()
+        self.write_table()
+
+        return self.stream.getvalue()
 
     def _write_table_iter(self):
         super(TextTableWriter, self)._write_table_iter()

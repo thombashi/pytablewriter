@@ -457,6 +457,7 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
+        assert writer.dumps() == expected
 
     def test_normal_single_tabledata(self, capsys):
         writer = table_writer_class()
@@ -569,6 +570,7 @@ class Test_MarkdownTableWriter_write_table(object):
         out = writer.stream.getvalue()
         print_test_result(expected=expected, actual=out)
         assert out == expected
+        assert writer.dumps() == expected
 
         writer.table_name = "specify alignment for each column manually"
         writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
@@ -587,6 +589,7 @@ class Test_MarkdownTableWriter_write_table(object):
         out = writer.stream.getvalue()
         print_test_result(expected=expected, actual=out)
         assert out == expected
+        assert writer.dumps() == expected
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()

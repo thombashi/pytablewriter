@@ -241,3 +241,15 @@ class Test_ExcelTableWriter_write_table_iter(object):
 
         with pytest.raises(IOError):
             writer.write_table_iter()
+
+
+class Test_ExcelTableWriter_dumps(object):
+    def test_exception(self, tmpdir):
+        for writer_class in table_writer_class_list:
+            test_file_path = tmpdir.join("test.xlsx")
+
+            writer = writer_class()
+            writer.open(str(test_file_path))
+
+            with pytest.raises(NotImplementedError):
+                writer.dumps()
