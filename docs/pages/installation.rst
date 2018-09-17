@@ -17,7 +17,7 @@ Python 2.7+ or 3.4+
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
-- `six <https://pypi.python.org/pypi/six/>`__
+- `six <https://pypi.org/project/six/>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
 - `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
@@ -33,5 +33,5 @@ Optional Dependencies
 Test dependencies
 -----------------
 - `pytest <https://docs.pytest.org/en/latest/>`__
-- `pytest-runner <https://pypi.python.org/pypi/pytest-runner>`__
+- `pytest-runner <https://github.com/pytest-dev/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__

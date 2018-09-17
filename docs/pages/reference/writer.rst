@@ -134,8 +134,8 @@ Base table writer class
 .. autoclass:: pytablewriter.writer._table_writer.AbstractTableWriter
     :members:
 
-.. autoclass:: pytablewriter.writer._text_writer.TextTableWriter
+.. autoclass:: pytablewriter.writer.text._text_writer.TextTableWriter
     :members:
 
-.. autoclass:: pytablewriter.writer._text_writer.IndentationTextTableWriter
+.. autoclass:: pytablewriter.writer.text._text_writer.IndentationTextTableWriter
     :members:

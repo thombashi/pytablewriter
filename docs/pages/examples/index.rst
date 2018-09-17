@@ -7,7 +7,9 @@ Examples
    basic
    table_format/index
    stream/index
-   multibyte/index
    datasource/index
-   jupyter_notebook/index
+   alignment/index
+   dump/index
+   multibyte/index
    typehint/index
+   jupyter_notebook/index

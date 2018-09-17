@@ -17,7 +17,7 @@ You can set alignment for each column manually by ``align_list`` attribute of wr
         writer.write_table()
 
 :Output:
-    .. code-block::
+    .. code-block:: none
 
         # specify alignment for each column manually
         |left|   right   |   center   |auto (int)|auto (str)|None (auto)|
