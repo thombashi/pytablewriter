@@ -5,11 +5,10 @@ from __future__ import absolute_import, unicode_literals
 import simplesqlite
 import tabledata
 
-from .._table_writer import AbstractTableWriter
-from ._interface import BinaryWriterInterface
+from ._interface import AbstractBinaryTableWriter
 
 
-class SqliteTableWriter(AbstractTableWriter, BinaryWriterInterface):
+class SqliteTableWriter(AbstractBinaryTableWriter):
     """
     A table writer class for SQLite database.
 

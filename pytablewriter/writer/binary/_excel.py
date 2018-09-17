@@ -10,12 +10,11 @@ import typepy
 from six.moves import range
 from typepy import Integer
 
-from .._table_writer import AbstractTableWriter
 from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
-from ._interface import BinaryWriterInterface
+from ._interface import AbstractBinaryTableWriter
 
 
-class ExcelTableWriter(AbstractTableWriter, BinaryWriterInterface):
+class ExcelTableWriter(AbstractBinaryTableWriter):
     """
     An abstract class of a table writer for Excel file format.
     """
