@@ -151,6 +151,7 @@ class Test_TomlTableWriter_write_new_line(object):
 
 
 class Test_TomlTableWriter_write_table(object):
+    @pytest.mark.xfail(run=False)
     @pytest.mark.parametrize(
         ["table_name", "header", "value", "expected"],
         [
