@@ -7,7 +7,7 @@ mbstrdecoder
 msgfy>=0.0.3
 pathvalidate>=0.21.1
 simplejson>=3.16.0
-SimpleSQLite>=0.32.0
+SimpleSQLite>=0.33.0
 six
 tabledata>=0.0.23
 toml>=0.9.4
