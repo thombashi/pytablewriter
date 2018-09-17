@@ -114,10 +114,8 @@ class Test_SqliteTableWriter_write_table(object):
         [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
     )
     def test_exception(self, tmpdir, table, header, value, expected):
-        test_file_path = tmpdir.join("test.sqlite")
-
         writer = ptw.SqliteTableWriter()
-        writer.open(str(test_file_path))
+        writer.open(":memory:")
         writer.table_name = table
         writer.header_list = header
         writer.value_matrix = value
