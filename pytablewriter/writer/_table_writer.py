@@ -520,6 +520,9 @@ class AbstractTableWriter(TableWriterInterface):
         except (IndexError, KeyError):
             return default
 
+        if align is None:
+            return default
+
         if align not in Align:
             self._logger.logger.debug("invalid alignment: {}".format(align))
             return default
