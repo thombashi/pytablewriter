@@ -16,4 +16,4 @@ class BinaryWriterInterface(object):
 
 class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
     def dumps(self):
-        raise NotImplementedError()
+        raise NotImplementedError("binary format writers did not support dumps method")
