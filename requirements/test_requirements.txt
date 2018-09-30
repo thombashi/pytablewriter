@@ -1,5 +1,5 @@
 elasticsearch>=5.4.0
-pytablereader>=0.20.7
+pytablereader>=0.21.0
 pytest-cov
 pytest
 tablib

@@ -1,5 +1,5 @@
-DataProperty>=0.31.2
-dominate>=2.3.1
+DataProperty>=0.33.0
+dominate>=2.3.4
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
 logbook
@@ -12,4 +12,4 @@ six
 tabledata>=0.0.23
 toml>=0.9.4
 typepy
-XlsxWriter>=1.1.0
+XlsxWriter>=1.1.1
