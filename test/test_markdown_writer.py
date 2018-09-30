@@ -591,6 +591,37 @@ class Test_MarkdownTableWriter_write_table(object):
         assert out == expected
         assert writer.dumps() == expected
 
+    def test_normal_format_list(self, capsys):
+        writer = table_writer_class()
+        writer.from_tabledata(
+            TableData(
+                table_name="",
+                header_list=["wo_format", "thousand_separator_i", "thousand_separator_f"],
+                row_list=[[1000, 1234567, 1234567.8], [1000, 1234567, 1234567.8]],
+            )
+        )
+        writer.format_list = [
+            ptw.Format.NONE,
+            ptw.Format.THOUSAND_SEPARATOR,
+            ptw.Format.THOUSAND_SEPARATOR,
+        ]
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            |wo_format|thousand_separator_i|thousand_separator_f|
+            |--------:|-------------------:|-------------------:|
+            |     1000|           1,234,567|         1,234,567.8|
+            |     1000|           1,234,567|         1,234,567.8|
+
+            """
+        )
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(

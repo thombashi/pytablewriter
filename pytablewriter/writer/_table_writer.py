@@ -196,6 +196,18 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def format_list(self):
+        return self._dp_extractor.format_flags_list
+
+    @format_list.setter
+    def format_list(self, value):
+        if self.format_list == value:
+            return
+
+        self._dp_extractor.format_flags_list = value
+        self.__clear_preprocess()
+
+    @property
     def is_escape_html_tag(self):
         return self._dp_extractor.is_escape_html_tag
 
