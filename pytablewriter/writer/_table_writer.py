@@ -11,7 +11,6 @@ import re
 import sys
 
 import msgfy
-import six
 import typepy
 from dataproperty import Align
 from six.moves import zip

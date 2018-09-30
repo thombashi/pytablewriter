@@ -42,8 +42,6 @@ def dump_tabledata(value, format_name="rst_grid_table"):
                 ======  ======  ======
     """
 
-    import six
-
     from ._factory import TableWriterFactory
 
     writer = TableWriterFactory.create_from_format_name(format_name)
