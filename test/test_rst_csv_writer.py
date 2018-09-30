@@ -6,6 +6,8 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 
+from textwrap import dedent
+
 import pytablewriter
 import pytest
 
@@ -28,41 +30,50 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix,
-        expected=""".. csv-table:: table name
-    :header: "a", "b", "c", "dd", "e"
-    :widths: 3, 5, 5, 4, 6
+        expected=dedent(
+            """\
+        .. csv-table:: table name
+            :header: "a", "b", "c", "dd", "e"
+            :widths: 3, 5, 5, 4, 6
 
-    1, 123.1, "a", 1.0, 1
-    2, 2.2, "bb", 2.2, 2.2
-    3, 3.3, "ccc", 3.0, "cccc"
+            1, 123.1, "a", 1.0, 1
+            2, 2.2, "bb", 2.2, 2.2
+            3, 3.3, "ccc", 3.0, "cccc"
 
-""",
+        """
+        ),
     ),
     Data(
         table="",
         indent=0,
         header=header_list,
         value=None,
-        expected=""".. csv-table:: 
-    :header: "a", "b", "c", "dd", "e"
-    :widths: 3, 3, 3, 4, 3
+        expected=dedent(
+            """\
+        .. csv-table:: 
+            :header: "a", "b", "c", "dd", "e"
+            :widths: 3, 3, 3, 4, 3
 
 
-""",
+        """
+        ),
     ),
     Data(
         table=None,
         indent=0,
         header=None,
         value=value_matrix,
-        expected=""".. csv-table:: 
-    :widths: 1, 5, 5, 3, 6
+        expected=dedent(
+            """\
+        .. csv-table:: 
+            :widths: 1, 5, 5, 3, 6
 
-    1, 123.1, "a", 1.0, 1
-    2, 2.2, "bb", 2.2, 2.2
-    3, 3.3, "ccc", 3.0, "cccc"
+            1, 123.1, "a", 1.0, 1
+            2, 2.2, "bb", 2.2, 2.2
+            3, 3.3, "ccc", 3.0, "cccc"
 
-""",
+        """
+        ),
     ),
     Data(
         table="",
@@ -84,31 +95,37 @@ normal_test_data_list = [
         indent=0,
         header=header_list,
         value=value_matrix_with_none,
-        expected=""".. csv-table:: table name
-    :header: "a", "b", "c", "dd", "e"
-    :widths: 3, 3, 5, 4, 6
+        expected=dedent(
+            """\
+        .. csv-table:: table name
+            :header: "a", "b", "c", "dd", "e"
+            :widths: 3, 3, 5, 4, 6
 
-    1, , "a", 1.0, 
-    , 2.2, , 2.2, 2.2
-    3, 3.3, "ccc", , "cccc"
-    , , , , 
+            1, , "a", 1.0, 
+            , 2.2, , 2.2, 2.2
+            3, 3.3, "ccc", , "cccc"
+            , , , , 
 
-""",
+        """
+        ),
     ),
     Data(
         table="table name",
         indent=0,
         header=mix_header_list,
         value=mix_value_matrix,
-        expected=""".. csv-table:: table name
-    :header: "i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"
-    :widths: 3, 4, 6, 4, 5, 6, 8, 5, 9, 27
+        expected=dedent(
+            """\
+        .. csv-table:: table name
+            :header: "i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"
+            :widths: 3, 4, 6, 4, 5, 6, 8, 5, 9, 27
 
-    1, 1.10, "aa", 1.0, 1, True, Infinity, NaN, 1, 2017-01-01 00:00:00
-    2, 2.20, "bbb", 2.2, 2.2, False, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"
-    3, 3.33, "cccc", -3.0, "ccc", True, Infinity, NaN, NaN, 2017-01-01 00:00:00
+            1, 1.10, "aa", 1.0, 1, True, Infinity, NaN, 1, 2017-01-01T00:00:00
+            2, 2.20, "bbb", 2.2, 2.2, False, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"
+            3, 3.33, "cccc", -3.0, "ccc", True, Infinity, NaN, NaN, 2017-01-01T00:00:00
 
-""",
+        """
+        ),
     ),
 ]
 

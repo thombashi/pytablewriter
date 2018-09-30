@@ -31,9 +31,9 @@ normal_test_data_list = [
         expected=r"""\begin{array}{r | r | l | r | l | l | l | l | l | l} \hline
     \verb|i| & \verb| f  | & \verb| c  | & \verb| if | & \verb|ifc| & \verb|bool | & \verb| inf  | & \verb|nan| & \verb|mix_num| & \verb|          time           | \\ \hline
     \hline
-    1 & 1.10 & aa   &  1.0 &   1 & True  & \infty & NaN &       1 & 2017-01-01 00:00:00       \\ \hline
+    1 & 1.10 & aa   &  1.0 &   1 & True  & \infty & NaN &       1 & 2017-01-01T00:00:00       \\ \hline
     2 & 2.20 & bbb  &  2.2 & 2.2 & False & \infty & NaN & \infty  & \verb|2017-01-02 03:04:05+09:00| \\ \hline
-    3 & 3.33 & cccc & -3.0 & ccc & True  & \infty & NaN & NaN     & 2017-01-01 00:00:00       \\ \hline
+    3 & 3.33 & cccc & -3.0 & ccc & True  & \infty & NaN & NaN     & 2017-01-01T00:00:00       \\ \hline
 \end{array}
 
 """,
