@@ -178,6 +178,9 @@ class AbstractTableWriter(TableWriterInterface):
 
     @type_hint_list.setter
     def type_hint_list(self, value):
+        if self.type_hint_list == value:
+            return
+
         self.__set_type_hint_list(value)
         self.__clear_preprocess()
 
@@ -187,6 +190,9 @@ class AbstractTableWriter(TableWriterInterface):
 
     @align_list.setter
     def align_list(self, value):
+        if self.align_list == value:
+            return
+
         self.__align_list = value
         self.__clear_preprocess()
 
