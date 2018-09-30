@@ -30,5 +30,6 @@ class SpaceAlignedTableWriter(CsvTableWriter):
 
         self.column_delimiter = "  "
         self.is_padding = True
+        self.is_formatting_float = True
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)

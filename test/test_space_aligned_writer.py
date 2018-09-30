@@ -8,6 +8,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
+from textwrap import dedent
 
 import pytablewriter as ptw
 import pytest
@@ -28,28 +29,37 @@ normal_test_data_list = [
     Data(
         header=mix_header_list,
         value=mix_value_matrix,
-        expected="""i   f     c    if   ifc  bool     inf     nan  mix_num             time           
-1   1.1  aa      1    1  True   Infinity  NaN         1  2017-01-01 00:00:00      
-2   2.2  bbb   2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
-3  3.33  cccc   -3  ccc  True   Infinity  NaN       NaN  2017-01-01 00:00:00      
-""",
+        expected=dedent(
+            """\
+            i   f     c     if   ifc  bool     inf     nan  mix_num             time           
+            1  1.10  aa     1.0    1  True   Infinity  NaN         1  2017-01-01T00:00:00      
+            2  2.20  bbb    2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
+            3  3.33  cccc  -3.0  ccc  True   Infinity  NaN       NaN  2017-01-01T00:00:00      
+            """
+        ),
     ),
     Data(
         header=None,
         value=value_matrix,
-        expected="""1  123.1  a      1     1
-2    2.2  bb   2.2   2.2
-3    3.3  ccc    3  cccc
-""",
+        expected=dedent(
+            """\
+            1  123.1  a    1.0     1
+            2    2.2  bb   2.2   2.2
+            3    3.3  ccc  3.0  cccc
+            """
+        ),
     ),
     Data(
         header=float_header_list,
         value=float_value_matrix,
-        expected=""" a        b         c  
-0.01     0.00125      0
-   1        99.9   0.01
- 1.2  999999.123  0.001
-""",
+        expected=dedent(
+            """\
+             a         b         c  
+            0.01       0.0012  0.000
+            1.00      99.9000  0.010
+            1.20  999999.1230  0.001
+            """
+        ),
     ),
 ]
 
