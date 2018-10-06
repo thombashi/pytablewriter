@@ -7,15 +7,16 @@
 from __future__ import absolute_import, unicode_literals
 
 import abc
+import math
 import re
 import sys
 
 import msgfy
 import typepy
-from dataproperty import Align
+from dataproperty import Align, DataPropertyExtractor, MatrixFormatting
 from six.moves import zip
-from tabledata import convert_idx_to_alphabet, to_value_matrix
-from typepy import Typecode
+from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
+from typepy import String, Typecode
 
 from .._logger import WriterLogger
 from ..error import (
@@ -133,8 +134,6 @@ class AbstractTableWriter(TableWriterInterface):
         :rtype: tabledata.TableData
         """
 
-        from tabledata import TableData
-
         return TableData(self.table_name, self.header_list, self.value_matrix)
 
     @property
@@ -230,8 +229,6 @@ class AbstractTableWriter(TableWriterInterface):
         pass
 
     def __init__(self):
-        from dataproperty import DataPropertyExtractor, MatrixFormatting
-
         self._logger = WriterLogger(self)
 
         self.stream = sys.stdout
@@ -515,8 +512,6 @@ class AbstractTableWriter(TableWriterInterface):
             return column_dp.ascii_char_width
 
     def _to_header_item(self, col_dp, value_dp):
-        from typepy import String
-
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
 
@@ -664,8 +659,6 @@ class AbstractTableWriter(TableWriterInterface):
         self._logger.logger.debug("_preprocess_table_property")
 
         if self._iter_count == 1:
-            import math
-
             for column_dp in self._column_dp_list:
                 column_dp.extend_width(int(math.ceil(column_dp.ascii_char_width * 0.25)))
 
