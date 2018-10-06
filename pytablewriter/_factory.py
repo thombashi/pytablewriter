@@ -10,8 +10,8 @@ import os
 
 import typepy
 
-from ._error import WriterNotFoundError
 from ._table_format import FormatAttr, TableFormat
+from .error import WriterNotFoundError
 
 
 class TableWriterFactory(object):

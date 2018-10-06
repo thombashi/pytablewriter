@@ -5,7 +5,7 @@ from __future__ import absolute_import, unicode_literals
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...._error import EmptyTableNameError
+from ....error import EmptyTableNameError
 from ._numpy import NumpyTableWriter
 
 

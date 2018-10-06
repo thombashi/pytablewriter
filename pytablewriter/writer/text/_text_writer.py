@@ -7,7 +7,7 @@ import six
 import typepy
 from six.moves import zip
 
-from ..._error import EmptyHeaderError
+from ...error import EmptyHeaderError
 from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
 

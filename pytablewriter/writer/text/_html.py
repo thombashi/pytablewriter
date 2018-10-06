@@ -11,7 +11,7 @@ import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
-from ..._error import EmptyHeaderError
+from ...error import EmptyHeaderError
 from ._text_writer import TextTableWriter
 
 

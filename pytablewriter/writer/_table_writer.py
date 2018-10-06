@@ -17,14 +17,14 @@ from six.moves import zip
 from tabledata import convert_idx_to_alphabet, to_value_matrix
 from typepy import Typecode
 
-from .._error import (
+from .._logger import WriterLogger
+from ..error import (
     EmptyHeaderError,
     EmptyTableDataError,
     EmptyTableNameError,
     EmptyValueError,
     NotSupportedError,
 )
-from .._logger import WriterLogger
 from ._interface import TableWriterInterface
 
 

@@ -23,7 +23,11 @@ from typepy import (
 )
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
-from ._error import (
+from ._factory import TableWriterFactory
+from ._function import dump_tabledata
+from ._logger import set_log_level, set_logger
+from ._table_format import FormatAttr, TableFormat
+from .error import (
     EmptyHeaderError,
     EmptyTableDataError,
     EmptyTableNameError,
@@ -31,10 +35,6 @@ from ._error import (
     NotSupportedError,
     WriterNotFoundError,
 )
-from ._factory import TableWriterFactory
-from ._function import dump_tabledata
-from ._logger import set_log_level, set_logger
-from ._table_format import FormatAttr, TableFormat
 from .writer import (
     CsvTableWriter,
     ElasticsearchWriter,
