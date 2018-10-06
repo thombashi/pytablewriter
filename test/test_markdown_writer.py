@@ -342,15 +342,12 @@ normal_test_data_list = [
         header=["a|b", "|c||d|"],
         value=[["|v1|v1|", "v2|v2"]],
         is_formatting_float=True,
-        expected=dedent(
-            """\
-            ## vertical bar
-            |  a\|b  |\|c\|\|d\||
-            |-------|------|
-            |\|v1\|v1\||v2\|v2 |
+        expected=r"""## vertical bar
+|  a\|b  |\|c\|\|d\||
+|-------|------|
+|\|v1\|v1\||v2\|v2 |
 
-            """
-        ),
+"""
     ),
     Data(
         table="mixed value types",
