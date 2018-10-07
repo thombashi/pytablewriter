@@ -347,7 +347,7 @@ normal_test_data_list = [
 |-------|------|
 |\|v1\|v1\||v2\|v2 |
 
-"""
+""",
     ),
     Data(
         table="mixed value types",
@@ -593,12 +593,22 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.from_tabledata(
             TableData(
                 table_name="",
-                header_list=["wo_format", "thousand_separator_i", "thousand_separator_f"],
-                row_list=[[1000, 1234567, 1234567.8], [1000, 1234567, 1234567.8]],
+                header_list=[
+                    "none_format",
+                    "thousand_separator_i",
+                    "thousand_separator_f",
+                    "f",
+                    "wo_f",
+                ],
+                row_list=[
+                    [1000, 1234567, 1234567.8, 1234.5678, 1234567.8],
+                    [1000, 1234567, 1234567.8, 1234.5678, 1234567.8],
+                ],
             )
         )
         writer.format_list = [
             ptw.Format.NONE,
+            ptw.Format.THOUSAND_SEPARATOR,
             ptw.Format.THOUSAND_SEPARATOR,
             ptw.Format.THOUSAND_SEPARATOR,
         ]
@@ -606,10 +616,10 @@ class Test_MarkdownTableWriter_write_table(object):
 
         expected = dedent(
             """\
-            |wo_format|thousand_separator_i|thousand_separator_f|
-            |--------:|-------------------:|-------------------:|
-            |     1000|           1,234,567|         1,234,567.8|
-            |     1000|           1,234,567|         1,234,567.8|
+            |none_format|thousand_separator_i|thousand_separator_f|   f   |  wo_f   |
+            |----------:|-------------------:|-------------------:|------:|--------:|
+            |       1000|           1,234,567|         1,234,567.8|1,234.6|1234567.8|
+            |       1000|           1,234,567|         1,234,567.8|1,234.6|1234567.8|
 
             """
         )
