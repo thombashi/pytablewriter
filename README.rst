@@ -556,7 +556,6 @@ Python 2.7+ or 3.4+
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `simplejson <https://github.com/simplejson/simplejson>`__
 - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.org/project/six/>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
@@ -566,9 +565,10 @@ Python 2.7+ or 3.4+
 
 Optional Dependencies
 ----------------------------------
-- `pytablereader <https://github.com/thombashi/pytablereader>`__
-- `xlwt <http://www.python-excel.org/>`__
 - `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
+- `pytablereader <https://github.com/thombashi/pytablereader>`__
+- `simplejson <https://github.com/simplejson/simplejson>`__
+- `xlwt <http://www.python-excel.org/>`__
 
 
 Test dependencies
