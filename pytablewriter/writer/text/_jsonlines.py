@@ -2,9 +2,13 @@
 
 from __future__ import absolute_import, unicode_literals
 
-import simplejson as json
-
 from ._json import JsonTableWriter
+
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 
 class JsonLinesTableWriter(JsonTableWriter):

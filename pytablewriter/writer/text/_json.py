@@ -6,13 +6,18 @@ import copy
 from decimal import Decimal
 
 import dataproperty
-import simplejson as json
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ..._converter import strip_quote
 from ._text_writer import IndentationTextTableWriter
+
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 
 class JsonTableWriter(IndentationTextTableWriter):
