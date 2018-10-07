@@ -10,6 +10,7 @@ import typepy
 from pytablewriter import Align
 from typepy import Typecode
 
+from ...style import LatexStyler
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -75,6 +76,9 @@ class LatexWriter(IndentationTextTableWriter):
         # return r"${:s}$".format(value)
 
         return value
+
+    def _create_styler(self, style=None):
+        return LatexStyler(style)
 
 
 class LatexMatrixWriter(LatexWriter):

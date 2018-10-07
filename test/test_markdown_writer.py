@@ -629,6 +629,39 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
+    def test_normal_style_list(self, capsys):
+        from pytablewriter.style import Style, FontSize
+
+        writer = table_writer_class()
+        writer.table_name = "style test: font size will not be affected"
+        writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
+        writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
+        writer.style_list = [
+            None,
+            Style(),
+            Style(font_size=FontSize.TINY),
+            Style(font_size=FontSize.SMALL),
+            Style(font_size=FontSize.MEDIUM),
+            Style(font_size=FontSize.LARGE),
+        ]
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            # style test: font size will not be affected
+            |none|empty_style|tiny|small|medium|large|
+            |---:|----------:|---:|----:|-----:|----:|
+            | 111|        111| 111|  111|   111|  111|
+            |1234|       1234|1234| 1234|  1234| 1234|
+
+            """
+        )
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(

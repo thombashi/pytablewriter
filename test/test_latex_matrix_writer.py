@@ -117,6 +117,37 @@ class Test_LatexMatrixWriter_write_table(object):
         assert out == expected
         assert writer.dumps() == expected
 
+    def test_normal_style_list(self, capsys):
+        from pytablewriter.style import Style, FontSize
+
+        writer = table_writer_class()
+        writer.table_name = "style test: font size"
+        writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
+        writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
+        writer.style_list = [
+            None,
+            Style(),
+            Style(font_size=FontSize.TINY),
+            Style(font_size=FontSize.SMALL),
+            Style(font_size=FontSize.MEDIUM),
+            Style(font_size=FontSize.LARGE),
+        ]
+        writer.write_table()
+
+        expected = r"""\begin{equation}
+    style test: font size = \left( \begin{array}{rrrrrr}
+         111 &         111 & \tiny 111 & \small 111 & \normalsize 111 & \large 111 \\
+        1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1234 & \large 1234 \\
+    \end{array} \right)
+\end{equation}
+
+"""
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["header", "value", "expected"],
         [[data.header, data.value, data.expected] for data in exception_test_data_list],

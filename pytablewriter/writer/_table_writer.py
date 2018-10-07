@@ -26,6 +26,7 @@ from ..error import (
     EmptyValueError,
     NotSupportedError,
 )
+from ..style import NullStyler, Style
 from ._interface import TableWriterInterface
 
 
@@ -207,6 +208,18 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def style_list(self):
+        return self.__style_list
+
+    @style_list.setter
+    def style_list(self, value):
+        if self.__style_list == value:
+            return
+
+        self.__style_list = value
+        self.__clear_preprocess()
+
+    @property
     def is_escape_html_tag(self):
         return self._dp_extractor.is_escape_html_tag
 
@@ -286,6 +299,9 @@ class AbstractTableWriter(TableWriterInterface):
             Align.RIGHT: ">",
             Align.CENTER: "^",
         }
+
+        self.__style_list = []
+        self._styler_list = []
 
         self.__clear_preprocess()
 
@@ -522,8 +538,10 @@ class AbstractTableWriter(TableWriterInterface):
         return "{:s}"
 
     def _to_row_item(self, col_dp, value_dp):
+        styler = self._styler_list[col_dp.column_index]
+
         return self.__get_align_format(col_dp, value_dp).format(
-            self.__remove_line_break(col_dp.dp_to_str(value_dp))
+            styler.apply(self.__remove_line_break(col_dp.dp_to_str(value_dp)))
         )
 
     def _get_align(self, col_idx, default):
@@ -626,6 +644,9 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
+    def _create_styler(self, style=None):
+        return NullStyler(style)
+
     def _preprocess_table_dp(self):
         if self._is_complete_table_dp_preprocess:
             return
@@ -651,6 +672,20 @@ class AbstractTableWriter(TableWriterInterface):
         )
 
         self._is_complete_table_dp_preprocess = True
+
+    def _preprocess_style(self):
+        self._styler_list = []
+
+        for col_dp in self._column_dp_list:
+            try:
+                style = self.style_list[col_dp.column_index]
+            except IndexError:
+                style = None
+
+            if style is None:
+                style = Style()
+
+            self._styler_list.append(self._create_styler(style))
 
     def _preprocess_table_property(self):
         if self._is_complete_table_property_preprocess:
@@ -699,6 +734,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _preprocess(self):
         self._preprocess_table_dp()
+        self._preprocess_style()
         self._preprocess_table_property()
         self._preprocess_header()
         self._preprocess_value_matrix()

@@ -12,6 +12,7 @@ from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ...error import EmptyHeaderError
+from ...style import HtmlStyler
 from ._text_writer import TextTableWriter
 
 
@@ -88,11 +89,16 @@ class HtmlTableWriter(TextTableWriter):
 
         for value_list, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
             tr_tag = tags.tr()
-            for value, value_dp in zip(value_list, value_dp_list):
+            for value, value_dp, styler in zip(value_list, value_dp_list, self._styler_list):
                 td_tag = tags.td(MultiByteStrDecoder(value).unicode_str)
                 td_tag["align"] = value_dp.align.align_string
+                if styler.font_size:
+                    td_tag["style"] = styler.font_size
                 tr_tag += td_tag
             tbody_tag += tr_tag
 
         self._table_tag += tbody_tag
         self._write_line(self._table_tag.render(indent=self.indent_string))
+
+    def _create_styler(self, style=None):
+        return HtmlStyler(style)

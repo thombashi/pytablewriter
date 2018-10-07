@@ -6,6 +6,8 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 
+from textwrap import dedent
+
 import pytablewriter
 import pytest
 
@@ -279,6 +281,64 @@ class Test_HtmlTableWriter_write_table(object):
 
         assert out == expected
         assert writer.dumps() == expected
+
+    def test_normal_style_list(self, capsys):
+        from pytablewriter.style import Style, FontSize
+
+        writer = table_writer_class()
+        writer.table_name = "style test: font size"
+        writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
+        writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
+        writer.style_list = [
+            None,
+            Style(),
+            Style(font_size=FontSize.TINY),
+            Style(font_size=FontSize.SMALL),
+            Style(font_size=FontSize.MEDIUM),
+            Style(font_size=FontSize.LARGE),
+        ]
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            <table id="styletestfontsize">
+                <caption>style test: font size</caption>
+                <thead>
+                    <tr>
+                        <th>none</th>
+                        <th>empty_style</th>
+                        <th>tiny</th>
+                        <th>small</th>
+                        <th>medium</th>
+                        <th>large</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="right">111</td>
+                        <td align="right">111</td>
+                        <td align="right" style="font-size:x-small">111</td>
+                        <td align="right" style="font-size:small">111</td>
+                        <td align="right" style="font-size:medium">111</td>
+                        <td align="right" style="font-size:large">111</td>
+                    </tr>
+                    <tr>
+                        <td align="right">1234</td>
+                        <td align="right">1234</td>
+                        <td align="right" style="font-size:x-small">1234</td>
+                        <td align="right" style="font-size:small">1234</td>
+                        <td align="right" style="font-size:medium">1234</td>
+                        <td align="right" style="font-size:large">1234</td>
+                    </tr>
+                </tbody>
+            </table>
+            """
+        )
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
