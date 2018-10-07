@@ -51,7 +51,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super(PythonCodeTableWriter, self).__init__()
 
         self.table_name = ""
-        self._dp_extractor.type_value_mapping = {
+        self._dp_extractor.type_value_map = {
             typepy.Typecode.NONE: None,
             typepy.Typecode.INFINITY: 'float("inf")',
             typepy.Typecode.NAN: 'float("nan")',

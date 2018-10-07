@@ -81,12 +81,12 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         super(JavaScriptTableWriter, self).__init__()
 
         self.variable_declaration = "const"
-        self._dp_extractor.type_value_mapping = {
+        self._dp_extractor.type_value_map = {
             # Typecode.NONE: "null",
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
-        self._dp_extractor.const_value_mapping = {True: "true", False: "false"}
+        self._dp_extractor.const_value_map = {True: "true", False: "false"}
 
     def get_variable_name(self, value):
         import pathvalidate

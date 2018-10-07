@@ -260,7 +260,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.min_column_width = 1
         self._dp_extractor.strip_str_header = '"'
         self._dp_extractor.strip_str_value = '"'
-        self._dp_extractor.type_value_mapping[Typecode.NONE] = ""
+        self._dp_extractor.type_value_map[Typecode.NONE] = ""
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
 
         self.is_formatting_float = True

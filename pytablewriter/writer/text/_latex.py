@@ -167,7 +167,7 @@ class LatexTableWriter(LatexWriter):
         super(LatexTableWriter, self).__init__()
 
         self.char_right_side_row = r" \\ \hline"
-        self._dp_extractor.type_value_mapping[Typecode.INFINITY] = r"\infty"
+        self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"
 
     def _get_opening_row_item_list(self):
         return [

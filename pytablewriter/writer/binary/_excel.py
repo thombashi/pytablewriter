@@ -103,7 +103,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         self.stream = None
         self._workbook = None
 
-        self._dp_extractor.type_value_mapping = {
+        self._dp_extractor.type_value_map = {
             typepy.Typecode.INFINITY: "Inf",
             typepy.Typecode.NAN: "NaN",
         }

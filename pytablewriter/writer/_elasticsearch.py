@@ -87,9 +87,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         self.is_formatting_float = False
         self._is_require_table_name = True
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-        self._dp_extractor.type_value_mapping = copy.deepcopy(
-            dataproperty.DefaultValue.TYPE_VALUE_MAPPING
-        )
+        self._dp_extractor.type_value_map = copy.deepcopy(dataproperty.DefaultValue.TYPE_VALUE_MAP)
 
         self.document_type = "table"
 

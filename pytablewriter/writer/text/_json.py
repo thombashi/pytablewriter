@@ -57,12 +57,12 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.char_right_side_row = ","
 
         self._is_require_header = True
-        self._dp_extractor.type_value_mapping = {
+        self._dp_extractor.type_value_map = {
             typepy.Typecode.NONE: "null",
             typepy.Typecode.INFINITY: "Infinity",
             typepy.Typecode.NAN: "NaN",
         }
-        self._dp_extractor.const_value_mapping = {True: "true", False: "false"}
+        self._dp_extractor.const_value_map = {True: "true", False: "false"}
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
     def write_null_line(self):
@@ -80,7 +80,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             for json_data in self._table_value_matrix:
                 json_text = json.dumps(json_data, sort_keys=True, indent=4 * self._indent_level)
                 json_text = strip_quote(
-                    json_text, self._dp_extractor.type_value_mapping.get(typepy.Typecode.NONE)
+                    json_text, self._dp_extractor.type_value_map.get(typepy.Typecode.NONE)
                 )
                 json_text = strip_quote(json_text, "true")
                 json_text = strip_quote(json_text, "false")

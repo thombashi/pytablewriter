@@ -46,10 +46,10 @@ class NumpyTableWriter(PythonCodeTableWriter):
         super(NumpyTableWriter, self).__init__()
 
         self.import_numpy_as = "np"
-        self._dp_extractor.type_value_mapping[typepy.Typecode.INFINITY] = "{:s}.inf".format(
+        self._dp_extractor.type_value_map[typepy.Typecode.INFINITY] = "{:s}.inf".format(
             self.import_numpy_as
         )
-        self._dp_extractor.type_value_mapping[typepy.Typecode.NAN] = "{:s}.nan".format(
+        self._dp_extractor.type_value_map[typepy.Typecode.NAN] = "{:s}.nan".format(
             self.import_numpy_as
         )
 
