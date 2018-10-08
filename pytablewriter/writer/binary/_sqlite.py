@@ -2,7 +2,6 @@
 
 from __future__ import absolute_import, unicode_literals
 
-import simplesqlite
 import tabledata
 
 from ._interface import AbstractBinaryTableWriter
@@ -59,9 +58,10 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         :param str file_path: SQLite database file path to open.
         """
+        from simplesqlite import SimpleSQLite
 
         self.close()
-        self.stream = simplesqlite.SimpleSQLite(file_path, "w")
+        self.stream = SimpleSQLite(file_path, "w")
 
     def _write_table(self):
         self._verify_value_matrix()

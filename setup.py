@@ -87,6 +87,7 @@ setuptools.setup(
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
         "es6": ["elasticsearch>=6.2.0,<7.0.0"],
         "release": ["releasecmd>=0.0.12"],
+        "sqlite": ["SimpleSQLite>=0.33.0"],
         "test": tests_requires,
     },
 

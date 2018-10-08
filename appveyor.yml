@@ -18,7 +18,7 @@ install:
     - "%PYTHON%/python.exe C:/get-pip.py"
     - "%PYTHON%/Scripts/pip.exe --version"
     - "%PYTHON%/Scripts/pip.exe install setuptools --upgrade"
-    - "%PYTHON%/Scripts/pip.exe install .[excel,es6,test]"
+    - "%PYTHON%/Scripts/pip.exe install .[excel,es6,sqlite,test]"
 
 test_script:
     - "%PYTHON%/python.exe invoke_pytest.py"

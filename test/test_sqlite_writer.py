@@ -83,6 +83,7 @@ exception_test_data_list = [
 ]
 
 
+@pytest.mark.xfail(run=False)
 class Test_SqliteTableWriter_write_table(object):
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
@@ -124,6 +125,7 @@ class Test_SqliteTableWriter_write_table(object):
             writer.write_table()
 
 
+@pytest.mark.xfail(run=False)
 class Test_SqliteTableWriter_write_table_iter(object):
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
@@ -166,6 +168,7 @@ class Test_SqliteTableWriter_write_table_iter(object):
             assert table_data == expected
 
 
+@pytest.mark.xfail(run=False)
 class Test_SqliteTableWriter_dumps(object):
     def test_exception(self, tmpdir):
         writer = ptw.SqliteTableWriter()

@@ -8,7 +8,6 @@ from __future__ import absolute_import, unicode_literals
 
 import dataproperty
 import logbook
-import simplesqlite
 from mbstrdecoder import MultiByteStrDecoder
 
 
@@ -26,7 +25,14 @@ def set_logger(is_enable):
         logger.disable()
 
     dataproperty.set_logger(is_enable)
-    simplesqlite.set_logger(is_enable)
+
+    try:
+        import simplesqlite
+
+        simplesqlite.set_logger(is_enable)
+    except ImportError:
+        pass
+
     try:
         import pytablereader
 
@@ -60,7 +66,14 @@ def set_log_level(log_level):
 
     logger.level = log_level
     dataproperty.set_log_level(log_level)
-    simplesqlite.set_log_level(log_level)
+
+    try:
+        import simplesqlite
+
+        simplesqlite.set_log_level(log_level)
+    except ImportError:
+        pass
+
     try:
         import pytablereader
 
