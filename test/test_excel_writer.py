@@ -89,6 +89,7 @@ invalid_test_data_list = [
 table_writer_class_list = [ptw.ExcelXlsTableWriter, ptw.ExcelXlsxTableWriter]
 
 
+@pytest.mark.xfail(run=False)
 class Test_ExcelTableWriter_write_table(object):
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
@@ -171,6 +172,7 @@ class Test_ExcelTableWriter_write_table(object):
             writer.write_table()
 
 
+@pytest.mark.xfail(run=False)
 class Test_ExcelTableWriter_write_table_iter(object):
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
@@ -243,6 +245,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
             writer.write_table_iter()
 
 
+@pytest.mark.xfail(run=False)
 class Test_ExcelTableWriter_dumps(object):
     def test_exception(self, tmpdir):
         for writer_class in table_writer_class_list:

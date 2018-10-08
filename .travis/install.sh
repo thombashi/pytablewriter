@@ -7,8 +7,8 @@ if [ "$TRAVIS_OS_NAME" = "osx" ]; then
     fi
 
     pip3 install setuptools --upgrade
-    pip3 install .[es6,test]
+    pip3 install .[excel,es6,test]
 else
     pip install setuptools --upgrade
-    pip install .[es6,test]
+    pip install .[excel,es6,test]
 fi

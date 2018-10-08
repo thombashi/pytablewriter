@@ -4,4 +4,3 @@ pytest
 simplejson
 tablib
 tox
-xlwt

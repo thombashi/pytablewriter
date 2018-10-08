@@ -8,7 +8,6 @@ import msgfy
 import pathvalidate
 import six
 import typepy
-import xlsxwriter
 
 from ..._logger import logger
 
@@ -108,6 +107,8 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         self.open(file_path)
 
     def open(self, file_path):
+        import xlsxwriter
+
         self._workbook = xlsxwriter.Workbook(file_path)
 
     def close(self):
