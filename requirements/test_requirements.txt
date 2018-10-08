@@ -1,4 +1,3 @@
-elasticsearch>=5.4.0
 pytablereader>=0.21.0
 pytest-cov
 pytest

@@ -18,7 +18,7 @@ install:
     - "%PYTHON%/python.exe C:/get-pip.py"
     - "%PYTHON%/Scripts/pip.exe --version"
     - "%PYTHON%/Scripts/pip.exe install setuptools --upgrade"
-    - "%PYTHON%/Scripts/pip.exe install .[test]"
+    - "%PYTHON%/Scripts/pip.exe install .[es6,test]"
 
 test_script:
     - "%PYTHON%/python.exe invoke_pytest.py"
