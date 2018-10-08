@@ -4,6 +4,17 @@ Installation
 
     pip install pytablewriter
 
+Some of the formats require additional packages, you can download the packages as follows:
+
+- Elasticsearch
+    - ``pip install pytablewriter[es6]`` or ``pip install pytablewriter[es5]``
+- Excel
+    - ``pip install pytablewriter[excel]``
+- SQLite
+    - ``pip install pytablewriter[sqlite]``
+- TOML
+    - ``pip install pytablewriter[toml]``
+
 
 Dependencies
 ============
@@ -15,19 +26,23 @@ Python 2.7+ or 3.4+
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - `six <https://pypi.org/project/six/>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
-- `toml <https://github.com/uiri/toml>`__
 - `typepy <https://github.com/thombashi/typepy>`__
-- `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
 
 Optional Dependencies
 ----------------------------------
-- `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
-- `xlwt <http://www.python-excel.org/>`__
+- Elasticsearch:
+    - `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
+- Excel
+    - `xlwt <http://www.python-excel.org/>`__
+    - `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
+- SQLite
+    - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
+- TOML
+    - `toml <https://github.com/uiri/toml>`__
 
 
 Test dependencies
