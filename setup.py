@@ -81,11 +81,11 @@ setuptools.setup(
     setup_requires=setuptools_require + pytest_runner_require,
     tests_require=tests_requires,
     extras_require={
-        "build": "wheel",
+        "build": ["wheel"],
         "docs": docs_requires,
         "es5": "elasticsearch>=5.5.2,<6.0.0",
         "es6": "elasticsearch>=6.2.0,<7.0.0",
-        "release": "releasecmd>=0.0.12",
+        "release": ["releasecmd>=0.0.12"],
         "test": tests_requires,
     },
 
