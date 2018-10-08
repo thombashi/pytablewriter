@@ -217,7 +217,7 @@ normal_test_data_list = [
             | Infinity
             | NaN
             | style="text-align:right"| 1
-            | 2017-01-01 00:00:00
+            | 2017-01-01T00:00:00
             |-
             | style="text-align:right"| 2
             | style="text-align:right"| 2.20
@@ -239,7 +239,7 @@ normal_test_data_list = [
             | Infinity
             | NaN
             | NaN
-            | 2017-01-01 00:00:00
+            | 2017-01-01T00:00:00
             |}
 
             """
