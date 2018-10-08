@@ -10,9 +10,9 @@ import collections
 import itertools
 from decimal import Decimal
 
-import pytablereader as ptr
 import pytablewriter as ptw
 import pytest
+from pytablereader import ExcelTableFileLoader
 from tabledata import TableData
 
 from ._common import print_test_result
@@ -114,9 +114,7 @@ class Test_ExcelTableWriter_write_table(object):
         writer.write_table()
         writer.close()
 
-        loader = ptr.ExcelTableFileLoader(str(test_file_path))
-
-        for table_data in loader.load():
+        for table_data in ExcelTableFileLoader(str(test_file_path)).load():
             expected_dump = ptw.dump_tabledata(expected)
             actual_dump = ptw.dump_tabledata(table_data)
 
@@ -216,9 +214,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
         assert writer.first_data_row == 1
         assert writer.last_data_row == 7
 
-        loader = ptr.ExcelTableFileLoader(str(test_file_path))
-
-        for table_data in loader.load():
+        for table_data in ExcelTableFileLoader(str(test_file_path)).load():
             assert table_data == expected
 
     @pytest.mark.parametrize(

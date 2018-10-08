@@ -9,9 +9,9 @@ from __future__ import absolute_import, print_function, unicode_literals
 import collections
 from decimal import Decimal
 
-import pytablereader as ptr
 import pytablewriter as ptw
 import pytest
+from pytablereader import SqliteFileLoader
 from tabledata import TableData
 
 from ._common import print_test_result
@@ -100,9 +100,7 @@ class Test_SqliteTableWriter_write_table(object):
         writer.write_table()
         writer.close()
 
-        loader = ptr.SqliteFileLoader(str(test_file_path))
-
-        for table_data in loader.load():
+        for table_data in SqliteFileLoader(str(test_file_path)).load():
             expected_dump = ptw.dump_tabledata(expected)
             actual_dump = ptw.dump_tabledata(table_data)
 
@@ -162,9 +160,7 @@ class Test_SqliteTableWriter_write_table_iter(object):
 
         writer.close()
 
-        loader = ptr.SqliteFileLoader(str(test_file_path))
-
-        for table_data in loader.load():
+        for table_data in SqliteFileLoader(str(test_file_path)).load():
             assert table_data == expected
 
 
