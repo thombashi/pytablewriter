@@ -7,5 +7,5 @@ mbstrdecoder
 msgfy>=0.0.3
 pathvalidate>=0.21.3
 six
-tabledata>=0.0.23
+tabledata>=0.0.24
 typepy[datetime]

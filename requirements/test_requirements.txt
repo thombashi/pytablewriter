@@ -1,4 +1,4 @@
-pytablereader>=0.21.0
+pytablereader[excel]>=0.22.0
 pytest-cov
 pytest
 simplejson
