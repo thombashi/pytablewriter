@@ -89,6 +89,7 @@ setuptools.setup(
         "release": ["releasecmd>=0.0.12"],
         "sqlite": ["SimpleSQLite>=0.33.0"],
         "test": tests_requires,
+        "toml": ["toml>=0.9.4"],
     },
 
     classifiers=[

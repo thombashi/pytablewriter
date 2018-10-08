@@ -8,5 +8,4 @@ msgfy>=0.0.3
 pathvalidate>=0.21.3
 six
 tabledata>=0.0.23
-toml>=0.9.4
 typepy[datetime]

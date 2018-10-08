@@ -2,8 +2,6 @@
 
 from __future__ import absolute_import, unicode_literals
 
-import toml
-
 from ._text_writer import TextTableWriter
 
 
@@ -41,6 +39,8 @@ class TomlTableWriter(TextTableWriter):
         :Example:
             :ref:`example-toml-table-writer`
         """
+
+        import toml
 
         with self._logger:
             self._verify_property()
