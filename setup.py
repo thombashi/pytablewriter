@@ -54,6 +54,9 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 
 setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
+excel_requires = ["xlwt", "XlsxWriter>=1.1.1"]
+es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
+sqlite_requires = ["SimpleSQLite>=0.33.1"]
 
 setuptools.setup(
     name=MODULE_NAME,
@@ -79,15 +82,15 @@ setuptools.setup(
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*',
     install_requires=setuptools_require + install_requires,
     setup_requires=setuptools_require + pytest_runner_require,
-    tests_require=tests_requires,
+    tests_require=tests_requires + excel_requires + es6_requires + sqlite_requires,
     extras_require={
         "build": ["wheel"],
         "docs": docs_requires,
-        "excel": ["xlwt", "XlsxWriter>=1.1.1"],
+        "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
-        "es6": ["elasticsearch>=6.2.0,<7.0.0"],
+        "es6": es6_requires,
         "release": ["releasecmd>=0.0.12"],
-        "sqlite": ["SimpleSQLite>=0.33.0"],
+        "sqlite": sqlite_requires,
         "test": tests_requires,
         "toml": ["toml>=0.9.4"],
     },
