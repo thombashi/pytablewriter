@@ -566,9 +566,10 @@ class AbstractTableWriter(TableWriterInterface):
         return self.__align_char_mapping[align]
 
     def __get_align_format(self, col_dp, value_dp):
-        if col_dp.typecode == Typecode.STRING and value_dp.typecode in (
-            Typecode.INTEGER,
-            Typecode.REAL_NUMBER,
+        if col_dp.typecode == Typecode.STRING and (
+            value_dp.typecode in (Typecode.INTEGER, Typecode.REAL_NUMBER)
+            or value_dp.typecode == Typecode.STRING
+            and value_dp.is_include_ansi_escape
         ):
             align_char = self._get_align_char(self._get_align(col_dp.column_index, value_dp.align))
         else:
