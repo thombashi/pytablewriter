@@ -4,7 +4,7 @@ enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
 logbook
 mbstrdecoder
-msgfy>=0.0.3
+msgfy>=0.0.4
 pathvalidate>=0.21.3
 six
 tabledata>=0.0.24
