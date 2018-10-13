@@ -663,7 +663,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
-    def test_normal_anci_color(self, capsys):
+    def test_normal_ansi_color(self, capsys):
         writer = table_writer_class()
         writer.table_name = "ANCI escape sequence"
         writer.header_list = ["colored_i", "colored_f", "colored_s", "wo_anci"]
