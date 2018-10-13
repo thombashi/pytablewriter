@@ -1,5 +1,4 @@
 pytablereader[excel,sqlite]>=0.22.0
-pytest-cov
 pytest
 simplejson
 tablib
