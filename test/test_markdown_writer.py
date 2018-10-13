@@ -7,12 +7,14 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
+import re
 from textwrap import dedent
 
 import pytablewriter as ptw
 import pytest
 import six  # noqa: W0611
 from tabledata import TableData
+from termcolor import colored
 
 from ._common import print_test_result
 from .data import (
@@ -656,11 +658,37 @@ class Test_MarkdownTableWriter_write_table(object):
 
             """
         )
-
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
+
+    def test_normal_anci_color(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "ANCI escape sequence"
+        writer.header_list = ["colored_i", "colored_f", "colored_s", "wo_anci"]
+        writer.value_matrix = [
+            [colored(111, "red"), colored(1.1, "green"), colored("abc", "blue"), "abc"],
+            [colored(0, "red"), colored(0.12, "green"), colored("abcdef", "blue"), "abcdef"],
+        ]
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            # ANCI escape sequence
+            |colored_i|colored_f|colored_s|wo_anci|
+            |--------:|--------:|---------|-------|
+            |      111|      1.1|abc      |abc    |
+            |        0|     0.12|abcdef   |abcdef |
+
+            """
+        )
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        _ansi_escape = re.compile(r"(\x9b|\x1b\[)[0-?]*[ -\/]*[@-~]", re.IGNORECASE)
+
+        assert _ansi_escape.sub("", out) == expected
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
