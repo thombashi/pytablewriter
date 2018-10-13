@@ -33,7 +33,6 @@ Features
     - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
     - HTML
     - JSON
-    - Jupyter Notebook
     - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
     - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
     - LaTeX: ``tabular``/``array`` environment
@@ -53,8 +52,9 @@ Features
     - Padding
     - Decimal places of numbers
 - Multibyte character support
-- Write table to a stream such as a file/standard-output/string-buffer
+- Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
 - Get rendered tabular text
+- ANSI color support
 
 Examples
 ==========
