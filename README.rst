@@ -561,7 +561,7 @@ Dependencies
 ============
 Python 2.7+ or 3.4+
 
-- `DataPropery <https://github.com/thombashi/DataProperty>`__
+- `DataProperty <https://github.com/thombashi/DataProperty>`__
 - `dominate <https://github.com/Knio/dominate/>`__
 - `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
@@ -571,8 +571,8 @@ Python 2.7+ or 3.4+
 - `tabledata <https://github.com/thombashi/tabledata>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 
-Optional Dependencies
-----------------------------------
+Optional dependencies
+---------------------
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - Elasticsearch:
