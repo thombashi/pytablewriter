@@ -54,9 +54,18 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 
 setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
+
 excel_requires = ["xlwt", "XlsxWriter>=1.1.2"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
 sqlite_requires = ["SimpleSQLite>=0.33.2"]
+toml_requires = ["toml>=0.9.4"]
+all_requires = (
+    excel_requires
+    + es6_requires
+    + sqlite_requires
+    + toml_requires
+)
+tests_requires = frozenset(tests_requires + all_requires)
 
 setuptools.setup(
     name=MODULE_NAME,
@@ -82,8 +91,9 @@ setuptools.setup(
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*',
     install_requires=setuptools_require + install_requires,
     setup_requires=setuptools_require + pytest_runner_require,
-    tests_require=tests_requires + excel_requires + es6_requires + sqlite_requires,
+    tests_require=tests_requires,
     extras_require={
+        "all": all_requires,
         "build": ["wheel"],
         "docs": docs_requires,
         "excel": excel_requires,
@@ -92,7 +102,7 @@ setuptools.setup(
         "release": ["releasecmd>=0.0.12"],
         "sqlite": sqlite_requires,
         "test": tests_requires,
-        "toml": ["toml>=0.9.4"],
+        "toml": toml_requires,
     },
 
     classifiers=[
