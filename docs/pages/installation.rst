@@ -4,7 +4,7 @@ Installation
 
     pip install pytablewriter
 
-Some of the formats require additional packages, you can download the packages as follows:
+Some of the formats require additional dependency packages, you can install the dependency packages as follows:
 
 - Elasticsearch
     - ``pip install pytablewriter[es6]`` or ``pip install pytablewriter[es5]``
@@ -14,6 +14,8 @@ Some of the formats require additional packages, you can download the packages a
     - ``pip install pytablewriter[sqlite]``
 - TOML
     - ``pip install pytablewriter[toml]``
+- All of the extra dependencies
+    - ``pip install pytablewriter[all]``
 
 
 Dependencies
