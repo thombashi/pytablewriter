@@ -54,9 +54,9 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 
 setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
-excel_requires = ["xlwt", "XlsxWriter>=1.1.1"]
+excel_requires = ["xlwt", "XlsxWriter>=1.1.2"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
-sqlite_requires = ["SimpleSQLite>=0.33.1"]
+sqlite_requires = ["SimpleSQLite>=0.33.2"]
 
 setuptools.setup(
     name=MODULE_NAME,
