@@ -16,9 +16,11 @@ class JsonLinesTableWriter(JsonTableWriter):
     A table writer class for JSON lines format.
     """
 
+    FORMAT_NAME = "json_lines"
+
     @property
     def format_name(self):
-        return "json_lines"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

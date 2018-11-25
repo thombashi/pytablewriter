@@ -16,9 +16,11 @@ class CsvTableWriter(TextTableWriter):
         :ref:`example-csv-table-writer`
     """
 
+    FORMAT_NAME = "csv"
+
     @property
     def format_name(self):
-        return "csv"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

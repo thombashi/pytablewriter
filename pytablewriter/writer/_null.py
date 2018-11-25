@@ -11,9 +11,11 @@ from .text._interface import IndentationInterface, TextWriterInterface
 
 
 class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInterface):
+    FORMAT_NAME = "null"
+
     @property
     def format_name(self):
-        return "null"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

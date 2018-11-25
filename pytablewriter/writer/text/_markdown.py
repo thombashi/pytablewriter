@@ -17,9 +17,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     A table writer class for Markdown format.
     """
 
+    FORMAT_NAME = "markdown"
+
     @property
     def format_name(self):
-        return "markdown"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

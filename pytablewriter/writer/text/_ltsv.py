@@ -15,9 +15,11 @@ class LtsvTableWriter(CsvTableWriter):
     `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.
     """
 
+    FORMAT_NAME = "ltsv"
+
     @property
     def format_name(self):
-        return "ltsv"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

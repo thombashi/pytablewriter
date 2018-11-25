@@ -69,140 +69,130 @@ class TableFormat(enum.Enum):
     Enum to represent table format attributes.
     """
 
-    CSV = (
-        [CsvTableWriter().format_name],
-        CsvTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT,
-        ["csv"],
-    )
-    ELASTICSEARCH = ([ElasticsearchWriter().format_name], ElasticsearchWriter, FormatAttr.API, [])
+    CSV = ([CsvTableWriter.FORMAT_NAME], CsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
+    ELASTICSEARCH = ([ElasticsearchWriter.FORMAT_NAME], ElasticsearchWriter, FormatAttr.API, [])
     EXCEL_XLS = (
-        [ExcelXlsTableWriter().format_name],
+        [ExcelXlsTableWriter.FORMAT_NAME],
         ExcelXlsTableWriter,
         FormatAttr.FILE | FormatAttr.BIN | FormatAttr.SECONDARY_NAME,
         ["xls"],
     )
     EXCEL_XLSX = (
-        [ExcelXlsxTableWriter().format_name],
+        [ExcelXlsxTableWriter.FORMAT_NAME],
         ExcelXlsxTableWriter,
         FormatAttr.FILE | FormatAttr.BIN,
         ["xlsx"],
     )
     HTML = (
-        [HtmlTableWriter().format_name, "htm"],
+        [HtmlTableWriter.FORMAT_NAME, "htm"],
         HtmlTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["html", "htm"],
     )
     JAVASCRIPT = (
-        [JavaScriptTableWriter().format_name, "js"],
+        [JavaScriptTableWriter.FORMAT_NAME, "js"],
         JavaScriptTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE,
         ["js"],
     )
     JSON = (
-        [JsonTableWriter().format_name],
+        [JsonTableWriter.FORMAT_NAME],
         JsonTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["json"],
     )
     JSON_LINES = (
-        [JsonLinesTableWriter().format_name, "jsonl", "ldjson", "ndjson"],
+        [JsonLinesTableWriter.FORMAT_NAME, "jsonl", "ldjson", "ndjson"],
         JsonLinesTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["jsonl", "ldjson", "ndjson"],
     )
     LATEX_MATRIX = (
-        [LatexMatrixWriter().format_name],
+        [LatexMatrixWriter.FORMAT_NAME],
         LatexMatrixWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["tex"],
     )
     LATEX_TABLE = (
-        [LatexTableWriter().format_name],
+        [LatexTableWriter.FORMAT_NAME],
         LatexTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT,
         ["tex"],
     )
     LTSV = (
-        [LtsvTableWriter().format_name],
+        [LtsvTableWriter.FORMAT_NAME],
         LtsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["ltsv"],
     )
     MARKDOWN = (
-        [MarkdownTableWriter().format_name, "md"],
+        [MarkdownTableWriter.FORMAT_NAME, "md"],
         MarkdownTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["md"],
     )
     MEDIAWIKI = (
-        [MediaWikiTableWriter().format_name],
+        [MediaWikiTableWriter.FORMAT_NAME],
         MediaWikiTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
     )
-    NULL = ([NullTableWriter().format_name], NullTableWriter, FormatAttr.NONE, [])
+    NULL = ([NullTableWriter.FORMAT_NAME], NullTableWriter, FormatAttr.NONE, [])
     NUMPY = (
-        [NumpyTableWriter().format_name],
+        [NumpyTableWriter.FORMAT_NAME],
         NumpyTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY_EXT,
         ["py"],
     )
     PANDAS = (
-        [PandasDataFrameWriter().format_name],
+        [PandasDataFrameWriter.FORMAT_NAME],
         PandasDataFrameWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY_EXT,
         ["py"],
     )
     PYTHON = (
-        [PythonCodeTableWriter().format_name, "py"],
+        [PythonCodeTableWriter.FORMAT_NAME, "py"],
         PythonCodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE,
         ["py"],
     )
     RST_CSV_TABLE = (
-        [RstCsvTableWriter().format_name, "rst_csv"],
+        [RstCsvTableWriter.FORMAT_NAME, "rst_csv"],
         RstCsvTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT,
         ["rst"],
     )
     RST_GRID_TABLE = (
-        [RstGridTableWriter().format_name, "rst_grid", "rst"],
+        [RstGridTableWriter.FORMAT_NAME, "rst_grid", "rst"],
         RstGridTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["rst"],
     )
     RST_SIMPLE_TABLE = (
-        [RstSimpleTableWriter().format_name, "rst_simple"],
+        [RstSimpleTableWriter.FORMAT_NAME, "rst_simple"],
         RstSimpleTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SECONDARY_EXT,
         ["rst"],
     )
     SPACE_ALIGNED = (
-        [SpaceAlignedTableWriter().format_name],
+        [SpaceAlignedTableWriter.FORMAT_NAME],
         SpaceAlignedTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
     )
     SQLITE = (
-        [SqliteTableWriter().format_name],
+        [SqliteTableWriter.FORMAT_NAME],
         SqliteTableWriter,
         FormatAttr.FILE | FormatAttr.BIN,
         ["sqlite", "sqlite3"],
     )
     TOML = (
-        [TomlTableWriter().format_name],
+        [TomlTableWriter.FORMAT_NAME],
         TomlTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["toml"],
     )
-    TSV = (
-        [TsvTableWriter().format_name],
-        TsvTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT,
-        ["tsv"],
-    )
+    TSV = ([TsvTableWriter.FORMAT_NAME], TsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["tsv"])
 
     @property
     def name_list(self):

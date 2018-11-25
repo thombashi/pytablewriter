@@ -39,9 +39,11 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
                 :ref:`example-type-hint-python`
     """
 
+    FORMAT_NAME = "python"
+
     @property
     def format_name(self):
-        return "python"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

@@ -50,9 +50,11 @@ class ElasticsearchWriter(AbstractTableWriter):
             :ref:`example-elasticsearch-table-writer`
     """
 
+    FORMAT_NAME = "elasticsearch"
+
     @property
     def format_name(self):
-        return "elasticsearch"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

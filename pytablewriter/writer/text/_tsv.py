@@ -13,9 +13,11 @@ class TsvTableWriter(CsvTableWriter):
         :ref:`example-tsv-table-writer`
     """
 
+    FORMAT_NAME = "tsv"
+
     @property
     def format_name(self):
-        return "tsv"
+        return self.FORMAT_NAME
 
     def __init__(self):
         super(TsvTableWriter, self).__init__()

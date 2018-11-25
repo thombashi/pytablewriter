@@ -38,9 +38,11 @@ class NumpyTableWriter(PythonCodeTableWriter):
                 :ref:`example-type-hint-python`
     """
 
+    FORMAT_NAME = "numpy"
+
     @property
     def format_name(self):
-        return "numpy"
+        return self.FORMAT_NAME
 
     def __init__(self):
         super(NumpyTableWriter, self).__init__()

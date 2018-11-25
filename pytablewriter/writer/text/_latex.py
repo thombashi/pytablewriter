@@ -93,11 +93,12 @@ class LatexMatrixWriter(LatexWriter):
             :ref:`example-latex-matrix-writer`
     """
 
+    FORMAT_NAME = "latex_matrix"
     _RE_VAR = re.compile(r"^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
 
     @property
     def format_name(self):
-        return "latex_matrix"
+        return self.FORMAT_NAME
 
     def __init__(self):
         super(LatexMatrixWriter, self).__init__()
@@ -159,9 +160,11 @@ class LatexTableWriter(LatexWriter):
             :ref:`example-latex-table-writer`
     """
 
+    FORMAT_NAME = "latex_table"
+
     @property
     def format_name(self):
-        return "latex_table"
+        return self.FORMAT_NAME
 
     def __init__(self):
         super(LatexTableWriter, self).__init__()

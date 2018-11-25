@@ -25,9 +25,11 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
             :ref:`example-sqlite-table-writer`
     """
 
+    FORMAT_NAME = "sqlite"
+
     @property
     def format_name(self):
-        return "sqlite"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

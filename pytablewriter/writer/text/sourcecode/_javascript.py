@@ -54,12 +54,13 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
                 :ref:`example-type-hint-js`
     """
 
+    FORMAT_NAME = "javascript"
     __VALID_VAR_DECLARATION = ("var", "let", "const")
     __NONE_VALUE_DP = DataProperty("null")
 
     @property
     def format_name(self):
-        return "javascript"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

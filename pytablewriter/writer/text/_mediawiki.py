@@ -22,11 +22,12 @@ class MediaWikiTableWriter(TextTableWriter):
         :ref:`example-mediawiki-table-writer`
     """
 
+    FORMAT_NAME = "mediawiki"
     __RE_TABLE_SEQUENCE = re.compile(r"^[\s]+[*|#]+")
 
     @property
     def format_name(self):
-        return "mediawiki"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

@@ -11,9 +11,11 @@ class TomlTableWriter(TextTableWriter):
     `TOML <https://github.com/toml-lang/toml>`__ data format.
     """
 
+    FORMAT_NAME = "toml"
+
     @property
     def format_name(self):
-        return "toml"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

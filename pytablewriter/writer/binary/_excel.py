@@ -19,9 +19,11 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
     An abstract class of a table writer for Excel file format.
     """
 
+    FORMAT_NAME = "excel"
+
     @property
     def format_name(self):
-        return "excel"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

@@ -47,9 +47,11 @@ class PandasDataFrameWriter(NumpyTableWriter):
                 :ref:`example-type-hint-python`
     """
 
+    FORMAT_NAME = "pandas"
+
     @property
     def format_name(self):
-        return "pandas"
+        return self.FORMAT_NAME
 
     def __init__(self):
         super(PandasDataFrameWriter, self).__init__()

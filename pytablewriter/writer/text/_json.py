@@ -40,9 +40,11 @@ class JsonTableWriter(IndentationTextTableWriter):
             - |nan|: written as ``NaN``
     """
 
+    FORMAT_NAME = "json"
+
     @property
     def format_name(self):
-        return "json"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

@@ -21,9 +21,11 @@ class SpaceAlignedTableWriter(CsvTableWriter):
             :ref:`example-space-aligned-table-writer`
     """
 
+    FORMAT_NAME = "space_aligned"
+
     @property
     def format_name(self):
-        return "space_aligned"
+        return self.FORMAT_NAME
 
     def __init__(self):
         super(SpaceAlignedTableWriter, self).__init__()

@@ -21,9 +21,11 @@ class HtmlTableWriter(TextTableWriter):
     A table writer class for HTML format.
     """
 
+    FORMAT_NAME = "html"
+
     @property
     def format_name(self):
-        return "html"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):

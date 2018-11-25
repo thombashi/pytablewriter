@@ -57,9 +57,11 @@ class RstCsvTableWriter(RstTableWriter):
     format.
     """
 
+    FORMAT_NAME = "rst_csv_table"
+
     @property
     def format_name(self):
-        return "rst_csv_table"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):
@@ -148,9 +150,11 @@ class RstGridTableWriter(RstTableWriter):
             - |None| values are written as an empty string
     """
 
+    FORMAT_NAME = "rst_grid_table"
+
     @property
     def format_name(self):
-        return "rst_grid_table"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):
@@ -180,9 +184,11 @@ class RstSimpleTableWriter(RstTableWriter):
             - |None| values are written as an empty string
     """
 
+    FORMAT_NAME = "rst_simple_table"
+
     @property
     def format_name(self):
-        return "rst_simple_table"
+        return self.FORMAT_NAME
 
     @property
     def support_split_write(self):
