@@ -27,3 +27,13 @@ class Style(object):
 
     def __repr__(self):
         return "{}".format(self.font_size)
+
+    def __eq__(self, other):
+        if self.__class__ is not other.__class__:
+            return NotImplemented
+
+        return all([self.align == other.align, self.font_size == other.font_size])
+
+    def __ne__(self, other):
+        equal = self.__eq__(other)
+        return NotImplemented if equal is NotImplemented else not equal
