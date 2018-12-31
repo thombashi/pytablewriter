@@ -11,7 +11,7 @@ import itertools
 
 import pytablewriter as ptw
 import pytest
-from pytablewriter import Align
+from pytablewriter.style import Align
 
 from ._common import print_test_result
 from .data import float_header_list, float_value_matrix, value_matrix

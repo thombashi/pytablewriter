@@ -7,10 +7,9 @@ import re
 
 import dataproperty as dp
 import typepy
-from pytablewriter import Align
 from typepy import Typecode
 
-from ...style import LatexStyler
+from ...style import Align, LatexStyler
 from ._text_writer import IndentationTextTableWriter
 
 

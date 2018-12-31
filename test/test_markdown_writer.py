@@ -13,7 +13,7 @@ from textwrap import dedent
 import pytablewriter as ptw
 import pytest
 import six  # noqa: W0611
-from pytablewriter.style import FontSize, Style
+from pytablewriter.style import Align, FontSize, Style
 from tabledata import TableData
 
 from termcolor import colored
@@ -543,8 +543,6 @@ class Test_MarkdownTableWriter_write_table(object):
         assert out == expected
 
     def test_normal_set_align(self):
-        from pytablewriter import Align
-
         writer = table_writer_class()
         writer.from_tabledata(
             TableData(

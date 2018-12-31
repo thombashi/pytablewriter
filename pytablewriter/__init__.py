@@ -6,7 +6,6 @@
 
 from __future__ import absolute_import
 
-from dataproperty import Align, Format
 from typepy import (
     Bool,
     DateTime,
@@ -35,6 +34,7 @@ from .error import (
     NotSupportedError,
     WriterNotFoundError,
 )
+from .style import Align, Format
 from .writer import (
     CsvTableWriter,
     ElasticsearchWriter,

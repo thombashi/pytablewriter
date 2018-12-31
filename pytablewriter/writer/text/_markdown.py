@@ -7,8 +7,8 @@ import copy
 import dataproperty as dp
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
-from pytablewriter import Align
 
+from ...style import Align
 from ._text_writer import IndentationTextTableWriter
 
 

@@ -8,9 +8,9 @@ import re
 import dataproperty as dp
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
-from pytablewriter import Align
 from six.moves import zip
 
+from ...style import Align
 from ._text_writer import TextTableWriter
 
 
