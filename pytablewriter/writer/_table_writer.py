@@ -680,7 +680,7 @@ class AbstractTableWriter(TableWriterInterface):
         for col_dp in self._column_dp_list:
             try:
                 style = self.style_list[col_dp.column_index]
-            except IndexError:
+            except (TypeError, IndexError):
                 style = None
 
             if style is None:
