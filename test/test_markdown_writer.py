@@ -554,8 +554,6 @@ class Test_MarkdownTableWriter_write_table(object):
                 ],
             )
         )
-        writer.stream = six.StringIO()
-        writer.write_table()
         expected = dedent(
             """\
             # auto align
@@ -566,15 +564,12 @@ class Test_MarkdownTableWriter_write_table(object):
 
             """
         )
-        out = writer.stream.getvalue()
+        out = writer.dumps()
         print_test_result(expected=expected, actual=out)
         assert out == expected
-        assert writer.dumps() == expected
 
         writer.table_name = "specify alignment for each column manually"
         writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
-        writer.stream = six.StringIO()
-        writer.write_table()
         expected = dedent(
             """\
             # specify alignment for each column manually
@@ -585,10 +580,9 @@ class Test_MarkdownTableWriter_write_table(object):
 
             """
         )
-        out = writer.stream.getvalue()
+        out = writer.dumps()
         print_test_result(expected=expected, actual=out)
         assert out == expected
-        assert writer.dumps() == expected
 
     def test_normal_format_list(self, capsys):
         writer = table_writer_class()
