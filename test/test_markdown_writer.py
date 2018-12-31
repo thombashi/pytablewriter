@@ -13,7 +13,9 @@ from textwrap import dedent
 import pytablewriter as ptw
 import pytest
 import six  # noqa: W0611
+from pytablewriter.style import FontSize, Style
 from tabledata import TableData
+
 from termcolor import colored
 
 from ._common import print_test_result
@@ -569,7 +571,14 @@ class Test_MarkdownTableWriter_write_table(object):
         assert out == expected
 
         writer.table_name = "specify alignment for each column manually"
-        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
+        writer.style_list = [
+            Style(align=Align.LEFT),
+            Style(align=Align.RIGHT),
+            Style(align=Align.CENTER),
+            Style(align=Align.AUTO),
+            Style(align=Align.AUTO),
+            None,
+        ]
         expected = dedent(
             """\
             # specify alignment for each column manually
@@ -580,6 +589,12 @@ class Test_MarkdownTableWriter_write_table(object):
 
             """
         )
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
+        writer.style_list = None
+        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
         assert out == expected
@@ -626,8 +641,6 @@ class Test_MarkdownTableWriter_write_table(object):
         assert out == expected
 
     def test_normal_style_list(self, capsys):
-        from pytablewriter.style import Style, FontSize
-
         writer = table_writer_class()
         writer.table_name = "style test: font size will not be affected"
         writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]

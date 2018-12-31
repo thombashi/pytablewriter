@@ -11,6 +11,7 @@ import itertools
 
 import pytablewriter as ptw
 import pytest
+from pytablewriter import Align
 
 from ._common import print_test_result
 from .data import float_header_list, float_value_matrix, value_matrix
@@ -133,7 +134,6 @@ class Test_LatexMatrixWriter_write_table(object):
             Style(font_size=FontSize.LARGE),
         ]
         writer.write_table()
-
         expected = r"""\begin{equation}
     style test: font size = \left( \begin{array}{rrrrrr}
          111 &         111 & \tiny 111 & \small 111 & \normalsize 111 & \large 111 \\
@@ -142,10 +142,28 @@ class Test_LatexMatrixWriter_write_table(object):
 \end{equation}
 
 """
-
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
+        assert out == expected
 
+        writer.style_list = [
+            None,
+            Style(align=Align.AUTO),
+            Style(align=Align.AUTO, font_size=FontSize.TINY),
+            Style(align=Align.LEFT, font_size=FontSize.SMALL),
+            Style(align=Align.RIGHT, font_size=FontSize.MEDIUM),
+            Style(align=Align.CENTER, font_size=FontSize.LARGE),
+        ]
+        out = writer.dumps()
+        expected = r"""\begin{equation}
+    style test: font size = \left( \begin{array}{rrrlrc}
+         111 &         111 & \tiny 111 & \small 111 & \normalsize 111 & \large 111 \\
+        1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1234 & \large 1234 \\
+    \end{array} \right)
+\end{equation}
+
+"""
+        print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
     @pytest.mark.parametrize(

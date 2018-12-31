@@ -50,10 +50,15 @@ class LatexWriter(IndentationTextTableWriter):
 
     def _get_col_align_char_list(self):
         col_align_list = []
+
         for col_dp in self._column_dp_list:
-            if col_dp.align == Align.RIGHT:
+            align = self._get_align_from_style(col_dp.column_index)
+            if align is None or align == Align.AUTO:
+                align = col_dp.align
+
+            if align == Align.RIGHT:
                 col_align = "r"
-            elif col_dp.align == Align.CENTER:
+            elif align == Align.CENTER:
                 col_align = "c"
             else:
                 col_align = "l"
