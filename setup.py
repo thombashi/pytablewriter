@@ -57,13 +57,17 @@ pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 excel_requires = ["xlwt", "XlsxWriter>=1.1.2"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
+from_requires = ["pytablereader>=0.22.4"]
 sqlite_requires = ["SimpleSQLite>=0.33.4"]
 toml_requires = ["toml>=0.9.4"]
+optional_requires = ["simplejson>=3.16"]
 all_requires = (
     excel_requires
     + es6_requires
+    + from_requires
     + sqlite_requires
     + toml_requires
+    + optional_requires
 )
 tests_requires = frozenset(tests_requires + all_requires)
 
@@ -99,6 +103,7 @@ setuptools.setup(
         "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
         "es6": es6_requires,
+        "from": from_requires,
         "release": ["releasecmd>=0.0.12"],
         "sqlite": sqlite_requires,
         "test": tests_requires,
