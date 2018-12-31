@@ -544,21 +544,21 @@ class AbstractTableWriter(TableWriterInterface):
             styler.apply(self.__remove_line_break(col_dp.dp_to_str(value_dp)))
         )
 
-    def _get_align(self, col_idx, default):
+    def _get_align(self, col_idx, default_align):
         try:
             align = self.align_list[col_idx]
         except (IndexError, KeyError):
-            return default
+            return default_align
 
         if align is None:
-            return default
+            return default_align
 
         if align not in Align:
             self._logger.logger.debug("invalid alignment: {}".format(align))
-            return default
+            return default_align
 
         if align == Align.AUTO:
-            return default
+            return default_align
 
         return align
 
