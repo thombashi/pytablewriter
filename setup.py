@@ -57,7 +57,7 @@ pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 excel_requires = ["xlwt", "XlsxWriter>=1.1.2"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
-sqlite_requires = ["SimpleSQLite>=0.33.2"]
+sqlite_requires = ["SimpleSQLite>=0.33.4"]
 toml_requires = ["toml>=0.9.4"]
 all_requires = (
     excel_requires
