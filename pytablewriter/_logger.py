@@ -17,6 +17,7 @@ logger.disable()
 
 def set_logger(is_enable):
     if is_enable != logger.disabled:
+        # logger setting have not changed
         return
 
     if is_enable:
