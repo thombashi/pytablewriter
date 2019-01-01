@@ -544,16 +544,16 @@ class AbstractTableWriter(TableWriterInterface):
             styler.apply(self.__remove_line_break(col_dp.dp_to_str(value_dp)))
         )
 
-    def _get_align_from_style(self, col_idx):
+    def _get_style_attr_from_style(self, col_idx, attr_name):
         try:
-            return self.style_list[col_idx].align
+            return getattr(self.style_list[col_idx], attr_name)
         except (TypeError, IndexError, KeyError, AttributeError):
             pass
 
         return None
 
     def _get_align(self, col_idx, default_align):
-        align = self._get_align_from_style(col_idx)
+        align = self._get_style_attr_from_style(col_idx, "align")
 
         if not align:
             try:
