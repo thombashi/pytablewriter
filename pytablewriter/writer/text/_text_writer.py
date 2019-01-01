@@ -9,7 +9,7 @@ from six.moves import zip
 
 from ...error import EmptyHeaderError
 from ...style import TextStyler
-from .._table_writer import AbstractTableWriter
+from .._table_writer import AbstractTableWriter, LineBreakHandling
 from ._interface import IndentationInterface, TextWriterInterface
 
 
@@ -111,7 +111,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.margin = 0
 
-        self._is_remove_line_break = True
+        self.line_break_handling = LineBreakHandling.REPLACE
         self.is_write_null_line_after_table = True
 
     def write_null_line(self):

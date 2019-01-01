@@ -61,3 +61,4 @@ from .writer import (
     TomlTableWriter,
     TsvTableWriter,
 )
+from .writer._table_writer import LineBreakHandling

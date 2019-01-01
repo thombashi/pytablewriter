@@ -11,6 +11,7 @@ from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ...style import Align
+from .._table_writer import LineBreakHandling
 from ._text_writer import TextTableWriter
 
 
@@ -44,7 +45,8 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
-        self._is_remove_line_break = False
+        self.line_break_handling = LineBreakHandling.NOP
+
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 
     def _write_header(self):

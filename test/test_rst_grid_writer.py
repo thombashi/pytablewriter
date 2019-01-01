@@ -219,11 +219,11 @@ normal_test_data_list = [
             """\
             .. table:: line breaks will be converted to a white space
 
-                +-----+------+------+
-                | a b | c d  | e f  |
-                +=====+======+======+
-                |v1 v1|v2 v2 |v3 v3 |
-                +-----+------+------+
+                +-----+-----+-----+
+                | a b | c d | e f |
+                +=====+=====+=====+
+                |v1 v1|v2 v2|v3 v3|
+                +-----+-----+-----+
 
             """
         ),

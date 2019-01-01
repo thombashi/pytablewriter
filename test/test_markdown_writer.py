@@ -15,7 +15,6 @@ import pytest
 import six  # noqa: W0611
 from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
 from tabledata import TableData
-
 from termcolor import colored
 
 from ._common import print_test_result
@@ -315,9 +314,9 @@ normal_test_data_list = [
         expected=dedent(
             """\
             # line breaks
-            | a b | c d  | e f  |
-            |-----|------|------|
-            |v1 v1|v2 v2 |v3 v3 |
+            | a b | c d | e f |
+            |-----|-----|-----|
+            |v1 v1|v2 v2|v3 v3|
 
             """
         ),
@@ -923,5 +922,42 @@ class Test_MarkdownTableWriter_from_tablib(object):
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
+
+class Test_MarkdownTableWriter_line_break_handling(object):
+    @pytest.mark.parametrize(
+        ["value", "expected"],
+        [
+            [
+                ptw.LineBreakHandling.REPLACE,
+                dedent(
+                    """\
+                    |no |    text    |
+                    |--:|------------|
+                    |  1|first second|
+
+                    """
+                ),
+            ],
+            [
+                ptw.LineBreakHandling.ESCAPE,
+                r"""|no |    text     |
+|--:|-------------|
+|  1|first\nsecond|
+
+""",
+            ],
+        ],
+    )
+    def test_normal_line(self, value, expected):
+        writer = table_writer_class()
+        writer.header_list = ["no", "text"]
+        writer.value_matrix = [[1, "first\nsecond"]]
+        writer.line_break_handling = value
+
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected

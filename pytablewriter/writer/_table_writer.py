@@ -13,7 +13,7 @@ import sys
 
 import msgfy
 import typepy
-from dataproperty import Align, DataPropertyExtractor, Format, MatrixFormatting
+from dataproperty import Align, DataPropertyExtractor, Format, LineBreakHandling, MatrixFormatting
 from six.moves import zip
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
@@ -76,8 +76,6 @@ class AbstractTableWriter(TableWriterInterface):
         - first argument: current iteration number (start from ``1``)
         - second argument: a total number of iteration
     """
-
-    __RE_LINE_BREAK = re.compile("[\0\t\r\n]+")
 
     @property
     def is_formatting_float(self):
@@ -259,6 +257,18 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def line_break_handling(self):
+        return self._dp_extractor.line_break_handling
+
+    @line_break_handling.setter
+    def line_break_handling(self, value):
+        if self._dp_extractor.line_break_handling == value:
+            return
+
+        self._dp_extractor.line_break_handling = value
+        self.__clear_preprocess()
+
+    @property
     def is_escape_html_tag(self):
         return self._dp_extractor.is_escape_html_tag
 
@@ -325,7 +335,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_require_table_name = False
         self._is_require_header = False
-        self._is_remove_line_break = False
+
+        self.__line_break_handling = None
+        self.line_break_handling = LineBreakHandling.NOP
 
         self.iteration_length = -1
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
@@ -570,7 +582,7 @@ class AbstractTableWriter(TableWriterInterface):
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
 
-        return format_string.format(self.__remove_line_break(header))
+        return format_string.format(header)
 
     @staticmethod
     def _get_header_format_string(_col_dp, _value_dp):
@@ -580,7 +592,7 @@ class AbstractTableWriter(TableWriterInterface):
         styler = self._styler_list[col_dp.column_index]
 
         return self.__get_align_format(col_dp, value_dp).format(
-            styler.apply(self.__remove_line_break(col_dp.dp_to_str(value_dp)))
+            styler.apply(col_dp.dp_to_str(value_dp))
         )
 
     def _get_style_attr_from_style(self, col_idx, attr_name):
@@ -831,9 +843,3 @@ class AbstractTableWriter(TableWriterInterface):
     def __clear_preprocess(self):
         self.__clear_preprocess_status()
         self.__clear_preprocess_data()
-
-    def __remove_line_break(self, text):
-        if not self._is_remove_line_break:
-            return text
-
-        return self.__RE_LINE_BREAK.sub(" ", text)

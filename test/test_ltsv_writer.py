@@ -53,7 +53,7 @@ normal_test_data_list = [
         value=[["a\0b", "c   d", "e\tf", "g\nh", "i\r\nj"]],
         expected=dedent(
             """\
-            a0:"a b"\ta1:"c   d"\ta.2:"e  f"\ta_3:"g h"\ta-4:"i j"
+            a0:"a\0b"\ta1:"c   d"\ta.2:"e  f"\ta_3:"g h"\ta-4:"i j"
             """
         ),
     ),
