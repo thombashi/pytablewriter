@@ -49,9 +49,16 @@ class Style(object):
         self.__validate_attr("thousand_separator", ThousandSeparator)
 
     def __repr__(self):
-        return "align={}, font_size={}, thousand_separator={}".format(
-            self.align, self.font_size, self.thousand_separator
-        )
+        items = []
+        
+        if self.align:
+            items.append("align={}".format(self.align))
+        if self.font_size:
+            items.append("font_size={}".format(self.font_size))
+        if self.thousand_separator:
+            items.append("thousand_separator={}".format(self.thousand_separator))
+        
+        return ", ".join(items)
 
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
