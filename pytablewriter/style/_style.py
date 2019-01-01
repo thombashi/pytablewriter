@@ -18,12 +18,10 @@ class Style(object):
 
     def __init__(self, **kwargs):
         self.__align = kwargs.pop("align", None)
-        if self.__align is not None and not isinstance(self.__align, Align):
-            return TypeError("align must be a pytablewriter.style.Align instancce")
+        self.__validate_attr("align", Align)
 
         self.__font_size = kwargs.pop("font_size", FontSize.NONE)
-        if self.__font_size is not None and not isinstance(self.__font_size, FontSize):
-            return TypeError("align must be a pytablewriter.style.FontSize instancce")
+        self.__validate_attr("font_size", FontSize)
 
     def __repr__(self):
         return "{}".format(self.font_size)
@@ -37,3 +35,8 @@ class Style(object):
     def __ne__(self, other):
         equal = self.__eq__(other)
         return NotImplemented if equal is NotImplemented else not equal
+
+    def __validate_attr(self, attr_name, expected_type):
+        value = getattr(self, attr_name)
+        if value is not None and not isinstance(value, expected_type):
+            raise TypeError("align must be a {} instancce".format(type(expected_type)))
