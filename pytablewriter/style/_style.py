@@ -40,7 +40,9 @@ class Style(object):
         self.__validate_attr("thousand_separator", ThousandSeparator)
 
     def __repr__(self):
-        return "{}".format(self.font_size)
+        return "align={}, font_size={}, thousand_separator={}".format(
+            self.align, self.font_size, self.thousand_separator
+        )
 
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
