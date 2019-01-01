@@ -4,6 +4,7 @@ from __future__ import absolute_import, unicode_literals
 
 import enum
 
+import six
 from dataproperty import Align
 
 from ._font import FontSize
@@ -14,6 +15,9 @@ class ThousandSeparator(enum.Enum):
     NONE = 0
     COMMA = 1
     SPACE = 2
+
+
+_s_to_ts = {"": ThousandSeparator.NONE, ",": ThousandSeparator.COMMA, " ": ThousandSeparator.SPACE}
 
 
 class Style(object):
@@ -30,13 +34,18 @@ class Style(object):
         return self.__thousand_separator
 
     def __init__(self, **kwargs):
-        self.__align = kwargs.pop("align", None)
+        self.__align = self.__normalize_enum(kwargs.pop("align", None), Align)
         self.__validate_attr("align", Align)
 
-        self.__font_size = kwargs.pop("font_size", FontSize.NONE)
+        self.__font_size = self.__normalize_enum(kwargs.pop("font_size", FontSize.NONE), FontSize)
         self.__validate_attr("font_size", FontSize)
 
-        self.__thousand_separator = kwargs.pop("thousand_separator", ThousandSeparator.NONE)
+        self.__thousand_separator = self.__normalie_thousand_separator(
+            self.__normalize_enum(
+                kwargs.pop("thousand_separator", ThousandSeparator.NONE), ThousandSeparator
+            )
+        )
+
         self.__validate_attr("thousand_separator", ThousandSeparator)
 
     def __repr__(self):
@@ -50,9 +59,9 @@ class Style(object):
 
         return all(
             [
-                self.align == other.align,
-                self.font_size == other.font_size,
-                self.thousand_separator == other.thousand_separator,
+                self.align is other.align,
+                self.font_size is other.font_size,
+                self.thousand_separator is other.thousand_separator,
             ]
         )
 
@@ -63,4 +72,26 @@ class Style(object):
     def __validate_attr(self, attr_name, expected_type):
         value = getattr(self, attr_name)
         if value is not None and not isinstance(value, expected_type):
-            raise TypeError("align must be a {} instancce".format(type(expected_type)))
+            raise TypeError("align must be a {} instancce".format(expected_type.__name__))
+
+    @staticmethod
+    def __normalize_enum(value, enum_class):
+        if value is None or not isinstance(value, six.string_types):
+            return value
+
+        for enum_value in enum_class:
+            if value.upper() == enum_value.name:
+                return enum_value
+
+        return value
+
+    @staticmethod
+    def __normalie_thousand_separator(value):
+        if isinstance(value, ThousandSeparator):
+            return value
+
+        norm_value = _s_to_ts.get(value)
+        if norm_value is None:
+            return value
+
+        return norm_value
