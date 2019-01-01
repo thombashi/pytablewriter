@@ -11,7 +11,7 @@ import itertools
 
 import pytablewriter as ptw
 import pytest
-from pytablewriter.style import Align
+from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
 
 from ._common import print_test_result
 from .data import float_header_list, float_value_matrix, value_matrix
@@ -119,8 +119,6 @@ class Test_LatexMatrixWriter_write_table(object):
         assert writer.dumps() == expected
 
     def test_normal_style_list(self, capsys):
-        from pytablewriter.style import Style, FontSize
-
         writer = table_writer_class()
         writer.table_name = "style test: font size"
         writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
@@ -149,8 +147,16 @@ class Test_LatexMatrixWriter_write_table(object):
         writer.style_list = [
             None,
             Style(align=Align.AUTO),
-            Style(align=Align.AUTO, font_size=FontSize.TINY),
-            Style(align=Align.LEFT, font_size=FontSize.SMALL),
+            Style(
+                align=Align.AUTO,
+                font_size=FontSize.TINY,
+                thousand_separator=ThousandSeparator.COMMA,
+            ),
+            Style(
+                align=Align.LEFT,
+                font_size=FontSize.SMALL,
+                thousand_separator=ThousandSeparator.SPACE,
+            ),
             Style(align=Align.RIGHT, font_size=FontSize.MEDIUM),
             Style(align=Align.CENTER, font_size=FontSize.LARGE),
         ]
@@ -158,7 +164,7 @@ class Test_LatexMatrixWriter_write_table(object):
         expected = r"""\begin{equation}
     style test: font size = \left( \begin{array}{rrrlrc}
          111 &         111 & \tiny 111 & \small 111 & \normalsize 111 & \large 111 \\
-        1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1234 & \large 1234 \\
+        1234 &        1234 & \tiny 1,234 & \small 1 234 & \normalsize 1234 & \large 1234 \\
     \end{array} \right)
 \end{equation}
 

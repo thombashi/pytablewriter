@@ -8,6 +8,7 @@ import typepy
 from six.moves import zip
 
 from ...error import EmptyHeaderError
+from ...style import TextStyler
 from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
 
@@ -142,6 +143,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.write_table()
 
         return self.stream.getvalue()
+
+    def _create_styler(self, style=None):
+        return TextStyler(style)
 
     def _write_table_iter(self):
         super(TextTableWriter, self)._write_table_iter()

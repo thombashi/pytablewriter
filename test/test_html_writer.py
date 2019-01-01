@@ -283,7 +283,7 @@ class Test_HtmlTableWriter_write_table(object):
         assert writer.dumps() == expected
 
     def test_normal_style_list(self, capsys):
-        from pytablewriter.style import Style, FontSize
+        from pytablewriter.style import Style, FontSize, ThousandSeparator
 
         writer = table_writer_class()
         writer.table_name = "style test: font size"
@@ -294,8 +294,8 @@ class Test_HtmlTableWriter_write_table(object):
             Style(),
             Style(font_size=FontSize.TINY),
             Style(font_size=FontSize.SMALL),
-            Style(font_size=FontSize.MEDIUM),
-            Style(font_size=FontSize.LARGE),
+            Style(font_size=FontSize.MEDIUM, thousand_separator=ThousandSeparator.COMMA),
+            Style(font_size=FontSize.LARGE, thousand_separator=ThousandSeparator.SPACE),
         ]
         writer.write_table()
 
@@ -327,8 +327,8 @@ class Test_HtmlTableWriter_write_table(object):
                         <td align="right">1234</td>
                         <td align="right" style="font-size:x-small">1234</td>
                         <td align="right" style="font-size:small">1234</td>
-                        <td align="right" style="font-size:medium">1234</td>
-                        <td align="right" style="font-size:large">1234</td>
+                        <td align="right" style="font-size:medium">1,234</td>
+                        <td align="right" style="font-size:large">1 234</td>
                     </tr>
                 </tbody>
             </table>

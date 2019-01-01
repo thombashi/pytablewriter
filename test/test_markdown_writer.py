@@ -13,7 +13,7 @@ from textwrap import dedent
 import pytablewriter as ptw
 import pytest
 import six  # noqa: W0611
-from pytablewriter.style import Align, FontSize, Style
+from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
 from tabledata import TableData
 
 from termcolor import colored
@@ -597,7 +597,7 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-    def test_normal_format_list(self, capsys):
+    def test_normal_thousand_separator(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(
             TableData(
@@ -615,14 +615,34 @@ class Test_MarkdownTableWriter_write_table(object):
                 ],
             )
         )
+
+        writer.style_list = [
+            Style(thousand_separator=ThousandSeparator.NONE),
+            Style(thousand_separator=ThousandSeparator.COMMA),
+            Style(thousand_separator=ThousandSeparator.COMMA),
+            Style(thousand_separator=ThousandSeparator.SPACE),
+        ]
+        out = writer.dumps()
+        expected = dedent(
+            """\
+            |none_format|thousand_separator_i|thousand_separator_f|   f   |  wo_f   |
+            |----------:|-------------------:|-------------------:|------:|--------:|
+            |       1000|           1,234,567|         1,234,567.8|1 234.6|1234567.8|
+            |       1000|           1,234,567|         1,234,567.8|1 234.6|1234567.8|
+
+            """
+        )
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
+        writer.style_list = None
         writer.format_list = [
             ptw.Format.NONE,
             ptw.Format.THOUSAND_SEPARATOR,
             ptw.Format.THOUSAND_SEPARATOR,
             ptw.Format.THOUSAND_SEPARATOR,
         ]
-        writer.write_table()
-
+        out = writer.dumps()
         expected = dedent(
             """\
             |none_format|thousand_separator_i|thousand_separator_f|   f   |  wo_f   |
@@ -632,10 +652,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
             """
         )
-
-        out, err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out, error=err)
-
+        print_test_result(expected=expected, actual=out)
         assert out == expected
 
     def test_normal_style_list(self, capsys):

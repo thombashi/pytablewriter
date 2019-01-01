@@ -7,7 +7,7 @@ import abc
 import six
 
 from ._font import FontSize
-from ._style import Style
+from ._style import Style, ThousandSeparator
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -46,7 +46,15 @@ class NullStyler(AbstractStyler):
         return self._style.font_size
 
 
-class HtmlStyler(AbstractStyler):
+class TextStyler(AbstractStyler):
+    def apply(self, value):
+        if value and self._style.thousand_separator == ThousandSeparator.SPACE:
+            value = value.replace(",", " ")
+
+        return value
+
+
+class HtmlStyler(TextStyler):
     @property
     def _font_size_map(self):
         return {
@@ -57,7 +65,7 @@ class HtmlStyler(AbstractStyler):
         }
 
 
-class LatexStyler(AbstractStyler):
+class LatexStyler(TextStyler):
     @property
     def _font_size_map(self):
         return {
@@ -68,6 +76,7 @@ class LatexStyler(AbstractStyler):
         }
 
     def apply(self, value):
+        value = super(LatexStyler, self).apply(value)
         font_size = self.font_size
 
         if font_size is None:

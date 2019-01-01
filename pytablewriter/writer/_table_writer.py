@@ -13,7 +13,7 @@ import sys
 
 import msgfy
 import typepy
-from dataproperty import Align, DataPropertyExtractor, MatrixFormatting
+from dataproperty import Align, DataPropertyExtractor, Format, MatrixFormatting
 from six.moves import zip
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
@@ -26,7 +26,7 @@ from ..error import (
     EmptyValueError,
     NotSupportedError,
 )
-from ..style import NullStyler, Style
+from ..style import NullStyler, Style, ThousandSeparator
 from ._interface import TableWriterInterface
 
 
@@ -207,6 +207,25 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.format_flags_list = value
         self.__clear_preprocess()
 
+    def __get_thousand_separator(self, col_idx):
+        thousand_separator = self._get_style_attr_from_style(col_idx, "thousand_separator")
+
+        if not thousand_separator:
+            try:
+                thousand_separator = self.format_list[col_idx]
+            except (IndexError, KeyError):
+                pass
+
+            if thousand_separator == Format.NONE:
+                return ThousandSeparator.NONE
+            elif thousand_separator == Format.THOUSAND_SEPARATOR:
+                return ThousandSeparator.COMMA
+
+        if thousand_separator is None:
+            return ThousandSeparator.NONE
+
+        return thousand_separator
+
     @property
     def style_list(self):
         return self.__style_list
@@ -217,6 +236,18 @@ class AbstractTableWriter(TableWriterInterface):
             return
 
         self.__style_list = value
+
+        if self.__style_list:
+            ts_to_flag = {
+                ThousandSeparator.NONE: Format.NONE,
+                ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
+                ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
+            }
+            self._dp_extractor.format_flags_list = [
+                ts_to_flag[self.__get_thousand_separator(col_idx)]
+                for col_idx in range(len(self.__style_list))
+            ]
+
         self.__clear_preprocess()
 
     @property
