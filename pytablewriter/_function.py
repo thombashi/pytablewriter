@@ -20,7 +20,7 @@ def dateutil_datetime_formatter(value):
     )
 
 
-def dump_tabledata(value, format_name="rst_grid_table"):
+def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
     """
     :param tabledata.TableData value: Tabular data to dump.
     :param str format_name:
@@ -45,7 +45,14 @@ def dump_tabledata(value, format_name="rst_grid_table"):
 
     from ._factory import TableWriterFactory
 
+    if not value:
+        raise TypeError("value must be a tabledata.TableData instance")
+
     writer = TableWriterFactory.create_from_format_name(format_name)
+
+    for attr_name, attr_value in kwargs.items():
+        setattr(writer, attr_name, attr_value)
+
     writer.from_tabledata(value)
 
     return writer.dumps()
