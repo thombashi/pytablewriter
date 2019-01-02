@@ -7,6 +7,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import dataproperty
+import six
 
 
 def quote_datetime_formatter(value):
@@ -48,3 +49,14 @@ def dump_tabledata(value, format_name="rst_grid_table"):
     writer.from_tabledata(value)
 
     return writer.dumps()
+
+
+def normalize_enum(value, enum_class):
+    if value is None or not isinstance(value, six.string_types):
+        return value
+
+    for enum_value in enum_class:
+        if value.upper() == enum_value.name:
+            return enum_value
+
+    return value

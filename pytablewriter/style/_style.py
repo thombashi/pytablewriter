@@ -7,6 +7,7 @@ import enum
 import six
 from dataproperty import Align
 
+from .._function import normalize_enum
 from ._font import FontSize, FontWeight
 
 
@@ -85,18 +86,18 @@ class Style(object):
         return self.__thousand_separator
 
     def __init__(self, **kwargs):
-        self.__align = self.__normalize_enum(kwargs.pop("align", None), Align)
+        self.__align = normalize_enum(kwargs.pop("align", None), Align)
         self.__validate_attr("align", Align)
 
-        self.__font_size = self.__normalize_enum(kwargs.pop("font_size", FontSize.NONE), FontSize)
+        self.__font_size = normalize_enum(kwargs.pop("font_size", FontSize.NONE), FontSize)
         self.__validate_attr("font_size", FontSize)
 
-        self.__font_weight = self.__normalize_enum(
+        self.__font_weight = normalize_enum(
             kwargs.pop("font_weight", FontWeight.NORMAL), FontWeight
         )
 
         self.__thousand_separator = self.__normalie_thousand_separator(
-            self.__normalize_enum(
+            normalize_enum(
                 kwargs.pop("thousand_separator", ThousandSeparator.NONE), ThousandSeparator
             )
         )
