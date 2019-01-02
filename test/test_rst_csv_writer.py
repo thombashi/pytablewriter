@@ -182,7 +182,8 @@ class Test_RstCsvTableWriter_write_table_iter(object):
                 "tablename",
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
-                dedent("""\
+                dedent(
+                    """\
                     .. csv-table:: tablename
                         :header: "ha", "hb", "hc"
                         :widths: 5, 5, 5
@@ -193,7 +194,8 @@ class Test_RstCsvTableWriter_write_table_iter(object):
                         11, 12, 13
                         101, 102, 103
                         1001, 1002, 1003
-                    """),
+                    """
+                ),
             ]
         ],
     )
