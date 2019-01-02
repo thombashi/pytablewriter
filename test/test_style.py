@@ -5,7 +5,7 @@ from __future__ import print_function, unicode_literals
 import sys
 
 import pytest
-from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
+from pytablewriter.style import Align, FontSize, FontWeight, Style, ThousandSeparator
 
 
 class Test_Style_constructor(object):
@@ -16,25 +16,37 @@ class Test_Style_constructor(object):
                 {
                     "align": Align.RIGHT,
                     "font_size": FontSize.TINY,
+                    "font_weight": FontWeight.BOLD,
                     "thousand_separator": ThousandSeparator.SPACE,
                 },
                 {
                     "align": Align.RIGHT,
                     "font_size": FontSize.TINY,
+                    "font_weight": FontWeight.BOLD,
                     "thousand_separator": ThousandSeparator.SPACE,
                 },
             ],
             [
-                {"align": "left", "font_size": "small", "thousand_separator": ","},
+                {
+                    "align": "left",
+                    "font_size": "small",
+                    "font_weight": "bold",
+                    "thousand_separator": ",",
+                },
                 {
                     "align": Align.LEFT,
                     "font_size": FontSize.SMALL,
+                    "font_weight": FontWeight.BOLD,
                     "thousand_separator": ThousandSeparator.COMMA,
                 },
             ],
             [
                 {"font_size": "TINY"},
-                {"font_size": FontSize.TINY, "thousand_separator": ThousandSeparator.NONE},
+                {
+                    "font_size": FontSize.TINY,
+                    "font_weight": FontWeight.NORMAL,
+                    "thousand_separator": ThousandSeparator.NONE,
+                },
             ],
         ],
     )
@@ -45,6 +57,7 @@ class Test_Style_constructor(object):
 
         assert style.align is expected.get("align")
         assert style.font_size is expected.get("font_size")
+        assert style.font_weight is expected.get("font_weight")
         assert style.thousand_separator is expected.get("thousand_separator")
 
 

@@ -12,7 +12,7 @@ from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ...error import EmptyHeaderError
-from ...style import HtmlStyler
+from ...style import FontWeight, HtmlStyler
 from ._text_writer import TextTableWriter
 
 
@@ -94,13 +94,30 @@ class HtmlTableWriter(TextTableWriter):
             for value, value_dp, styler in zip(value_list, value_dp_list, self._styler_list):
                 td_tag = tags.td(MultiByteStrDecoder(value).unicode_str)
                 td_tag["align"] = value_dp.align.align_string
-                if styler.font_size:
-                    td_tag["style"] = styler.font_size
+
+                style_tag = self.__make_style_tag(styler)
+                if style_tag:
+                    td_tag["style"] = style_tag
+
                 tr_tag += td_tag
             tbody_tag += tr_tag
 
         self._table_tag += tbody_tag
         self._write_line(self._table_tag.render(indent=self.indent_string))
+
+    @staticmethod
+    def __make_style_tag(styler):
+        style_list = []
+
+        if styler.font_size:
+            style_list.append(styler.font_size)
+        if styler._style.font_weight == FontWeight.BOLD:
+            style_list.append("font-weight:bold")
+
+        if not style_list:
+            return None
+
+        return "; ".join(style_list)
 
     def _create_styler(self, style=None):
         return HtmlStyler(style)

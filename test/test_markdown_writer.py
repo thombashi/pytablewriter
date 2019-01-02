@@ -654,7 +654,7 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-    def test_normal_style_list(self, capsys):
+    def test_normal_style_font_size(self):
         writer = table_writer_class()
         writer.table_name = "style test: font size will not be affected"
         writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
@@ -667,8 +667,6 @@ class Test_MarkdownTableWriter_write_table(object):
             Style(font_size=FontSize.MEDIUM),
             Style(font_size=FontSize.LARGE),
         ]
-        writer.write_table()
-
         expected = dedent(
             """\
             # style test: font size will not be affected
@@ -679,8 +677,31 @@ class Test_MarkdownTableWriter_write_table(object):
 
             """
         )
-        out, err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out, error=err)
+        out = writer.dumps()
+
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_normal_style_font_weight(self):
+        writer = table_writer_class()
+        writer.table_name = "style test: bold"
+        writer.header_list = ["normal", "bold"]
+        writer.value_matrix = [[11, 11], [123456, 123456]]
+        writer.style_list = [Style(font_weight="normal"), Style(font_weight="bold")]
+        expected = dedent(
+            """\
+            # style test: bold
+            |normal|   bold   |
+            |-----:|---------:|
+            |    11|    **11**|
+            |123456|**123456**|
+
+            """
+        )
+        out = writer.dumps()
+
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

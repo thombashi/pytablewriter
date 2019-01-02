@@ -12,3 +12,9 @@ class FontSize(enum.Enum):
     SMALL = 2
     MEDIUM = 3
     LARGE = 4
+
+
+@enum.unique
+class FontWeight(enum.Enum):
+    NORMAL = 0
+    BOLD = 1

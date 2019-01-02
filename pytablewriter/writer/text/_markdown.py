@@ -8,7 +8,7 @@ import dataproperty as dp
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import Align
+from ...style import Align, MarkdownStyler
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -111,6 +111,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
                 "#" * (self._indent_level + 1), MultiByteStrDecoder(self.table_name).unicode_str
             )
         )
+
+    def _create_styler(self, style=None):
+        return MarkdownStyler(style)
 
     @staticmethod
     def __escape_vertical_bar_char(value):

@@ -6,7 +6,7 @@ import abc
 
 import six
 
-from ._font import FontSize
+from ._font import FontSize, FontWeight
 from ._style import Style, ThousandSeparator
 
 
@@ -20,6 +20,10 @@ class StylerInterface(object):
     def font_size(self):  # pragma: no cover
         raise NotImplementedError()
 
+    @abc.abstractproperty
+    def additional_char_width(self):  # pragma: no cover
+        raise NotImplementedError()
+
 
 class AbstractStyler(StylerInterface):
     @property
@@ -29,6 +33,10 @@ class AbstractStyler(StylerInterface):
     @property
     def font_size(self):
         return self._font_size_map.get(self._style.font_size)
+
+    @property
+    def additional_char_width(self):
+        return 0
 
     def __init__(self, style):
         if not isinstance(style, Style):
@@ -75,11 +83,45 @@ class LatexStyler(TextStyler):
             FontSize.LARGE: r"\large",
         }
 
+    @property
+    def additional_char_width(self):
+        width = 0
+
+        if self.font_size:
+            width += len(self.font_size)
+        if self._style.font_weight == FontWeight.BOLD:
+            width += len(r"\bf")
+
+        return width
+
     def apply(self, value):
         value = super(LatexStyler, self).apply(value)
         font_size = self.font_size
+        item_list = []
 
-        if font_size is None:
-            return value
+        if font_size:
+            item_list.append(font_size)
+        if self._style.font_weight == FontWeight.BOLD:
+            item_list.append(r"\bf")
 
-        return "{style} {value}".format(style=font_size, value=value)
+        item_list.append(value)
+        return " ".join(item_list)
+
+
+class MarkdownStyler(TextStyler):
+    @property
+    def additional_char_width(self):
+        width = 0
+
+        if self._style.font_weight == FontWeight.BOLD:
+            width += 4
+
+        return width
+
+    def apply(self, value):
+        value = super(MarkdownStyler, self).apply(value)
+
+        if self._style.font_weight == FontWeight.BOLD:
+            value = "**{}**".format(value)
+
+        return value

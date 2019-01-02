@@ -766,6 +766,14 @@ class AbstractTableWriter(TableWriterInterface):
             for column_dp in self._column_dp_list:
                 column_dp.extend_width(int(math.ceil(column_dp.ascii_char_width * 0.25)))
 
+        for column_dp in self._column_dp_list:
+            style = self.__get_style(column_dp.column_index)
+            if style is None:
+                continue
+
+            styler = self._create_styler(style)
+            column_dp.extend_width(styler.additional_char_width)
+
         self._is_complete_table_property_preprocess = True
 
     def _preprocess_header(self):

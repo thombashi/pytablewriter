@@ -99,8 +99,8 @@ class Test_LatexTableWriter_write_table(object):
         assert out == expected
         assert writer.dumps() == expected
 
-    def test_normal_style_list(self, capsys):
-        from pytablewriter.style import Style, FontSize
+    def test_normal_style_list(self):
+        from pytablewriter.style import Style
 
         writer = table_writer_class()
         writer.table_name = "style test: font size"
@@ -108,25 +108,24 @@ class Test_LatexTableWriter_write_table(object):
         writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
         writer.style_list = [
             None,
-            Style(),
-            Style(font_size=FontSize.TINY),
-            Style(font_size=FontSize.SMALL),
-            Style(font_size=FontSize.MEDIUM),
-            Style(font_size=FontSize.LARGE),
+            Style(align="auto"),
+            Style(align="auto", font_size="tiny", thousand_separator=","),
+            Style(align="left", font_size="small", thousand_separator=" "),
+            Style(align="right", font_size="medium"),
+            Style(align="center", font_size="large"),
+            Style(font_size="large", font_weight="bold"),
         ]
-        writer.write_table()
-
-        expected = r"""\begin{array}{r | r | r | r | r | r} \hline
-    \verb|none| & \verb|empty_style| & \verb|tiny| & \verb|small| & \verb|medium| & \verb|large| \\ \hline
+        expected = r"""\begin{array}{r | r | r | l | r | c} \hline
+    \verb|none| & \verb|empty_style| & \verb|   tiny   | & \verb|   small   | & \verb|     medium      | & \verb|   large   | \\ \hline
     \hline
-     111 &         111 & \tiny 111 & \small 111 & \normalsize 111 & \large 111 \\ \hline
-    1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1234 & \large 1234 \\ \hline
+     111 &         111 &  \tiny 111 & \small 111  &   \normalsize 111 & \large 111  \\ \hline
+    1234 &        1234 & \tiny 1,234 & \small 1 234 &  \normalsize 1234 & \large 1234 \\ \hline
 \end{array}
 
 """
 
-        out, err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out, error=err)
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

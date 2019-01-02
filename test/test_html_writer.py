@@ -283,19 +283,31 @@ class Test_HtmlTableWriter_write_table(object):
         assert writer.dumps() == expected
 
     def test_normal_style_list(self, capsys):
-        from pytablewriter.style import Style, FontSize, ThousandSeparator
+        from pytablewriter.style import Style
 
         writer = table_writer_class()
         writer.table_name = "style test: font size"
-        writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
-        writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
+        writer.header_list = [
+            "none",
+            "empty_style",
+            "tiny",
+            "small",
+            "medium",
+            "large",
+            "large bold",
+        ]
+        writer.value_matrix = [
+            [111, 111, 111, 111, 111, 111, 111],
+            [1234, 1234, 1234, 1234, 1234, 1234, 1234],
+        ]
         writer.style_list = [
             None,
             Style(),
-            Style(font_size=FontSize.TINY),
-            Style(font_size=FontSize.SMALL),
-            Style(font_size=FontSize.MEDIUM, thousand_separator=ThousandSeparator.COMMA),
-            Style(font_size=FontSize.LARGE, thousand_separator=ThousandSeparator.SPACE),
+            Style(font_size="TINY"),
+            Style(font_size="SMALL"),
+            Style(font_size="MEDIUM", thousand_separator=","),
+            Style(font_size="LARGE", thousand_separator=" "),
+            Style(font_size="LARGE", font_weight="bold"),
         ]
         writer.write_table()
 
@@ -311,6 +323,7 @@ class Test_HtmlTableWriter_write_table(object):
                         <th>small</th>
                         <th>medium</th>
                         <th>large</th>
+                        <th>large bold</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -321,6 +334,7 @@ class Test_HtmlTableWriter_write_table(object):
                         <td align="right" style="font-size:small">111</td>
                         <td align="right" style="font-size:medium">111</td>
                         <td align="right" style="font-size:large">111</td>
+                        <td align="right" style="font-size:large; font-weight:bold">111</td>
                     </tr>
                     <tr>
                         <td align="right">1234</td>
@@ -329,6 +343,7 @@ class Test_HtmlTableWriter_write_table(object):
                         <td align="right" style="font-size:small">1234</td>
                         <td align="right" style="font-size:medium">1,234</td>
                         <td align="right" style="font-size:large">1 234</td>
+                        <td align="right" style="font-size:large; font-weight:bold">1234</td>
                     </tr>
                 </tbody>
             </table>
