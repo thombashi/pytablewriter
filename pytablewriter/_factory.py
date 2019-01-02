@@ -169,21 +169,29 @@ class TableWriterFactory(object):
                 javascript
                 js
                 json
+                json_lines
+                jsonl
                 latex_matrix
                 latex_table
+                ldjson
                 ltsv
                 markdown
                 md
                 mediawiki
+                ndjson
                 null
                 numpy
                 pandas
                 py
                 python
                 rst
+                rst_csv
                 rst_csv_table
+                rst_grid
                 rst_grid_table
+                rst_simple
                 rst_simple_table
+                space_aligned
                 sqlite
                 toml
                 tsv
@@ -215,8 +223,11 @@ class TableWriterFactory(object):
                 html
                 js
                 json
+                jsonl
+                ldjson
                 ltsv
                 md
+                ndjson
                 py
                 rst
                 sqlite
