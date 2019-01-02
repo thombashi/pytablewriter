@@ -18,6 +18,7 @@ from six.moves import zip
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
 
+from .._function import normalize_enum
 from .._logger import WriterLogger
 from ..error import (
     EmptyHeaderError,
@@ -269,7 +270,7 @@ class AbstractTableWriter(TableWriterInterface):
         if self._dp_extractor.line_break_handling == value:
             return
 
-        self._dp_extractor.line_break_handling = value
+        self._dp_extractor.line_break_handling = normalize_enum(value, LineBreakHandling)
         self.__clear_preprocess()
 
     @property

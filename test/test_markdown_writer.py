@@ -934,6 +934,13 @@ class Test_MarkdownTableWriter_line_break_handling(object):
 |  1|first\nsecond|
 """,
             ],
+            [
+                "escape",
+                r"""|no |    text     |
+|--:|-------------|
+|  1|first\nsecond|
+""",
+            ],
         ],
     )
     def test_normal_line(self, value, expected):
