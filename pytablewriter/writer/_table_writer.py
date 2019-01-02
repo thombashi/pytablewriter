@@ -595,10 +595,16 @@ class AbstractTableWriter(TableWriterInterface):
             styler.apply(col_dp.dp_to_str(value_dp))
         )
 
+    def __get_style(self, col_idx):
+        try:
+            return self.style_list[col_idx]
+        except (TypeError, IndexError, KeyError):
+            return None
+
     def _get_style_attr_from_style(self, col_idx, attr_name):
         try:
-            return getattr(self.style_list[col_idx], attr_name)
-        except (TypeError, IndexError, KeyError, AttributeError):
+            return getattr(self.__get_style(col_idx), attr_name)
+        except AttributeError:
             pass
 
         return None
