@@ -46,7 +46,6 @@ normal_test_data_list = [
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"]
             ];
-
             """
         ),
     ),
@@ -62,7 +61,6 @@ normal_test_data_list = [
             const null_value = [
                 ["a", "b", "c", "dd", "e"]
             ];
-
             """
         ),
     ),
@@ -77,7 +75,6 @@ normal_test_data_list = [
             """\
             const null_table = [
             ];
-
             """
         ),
     ),
@@ -95,7 +92,6 @@ normal_test_data_list = [
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"]
             ];
-
             """
         ),
     ),
@@ -113,7 +109,6 @@ normal_test_data_list = [
         [2, 2.2, "bb", 2.2, 2.2],
         [3, 3.3, "ccc", 3, "cccc"]
     ];
-
 """,
     ),
     Data(
@@ -132,7 +127,6 @@ normal_test_data_list = [
                 [3, 3.3, "ccc", null, "cccc"],
                 [null, null, null, null, null]
             ];
-
             """
         ),
     ),
@@ -151,7 +145,6 @@ normal_test_data_list = [
                 [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
                 [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, new Date("2017-01-01T00:00:00")]
             ];
-
             """
         ),
     ),
@@ -170,7 +163,6 @@ normal_test_data_list = [
                 [2, 2.2, "bbb", 2.2, 2.2, false, Infinity, NaN, Infinity, "2017-01-02 03:04:05+09:00"],
                 [3, 3.33, "cccc", -3, "ccc", true, Infinity, NaN, NaN, "2017-01-01T00:00:00"]
             ];
-
             """
         ),
     ),
@@ -193,7 +185,6 @@ normal_test_data_list = [
                 [null, 826.21158713263],
                 [0.1, 1.0499675627886724]
             ];
-
             """
         ),
     ),
@@ -210,7 +201,6 @@ normal_test_data_list = [
                 ["a b", " c d ", "e f"],
                 ["v1 v1", "v2 v2", "v3 v3"]
             ];
-
             """
         ),
     ),
@@ -271,7 +261,6 @@ class Test_JavaScriptTableWriter_type_hint(object):
                         ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
                         ["2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")]
                     ];
-
                     """
                 ),
             ],
@@ -287,7 +276,6 @@ class Test_JavaScriptTableWriter_type_hint(object):
                         [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],
                         [new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"]
                     ];
-
                     """
                 ),
             ],
@@ -357,7 +345,6 @@ class Test_JavaScriptTableWriter_write_table(object):
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"]
             ];
-
             """
         )
 
@@ -377,7 +364,6 @@ class Test_JavaScriptTableWriter_write_table(object):
     [12, "    [-10, -9.9,     \"\",     \"FALSE\", \"nan\", \"2017-01-01 00:00:00+0900\"],"],
     [13, "]"]
 ];
-
 """
         writer.table_name = "escape quotes 1"
         writer.value_matrix = [
@@ -410,7 +396,6 @@ class Test_JavaScriptTableWriter_write_table(object):
     [10, "    \"\"\"),"],
     [11, "    delimiter=\" \")"]
 ];
-
 """
         writer.table_name = "escape quotes 2"
         writer.value_matrix = [
@@ -486,7 +471,6 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
                         [101, 102, 103],
                         [1001, 1002, 1003]
                     ];
-
                     """
                 ),
             ],
@@ -504,7 +488,6 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
                         [1, 2, 3],
                         [11, 12, 13]
                     ];
-
                     """
                 ),
             ],

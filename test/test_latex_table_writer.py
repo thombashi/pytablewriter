@@ -35,7 +35,6 @@ normal_test_data_list = [
     2 & 2.20 & bbb  &  2.2 & 2.2 & False & \infty & NaN & \infty  & \verb|2017-01-02 03:04:05+09:00| \\ \hline
     3 & 3.33 & cccc & -3.0 & ccc & True  & \infty & NaN & NaN     & 2017-01-01T00:00:00       \\ \hline
 \end{array}
-
 """,
     ),
     Data(
@@ -46,7 +45,6 @@ normal_test_data_list = [
     2 &   2.2 & bb  & 2.2 &  2.2 \\ \hline
     3 &   3.3 & ccc & 3.0 & cccc \\ \hline
 \end{array}
-
 """,
     ),
     Data(
@@ -59,7 +57,6 @@ normal_test_data_list = [
     1.00 &     99.9000 & 0.010 \\ \hline
     1.20 & 999999.1230 & 0.001 \\ \hline
 \end{array}
-
 """,
     ),
 ]
@@ -121,7 +118,6 @@ class Test_LatexTableWriter_write_table(object):
      111 &         111 &  \tiny 111 & \small 111  &   \normalsize 111 & \large 111  \\ \hline
     1234 &        1234 & \tiny 1,234 & \small 1 234 &  \normalsize 1234 & \large 1234 \\ \hline
 \end{array}
-
 """
 
         out = writer.dumps()

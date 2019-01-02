@@ -31,7 +31,6 @@ normal_test_data_list = [
         1.20 & 999999.1230 & 0.001 \\
     \end{array} \right)
 \end{equation}
-
 """,
     ),
     Data(
@@ -45,7 +44,6 @@ normal_test_data_list = [
         1.20 & 999999.1230 & 0.001 \\
     \end{array} \right)
 \end{equation}
-
 """,
     ),
     Data(
@@ -63,7 +61,6 @@ normal_test_data_list = [
         a_{31} & a_{32} & \ldots & a_{3n} \\
     \end{array} \right)
 \end{equation}
-
 """,
     ),
     Data(
@@ -77,7 +74,6 @@ normal_test_data_list = [
         3 &   3.3 & ccc & 3.0 & cccc \\
     \end{array} \right)
 \end{equation}
-
 """,
     ),
 ]
@@ -150,7 +146,6 @@ class Test_LatexMatrixWriter_write_table(object):
         1234 &        1234 & \tiny 1234 & \small 1234 &  \normalsize 1234 & \large 1234 &     \large \bf 1234 \\
     \end{array} \right)
 \end{equation}
-
 """
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
@@ -172,7 +167,6 @@ class Test_LatexMatrixWriter_write_table(object):
         1234 &        1234 & \tiny 1,234 & \small 1 234 &  \normalsize 1234 & \large 1234 &     \large \bf 1234 \\
     \end{array} \right)
 \end{equation}
-
 """
         print_test_result(expected=expected, actual=out)
         assert out == expected

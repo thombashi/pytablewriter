@@ -31,17 +31,16 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-        .. table:: tablename
+            .. table:: tablename
 
-            =  =====  ===  ===  ====
-            a    b     c   dd    e  
-            =  =====  ===  ===  ====
-            1  123.1  a    1.0     1
-            2    2.2  bb   2.2   2.2
-            3    3.3  ccc  3.0  cccc
-            =  =====  ===  ===  ====
-
-        """
+                =  =====  ===  ===  ====
+                a    b     c   dd    e  
+                =  =====  ===  ===  ====
+                1  123.1  a    1.0     1
+                2    2.2  bb   2.2   2.2
+                3    3.3  ccc  3.0  cccc
+                =  =====  ===  ===  ====
+            """
         ),
     ),
     Data(
@@ -51,14 +50,13 @@ normal_test_data_list = [
         value=None,
         expected=dedent(
             """\
-        .. table:: 
+            .. table:: 
 
-            =  =  =  ==  =
-            a  b  c  dd  e
-            =  =  =  ==  =
-            =  =  =  ==  =
-
-        """
+                =  =  =  ==  =
+                a  b  c  dd  e
+                =  =  =  ==  =
+                =  =  =  ==  =
+            """
         ),
     ),
     Data(
@@ -68,15 +66,14 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-        .. table:: 
+            .. table:: 
 
-            =  =====  ===  ===  ====
-            1  123.1  a    1.0     1
-            2    2.2  bb   2.2   2.2
-            3    3.3  ccc  3.0  cccc
-            =  =====  ===  ===  ====
-
-        """
+                =  =====  ===  ===  ====
+                1  123.1  a    1.0     1
+                2    2.2  bb   2.2   2.2
+                3    3.3  ccc  3.0  cccc
+                =  =====  ===  ===  ====
+            """
         ),
     ),
     Data(
@@ -93,7 +90,6 @@ normal_test_data_list = [
         2    2.2  bb   2.2   2.2
         3    3.3  ccc  3.0  cccc
         =  =====  ===  ===  ====
-
 """,
     ),
     Data(
@@ -103,18 +99,17 @@ normal_test_data_list = [
         value=value_matrix_with_none,
         expected=dedent(
             """\
-        .. table:: table name
+            .. table:: table name
 
-            =  ===  ===  ===  ====
-            a   b    c   dd    e  
-            =  ===  ===  ===  ====
-            1       a    1.0      
-               2.2       2.2   2.2
-            3  3.3  ccc       cccc
+                =  ===  ===  ===  ====
+                a   b    c   dd    e  
+                =  ===  ===  ===  ====
+                1       a    1.0      
+                2.2       2.2   2.2
+                3  3.3  ccc       cccc
 
-            =  ===  ===  ===  ====
-
-        """
+                =  ===  ===  ===  ====
+            """
         ),
     ),
     Data(
@@ -124,17 +119,16 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected=dedent(
             """\
-        .. table:: table name
+            .. table:: table name
 
-            =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
-            i   f     c     if   ifc  bool     inf     nan  mix_num             time           
-            =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
-            1  1.10  aa     1.0    1  True   Infinity  NaN         1  2017-01-01T00:00:00      
-            2  2.20  bbb    2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
-            3  3.33  cccc  -3.0  ccc  True   Infinity  NaN       NaN  2017-01-01T00:00:00      
-            =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
-
-        """
+                =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
+                i   f     c     if   ifc  bool     inf     nan  mix_num             time           
+                =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
+                1  1.10  aa     1.0    1  True   Infinity  NaN         1  2017-01-01T00:00:00      
+                2  2.20  bbb    2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
+                3  3.33  cccc  -3.0  ccc  True   Infinity  NaN       NaN  2017-01-01T00:00:00      
+                =  ====  ====  ====  ===  =====  ========  ===  ========  =========================
+            """
         ),
     ),
 ]

@@ -59,7 +59,6 @@ normal_test_data_list = [
             | style="text-align:right"| 3.0
             | cccc
             |}
-
             """
         ),
     ),
@@ -77,7 +76,6 @@ normal_test_data_list = [
             ! e
             |-
             |}
-
             """
         ),
     ),
@@ -114,7 +112,6 @@ normal_test_data_list = [
             |  a # b
             a * b ** c ***
             |}
-
             """
         ),
     ),
@@ -143,7 +140,6 @@ normal_test_data_list = [
             | style="text-align:right"| 3.0
             | cccc
             |}
-
             """
         ),
     ),
@@ -185,7 +181,6 @@ normal_test_data_list = [
             | 
             | 
             |}
-
             """
         ),
     ),
@@ -241,7 +236,6 @@ normal_test_data_list = [
             | NaN
             | 2017-01-01T00:00:00
             |}
-
             """
         ),
     ),
@@ -339,7 +333,6 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
                 | style="text-align:right"| 1002
                 | style="text-align:right"| 1003
                 |}
-
                 """
                 ),
             ],
@@ -378,7 +371,6 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
                 | style="text-align:right"| 1003
                 |}
                 3/3
-
                 """
                 ),
             ],

@@ -47,7 +47,6 @@ normal_test_data_list = [
             |  1|123.1|a  |1.0|   1|
             |  2|  2.2|bb |2.2| 2.2|
             |  3|  3.3|ccc|3.0|cccc|
-
             """
         ),
     ),
@@ -61,7 +60,6 @@ normal_test_data_list = [
             """\
             | a | b | c |dd | e |
             |---|---|---|---|---|
-
             """
         ),
     ),
@@ -83,7 +81,6 @@ normal_test_data_list = [
             |  1|123.1|a  |1.0|   1|
             |  2|  2.2|bb |2.2| 2.2|
             |  3|  3.3|ccc|3.3|cccc|
-
             """
         ),
     ),
@@ -101,7 +98,6 @@ normal_test_data_list = [
             |  1|123.1|a  |1.0|   1|
             |  2|  2.2|bb |2.2| 2.2|
             |  3|  3.3|ccc|3.0|cccc|
-
             """
         ),
     ),
@@ -119,7 +115,6 @@ normal_test_data_list = [
             |   |2.2|   |2.2| 2.2|
             |  3|3.3|ccc|   |cccc|
             |   |   |   |   |    |
-
             """
         ),
     ),
@@ -136,7 +131,6 @@ normal_test_data_list = [
             |  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01T00:00:00      |
             |  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
             |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01T00:00:00      |
-
             """
         ),
     ),
@@ -154,7 +148,6 @@ normal_test_data_list = [
             |  1|123.1|a  |1.0|   1|
             |  2|  2.2|bb |2.2| 2.2|
             |  3|  3.3|ccc|3.0|cccc|
-
             """
         ),
     ),
@@ -172,7 +165,6 @@ normal_test_data_list = [
             |0.01|     0.0012|0.000|
             |1.00|    99.9000|0.010|
             |1.20|999999.1230|0.001|
-
             """
         ),
     ),
@@ -190,7 +182,6 @@ normal_test_data_list = [
             |  1|123.1|a  |  1|   1|
             |  2|  2.2|bb |2.2| 2.2|
             |  3|  3.3|ccc|  3|cccc|
-
             """
         ),
     ),
@@ -208,7 +199,6 @@ normal_test_data_list = [
             |0.01|   0.00125|    0|
             |   1|      99.9| 0.01|
             | 1.2|999999.123|0.001|
-
             """
         ),
     ),
@@ -231,7 +221,6 @@ normal_test_data_list = [
             | Name  |xUnit|Source|                                                      Remarks                                                       |
             |-------|-----|------|--------------------------------------------------------------------------------------------------------------------|
             |Crotest|     |[160] |MIT License. A tiny and simple test framework for Crystal with common assertions and no pollution into Object class.|
-
             """
         ),
     ),
@@ -250,7 +239,6 @@ normal_test_data_list = [
             |----|----|--------|--------|--------------------------|------------|
             |山田|太郎|2001/1/1|100-0002|東京都千代田区皇居外苑    |03-1234-5678|
             |山田|次郎|2001/1/2|251-0036|神奈川県藤沢市江の島１丁目|03-9999-9999|
-
             """
         ),
     ),
@@ -267,7 +255,6 @@ normal_test_data_list = [
             |----:|-------|
             |    1|abc    |
             |   -1|efg    |
-
             """
         ),
     ),
@@ -283,7 +270,6 @@ normal_test_data_list = [
             |   | 1 |0.1|
             |---|--:|--:|
             |   |  1|0.1|
-
             """
         ),
     ),
@@ -301,7 +287,6 @@ normal_test_data_list = [
             |a  |  0|   |
             |b  |  1|bb |
             |c  |  2|ccc|
-
             """
         ),
     ),
@@ -317,7 +302,6 @@ normal_test_data_list = [
             | a b | c d | e f |
             |-----|-----|-----|
             |v1 v1|v2 v2|v3 v3|
-
             """
         ),
     ),
@@ -335,7 +319,6 @@ normal_test_data_list = [
             |  1|123.1|a  |1.0|   1|
             |  2|  2.2|bb |2.2| 2.2|
             |  3|  3.3|ccc|3.0|cccc|
-
             """
         ),
     ),
@@ -349,7 +332,6 @@ normal_test_data_list = [
 |  a\|b  |\|c\|\|d\||
 |-------|------|
 |\|v1\|v1\||v2\|v2 |
-
 """,
     ),
     Data(
@@ -374,7 +356,6 @@ normal_test_data_list = [
             |  189.744|  189.74|
             |10064.010|10001.91|
             |next     |10250.32|
-
             """
         ),
     ),
@@ -400,7 +381,6 @@ normal_test_data_list = [
             |  0| 0.1|foo |
             |   |    |    |
             | -1|-0.1|bar |
-
             """
         ),
     ),
@@ -490,7 +470,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |mediawiki       |MediaWikiTableFileLoader|
             |json            |JsonTableFileLoader     |
             |Long Format Name|Loader                  |
-
             """
         )
 
@@ -501,6 +480,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_multiple_write(self, capsys):
         writer = table_writer_class()
+        writer.is_write_null_line_after_table = True
         writer.from_tabledata(
             TableData(
                 table_name="first",
@@ -560,7 +540,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |---:|-----------|------------|---:|----|-----------|
             |   0|r          |center align|   0|a   |n          |
             |  11|right align|bb          |  11|auto|none (auto)|
-
             """
         )
         out = writer.dumps()
@@ -583,7 +562,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |----|----------:|:----------:|---:|----|-----------|
             |0   |          r|center align|   0|a   |n          |
             |11  |right align|     bb     |  11|auto|none (auto)|
-
             """
         )
         out = writer.dumps()
@@ -628,7 +606,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |----------:|-------------------:|-------------------:|------:|--------:|
             |       1000|           1,234,567|         1,234,567.8|1 234.6|1234567.8|
             |       1000|           1,234,567|         1,234,567.8|1 234.6|1234567.8|
-
             """
         )
         print_test_result(expected=expected, actual=out)
@@ -648,7 +625,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |----------:|-------------------:|-------------------:|------:|--------:|
             |       1000|           1,234,567|         1,234,567.8|1,234.6|1234567.8|
             |       1000|           1,234,567|         1,234,567.8|1,234.6|1234567.8|
-
             """
         )
         print_test_result(expected=expected, actual=out)
@@ -674,7 +650,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |---:|----------:|---:|----:|-----:|----:|
             | 111|        111| 111|  111|   111|  111|
             |1234|       1234|1234| 1234|  1234| 1234|
-
             """
         )
         out = writer.dumps()
@@ -696,7 +671,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |-----:|---------:|
             |    11|    **11**|
             |123456|**123456**|
-
             """
         )
         out = writer.dumps()
@@ -722,7 +696,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |--------:|--------:|---------|-------|
             |      111|      1.1|abc      |abc    |
             |        0|     0.12|abcdef   |abcdef |
-
             """
         )
         out, err = capsys.readouterr()
@@ -747,7 +720,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |   1 | 123.1 | a   | 1.0 |    1 |
             |   2 |   2.2 | bb  | 2.2 |  2.2 |
             |   3 |   3.3 | ccc | 3.0 | cccc |
-
             """
         )
 
@@ -771,7 +743,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |    1  |  123.1  |  a    |  1.0  |     1  |
             |    2  |    2.2  |  bb   |  2.2  |   2.2  |
             |    3  |    3.3  |  ccc  |  3.0  |  cccc  |
-
             """
         )
 
@@ -793,7 +764,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |no |                                   text                                    |
             |--:|---------------------------------------------------------------------------|
             |  1|&lt;caption&gt;Table &#x27;formatting for Jupyter Notebook.&lt;/caption&gt;|
-
             """
         )
 
@@ -820,7 +790,6 @@ class Test_MarkdownTableWriter_write_table(object):
             |no |                                   text                                    |
             |--:|---------------------------------------------------------------------------|
             |  1|&lt;caption&gt;Table &#x27;formatting for Jupyter Notebook.&lt;/caption&gt;|
-
             """
         )
 
@@ -857,17 +826,16 @@ class Test_MarkdownTableWriter_write_table_iter(object):
                 value_matrix_iter,
                 dedent(
                     """\
-                # tablename
-                | ha | hb | hc |
-                |---:|---:|---:|
-                |   1|   2|   3|
-                |  11|  12|  13|
-                |   1|   2|   3|
-                |  11|  12|  13|
-                | 101| 102| 103|
-                |1001|1002|1003|
-
-                """
+                    # tablename
+                    | ha | hb | hc |
+                    |---:|---:|---:|
+                    |   1|   2|   3|
+                    |  11|  12|  13|
+                    |   1|   2|   3|
+                    |  11|  12|  13|
+                    | 101| 102| 103|
+                    |1001|1002|1003|
+                    """
                 ),
             ],
             [
@@ -876,17 +844,16 @@ class Test_MarkdownTableWriter_write_table_iter(object):
                 value_matrix_iter_1,
                 dedent(
                     """\
-                # mix length
-                |           string            | hb  | hc |
-                |-----------------------------|----:|---:|
-                |a b c d e f g h i jklmn      |  2.1|   3|
-                |aaaaa                        | 12.1|  13|
-                |bbb                          |    2|   3|
-                |cc                           |   12|  13|
-                |a                            |  102| 103|
-                |                             | 1002|1003|
-
-                """
+                    # mix length
+                    |           string            | hb  | hc |
+                    |-----------------------------|----:|---:|
+                    |a b c d e f g h i jklmn      |  2.1|   3|
+                    |aaaaa                        | 12.1|  13|
+                    |bbb                          |    2|   3|
+                    |cc                           |   12|  13|
+                    |a                            |  102| 103|
+                    |                             | 1002|1003|
+                    """
                 ),
             ],
         ],
@@ -937,7 +904,6 @@ class Test_MarkdownTableWriter_from_tablib(object):
             |--:|---|---|
             |  1|AA |abc|
             |  2|BB |zzz|
-
             """
         )
 
@@ -958,7 +924,6 @@ class Test_MarkdownTableWriter_line_break_handling(object):
                     |no |    text    |
                     |--:|------------|
                     |  1|first second|
-
                     """
                 ),
             ],
@@ -967,7 +932,6 @@ class Test_MarkdownTableWriter_line_break_handling(object):
                 r"""|no |    text     |
 |--:|-------------|
 |  1|first\nsecond|
-
 """,
             ],
         ],

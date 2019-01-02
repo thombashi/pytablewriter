@@ -112,7 +112,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.margin = 0
 
         self.line_break_handling = LineBreakHandling.REPLACE
-        self.is_write_null_line_after_table = True
+        self.is_write_null_line_after_table = False
 
     def write_null_line(self):
         """

@@ -46,7 +46,6 @@ normal_test_data_list = [
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"],
             ], columns=["a", "b", "c", "dd", "e"])
-
             """
         ),
     ),
@@ -59,7 +58,6 @@ normal_test_data_list = [
             """\
             tablename = pd.DataFrame([
             ], columns=["a", "b", "c", "dd", "e"])
-
             """
         ),
     ),
@@ -76,7 +74,6 @@ normal_test_data_list = [
                 [3, 3.3, "ccc", None, "cccc"],
                 [None, None, None, None, None],
             ], columns=["a", "b", "c", "dd", "e"])
-
             """
         ),
     ),
@@ -92,7 +89,6 @@ normal_test_data_list = [
                 [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, "2017-01-02 03:04:05+09:00"],
                 [3, 3.33, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
             ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
-
             """
         ),
     ),
@@ -112,7 +108,6 @@ normal_test_data_list = [
                 [None, 826.21158713263],
                 [0.1, 1.0499675627886724],
             ], columns=["a", "b"])
-
             """
         ),
     ),
@@ -128,7 +123,6 @@ normal_test_data_list = [
                 [2, 2.2, "bb", 2.2, 2.2],
                 [3, 3.3, "ccc", 3, "cccc"],
             ])
-
             """
         ),
     ),
@@ -220,7 +214,6 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
                     [101, 102, 103],
                     [1001, 1002, 1003],
                 ], columns=["ha", "hb", "hc"])
-
                 """
                 ),
             ]
@@ -266,7 +259,6 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
                     [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
                     [3, 3333.3, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
                 ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
-
                 """
                 ),
             ]
