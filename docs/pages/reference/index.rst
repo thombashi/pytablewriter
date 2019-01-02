@@ -7,5 +7,6 @@ Reference
    writer
    writer_factory
    table_format
-   error
+   style
    function
+   error

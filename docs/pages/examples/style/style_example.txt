@@ -1,0 +1,38 @@
+Writers can specify cell :py:class:`~pytablewriter.style.Style`
+for each column manually by ``style_list`` attribute of writer classes.
+
+:Sample Code:
+    .. code-block:: python
+
+        from pytablewriter import MarkdownTableWriter
+        from pytablewriter.style import Style
+
+        writer = MarkdownTableWriter()
+        writer.table_name = "set style"
+        writer.header_list = ["auto align", "left align", "center align", "bold", "bold ts"]
+        writer.value_matrix = [
+            [11, 11, 11, 11, 11],
+            [1234, 1234, 1234, 1234, 1234],
+        ]
+        
+        # specify styles for each column
+        writer.style_list = [
+            Style(),
+            Style(align="left"),
+            Style(align="center"),
+            Style(font_weight="bold"),
+            Style(font_weight="bold", thousand_separator=","),
+        ]
+
+        writer.write_table()
+
+:Output:
+    .. code-block:: none
+
+        # specify alignment for each column manually
+        |left|   right   |   center   |auto (int)|auto (str)|None (same as AUTO)|
+        |----|----------:|:----------:|---------:|----------|-------------------|
+        |0   |          r|center align|         0|a         |n                  |
+        |11  |right align|     c      |        11|auto      |none               |
+
+`Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/style/output.md>`__

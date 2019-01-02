@@ -24,6 +24,10 @@ Features
     - Alignment
     - Padding
     - Decimal places of numbers
+- Configure cell styles:
+    - Text alignment
+    - Font size/weight
+    - Thousand separator for numbers
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
 - Get rendered tabular text

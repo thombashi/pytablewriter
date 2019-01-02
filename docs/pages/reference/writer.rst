@@ -71,7 +71,7 @@ JSON writer class
 
 Line-delimited JSON(LDJSON) writer class
 --------------------------------------------------------------
-.. autoclass:: pytablewriter.JsonTableWriter
+.. autoclass:: pytablewriter.JsonLinesTableWriter
 
 
 Source code writer classes

@@ -8,7 +8,7 @@ Examples
    table_format/index
    stream/index
    datasource/index
-   alignment/index
+   style/index
    dump/index
    multibyte/index
    typehint/index
