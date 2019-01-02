@@ -19,6 +19,9 @@ from ._text_writer import TextTableWriter
 class HtmlTableWriter(TextTableWriter):
     """
     A table writer class for HTML format.
+
+        :Example:
+            :ref:`example-html-table-writer`
     """
 
     FORMAT_NAME = "html"

@@ -22,6 +22,9 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     """
     A table writer for class JavaScript format.
 
+        :Example:
+            :ref:`example-js-table-writer`
+
     .. py:attribute:: variable_declaration
 
         JavaScript variable declarations type.

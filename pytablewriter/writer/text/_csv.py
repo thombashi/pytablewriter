@@ -12,8 +12,8 @@ class CsvTableWriter(TextTableWriter):
     A table writer class for character separated values format.
     The default separated character is a comma (``","``).
 
-    :Example:
-        :ref:`example-csv-table-writer`
+        :Example:
+            :ref:`example-csv-table-writer`
     """
 
     FORMAT_NAME = "csv"

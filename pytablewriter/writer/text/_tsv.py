@@ -9,8 +9,8 @@ class TsvTableWriter(CsvTableWriter):
     """
     A table writer class for tab separated values (TSV) format.
 
-    :Example:
-        :ref:`example-tsv-table-writer`
+        :Example:
+            :ref:`example-tsv-table-writer`
     """
 
     FORMAT_NAME = "tsv"

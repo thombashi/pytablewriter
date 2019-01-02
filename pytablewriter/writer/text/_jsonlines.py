@@ -14,6 +14,9 @@ except ImportError:
 class JsonLinesTableWriter(JsonTableWriter):
     """
     A table writer class for JSON lines format.
+
+        :Example:
+            :ref:`example-jsonl-writer`
     """
 
     FORMAT_NAME = "json_lines"
@@ -29,12 +32,12 @@ class JsonLinesTableWriter(JsonTableWriter):
     def write_table(self):
         """
         |write_table| with
-        `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.
-        Invalid characters in labels/data are removed.
+        `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
+        /NDJSON/JSON Lines format.
 
         :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
         :Example:
-            :ref:`example-ltsv-table-writer`
+            :ref:`example-jsonl-writer`
         """
 
         with self._logger:

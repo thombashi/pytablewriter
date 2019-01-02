@@ -13,6 +13,9 @@ class SpaceAlignedTableWriter(CsvTableWriter):
     """
     A table writer class for space aligned format.
 
+        :Example:
+            :ref:`example-space-aligned-table-writer`
+
     .. py:method:: write_table
 
         |write_table| with space aligned format.

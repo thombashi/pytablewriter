@@ -13,6 +13,9 @@ class PandasDataFrameWriter(NumpyTableWriter):
     """
     A writer class for Pandas DataFrame format.
 
+        :Example:
+            :ref:`example-pandas-dataframe-writer`
+
     .. py:attribute:: import_pandas_as
 
         Specify ``pandas`` module import name. Defaults to ``"pd"``.

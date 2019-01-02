@@ -15,6 +15,9 @@ from ._text_writer import IndentationTextTableWriter
 class MarkdownTableWriter(IndentationTextTableWriter):
     """
     A table writer class for Markdown format.
+
+        :Example:
+            :ref:`example-markdown-table-writer`
     """
 
     FORMAT_NAME = "markdown"

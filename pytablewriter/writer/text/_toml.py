@@ -9,6 +9,9 @@ class TomlTableWriter(TextTableWriter):
     """
     A table writer class for
     `TOML <https://github.com/toml-lang/toml>`__ data format.
+
+        :Example:
+            :ref:`example-toml-table-writer`
     """
 
     FORMAT_NAME = "toml"

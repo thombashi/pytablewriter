@@ -41,6 +41,9 @@ class AbstractTableWriter(TableWriterInterface):
         such as ``sys.stdout``, file stream, ``StringIO``, and so forth.
         Defaults to ``sys.stdout``.
 
+        :Example:
+            :ref:`example-configure-stream`
+
     .. py:attribute:: is_write_header
 
         Write headers of a table if the value is |True|.
@@ -168,7 +171,8 @@ class AbstractTableWriter(TableWriterInterface):
         Defaults to |None|.
 
         :Examples:
-            :ref:`example-type-hint-js`
+            - :ref:`example-type-hint-js`
+            - :ref:`example-type-hint-python`
         """
 
         return self._dp_extractor.column_type_hint_list

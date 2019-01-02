@@ -55,6 +55,9 @@ class RstCsvTableWriter(RstTableWriter):
     A table class writer for reStructuredText
     `CSV table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
     format.
+
+        :Example:
+            :ref:`example-rst-csv-table-writer`
     """
 
     FORMAT_NAME = "rst_csv_table"
@@ -139,6 +142,9 @@ class RstGridTableWriter(RstTableWriter):
     `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__
     format.
 
+        :Example:
+            :ref:`example-rst-grid-table-writer`
+
     .. py:method:: write_table
 
         |write_table| with reStructuredText grid tables format.
@@ -172,6 +178,9 @@ class RstSimpleTableWriter(RstTableWriter):
     A table writer class for reStructuredText
     `Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
     format.
+
+        :Example:
+            :ref:`example-rst-simple-table-writer`
 
     .. py:method:: write_table
 

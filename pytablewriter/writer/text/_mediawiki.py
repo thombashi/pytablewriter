@@ -19,8 +19,8 @@ class MediaWikiTableWriter(TextTableWriter):
     """
     A table writer class for MediaWiki format.
 
-    :Example:
-        :ref:`example-mediawiki-table-writer`
+        :Example:
+            :ref:`example-mediawiki-table-writer`
     """
 
     FORMAT_NAME = "mediawiki"

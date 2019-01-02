@@ -12,6 +12,9 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     """
     A table writer class for Python source code format.
 
+        :Example:
+            :ref:`example-python-code-table-writer`
+
     .. py:method:: write_table
 
         |write_table| with Python format.

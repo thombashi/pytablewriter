@@ -11,6 +11,9 @@ class NumpyTableWriter(PythonCodeTableWriter):
     """
     A table writer class for ``NumPy`` source code format.
 
+        :Example:
+            :ref:`example-numpy-table-writer`
+
     .. py:method:: write_table
 
         |write_table| with ``NumPy`` format.

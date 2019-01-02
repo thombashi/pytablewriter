@@ -89,6 +89,9 @@ class LatexMatrixWriter(LatexWriter):
     """
     A matrix writer class for LaTeX environment.
 
+        :Example:
+            :ref:`example-latex-matrix-writer`
+
     .. py:method:: write_table
 
         |write_table| with LaTeX ``array`` environment.
@@ -155,6 +158,9 @@ class LatexMatrixWriter(LatexWriter):
 class LatexTableWriter(LatexWriter):
     """
     A matrix writer class for LaTeX environment.
+
+        :Example:
+            :ref:`example-latex-table-writer`
 
     .. py:method:: write_table
 

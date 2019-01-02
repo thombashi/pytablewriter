@@ -13,6 +13,9 @@ class LtsvTableWriter(CsvTableWriter):
     """
     A table writer class for
     `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.
+
+        :Example:
+            :ref:`example-ltsv-table-writer`
     """
 
     FORMAT_NAME = "ltsv"
