@@ -13,7 +13,7 @@ import sys
 
 import msgfy
 import typepy
-from dataproperty import Align, DataPropertyExtractor, Format, LineBreakHandling, MatrixFormatting
+from dataproperty import DataPropertyExtractor, Format, LineBreakHandling, MatrixFormatting
 from six.moves import zip
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
@@ -26,7 +26,7 @@ from ..error import (
     EmptyValueError,
     NotSupportedError,
 )
-from ..style import NullStyler, Style, ThousandSeparator
+from ..style import Align, NullStyler, Style, ThousandSeparator
 from ._interface import TableWriterInterface
 
 
