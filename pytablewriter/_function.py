@@ -30,7 +30,7 @@ def dump_tabledata(value, format_name="rst_grid_table"):
     :Example:
         .. code:: python
 
-            >>>dump_tabledata(value)
+            >>> dump_tabledata(value)
             .. table:: sample_data
 
                 ======  ======  ======
