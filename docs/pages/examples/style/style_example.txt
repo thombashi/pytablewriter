@@ -29,10 +29,10 @@ for each column manually by ``style_list`` attribute of writer classes.
 :Output:
     .. code-block:: none
 
-        # specify alignment for each column manually
-        |left|   right   |   center   |auto (int)|auto (str)|None (same as AUTO)|
-        |----|----------:|:----------:|---------:|----------|-------------------|
-        |0   |          r|center align|         0|a         |n                  |
-        |11  |right align|     c      |        11|auto      |none               |
+        # set styles
+        |auto align|left align|center align|  bold  |  bold ts  |
+        |---------:|----------|:----------:|-------:|----------:|
+        |        11|11        |     11     |  **11**|     **11**|
+        |      1234|1234      |    1234    |**1234**|  **1,234**|
 
 `Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/style/output.md>`__
