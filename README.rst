@@ -51,6 +51,10 @@ Features
     - Alignment
     - Padding
     - Decimal places of numbers
+- Configure cell styles:
+    - Text alignment
+    - Font size/weight
+    - Thousand separator for numbers
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
 - Get rendered tabular text
@@ -336,38 +340,46 @@ Get rendered tabular text as str
         |  3| 0.00|bar |True |Infinity|2017-03-03 33:44:55+0900|
         |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
 
-Configure table format
+Configure table styles
 ------------------------
-Set alignment for each column
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-``pytablewriter`` will automatically set alignment for each column by data types.
-You can set alignment for each column manually by ``align_list`` attribute of writer classes.
+Writers can specify cell :py:class:`~pytablewriter.style.Style`
+for each column manually by ``style_list`` attribute of writer classes.
 
 :Sample Code:
     .. code-block:: python
 
-        from pytablewriter import Align, MarkdownTableWriter
+        from pytablewriter import MarkdownTableWriter
+        from pytablewriter.style import Style
 
         writer = MarkdownTableWriter()
-        writer.table_name = "specify alignment for each column manually"
-        writer.header_list = ["left", "right", "center", "auto (int)", "auto (str)", "None (auto)"]
+        writer.table_name = "set style"
+        writer.header_list = ["auto align", "left align", "center align", "bold", "bold ts"]
         writer.value_matrix = [
-            [0, "r", "center align", 0, "a", "n"],
-            [11, "right align", "c", 11, "auto", "none"],
+            [11, 11, 11, 11, 11],
+            [1234, 1234, 1234, 1234, 1234],
         ]
-        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
+
+        # specify styles for each column
+        writer.style_list = [
+            Style(),
+            Style(align="left"),
+            Style(align="center"),
+            Style(font_weight="bold"),
+            Style(font_weight="bold", thousand_separator=","),
+        ]
+
         writer.write_table()
 
 :Output:
     .. code-block::
 
-        # specify alignment for each column manually
-        |left|   right   |   center   |auto (int)|auto (str)|None (auto)|
-        |----|----------:|:----------:|---------:|----------|-----------|
-        |0   |          r|center align|         0|a         |n          |
-        |11  |right align|     c      |        11|auto      |none       |
+        # set styles
+        |auto align|left align|center align|  bold  |  bold ts  |
+        |---------:|----------|:----------:|-------:|----------:|
+        |        11|11        |     11     |  **11**|     **11**|
+        |      1234|1234      |    1234    |**1234**|  **1,234**|
 
-`Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/alignment/output.md>`__
+`Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/style/output.md>`__
 
 Make tables for specific applications
 ---------------------------------------

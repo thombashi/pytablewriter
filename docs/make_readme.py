@@ -59,11 +59,9 @@ def write_examples(maker):
     maker.write_file(examples_root.joinpath("dump", "dumps.txt"))
 
     maker.set_indent_level(1)
-    maker.write_chapter("Configure table format")
+    maker.write_chapter("Configure table styles")
     maker.inc_indent_level()
-
-    maker.write_chapter("Set alignment for each column")
-    maker.write_file(examples_root.joinpath("alignment", "manual_example.txt"))
+    maker.write_file(examples_root.joinpath("style", "style_example.txt"))
 
     maker.set_indent_level(1)
     maker.write_chapter("Make tables for specific applications")
