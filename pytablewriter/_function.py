@@ -55,8 +55,7 @@ def normalize_enum(value, enum_class):
     if value is None or not isinstance(value, six.string_types):
         return value
 
-    for enum_value in enum_class:
-        if value.upper() == enum_value.name:
-            return enum_value
-
-    return value
+    try:
+        return enum_class[value.upper()]
+    except KeyError:
+        return value
