@@ -141,17 +141,6 @@ class Style(object):
             raise TypeError("align must be a {} instancce".format(expected_type.__name__))
 
     @staticmethod
-    def __normalize_enum(value, enum_class):
-        if value is None or not isinstance(value, six.string_types):
-            return value
-
-        for enum_value in enum_class:
-            if value.upper() == enum_value.name:
-                return enum_value
-
-        return value
-
-    @staticmethod
     def __normalie_thousand_separator(value):
         if isinstance(value, ThousandSeparator):
             return value
