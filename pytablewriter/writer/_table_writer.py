@@ -747,7 +747,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_dp_preprocess = True
 
-    def _preprocess_style(self):
+    def _preprocess_styler(self):
         self._styler_list = []
 
         for col_dp in self._column_dp_list:
@@ -816,7 +816,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _preprocess(self):
         self._preprocess_table_dp()
-        self._preprocess_style()
+        self._preprocess_styler()
         self._preprocess_table_property()
         self._preprocess_header()
         self._preprocess_value_matrix()
