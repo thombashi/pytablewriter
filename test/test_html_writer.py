@@ -18,6 +18,8 @@ from .data import (
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
+    style_list,
+    style_tabledata,
     value_matrix,
     value_matrix_with_none,
 )
@@ -286,35 +288,14 @@ class Test_HtmlTableWriter_write_table(object):
         from pytablewriter.style import Style
 
         writer = table_writer_class()
-        writer.table_name = "style test: font size"
-        writer.header_list = [
-            "none",
-            "empty_style",
-            "tiny",
-            "small",
-            "medium",
-            "large",
-            "large bold",
-        ]
-        writer.value_matrix = [
-            [111, 111, 111, 111, 111, 111, 111],
-            [1234, 1234, 1234, 1234, 1234, 1234, 1234],
-        ]
-        writer.style_list = [
-            None,
-            Style(),
-            Style(font_size="TINY"),
-            Style(font_size="SMALL"),
-            Style(font_size="MEDIUM", thousand_separator=","),
-            Style(font_size="LARGE", thousand_separator=" "),
-            Style(font_size="LARGE", font_weight="bold"),
-        ]
+        writer.from_tabledata(style_tabledata)
+        writer.style_list = style_list
         writer.write_table()
 
         expected = dedent(
             """\
-            <table id="styletestfontsize">
-                <caption>style test: font size</caption>
+            <table id="styletest">
+                <caption>style test</caption>
                 <thead>
                     <tr>
                         <th>none</th>

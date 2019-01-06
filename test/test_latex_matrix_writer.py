@@ -14,7 +14,7 @@ import pytest
 from pytablewriter.style import FontSize, Style
 
 from ._common import print_test_result
-from .data import float_header_list, float_value_matrix, value_matrix
+from .data import float_header_list, float_value_matrix, style_list, style_tabledata, value_matrix
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -116,34 +116,13 @@ class Test_LatexMatrixWriter_write_table(object):
 
     def test_normal_style_list(self):
         writer = table_writer_class()
-        writer.table_name = "style test: font size"
-        writer.header_list = [
-            "none",
-            "empty_style",
-            "tiny",
-            "small",
-            "medium",
-            "large",
-            "large bold",
-        ]
-        writer.value_matrix = [
-            [111, 111, 111, 111, 111, 111, 111],
-            [1234, 1234, 1234, 1234, 1234, 1234, 1234],
-        ]
-        writer.style_list = [
-            None,
-            Style(),
-            Style(font_size=FontSize.TINY),
-            Style(font_size=FontSize.SMALL),
-            Style(font_size=FontSize.MEDIUM),
-            Style(font_size=FontSize.LARGE),
-            Style(font_size=FontSize.LARGE, font_weight="bold"),
-        ]
-        writer.write_table()
+        writer.from_tabledata(style_tabledata)
+        writer.style_list = style_list
+
         expected = r"""\begin{equation}
-    style test: font size = \left( \begin{array}{rrrrrrr}
+    style test = \left( \begin{array}{rrrrrrr}
          111 &         111 & \tiny 111 &  \small 111 &   \normalsize 111 &  \large 111 &      \large \bf 111 \\
-        1234 &        1234 & \tiny 1234 & \small 1234 &  \normalsize 1234 & \large 1234 &     \large \bf 1234 \\
+        1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1,234 & \large 1 234 &     \large \bf 1234 \\
     \end{array} \right)
 \end{equation}
 """
@@ -162,7 +141,7 @@ class Test_LatexMatrixWriter_write_table(object):
         ]
         out = writer.dumps()
         expected = r"""\begin{equation}
-    style test: font size = \left( \begin{array}{rrrlrcr}
+    style test = \left( \begin{array}{rrrlrcr}
          111 &         111 &  \tiny 111 & \small 111  &   \normalsize 111 & \large 111  &      \large \bf 111 \\
         1234 &        1234 & \tiny 1,234 & \small 1 234 &  \normalsize 1234 & \large 1234 &     \large \bf 1234 \\
     \end{array} \right)

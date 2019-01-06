@@ -18,6 +18,8 @@ from .data import (
     float_value_matrix,
     mix_header_list,
     mix_value_matrix,
+    style_list,
+    style_tabledata,
     value_matrix,
 )
 
@@ -100,23 +102,14 @@ class Test_LatexTableWriter_write_table(object):
         from pytablewriter.style import Style
 
         writer = table_writer_class()
-        writer.table_name = "style test: font size"
-        writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
-        writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
-        writer.style_list = [
-            None,
-            Style(align="auto"),
-            Style(align="auto", font_size="tiny", thousand_separator=","),
-            Style(align="left", font_size="small", thousand_separator=" "),
-            Style(align="right", font_size="medium"),
-            Style(align="center", font_size="large"),
-            Style(font_size="large", font_weight="bold"),
-        ]
-        expected = r"""\begin{array}{r | r | r | l | r | c} \hline
-    \verb|none| & \verb|empty_style| & \verb|   tiny   | & \verb|   small   | & \verb|     medium      | & \verb|   large   | \\ \hline
+        writer.from_tabledata(style_tabledata)
+        writer.style_list = style_list
+
+        expected = r"""\begin{array}{r | r | r | r | r | r | r} \hline
+    \verb|none| & \verb|empty_style| & \verb|  tiny   | & \verb|   small   | & \verb|     medium      | & \verb|   large   | & \verb|    large bold     | \\ \hline
     \hline
-     111 &         111 &  \tiny 111 & \small 111  &   \normalsize 111 & \large 111  \\ \hline
-    1234 &        1234 & \tiny 1,234 & \small 1 234 &  \normalsize 1234 & \large 1234 \\ \hline
+     111 &         111 & \tiny 111 &  \small 111 &   \normalsize 111 &  \large 111 &      \large \bf 111 \\ \hline
+    1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1,234 & \large 1 234 &     \large \bf 1234 \\ \hline
 \end{array}
 """
 
