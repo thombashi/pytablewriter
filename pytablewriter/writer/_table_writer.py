@@ -751,10 +751,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._styler_list = []
 
         for col_dp in self._column_dp_list:
-            try:
-                style = self.style_list[col_dp.column_index]
-            except (TypeError, IndexError):
-                style = None
+            style = self.__get_style(col_dp.column_index)
 
             if style is None:
                 style = Style()
