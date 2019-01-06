@@ -1,4 +1,5 @@
-Writers can specify cell :py:class:`~pytablewriter.style.Style`
+Writers can specify cell 
+`Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
 for each column manually by ``style_list`` attribute of writer classes.
 
 :Sample Code:
