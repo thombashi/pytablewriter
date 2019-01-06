@@ -55,12 +55,12 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
-excel_requires = ["xlwt", "XlsxWriter>=1.1.2"]
+excel_requires = ["xlwt", "XlsxWriter>=1.1.2,<2.0.0"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
-from_requires = ["pytablereader>=0.22.4"]
-sqlite_requires = ["SimpleSQLite>=0.33.4"]
-toml_requires = ["toml>=0.9.4"]
-optional_requires = ["simplejson>=3.16"]
+from_requires = ["pytablereader>=0.22.6,<1.0.0"]
+sqlite_requires = ["SimpleSQLite>=0.33.6,<1.0.0"]
+toml_requires = ["toml>=0.9.4,<1.0.0"]
+optional_requires = ["simplejson>=3.16,<4.0"]
 all_requires = (
     excel_requires
     + es6_requires
@@ -104,7 +104,7 @@ setuptools.setup(
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
         "es6": es6_requires,
         "from": from_requires,
-        "release": ["releasecmd>=0.0.12"],
+        "release": ["releasecmd>=0.0.12,<0.1.0"],
         "sqlite": sqlite_requires,
         "test": tests_requires,
         "toml": toml_requires,
