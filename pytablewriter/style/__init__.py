@@ -4,5 +4,12 @@ from __future__ import absolute_import
 
 from ._font import FontSize, FontWeight
 from ._style import Align, Style, ThousandSeparator
-from ._styler import HtmlStyler, LatexStyler, NullStyler, TextStyler, MarkdownStyler
+from ._styler import (
+    HtmlStyler,
+    LatexStyler,
+    NullStyler,
+    TextStyler,
+    MarkdownStyler,
+    ReStructuredTextStyler,
+)
 from dataproperty import Format

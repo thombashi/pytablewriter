@@ -8,6 +8,7 @@ import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 
+from ...style import ReStructuredTextStyler
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -48,6 +49,9 @@ class RstTableWriter(IndentationTextTableWriter):
         self.inc_indent_level()
         super(RstTableWriter, self)._write_table()
         self.dec_indent_level()
+
+    def _create_styler(self, style, writer):
+        return ReStructuredTextStyler(style, writer)
 
 
 class RstCsvTableWriter(RstTableWriter):

@@ -81,8 +81,8 @@ class LatexWriter(IndentationTextTableWriter):
 
         return value
 
-    def _create_styler(self, style=None):
-        return LatexStyler(style)
+    def _create_styler(self, style, writer):
+        return LatexStyler(style, writer)
 
 
 class LatexMatrixWriter(LatexWriter):

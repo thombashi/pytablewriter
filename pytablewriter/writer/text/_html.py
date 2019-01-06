@@ -120,5 +120,5 @@ class HtmlTableWriter(TextTableWriter):
 
         return "; ".join(style_list)
 
-    def _create_styler(self, style=None):
-        return HtmlStyler(style)
+    def _create_styler(self, style, writer):
+        return HtmlStyler(style, writer)

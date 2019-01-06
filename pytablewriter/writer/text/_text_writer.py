@@ -144,8 +144,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         return self.stream.getvalue()
 
-    def _create_styler(self, style=None):
-        return TextStyler(style)
+    def _create_styler(self, style, writer):
+        return TextStyler(style, writer)
 
     def _write_table_iter(self):
         super(TextTableWriter, self)._write_table_iter()

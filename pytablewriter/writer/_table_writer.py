@@ -718,8 +718,8 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-    def _create_styler(self, style=None):
-        return NullStyler(style)
+    def _create_styler(self, style, writer):
+        return NullStyler(style, writer)
 
     def _preprocess_table_dp(self):
         if self._is_complete_table_dp_preprocess:
@@ -759,7 +759,7 @@ class AbstractTableWriter(TableWriterInterface):
             if style is None:
                 style = Style()
 
-            self._styler_list.append(self._create_styler(style))
+            self._styler_list.append(self._create_styler(style, self))
 
     def _preprocess_table_property(self):
         if self._is_complete_table_property_preprocess:
@@ -776,7 +776,7 @@ class AbstractTableWriter(TableWriterInterface):
             if style is None:
                 continue
 
-            styler = self._create_styler(style)
+            styler = self._create_styler(style, self)
             column_dp.extend_width(styler.additional_char_width)
 
         self._is_complete_table_property_preprocess = True

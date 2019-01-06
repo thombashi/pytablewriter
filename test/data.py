@@ -12,6 +12,8 @@ import itertools
 from decimal import Decimal
 
 from pytablewriter import EmptyTableDataError
+from pytablewriter.style import Style
+from tabledata import TableData
 
 
 TIME = datetime.datetime(2017, 1, 1, 0, 0, 0)
@@ -104,4 +106,28 @@ null_test_data_list = [
         value=value,
         expected=EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
+]
+
+style_tabledata = TableData(
+    table_name="style test",
+    header_list=[
+        "none",
+        "empty_style",
+        "tiny",
+        "small",
+        "medium",
+        "large",
+        "large bold",
+    ], row_list=[
+        [111, 111, 111, 111, 111, 111, 111],
+        [1234, 1234, 1234, 1234, 1234, 1234, 1234],
+    ])
+style_list = [
+    None,
+    Style(),
+    Style(font_size="TINY"),
+    Style(font_size="SMALL"),
+    Style(font_size="MEDIUM", thousand_separator=","),
+    Style(font_size="LARGE", thousand_separator=" "),
+    Style(font_size="LARGE", font_weight="bold"),
 ]

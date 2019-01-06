@@ -19,6 +19,8 @@ from .data import (
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
+    style_list,
+    style_tabledata,
     value_matrix,
     value_matrix_with_none,
 )
@@ -311,6 +313,29 @@ class Test_RstGridTableWriter_write_table(object):
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
+    def test_normal_style_list(self):
+        writer = table_writer_class()
+        writer.from_tabledata(style_tabledata)
+        writer.style_list = style_list
+
+        expected = dedent(
+            """\
+            .. table:: style test
+
+                +----+-----------+----+-----+------+-----+--------------+
+                |none|empty_style|tiny|small|medium|large|  large bold  |
+                +====+===========+====+=====+======+=====+==============+
+                | 111|        111| 111|  111|   111|  111|       **111**|
+                +----+-----------+----+-----+------+-----+--------------+
+                |1234|       1234|1234| 1234| 1,234|1 234|      **1234**|
+                +----+-----------+----+-----+------+-----+--------------+
+            """
+        )
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

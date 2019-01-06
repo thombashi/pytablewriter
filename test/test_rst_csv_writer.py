@@ -18,6 +18,8 @@ from .data import (
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
+    style_list,
+    style_tabledata,
     value_matrix,
     value_matrix_iter,
     value_matrix_with_none,
@@ -143,16 +145,35 @@ class Test_RstCsvTableWriter_write_table(object):
             for data in normal_test_data_list
         ],
     )
-    def test_normal(self, capsys, table, indent, header, value, expected):
+    def test_normal(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
         writer.header_list = header
         writer.value_matrix = value
-        writer.write_table()
 
-        out, err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out, error=err)
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_normal_style_list(self):
+        writer = table_writer_class()
+        writer.from_tabledata(style_tabledata)
+        writer.style_list = style_list
+
+        expected = dedent(
+            """\
+            .. csv-table:: style test
+                :header: "none", "empty_style", "tiny", "small", "medium", "large", "large bold"
+                :widths: 6, 13, 6, 7, 10, 7, 16
+
+                111, 111, 111, 111, "111", 111, **111**
+                1234, 1234, 1234, 1234, "1,234", 1 234, **1234**
+            """
+        )
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
 

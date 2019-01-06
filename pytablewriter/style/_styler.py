@@ -38,11 +38,12 @@ class AbstractStyler(StylerInterface):
     def additional_char_width(self):
         return 0
 
-    def __init__(self, style):
+    def __init__(self, style, writer):
         if not isinstance(style, Style):
             raise TypeError("style must be a Style instance")
 
         self._style = style
+        self._writer = writer
 
     def apply(self, value):
         return value
@@ -123,5 +124,40 @@ class MarkdownStyler(TextStyler):
 
         if self._style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
+
+        return value
+
+
+class ReStructuredTextStyler(TextStyler):
+    @property
+    def additional_char_width(self):
+        from ..writer import RstCsvTableWriter
+
+        width = 0
+
+        if self._style.font_weight == FontWeight.BOLD:
+            width += 4
+
+        if (
+            self._style.thousand_separator == ThousandSeparator.COMMA
+            and self._writer.format_name == RstCsvTableWriter.FORMAT_NAME
+        ):
+            width += 2
+
+        return width
+
+    def apply(self, value):
+        from ..writer import RstCsvTableWriter
+
+        value = super(ReStructuredTextStyler, self).apply(value)
+
+        if self._style.font_weight == FontWeight.BOLD:
+            value = "**{}**".format(value)
+
+        if (
+            self._style.thousand_separator == ThousandSeparator.COMMA
+            and self._writer.format_name == RstCsvTableWriter.FORMAT_NAME
+        ):
+            value = '"{}"'.format(value)
 
         return value
