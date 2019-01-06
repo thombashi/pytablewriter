@@ -5,6 +5,7 @@ from __future__ import absolute_import, unicode_literals
 import typepy
 
 from ...._function import dateutil_datetime_formatter, quote_datetime_formatter
+from ....sanitizer import sanitize_python_var_name
 from ._sourcecode import SourceCodeTableWriter
 
 
@@ -63,9 +64,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         }
 
     def get_variable_name(self, value):
-        import pathvalidate
-
-        return pathvalidate.sanitize_python_var_name(self.table_name, "_").lower()
+        return sanitize_python_var_name(self.table_name, "_").lower()
 
     def _write_table(self):
         if self.is_datetime_instance_formatting:

@@ -5,11 +5,11 @@ from __future__ import absolute_import, unicode_literals
 import abc
 
 import msgfy
-import pathvalidate
 import six
 import typepy
 
 from ..._logger import logger
+from ...sanitizer import sanitize_excel_sheet_name
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -80,7 +80,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
         self._clear()
 
     def add_worksheet(self, worksheet_name):
-        worksheet_name = pathvalidate.sanitize_excel_sheet_name(worksheet_name)
+        worksheet_name = sanitize_excel_sheet_name(worksheet_name)
 
         if typepy.is_not_null_string(worksheet_name):
             if worksheet_name in self._worksheet_table:
@@ -119,7 +119,7 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         self._clear()
 
     def add_worksheet(self, worksheet_name):
-        worksheet_name = pathvalidate.sanitize_excel_sheet_name(worksheet_name)
+        worksheet_name = sanitize_excel_sheet_name(worksheet_name)
 
         if typepy.is_not_null_string(worksheet_name):
             if worksheet_name in self._worksheet_table:

@@ -7,6 +7,7 @@ from dataproperty import DataProperty, DefaultValue
 from typepy import Typecode
 
 from ...._function import quote_datetime_formatter
+from ....sanitizer import sanitize_js_var_name
 from ._sourcecode import SourceCodeTableWriter
 
 
@@ -93,9 +94,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._dp_extractor.const_value_map = {True: "true", False: "false"}
 
     def get_variable_name(self, value):
-        import pathvalidate
-
-        return pathvalidate.sanitize_js_var_name(value, "_").lower()
+        return sanitize_js_var_name(value, "_").lower()
 
     def _write_table(self):
         if self.is_datetime_instance_formatting:

@@ -66,12 +66,16 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @table_name.setter
     def table_name(self, value):
-        from pathvalidate import ElasticsearchIndexNameSanitizer, NullNameError
+        from ..sanitizer import ElasticsearchIndexNameSanitizer
+        from pathvalidate import ValidationError, ErrorReason
 
         try:
             self._table_name = ElasticsearchIndexNameSanitizer(value).sanitize(replacement_text="_")
-        except NullNameError:
-            self._table_name = None
+        except ValidationError as e:
+            if e.reason is ErrorReason.NULL_NAME:
+                self._table_name = None
+            else:
+                raise
 
     @property
     def index_name(self):

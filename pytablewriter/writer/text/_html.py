@@ -6,12 +6,12 @@ import copy
 
 import dataproperty
 import dominate.tags as tags
-import pathvalidate
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ...error import EmptyHeaderError
+from ...sanitizer import sanitize_python_var_name
 from ...style import FontWeight, HtmlStyler
 from ._text_writer import TextTableWriter
 
@@ -59,9 +59,7 @@ class HtmlTableWriter(TextTableWriter):
             self._preprocess()
 
             if typepy.is_not_null_string(self.table_name):
-                self._table_tag = tags.table(
-                    id=pathvalidate.sanitize_python_var_name(self.table_name)
-                )
+                self._table_tag = tags.table(id=sanitize_python_var_name(self.table_name))
                 self._table_tag += tags.caption(MultiByteStrDecoder(self.table_name).unicode_str)
             else:
                 self._table_tag = tags.table()
