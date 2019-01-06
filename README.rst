@@ -9,21 +9,27 @@ A Python library to write a table in various formats: CSV / Elasticsearch / HTML
 
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
+    :alt: PyPI package version
 
 .. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
-   :target: https://pypi.org/project/pytablewriter/
+    :target: https://pypi.org/project/pytablewriter/
+    :alt: Supported Python versions
 
-.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS
+.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS-CI
     :target: https://travis-ci.org/thombashi/pytablewriter
+    :alt: Linux/macOS CI status
 
-.. image:: https://img.shields.io/appveyor/ci/thombashi/pytablewriter/master.svg?label=Windows
+.. image:: https://img.shields.io/appveyor/ci/thombashi/pytablewriter/master.svg?label=Windows-CI
     :target: https://ci.appveyor.com/project/thombashi/pytablewriter
+    :alt: Windows CI status
 
 .. image:: https://coveralls.io/repos/github/thombashi/pytablewriter/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
+    :alt: Test coverage
 
 .. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
-   :target: https://github.com/thombashi/pytablewriter
+    :target: https://github.com/thombashi/pytablewriter
+    :alt: GitHub stars
 
 Features
 --------
@@ -342,7 +348,8 @@ Get rendered tabular text as str
 
 Configure table styles
 ------------------------
-Writers can specify cell :py:class:`~pytablewriter.style.Style`
+Writers can specify cell
+`Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
 for each column manually by ``style_list`` attribute of writer classes.
 
 :Sample Code:
