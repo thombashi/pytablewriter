@@ -689,10 +689,10 @@ class Test_MarkdownTableWriter_write_table(object):
         expected = dedent(
             """\
             # style test
-            |none|empty_style|tiny|small|medium|large|  large bold  |
-            |---:|----------:|---:|----:|-----:|----:|-------------:|
-            | 111|        111| 111|  111|   111|  111|       **111**|
-            |1234|       1234|1234| 1234| 1,234|1 234|      **1234**|
+            |none|empty_style|tiny|small|medium|large|null w/ bold|large bold|
+            |---:|----------:|---:|----:|-----:|----:|------------|---------:|
+            | 111|        111| 111|  111|   111|  111|            |   **111**|
+            |1234|       1234|1234| 1234| 1,234|1 234|            |  **1234**|
             """
         )
         out = writer.dumps()

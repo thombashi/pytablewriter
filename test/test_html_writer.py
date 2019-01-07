@@ -304,6 +304,7 @@ class Test_HtmlTableWriter_write_table(object):
                         <th>small</th>
                         <th>medium</th>
                         <th>large</th>
+                        <th>null w/ bold</th>
                         <th>large bold</th>
                     </tr>
                 </thead>
@@ -315,6 +316,7 @@ class Test_HtmlTableWriter_write_table(object):
                         <td align="right" style="font-size:small">111</td>
                         <td align="right" style="font-size:medium">111</td>
                         <td align="right" style="font-size:large">111</td>
+                        <td align="left" style="font-weight:bold"></td>
                         <td align="right" style="font-size:large; font-weight:bold">111</td>
                     </tr>
                     <tr>
@@ -324,6 +326,7 @@ class Test_HtmlTableWriter_write_table(object):
                         <td align="right" style="font-size:small">1234</td>
                         <td align="right" style="font-size:medium">1,234</td>
                         <td align="right" style="font-size:large">1 234</td>
+                        <td align="left" style="font-weight:bold"></td>
                         <td align="right" style="font-size:large; font-weight:bold">1234</td>
                     </tr>
                 </tbody>
