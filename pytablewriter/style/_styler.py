@@ -97,6 +97,9 @@ class LatexStyler(TextStyler):
 
     def apply(self, value):
         value = super(LatexStyler, self).apply(value)
+        if not value:
+            return value
+
         font_size = self.font_size
         item_list = []
 
@@ -121,6 +124,8 @@ class MarkdownStyler(TextStyler):
 
     def apply(self, value):
         value = super(MarkdownStyler, self).apply(value)
+        if not value:
+            return value
 
         if self._style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
@@ -150,6 +155,8 @@ class ReStructuredTextStyler(TextStyler):
         from ..writer import RstCsvTableWriter
 
         value = super(ReStructuredTextStyler, self).apply(value)
+        if not value:
+            return value
 
         if self._style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
