@@ -700,6 +700,28 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
+    def test_normal_set_style(self):
+        writer = table_writer_class()
+        writer.table_name = "set style method"
+        writer.header_list = ["normal", "style by idx", "style by header"]
+        writer.value_matrix = [[11, 11, 11], [123456, 123456, 123456]]
+        writer.set_style(1, Style(font_weight="bold"))
+        writer.set_style("style by header", Style(font_weight="bold"))
+
+        expected = dedent(
+            """\
+            # set style method
+            |normal|style by idx|style by header|
+            |-----:|-----------:|--------------:|
+            |    11|      **11**|         **11**|
+            |123456|  **123456**|     **123456**|
+            """
+        )
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+
+        assert output == expected
+
     def test_normal_ansi_color(self, capsys):
         writer = table_writer_class()
         writer.table_name = "ANCI escape sequence"

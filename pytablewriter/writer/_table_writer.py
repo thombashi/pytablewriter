@@ -12,6 +12,7 @@ import re
 import sys
 
 import msgfy
+import six
 import typepy
 from dataproperty import DataPropertyExtractor, Format, LineBreakHandling, MatrixFormatting
 from six.moves import zip
@@ -390,6 +391,37 @@ class AbstractTableWriter(TableWriterInterface):
         writer.value_matrix = self.value_matrix
 
         return writer.dumps()
+
+    def set_style(self, column, style):
+        """Set style for a specific column.
+
+        Args:
+            column (|int| or |str|):
+                Column specifier. column index or header name correlated with the column.
+            style (|Style|):
+                Style value to be set to the column.
+
+        Raises:
+            ValueError: If the column specifier is invalid.
+        """
+
+        while len(self.header_list) > len(self.__style_list):
+            self.__style_list.append(None)
+
+        if isinstance(column, six.integer_types):
+            self.__style_list[column] = style
+            return
+
+        if isinstance(column, six.string_types):
+            try:
+                column_idx = self.header_list.index(column)
+            except ValueError:
+                pass
+
+            self.__style_list[column_idx] = style
+            return
+
+        raise ValueError("column must be an int or string")
 
     def close(self):
         """
