@@ -99,8 +99,6 @@ class Test_LatexTableWriter_write_table(object):
         assert writer.dumps() == expected
 
     def test_normal_style_list(self):
-        from pytablewriter.style import Style
-
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
         writer.style_list = style_list

@@ -11,7 +11,7 @@ import itertools
 
 import pytablewriter as ptw
 import pytest
-from pytablewriter.style import FontSize, Style
+from pytablewriter.style import Style
 
 from ._common import print_test_result
 from .data import float_header_list, float_value_matrix, style_list, style_tabledata, value_matrix
