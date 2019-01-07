@@ -15,11 +15,11 @@ A Python library to write a table in various formats: CSV / Elasticsearch / HTML
     :target: https://pypi.org/project/pytablewriter/
     :alt: Supported Python versions
 
-.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS-CI
+.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS%20CI
     :target: https://travis-ci.org/thombashi/pytablewriter
     :alt: Linux/macOS CI status
 
-.. image:: https://img.shields.io/appveyor/ci/thombashi/pytablewriter/master.svg?label=Windows-CI
+.. image:: https://img.shields.io/appveyor/ci/thombashi/pytablewriter/master.svg?label=Windows%20CI
     :target: https://ci.appveyor.com/project/thombashi/pytablewriter
     :alt: Windows CI status
 
@@ -380,11 +380,11 @@ for each column manually by ``style_list`` attribute of writer classes.
 :Output:
     .. code-block::
 
-        # set styles
-        |auto align|left align|center align|  bold  |  bold ts  |
-        |---------:|----------|:----------:|-------:|----------:|
-        |        11|11        |     11     |  **11**|     **11**|
-        |      1234|1234      |    1234    |**1234**|  **1,234**|
+        # set style
+        |auto align|left align|center align|  bold  | bold ts |
+        |---------:|----------|:----------:|-------:|--------:|
+        |        11|11        |     11     |  **11**|   **11**|
+        |      1234|1234      |    1234    |**1234**|**1,234**|
 
 `Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/style/output.md>`__
 
