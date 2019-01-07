@@ -264,6 +264,8 @@ class AbstractTableWriter(TableWriterInterface):
                 ts_to_flag[self.__get_thousand_separator(col_idx)]
                 for col_idx in range(len(self.__style_list))
             ]
+        else:
+            self._dp_extractor.format_flags_list = []
 
         self.__clear_preprocess()
 
