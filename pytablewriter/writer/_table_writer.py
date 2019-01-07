@@ -240,10 +240,10 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def style_list(self):
-        """Output :py:class:`~pytablewriter.style.Style` for each column.
+        """Output |Style| for each column.
 
         Returns:
-            list of :py:class:`~pytablewriter.style.Style`:
+            list of |Style|:
         """
 
         return self.__style_list
