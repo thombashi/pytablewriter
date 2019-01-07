@@ -314,6 +314,7 @@ rp_class = u"""
 .. |datetime| replace:: :py:class:`datetime.datetime`
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
 
+.. |Style| replace:: :py:class:`~pytablewriter.style.Style`
 .. |TableData| replace:: `TableData <https://tabledata.rtfd.io/en/latest/pages/reference/data.html#tabledata>`__
 .. |Typecode| replace:: :py:class:`typepy.Typecode`
 
