@@ -772,6 +772,26 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert out == expected
 
+    def test_normal_value_map(self):
+        writer = table_writer_class()
+        writer.header_list = ["a", "b"]
+        writer.value_matrix = [["foo", True], ["bar", False]]
+        writer.value_map = {True: "X", False: ""}
+
+        expected = dedent(
+            """\
+            | a | b |
+            |---|---|
+            |foo|X  |
+            |bar|   |
+            """
+        )
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+
+        assert output == expected
+
     @pytest.mark.skipif("six.PY2")
     def test_normal_escape_html_tag(self, capsys):
         writer = table_writer_class()

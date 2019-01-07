@@ -91,7 +91,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
-        self._dp_extractor.const_value_map = {True: "true", False: "false"}
+        self.value_map = {True: "true", False: "false"}
 
     def get_variable_name(self, value):
         return sanitize_js_var_name(value, "_").lower()

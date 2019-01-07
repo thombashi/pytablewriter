@@ -67,7 +67,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             typepy.Typecode.INFINITY: "Infinity",
             typepy.Typecode.NAN: "NaN",
         }
-        self._dp_extractor.const_value_map = {True: "true", False: "false"}
+        self.value_map = {True: "true", False: "false"}
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
     def write_null_line(self):
