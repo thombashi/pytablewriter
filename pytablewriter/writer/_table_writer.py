@@ -778,7 +778,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         for column_dp in self._column_dp_list:
             styler = self._styler_list[column_dp.column_index]
-            column_dp.extend_width(styler.additional_char_width)
+            column_dp.extend_body_width(styler.additional_char_width)
 
         self._is_complete_table_property_preprocess = True
 

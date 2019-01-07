@@ -1,4 +1,4 @@
-DataProperty>=0.37.1,<1.0.0
+DataProperty>=0.38.0,<1.0.0
 dominate>=2.3.5,<3.0.0
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
