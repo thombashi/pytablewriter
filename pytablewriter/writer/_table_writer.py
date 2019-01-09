@@ -821,8 +821,11 @@ class AbstractTableWriter(TableWriterInterface):
                 column_dp.extend_width(int(math.ceil(column_dp.ascii_char_width * 0.25)))
 
         for column_dp in self._column_dp_list:
-            styler = self._styler_list[column_dp.column_index]
-            column_dp.extend_body_width(styler.additional_char_width)
+            try:
+                styler = self._styler_list[column_dp.column_index]
+                column_dp.extend_body_width(styler.additional_char_width)
+            except IndexError:
+                pass
 
         self._is_complete_table_property_preprocess = True
 
