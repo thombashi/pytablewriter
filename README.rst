@@ -319,6 +319,7 @@ Write a markdown table from a space-separated values
 Get rendered tabular text as str
 ----------------------------------
 ``dumps`` method returns rendered tabular text.
+``dumps`` available only for text format writers.
 
 :Sample Code:
     .. code-block:: python
