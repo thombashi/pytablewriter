@@ -57,7 +57,7 @@ pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 excel_requires = ["xlwt", "XlsxWriter>=1.1.2,<2.0.0"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
-from_requires = ["pytablereader>=0.22.6,<1.0.0"]
+from_requires = ["pytablereader>=0.22.7,<1.0.0"]
 sqlite_requires = ["SimpleSQLite>=0.33.6,<1.0.0"]
 toml_requires = ["toml>=0.9.4,<1.0.0"]
 optional_requires = ["simplejson>=3.16,<4.0"]
