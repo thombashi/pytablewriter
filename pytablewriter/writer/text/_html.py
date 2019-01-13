@@ -5,7 +5,6 @@ from __future__ import absolute_import, unicode_literals
 import copy
 
 import dataproperty
-import dominate.tags as tags
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
@@ -54,6 +53,8 @@ class HtmlTableWriter(TextTableWriter):
             - |None| is not written
         """
 
+        import dominate.tags as tags
+
         with self._logger:
             self._verify_property()
             self._preprocess()
@@ -72,6 +73,8 @@ class HtmlTableWriter(TextTableWriter):
             self._write_body()
 
     def _write_header(self):
+        import dominate.tags as tags
+
         if not self.is_write_header:
             return
 
@@ -88,6 +91,8 @@ class HtmlTableWriter(TextTableWriter):
         self._table_tag += thead_tag
 
     def _write_body(self):
+        import dominate.tags as tags
+
         tbody_tag = tags.tbody()
 
         for value_list, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
