@@ -1,4 +1,4 @@
-pytablereader[excel,sqlite]>=0.22
+pytablereader[excel,sqlite]>=0.23
 pytest
 simplejson
 tablib
