@@ -103,11 +103,11 @@ class Test_LatexTableWriter_write_table(object):
         writer.from_tabledata(style_tabledata)
         writer.style_list = style_list
 
-        expected = r"""\begin{array}{r | r | r | r | r | r | l | r} \hline
-    \verb|none| & \verb|empty_style| & \verb|  tiny   | & \verb|  small   | & \verb|     medium     | & \verb|   large   | & \verb|null w/ bold| & \verb| large bold  | \\ \hline
+        expected = r"""\begin{array}{r | r | r | r | r | r | l | r | r | r} \hline
+    \verb|none| & \verb|empty| & \verb|  tiny   | & \verb|  small   | & \verb|     medium     | & \verb|   large   | & \verb|null w/ bold| & \verb|   L bold    | & \verb|  S italic   | & \verb| L bold italic  | \\ \hline
     \hline
-     111 &         111 & \tiny 111 & \small 111 &  \normalsize 111 &  \large 111 &              & \large \bf 111 \\ \hline
-    1234 &        1234 & \tiny 1234 & \small 1234 & \normalsize 1,234 & \large 1 234 &              & \large \bf 1234 \\ \hline
+     111 &   111 & \tiny 111 & \small 111 &  \normalsize 111 &  \large 111 &              & \large \bf 111 & \small \it 111 & \large \bf \it 111 \\ \hline
+    1234 &  1234 & \tiny 1234 & \small 1234 & \normalsize 1,234 & \large 1 234 &              & \large \bf 1234 & \small \it 1234 & \large \bf \it 1234 \\ \hline
 \end{array}
 """
 

@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 
-from ._font import FontSize, FontWeight
+from ._font import FontSize, FontWeight, FontStyle
 from ._style import Align, Style, ThousandSeparator
 from ._styler import (
     HtmlStyler,

@@ -6,7 +6,7 @@ import abc
 
 import six
 
-from ._font import FontSize, FontWeight
+from ._font import FontSize, FontStyle, FontWeight
 from ._style import Style, ThousandSeparator
 
 
@@ -77,7 +77,8 @@ class HtmlStyler(TextStyler):
 class LatexStyler(TextStyler):
     class Command(object):
         BOLD = r"\bf"
-    
+        ITALIC = r"\it"
+
     @property
     def _font_size_map(self):
         return {
@@ -97,6 +98,9 @@ class LatexStyler(TextStyler):
         if self._style.font_weight == FontWeight.BOLD:
             width += len(self.Command.BOLD)
 
+        if self._style.font_style == FontStyle.ITALIC:
+            width += len(self.Command.ITALIC)
+
         return width
 
     def apply(self, value):
@@ -113,6 +117,9 @@ class LatexStyler(TextStyler):
         if self._style.font_weight == FontWeight.BOLD:
             item_list.append(self.Command.BOLD)
 
+        if self._style.font_style == FontStyle.ITALIC:
+            item_list.append(self.Command.ITALIC)
+
         item_list.append(value)
         return " ".join(item_list)
 
@@ -125,6 +132,9 @@ class MarkdownStyler(TextStyler):
         if self._style.font_weight == FontWeight.BOLD:
             width += 4
 
+        if self._style.font_style == FontStyle.ITALIC:
+            width += 2
+
         return width
 
     def apply(self, value):
@@ -134,6 +144,9 @@ class MarkdownStyler(TextStyler):
 
         if self._style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
+
+        if self._style.font_style == FontStyle.ITALIC:
+            value = "_{}_".format(value)
 
         return value
 
@@ -147,6 +160,8 @@ class ReStructuredTextStyler(TextStyler):
 
         if self._style.font_weight == FontWeight.BOLD:
             width += 4
+        elif self._style.font_style == FontStyle.ITALIC:
+            width += 2
 
         if (
             self._style.thousand_separator == ThousandSeparator.COMMA
@@ -165,6 +180,10 @@ class ReStructuredTextStyler(TextStyler):
 
         if self._style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
+        elif self._style.font_style == FontStyle.ITALIC:
+            # in reStructuredText, some custom style definition will be required to
+            # set for both bold and italic (currently not supported)
+            value = "*{}*".format(value)
 
         if (
             self._style.thousand_separator == ThousandSeparator.COMMA

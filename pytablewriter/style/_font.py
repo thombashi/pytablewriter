@@ -15,6 +15,12 @@ class FontSize(enum.Enum):
 
 
 @enum.unique
+class FontStyle(enum.Enum):
+    NORMAL = "normal"
+    ITALIC = "italic"
+
+
+@enum.unique
 class FontWeight(enum.Enum):
     NORMAL = "normal"
     BOLD = "bold"

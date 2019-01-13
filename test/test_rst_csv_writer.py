@@ -165,11 +165,11 @@ class Test_RstCsvTableWriter_write_table(object):
         expected = dedent(
             """\
             .. csv-table:: style test
-                :header: "none", "empty_style", "tiny", "small", "medium", "large", "null w/ bold", "large bold"
-                :widths: 6, 13, 6, 7, 8, 7, 14, 12
+                :header: "none", "empty", "tiny", "small", "medium", "large", "null w/ bold", "L bold", "S italic", "L bold italic"
+                :widths: 6, 7, 6, 7, 8, 7, 14, 8, 10, 15
 
-                111, 111, 111, 111, "111", 111, , **111**
-                1234, 1234, 1234, 1234, "1,234", 1 234, , **1234**
+                111, 111, 111, 111, "111", 111, , **111**, *111*, **111**
+                1234, 1234, 1234, 1234, "1,234", 1 234, , **1234**, *1234*, **1234**
             """
         )
         out = writer.dumps()

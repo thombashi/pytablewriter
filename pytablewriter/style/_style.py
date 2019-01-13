@@ -7,7 +7,7 @@ import enum
 from dataproperty import Align
 
 from .._function import normalize_enum
-from ._font import FontSize, FontWeight
+from ._font import FontSize, FontStyle, FontWeight
 
 
 @enum.unique
@@ -77,6 +77,10 @@ class Style(object):
         return self.__font_size
 
     @property
+    def font_style(self):
+        return self.__font_style
+
+    @property
     def font_weight(self):
         return self.__font_weight
 
@@ -90,6 +94,9 @@ class Style(object):
 
         self.__font_size = normalize_enum(kwargs.pop("font_size", FontSize.NONE), FontSize)
         self.__validate_attr("font_size", FontSize)
+
+        self.__font_style = normalize_enum(kwargs.pop("font_style", FontStyle.NORMAL), FontStyle)
+        self.__validate_attr("font_style", FontStyle)
 
         self.__font_weight = normalize_enum(
             kwargs.pop("font_weight", FontWeight.NORMAL), FontWeight

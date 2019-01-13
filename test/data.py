@@ -112,16 +112,18 @@ style_tabledata = TableData(
     table_name="style test",
     header_list=[
         "none",
-        "empty_style",
+        "empty",
         "tiny",
         "small",
         "medium",
         "large",
         "null w/ bold",
-        "large bold",
+        "L bold",
+        "S italic",
+        "L bold italic",
     ], row_list=[
-        [111, 111, 111, 111, 111, 111, "", 111],
-        [1234, 1234, 1234, 1234, 1234, 1234, "", 1234],
+        [111, 111, 111, 111, 111, 111, "", 111, 111, 111],
+        [1234, 1234, 1234, 1234, 1234, 1234, "", 1234, 1234, 1234],
     ])
 style_list = [
     None,
@@ -132,4 +134,6 @@ style_list = [
     Style(font_size="LARGE", thousand_separator=" "),
     Style(font_weight="bold", thousand_separator=","),
     Style(font_size="LARGE", font_weight="bold"),
+    Style(font_size="SMALL", font_style="italic"),
+    Style(font_size="LARGE", font_weight="bold", font_style="italic"),
 ]

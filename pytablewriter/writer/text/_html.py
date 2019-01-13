@@ -11,7 +11,7 @@ from six.moves import zip
 
 from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
-from ...style import FontWeight, HtmlStyler
+from ...style import FontStyle, FontWeight, HtmlStyler
 from ._text_writer import TextTableWriter
 
 
@@ -119,6 +119,8 @@ class HtmlTableWriter(TextTableWriter):
             style_list.append(styler.font_size)
         if styler._style.font_weight == FontWeight.BOLD:
             style_list.append("font-weight:bold")
+        if styler._style.font_style == FontStyle.ITALIC:
+            style_list.append("font-style:italic")
 
         if not style_list:
             return None
