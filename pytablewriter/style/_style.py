@@ -12,9 +12,9 @@ from ._font import FontSize, FontWeight
 
 @enum.unique
 class ThousandSeparator(enum.Enum):
-    NONE = 0
-    COMMA = 1
-    SPACE = 2
+    NONE = "none"
+    COMMA = "comma"
+    SPACE = "space"
 
 
 _s_to_ts = {"": ThousandSeparator.NONE, ",": ThousandSeparator.COMMA, " ": ThousandSeparator.SPACE}
@@ -107,13 +107,13 @@ class Style(object):
         items = []
 
         if self.align:
-            items.append("align={}".format(self.align))
-        if self.font_size:
-            items.append("font_size={}".format(self.font_size))
-        if self.__font_weight:
-            items.append("__font_weight={}".format(self.__font_weight))
-        if self.thousand_separator:
-            items.append("thousand_separator={}".format(self.thousand_separator))
+            items.append("align={}".format(self.align.align_string))
+        if self.font_size is not FontSize.NONE:
+            items.append("font_size={}".format(self.font_size.value))
+        if self.font_weight:
+            items.append("font_weight={}".format(self.font_weight.value))
+        if self.thousand_separator is not ThousandSeparator.NONE:
+            items.append("thousand_separator={}".format(self.thousand_separator.value))
 
         return ", ".join(items)
 

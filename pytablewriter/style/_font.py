@@ -7,14 +7,14 @@ import enum
 
 @enum.unique
 class FontSize(enum.Enum):
-    NONE = 0
-    TINY = 1
-    SMALL = 2
-    MEDIUM = 3
-    LARGE = 4
+    NONE = "none"
+    TINY = "tiny"
+    SMALL = "small"
+    MEDIUM = "medium"
+    LARGE = "large"
 
 
 @enum.unique
 class FontWeight(enum.Enum):
-    NORMAL = 0
-    BOLD = 1
+    NORMAL = "normal"
+    BOLD = "bold"

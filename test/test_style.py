@@ -121,3 +121,18 @@ class Test_Style_eq(object):
     def test_exception(self, align, font_size, thousand_separator, expected):
         with pytest.raises(expected):
             Style(align=align, font_size=font_size, thousand_separator=thousand_separator)
+
+
+class Test_Style_repr(object):
+    @pytest.mark.parametrize(
+        ["value", "expected"],
+        [
+            [
+                Style(align="left", font_size="tiny", font_weight="bold", thousand_separator=","),
+                "align=left, font_size=tiny, font_weight=bold, thousand_separator=comma",
+            ],
+            [Style(), "align=auto, font_weight=normal"],
+        ],
+    )
+    def test_normal(self, value, expected):
+        assert str(value) == expected
