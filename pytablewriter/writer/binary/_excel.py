@@ -132,6 +132,10 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         :param str file_path: Excel workbook file path to open.
         """
 
+        if self.is_opened() and self.workbook.file_path == file_path:
+            self._logger.logger.debug("workbook already opened: {}".format(self.workbook.file_path))
+            return
+
         self.close()
         self._open(file_path)
 

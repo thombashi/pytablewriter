@@ -63,9 +63,18 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         :param str file_path: SQLite database file path to open.
         """
+
         from simplesqlite import SimpleSQLite
 
-        self.close()
+        if self.is_opened():
+            if self.stream.database_path == file_path:
+                self._logger.logger.debug(
+                    "database already opened: {}".format(self.stream.database_path)
+                )
+                return
+
+            self.close()
+
         self.stream = SimpleSQLite(file_path, "w")
 
     def _write_table(self):
