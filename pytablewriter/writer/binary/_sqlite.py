@@ -2,6 +2,8 @@
 
 from __future__ import absolute_import, unicode_literals
 
+from os.path import abspath
+
 import tabledata
 
 from ._interface import AbstractBinaryTableWriter
@@ -67,7 +69,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
         from simplesqlite import SimpleSQLite
 
         if self.is_opened():
-            if self.stream.database_path == file_path:
+            if self.stream.database_path == abspath(file_path):
                 self._logger.logger.debug(
                     "database already opened: {}".format(self.stream.database_path)
                 )
