@@ -439,6 +439,9 @@ class AbstractTableWriter(TableWriterInterface):
                 return
         except AttributeError:
             pass
+        except ValueError:
+            # raised when executing an operation to a closed stream
+            pass
 
         try:
             self.stream.close()
