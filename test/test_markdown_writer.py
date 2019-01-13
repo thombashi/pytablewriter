@@ -833,7 +833,7 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=output)
         assert output == expected
 
-        print("--------------------", flush=True)
+        print("--------------------")
 
         writer.write_table()
         output = writer.stream.getvalue()

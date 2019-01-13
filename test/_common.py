@@ -10,8 +10,8 @@ import sys
 
 
 def print_test_result(expected, actual, error=None):
-    print("[expected]\n{}\n".format(expected), flush=True)
-    print("[actual]\n{}\n".format(actual), flush=True)
+    print("[expected]\n{}\n".format(expected))
+    print("[actual]\n{}\n".format(actual))
 
     if error:
-        print(error, file=sys.stderr, flush=True)
+        print(error, file=sys.stderr)
