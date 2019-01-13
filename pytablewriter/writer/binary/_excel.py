@@ -176,7 +176,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
 
         self.make_worksheet(self.table_name)
 
-    def make_worksheet(self, sheet_name):
+    def make_worksheet(self, sheet_name=None):
         """Make a worksheet to the current workbook.
 
         Args:
@@ -186,7 +186,10 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         """
 
         if sheet_name is None:
+            sheet_name = self.table_name
+        if not sheet_name:
             sheet_name = ""
+
         self.stream = self.workbook.add_worksheet(sheet_name)
         self._current_data_row = self._first_data_row
 
