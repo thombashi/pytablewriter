@@ -26,7 +26,7 @@ class Style(object):
     Args:
         align (str / pytablewriter.Align):
             Text alignment specification for cells in a column.
-            This can be applied only for text format writer classes.
+            This can be only applied for text format writer classes.
             Possible values are:
 
             - ``"auto"``/``pytablewriter.Align.AUTO``
@@ -38,7 +38,7 @@ class Style(object):
 
         font_size (str / pytablewriter.style.FontSize):
             Font size specification for cells in a column.
-            This can be applied only for HTML/Latex writer classes.
+            This can be only applied for HTML/Latex writer classes.
             Possible values are:
 
             - ``"tiny"``/``pytablewriter.style.FontSize.TINY``
@@ -49,15 +49,23 @@ class Style(object):
 
         font_weight (str / pytablewriter.style.FontWeight):
             Font weight specification for cells in a column.
-            This can be applied only for HTML/Latex/Markdown writer classes.
+            This can be only applied for HTML/Latex/Markdown writer classes.
             Possible values are:
 
             - ``"normal"``/``pytablewriter.style.FontWeight.NORMAL``
             - ``"bold"``/``pytablewriter.style.FontWeight.BOLD``
 
+        font_style (str / pytablewriter.style.FontStyle):
+            Font style specification for cells in a column.
+            This can be applied only for HTML/Latex/Markdown writer classes.
+            Possible values are:
+
+            - ``"normal"``/``pytablewriter.style.FontStyle.NORMAL``
+            - ``"italic"``/``pytablewriter.style.FontStyle.ITALIC``
+
         thousand_separator (str / pytablewriter.style.ThousandSeparator):
             Thousand separator specification for numbers in a column.
-            This can be applied only for text format writer classes.
+            This can be only applied for text format writer classes.
             Possible values are:
 
             - ``","``/``"comma"``/``pytablewriter.style.ThousandSeparator.COMMA``
