@@ -43,6 +43,7 @@ class Test_Style_constructor(object):
             [
                 {"font_size": "TINY"},
                 {
+                    "align": Align.AUTO,
                     "font_size": FontSize.TINY,
                     "font_weight": FontWeight.NORMAL,
                     "thousand_separator": ThousandSeparator.NONE,

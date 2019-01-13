@@ -85,7 +85,7 @@ class Style(object):
         return self.__thousand_separator
 
     def __init__(self, **kwargs):
-        self.__align = normalize_enum(kwargs.pop("align", None), Align)
+        self.__align = normalize_enum(kwargs.pop("align", Align.AUTO), Align)
         self.__validate_attr("align", Align)
 
         self.__font_size = normalize_enum(kwargs.pop("font_size", FontSize.NONE), FontSize)
