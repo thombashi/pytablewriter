@@ -448,6 +448,7 @@ class AbstractTableWriter(TableWriterInterface):
             from _pytest.capture import EncodedFile
 
             if isinstance(self.stream, (CaptureIO, EncodedFile)):
+                # avoid closing streams for pytest
                 return
         except ImportError:
             pass
