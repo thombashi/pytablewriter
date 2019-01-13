@@ -9,7 +9,6 @@ import pytablewriter
 
 
 writer = pytablewriter.SqliteTableWriter()
-writer.open("sample.sqlite")
 
 # create the first table
 writer.table_name = "example"
@@ -20,7 +19,7 @@ writer.value_matrix = [
     [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
     [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
 ]
-writer.write_table()
+writer.dump("sample.sqlite", close_after_write=False)
 
 # write the second table
 writer.table_name = "Timezone"
@@ -34,6 +33,6 @@ writer.value_matrix = [
     ["1", "CEST", "1111885200", "7200", "1"],
     ["1", "CEST", "1143334800", "7200", "1"],
 ]
-writer.write_table()
+writer.dump("sample.sqlite")
 
 writer.close()
