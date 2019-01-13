@@ -143,7 +143,10 @@ class AbstractTableWriter(TableWriterInterface):
     @property
     def type_hint_list(self):
         """
-        List of type hints for each column of the tabular data.
+        Type hints for each column of the tabular data.
+        Writers convert data for each column using the type hints information
+        before writing tables when you call ``write_xxx`` methods.
+
         Acceptable values are as follows:
 
             - |None| (automatically detect column type from values in the column)
@@ -159,8 +162,6 @@ class AbstractTableWriter(TableWriterInterface):
             - :py:class:`pytablewriter.RealNumber`
             - :py:class:`pytablewriter.String`
 
-        A writer converts data for each column using type-hint
-        information before writing tables when you call ``write_xxx`` methods.
         If a type-hint value is not |None|, the writer tries to
         convert data for each data in a column to type-hint class.
         If the type-hint value is |None| or failed to convert data,
@@ -168,8 +169,8 @@ class AbstractTableWriter(TableWriterInterface):
         the column data.
 
         If ``type_hint_list`` is |None|, the writer detects data types for all
-        of the columns automatically and writes a table by using detected
-        column types.
+        of the columns automatically and writes a table by using detected column types.
+
         Defaults to |None|.
 
         :Examples:
