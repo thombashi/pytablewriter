@@ -10,6 +10,8 @@ Some of the formats require additional dependency packages, you can install the 
     - ``pip install pytablewriter[es6]`` or ``pip install pytablewriter[es5]``
 - Excel
     - ``pip install pytablewriter[excel]``
+- HTML
+    - ``pip install pytablewriter[html]``
 - SQLite
     - ``pip install pytablewriter[sqlite]``
 - TOML
@@ -23,8 +25,6 @@ Dependencies
 Python 2.7+ or 3.4+
 
 - `DataProperty <https://github.com/thombashi/DataProperty>`__
-- `dominate <https://github.com/Knio/dominate/>`__
-- `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
@@ -34,6 +34,8 @@ Python 2.7+ or 3.4+
 
 Optional dependencies
 ---------------------
+- `logbook <https://logbook.readthedocs.io/en/stable/>`__
+    - Logging using logbook if the package installed
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - Elasticsearch:
@@ -41,6 +43,8 @@ Optional dependencies
 - Excel
     - `xlwt <http://www.python-excel.org/>`__
     - `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
+- HTML
+    - `dominate <https://github.com/Knio/dominate/>`__
 - SQLite
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - TOML
