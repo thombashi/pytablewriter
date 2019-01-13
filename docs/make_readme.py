@@ -9,8 +9,8 @@ from __future__ import unicode_literals
 
 import sys
 
-import readmemaker
 from path import Path
+from readmemaker import ReadmeMaker
 
 
 PROJECT_NAME = "pytablewriter"
@@ -82,7 +82,7 @@ def write_examples(maker):
 
     maker.set_indent_level(1)
     maker.write_chapter("For more information")
-    maker.write_line_list(
+    maker.write_lines(
         [
             "More examples are available at ",
             "https://{:s}.rtfd.io/en/latest/pages/examples/index.html".format(PROJECT_NAME),
@@ -91,7 +91,12 @@ def write_examples(maker):
 
 
 def main():
-    maker = readmemaker.ReadmeMaker(PROJECT_NAME, OUTPUT_DIR, is_make_toc=True)
+    maker = ReadmeMaker(
+        PROJECT_NAME,
+        OUTPUT_DIR,
+        is_make_toc=True,
+        project_url="https://github.com/thombashi/{}".format(PROJECT_NAME),
+    )
 
     maker.write_chapter("Summary")
     maker.write_introduction_file("summary.txt")
@@ -104,10 +109,10 @@ def main():
 
     maker.set_indent_level(0)
     maker.write_chapter("Documentation")
-    maker.write_line_list(["https://{:s}.rtfd.io/".format(PROJECT_NAME)])
+    maker.write_lines(["https://{:s}.rtfd.io/".format(PROJECT_NAME)])
 
     maker.write_chapter("Related Project")
-    maker.write_line_list(
+    maker.write_lines(
         [
             "- `pytablereader <https://github.com/thombashi/pytablereader>`__",
             "    - Tabular data loaded by ``pytablereader`` can be written "
@@ -116,7 +121,7 @@ def main():
     )
 
     maker.write_chapter("Tasks")
-    maker.write_line_list(["https://trello.com/b/kE0XG34y"])
+    maker.write_lines(["https://trello.com/b/kE0XG34y"])
 
     return 0
 

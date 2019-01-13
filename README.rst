@@ -1,11 +1,10 @@
-**pytablewriter**
-
-.. contents:: Table of Contents
+.. contents:: **pytablewriter**
+   :backlinks: top
    :depth: 2
 
 Summary
 =========
-A Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+`pytablewriter <https://github.com/thombashi/pytablewriter>`__ is a Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
 
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
@@ -227,12 +226,10 @@ Write a table to an Excel sheet
 :Sample Code:
     .. code-block:: python
 
-        import pytablewriter
+        from pytablewriter import ExcelXlsxTableWriter
 
-        writer = pytablewriter.ExcelXlsxTableWriter()
-        writer.open("sample.xlsx")
-
-        writer.make_worksheet("example")
+        writer = ExcelXlsxTableWriter()
+        writer.table_name = "example"
         writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
@@ -240,9 +237,7 @@ Write a table to an Excel sheet
             [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
             [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
         ]
-        writer.write_table()
-
-        writer.close()
+        writer.dump("sample.xlsx")
 
 :Output:
     .. figure:: ss/excel_single.png
@@ -571,6 +566,8 @@ Some of the formats require additional dependency packages, you can install the 
     - ``pip install pytablewriter[es6]`` or ``pip install pytablewriter[es5]``
 - Excel
     - ``pip install pytablewriter[excel]``
+- HTML
+    - ``pip install pytablewriter[html]``
 - SQLite
     - ``pip install pytablewriter[sqlite]``
 - TOML
@@ -584,8 +581,6 @@ Dependencies
 Python 2.7+ or 3.4+
 
 - `DataProperty <https://github.com/thombashi/DataProperty>`__
-- `dominate <https://github.com/Knio/dominate/>`__
-- `logbook <https://logbook.readthedocs.io/en/stable/>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
@@ -595,6 +590,8 @@ Python 2.7+ or 3.4+
 
 Optional dependencies
 ---------------------
+- `logbook <https://logbook.readthedocs.io/en/stable/>`__
+    - Logging using logbook if the package installed
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - Elasticsearch:
@@ -602,6 +599,8 @@ Optional dependencies
 - Excel
     - `xlwt <http://www.python-excel.org/>`__
     - `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
+- HTML
+    - `dominate <https://github.com/Knio/dominate/>`__
 - SQLite
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - TOML
