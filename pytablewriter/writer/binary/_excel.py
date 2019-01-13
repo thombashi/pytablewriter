@@ -155,7 +155,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
             self.workbook.close()
             self._workbook = None
 
-    def from_tabledata(self, value):
+    def from_tabledata(self, value, is_overwrite_table_name=True):
         """
         Set following attributes from |TableData|
 
