@@ -143,10 +143,13 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         """
 
         old_stream = self.stream
-        self.stream = six.StringIO()
-        self.write_table()
-        tabular_text = self.stream.getvalue()
-        self.stream = old_stream
+
+        try:
+            self.stream = six.StringIO()
+            self.write_table()
+            tabular_text = self.stream.getvalue()
+        finally:
+            self.stream = old_stream
 
         return tabular_text
 
