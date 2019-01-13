@@ -2,7 +2,6 @@ DataProperty>=0.38.0,<1.0.0
 dominate>=2.3.5,<3.0.0
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
-logbook>=1.1.0,<2.0.0
 mbstrdecoder[all]>=0.6.2,<1.0.0
 msgfy>=0.0.4,<0.1.0
 pathvalidate>=0.23.0,<1.0.0
