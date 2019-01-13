@@ -390,6 +390,7 @@ class AbstractTableWriter(TableWriterInterface):
         writer.table_name = self.table_name
         writer.header_list = self.header_list
         writer.value_matrix = self.value_matrix
+        writer.style_list = self.style_list
 
         return writer.dumps()
 
