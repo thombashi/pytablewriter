@@ -75,6 +75,9 @@ class HtmlStyler(TextStyler):
 
 
 class LatexStyler(TextStyler):
+    class Command(object):
+        BOLD = r"\bf"
+    
     @property
     def _font_size_map(self):
         return {
@@ -90,8 +93,9 @@ class LatexStyler(TextStyler):
 
         if self.font_size:
             width += len(self.font_size)
+
         if self._style.font_weight == FontWeight.BOLD:
-            width += len(r"\bf")
+            width += len(self.Command.BOLD)
 
         return width
 
@@ -105,8 +109,9 @@ class LatexStyler(TextStyler):
 
         if font_size:
             item_list.append(font_size)
+
         if self._style.font_weight == FontWeight.BOLD:
-            item_list.append(r"\bf")
+            item_list.append(self.Command.BOLD)
 
         item_list.append(value)
         return " ".join(item_list)
