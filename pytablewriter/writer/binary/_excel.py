@@ -174,13 +174,12 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         self.make_worksheet(self.table_name)
 
     def make_worksheet(self, sheet_name):
-        """
-        Make a worksheet to the current workbook.
+        """Make a worksheet to the current workbook.
 
-        :param str sheet_name:
-            Name of the worksheet to create. Name of the work sheet
-            automatically decided (like ``"Sheet1"``)
-            if the ``sheet_name`` is empty.
+        Args:
+            sheet_name (str):
+                Name of the worksheet to create. The name will be automatically generated
+                (like ``"Sheet1"``) if the ``sheet_name`` is empty.
         """
 
         if sheet_name is None:
