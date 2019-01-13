@@ -94,13 +94,13 @@ class Style(object):
         self.__font_weight = normalize_enum(
             kwargs.pop("font_weight", FontWeight.NORMAL), FontWeight
         )
+        self.__validate_attr("font_weight", FontWeight)
 
         self.__thousand_separator = self.__normalie_thousand_separator(
             normalize_enum(
                 kwargs.pop("thousand_separator", ThousandSeparator.NONE), ThousandSeparator
             )
         )
-
         self.__validate_attr("thousand_separator", ThousandSeparator)
 
     def __repr__(self):
