@@ -54,6 +54,9 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
     def __del__(self):
         self.close()
 
+    def is_opened(self):
+        return self.stream is not None
+
     def open(self, file_path):
         """
         Open a SQLite database file.

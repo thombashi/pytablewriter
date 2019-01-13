@@ -122,6 +122,9 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self._quoting_flags[typepy.Typecode.DATETIME] = True
 
+    def is_opened(self):
+        return self.workbook is not None
+
     def open(self, file_path):
         """
         Open an Excel workbook file.
@@ -151,7 +154,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         Close the current workbook.
         """
 
-        if self.workbook is not None:
+        if self.is_opened():
             self.workbook.close()
             self._workbook = None
 
