@@ -178,7 +178,8 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
 
         super(ExcelTableWriter, self).from_tabledata(value)
 
-        self.make_worksheet(self.table_name)
+        if self.is_opened():
+            self.make_worksheet(self.table_name)
 
     def make_worksheet(self, sheet_name=None):
         """Make a worksheet to the current workbook.
@@ -196,6 +197,25 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
 
         self.stream = self.workbook.add_worksheet(sheet_name)
         self._current_data_row = self._first_data_row
+
+    def dump(self, output, close_after_write=True):
+        """Write a worksheet to the current workbook.
+
+        Args:
+            output (str):
+                Path to the workbook file to write.
+            close_after_write (bool, optional):
+                Close the workbook after write.
+                Defaults to True.
+        """
+
+        self.open(output)
+        try:
+            self.make_worksheet(self.table_name)
+            self.write_table()
+        finally:
+            if close_after_write:
+                self.close()
 
     def _write_table(self):
         self._preprocess_table_dp()

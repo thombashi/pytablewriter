@@ -124,6 +124,54 @@ class Test_SqliteTableWriter_write_table(object):
 
 
 @pytest.mark.xfail(run=False)
+class Test_SqliteTableWriter_dump(object):
+    def test_normal_single_table(self, tmpdir):
+        test_filepath = str(tmpdir.join("test.sqlite"))
+        data = TableData(
+            table_name="tablename",
+            header_list=["ha", "hb", "hc"],
+            row_list=[[1.0, 2.0, 3.0], [11.0, 12.0, 13.0], [1.0, 2.0, 3.0]],
+        )
+
+        writer = ptw.SqliteTableWriter()
+        writer.from_tabledata(data)
+        writer.dump(test_filepath)
+
+        for expected in SqliteFileLoader(test_filepath).load():
+            assert data == expected
+
+    def test_normal_multi_table(self, tmpdir):
+        test_filepath = str(tmpdir.join("test.sqlite"))
+        data_list = [
+            TableData(
+                table_name="first",
+                header_list=["ha1", "hb1", "hc1"],
+                row_list=[[1.0, 2.0, 3.0], [11.0, 12.0, 13.0]],
+            ),
+            TableData(
+                table_name="second",
+                header_list=["ha2", "hb2", "hc2"],
+                row_list=[[11.0, 12.0, 13.0], [1.0, 2.0, 3.0]],
+            ),
+        ]
+
+        writer = ptw.SqliteTableWriter()
+
+        for data in data_list:
+            writer.from_tabledata(data)
+            writer.dump(test_filepath, close_after_write=False)
+
+        writer.close()
+
+        count = 0
+        for data, expected in zip(data_list, SqliteFileLoader(test_filepath).load()):
+            assert data == expected
+            count += 1
+
+        assert count == 2
+
+
+@pytest.mark.xfail(run=False)
 class Test_SqliteTableWriter_write_table_iter(object):
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],

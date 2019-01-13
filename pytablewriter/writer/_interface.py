@@ -44,6 +44,9 @@ class TableWriterInterface(object):
 
         pass
 
+    def dump(self, output, close_after_write):  # pragma: no cover
+        raise NotImplementedError("{} writer did not support dump method".format(self.format_name))
+
     def dumps(self):  # pragma: no cover
         raise NotImplementedError("{} writer did not support dumps method".format(self.format_name))
 

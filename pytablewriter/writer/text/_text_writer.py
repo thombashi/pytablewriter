@@ -2,6 +2,9 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import io
+import sys
+
 import dataproperty
 import six
 import typepy
@@ -132,6 +135,30 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         super(TextTableWriter, self).write_table()
         if self.is_write_null_line_after_table:
             self.write_null_line()
+
+    def dump(self, output, close_after_write=True):
+        """Write data to the output with tabular format.
+
+        Args:
+            output (file descriptor or str):
+                file descriptor or path to the output file.
+            close_after_write (bool, optional):
+                Close the output after write.
+                Defaults to True.
+        """
+
+        try:
+            output.write
+            self.stream = output
+        except AttributeError:
+            self.stream = io.open(output, "w", encoding="utf-8")
+
+        try:
+            self.write_table()
+        finally:
+            if close_after_write:
+                self.stream.close()
+                self.stream = sys.stdout
 
     def dumps(self):
         """Get rendered tabular text from the table data.

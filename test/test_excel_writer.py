@@ -242,13 +242,69 @@ class Test_ExcelTableWriter_write_table_iter(object):
 
 
 @pytest.mark.xfail(run=False)
+class Test_ExcelTableWriter_dump(object):
+    def test_normal_single_sheet(self, tmpdir):
+        for writer_class in table_writer_class_list:
+            test_filepath = str(tmpdir.join("test.xlsx"))
+            data = TableData(
+                table_name="tablename",
+                header_list=["ha", "hb", "hc"],
+                row_list=[
+                    [1.0, 2.0, 3.0],
+                    [11.0, 12.0, 13.0],
+                    [1.0, 2.0, 3.0],
+                    [11.0, 12.0, 13.0],
+                    [101.0, 102.0, 103.0],
+                    [1001.0, 1002.0, 1003.0],
+                ],
+            )
+
+            writer = writer_class()
+            writer.from_tabledata(data)
+            writer.dump(test_filepath)
+
+            assert writer.first_data_row == 1
+            assert writer.last_data_row == 7
+
+            for expected in ExcelTableFileLoader(test_filepath).load():
+                assert data == expected
+
+    def test_normal_multi_sheet(self, tmpdir):
+        for writer_class in table_writer_class_list:
+            test_filepath = str(tmpdir.join("test.xlsx"))
+            data_list = [
+                TableData(
+                    table_name="first",
+                    header_list=["ha1", "hb1", "hc1"],
+                    row_list=[[1.0, 2.0, 3.0], [11.0, 12.0, 13.0]],
+                ),
+                TableData(
+                    table_name="second",
+                    header_list=["ha2", "hb2", "hc2"],
+                    row_list=[[11.0, 12.0, 13.0], [1.0, 2.0, 3.0]],
+                ),
+            ]
+
+            writer = writer_class()
+
+            for data in data_list:
+                writer.from_tabledata(data)
+                writer.dump(test_filepath, close_after_write=False)
+
+            writer.close()
+
+            for data, expected in zip(data_list, ExcelTableFileLoader(test_filepath).load()):
+                assert data == expected
+
+
+@pytest.mark.xfail(run=False)
 class Test_ExcelTableWriter_dumps(object):
     def test_exception(self, tmpdir):
         for writer_class in table_writer_class_list:
-            test_file_path = tmpdir.join("test.xlsx")
+            test_filepath = tmpdir.join("test.xlsx")
 
             writer = writer_class()
-            writer.open(str(test_file_path))
+            writer.open(str(test_filepath))
 
             with pytest.raises(NotImplementedError):
                 writer.dumps()

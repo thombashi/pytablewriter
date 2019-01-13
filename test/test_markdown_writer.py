@@ -570,6 +570,7 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
+        # test for backward compatibility
         writer.style_list = None
         writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
         out = writer.dumps()
@@ -971,6 +972,30 @@ class Test_MarkdownTableWriter_write_table_iter(object):
 
         with pytest.raises(expected):
             writer.write_table_iter()
+
+
+class Test_MarkdownTableWriter_dump(object):
+    def test_normal(self, tmpdir):
+        test_filepath = str(tmpdir.join("test.sqlite"))
+
+        writer = table_writer_class()
+        writer.header_list = ["a", "b"]
+        writer.value_matrix = [["foo", "bar"]]
+        writer.dump(test_filepath)
+
+        expected = dedent(
+            """\
+            | a | b |
+            |---|---|
+            |foo|bar|
+            """
+        )
+
+        with open(test_filepath) as f:
+            output = f.read()
+
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
 
 
 class Test_MarkdownTableWriter_from_tablib(object):

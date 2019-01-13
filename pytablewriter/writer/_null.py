@@ -36,6 +36,9 @@ class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInte
     def write_table(self):
         pass
 
+    def dump(self, output, close_after_write=True):
+        pass
+
     def dumps(self):
         return ""
 
