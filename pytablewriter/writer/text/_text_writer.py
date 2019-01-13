@@ -142,10 +142,13 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             str: Rendered tabular text.
         """
 
+        old_stream = self.stream
         self.stream = six.StringIO()
         self.write_table()
+        tabular_text = self.stream.getvalue()
+        self.stream = old_stream
 
-        return self.stream.getvalue()
+        return tabular_text
 
     def _create_styler(self, style, writer):
         return TextStyler(style, writer)

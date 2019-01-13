@@ -814,6 +814,31 @@ class Test_MarkdownTableWriter_write_table(object):
 
         assert output == expected
 
+    def test_normal_avoid_overwrite_stream_by_dumps(self):
+        writer = table_writer_class()
+        writer.header_list = ["a", "b"]
+        writer.value_matrix = [["foo", "bar"]]
+        writer.stream = six.StringIO()
+
+        expected = dedent(
+            """\
+            | a | b |
+            |---|---|
+            |foo|bar|
+            """
+        )
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
+
+        print("--------------------", flush=True)
+
+        writer.write_table()
+        output = writer.stream.getvalue()
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
+
     @pytest.mark.skipif("six.PY2")
     def test_normal_escape_html_tag(self, capsys):
         writer = table_writer_class()
