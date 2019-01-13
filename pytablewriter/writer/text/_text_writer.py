@@ -134,9 +134,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.write_null_line()
 
     def dumps(self):
-        """
-        :return: Rendered tabular text.
-        :rtype: str
+        """Get rendered tabular text from the table data.
+
+        Only available for text format table writers.
+
+        Returns:
+            str: Rendered tabular text.
         """
 
         self.stream = six.StringIO()
