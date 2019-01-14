@@ -706,9 +706,9 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.table_name = "set style method"
         writer.header_list = ["normal", "style by idx", "style by header"]
         writer.value_matrix = [[11, 11, 11], [123456, 123456, 123456]]
+
         writer.set_style(1, Style(font_weight="bold"))
         writer.set_style("style by header", Style(font_weight="bold"))
-
         expected = dedent(
             """\
             # set style method
@@ -720,7 +720,22 @@ class Test_MarkdownTableWriter_write_table(object):
         )
         output = writer.dumps()
         print_test_result(expected=expected, actual=output)
+        assert output == expected
 
+        writer.table_name = "change style"
+        writer.set_style(1, Style(align="center", font_style="italic"))
+        writer.set_style("style by header", Style())
+        expected = dedent(
+            """\
+            # change style
+            |normal|style by idx|style by header|
+            |-----:|:----------:|--------------:|
+            |    11|    _11_    |             11|
+            |123456|  _123456_  |         123456|
+            """
+        )
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
         assert output == expected
 
     def test_normal_ansi_color(self, capsys):

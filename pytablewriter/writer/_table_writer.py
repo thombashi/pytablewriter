@@ -379,7 +379,6 @@ class AbstractTableWriter(TableWriterInterface):
         }
 
         self.__style_list = []
-        self._styler_list = []
 
         self.__clear_preprocess()
 
@@ -412,6 +411,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         if isinstance(column, six.integer_types):
             self.__style_list[column] = style
+            self.__clear_preprocess()
             return
 
         if isinstance(column, six.string_types):
@@ -421,6 +421,7 @@ class AbstractTableWriter(TableWriterInterface):
                 pass
 
             self.__style_list[column_idx] = style
+            self.__clear_preprocess()
             return
 
         raise ValueError("column must be an int or string")
@@ -815,6 +816,9 @@ class AbstractTableWriter(TableWriterInterface):
         self._is_complete_table_dp_preprocess = True
 
     def _preprocess_styler(self):
+        if self._is_complete_styler_proprocess:
+            return
+
         self._styler_list = []
 
         for col_dp in self._column_dp_list:
@@ -824,6 +828,8 @@ class AbstractTableWriter(TableWriterInterface):
                 style = Style()
 
             self._styler_list.append(self._create_styler(style, self))
+
+        self._is_complete_styler_proprocess = True
 
     def _preprocess_table_property(self):
         if self._is_complete_table_property_preprocess:
@@ -889,6 +895,7 @@ class AbstractTableWriter(TableWriterInterface):
             if any(
                 [
                     self._is_complete_table_dp_preprocess,
+                    self._is_complete_styler_proprocess,
                     self._is_complete_table_property_preprocess,
                     self._is_complete_header_preprocess,
                     self._is_complete_value_matrix_preprocess,
@@ -899,6 +906,7 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         self._is_complete_table_dp_preprocess = False
+        self._is_complete_styler_proprocess = False
         self._is_complete_table_property_preprocess = False
         self._is_complete_header_preprocess = False
         self._is_complete_value_matrix_preprocess = False
@@ -908,6 +916,7 @@ class AbstractTableWriter(TableWriterInterface):
             if any(
                 [
                     self._column_dp_list,
+                    self._styler_list,
                     self._table_header_list,
                     self._table_value_matrix,
                     self._table_value_dp_matrix,
@@ -918,6 +927,7 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         self._column_dp_list = []
+        self._styler_list = []
         self._table_header_list = []
         self._table_value_matrix = []
         self._table_value_dp_matrix = []
