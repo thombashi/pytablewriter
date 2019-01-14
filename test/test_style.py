@@ -128,10 +128,16 @@ class Test_Style_repr(object):
         ["value", "expected"],
         [
             [
-                Style(align="left", font_size="tiny", font_weight="bold", thousand_separator=","),
-                "align=left, font_size=tiny, font_weight=bold, thousand_separator=comma",
+                Style(
+                    align="left",
+                    font_size="tiny",
+                    font_style="italic",
+                    font_weight="bold",
+                    thousand_separator=",",
+                ),
+                "align=left, font_size=tiny, font_style=italic, font_weight=bold, thousand_separator=comma",
             ],
-            [Style(), "align=auto, font_weight=normal"],
+            [Style(), "align=auto, font_style=normal, font_weight=normal"],
         ],
     )
     def test_normal(self, value, expected):

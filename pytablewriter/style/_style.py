@@ -125,6 +125,8 @@ class Style(object):
             items.append("align={}".format(self.align.align_string))
         if self.font_size is not FontSize.NONE:
             items.append("font_size={}".format(self.font_size.value))
+        if self.font_style:
+            items.append("font_style={}".format(self.font_style.value))
         if self.font_weight:
             items.append("font_weight={}".format(self.font_weight.value))
         if self.thousand_separator is not ThousandSeparator.NONE:
