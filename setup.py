@@ -108,6 +108,7 @@ setuptools.setup(
         "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
         "es6": es6_requires,
+        "html": html_requires,
         "from": from_requires,
         "logging": logging_requires,
         "release": ["releasecmd>=0.0.12,<0.1.0"],
