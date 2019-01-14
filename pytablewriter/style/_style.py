@@ -152,7 +152,11 @@ class Style(object):
     def __validate_attr(self, attr_name, expected_type):
         value = getattr(self, attr_name)
         if value is not None and not isinstance(value, expected_type):
-            raise TypeError("{} must be a {} instancce".format(attr_name, expected_type.__name__))
+            raise TypeError(
+                "{} must be a {} instancce: actual={}".format(
+                    attr_name, expected_type.__name__, type(value)
+                )
+            )
 
     @staticmethod
     def __normalie_thousand_separator(value):
