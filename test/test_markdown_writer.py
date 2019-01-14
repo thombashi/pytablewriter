@@ -707,15 +707,17 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.header_list = ["normal", "style by idx", "style by header"]
         writer.value_matrix = [[11, 11, 11], [123456, 123456, 123456]]
 
-        writer.set_style(1, Style(font_weight="bold"))
-        writer.set_style("style by header", Style(font_weight="bold"))
+        writer.set_style(1, Style(font_weight="bold", thousand_separator=","))
+        writer.set_style(
+            "style by header", Style(align="center", font_weight="bold", thousand_separator=" ")
+        )
         expected = dedent(
             """\
             # set style method
             |normal|style by idx|style by header|
-            |-----:|-----------:|--------------:|
-            |    11|      **11**|         **11**|
-            |123456|  **123456**|     **123456**|
+            |-----:|-----------:|:-------------:|
+            |    11|      **11**|    **11**     |
+            |123456| **123,456**|  **123 456**  |
             """
         )
         output = writer.dumps()
@@ -723,15 +725,15 @@ class Test_MarkdownTableWriter_write_table(object):
         assert output == expected
 
         writer.table_name = "change style"
-        writer.set_style(1, Style(align="center", font_style="italic"))
+        writer.set_style(1, Style(align="right", font_style="italic"))
         writer.set_style("style by header", Style())
         expected = dedent(
             """\
             # change style
             |normal|style by idx|style by header|
-            |-----:|:----------:|--------------:|
-            |    11|    _11_    |             11|
-            |123456|  _123456_  |         123456|
+            |-----:|-----------:|--------------:|
+            |    11|        _11_|             11|
+            |123456|    _123456_|         123456|
             """
         )
         output = writer.dumps()

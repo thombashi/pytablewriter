@@ -32,6 +32,13 @@ from ..style import Align, NullStyler, Style, ThousandSeparator
 from ._interface import TableWriterInterface
 
 
+_ts_to_flag = {
+    ThousandSeparator.NONE: Format.NONE,
+    ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
+    ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
+}
+
+
 class AbstractTableWriter(TableWriterInterface):
     """
     An abstract base class of table writer classes.
@@ -257,13 +264,8 @@ class AbstractTableWriter(TableWriterInterface):
         self.__style_list = value
 
         if self.__style_list:
-            ts_to_flag = {
-                ThousandSeparator.NONE: Format.NONE,
-                ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
-                ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
-            }
             self._dp_extractor.format_flags_list = [
-                ts_to_flag[self.__get_thousand_separator(col_idx)]
+                _ts_to_flag[self.__get_thousand_separator(col_idx)]
                 for col_idx in range(len(self.__style_list))
             ]
         else:
@@ -406,22 +408,26 @@ class AbstractTableWriter(TableWriterInterface):
             ValueError: If the column specifier is invalid.
         """
 
+        column_idx = None
+
         while len(self.header_list) > len(self.__style_list):
             self.__style_list.append(None)
 
         if isinstance(column, six.integer_types):
-            self.__style_list[column] = style
-            self.__clear_preprocess()
-            return
-
-        if isinstance(column, six.string_types):
+            column_idx = column
+        elif isinstance(column, six.string_types):
             try:
                 column_idx = self.header_list.index(column)
             except ValueError:
                 pass
 
+        if column_idx is not None:
             self.__style_list[column_idx] = style
             self.__clear_preprocess()
+            self._dp_extractor.format_flags_list = [
+                _ts_to_flag[self.__get_thousand_separator(col_idx)]
+                for col_idx in range(len(self.__style_list))
+            ]
             return
 
         raise ValueError("column must be an int or string")
