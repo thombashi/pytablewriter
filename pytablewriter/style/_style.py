@@ -132,7 +132,7 @@ class Style(object):
         if self.thousand_separator is not ThousandSeparator.NONE:
             items.append("thousand_separator={}".format(self.thousand_separator.value))
 
-        return ", ".join(items)
+        return "({})".format(", ".join(items))
 
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
