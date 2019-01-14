@@ -142,6 +142,7 @@ class Style(object):
             [
                 self.align is other.align,
                 self.font_size is other.font_size,
+                self.font_style is other.font_style,
                 self.font_weight is other.font_weight,
                 self.thousand_separator is other.thousand_separator,
             ]

@@ -5,7 +5,7 @@ from __future__ import print_function, unicode_literals
 import sys
 
 import pytest
-from pytablewriter.style import Align, FontSize, FontWeight, Style, ThousandSeparator
+from pytablewriter.style import Align, FontSize, FontStyle, FontWeight, Style, ThousandSeparator
 
 
 class Test_Style_constructor(object):
@@ -74,6 +74,8 @@ class Test_Style_eq(object):
             [Style(font_size=FontSize.TINY), Style(font_size=FontSize.TINY), True],
             [Style(font_size=FontSize.TINY), Style(font_size="tiny"), True],
             [Style(font_size=FontSize.TINY), Style(font_size=FontSize.LARGE), False],
+            [Style(font_style="italic"), Style(font_style=FontStyle.ITALIC), True],
+            [Style(font_style="italic"), Style(font_style="normal"), False],
             [Style(thousand_separator=","), Style(thousand_separator=","), True],
             [Style(thousand_separator=","), Style(thousand_separator="comma"), True],
             [Style(thousand_separator=""), Style(thousand_separator=","), False],
