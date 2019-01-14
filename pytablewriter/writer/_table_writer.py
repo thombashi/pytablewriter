@@ -456,6 +456,15 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         try:
+            from ipykernel.iostream import OutStream
+
+            if isinstance(self.stream, OutStream):
+                # avoid closing streams for Jupyter Notebook
+                return
+        except ImportError:
+            pass
+
+        try:
             self.stream.close()
         except AttributeError:
             self._logger.logger.warn(
