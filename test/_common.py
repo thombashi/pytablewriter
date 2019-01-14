@@ -15,3 +15,5 @@ def print_test_result(expected, actual, error=None):
 
     if error:
         print(error, file=sys.stderr)
+
+    print("----------------------------------------")
