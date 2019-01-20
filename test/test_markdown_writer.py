@@ -445,9 +445,9 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.from_tabledata(
             TableData(
-                table_name="loader_mapping",
-                header_list=["Name", "Loader"],
-                row_list=[
+                "loader_mapping",
+                ["Name", "Loader"],
+                [
                     ["csv", "CsvTableFileLoader"],
                     ["excel", "ExcelTableFileLoader"],
                     ["html", "HtmlTableFileLoader"],
@@ -485,19 +485,15 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.is_write_null_line_after_table = True
         writer.from_tabledata(
             TableData(
-                table_name="first",
-                header_list=["Name", "Loader"],
-                row_list=[["csv", "CsvTableFileLoader"], ["excel", "ExcelTableFileLoader"]],
+                "first",
+                ["Name", "Loader"],
+                [["csv", "CsvTableFileLoader"], ["excel", "ExcelTableFileLoader"]],
             )
         )
         writer.write_table()
 
         writer.from_tabledata(
-            TableData(
-                table_name="second",
-                header_list=["a", "b", "c"],
-                row_list=[["1", "AA", "abc"], ["2", "BB", "zzz"]],
-            )
+            TableData("second", ["a", "b", "c"], [["1", "AA", "abc"], ["2", "BB", "zzz"]])
         )
         writer.write_table()
 
@@ -527,9 +523,9 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.from_tabledata(
             TableData(
-                table_name="auto align",
-                header_list=["left", "right", "center", "auto", "auto", "None"],
-                row_list=[
+                "auto align",
+                ["left", "right", "center", "auto", "auto", "None"],
+                [
                     [0, "r", "center align", 0, "a", "n"],
                     [11, "right align", "bb", 11, "auto", "none (auto)"],
                 ],
@@ -581,15 +577,9 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.from_tabledata(
             TableData(
-                table_name="",
-                header_list=[
-                    "none_format",
-                    "thousand_separator_i",
-                    "thousand_separator_f",
-                    "f",
-                    "wo_f",
-                ],
-                row_list=[
+                "",
+                ["none_format", "thousand_separator_i", "thousand_separator_f", "f", "wo_f"],
+                [
                     [1000, 1234567, 1234567.8, 1234.5678, 1234567.8],
                     [1000, 1234567, 1234567.8, 1234.5678, 1234567.8],
                 ],
@@ -768,9 +758,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(
-            TableData(table_name="", header_list=header_list, row_list=value_matrix)
-        )
+        writer.from_tabledata(TableData("", header_list, value_matrix))
         writer.margin = 1
         writer.write_table()
 
@@ -791,9 +779,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_margin_2(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(
-            TableData(table_name="", header_list=header_list, row_list=value_matrix)
-        )
+        writer.from_tabledata(TableData("", header_list, value_matrix))
         writer.margin = 2
         writer.write_table()
 
@@ -883,9 +869,9 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.from_tabledata(
             TableData(
-                table_name="",
-                header_list=["no", "text"],
-                row_list=[[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]],
+                "",
+                ["no", "text"],
+                [[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]],
             )
         )
         writer.is_escape_html_tag = True

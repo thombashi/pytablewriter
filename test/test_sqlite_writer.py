@@ -128,9 +128,7 @@ class Test_SqliteTableWriter_dump(object):
     def test_normal_single_table(self, tmpdir):
         test_filepath = str(tmpdir.join("test.sqlite"))
         data = TableData(
-            table_name="tablename",
-            header_list=["ha", "hb", "hc"],
-            row_list=[[1.0, 2.0, 3.0], [11.0, 12.0, 13.0], [1.0, 2.0, 3.0]],
+            "tablename", ["ha", "hb", "hc"], [[1.0, 2.0, 3.0], [11.0, 12.0, 13.0], [1.0, 2.0, 3.0]]
         )
 
         writer = ptw.SqliteTableWriter()
@@ -143,16 +141,8 @@ class Test_SqliteTableWriter_dump(object):
     def test_normal_multi_table(self, tmpdir):
         test_filepath = str(tmpdir.join("test.sqlite"))
         data_list = [
-            TableData(
-                table_name="first",
-                header_list=["ha1", "hb1", "hc1"],
-                row_list=[[1.0, 2.0, 3.0], [11.0, 12.0, 13.0]],
-            ),
-            TableData(
-                table_name="second",
-                header_list=["ha2", "hb2", "hc2"],
-                row_list=[[11.0, 12.0, 13.0], [1.0, 2.0, 3.0]],
-            ),
+            TableData("first", ["ha1", "hb1", "hc1"], [[1.0, 2.0, 3.0], [11.0, 12.0, 13.0]]),
+            TableData("second", ["ha2", "hb2", "hc2"], [[11.0, 12.0, 13.0], [1.0, 2.0, 3.0]]),
         ]
 
         writer = ptw.SqliteTableWriter()
@@ -181,9 +171,9 @@ class Test_SqliteTableWriter_write_table_iter(object):
                 ["ha", "hb", "hc"],
                 value_matrix_iter,
                 TableData(
-                    table_name="tablename",
-                    header_list=["ha", "hb", "hc"],
-                    row_list=[
+                    "tablename",
+                    ["ha", "hb", "hc"],
+                    [
                         [1.0, 2.0, 3.0],
                         [11.0, 12.0, 13.0],
                         [1.0, 2.0, 3.0],

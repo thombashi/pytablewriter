@@ -109,8 +109,8 @@ null_test_data_list = [
 ]
 
 style_tabledata = TableData(
-    table_name="style test",
-    header_list=[
+    "style test",
+    [
         "none",
         "empty",
         "tiny",
@@ -121,7 +121,8 @@ style_tabledata = TableData(
         "L bold",
         "S italic",
         "L bold italic",
-    ], row_list=[
+    ],
+    [
         [111, 111, 111, 111, 111, 111, "", 111, 111, 111],
         [1234, 1234, 1234, 1234, 1234, 1234, "", 1234, 1234, 1234],
     ])

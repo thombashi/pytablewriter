@@ -260,9 +260,7 @@ class Test_RstGridTableWriter_write_table(object):
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(
-            TableData(table_name="margin 1", header_list=header_list, row_list=value_matrix)
-        )
+        writer.from_tabledata(TableData("margin 1", header_list, value_matrix))
         writer.margin = 1
         writer.write_table()
 
@@ -289,9 +287,7 @@ class Test_RstGridTableWriter_write_table(object):
 
     def test_normal_margin_2(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(
-            TableData(table_name="margin 2", header_list=header_list, row_list=value_matrix)
-        )
+        writer.from_tabledata(TableData("margin 2", header_list, value_matrix))
         writer.margin = 2
         writer.write_table()
 
