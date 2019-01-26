@@ -206,7 +206,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
                 Path to the workbook file to write.
             close_after_write (bool, optional):
                 Close the workbook after write.
-                Defaults to True.
+                Defaults to |True|.
         """
 
         self.open(output)

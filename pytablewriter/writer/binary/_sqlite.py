@@ -86,7 +86,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
             output (file descriptor or filepath):
             close_after_write (bool, optional):
                 Close the output after write.
-                Defaults to True.
+                Defaults to |True|.
         """
 
         self.open(output)

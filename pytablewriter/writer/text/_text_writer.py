@@ -144,7 +144,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                 file descriptor or path to the output file.
             close_after_write (bool, optional):
                 Close the output after write.
-                Defaults to True.
+                Defaults to |True|.
         """
 
         try:
