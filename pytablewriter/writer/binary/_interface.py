@@ -21,3 +21,7 @@ class BinaryWriterInterface(object):
 class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
     def dumps(self):
         raise NotImplementedError("binary format writers did not support dumps method")
+
+    def _verify_stream(self):
+        if self.stream is None:
+            raise IOError("null output stream. required to open(file_path) first.")
