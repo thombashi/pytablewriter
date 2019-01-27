@@ -185,7 +185,7 @@ class AbstractTableWriter(TableWriterInterface):
             - :ref:`example-type-hint-python`
         """
 
-        return self._dp_extractor.column_type_hint_list
+        return self._dp_extractor.column_type_hints
 
     @type_hint_list.setter
     def type_hint_list(self, value):
@@ -507,8 +507,8 @@ class AbstractTableWriter(TableWriterInterface):
         if is_overwrite_table_name:
             self.table_name = value.table_name
 
-        self.header_list = value.header_list
-        self.value_matrix = value.row_list
+        self.header_list = value.headers
+        self.value_matrix = value.rows
 
         if not value.has_value_dp_matrix:
             return
@@ -780,7 +780,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.__value_matrix_org = value_matrix
 
     def __set_type_hint_list(self, type_hint_list):
-        self._dp_extractor.column_type_hint_list = type_hint_list
+        self._dp_extractor.column_type_hints = type_hint_list
 
     def _verify_table_name(self):
         if all([self._is_require_table_name, typepy.is_null_string(self.table_name)]):
