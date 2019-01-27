@@ -9,7 +9,6 @@ from __future__ import absolute_import, unicode_literals
 import abc
 import math
 import re
-import sys
 
 import msgfy
 import six
