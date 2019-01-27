@@ -102,8 +102,6 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         else:
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
-        self._preprocess()
-
         org_stream = self.stream
         self.stream = six.StringIO()
 
