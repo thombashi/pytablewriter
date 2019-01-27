@@ -1,5 +1,5 @@
-Write a table
-================================
+Write table(s) with a specific format
+===========================================
 
 .. toctree::
    :maxdepth: 2
