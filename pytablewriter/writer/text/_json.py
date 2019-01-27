@@ -9,6 +9,7 @@ import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
+from typepy import Typecode
 
 from ..._converter import strip_quote
 from ._text_writer import IndentationTextTableWriter
@@ -63,9 +64,9 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         self._is_require_header = True
         self._dp_extractor.type_value_map = {
-            typepy.Typecode.NONE: "null",
-            typepy.Typecode.INFINITY: "Infinity",
-            typepy.Typecode.NAN: "NaN",
+            Typecode.NONE: "null",
+            Typecode.INFINITY: "Infinity",
+            Typecode.NAN: "NaN",
         }
         self.value_map = {True: "true", False: "false"}
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
@@ -85,7 +86,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             for json_data in self._table_value_matrix:
                 json_text = json.dumps(json_data, sort_keys=True, indent=4 * self._indent_level)
                 json_text = strip_quote(
-                    json_text, self._dp_extractor.type_value_map.get(typepy.Typecode.NONE)
+                    json_text, self._dp_extractor.type_value_map.get(Typecode.NONE)
                 )
                 json_text = strip_quote(json_text, "true")
                 json_text = strip_quote(json_text, "false")
@@ -120,10 +121,10 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     @staticmethod
     def __get_data_helper(dp):
-        if dp.typecode == typepy.Typecode.REAL_NUMBER and isinstance(dp.data, Decimal):
+        if dp.typecode == Typecode.REAL_NUMBER and isinstance(dp.data, Decimal):
             return float(dp.data)
 
-        if dp.typecode == typepy.Typecode.DATETIME:
+        if dp.typecode == Typecode.DATETIME:
             return dp.to_str()
 
         return dp.data
