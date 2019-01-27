@@ -12,6 +12,7 @@ from six.moves import zip
 from typepy import Typecode
 
 from ..._converter import strip_quote
+from ._common import bool_to_str
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -68,7 +69,8 @@ class JsonTableWriter(IndentationTextTableWriter):
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
-        self.value_map = {True: "true", False: "false"}
+        self._dp_extractor.strict_level_map[Typecode.BOOL] = typepy.StrictLevel.MAX
+        self.trans_func = bool_to_str
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
     def write_null_line(self):

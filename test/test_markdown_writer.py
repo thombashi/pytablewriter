@@ -128,11 +128,11 @@ normal_test_data_list = [
         is_formatting_float=True,
         expected=dedent(
             """\
-            | i | f  | c  | if |ifc|bool |  inf   |nan|mix_num |          time           |
-            |--:|---:|----|---:|---|-----|--------|---|-------:|-------------------------|
-            |  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01T00:00:00      |
-            |  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
-            |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01T00:00:00      |
+            | i | f  | c  | if |ifc|bool|  inf   |nan|mix_num |          time           |
+            |--:|---:|----|---:|---|----|--------|---|-------:|-------------------------|
+            |  1|1.10|aa  | 1.0|  1|X   |Infinity|NaN|       1|2017-01-01T00:00:00      |
+            |  2|2.20|bbb | 2.2|2.2|    |Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
+            |  3|3.33|cccc|-3.0|ccc|X   |Infinity|NaN|     NaN|2017-01-01T00:00:00      |
             """
         ),
     ),
@@ -402,6 +402,16 @@ exception_test_data_list = [
 table_writer_class = ptw.MarkdownTableWriter
 
 
+def trans_func(value):
+    if value is None:
+        return ""
+    if value is True:
+        return "X"
+    if value is False:
+        return ""
+    return value
+
+
 class Test_MarkdownTableWriter_write_new_line(object):
     def test_normal(self, capsys):
         writer = table_writer_class()
@@ -433,6 +443,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.header_list = header
         writer.value_matrix = value
         writer.is_formatting_float = is_formatting_float
+        writer.trans_func = trans_func
         writer.write_table()
 
         out, err = capsys.readouterr()
@@ -802,7 +813,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.header_list = ["a", "b"]
         writer.value_matrix = [["foo", True], ["bar", False]]
-        writer.value_map = {True: "X", False: ""}
+        writer.trans_func = trans_func
 
         expected = dedent(
             """\

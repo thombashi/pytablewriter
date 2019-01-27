@@ -4,10 +4,12 @@ from __future__ import absolute_import, unicode_literals
 
 import six
 from dataproperty import DataProperty, DefaultValue
-from typepy import Typecode
+from typepy import StrictLevel, Typecode
 
+from ...._converter import strip_quote
 from ...._function import quote_datetime_formatter
 from ....sanitizer import sanitize_js_var_name
+from .._common import bool_to_str
 from ._sourcecode import SourceCodeTableWriter
 
 
@@ -91,7 +93,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
-        self.value_map = {True: "true", False: "false"}
+        self._dp_extractor.strict_level_map[Typecode.BOOL] = StrictLevel.MAX
+        self.trans_func = bool_to_str
 
     def get_variable_name(self, value):
         return sanitize_js_var_name(value, "_").lower()
@@ -109,6 +112,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         super(JavaScriptTableWriter, self)._write_table()
         self.dec_indent_level()
         js_matrix_var_def_text = self.stream.getvalue().rstrip("\n")
+        js_matrix_var_def_text = strip_quote(js_matrix_var_def_text, "true")
+        js_matrix_var_def_text = strip_quote(js_matrix_var_def_text, "false")
         if self.is_write_closing_row:
             js_matrix_var_def_line_list = js_matrix_var_def_text.splitlines()
             js_matrix_var_def_line_list[-2] = js_matrix_var_def_line_list[-2].rstrip(",")

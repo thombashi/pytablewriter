@@ -273,6 +273,18 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def trans_func(self):
+        return self._dp_extractor.trans_func
+
+    @trans_func.setter
+    def trans_func(self, value):
+        if self._dp_extractor.trans_func is value:
+            return
+
+        self._dp_extractor.trans_func = value
+        self.__clear_preprocess()
+
+    @property
     def value_map(self):
         return self._dp_extractor.const_value_map
 
@@ -346,6 +358,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.strip_str_value = '"'
         self._dp_extractor.type_value_map[Typecode.NONE] = ""
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
+        self._dp_extractor.strict_level_map[Typecode.BOOL] = 1
 
         self.is_formatting_float = True
         self.is_padding = True
