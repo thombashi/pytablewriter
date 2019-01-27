@@ -102,6 +102,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def __init__(self):
         super(TextTableWriter, self).__init__()
 
+        self.stream = sys.stdout
+
         self.column_delimiter = "|"
         self.char_left_side_row = ""
         self.char_right_side_row = ""

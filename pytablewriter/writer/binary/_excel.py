@@ -102,7 +102,6 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
     def __init__(self):
         super(ExcelTableWriter, self).__init__()
 
-        self.stream = None
         self._workbook = None
 
         self._dp_extractor.type_value_map = {
@@ -195,7 +194,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         if not sheet_name:
             sheet_name = ""
 
-        self.stream = self.workbook.add_worksheet(sheet_name)
+        self._stream = self.workbook.add_worksheet(sheet_name)
         self._current_data_row = self._first_data_row
 
     def dump(self, output, close_after_write=True):

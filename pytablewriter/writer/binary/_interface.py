@@ -19,6 +19,21 @@ class BinaryWriterInterface(object):
 
 
 class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
+    @property
+    def stream(self):
+        return self._stream
+
+    @stream.setter
+    def stream(self, value):
+        raise RuntimeError(
+            "cannot assign a stream to binary format writers. use open method instead."
+        )
+
+    def __init__(self):
+        super(AbstractBinaryTableWriter, self).__init__()
+
+        self._stream = None
+
     def dumps(self):
         raise NotImplementedError("binary format writers did not support dumps method")
 

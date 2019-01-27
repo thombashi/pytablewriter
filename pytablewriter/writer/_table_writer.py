@@ -307,6 +307,14 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
+    def stream(self):
+        return self._stream
+
+    @stream.setter
+    def stream(self, value):
+        self._stream = value
+
+    @property
     def _quoting_flags(self):
         return self._dp_extractor.quoting_flags
 
@@ -322,7 +330,6 @@ class AbstractTableWriter(TableWriterInterface):
     def __init__(self):
         self._logger = WriterLogger(self)
 
-        self.stream = sys.stdout
         self._table_name = None
         self.value_matrix = None
 
@@ -477,7 +484,7 @@ class AbstractTableWriter(TableWriterInterface):
                 "the stream has no close method implementation: type={}".format(type(self.stream))
             )
         finally:
-            self.stream = None
+            self._stream = None
 
     def from_tabledata(self, value, is_overwrite_table_name=True):
         """

@@ -43,7 +43,6 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         super(SqliteTableWriter, self).__init__()
 
-        self.stream = None
         self.is_padding = False
         self.is_formatting_float = False
         self._use_default_header = True
@@ -77,7 +76,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
             self.close()
 
-        self.stream = SimpleSQLite(file_path, "w")
+        self._stream = SimpleSQLite(file_path, "w")
 
     def dump(self, output, close_after_write=True):
         """Write data to the SQLite database file.
