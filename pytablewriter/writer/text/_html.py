@@ -12,7 +12,17 @@ from six.moves import zip
 from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
 from ...style import FontStyle, FontWeight, HtmlStyler
+from .._common import import_error_msg_template
 from ._text_writer import TextTableWriter
+
+
+def _get_tags_module():
+    try:
+        from dominate import tags
+
+        return tags
+    except ImportError:
+        raise ImportError(import_error_msg_template.format("html"))
 
 
 class HtmlTableWriter(TextTableWriter):
@@ -53,7 +63,7 @@ class HtmlTableWriter(TextTableWriter):
             - |None| is not written
         """
 
-        import dominate.tags as tags
+        tags = _get_tags_module()
 
         with self._logger:
             self._verify_property()
@@ -73,7 +83,7 @@ class HtmlTableWriter(TextTableWriter):
             self._write_body()
 
     def _write_header(self):
-        import dominate.tags as tags
+        tags = _get_tags_module()
 
         if not self.is_write_header:
             return
@@ -91,8 +101,7 @@ class HtmlTableWriter(TextTableWriter):
         self._table_tag += thead_tag
 
     def _write_body(self):
-        import dominate.tags as tags
-
+        tags = _get_tags_module()
         tbody_tag = tags.tbody()
 
         for value_list, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):

@@ -10,6 +10,7 @@ import typepy
 
 from ..._logger import logger
 from ...sanitizer import sanitize_excel_sheet_name
+from .._common import import_error_msg_template
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -64,7 +65,10 @@ class ExcelWorkbookXls(ExcelWorkbook):
         self.open(file_path)
 
     def open(self, file_path):
-        import xlwt
+        try:
+            import xlwt
+        except ImportError:
+            raise ImportError(import_error_msg_template.format("excel"))
 
         self._workbook = xlwt.Workbook()
 
@@ -107,7 +111,10 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         self.open(file_path)
 
     def open(self, file_path):
-        import xlsxwriter
+        try:
+            import xlsxwriter
+        except ImportError:
+            raise ImportError(import_error_msg_template.format("excel"))
 
         self._workbook = xlsxwriter.Workbook(file_path)
 

@@ -10,6 +10,7 @@ import typepy
 from six.moves import range
 from typepy import Integer
 
+from .._common import import_error_msg_template
 from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import AbstractBinaryTableWriter
 
@@ -301,7 +302,10 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         self.__col_style_table = {}
 
     def __get_cell_style(self, col):
-        import xlwt
+        try:
+            import xlwt
+        except ImportError:
+            raise ImportError(import_error_msg_template.format("excel"))
 
         if col in self.__col_style_table:
             return self.__col_style_table.get(col)
