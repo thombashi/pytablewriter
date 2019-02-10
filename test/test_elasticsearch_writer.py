@@ -17,7 +17,7 @@ import simplejson as json
 import six  # noqa: W0611
 
 from ._common import print_test_result
-from .data import header_list, mix_header_list, mix_value_matrix, value_matrix
+from .data import header_list, value_matrix
 
 
 inf = Decimal("Infinity")

@@ -2,8 +2,6 @@
 
 from __future__ import unicode_literals
 
-import sys
-
 
 def bool_to_str(value):
     if value is True:
