@@ -15,6 +15,7 @@ build:
 		cd $(PACKAGE); \
 		python setup.py build
 	ls $(BUILD_WORK_DIR)/$(PACKAGE)/dist/
+	@twine check $(DIST_DIR)/*
 
 .PHONY: clean
 clean:

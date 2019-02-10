@@ -103,7 +103,7 @@ setuptools.setup(
     tests_require=tests_requires,
     extras_require={
         "all": all_requires,
-        "build": ["wheel"],
+        "build": ["twine", "wheel"],
         "docs": docs_requires,
         "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
