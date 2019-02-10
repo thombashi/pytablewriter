@@ -111,7 +111,7 @@ setuptools.setup(
         "html": html_requires,
         "from": from_requires,
         "logging": logging_requires,
-        "release": ["releasecmd>=0.0.14,<0.1.0"],
+        "release": ["releasecmd>=0.0.18,<0.1.0"],
         "sqlite": sqlite_requires,
         "test": tests_requires,
         "toml": toml_requires,
