@@ -247,29 +247,12 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
 
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
 class Test_PandasDataFrameWriter_from_dataframe(object):
-    @pytest.mark.parametrize(
-        ["table", "expected"],
-        [
-            [
-                "tablename",
-                dedent(
-                    """\
-                tablename = pd.DataFrame([
-                    [1, 0.125, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
-                    [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
-                    [3, 3333.3, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
-                ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
-                """
-                ),
-            ]
-        ],
-    )
-    def test_normal(self, capsys, table, expected):
+    def test_normal(self):
         import dateutil
         from typepy import Integer, RealNumber
 
         writer = table_writer_class()
-        writer.table_name = table
+        writer.table_name = "pd dataframe"
         writer.from_dataframe(
             pandas.DataFrame(
                 [
@@ -314,6 +297,16 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
             )
         )
 
+        expected = dedent(
+            """\
+            pd_dataframe = pd.DataFrame([
+                [1, 0.125, "aa", 1, 1, True, np.inf, np.nan, 1, dateutil.parser.parse("2017-01-01T00:00:00")],
+                [2, 2.2, "bbb", 2.2, 2.2, False, np.inf, np.nan, np.inf, dateutil.parser.parse("2017-01-02T03:04:05+0900")],
+                [3, 3333.3, "cccc", -3, "ccc", True, np.inf, np.nan, np.nan, dateutil.parser.parse("2017-01-01T00:00:00")],
+            ], columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"])
+            """
+        )
+
         assert writer.value_matrix is not None
         assert writer.type_hint_list == [
             Integer,
@@ -328,9 +321,7 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
             None,
         ]
 
-        writer.write_table()
-
-        out, err = capsys.readouterr()
-        print_test_result(expected=expected, actual=out, error=err)
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
 
         assert out == expected
