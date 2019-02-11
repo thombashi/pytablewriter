@@ -298,20 +298,6 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
-    def value_map(self):
-        # deprecated
-        return self._dp_extractor.const_value_map
-
-    @value_map.setter
-    def value_map(self, value):
-        # deprecated
-        if self._dp_extractor.const_value_map == value:
-            return
-
-        self._dp_extractor.const_value_map = value
-        self.__clear_preprocess()
-
-    @property
     def line_break_handling(self):
         return self._dp_extractor.line_break_handling
 
