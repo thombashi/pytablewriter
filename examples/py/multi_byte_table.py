@@ -10,7 +10,7 @@ import pytablewriter
 
 writer = pytablewriter.RstSimpleTableWriter()
 writer.table_name = "生成に関するパターン"
-writer.header_list = ["パターン名", "概要", "GoF", "Code Complete[1]"]
+writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
 writer.value_matrix = [
     ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
     ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],

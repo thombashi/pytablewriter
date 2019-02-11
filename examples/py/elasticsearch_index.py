@@ -35,7 +35,7 @@ def main():
     writer = ptw.ElasticsearchWriter()
     writer.stream = es
     writer.index_name = "es writer example"
-    writer.header_list = [
+    writer.headers = [
         "str", "byte", "short", "int", "long", "float", "date", "bool", "ip",
     ]
     writer.value_matrix = [
