@@ -3,7 +3,7 @@
 Type Hint: Python Code
 -----------------------------
 You can specify type hints to a writer via 
-:py:attr:`~AbstractTableWriter.type_hint_list`.
+:py:attr:`~AbstractTableWriter.type_hints`.
 
 :Sample Code:
     .. code-block:: python
@@ -20,13 +20,13 @@ You can specify type hints to a writer via
 
         # column data types detected automatically by default
         writer.table_name = "python variable without type hints"
-        writer.header_list = ["float", "infnan", "string", "datetime"]
+        writer.headers = ["float", "infnan", "string", "datetime"]
         writer.write_table()
 
         # set type hints
         writer.table_name = "python variable with type hints"
-        writer.header_list = ["hint_int", "hint_str", "hint_datetime", "hint_str"]
-        writer.type_hint_list = [ptw.Integer, ptw.String, ptw.DateTime, ptw.String]
+        writer.headers = ["hint_int", "hint_str", "hint_datetime", "hint_str"]
+        writer.type_hints = [ptw.Integer, ptw.String, ptw.DateTime, ptw.String]
         writer.write_table()
 
 :Output:

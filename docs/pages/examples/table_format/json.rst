@@ -16,7 +16,7 @@ JSON with a table name
 
         writer = JsonTableWriter()
         writer.table_name = "example_table"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -73,7 +73,7 @@ JSON without a table name
         from pytablewriter import JsonTableWriter
 
         writer = JsonTableWriter()
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -132,7 +132,7 @@ JSON lines
         from pytablewriter import JsonLinesTableWriter
 
         writer = JsonLinesTableWriter()
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],

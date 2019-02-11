@@ -359,8 +359,8 @@ rp_attr = u"""
 .. |table_name| replace::
     :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.table_name`
 
-.. |header_list| replace::
-    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.header_list`
+.. |headers| replace::
+    :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.headers`
 
 .. |value_matrix| replace::
     :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.value_matrix`

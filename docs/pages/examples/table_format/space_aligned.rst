@@ -12,7 +12,7 @@ that aligned column with multiple spaces, to the |stream| from a matrix of data.
         import pytablewriter
 
         writer = pytablewriter.SpaceAlignedTableWriter()
-        writer.header_list = ["PID", "USER", "PR", "NI", "VIRT", "RES", "SHR", "S", "%CPU", "%MEM", "TIME+", "COMMAND"]
+        writer.headers = ["PID", "USER", "PR", "NI", "VIRT", "RES", "SHR", "S", "%CPU", "%MEM", "TIME+", "COMMAND"]
         writer.value_matrix = csv1 = [
             [32866, "root", 20, 0, 48344, 3924, 3448, "R", 5.6, 0.2, "0:00.03", "top"],
             [1, "root", 20, 0, 212080, 7676, 5876, "S", 0, 0.4, "1:06.56", "systemd"],

@@ -1,4 +1,4 @@
-# set style by style_list
+# set style by styles
 |auto align|left align|center align|  bold  |italic|bold italic ts|
 |---------:|----------|:----------:|-------:|-----:|-------------:|
 |        11|11        |     11     |  **11**|  _11_|      _**11**_|

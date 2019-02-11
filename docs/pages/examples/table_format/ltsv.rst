@@ -13,7 +13,7 @@ table to the |stream| from a matrix of data.
         import pytablewriter
 
         writer = pytablewriter.LtsvTableWriter()
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],

@@ -3,7 +3,7 @@
 Type Hint: JavaScript Code
 -----------------------------
 You can specify type hints to a writer via 
-:py:attr:`~AbstractTableWriter.type_hint_list`.
+:py:attr:`~AbstractTableWriter.type_hints`.
 
 :Sample Code:
     .. code-block:: python
@@ -13,7 +13,7 @@ You can specify type hints to a writer via
         import pytablewriter as ptw
 
         writer = ptw.JavaScriptTableWriter()
-        writer.header_list = ["header_a", "header_b", "header_c"]
+        writer.headers = ["header_a", "header_b", "header_c"]
         writer.value_matrix = [
             [-1.1, "2017-01-02 03:04:05", datetime(2017, 1, 2, 3, 4, 5)],
             [0.12, "2017-02-03 04:05:06", datetime(2017, 2, 3, 4, 5, 6)],
@@ -25,7 +25,7 @@ You can specify type hints to a writer via
 
         print("// with type hints: Integer, DateTime, String")
         writer.table_name = "with type hint"
-        writer.type_hint_list = [ptw.Integer, ptw.DateTime, ptw.String]
+        writer.type_hints = [ptw.Integer, ptw.DateTime, ptw.String]
         writer.write_table()
 
 :Output:

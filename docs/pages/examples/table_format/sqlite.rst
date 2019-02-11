@@ -16,7 +16,7 @@ a SQLite database file from a matrix of data.
 
         # create the first table
         writer.table_name = "example"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
@@ -27,7 +27,7 @@ a SQLite database file from a matrix of data.
 
         # write the second table
         writer.table_name = "Timezone"
-        writer.header_list = [
+        writer.headers = [
             "zone_id", "abbreviation", "time_start", "gmt_offset", "dst",
         ]
         writer.value_matrix = [
