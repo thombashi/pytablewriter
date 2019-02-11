@@ -221,40 +221,36 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def align_list(self):
-        warnings.warn(
-            "align_list property has integrated into styles property.", DeprecationWarning
-        )
+        # deprecated: align_list property has integrated into styles property
 
         return self.__align_list
 
     @align_list.setter
     def align_list(self, value):
+        if self.align_list == value:
+            return
+
         warnings.warn(
             "align_list property has integrated into styles property.", DeprecationWarning
         )
-
-        if self.align_list == value:
-            return
 
         self.__align_list = value
         self.__clear_preprocess()
 
     @property
     def format_list(self):
-        warnings.warn(
-            "format_list property has integrated into styles property.", DeprecationWarning
-        )
+        # deprecated: format_list property has integrated into styles property.
 
         return self._dp_extractor.format_flags_list
 
     @format_list.setter
     def format_list(self, value):
+        if self.format_list == value:
+            return
+
         warnings.warn(
             "format_list property has integrated into styles property.", DeprecationWarning
         )
-
-        if self.format_list == value:
-            return
 
         self._dp_extractor.format_flags_list = value
         self.__clear_preprocess()
