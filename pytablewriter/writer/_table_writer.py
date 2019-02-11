@@ -9,6 +9,7 @@ from __future__ import absolute_import, unicode_literals
 import abc
 import math
 import re
+import warnings
 
 import msgfy
 import six
@@ -274,10 +275,18 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def trans_func(self):
+        warnings.warn(
+            "trans_func property now deprecated, register_trans_func() instead.", DeprecationWarning
+        )
+
         return self._dp_extractor.trans_func
 
     @trans_func.setter
     def trans_func(self, value):
+        warnings.warn(
+            "trans_func property now deprecated, register_trans_func() instead.", DeprecationWarning
+        )
+
         if self._dp_extractor.trans_func is value:
             return
 
