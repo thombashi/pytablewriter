@@ -112,7 +112,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
         assert mappings == expected_mappings
 
         # mappings w/ type hint ---
-        writer.type_hint_list = [None, None, None, None, None, None, None, None, ptw.IpAddress]
+        writer.type_hints = [None, None, None, None, None, None, None, None, ptw.IpAddress]
         writer._preprocess()
         mappings = writer._get_mappings()
         expected_mappings = {

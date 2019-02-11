@@ -148,7 +148,7 @@ class AbstractTableWriter(TableWriterInterface):
         return TableData(self.table_name, self.header_list, self.value_matrix)
 
     @property
-    def type_hint_list(self):
+    def type_hints(self):
         """
         Type hints for each column of the tabular data.
         Writers convert data for each column using the type hints information
@@ -175,7 +175,7 @@ class AbstractTableWriter(TableWriterInterface):
         the writer automatically detect column data type from
         the column data.
 
-        If ``type_hint_list`` is |None|, the writer detects data types for all
+        If ``type_hints`` is |None|, the writer detects data types for all
         of the columns automatically and writes a table by using detected column types.
 
         Defaults to |None|.
@@ -187,13 +187,25 @@ class AbstractTableWriter(TableWriterInterface):
 
         return self._dp_extractor.column_type_hints
 
-    @type_hint_list.setter
-    def type_hint_list(self, value):
-        if self.type_hint_list == value:
+    @type_hints.setter
+    def type_hints(self, value):
+        if self.type_hints == value:
             return
 
-        self.__set_type_hint_list(value)
+        self.__set_type_hints(value)
         self.__clear_preprocess()
+
+    @property
+    def type_hint_list(self):
+        """
+        alias for :py:attr:`~.type_hints`.
+        """
+
+        return self.type_hints
+
+    @type_hint_list.setter
+    def type_hint_list(self, value):
+        self.type_hints = value
 
     @property
     def align_list(self):
@@ -374,7 +386,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_escape_html_tag = False
 
         self.header_list = None
-        self.type_hint_list = None
+        self.type_hints = None
         self._quoting_flags = {
             Typecode.BOOL: False,
             Typecode.DATETIME: True,
@@ -538,7 +550,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._column_dp_list = self._dp_extractor.to_column_dp_list(
             self._table_value_dp_matrix, self._column_dp_list
         )
-        self.__set_type_hint_list([col_dp.type_class for col_dp in self._column_dp_list])
+        self.__set_type_hints([col_dp.type_class for col_dp in self._column_dp_list])
 
         self._is_complete_table_dp_preprocess = True
 
@@ -587,7 +599,7 @@ class AbstractTableWriter(TableWriterInterface):
 
             - :py:attr:`~.header_list`.
             - :py:attr:`~.value_matrix`.
-            - :py:attr:`~.type_hint_list`.
+            - :py:attr:`~.type_hints`.
 
         Args:
             dataframe(pandas.DataFrame):
@@ -601,12 +613,12 @@ class AbstractTableWriter(TableWriterInterface):
         """
 
         self.header_list = list(dataframe.columns.values)
-        self.type_hint_list = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
+        self.type_hints = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
 
         if add_index_column:
             self.header_list = [""] + self.header_list
-            if self.type_hint_list:
-                self.type_hint_list = [None] + self.type_hint_list
+            if self.type_hints:
+                self.type_hints = [None] + self.type_hints
             self.value_matrix = [
                 [index] + row
                 for index, row in zip(dataframe.index.tolist(), dataframe.values.tolist())
@@ -684,8 +696,8 @@ class AbstractTableWriter(TableWriterInterface):
 
                 # update typehint for the next iteration
                 """
-                if self.type_hint_list is None:
-                    self.__set_type_hint_list([
+                if self.type_hints is None:
+                    self.__set_type_hints([
                         column_dp.type_class for column_dp in self._column_dp_list
                     ])
                 """
@@ -815,8 +827,8 @@ class AbstractTableWriter(TableWriterInterface):
     def __set_value_matrix(self, value_matrix):
         self.__value_matrix_org = value_matrix
 
-    def __set_type_hint_list(self, type_hint_list):
-        self._dp_extractor.column_type_hints = type_hint_list
+    def __set_type_hints(self, type_hints):
+        self._dp_extractor.column_type_hints = type_hints
 
     def _verify_table_name(self):
         if all([self._is_require_table_name, typepy.is_null_string(self.table_name)]):

@@ -286,7 +286,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
         writer.table_name = table
         writer.header_list = header
         writer.value_matrix = value
-        writer.type_hint_list = type_hint
+        writer.type_hints = type_hint
 
         writer.write_table()
 

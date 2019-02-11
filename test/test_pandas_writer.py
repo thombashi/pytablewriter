@@ -308,7 +308,7 @@ class Test_PandasDataFrameWriter_from_dataframe(object):
         )
 
         assert writer.value_matrix is not None
-        assert writer.type_hint_list == [
+        assert writer.type_hints == [
             Integer,
             RealNumber,
             None,
