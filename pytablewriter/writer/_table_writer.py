@@ -119,11 +119,11 @@ class AbstractTableWriter(TableWriterInterface):
         List of table header to write.
         """
 
-        return self._dp_extractor.header_list
+        return self._dp_extractor.headers
 
     @header_list.setter
     def header_list(self, value):
-        self._dp_extractor.header_list = value
+        self._dp_extractor.headers = value
 
     @property
     def value_matrix(self):
