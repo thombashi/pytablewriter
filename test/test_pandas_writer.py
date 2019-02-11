@@ -10,6 +10,7 @@ from textwrap import dedent
 
 import pytablewriter
 import pytest
+from typepy import Integer, RealNumber
 
 from ._common import print_test_result
 from .data import (
@@ -26,7 +27,7 @@ from .data import (
 
 try:
     import numpy as np
-    import pandas
+    import pandas as pd
 
     SKIP_DATAFRAME_TEST = False
 except ImportError:
@@ -249,12 +250,11 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
 class Test_PandasDataFrameWriter_from_dataframe(object):
     def test_normal(self):
         import dateutil
-        from typepy import Integer, RealNumber
 
         writer = table_writer_class()
         writer.table_name = "pd dataframe"
         writer.from_dataframe(
-            pandas.DataFrame(
+            pd.DataFrame(
                 [
                     [
                         1,
