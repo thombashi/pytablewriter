@@ -24,8 +24,8 @@ from .data import (
     headers,
     mix_header_list,
     mix_value_matrix,
-    style_list,
     style_tabledata,
+    styles,
     value_matrix,
     value_matrix_iter,
     value_matrix_iter_1,
@@ -564,7 +564,7 @@ class Test_MarkdownTableWriter_write_table(object):
         assert out == expected
 
         writer.table_name = "specify alignment for each column manually"
-        writer.style_list = [
+        writer.styles = [
             Style(align=Align.LEFT),
             Style(align=Align.RIGHT),
             Style(align=Align.CENTER),
@@ -586,7 +586,7 @@ class Test_MarkdownTableWriter_write_table(object):
         assert out == expected
 
         # test for backward compatibility
-        writer.style_list = None
+        writer.styles = None
         writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
@@ -605,7 +605,7 @@ class Test_MarkdownTableWriter_write_table(object):
             )
         )
 
-        writer.style_list = [
+        writer.styles = [
             Style(thousand_separator=ThousandSeparator.NONE),
             Style(thousand_separator=ThousandSeparator.COMMA),
             Style(thousand_separator=ThousandSeparator.COMMA),
@@ -623,7 +623,7 @@ class Test_MarkdownTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-        writer.style_list = None
+        writer.styles = None
         writer.format_list = [
             ptw.Format.NONE,
             ptw.Format.THOUSAND_SEPARATOR,
@@ -647,7 +647,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.table_name = "style test: font size will not be affected"
         writer.headers = ["none", "empty_style", "tiny", "small", "medium", "large"]
         writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
-        writer.style_list = [
+        writer.styles = [
             None,
             Style(),
             Style(font_size=FontSize.TINY),
@@ -675,7 +675,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.table_name = "style test: bold"
         writer.headers = ["normal", "bold"]
         writer.value_matrix = [[11, 11], [123456, 123456]]
-        writer.style_list = [Style(font_weight="normal"), Style(font_weight="bold")]
+        writer.styles = [Style(font_weight="normal"), Style(font_weight="bold")]
 
         expected = dedent(
             """\
@@ -694,7 +694,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_style_mix(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.style_list = style_list
+        writer.styles = styles
 
         expected = dedent(
             """\

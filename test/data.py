@@ -126,7 +126,7 @@ style_tabledata = TableData(
         [111, 111, 111, 111, 111, 111, "", 111, 111, 111],
         [1234, 1234, 1234, 1234, 1234, 1234, "", 1234, 1234, 1234],
     ])
-style_list = [
+styles = [
     None,
     Style(),
     Style(font_size="TINY"),

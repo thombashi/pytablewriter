@@ -18,8 +18,8 @@ from .data import (
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
-    style_list,
     style_tabledata,
+    styles,
     value_matrix,
     value_matrix_with_none,
 )
@@ -287,7 +287,7 @@ class Test_HtmlTableWriter_write_table(object):
     def test_normal_style_list(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.style_list = style_list
+        writer.styles = styles
         writer.write_table()
 
         expected = dedent(

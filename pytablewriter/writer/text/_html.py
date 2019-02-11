@@ -124,19 +124,19 @@ class HtmlTableWriter(TextTableWriter):
 
     @staticmethod
     def __make_style_tag(styler):
-        style_list = []
+        styles = []
 
         if styler.font_size:
-            style_list.append(styler.font_size)
+            styles.append(styler.font_size)
         if styler._style.font_weight == FontWeight.BOLD:
-            style_list.append("font-weight:bold")
+            styles.append("font-weight:bold")
         if styler._style.font_style == FontStyle.ITALIC:
-            style_list.append("font-style:italic")
+            styles.append("font-style:italic")
 
-        if not style_list:
+        if not styles:
             return None
 
-        return "; ".join(style_list)
+        return "; ".join(styles)
 
     def _create_styler(self, style, writer):
         return HtmlStyler(style, writer)

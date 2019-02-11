@@ -222,7 +222,7 @@ class AbstractTableWriter(TableWriterInterface):
     @property
     def align_list(self):
         warnings.warn(
-            "align_list property has integrated into style_list property.", DeprecationWarning
+            "align_list property has integrated into styles property.", DeprecationWarning
         )
 
         return self.__align_list
@@ -230,7 +230,7 @@ class AbstractTableWriter(TableWriterInterface):
     @align_list.setter
     def align_list(self, value):
         warnings.warn(
-            "align_list property has integrated into style_list property.", DeprecationWarning
+            "align_list property has integrated into styles property.", DeprecationWarning
         )
 
         if self.align_list == value:
@@ -242,7 +242,7 @@ class AbstractTableWriter(TableWriterInterface):
     @property
     def format_list(self):
         warnings.warn(
-            "format_list property has integrated into style_list property.", DeprecationWarning
+            "format_list property has integrated into styles property.", DeprecationWarning
         )
 
         return self._dp_extractor.format_flags_list
@@ -250,7 +250,7 @@ class AbstractTableWriter(TableWriterInterface):
     @format_list.setter
     def format_list(self, value):
         warnings.warn(
-            "format_list property has integrated into style_list property.", DeprecationWarning
+            "format_list property has integrated into styles property.", DeprecationWarning
         )
 
         if self.format_list == value:
@@ -279,7 +279,7 @@ class AbstractTableWriter(TableWriterInterface):
         return thousand_separator
 
     @property
-    def style_list(self):
+    def styles(self):
         """Output |Style| for each column.
 
         Returns:
@@ -288,8 +288,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         return self.__style_list
 
-    @style_list.setter
-    def style_list(self, value):
+    @styles.setter
+    def styles(self, value):
         if self.__style_list == value:
             return
 
@@ -304,6 +304,18 @@ class AbstractTableWriter(TableWriterInterface):
             self._dp_extractor.format_flags_list = []
 
         self.__clear_preprocess()
+
+    @property
+    def style_list(self):
+        """
+        alias for :py:attr:`~.styles`.
+        """
+
+        return self.styles
+
+    @style_list.setter
+    def style_list(self, value):
+        self.styles = value
 
     @property
     def trans_func(self):
@@ -443,7 +455,7 @@ class AbstractTableWriter(TableWriterInterface):
         writer.table_name = self.table_name
         writer.headers = self.headers
         writer.value_matrix = self.value_matrix
-        writer.style_list = self.style_list
+        writer.styles = self.styles
 
         return writer.dumps()
 
@@ -749,7 +761,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def __get_style(self, col_idx):
         try:
-            return self.style_list[col_idx]
+            return self.styles[col_idx]
         except (TypeError, IndexError, KeyError):
             return None
 

@@ -18,8 +18,8 @@ from .data import (
     float_value_matrix,
     mix_header_list,
     mix_value_matrix,
-    style_list,
     style_tabledata,
+    styles,
     value_matrix,
 )
 
@@ -101,7 +101,7 @@ class Test_LatexTableWriter_write_table(object):
     def test_normal_style_list(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.style_list = style_list
+        writer.styles = styles
 
         expected = r"""\begin{array}{r | r | r | r | r | r | l | r | r | r} \hline
     \verb|none| & \verb|empty| & \verb|  tiny   | & \verb|  small   | & \verb|     medium     | & \verb|   large   | & \verb|null w/ bold| & \verb|   L bold    | & \verb|  S italic   | & \verb| L bold italic  | \\ \hline
