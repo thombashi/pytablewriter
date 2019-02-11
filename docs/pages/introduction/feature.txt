@@ -1,25 +1,28 @@
 Features
 --------
 - Write a table in various formats:
-    - CSV / Tab-separated values (TSV)
-    - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
-    - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
-    - HTML
-    - JSON
-    - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
-    - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
-    - LaTeX: ``tabular``/``array`` environment
-    - Markdown
-    - MediaWiki
-    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
-    - Source code
-        - JavaScript code (Definition of a nested list variable)
-        - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-        - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
-        - Python code (Definition of a nested list variable)
-    - Space aligned values
-    - SQLite database file
-    - `TOML <https://github.com/toml-lang/toml>`__
+    - Text formats:
+        - CSV / Tab-separated values (TSV)
+        - HTML
+        - JSON
+        - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
+        - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
+        - LaTeX: ``tabular``/``array`` environment
+        - Markdown
+        - MediaWiki
+        - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
+        - Source code
+            - JavaScript code (Definition of a nested list variable)
+            - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
+            - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
+            - Python code (Definition of a nested list variable)
+        - Space aligned values
+        - `TOML <https://github.com/toml-lang/toml>`__
+    - Binary file formats:
+        - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
+        - SQLite database
+    - Application specific formats:
+        - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
 - Automatic tabular data formatting
     - Alignment
     - Padding
@@ -27,7 +30,7 @@ Features
 - Configure cell styles:
     - Text alignment
     - Font size/weight
-    - Thousand separator for numbers
+    - Thousand separator for numbers: e.g. ``1,000``/``1 000``
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
 - Get rendered tabular text

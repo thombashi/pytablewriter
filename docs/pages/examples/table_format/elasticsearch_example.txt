@@ -53,7 +53,7 @@
 
 
 :Output:
-    .. code-block:: json
+    .. code-block:: none
 
         ----- mappings -----
         {

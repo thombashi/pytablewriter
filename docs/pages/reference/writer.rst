@@ -1,6 +1,9 @@
 Table Writer Classes
 ====================================
 
+Text formats
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 CSV table writer classes
 -------------------------------
 
@@ -17,23 +20,6 @@ TSV writer
 LTSV writer
 -------------------------------
 .. autoclass:: pytablewriter.LtsvTableWriter
-
-
-Elasticsearch writer
--------------------------------
-.. autoclass:: pytablewriter.ElasticsearchWriter
-
-
-Excel writer classes
--------------------------------
-
-Xlsx table writer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. autoclass:: pytablewriter.ExcelXlsxTableWriter
-
-Xls table writer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. autoclass:: pytablewriter.ExcelXlsTableWriter
 
 
 LaTeX writer classes
@@ -115,18 +101,44 @@ Space aligned table writer
 .. autoclass:: pytablewriter.SpaceAlignedTableWriter
 
 
-SQLite writer class
--------------------------------
-.. autoclass:: pytablewriter.SqliteTableWriter
-
-
 TOML table writer class
 -------------------------------
 .. autoclass:: pytablewriter.TomlTableWriter
 
 
-Base table writer class
+
+Binary formats
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Excel writer classes
 -------------------------------
+
+Xlsx table writer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: pytablewriter.ExcelXlsxTableWriter
+
+Xls table writer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: pytablewriter.ExcelXlsTableWriter
+
+
+SQLite writer class
+-------------------------------
+.. autoclass:: pytablewriter.SqliteTableWriter
+
+
+
+Application specific formats
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Elasticsearch writer
+-------------------------------
+.. autoclass:: pytablewriter.ElasticsearchWriter
+
+
+
+Base writers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: pytablewriter.writer._table_writer.TableWriterInterface
     :members:

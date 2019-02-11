@@ -42,7 +42,7 @@ a SQLite database file from a matrix of data.
         writer.close()
 
 :Output:
-    .. code-block:: sql
+    .. code-block:: none
 
         $ sqlite3 sample.sqlite
         sqlite> .schema
