@@ -94,7 +94,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             Typecode.NAN: "NaN",
         }
         self._dp_extractor.strict_level_map[Typecode.BOOL] = StrictLevel.MAX
-        self.trans_func = bool_to_str
+        self.register_trans_func(bool_to_str)
 
     def get_variable_name(self, value):
         return sanitize_js_var_name(value, "_").lower()

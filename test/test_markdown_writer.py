@@ -443,7 +443,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer.header_list = header
         writer.value_matrix = value
         writer.is_formatting_float = is_formatting_float
-        writer.trans_func = trans_func
+        writer.register_trans_func(trans_func)
         writer.write_table()
 
         out, err = capsys.readouterr()
@@ -813,7 +813,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.header_list = ["a", "b"]
         writer.value_matrix = [["foo", True], ["bar", False]]
-        writer.trans_func = trans_func
+        writer.register_trans_func(trans_func)
 
         expected = dedent(
             """\

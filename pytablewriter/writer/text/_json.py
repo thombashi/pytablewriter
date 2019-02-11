@@ -70,8 +70,8 @@ class JsonTableWriter(IndentationTextTableWriter):
             Typecode.NAN: "NaN",
         }
         self._dp_extractor.strict_level_map[Typecode.BOOL] = typepy.StrictLevel.MAX
-        self.trans_func = bool_to_str
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
+        self.register_trans_func(bool_to_str)
 
     def write_null_line(self):
         self._verify_stream()

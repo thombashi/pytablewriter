@@ -284,6 +284,10 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.trans_func = value
         self.__clear_preprocess()
 
+    def register_trans_func(self, trans_func):
+        self._dp_extractor.register_trans_func(trans_func)
+        self.__clear_preprocess()
+
     @property
     def value_map(self):
         # deprecated
