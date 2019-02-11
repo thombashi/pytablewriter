@@ -33,7 +33,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         |write_table| with JSON format.
 
-        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
         :Examples:
             :ref:`example-json-table-writer`
 

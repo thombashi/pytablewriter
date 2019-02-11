@@ -42,7 +42,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
         :raises pytablewriter.EmptyTableDataError:
-            If the |header_list| and the |value_matrix| is empty.
+            If the |headers| and the |value_matrix| is empty.
         :Example:
             :ref:`example-js-table-writer`
 
