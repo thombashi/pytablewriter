@@ -197,13 +197,17 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def align_list(self):
-        # deprecated: integrated into style_list
+        warnings.warn(
+            "align_list property has integrated into style_list property.", DeprecationWarning
+        )
 
         return self.__align_list
 
     @align_list.setter
     def align_list(self, value):
-        # deprecated: integrated into style_list
+        warnings.warn(
+            "align_list property has integrated into style_list property.", DeprecationWarning
+        )
 
         if self.align_list == value:
             return
@@ -213,13 +217,17 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def format_list(self):
-        # deprecated: integrated into style_list
+        warnings.warn(
+            "format_list property has integrated into style_list property.", DeprecationWarning
+        )
 
         return self._dp_extractor.format_flags_list
 
     @format_list.setter
     def format_list(self, value):
-        # deprecated: integrated into style_list
+        warnings.warn(
+            "format_list property has integrated into style_list property.", DeprecationWarning
+        )
 
         if self.format_list == value:
             return
