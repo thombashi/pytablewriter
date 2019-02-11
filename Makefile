@@ -1,9 +1,9 @@
 AUTHOR := thombashi
 PACKAGE := pytablewriter
-BUILD_DIR := build
 DOCS_DIR := docs
 DOCS_BUILD_DIR := $(DOCS_DIR)/_build
 BUILD_WORK_DIR := _work
+DIST_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)/dist
 
 
 .PHONY: build
@@ -14,21 +14,22 @@ build:
 		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git; \
 		cd $(PACKAGE); \
 		python setup.py build
-	ls $(BUILD_WORK_DIR)/$(PACKAGE)/dist/
 	@twine check $(DIST_DIR)/*
+	ls $(DIST_DIR)
 
 .PHONY: clean
 clean:
 	@rm -rf $(PACKAGE)-*.*.*/ \
-		$(BUILD_DIR) \
 		$(BUILD_WORK_DIR) \
 		$(DOCS_BUILD_DIR) \
 		dist/ \
+		pip-wheel-metadata/ \
 		.eggs/ \
 		.pytest_cache/ \
 		.tox/ \
 		**/*/__pycache__/ \
 		*.egg-info/
+	@find . -not -path '*/\.*' -type f | grep -E .+\.py\.[a-z0-9]{32,}\.py$ | xargs -r rm
 
 .PHONY: docs
 docs:
