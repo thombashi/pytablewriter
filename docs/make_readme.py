@@ -28,24 +28,30 @@ def write_examples(maker):
     maker.inc_indent_level()
 
     maker.write_chapter("Write a Markdown table")
-    maker.write_file(examples_root.joinpath("table_format", "markdown_example.txt"))
+    maker.write_file(examples_root.joinpath("table_format", "text", "markdown_example.txt"))
 
     maker.inc_indent_level()
     maker.write_chapter("Write a Markdown table with a margin")
-    maker.write_file(examples_root.joinpath("table_format", "markdown_example_with_margin.txt"))
+    maker.write_file(
+        examples_root.joinpath("table_format", "text", "markdown_example_with_margin.txt")
+    )
     maker.dec_indent_level()
 
     maker.write_chapter("Write a reStructuredText table (Grid Tables)")
-    maker.write_file(examples_root.joinpath("table_format", "rst", "rst_grid_table_example.txt"))
+    maker.write_file(
+        examples_root.joinpath("table_format", "text", "rst", "rst_grid_table_example.txt")
+    )
 
     maker.write_chapter(
         "Write a table with JavaScript format (as a nested list variable definition)"
     )
-    maker.write_file(examples_root.joinpath("table_format", "sourcecode", "javascript_example.txt"))
+    maker.write_file(
+        examples_root.joinpath("table_format", "text", "sourcecode", "javascript_example.txt")
+    )
 
     maker.write_chapter("Write a table to an Excel sheet")
     maker.write_file(
-        examples_root.joinpath("table_format", "spreadsheet", "exel_single_example.txt")
+        examples_root.joinpath("table_format", "binary", "spreadsheet", "exel_single_example.txt")
     )
 
     maker.write_chapter("Write a Markdown table from ``pandas.DataFrame`` instance")

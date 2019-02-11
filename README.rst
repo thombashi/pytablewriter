@@ -33,25 +33,28 @@ Summary
 Features
 --------
 - Write a table in various formats:
-    - CSV / Tab-separated values (TSV)
-    - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
-    - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
-    - HTML
-    - JSON
-    - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
-    - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
-    - LaTeX: ``tabular``/``array`` environment
-    - Markdown
-    - MediaWiki
-    - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
-    - Source code
-        - JavaScript code (Definition of a nested list variable)
-        - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-        - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
-        - Python code (Definition of a nested list variable)
-    - Space aligned values
-    - SQLite database file
-    - `TOML <https://github.com/toml-lang/toml>`__
+    - Text formats:
+        - CSV / Tab-separated values (TSV)
+        - HTML
+        - JSON
+        - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
+        - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
+        - LaTeX: ``tabular``/``array`` environment
+        - Markdown
+        - MediaWiki
+        - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
+        - Source code
+            - JavaScript code (Definition of a nested list variable)
+            - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
+            - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
+            - Python code (Definition of a nested list variable)
+        - Space aligned values
+        - `TOML <https://github.com/toml-lang/toml>`__
+    - Binary file formats:
+        - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
+        - SQLite database
+    - Application specific formats:
+        - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
 - Automatic tabular data formatting
     - Alignment
     - Padding
@@ -59,7 +62,7 @@ Features
 - Configure cell styles:
     - Text alignment
     - Font size/weight
-    - Thousand separator for numbers
+    - Thousand separator for numbers: e.g. ``1,000``/``1 000``
 - Multibyte character support
 - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
 - Get rendered tabular text
@@ -78,7 +81,7 @@ Write a Markdown table
 
         writer = pytablewriter.MarkdownTableWriter()
         writer.table_name = "example_table"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -115,7 +118,7 @@ Write a Markdown table with a margin
 
         writer = pytablewriter.MarkdownTableWriter()
         writer.table_name = "write example with a margin"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -148,7 +151,7 @@ Write a reStructuredText table (Grid Tables)
 
         writer = pytablewriter.RstGridTableWriter()
         writer.table_name = "example_table"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -199,7 +202,7 @@ Write a table with JavaScript format (as a nested list variable definition)
 
         writer = pytablewriter.JavaScriptTableWriter()
         writer.table_name = "example_table"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -230,7 +233,7 @@ Write a table to an Excel sheet
 
         writer = ExcelXlsxTableWriter()
         writer.table_name = "example"
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
@@ -248,13 +251,15 @@ Write a table to an Excel sheet
 
 Write a Markdown table from ``pandas.DataFrame`` instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``from_dataframe`` method of writer classes will set up tabular data from ``pandas.DataFrame``:
+
 :Sample Code:
     .. code-block:: python
 
         from textwrap import dedent
         import pandas as pd
-        import pytablewriter
         import six
+        from pytablewriter import MarkdownTableWriter
 
         csv_data = six.StringIO(dedent("""\
             "i","f","c","if","ifc","bool","inf","nan","mix_num","time"
@@ -264,7 +269,7 @@ Write a Markdown table from ``pandas.DataFrame`` instance
             """))
         df = pd.read_csv(csv_data, sep=',')
 
-        writer = pytablewriter.MarkdownTableWriter()
+        writer = MarkdownTableWriter()
         writer.from_dataframe(df)
         writer.write_table()
 
@@ -276,6 +281,32 @@ Write a Markdown table from ``pandas.DataFrame`` instance
         |  1|1.10|aa  | 1.0|  1|True |Infinity|NaN|       1|2017-01-01 00:00:00+09:00|
         |  2|2.20|bbb | 2.2|2.2|False|Infinity|NaN|Infinity|2017-01-02 03:04:05+09:00|
         |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00|
+
+
+Adding a column of the DataFrame index if ``add_index_column=True``:
+
+:Sample Code:
+    .. code-block:: python
+
+        import pandas as pd
+        from pytablewriter import MarkdownTableWriter
+
+        writer = MarkdownTableWriter()
+        writer.table_name = "add_index_column"
+        writer.from_dataframe(
+            pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
+            add_index_column=True,
+        )
+        writer.write_table()
+
+:Output:
+    .. code-block::
+
+        # add_index_column
+        |   | A | B |
+        |---|--:|--:|
+        |a  |  1| 10|
+        |b  |  2| 11|
 
 Write a markdown table from a space-separated values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -322,7 +353,7 @@ Get rendered tabular text as str
         import pytablewriter
 
         writer = pytablewriter.MarkdownTableWriter()
-        writer.header_list = ["int", "float", "str", "bool", "mix", "time"]
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
             [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
             [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
@@ -346,7 +377,7 @@ Configure table styles
 ------------------------
 Writers can specify cell
 `Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
-for each column manually by ``style_list`` attribute of writer classes.
+for each column manually by ``styles`` attribute of writer classes.
 
 :Sample Code:
     .. code-block:: python
@@ -355,8 +386,8 @@ for each column manually by ``style_list`` attribute of writer classes.
         from pytablewriter.style import Style
 
         writer = MarkdownTableWriter()
-        writer.table_name = "set style by style_list"
-        writer.header_list = [
+        writer.table_name = "set style by styles"
+        writer.headers = [
             "auto align",
             "left align",
             "center align",
@@ -370,7 +401,7 @@ for each column manually by ``style_list`` attribute of writer classes.
         ]
 
         # specify styles for each column
-        writer.style_list = [
+        writer.styles = [
             Style(),
             Style(align="left"),
             Style(align="center"),
@@ -384,7 +415,7 @@ for each column manually by ``style_list`` attribute of writer classes.
 :Output:
     .. code-block::
 
-        # set style by style_list
+        # set style by styles
         |auto align|left align|center align|  bold  |italic|bold italic ts|
         |---------:|----------|:----------:|-------:|-----:|-------------:|
         |        11|11        |     11     |  **11**|  _11_|      _**11**_|
@@ -402,7 +433,7 @@ You can also set ``Style`` to a specific column with index or header by using ``
         from pytablewriter.style import Style
 
         writer = MarkdownTableWriter()
-        writer.header_list = ["A", "B", "C",]
+        writer.headers = ["A", "B", "C",]
         writer.value_matrix = [[11, 11, 11], [1234, 1234, 1234]]
 
         writer.table_name = "set style by index"
@@ -448,7 +479,7 @@ Create Elasticsearch index and put data
         writer = ptw.ElasticsearchWriter()
         writer.stream = es
         writer.index_name = "es writer example"
-        writer.header_list = [
+        writer.headers = [
             "str", "byte", "short", "int", "long", "float", "date", "bool", "ip",
         ]
         writer.value_matrix = [
@@ -488,7 +519,7 @@ Create Elasticsearch index and put data
 
 
 :Output:
-    .. code-block:: json
+    .. code-block::
 
         ----- mappings -----
         {
@@ -578,7 +609,7 @@ Multibyte characters also properly padded and aligned.
 
         writer = pytablewriter.RstSimpleTableWriter()
         writer.table_name = "生成に関するパターン"
-        writer.header_list = ["パターン名", "概要", "GoF", "Code Complete[1]"]
+        writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
         writer.value_matrix = [
             ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
             ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
