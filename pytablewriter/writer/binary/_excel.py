@@ -4,6 +4,7 @@ from __future__ import absolute_import, unicode_literals
 
 import abc
 import copy
+import warnings
 
 import dataproperty
 import typepy
@@ -305,7 +306,8 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         try:
             import xlwt
         except ImportError:
-            raise ImportError(import_error_msg_template.format("excel"))
+            warnings.warn(import_error_msg_template.format("excel"))
+            raise
 
         if col in self.__col_style_table:
             return self.__col_style_table.get(col)

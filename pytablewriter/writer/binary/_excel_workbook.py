@@ -3,6 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import abc
+import warnings
 
 import msgfy
 import six
@@ -68,7 +69,8 @@ class ExcelWorkbookXls(ExcelWorkbook):
         try:
             import xlwt
         except ImportError:
-            raise ImportError(import_error_msg_template.format("excel"))
+            warnings.warn(import_error_msg_template.format("excel"))
+            raise
 
         self._workbook = xlwt.Workbook()
 
@@ -114,7 +116,8 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         try:
             import xlsxwriter
         except ImportError:
-            raise ImportError(import_error_msg_template.format("excel"))
+            warnings.warn(import_error_msg_template.format("excel"))
+            raise
 
         self._workbook = xlsxwriter.Workbook(file_path)
 

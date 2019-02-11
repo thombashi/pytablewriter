@@ -3,6 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import copy
+import warnings
 
 import dataproperty
 import typepy
@@ -22,7 +23,8 @@ def _get_tags_module():
 
         return tags
     except ImportError:
-        raise ImportError(import_error_msg_template.format("html"))
+        warnings.warn(import_error_msg_template.format("html"))
+        raise
 
 
 class HtmlTableWriter(TextTableWriter):
