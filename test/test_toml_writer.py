@@ -16,7 +16,7 @@ import toml
 from dateutil.parser import parse
 
 from ._common import print_test_result
-from .data import float_header_list, float_value_matrix, header_list, value_matrix
+from .data import float_header_list, float_value_matrix, headers, value_matrix
 
 
 Data = collections.namedtuple("Data", "table_name header value expected")
@@ -24,7 +24,7 @@ Data = collections.namedtuple("Data", "table_name header value expected")
 normal_test_data_list = [
     Data(
         table_name="normal",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""[[normal]]
 a = 1
@@ -48,7 +48,7 @@ dd = 3
     ),
     Data(
         table_name="sparse",
-        header=header_list,
+        header=headers,
         value=[
             ["1", "", "a", "1", None],
             [None, 2.2, None, "2.2", 2.2],
@@ -135,7 +135,7 @@ exception_test_data_list = [
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ] + [
     Data(table_name="empty_header", header=None, value=value_matrix, expected=ptw.EmptyHeaderError),
-    Data(table_name=None, header=header_list, value=value_matrix, expected=ptw.EmptyTableNameError),
+    Data(table_name=None, header=headers, value=value_matrix, expected=ptw.EmptyTableNameError),
 ]
 
 table_writer_class = ptw.TomlTableWriter
@@ -162,7 +162,7 @@ class Test_TomlTableWriter_write_table(object):
     def test_normal(self, capsys, table_name, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table_name
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -181,7 +181,7 @@ class Test_TomlTableWriter_write_table(object):
     def test_exception(self, capsys, table_name, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table_name
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

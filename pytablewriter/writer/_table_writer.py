@@ -114,16 +114,28 @@ class AbstractTableWriter(TableWriterInterface):
         self._table_name = value
 
     @property
-    def header_list(self):
+    def headers(self):
         """
         List of table header to write.
         """
 
         return self._dp_extractor.headers
 
+    @headers.setter
+    def headers(self, value):
+        self._dp_extractor.headers = value
+
+    @property
+    def header_list(self):
+        """
+        alias for :py:attr:`~.headers`.
+        """
+
+        return self.headers
+
     @header_list.setter
     def header_list(self, value):
-        self._dp_extractor.headers = value
+        self.headers = value
 
     @property
     def value_matrix(self):
@@ -145,7 +157,7 @@ class AbstractTableWriter(TableWriterInterface):
         :rtype: tabledata.TableData
         """
 
-        return TableData(self.table_name, self.header_list, self.value_matrix)
+        return TableData(self.table_name, self.headers, self.value_matrix)
 
     @property
     def type_hints(self):
@@ -385,7 +397,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_padding = True
         self.is_escape_html_tag = False
 
-        self.header_list = None
+        self.headers = None
         self.type_hints = None
         self._quoting_flags = {
             Typecode.BOOL: False,
@@ -429,7 +441,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         writer = HtmlTableWriter()
         writer.table_name = self.table_name
-        writer.header_list = self.header_list
+        writer.headers = self.headers
         writer.value_matrix = self.value_matrix
         writer.style_list = self.style_list
 
@@ -450,14 +462,14 @@ class AbstractTableWriter(TableWriterInterface):
 
         column_idx = None
 
-        while len(self.header_list) > len(self.__style_list):
+        while len(self.headers) > len(self.__style_list):
             self.__style_list.append(None)
 
         if isinstance(column, six.integer_types):
             column_idx = column
         elif isinstance(column, six.string_types):
             try:
-                column_idx = self.header_list.index(column)
+                column_idx = self.headers.index(column)
             except ValueError:
                 pass
 
@@ -525,7 +537,7 @@ class AbstractTableWriter(TableWriterInterface):
         Following attributes are configured:
 
         - :py:attr:`~.table_name`.
-        - :py:attr:`~.header_list`.
+        - :py:attr:`~.headers`.
         - :py:attr:`~.value_matrix`.
 
         |TableData| can be created from various data formats by
@@ -540,7 +552,7 @@ class AbstractTableWriter(TableWriterInterface):
         if is_overwrite_table_name:
             self.table_name = value.table_name
 
-        self.header_list = value.headers
+        self.headers = value.headers
         self.value_matrix = value.rows
 
         if not value.has_value_dp_matrix:
@@ -559,7 +571,7 @@ class AbstractTableWriter(TableWriterInterface):
         Set tabular attributes to the writer from a character-separated values (CSV) data source.
         Following attributes are set to the writer by the method:
 
-        - :py:attr:`~.header_list`.
+        - :py:attr:`~.headers`.
         - :py:attr:`~.value_matrix`.
 
         :py:attr:`~.table_name` also be set if the CSV data source is a file.
@@ -597,7 +609,7 @@ class AbstractTableWriter(TableWriterInterface):
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
         Following attributes are set to the writer by the method:
 
-            - :py:attr:`~.header_list`.
+            - :py:attr:`~.headers`.
             - :py:attr:`~.value_matrix`.
             - :py:attr:`~.type_hints`.
 
@@ -612,11 +624,11 @@ class AbstractTableWriter(TableWriterInterface):
             :ref:`example-from-pandas-dataframe`
         """
 
-        self.header_list = list(dataframe.columns.values)
+        self.headers = list(dataframe.columns.values)
         self.type_hints = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
 
         if add_index_column:
-            self.header_list = [""] + self.header_list
+            self.headers = [""] + self.headers
             if self.type_hints:
                 self.type_hints = [None] + self.type_hints
             self.value_matrix = [
@@ -631,7 +643,7 @@ class AbstractTableWriter(TableWriterInterface):
         Set tabular attributes to the writer from :py:class:`tablib.Dataset`.
         """
 
-        self.header_list = tablib_dataset.headers
+        self.headers = tablib_dataset.headers
         self.value_matrix = [row for row in tablib_dataset]
 
     def write_table(self):
@@ -651,10 +663,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._verify_stream()
 
         if all(
-            [
-                typepy.is_empty_sequence(self.header_list),
-                typepy.is_empty_sequence(self.value_matrix),
-            ]
+            [typepy.is_empty_sequence(self.headers), typepy.is_empty_sequence(self.value_matrix)]
         ):
             raise EmptyTableDataError()
 
@@ -811,7 +820,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         if all(
             [
-                typepy.is_empty_sequence(self.header_list),
+                typepy.is_empty_sequence(self.headers),
                 typepy.is_empty_sequence(self.value_matrix),
                 typepy.is_empty_sequence(self._table_value_dp_matrix),
             ]
@@ -846,11 +855,11 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _validate_empty_header(self):
         """
-        :raises pytablewriter.EmptyHeaderError: If the |header_list| is empty.
+        :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
         """
 
-        if typepy.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError("header_list expected to have one or more header names")
+        if typepy.is_empty_sequence(self.headers):
+            raise EmptyHeaderError("headers expected to have one or more header names")
 
     def _verify_value_matrix(self):
         if typepy.is_empty_sequence(self.value_matrix):
@@ -865,15 +874,15 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._logger.logger.debug("_preprocess_table_dp")
 
-        if typepy.is_empty_sequence(self.header_list) and self._use_default_header:
-            self.header_list = [
+        if typepy.is_empty_sequence(self.headers) and self._use_default_header:
+            self.headers = [
                 convert_idx_to_alphabet(col_idx)
                 for col_idx in range(len(self.__value_matrix_org[0]))
             ]
 
         try:
             self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(
-                to_value_matrix(self.header_list, self.__value_matrix_org)
+                to_value_matrix(self.headers, self.__value_matrix_org)
             )
         except TypeError as e:
             self._logger.logger.debug(msgfy.to_error_message(e))

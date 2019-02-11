@@ -90,11 +90,11 @@ class HtmlTableWriter(TextTableWriter):
         if not self.is_write_header:
             return
 
-        if typepy.is_empty_sequence(self.header_list):
-            raise EmptyHeaderError("header_list is empty")
+        if typepy.is_empty_sequence(self.headers):
+            raise EmptyHeaderError("headers is empty")
 
         tr_tag = tags.tr()
-        for header in self.header_list:
+        for header in self.headers:
             tr_tag += tags.th(MultiByteStrDecoder(header).unicode_str)
 
         thead_tag = tags.thead()

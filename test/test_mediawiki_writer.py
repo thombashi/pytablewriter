@@ -14,7 +14,7 @@ import pytest
 
 from ._common import print_test_result
 from .data import (
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
@@ -29,7 +29,7 @@ Data = collections.namedtuple("Data", "table header value expected")
 normal_test_data_list = [
     Data(
         table="test table",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=dedent(
             """\
@@ -64,7 +64,7 @@ normal_test_data_list = [
     ),
     Data(
         table=None,
-        header=header_list,
+        header=headers,
         value=None,
         expected=dedent(
             """\
@@ -145,7 +145,7 @@ normal_test_data_list = [
     ),
     Data(
         table="test table",
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected=dedent(
             """\
@@ -262,7 +262,7 @@ class Test_MediaWikiTableWriter_write_table(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -279,7 +279,7 @@ class Test_MediaWikiTableWriter_write_table(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -379,7 +379,7 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, callback, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_callback = callback
@@ -395,7 +395,7 @@ class Test_MediaWikiTableWriter_write_table_iter(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

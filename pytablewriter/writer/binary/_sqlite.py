@@ -101,7 +101,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         table_data = tabledata.TableData(
             self.table_name,
-            self.header_list,
+            self.headers,
             [
                 [value_dp.data for value_dp in value_dp_list]
                 for value_dp_list in self._table_value_dp_matrix

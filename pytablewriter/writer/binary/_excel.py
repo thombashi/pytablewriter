@@ -168,7 +168,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         Set following attributes from |TableData|
 
         - :py:attr:`~.table_name`.
-        - :py:attr:`~.header_list`.
+        - :py:attr:`~.headers`.
         - :py:attr:`~.value_matrix`.
 
         And create worksheet named from :py:attr:`~.table_name` ABC
@@ -237,8 +237,8 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
             self._current_data_row += 1
 
     def _get_last_column(self):
-        if typepy.is_not_empty_sequence(self.header_list):
-            return len(self.header_list) - 1
+        if typepy.is_not_empty_sequence(self.headers):
+            return len(self.headers) - 1
 
         if typepy.is_not_empty_sequence(self.value_matrix):
             return len(self.value_matrix[0]) - 1
@@ -279,10 +279,10 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         self._workbook = ExcelWorkbookXls(workbook_path)
 
     def _write_header(self):
-        if not self.is_write_header or typepy.is_empty_sequence(self.header_list):
+        if not self.is_write_header or typepy.is_empty_sequence(self.headers):
             return
 
-        for col, value in enumerate(self.header_list):
+        for col, value in enumerate(self.headers):
             self.stream.write(self.first_header_row, col, value)
 
     def _write_cell(self, row, col, value_dp):
@@ -418,18 +418,18 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         self._workbook = ExcelWorkbookXlsx(workbook_path)
 
     def _write_header(self):
-        if not self.is_write_header or typepy.is_empty_sequence(self.header_list):
+        if not self.is_write_header or typepy.is_empty_sequence(self.headers):
             return
 
         header_format_props = self.format_table.get(self.TableFormat.HEADER, self.default_format)
         header_format = self.__add_format(header_format_props)
 
         self.stream.write_row(
-            row=self.first_header_row, col=0, data=self.header_list, cell_format=header_format
+            row=self.first_header_row, col=0, data=self.headers, cell_format=header_format
         )
         for row in range(self.first_header_row, self.last_header_row):
             self.stream.write_row(
-                row=row, col=0, data=[""] * len(self.header_list), cell_format=header_format
+                row=row, col=0, data=[""] * len(self.headers), cell_format=header_format
             )
 
     def _write_cell(self, row, col, value_dp):

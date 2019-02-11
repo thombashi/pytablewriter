@@ -12,7 +12,7 @@ import pytest
 from ._common import print_test_result
 from .data import (
     Data,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
@@ -26,7 +26,7 @@ normal_test_data_list = [
     Data(
         table="Table-Name ho'ge",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""table_name_ho_ge = [
     ["a", "b", "c", "dd", "e"],
@@ -39,7 +39,7 @@ normal_test_data_list = [
     Data(
         table="TABLENAME",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         expected="""tablename = [
     ["a", "b", "c", "dd", "e"],
@@ -49,7 +49,7 @@ normal_test_data_list = [
     Data(
         table="TableName",
         indent=1,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""    tablename = [
         ["a", "b", "c", "dd", "e"],
@@ -62,7 +62,7 @@ normal_test_data_list = [
     Data(
         table="TABLE Name",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected="""table_name = [
     ["a", "b", "c", "dd", "e"],
@@ -141,7 +141,7 @@ class Test_PythonCodeTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -153,7 +153,7 @@ class Test_PythonCodeTableWriter_write_table(object):
     def test_normal_not_strict(self, capsys):
         writer = table_writer_class()
         writer.table_name = "tablename"
-        writer.header_list = mix_header_list
+        writer.headers = mix_header_list
         writer.value_matrix = mix_value_matrix
         writer.write_table()
 
@@ -179,7 +179,7 @@ class Test_PythonCodeTableWriter_write_table(object):
                 Data(
                     table=None,
                     indent=0,
-                    header=header_list,
+                    header=headers,
                     value=value_matrix,
                     expected=ptw.EmptyTableNameError,
                 )
@@ -190,7 +190,7 @@ class Test_PythonCodeTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -221,7 +221,7 @@ class Test_PythonCodeTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()
@@ -236,7 +236,7 @@ class Test_PythonCodeTableWriter_write_table_iter(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

@@ -118,11 +118,11 @@ class RstCsvTableWriter(RstTableWriter):
         if not self.is_write_header:
             return
 
-        if typepy.is_not_empty_sequence(self.header_list):
+        if typepy.is_not_empty_sequence(self.headers):
             self._write_line(
                 ':header: "{:s}"'.format(
                     '", "'.join(
-                        [MultiByteStrDecoder(header).unicode_str for header in self.header_list]
+                        [MultiByteStrDecoder(header).unicode_str for header in self.headers]
                     )
                 )
             )

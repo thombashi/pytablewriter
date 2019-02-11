@@ -13,7 +13,7 @@ import six
 
 writer = pytablewriter.MarkdownTableWriter()
 writer.table_name = "zone"
-writer.header_list = ["zone_id", "country_code", "zone_name"]
+writer.headers = ["zone_id", "country_code", "zone_name"]
 writer.value_matrix = [
     ["1", "AD", "Europe/Andorra"],
     ["2", "AE", "Asia/Dubai"],

@@ -104,7 +104,7 @@ class Test_LatexMatrixWriter_write_table(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -156,7 +156,7 @@ class Test_LatexMatrixWriter_write_table(object):
     )
     def test_exception(self, header, value, expected):
         writer = table_writer_class()
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

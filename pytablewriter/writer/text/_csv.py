@@ -38,7 +38,7 @@ class CsvTableWriter(TextTableWriter):
         self._quoting_flags[typepy.Typecode.NULL_STRING] = False
 
     def _write_header(self):
-        if typepy.is_empty_sequence(self.header_list):
+        if typepy.is_empty_sequence(self.headers):
             return
 
         super(CsvTableWriter, self)._write_header()

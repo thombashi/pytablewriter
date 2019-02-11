@@ -15,7 +15,7 @@ from tabledata import TableData
 from ._common import print_test_result
 from .data import (
     Data,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
@@ -30,7 +30,7 @@ normal_test_data_list = [
     Data(
         table="table name",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=dedent(
             """\
@@ -51,7 +51,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         expected=dedent(
             """\
@@ -86,7 +86,7 @@ normal_test_data_list = [
     Data(
         table="INDENTATION",
         indent=1,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""    .. table:: INDENTATION
 
@@ -135,7 +135,7 @@ normal_test_data_list = [
     Data(
         table="table with None values.",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected=dedent(
             """\
@@ -248,7 +248,7 @@ class Test_RstGridTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -260,7 +260,7 @@ class Test_RstGridTableWriter_write_table(object):
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(TableData("margin 1", header_list, value_matrix))
+        writer.from_tabledata(TableData("margin 1", headers, value_matrix))
         writer.margin = 1
         writer.write_table()
 
@@ -287,7 +287,7 @@ class Test_RstGridTableWriter_write_table(object):
 
     def test_normal_margin_2(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(TableData("margin 2", header_list, value_matrix))
+        writer.from_tabledata(TableData("margin 2", headers, value_matrix))
         writer.margin = 2
         writer.write_table()
 
@@ -346,7 +346,7 @@ class Test_RstGridTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

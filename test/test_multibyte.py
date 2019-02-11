@@ -22,7 +22,7 @@ class Test_CsvTableWriter_write_table(object):
     def test_smoke_multi_byte(self, capsys, format_name):
         writer = ptw.TableWriterFactory.create_from_format_name(format_name)
         writer.table_name = "生成に関するパターン"
-        writer.header_list = ["パターン名", "概要", "GoF", "Code Complete[1]"]
+        writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
         writer.value_matrix = [
             ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
             ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],

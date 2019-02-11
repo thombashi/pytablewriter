@@ -116,7 +116,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         value_matrix = [[self.__get_data_helper(dp) for dp in dp_list] for dp_list in dp_matrix]
 
         self._table_value_matrix = [
-            dict(zip(self.header_list, value_list)) for value_list in value_matrix
+            dict(zip(self.headers, value_list)) for value_list in value_matrix
         ]
 
         self._is_complete_value_matrix_preprocess = True

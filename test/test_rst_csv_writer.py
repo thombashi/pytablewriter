@@ -14,7 +14,7 @@ import pytest
 from ._common import print_test_result
 from .data import (
     Data,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
@@ -30,7 +30,7 @@ normal_test_data_list = [
     Data(
         table="table name",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=dedent(
             """\
@@ -47,7 +47,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         expected=dedent(
             """\
@@ -77,7 +77,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=1,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""    .. csv-table:: 
         :header: "a", "b", "c", "dd", "e"
@@ -91,7 +91,7 @@ normal_test_data_list = [
     Data(
         table="table name",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected=dedent(
             """\
@@ -149,7 +149,7 @@ class Test_RstCsvTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         out = writer.dumps()
@@ -188,7 +188,7 @@ class Test_RstCsvTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -223,7 +223,7 @@ class Test_RstCsvTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()
@@ -240,7 +240,7 @@ class Test_RstCsvTableWriter_write_table_iter(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

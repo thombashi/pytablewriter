@@ -21,7 +21,7 @@ from ._common import print_test_result
 from .data import (
     float_header_list,
     float_value_matrix,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     style_list,
@@ -47,7 +47,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         is_formatting_float=True,
         expected=dedent(
@@ -63,7 +63,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         is_formatting_float=True,
         expected=dedent(
@@ -76,7 +76,7 @@ normal_test_data_list = [
     Data(
         table="floating point",
         indent=0,
-        header=header_list,
+        header=headers,
         value=[
             ["1", 123.09999999999999, "a", "1", 1],
             [2, 2.2000000000000002, "bb", "2.2", 2.2000000000000002],
@@ -97,7 +97,7 @@ normal_test_data_list = [
     Data(
         table="tablename",
         indent=1,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         is_formatting_float=True,
         expected=dedent(
@@ -114,7 +114,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         is_formatting_float=True,
         expected=dedent(
@@ -147,7 +147,7 @@ normal_test_data_list = [
     Data(
         table="formatting float 1",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         is_formatting_float=True,
         expected=dedent(
@@ -181,7 +181,7 @@ normal_test_data_list = [
     Data(
         table="not formatting float 1",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         is_formatting_float=False,
         expected=dedent(
@@ -448,7 +448,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.is_formatting_float = is_formatting_float
         writer.register_trans_func(trans_func)
@@ -645,7 +645,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_style_font_size(self):
         writer = table_writer_class()
         writer.table_name = "style test: font size will not be affected"
-        writer.header_list = ["none", "empty_style", "tiny", "small", "medium", "large"]
+        writer.headers = ["none", "empty_style", "tiny", "small", "medium", "large"]
         writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
         writer.style_list = [
             None,
@@ -673,7 +673,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_style_font_weight(self):
         writer = table_writer_class()
         writer.table_name = "style test: bold"
-        writer.header_list = ["normal", "bold"]
+        writer.headers = ["normal", "bold"]
         writer.value_matrix = [[11, 11], [123456, 123456]]
         writer.style_list = [Style(font_weight="normal"), Style(font_weight="bold")]
 
@@ -713,7 +713,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_set_style(self):
         writer = table_writer_class()
         writer.table_name = "set style method"
-        writer.header_list = ["normal", "style by idx", "style by header"]
+        writer.headers = ["normal", "style by idx", "style by header"]
         writer.value_matrix = [[11, 11, 11], [123456, 123456, 123456]]
 
         writer.set_style(1, Style(font_weight="bold", thousand_separator=","))
@@ -752,7 +752,7 @@ class Test_MarkdownTableWriter_write_table(object):
     def test_normal_ansi_color(self, capsys):
         writer = table_writer_class()
         writer.table_name = "ANCI escape sequence"
-        writer.header_list = ["colored_i", "colored_f", "colored_s", "wo_anci"]
+        writer.headers = ["colored_i", "colored_f", "colored_s", "wo_anci"]
         writer.value_matrix = [
             [colored(111, "red"), colored(1.1, "green"), colored("abc", "blue"), "abc"],
             [colored(0, "red"), colored(0.12, "green"), colored("abcdef", "blue"), "abcdef"],
@@ -777,7 +777,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(TableData("", header_list, value_matrix))
+        writer.from_tabledata(TableData("", headers, value_matrix))
         writer.margin = 1
         writer.write_table()
 
@@ -798,7 +798,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_margin_2(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(TableData("", header_list, value_matrix))
+        writer.from_tabledata(TableData("", headers, value_matrix))
         writer.margin = 2
         writer.write_table()
 
@@ -819,7 +819,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_value_map(self):
         writer = table_writer_class()
-        writer.header_list = ["a", "b"]
+        writer.headers = ["a", "b"]
         writer.value_matrix = [["foo", True], ["bar", False]]
         writer.register_trans_func(trans_func)
 
@@ -839,7 +839,7 @@ class Test_MarkdownTableWriter_write_table(object):
 
     def test_normal_avoid_overwrite_stream_by_dumps(self):
         writer = table_writer_class()
-        writer.header_list = ["a", "b"]
+        writer.headers = ["a", "b"]
         writer.value_matrix = [["foo", "bar"]]
         writer.stream = six.StringIO()
 
@@ -865,7 +865,7 @@ class Test_MarkdownTableWriter_write_table(object):
     @pytest.mark.skipif("six.PY2")
     def test_normal_escape_html_tag(self, capsys):
         writer = table_writer_class()
-        writer.header_list = ["no", "text"]
+        writer.headers = ["no", "text"]
         writer.value_matrix = [[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]]
         writer.is_escape_html_tag = True
         writer.write_table()
@@ -920,7 +920,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -972,7 +972,7 @@ class Test_MarkdownTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()
@@ -989,7 +989,7 @@ class Test_MarkdownTableWriter_write_table_iter(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -1001,7 +1001,7 @@ class Test_MarkdownTableWriter_dump(object):
         test_filepath = str(tmpdir.join("test.sqlite"))
 
         writer = table_writer_class()
-        writer.header_list = ["a", "b"]
+        writer.headers = ["a", "b"]
         writer.value_matrix = [["foo", "bar"]]
         writer.dump(test_filepath)
 
@@ -1080,7 +1080,7 @@ class Test_MarkdownTableWriter_line_break_handling(object):
     )
     def test_normal_line(self, value, expected):
         writer = table_writer_class()
-        writer.header_list = ["no", "text"]
+        writer.headers = ["no", "text"]
         writer.value_matrix = [[1, "first\nsecond"]]
         writer.line_break_handling = value
 

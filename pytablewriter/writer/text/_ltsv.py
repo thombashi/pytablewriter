@@ -53,7 +53,7 @@ class LtsvTableWriter(CsvTableWriter):
             for value_list in self._table_value_matrix:
                 ltsv_item_list = [
                     "{:s}:{}".format(pathvalidate.sanitize_ltsv_label(header_name), value)
-                    for header_name, value in zip(self.header_list, value_list)
+                    for header_name, value in zip(self.headers, value_list)
                     if typepy.is_not_null_string(value)
                 ]
 

@@ -20,7 +20,7 @@ TIME = datetime.datetime(2017, 1, 1, 0, 0, 0)
 INF = float("inf")
 NAN = float("nan")
 
-header_list = ["a", "b", "c", "dd", "e"]
+headers = ["a", "b", "c", "dd", "e"]
 value_matrix = [
     ["1", 123.1, "a", "1",   1],
     [2, 2.2, "bb", "2.2", 2.2],

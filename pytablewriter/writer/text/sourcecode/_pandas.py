@@ -67,13 +67,13 @@ class PandasDataFrameWriter(NumpyTableWriter):
         return ["{} = {}.DataFrame([".format(self.variable_name, self.import_pandas_as)]
 
     def _get_closing_row_item_list(self):
-        if typepy.is_not_empty_sequence(self.header_list):
+        if typepy.is_not_empty_sequence(self.headers):
             return [
                 "], columns=[{}])".format(
                     ", ".join(
                         [
                             '"{}"'.format(MultiByteStrDecoder(header).unicode_str)
-                            for header in self.header_list
+                            for header in self.headers
                         ]
                     )
                 )

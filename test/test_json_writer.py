@@ -16,7 +16,7 @@ from ._common import print_test_result
 from .data import (
     float_header_list,
     float_value_matrix,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     value_matrix,
@@ -30,7 +30,7 @@ Data = collections.namedtuple("Data", "table header value expected")
 normal_test_data_list = [
     Data(
         table="",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=json.loads(
             """[
@@ -59,10 +59,10 @@ normal_test_data_list = [
         """
         ),
     ),
-    Data(table="", header=header_list, value=None, expected=json.loads("[]")),
+    Data(table="", header=headers, value=None, expected=json.loads("[]")),
     Data(
         table="tablename",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=json.loads(
             """{
@@ -95,7 +95,7 @@ normal_test_data_list = [
     ),
     Data(
         table="with none values",
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected=json.loads(
             """{
@@ -235,7 +235,7 @@ class Test_JsonTableWriter_write_table(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -251,7 +251,7 @@ class Test_JsonTableWriter_write_table(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -305,7 +305,7 @@ class Test_JsonTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()
@@ -320,7 +320,7 @@ class Test_JsonTableWriter_write_table_iter(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

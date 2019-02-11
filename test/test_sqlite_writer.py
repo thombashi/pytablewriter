@@ -15,7 +15,7 @@ from pytablereader import SqliteFileLoader
 from tabledata import TableData
 
 from ._common import print_test_result
-from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
+from .data import headers, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 
 
 inf = Decimal("Infinity")
@@ -26,7 +26,7 @@ Data = collections.namedtuple("Data", "table header value expected")
 normal_test_data_list = [
     Data(
         table="tablename",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=TableData(
             "tablename",
@@ -77,9 +77,9 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(table="", header=header_list, value=value_matrix, expected=ptw.EmptyTableNameError),
+    Data(table="", header=headers, value=value_matrix, expected=ptw.EmptyTableNameError),
     Data(table="dummy", header=[], value=[], expected=ptw.EmptyTableDataError),
-    Data(table="dummy", header=header_list, value=[], expected=ptw.EmptyValueError),
+    Data(table="dummy", header=headers, value=[], expected=ptw.EmptyValueError),
 ]
 
 
@@ -95,7 +95,7 @@ class Test_SqliteTableWriter_write_table(object):
         writer = ptw.SqliteTableWriter()
         writer.open(str(test_file_path))
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
         writer.close()
@@ -116,7 +116,7 @@ class Test_SqliteTableWriter_write_table(object):
         writer = ptw.SqliteTableWriter()
         writer.open(":memory:")
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -191,7 +191,7 @@ class Test_SqliteTableWriter_write_table_iter(object):
         writer = ptw.SqliteTableWriter()
         writer.open(str(test_file_path))
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()

@@ -16,7 +16,7 @@ from pytablereader import ExcelTableFileLoader
 from tabledata import TableData
 
 from ._common import print_test_result
-from .data import header_list, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
+from .data import headers, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter
 
 
 try:
@@ -35,7 +35,7 @@ Data = collections.namedtuple("Data", "table header value expected")
 normal_test_data_list = [
     Data(
         table="tablename",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=TableData(
             "tablename",
@@ -45,7 +45,7 @@ normal_test_data_list = [
     ),
     Data(
         table="tablename",
-        header=header_list,
+        header=headers,
         value=None,
         expected=TableData("tablename", ["a", "b", "c", "dd", "e"], []),
     ),
@@ -109,7 +109,7 @@ class Test_ExcelTableWriter_write_table(object):
         writer = writer_class()
         writer.open(str(test_file_path))
         writer.make_worksheet(table)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
         writer.close()
@@ -140,7 +140,7 @@ class Test_ExcelTableWriter_write_table(object):
         writer = writer_class()
         writer.open(str(test_file_path))
         writer.make_worksheet(table)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -163,7 +163,7 @@ class Test_ExcelTableWriter_write_table(object):
 
         writer = writer_class()
         writer.open(str(test_file_path))
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(IOError):
@@ -205,7 +205,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
         writer = writer_class()
         writer.open(str(test_file_path))
         writer.make_worksheet(table)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()
@@ -234,7 +234,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
 
         writer = writer_class()
         writer.open(str(test_file_path))
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(IOError):

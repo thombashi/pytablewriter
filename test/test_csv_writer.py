@@ -18,7 +18,7 @@ from ._common import print_test_result
 from .data import (
     float_header_list,
     float_value_matrix,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     value_matrix,
@@ -32,7 +32,7 @@ Data = collections.namedtuple("Data", "col_delim header value expected")
 normal_test_data_list = [
     Data(
         col_delim=",",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=dedent(
             """\
@@ -45,7 +45,7 @@ normal_test_data_list = [
     ),
     Data(
         col_delim=",",
-        header=header_list,
+        header=headers,
         value=[],
         expected=dedent(
             """\
@@ -79,7 +79,7 @@ normal_test_data_list = [
     ),
     Data(
         col_delim=",",
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected=dedent(
             """\
@@ -175,7 +175,7 @@ class Test_CsvTableWriter_from_csv(object):
         out, _err = capsys.readouterr()
 
         assert writer.table_name is None
-        assert writer.header_list == ["a", "b", "c", "dd", "e"]
+        assert writer.headers == ["a", "b", "c", "dd", "e"]
 
         print_test_result(expected=self.__CSV_EXPECTED, actual=out)
 
@@ -193,7 +193,7 @@ class Test_CsvTableWriter_from_csv(object):
         out, _err = capsys.readouterr()
 
         assert writer.table_name == "test_data"
-        assert writer.header_list == ["a", "b", "c", "dd", "e"]
+        assert writer.headers == ["a", "b", "c", "dd", "e"]
 
         print_test_result(expected=self.__CSV_EXPECTED, actual=out)
 
@@ -211,7 +211,7 @@ class Test_CsvTableWriter_write_table(object):
     def test_normal(self, capsys, col_delim, header, value, expected):
         writer = table_writer_class()
         writer.column_delimiter = col_delim
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -227,7 +227,7 @@ class Test_CsvTableWriter_write_table(object):
     )
     def test_exception(self, header, value, expected):
         writer = table_writer_class()
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):
@@ -259,7 +259,7 @@ class Test_CsvTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = len(value)
         writer.write_table_iter()
@@ -274,7 +274,7 @@ class Test_CsvTableWriter_write_table_iter(object):
     )
     def test_exception(self, header, value, expected):
         writer = table_writer_class()
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

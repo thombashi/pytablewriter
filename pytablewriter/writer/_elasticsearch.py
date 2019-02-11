@@ -146,7 +146,7 @@ class ElasticsearchWriter(AbstractTableWriter):
     def _get_mappings(self):
         properties = {}
 
-        for header, column_dp in zip(self.header_list, self._column_dp_list):
+        for header, column_dp in zip(self.headers, self._column_dp_list):
             properties[header] = self.__get_es_datatype(column_dp)
 
         return {"mappings": {self.document_type: {"properties": properties}}}
@@ -160,7 +160,7 @@ class ElasticsearchWriter(AbstractTableWriter):
                 for value_dp in value_dp_list
             ]
 
-            yield dict(zip(self.header_list, value_list))
+            yield dict(zip(self.headers, value_list))
 
     def _write_table(self):
         import elasticsearch as es

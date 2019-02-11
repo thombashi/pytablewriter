@@ -17,7 +17,7 @@ import simplejson as json
 import six  # noqa: W0611
 
 from ._common import print_test_result
-from .data import header_list, value_matrix
+from .data import headers, value_matrix
 
 
 inf = Decimal("Infinity")
@@ -26,9 +26,9 @@ nan = None
 Data = collections.namedtuple("Data", "table header value expected")
 
 exception_test_data_list = [
-    Data(table="", header=header_list, value=value_matrix, expected=ptw.EmptyTableNameError),
+    Data(table="", header=headers, value=value_matrix, expected=ptw.EmptyTableNameError),
     Data(table="dummy", header=[], value=[], expected=ptw.EmptyTableDataError),
-    Data(table="dummy", header=header_list, value=[], expected=ptw.EmptyValueError),
+    Data(table="dummy", header=headers, value=[], expected=ptw.EmptyValueError),
 ]
 
 table_writer_class = ptw.ElasticsearchWriter
@@ -39,7 +39,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
     def test_normal(self):
         writer = table_writer_class()
         writer.table_name = "es mappings"
-        writer.header_list = [
+        writer.headers = [
             "text",
             "byte",
             "short",
@@ -187,7 +187,7 @@ class Test_ElasticsearchWriter_write_table(object):
         writer = table_writer_class()
         writer.stream = elasticsearch.Elasticsearch()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

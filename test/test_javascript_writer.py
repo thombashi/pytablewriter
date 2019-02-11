@@ -17,7 +17,7 @@ import typepy
 
 from ._common import print_test_result
 from .data import (
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     value_matrix,
@@ -34,7 +34,7 @@ normal_test_data_list = [
     Data(
         table="table-name ho'ge",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         is_write_header=True,
         is_dti_fmt=True,
@@ -52,7 +52,7 @@ normal_test_data_list = [
     Data(
         table="null value",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         is_write_header=True,
         is_dti_fmt=True,
@@ -67,7 +67,7 @@ normal_test_data_list = [
     Data(
         table="null table",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         is_write_header=False,
         is_dti_fmt=True,
@@ -98,7 +98,7 @@ normal_test_data_list = [
     Data(
         table="tablename",
         indent=1,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         is_write_header=True,
         is_dti_fmt=True,
@@ -114,7 +114,7 @@ normal_test_data_list = [
     Data(
         table="tablename",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         is_write_header=True,
         is_dti_fmt=True,
@@ -284,7 +284,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
     def test_normal(self, capsys, table, header, value, type_hint, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.type_hints = type_hint
 
@@ -319,7 +319,7 @@ class Test_JavaScriptTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.is_write_header = is_write_header
         writer.is_datetime_instance_formatting = is_dti_fmt
@@ -443,7 +443,7 @@ class Test_JavaScriptTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.is_write_header = is_write_header
 
@@ -496,7 +496,7 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
     def test_normal(self, capsys, table, header, value, iter_len, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.iteration_length = iter_len
         writer.write_table_iter()
@@ -511,7 +511,7 @@ class Test_JavaScriptTableWriter_write_table_iter(object):
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

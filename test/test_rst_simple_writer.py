@@ -14,7 +14,7 @@ import pytest
 from ._common import print_test_result
 from .data import (
     Data,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
@@ -29,7 +29,7 @@ normal_test_data_list = [
     Data(
         table="tablename",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected=dedent(
             """\
@@ -48,7 +48,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=0,
-        header=header_list,
+        header=headers,
         value=None,
         expected=dedent(
             """\
@@ -81,7 +81,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent=1,
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""    .. table:: 
 
@@ -97,7 +97,7 @@ normal_test_data_list = [
     Data(
         table="table name",
         indent=0,
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected=dedent(
             """\
@@ -159,7 +159,7 @@ class Test_RstSimpleTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -201,7 +201,7 @@ class Test_RstSimpleTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

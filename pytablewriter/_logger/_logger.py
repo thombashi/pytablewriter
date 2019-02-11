@@ -120,7 +120,7 @@ class WriterLogger(object):
         log_entry_list = [
             self.__get_format_name_message(),
             self.__get_table_name_message(),
-            "header={}".format(self.__writer.header_list),
+            "headers={}".format(self.__writer.headers),
         ]
 
         try:

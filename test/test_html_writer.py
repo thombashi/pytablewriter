@@ -14,7 +14,7 @@ import pytest
 from ._common import print_test_result
 from .data import (
     Data,
-    header_list,
+    headers,
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
@@ -29,7 +29,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent="  ",
-        header=header_list,
+        header=headers,
         value=value_matrix,
         expected="""<table>
   <thead>
@@ -102,7 +102,7 @@ normal_test_data_list = [
     Data(
         table="tablename",
         indent="    ",
-        header=header_list,
+        header=headers,
         value=[],
         expected="""<table id="tablename">
     <caption>tablename</caption>
@@ -122,7 +122,7 @@ normal_test_data_list = [
     Data(
         table=None,
         indent="    ",
-        header=header_list,
+        header=headers,
         value=None,
         expected="""<table>
     <thead>
@@ -141,7 +141,7 @@ normal_test_data_list = [
     Data(
         table="",
         indent="  ",
-        header=header_list,
+        header=headers,
         value=value_matrix_with_none,
         expected="""<table>
   <thead>
@@ -274,7 +274,7 @@ class Test_HtmlTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.indent_string = indent
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
         writer.write_table()
 
@@ -357,7 +357,7 @@ class Test_HtmlTableWriter_write_table(object):
         writer = table_writer_class()
         writer.table_name = table
         writer.indent_string = indent
-        writer.header_list = header
+        writer.headers = header
         writer.value_matrix = value
 
         with pytest.raises(expected):

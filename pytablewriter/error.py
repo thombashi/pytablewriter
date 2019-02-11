@@ -20,8 +20,8 @@ class EmptyTableNameError(Exception):
 
 class EmptyHeaderError(Exception):
     """
-    Exception raised when a table writer class of the |header_list| attribute
-    is null, and the class is not accepted null |header_list|.
+    Exception raised when a table writer class of the |headers| attribute
+    is null, and the class is not accepted null |headers|.
     """
 
 
@@ -34,7 +34,7 @@ class EmptyValueError(Exception):
 
 class EmptyTableDataError(Exception):
     """
-    Exception raised when a table writer class of the |header_list| and
+    Exception raised when a table writer class of the |headers| and
     |value_matrix| attributes are null.
     """
 
