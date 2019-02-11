@@ -24,8 +24,6 @@ class TableWriterInterface(object):
         :rtype: str
         """
 
-        pass
-
     @abc.abstractproperty
     def support_split_write(self):  # pragma: no cover
         """
@@ -34,15 +32,11 @@ class TableWriterInterface(object):
         :rtype: bool
         """
 
-        pass
-
     @abc.abstractmethod
     def write_table(self):  # pragma: no cover
         """
         |write_table|.
         """
-
-        pass
 
     def dump(self, output, close_after_write):  # pragma: no cover
         raise NotImplementedError("{} writer did not support dump method".format(self.format_name))
