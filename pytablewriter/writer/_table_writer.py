@@ -572,24 +572,39 @@ class AbstractTableWriter(TableWriterInterface):
         for table_data in loader.load():
             self.from_tabledata(table_data)
 
-    def from_dataframe(self, dataframe):
+    def from_dataframe(self, dataframe, add_index_column=False):
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
         Following attributes are set to the writer by the method:
 
-        - :py:attr:`~.header_list`.
-        - :py:attr:`~.value_matrix`.
-        - :py:attr:`~.type_hint_list`.
+            - :py:attr:`~.header_list`.
+            - :py:attr:`~.value_matrix`.
+            - :py:attr:`~.type_hint_list`.
 
-        :param pandas.DataFrame dataframe: Input dataframe.
+        Args:
+            dataframe(pandas.DataFrame):
+                Input dataframe.
+            add_index_column(bool, optional):
+                If |True|, add a column of ``index`` of the ``dataframe``.
+                Defaults to |False|.
 
-        :Example:
+        Example:
             :ref:`example-from-pandas-dataframe`
         """
 
         self.header_list = list(dataframe.columns.values)
-        self.value_matrix = dataframe.values.tolist()
         self.type_hint_list = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
+
+        if add_index_column:
+            self.header_list = [""] + self.header_list
+            if self.type_hint_list:
+                self.type_hint_list = [None] + self.type_hint_list
+            self.value_matrix = [
+                [index] + row
+                for index, row in zip(dataframe.index.tolist(), dataframe.values.tolist())
+            ]
+        else:
+            self.value_matrix = dataframe.values.tolist()
 
     def from_tablib(self, tablib_dataset):
         """

@@ -33,6 +33,14 @@ from .data import (
 )
 
 
+try:
+    import pandas as pd
+
+    SKIP_DATAFRAME_TEST = False
+except ImportError:
+    SKIP_DATAFRAME_TEST = True
+
+
 Data = collections.namedtuple("Data", "table indent header value is_formatting_float expected")
 
 normal_test_data_list = [
@@ -1075,6 +1083,51 @@ class Test_MarkdownTableWriter_line_break_handling(object):
         writer.header_list = ["no", "text"]
         writer.value_matrix = [[1, "first\nsecond"]]
         writer.line_break_handling = value
+
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+
+@pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
+class Test_MarkdownTableWriter_from_dataframe(object):
+    @pytest.mark.parametrize(
+        ["add_index_column", "expected"],
+        [
+            [
+                False,
+                dedent(
+                    """\
+                    # add_index_column: False
+                    | A | B |
+                    |--:|--:|
+                    |  1| 10|
+                    |  2| 11|
+                    """
+                ),
+            ],
+            [
+                True,
+                dedent(
+                    """\
+                    # add_index_column: True
+                    |   | A | B |
+                    |---|--:|--:|
+                    |a  |  1| 10|
+                    |b  |  2| 11|
+                    """
+                ),
+            ],
+        ],
+    )
+    def test_normal(self, add_index_column, expected):
+        writer = table_writer_class()
+        writer.table_name = "add_index_column: {}".format(add_index_column)
+        writer.from_dataframe(
+            pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
+            add_index_column=add_index_column,
+        )
 
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
