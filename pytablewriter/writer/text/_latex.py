@@ -127,7 +127,7 @@ class LatexMatrixWriter(LatexWriter):
     def _get_header_row_separator_items(self):
         return []
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         row_item_list = []
 
         if typepy.is_not_null_string(self.table_name):
@@ -182,7 +182,7 @@ class LatexTableWriter(LatexWriter):
         self.char_right_side_row = r" \\ \hline"
         self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         return [
             "".join(
                 [

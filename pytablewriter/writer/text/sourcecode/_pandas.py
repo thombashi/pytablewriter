@@ -63,7 +63,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
         self.import_pandas_as = "pd"
         self.is_write_header = False
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         return ["{} = {}.DataFrame([".format(self.variable_name, self.import_pandas_as)]
 
     def _get_closing_row_items(self):

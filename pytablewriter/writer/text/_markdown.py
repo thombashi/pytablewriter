@@ -55,7 +55,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             super(MarkdownTableWriter, self)._to_row_item(col_dp, value_dp)
         )
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         return []
 
     def _get_header_row_separator_items(self):

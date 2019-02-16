@@ -126,7 +126,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._write_line(js_matrix_var_def_text)
         self.inc_indent_level()
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         return ["{:s} {:s} = [".format(self.variable_declaration, self.variable_name)]
 
     def _get_closing_row_items(self):

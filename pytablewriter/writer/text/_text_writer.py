@@ -215,7 +215,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_closing_row()
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         return self.__get_row_separator_items(self.__opening_row_cell_format, self.char_opening_row)
 
     def _get_header_row_separator_items(self):
@@ -306,7 +306,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if not self.is_write_opening_row:
             return
 
-        self.__write_separator_row(self._get_opening_row_item_list())
+        self.__write_separator_row(self._get_opening_row_items())
 
     def __write_header_row_separator(self):
         if any([not self.is_write_header, not self.is_write_header_separator_row]):

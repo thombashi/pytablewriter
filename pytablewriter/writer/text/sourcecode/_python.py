@@ -76,7 +76,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super(PythonCodeTableWriter, self)._write_table()
         self.dec_indent_level()
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         if typepy.is_not_null_string(self.table_name):
             return [self.variable_name + " = ["]
 

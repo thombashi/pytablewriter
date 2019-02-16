@@ -58,7 +58,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
             self.import_numpy_as
         )
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         array_def = "{:s}.array([".format(self.import_numpy_as)
 
         if typepy.is_not_null_string(self.table_name):

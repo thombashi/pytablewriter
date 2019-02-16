@@ -101,7 +101,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         IndentationTextTableWriter.write_table(self)
 
-    def _get_opening_row_item_list(self):
+    def _get_opening_row_items(self):
         directive = ".. csv-table:: "
 
         if typepy.is_null_string(self.table_name):
