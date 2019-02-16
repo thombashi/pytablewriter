@@ -141,7 +141,7 @@ class LatexMatrixWriter(LatexWriter):
 
         return ["".join(row_item_list)]
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         return [r"\end{array} \right)"]
 
     def _write_opening_row(self):
@@ -219,5 +219,5 @@ class LatexTableWriter(LatexWriter):
     def _get_header_row_separator_items(self):
         return [r"\hline"]
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         return [r"\end{array}"]

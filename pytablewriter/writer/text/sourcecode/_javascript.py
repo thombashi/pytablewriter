@@ -129,7 +129,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def _get_opening_row_item_list(self):
         return ["{:s} {:s} = [".format(self.variable_declaration, self.variable_name)]
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         return ["];"]
 
     def _to_row_item(self, col_dp, value_dp):

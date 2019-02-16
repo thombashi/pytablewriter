@@ -137,7 +137,7 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         return ["["]
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         if typepy.is_not_null_string(self.table_name):
             return ["]}"]
 

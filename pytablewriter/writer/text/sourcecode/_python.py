@@ -82,5 +82,5 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
         return ["["]
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         return ["]"]

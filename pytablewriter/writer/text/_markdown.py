@@ -78,7 +78,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _get_value_row_separator_items(self):
         return []
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         return []
 
     def write_table(self):

@@ -228,7 +228,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.__value_row_separator_cell_format, self.char_value_row_separator
         )
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         return self.__get_row_separator_items(self.__closing_row_cell_format, self.char_closing_row)
 
     def __get_row_separator_items(self, margin_format, separator_char):
@@ -327,7 +327,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if not self.is_write_closing_row:
             return
 
-        self.__write_separator_row(self._get_closing_row_item_list())
+        self.__write_separator_row(self._get_closing_row_items())
 
     def __make_margin_format(self, margin_char):
         margin_str = margin_char * self.__margin

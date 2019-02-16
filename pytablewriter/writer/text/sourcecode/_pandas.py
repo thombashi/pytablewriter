@@ -66,7 +66,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
     def _get_opening_row_item_list(self):
         return ["{} = {}.DataFrame([".format(self.variable_name, self.import_pandas_as)]
 
-    def _get_closing_row_item_list(self):
+    def _get_closing_row_items(self):
         if typepy.is_not_empty_sequence(self.headers):
             return [
                 "], columns=[{}])".format(
