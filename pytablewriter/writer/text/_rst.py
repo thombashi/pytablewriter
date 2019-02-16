@@ -133,7 +133,7 @@ class RstCsvTableWriter(RstTableWriter):
         )
         self._write_line()
 
-    def _get_value_row_separator_item_list(self):
+    def _get_value_row_separator_items(self):
         return []
 
     def _get_closing_row_item_list(self):

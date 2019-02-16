@@ -54,7 +54,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         self._quoting_flags[typepy.Typecode.DATETIME] = False
         self._is_require_table_name = True
 
-    def _get_value_row_separator_item_list(self):
+    def _get_value_row_separator_items(self):
         return []
 
     def _write_opening_row(self):

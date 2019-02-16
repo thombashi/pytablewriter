@@ -223,7 +223,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self._header_row_separator_cell_format, self.char_header_row_separator
         )
 
-    def _get_value_row_separator_item_list(self):
+    def _get_value_row_separator_items(self):
         return self.__get_row_separator_items(
             self.__value_row_separator_cell_format, self.char_value_row_separator
         )
@@ -321,7 +321,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         :py:attr:`.is_write_value_separator_row`.
         """
 
-        self.__write_separator_row(self._get_value_row_separator_item_list())
+        self.__write_separator_row(self._get_value_row_separator_items())
 
     def _write_closing_row(self):
         if not self.is_write_closing_row:
