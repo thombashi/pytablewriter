@@ -196,13 +196,18 @@ class TableFormat(enum.Enum):
     TSV = ([TsvTableWriter.FORMAT_NAME], TsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["tsv"])
 
     @property
-    def name_list(self):
+    def names(self):
         """
         :return: Names associated with the table format.
         :rtype: list
         """
 
         return self.__names
+
+    @property
+    def name_list(self):
+        warnings.warn("'name_list' has moved to 'names'", DeprecationWarning)
+        return self.names
 
     @property
     def writer_class(self):

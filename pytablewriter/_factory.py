@@ -131,7 +131,7 @@ class TableWriterFactory(object):
         format_name = format_name.lower()
 
         for table_format in TableFormat:
-            if format_name in table_format.name_list and not (
+            if format_name in table_format.names and not (
                 table_format.format_attribute & FormatAttr.SECONDARY_NAME
             ):
                 return table_format.writer_class()
@@ -197,7 +197,7 @@ class TableWriterFactory(object):
 
         format_name_set = set()
         for table_format in TableFormat:
-            for format_name in table_format.name_list:
+            for format_name in table_format.names:
                 format_name_set.add(format_name)
 
         return sorted(list(format_name_set))
