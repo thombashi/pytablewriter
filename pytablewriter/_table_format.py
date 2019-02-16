@@ -202,7 +202,7 @@ class TableFormat(enum.Enum):
         :rtype: list
         """
 
-        return self.__name_list
+        return self.__names
 
     @property
     def writer_class(self):
@@ -237,8 +237,8 @@ class TableFormat(enum.Enum):
         warnings.warn("'file_extension_list' has moved to 'file_extensions'", DeprecationWarning)
         return self.file_extensions
 
-    def __init__(self, name_list, writer_class, format_attribute, file_extensions):
-        self.__name_list = name_list
+    def __init__(self, names, writer_class, format_attribute, file_extensions):
+        self.__names = names
         self.__writer_class = writer_class
         self.__format_attribute = format_attribute
         self.__file_extensions = file_extensions
