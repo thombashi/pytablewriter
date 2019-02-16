@@ -50,10 +50,10 @@ class LtsvTableWriter(CsvTableWriter):
             self._verify_property()
             self._preprocess()
 
-            for value_list in self._table_value_matrix:
+            for values in self._table_value_matrix:
                 ltsv_item_list = [
                     "{:s}:{}".format(pathvalidate.sanitize_ltsv_label(header_name), value)
-                    for header_name, value in zip(self.headers, value_list)
+                    for header_name, value in zip(self.headers, values)
                     if typepy.is_not_null_string(value)
                 ]
 
