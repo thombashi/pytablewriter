@@ -7,6 +7,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import os
+import warnings
 
 import typepy
 
@@ -203,7 +204,9 @@ class TableWriterFactory(object):
 
     @classmethod
     def get_format_name_list(cls):
-        # deprecated: alias to get_format_names
+        warnings.warn(
+            "'get_format_name_list()' has moved to 'get_format_names()'", DeprecationWarning
+        )
         return cls.get_format_names()
 
     @classmethod
@@ -249,5 +252,5 @@ class TableWriterFactory(object):
 
     @classmethod
     def get_extension_list(cls):
-        # deprecated: alias to get_extensions
+        warnings.warn("'get_extension_list()' has moved to 'get_extensions()'", DeprecationWarning)
         return cls.get_extensions()

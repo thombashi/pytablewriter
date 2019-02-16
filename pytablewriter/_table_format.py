@@ -7,6 +7,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import enum
+import warnings
 
 from .writer import (
     CsvTableWriter,
@@ -233,7 +234,7 @@ class TableFormat(enum.Enum):
 
     @property
     def file_extension_list(self):
-        # deprecated: alias to file_extensions
+        warnings.warn("'file_extension_list' has moved to 'file_extensions'", DeprecationWarning)
         return self.file_extensions
 
     def __init__(self, name_list, writer_class, format_attribute, file_extensions):
