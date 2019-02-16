@@ -52,9 +52,9 @@ class Test_WriterFactory_get_format_name_list(object):
         ]
 
 
-class Test_WriterFactory_get_extension_list(object):
+class Test_WriterFactory_get_extensions(object):
     def test_normal(self):
-        assert ptw.TableWriterFactory.get_extension_list() == [
+        assert ptw.TableWriterFactory.get_extensions() == [
             "csv",
             "htm",
             "html",

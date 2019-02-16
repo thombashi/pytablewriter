@@ -81,9 +81,7 @@ class TableWriterFactory(object):
                 [
                     "{:s} (unknown file extension).".format(file_extension),
                     "",
-                    "acceptable file extensions are: {}.".format(
-                        ", ".join(cls.get_extension_list())
-                    ),
+                    "acceptable file extensions are: {}.".format(", ".join(cls.get_extensions())),
                 ]
             )
         )
@@ -206,7 +204,7 @@ class TableWriterFactory(object):
         return sorted(list(format_name_set))
 
     @classmethod
-    def get_extension_list(cls):
+    def get_extensions(cls):
         """
         :return: Available file extensions.
         :rtype: list
@@ -215,7 +213,7 @@ class TableWriterFactory(object):
             .. code:: python
 
                 >>> import pytablewriter as ptw
-                >>> for name in ptw.TableWriterFactory.get_extension_list():
+                >>> for name in ptw.TableWriterFactory.get_extensions():
                 ...     print(name)
                 ...
                 csv
@@ -245,3 +243,8 @@ class TableWriterFactory(object):
                 file_extension_set.add(file_extension)
 
         return sorted(list(file_extension_set))
+
+    @classmethod
+    def get_extension_list(cls):
+        # deprecated: alias to get_extensions
+        return cls.get_extensions()
