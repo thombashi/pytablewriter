@@ -216,26 +216,22 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self._write_closing_row()
 
     def _get_opening_row_item_list(self):
-        return self.__get_row_separator_item_list(
-            self.__opening_row_cell_format, self.char_opening_row
-        )
+        return self.__get_row_separator_items(self.__opening_row_cell_format, self.char_opening_row)
 
     def _get_header_row_separator_item_list(self):
-        return self.__get_row_separator_item_list(
+        return self.__get_row_separator_items(
             self._header_row_separator_cell_format, self.char_header_row_separator
         )
 
     def _get_value_row_separator_item_list(self):
-        return self.__get_row_separator_item_list(
+        return self.__get_row_separator_items(
             self.__value_row_separator_cell_format, self.char_value_row_separator
         )
 
     def _get_closing_row_item_list(self):
-        return self.__get_row_separator_item_list(
-            self.__closing_row_cell_format, self.char_closing_row
-        )
+        return self.__get_row_separator_items(self.__closing_row_cell_format, self.char_closing_row)
 
-    def __get_row_separator_item_list(self, margin_format, separator_char):
+    def __get_row_separator_items(self, margin_format, separator_char):
         return [
             margin_format.format(separator_char * self._get_padding_len(col_dp))
             for col_dp in self._column_dp_list
