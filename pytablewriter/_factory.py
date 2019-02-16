@@ -68,7 +68,7 @@ class TableWriterFactory(object):
         file_extension = file_extension.lstrip(".").lower()
 
         for table_format in TableFormat:
-            if file_extension not in table_format.file_extension_list:
+            if file_extension not in table_format.file_extensions:
                 continue
 
             if table_format.format_attribute & FormatAttr.SECONDARY_EXT:
@@ -242,7 +242,7 @@ class TableWriterFactory(object):
 
         file_extension_set = set()
         for table_format in TableFormat:
-            for file_extension in table_format.file_extension_list:
+            for file_extension in table_format.file_extensions:
                 file_extension_set.add(file_extension)
 
         return sorted(list(file_extension_set))

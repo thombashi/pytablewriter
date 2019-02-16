@@ -223,13 +223,18 @@ class TableFormat(enum.Enum):
         return self.__format_attribute
 
     @property
-    def file_extension_list(self):
+    def file_extensions(self):
         """
         :return: File extensions associated with the table format.
         :rtype: list
         """
 
         return self.__file_extensions
+
+    @property
+    def file_extension_list(self):
+        # deprecated: alias to file_extensions
+        return self.file_extensions
 
     def __init__(self, name_list, writer_class, format_attribute, file_extensions):
         self.__name_list = name_list
