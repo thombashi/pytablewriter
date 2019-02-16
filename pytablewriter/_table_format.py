@@ -231,11 +231,11 @@ class TableFormat(enum.Enum):
 
         return self.__file_extensions
 
-    def __init__(self, name_list, writer_class, format_attribute, file_extension_list):
+    def __init__(self, name_list, writer_class, format_attribute, file_extensions):
         self.__name_list = name_list
         self.__writer_class = writer_class
         self.__format_attribute = format_attribute
-        self.__file_extensions = file_extension_list
+        self.__file_extensions = file_extensions
 
     @classmethod
     def find_all_attr(cls, format_attribute):
