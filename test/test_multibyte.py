@@ -15,7 +15,7 @@ class Test_CsvTableWriter_write_table(object):
         ["format_name"],
         [
             [format_name]
-            for format_name in ptw.TableWriterFactory.get_format_name_list()
+            for format_name in ptw.TableWriterFactory.get_format_names()
             if format_name not in ["null", "elasticsearch", "excel", "sqlite"]
         ],
     )

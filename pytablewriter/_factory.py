@@ -139,15 +139,13 @@ class TableWriterFactory(object):
             "\n".join(
                 [
                     "{} (unknown format name).".format(format_name),
-                    "acceptable format names are: {}.".format(
-                        ", ".join(cls.get_format_name_list())
-                    ),
+                    "acceptable format names are: {}.".format(", ".join(cls.get_format_names())),
                 ]
             )
         )
 
     @classmethod
-    def get_format_name_list(cls):
+    def get_format_names(cls):
         """
         :return: Available format names.
         :rtype: list
@@ -156,7 +154,7 @@ class TableWriterFactory(object):
             .. code:: python
 
                 >>> import pytablewriter as ptw
-                >>> for name in ptw.TableWriterFactory.get_format_name_list():
+                >>> for name in ptw.TableWriterFactory.get_format_names():
                 ...     print(name)
                 ...
                 csv
@@ -202,6 +200,11 @@ class TableWriterFactory(object):
                 format_name_set.add(format_name)
 
         return sorted(list(format_name_set))
+
+    @classmethod
+    def get_format_name_list(cls):
+        # deprecated: alias to get_format_names
+        return cls.get_format_names()
 
     @classmethod
     def get_extensions(cls):

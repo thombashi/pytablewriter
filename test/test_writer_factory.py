@@ -12,9 +12,9 @@ import pytablewriter as ptw
 import pytest
 
 
-class Test_WriterFactory_get_format_name_list(object):
+class Test_WriterFactory_get_format_names(object):
     def test_normal(self):
-        assert ptw.TableWriterFactory.get_format_name_list() == [
+        assert ptw.TableWriterFactory.get_format_names() == [
             "csv",
             "elasticsearch",
             "excel",
