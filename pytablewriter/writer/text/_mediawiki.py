@@ -69,11 +69,11 @@ class MediaWikiTableWriter(TextTableWriter):
     def _get_opening_row_item_list(self):
         return ['{| class="wikitable"']
 
-    def _get_header_row_separator_item_list(self):
+    def _get_header_row_separator_items(self):
         return ["|-"]
 
     def _get_value_row_separator_item_list(self):
-        return self._get_header_row_separator_item_list()
+        return self._get_header_row_separator_items()
 
     def _get_closing_row_item_list(self):
         return ["|}"]

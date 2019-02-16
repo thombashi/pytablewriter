@@ -124,7 +124,7 @@ class LatexMatrixWriter(LatexWriter):
 
         return row_item
 
-    def _get_header_row_separator_item_list(self):
+    def _get_header_row_separator_items(self):
         return []
 
     def _get_opening_row_item_list(self):
@@ -216,7 +216,7 @@ class LatexTableWriter(LatexWriter):
 
         return row_item
 
-    def _get_header_row_separator_item_list(self):
+    def _get_header_row_separator_items(self):
         return [r"\hline"]
 
     def _get_closing_row_item_list(self):

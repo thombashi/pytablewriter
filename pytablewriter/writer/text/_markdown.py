@@ -58,7 +58,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _get_opening_row_item_list(self):
         return []
 
-    def _get_header_row_separator_item_list(self):
+    def _get_header_row_separator_items(self):
         header_separator_list = []
         for col_dp in self._column_dp_list:
             padding_len = self._get_padding_len(col_dp) + self.margin * 2
