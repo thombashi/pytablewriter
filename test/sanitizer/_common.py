@@ -10,7 +10,7 @@ import random
 import string
 
 
-alphanum_char_list = [x for x in string.digits + string.ascii_letters]
+alphanum_chars = [x for x in string.digits + string.ascii_letters]
 
 
 INVALID_PATH_CHARS = ["\0"]
@@ -77,5 +77,5 @@ INVALID_JS_VAR_CHARS = INVALID_WIN_FILENAME_CHARS + [
 INVALID_PYTHON_VAR_CHARS = INVALID_JS_VAR_CHARS + ["$"]
 
 
-def make_random_str(length, char_list=alphanum_char_list):
+def make_random_str(length, char_list=alphanum_chars):
     return "".join([random.choice(char_list) for _i in range(length)])
