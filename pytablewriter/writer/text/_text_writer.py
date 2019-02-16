@@ -265,14 +265,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _write_line(self, text=""):
         self._write_raw_line(text)
 
-    def _write_row(self, value_list):
-        if typepy.is_empty_sequence(value_list):
+    def _write_row(self, values):
+        if typepy.is_empty_sequence(values):
             return
 
         self._write_line(
-            self.char_left_side_row
-            + self.column_delimiter.join(value_list)
-            + self.char_right_side_row
+            self.char_left_side_row + self.column_delimiter.join(values) + self.char_right_side_row
         )
 
     def _write_header(self):
@@ -284,11 +282,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_row(self._table_header_list)
 
-    def _write_value_row(self, value_list, value_dp_list):
-        self._write_row(value_list)
+    def _write_value_row(self, values, value_dp_list):
+        self._write_row(values)
 
-    def __write_separator_row(self, value_list):
-        if typepy.is_empty_sequence(value_list):
+    def __write_separator_row(self, values):
+        if typepy.is_empty_sequence(values):
             return
 
         left_cross_point = self.char_cross_point
@@ -298,9 +296,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if typepy.is_null_string(self.char_right_side_row):
             right_cross_point = ""
 
-        self._write_line(
-            left_cross_point + self.char_cross_point.join(value_list) + right_cross_point
-        )
+        self._write_line(left_cross_point + self.char_cross_point.join(values) + right_cross_point)
 
     def _write_opening_row(self):
         if not self.is_write_opening_row:
