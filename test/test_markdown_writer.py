@@ -1121,15 +1121,21 @@ class Test_MarkdownTableWriter_from_dataframe(object):
             ],
         ],
     )
-    def test_normal(self, add_index_column, expected):
+    def test_normal(self, tmpdir, add_index_column, expected):
         writer = table_writer_class()
         writer.table_name = "add_index_column: {}".format(add_index_column)
-        writer.from_dataframe(
-            pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
-            add_index_column=add_index_column,
-        )
+        df = pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"])
 
+        writer.from_dataframe(df, add_index_column=add_index_column)
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
-
         assert out == expected
+
+        if not SKIP_DATAFRAME_TEST:
+            df_pkl_filepath = str(tmpdir.join("df.pkl"))
+            df.to_pickle(df_pkl_filepath)
+
+            writer.from_dataframe(df_pkl_filepath, add_index_column=add_index_column)
+            out = writer.dumps()
+            print_test_result(expected=expected, actual=out)
+            assert out == expected

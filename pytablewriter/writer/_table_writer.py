@@ -615,15 +615,15 @@ class AbstractTableWriter(TableWriterInterface):
     def from_dataframe(self, dataframe, add_index_column=False):
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
-        Following attributes are set to the writer by the method:
+        Following attributes are set by the method:
 
             - :py:attr:`~.headers`.
             - :py:attr:`~.value_matrix`.
             - :py:attr:`~.type_hints`.
 
         Args:
-            dataframe(pandas.DataFrame):
-                Input dataframe.
+            dataframe(pandas.DataFrame or |str|):
+                Input pandas.DataFrame object or pickle.
             add_index_column(bool, optional):
                 If |True|, add a column of ``index`` of the ``dataframe``.
                 Defaults to |False|.
@@ -631,6 +631,11 @@ class AbstractTableWriter(TableWriterInterface):
         Example:
             :ref:`example-from-pandas-dataframe`
         """
+
+        if typepy.String(dataframe).is_type():
+            import pandas as pd
+
+            dataframe = pd.read_pickle(dataframe)
 
         self.headers = list(dataframe.columns.values)
         self.type_hints = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
