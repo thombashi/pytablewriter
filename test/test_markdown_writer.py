@@ -1131,11 +1131,11 @@ class Test_MarkdownTableWriter_from_dataframe(object):
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-        if not SKIP_DATAFRAME_TEST:
-            df_pkl_filepath = str(tmpdir.join("df.pkl"))
-            df.to_pickle(df_pkl_filepath)
+        # pickle test
+        df_pkl_filepath = str(tmpdir.join("df.pkl"))
+        df.to_pickle(df_pkl_filepath)
 
-            writer.from_dataframe(df_pkl_filepath, add_index_column=add_index_column)
-            out = writer.dumps()
-            print_test_result(expected=expected, actual=out)
-            assert out == expected
+        writer.from_dataframe(df_pkl_filepath, add_index_column=add_index_column)
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
