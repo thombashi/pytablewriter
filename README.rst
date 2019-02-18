@@ -46,7 +46,7 @@ Features
         - Source code
             - JavaScript code (Definition of a nested list variable)
             - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-            - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html>`__ variable)
+            - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ variable)
             - Python code (Definition of a nested list variable)
         - Space aligned values
         - `TOML <https://github.com/toml-lang/toml>`__
@@ -63,9 +63,16 @@ Features
     - Text alignment
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
+- Configure ouput:
+    - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
+    - Get rendered tabular text
+- Data source
+    - nested list
+    - CSV
+    - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
+    - `pandas.Series <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html>`__
+    - etc.
 - Multibyte character support
-- Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
-- Get rendered tabular text
 - ANSI color support
 
 Examples
@@ -345,7 +352,7 @@ Write a markdown table from a space-separated values
 Get rendered tabular text as str
 ----------------------------------
 ``dumps`` method returns rendered tabular text.
-``dumps`` available only for text format writers.
+``dumps`` only available for text format writers.
 
 :Sample Code:
     .. code-block:: python

@@ -62,7 +62,7 @@ def write_examples(maker):
 
     maker.set_indent_level(1)
     maker.write_chapter("Get rendered tabular text as str")
-    maker.write_file(examples_root.joinpath("dump", "dumps.txt"))
+    maker.write_file(examples_root.joinpath("output", "dump", "dumps.txt"))
 
     maker.set_indent_level(1)
     maker.write_chapter("Configure table styles")
