@@ -7,10 +7,9 @@
 
 from textwrap import dedent
 
+import pandas as pd
 import pytablewriter
 import six
-
-import pandas as pd
 
 
 df = pd.read_csv(six.StringIO(dedent("""\
