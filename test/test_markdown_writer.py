@@ -1139,3 +1139,58 @@ class Test_MarkdownTableWriter_from_dataframe(object):
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
         assert out == expected
+
+
+@pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
+class Test_MarkdownTableWriter_from_series(object):
+    @pytest.mark.parametrize(
+        ["add_index_column", "expected"],
+        [
+            [
+                False,
+                dedent(
+                    """\
+                    # add_index_column: False
+                    |value |
+                    |-----:|
+                    |100.00|
+                    | 49.50|
+                    | 29.01|
+                    |  0.00|
+                    | 24.75|
+                    | 49.50|
+                    | 74.25|
+                    | 99.00|
+                    """
+                ),
+            ],
+            [
+                True,
+                dedent(
+                    """\
+                    # add_index_column: True
+                    |     |value |
+                    |-----|-----:|
+                    |count|100.00|
+                    |mean | 49.50|
+                    |std  | 29.01|
+                    |min  |  0.00|
+                    |25%  | 24.75|
+                    |50%  | 49.50|
+                    |75%  | 74.25|
+                    |max  | 99.00|
+                    """
+                ),
+            ],
+        ],
+    )
+    def test_normal(self, add_index_column, expected):
+        writer = table_writer_class()
+        writer.table_name = "add_index_column: {}".format(add_index_column)
+
+        writer.from_series(
+            pd.Series(list(range(100))).describe(), add_index_column=add_index_column
+        )
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected

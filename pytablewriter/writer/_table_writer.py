@@ -651,6 +651,40 @@ class AbstractTableWriter(TableWriterInterface):
         else:
             self.value_matrix = dataframe.values.tolist()
 
+    def from_series(self, series, add_index_column=True):
+        """
+        Set tabular attributes to the writer from :py:class:`pandas.Series`.
+        Following attributes are set by the method:
+
+            - :py:attr:`~.headers`
+            - :py:attr:`~.value_matrix`
+            - :py:attr:`~.type_hints`
+
+        Args:
+            series(pandas.Series):
+                Input pandas.Series object.
+            add_index_column(bool, optional):
+                If |True|, add a column of ``index`` of the ``series``.
+                Defaults to |True|.
+        """
+
+        if series.name:
+            self.headers = [series.name]
+        else:
+            self.headers = ["value"]
+
+        self.type_hints = [self.__get_typehint_from_dtype(series.dtype)]
+
+        if add_index_column:
+            self.headers = [""] + self.headers
+            if self.type_hints:
+                self.type_hints = [None] + self.type_hints
+            self.value_matrix = [
+                [index] + [value] for index, value in zip(series.index.tolist(), series.tolist())
+            ]
+        else:
+            self.value_matrix = [[value] for value in series.tolist()]
+
     def from_tablib(self, tablib_dataset):
         """
         Set tabular attributes to the writer from :py:class:`tablib.Dataset`.
