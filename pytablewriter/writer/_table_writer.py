@@ -617,9 +617,9 @@ class AbstractTableWriter(TableWriterInterface):
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
         Following attributes are set by the method:
 
-            - :py:attr:`~.headers`.
-            - :py:attr:`~.value_matrix`.
-            - :py:attr:`~.type_hints`.
+            - :py:attr:`~.headers`
+            - :py:attr:`~.value_matrix`
+            - :py:attr:`~.type_hints`
 
         Args:
             dataframe(pandas.DataFrame or |str|):
