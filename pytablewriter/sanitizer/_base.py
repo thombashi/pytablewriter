@@ -68,7 +68,9 @@ class VarNameSanitizer(NameSanitizer):
 
         if self._is_reserved_keyword(unicode_var_name):
             raise ReservedNameError(
-                "{:s} is a reserved keyword by python".format(unicode_var_name), reusable_name=False
+                "{:s} is a reserved keyword by python".format(unicode_var_name),
+                reusable_name=False,
+                reserved_name=unicode_var_name,
             )
 
         match = self._invalid_var_name_re.search(unicode_var_name)
