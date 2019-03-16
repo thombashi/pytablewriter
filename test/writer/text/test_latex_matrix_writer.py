@@ -13,8 +13,8 @@ import pytablewriter as ptw
 import pytest
 from pytablewriter.style import Style
 
-from ._common import print_test_result
-from .data import float_header_list, float_value_matrix, style_tabledata, styles, value_matrix
+from ..._common import print_test_result
+from ...data import float_header_list, float_value_matrix, style_tabledata, styles, value_matrix
 
 
 Data = collections.namedtuple("Data", "table header value expected")

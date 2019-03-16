@@ -12,8 +12,8 @@ import itertools
 import pytablewriter as ptw
 import pytest
 
-from ._common import print_test_result
-from .data import (
+from ..._common import print_test_result
+from ...data import (
     float_header_list,
     float_value_matrix,
     mix_header_list,

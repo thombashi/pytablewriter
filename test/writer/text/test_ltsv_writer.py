@@ -13,39 +13,47 @@ from textwrap import dedent
 import pytablewriter as ptw
 import pytest
 
-from ._common import print_test_result
-from .data import (
-    float_header_list,
-    float_value_matrix,
-    mix_header_list,
-    mix_value_matrix,
-    value_matrix,
-)
+from ..._common import print_test_result
+from ...data import float_header_list, float_value_matrix, headers, value_matrix
 
 
 Data = collections.namedtuple("Data", "header value expected")
 
 normal_test_data_list = [
     Data(
-        header=mix_header_list,
-        value=mix_value_matrix,
+        header=headers,
+        value=value_matrix,
         expected=dedent(
             """\
-            i   f     c     if   ifc  bool     inf     nan  mix_num             time           
-            1  1.10  aa     1.0    1  True   Infinity  NaN         1  2017-01-01T00:00:00      
-            2  2.20  bbb    2.2  2.2  False  Infinity  NaN  Infinity  2017-01-02 03:04:05+09:00
-            3  3.33  cccc  -3.0  ccc  True   Infinity  NaN       NaN  2017-01-01T00:00:00      
+            a:1\tb:123.1\tc:"a"\tdd:1\te:1
+            a:2\tb:2.2\tc:"bb"\tdd:2.2\te:2.2
+            a:3\tb:3.3\tc:"ccc"\tdd:3\te:"cccc"
             """
         ),
     ),
     Data(
-        header=None,
-        value=value_matrix,
+        header=headers,
+        value=[
+            ["1", "", "a", "1", None],
+            [None, 2.2, None, "2.2", 2.2],
+            [None, None, None, None, None],
+            [3, 3.3, "ccc", None, "cccc"],
+            [None, None, None, None, None],
+        ],
         expected=dedent(
             """\
-            1  123.1  a    1.0     1
-            2    2.2  bb   2.2   2.2
-            3    3.3  ccc  3.0  cccc
+            a:1\tc:"a"\tdd:1
+            b:2.2\tdd:2.2\te:2.2
+            a:3\tb:3.3\tc:"ccc"\te:"cccc"
+            """
+        ),
+    ),
+    Data(
+        header=["a!0", "a#1", "a.2$", "a_%3", "a-&4"],
+        value=[["a\0b", "c   d", "e\tf", "g\nh", "i\r\nj"]],
+        expected=dedent(
+            """\
+            a0:"a\0b"\ta1:"c   d"\ta.2:"e  f"\ta_3:"g h"\ta-4:"i j"
             """
         ),
     ),
@@ -54,10 +62,9 @@ normal_test_data_list = [
         value=float_value_matrix,
         expected=dedent(
             """\
-             a         b         c  
-            0.01       0.0012  0.000
-            1.00      99.9000  0.010
-            1.20  999999.1230  0.001
+            a:0.01\tb:0.00125\tc:0
+            a:1\tb:99.9\tc:0.01
+            a:1.2\tb:999999.123\tc:0.001
             """
         ),
     ),
@@ -66,22 +73,21 @@ normal_test_data_list = [
 exception_test_data_list = [
     Data(header=header, value=value, expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
-]
+] + [Data(header=None, value=value_matrix, expected=ptw.EmptyHeaderError)]
 
-table_writer_class = ptw.SpaceAlignedTableWriter
+table_writer_class = ptw.LtsvTableWriter
 
 
-class Test_SpaceAlignedTableWriter_write_new_line(object):
+class Test_LtsvTableWriter_write_new_line(object):
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
 
         out, _err = capsys.readouterr()
-
         assert out == "\n"
 
 
-class Test_SpaceAlignedTableWriter_write_table(object):
+class Test_LtsvTableWriter_write_table(object):
     @pytest.mark.parametrize(
         ["header", "value", "expected"],
         [[data.header, data.value, data.expected] for data in normal_test_data_list],

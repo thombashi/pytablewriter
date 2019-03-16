@@ -15,8 +15,8 @@ import pytest
 import toml
 from dateutil.parser import parse
 
-from ._common import print_test_result
-from .data import float_header_list, float_value_matrix, headers, value_matrix
+from ..._common import print_test_result
+from ...data import float_header_list, float_value_matrix, headers, value_matrix
 
 
 Data = collections.namedtuple("Data", "table_name header value expected")

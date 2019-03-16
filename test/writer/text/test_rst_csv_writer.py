@@ -11,8 +11,8 @@ from textwrap import dedent
 import pytablewriter
 import pytest
 
-from ._common import print_test_result
-from .data import (
+from ..._common import print_test_result
+from ...data import (
     Data,
     headers,
     mix_header_list,

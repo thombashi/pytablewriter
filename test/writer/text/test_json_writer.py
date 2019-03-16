@@ -12,8 +12,8 @@ import pytablewriter
 import pytest
 import simplejson as json
 
-from ._common import print_test_result
-from .data import (
+from ..._common import print_test_result
+from ...data import (
     float_header_list,
     float_value_matrix,
     headers,

@@ -9,8 +9,8 @@ from __future__ import absolute_import, print_function, unicode_literals
 import pytablewriter as ptw
 import pytest
 
-from ._common import print_test_result
-from .data import (
+from ..._common import print_test_result
+from ...data import (
     Data,
     headers,
     mix_header_list,

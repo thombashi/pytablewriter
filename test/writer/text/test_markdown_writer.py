@@ -17,8 +17,8 @@ from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
 from tabledata import TableData
 from termcolor import colored
 
-from ._common import print_test_result
-from .data import (
+from ..._common import print_test_result
+from ...data import (
     float_header_list,
     float_value_matrix,
     headers,
