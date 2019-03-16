@@ -84,9 +84,9 @@ Write a Markdown table
 :Sample Code:
     .. code-block:: python
 
-        import pytablewriter
+        from pytablewriter import MarkdownTableWriter
 
-        writer = pytablewriter.MarkdownTableWriter()
+        writer = MarkdownTableWriter()
         writer.table_name = "example_table"
         writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
@@ -121,9 +121,9 @@ Write a Markdown table with a margin
 :Sample Code:
     .. code-block:: python
 
-        import pytablewriter
+        from pytablewriter import MarkdownTableWriter
 
-        writer = pytablewriter.MarkdownTableWriter()
+        writer = MarkdownTableWriter()
         writer.table_name = "write example with a margin"
         writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [
@@ -256,6 +256,40 @@ Write a table to an Excel sheet
 
        Output excel file (``sample_single.xlsx``)
 
+Write a Unicode table
+~~~~~~~~~~~~~~~~~~~~~~~
+:Sample Code:
+    .. code-block:: python
+
+        from pytablewriter import UnicodeTableWriter
+
+        writer = UnicodeTableWriter()
+        writer.table_name = "example_table"
+        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+        writer.value_matrix = [
+            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+        ]
+
+        writer.write_table()
+
+:Output:
+    .. code-block::
+
+        ┌───┬─────┬────┬─────┬────────┬────────────────────────┐
+        │int│float│str │bool │  mix   │          time          │
+        ├───┼─────┼────┼─────┼────────┼────────────────────────┤
+        │  0│ 0.10│hoge│True │       0│2017-01-01 03:04:05+0900│
+        ├───┼─────┼────┼─────┼────────┼────────────────────────┤
+        │  2│-2.23│foo │False│        │2017-12-23 12:34:51+0900│
+        ├───┼─────┼────┼─────┼────────┼────────────────────────┤
+        │  3│ 0.00│bar │True │Infinity│2017-03-03 22:44:55+0900│
+        ├───┼─────┼────┼─────┼────────┼────────────────────────┤
+        │-10│-9.90│    │False│     NaN│2017-01-01 00:00:00+0900│
+        └───┴─────┴────┴─────┴────────┴────────────────────────┘
+
 Write a Markdown table from ``pandas.DataFrame`` instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ``from_dataframe`` method of writer classes will set up tabular data from ``pandas.DataFrame``:
@@ -290,7 +324,7 @@ Write a Markdown table from ``pandas.DataFrame`` instance
         |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00|
 
 
-Adding a column of the DataFrame index if ``add_index_column=True``:
+Adding a column of the DataFrame index if you specify ``add_index_column=True``:
 
 :Sample Code:
     .. code-block:: python
@@ -592,8 +626,8 @@ Create Elasticsearch index and put data
             "ip": "127.0.0.1"
         }
 
-Formatting a table for Jupyter Notebook
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Render a table on Jupyter Notebook
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
 
 .. figure:: ss/jupyter_notebook.png

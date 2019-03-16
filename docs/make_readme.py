@@ -54,6 +54,9 @@ def write_examples(maker):
         examples_root.joinpath("table_format", "binary", "spreadsheet", "exel_single_example.txt")
     )
 
+    maker.write_chapter("Write a Unicode table")
+    maker.write_file(examples_root.joinpath("table_format", "text", "unicode_example.txt"))
+
     maker.write_chapter("Write a Markdown table from ``pandas.DataFrame`` instance")
     maker.write_file(examples_root.joinpath("datasource", "from_pandas_dataframe_example.txt"))
 
@@ -76,7 +79,7 @@ def write_examples(maker):
     maker.write_chapter("Create Elasticsearch index and put data")
     maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
 
-    maker.write_chapter("Formatting a table for Jupyter Notebook")
+    maker.write_chapter("Render a table on Jupyter Notebook")
     maker.write_file(examples_root.joinpath("jupyter_notebook", "jupyter_notebook_example.txt"))
 
     maker.set_indent_level(1)
