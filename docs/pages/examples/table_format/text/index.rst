@@ -15,3 +15,4 @@ Text formats
    sourcecode/index
    space_aligned
    toml
+   unicode

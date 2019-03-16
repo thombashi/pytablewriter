@@ -106,6 +106,10 @@ TOML table writer class
 .. autoclass:: pytablewriter.TomlTableWriter
 
 
+Unicode table writer class
+-------------------------------
+.. autoclass:: pytablewriter.UnicodeTableWriter
+
 
 Binary formats
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

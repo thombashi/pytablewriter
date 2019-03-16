@@ -2,9 +2,9 @@
     .. code-block:: python
         :caption: Write a Markdown table
 
-        import pytablewriter
+        from pytablewriter import MarkdownTableWriter
 
-        writer = pytablewriter.MarkdownTableWriter()
+        writer = MarkdownTableWriter()
         writer.table_name = "example_table"
         writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [

@@ -2,9 +2,9 @@
     .. code-block:: python
         :caption: Write a Markdown table with a margin
 
-        import pytablewriter
+        from pytablewriter import MarkdownTableWriter
 
-        writer = pytablewriter.MarkdownTableWriter()
+        writer = MarkdownTableWriter()
         writer.table_name = "write example with a margin"
         writer.headers = ["int", "float", "str", "bool", "mix", "time"]
         writer.value_matrix = [

@@ -341,6 +341,7 @@ rp_class = u"""
 .. |SqliteTableWriter| replace:: :py:class:`~pytablewriter.SqliteTableWriter`
 .. |TsvTableWriter| replace:: :py:class:`~pytablewriter.TsvTableWriter`
 .. |TomlTableWriter| replace:: :py:class:`~pytablewriter.TomlTableWriter`
+.. |UnicodeTableWriter| replace:: :py:class:`~pytablewriter.UnicodeTableWriter`
 """
 
 rp_module = u"""

@@ -31,7 +31,7 @@
         |  3|3.33|cccc|-3.0|ccc|True |Infinity|NaN|     NaN|2017-01-01 00:00:00+09:00|
 
 
-Adding a column of the DataFrame index if ``add_index_column=True``:
+Adding a column of the DataFrame index if you specify ``add_index_column=True``:
 
 :Sample Code:
     .. code-block:: python
