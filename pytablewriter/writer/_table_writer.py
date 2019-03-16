@@ -982,7 +982,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._logger.logger.debug("_preprocess_header")
 
-        self._table_header_list = [
+        self._table_headers = [
             self._to_header_item(col_dp, header_dp)
             for col_dp, header_dp in zip(
                 self._column_dp_list, self._dp_extractor.to_header_dp_list()
@@ -1043,7 +1043,7 @@ class AbstractTableWriter(TableWriterInterface):
                 [
                     self._column_dp_list,
                     self._styler_list,
-                    self._table_header_list,
+                    self._table_headers,
                     self._table_value_matrix,
                     self._table_value_dp_matrix,
                 ]
@@ -1054,7 +1054,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._column_dp_list = []
         self._styler_list = []
-        self._table_header_list = []
+        self._table_headers = []
         self._table_value_matrix = []
         self._table_value_dp_matrix = []
 
