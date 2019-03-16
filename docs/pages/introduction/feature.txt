@@ -18,6 +18,7 @@ Features
             - Python code (Definition of a nested list variable)
         - Space aligned values
         - `TOML <https://github.com/toml-lang/toml>`__
+        - Unicode
     - Binary file formats:
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
         - SQLite database
