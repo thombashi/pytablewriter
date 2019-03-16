@@ -456,7 +456,7 @@ class AbstractTableWriter(TableWriterInterface):
         return writer.dumps()
 
     def set_style(self, column, style):
-        """Set style for a specific column.
+        """Set |Style| for a specific column.
 
         Args:
             column (|int| or |str|):
