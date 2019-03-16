@@ -490,7 +490,7 @@ class AbstractTableWriter(TableWriterInterface):
             ]
             return
 
-        raise ValueError("column must be an int or string")
+        raise ValueError("column must be an int or string: actual={}".format(column))
 
     def close(self):
         """
