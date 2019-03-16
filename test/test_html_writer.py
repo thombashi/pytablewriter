@@ -284,7 +284,7 @@ class Test_HtmlTableWriter_write_table(object):
         assert out == expected
         assert writer.dumps() == expected
 
-    def test_normal_style_list(self, capsys):
+    def test_normal_styles(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
         writer.styles = styles

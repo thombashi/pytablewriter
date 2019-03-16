@@ -157,7 +157,7 @@ class Test_RstCsvTableWriter_write_table(object):
 
         assert out == expected
 
-    def test_normal_style_list(self):
+    def test_normal_styles(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
         writer.styles = styles
