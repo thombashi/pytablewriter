@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import enum
 import io
 import sys
 
@@ -14,6 +15,13 @@ from ...error import EmptyHeaderError
 from ...style import TextStyler
 from .._table_writer import AbstractTableWriter, LineBreakHandling
 from ._interface import IndentationInterface, TextWriterInterface
+
+
+@enum.unique
+class RowType(enum.Enum):
+    OPENING = "opening"
+    MIDDLE = "middle"
+    CLOSING = "closing"
 
 
 class TextTableWriter(AbstractTableWriter, TextWriterInterface):
@@ -107,17 +115,47 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.column_delimiter = "|"
         self.char_left_side_row = ""
         self.char_right_side_row = ""
+
         self.char_cross_point = ""
+        self.char_left_cross_point = ""
+        self.char_right_cross_point = ""
+        self.char_top_left_cross_point = ""
+        self.char_top_right_cross_point = ""
+        self.char_bottom_left_cross_point = ""
+        self.char_bottom_right_cross_point = ""
 
         self.char_opening_row = "-"
+        self.char_opening_row_cross_point = "-"
+
         self.char_header_row_separator = "-"
         self.char_value_row_separator = "-"
+
         self.char_closing_row = "-"
+        self.char_closing_row_cross_point = "-"
 
         self.margin = 0
 
         self.line_break_handling = LineBreakHandling.REPLACE
         self.is_write_null_line_after_table = False
+
+        self._init_cross_point_maps()
+
+    def _init_cross_point_maps(self):
+        self.__cross_point_maps = {
+            RowType.OPENING: self.char_opening_row_cross_point,
+            RowType.MIDDLE: self.char_cross_point,
+            RowType.CLOSING: self.char_closing_row_cross_point,
+        }
+        self.__left_cross_point_maps = {
+            RowType.OPENING: self.char_top_left_cross_point,
+            RowType.MIDDLE: self.char_left_cross_point,
+            RowType.CLOSING: self.char_bottom_left_cross_point,
+        }
+        self.__right_cross_point_maps = {
+            RowType.OPENING: self.char_top_right_cross_point,
+            RowType.MIDDLE: self.char_right_cross_point,
+            RowType.CLOSING: self.char_bottom_right_cross_point,
+        }
 
     def write_null_line(self):
         """
@@ -285,24 +323,28 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _write_value_row(self, values, value_dp_list):
         self._write_row(values)
 
-    def __write_separator_row(self, values):
+    def __write_separator_row(self, values, row_type=RowType.MIDDLE):
         if typepy.is_empty_sequence(values):
             return
 
-        left_cross_point = self.char_cross_point
-        right_cross_point = self.char_cross_point
+        cross_point = self.__cross_point_maps[row_type]
+        left_cross_point = self.__left_cross_point_maps[row_type]
+        right_cross_point = self.__right_cross_point_maps[row_type]
+
+        left_cross_point = left_cross_point if left_cross_point else cross_point
+        right_cross_point = right_cross_point if right_cross_point else cross_point
         if typepy.is_null_string(self.char_left_side_row):
             left_cross_point = ""
         if typepy.is_null_string(self.char_right_side_row):
             right_cross_point = ""
 
-        self._write_line(left_cross_point + self.char_cross_point.join(values) + right_cross_point)
+        self._write_line(left_cross_point + cross_point.join(values) + right_cross_point)
 
     def _write_opening_row(self):
         if not self.is_write_opening_row:
             return
 
-        self.__write_separator_row(self._get_opening_row_items())
+        self.__write_separator_row(self._get_opening_row_items(), row_type=RowType.OPENING)
 
     def __write_header_row_separator(self):
         if any([not self.is_write_header, not self.is_write_header_separator_row]):
@@ -323,7 +365,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if not self.is_write_closing_row:
             return
 
-        self.__write_separator_row(self._get_closing_row_items())
+        self.__write_separator_row(self._get_closing_row_items(), row_type=RowType.CLOSING)
 
     def __make_margin_format(self, margin_char):
         margin_str = margin_char * self.__margin

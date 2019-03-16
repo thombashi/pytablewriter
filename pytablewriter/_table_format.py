@@ -34,6 +34,7 @@ from .writer import (
     SqliteTableWriter,
     TomlTableWriter,
     TsvTableWriter,
+    UnicodeTableWriter,
 )
 
 
@@ -194,6 +195,12 @@ class TableFormat(enum.Enum):
         ["toml"],
     )
     TSV = ([TsvTableWriter.FORMAT_NAME], TsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["tsv"])
+    UNICODE = (
+        [UnicodeTableWriter.FORMAT_NAME],
+        UnicodeTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT,
+        [],
+    )
 
     @property
     def names(self):

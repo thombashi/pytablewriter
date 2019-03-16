@@ -60,5 +60,6 @@ from .writer import (
     SqliteTableWriter,
     TomlTableWriter,
     TsvTableWriter,
+    UnicodeTableWriter,
 )
 from .writer._table_writer import LineBreakHandling

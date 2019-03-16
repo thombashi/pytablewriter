@@ -62,6 +62,8 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
         self.char_right_side_row = ","
+        self.char_opening_row_cross_point = ""
+        self.char_closing_row_cross_point = ""
 
         self._is_require_header = True
         self._dp_extractor.type_value_map = {
@@ -72,6 +74,8 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._dp_extractor.strict_level_map[Typecode.BOOL] = typepy.StrictLevel.MAX
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self.register_trans_func(bool_to_str)
+
+        self._init_cross_point_maps()
 
     def write_null_line(self):
         self._verify_stream()

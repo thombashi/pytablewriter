@@ -21,6 +21,7 @@ from .text import (
     SpaceAlignedTableWriter,
     TomlTableWriter,
     TsvTableWriter,
+    UnicodeTableWriter,
 )
 from .text.sourcecode import (
     JavaScriptTableWriter,

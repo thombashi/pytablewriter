@@ -118,6 +118,7 @@ class TableWriterFactory(object):
             ``"sqlite"``                                   :py:class:`~.SqliteTableWriter`
             ``"tsv"``                                      :py:class:`~.TsvTableWriter`
             ``"toml"``                                     :py:class:`~.TomlTableWriter`
+            ``"unicode"``                                  :py:class:`~.UnicodeTableWriter`
             =============================================  ===================================
 
         :param str format_name: Format name string (case insensitive).
@@ -192,6 +193,7 @@ class TableWriterFactory(object):
                 sqlite
                 toml
                 tsv
+                unicode
 
         """
 

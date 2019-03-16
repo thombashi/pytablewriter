@@ -14,3 +14,4 @@ from ._rst import RstCsvTableWriter, RstGridTableWriter, RstSimpleTableWriter
 from ._spacealigned import SpaceAlignedTableWriter
 from ._toml import TomlTableWriter
 from ._tsv import TsvTableWriter
+from ._unicode import UnicodeTableWriter

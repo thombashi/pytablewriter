@@ -36,6 +36,7 @@ class Test_TableFormat_search_table_format(object):
                     TableFormat.SPACE_ALIGNED,
                     TableFormat.TOML,
                     TableFormat.TSV,
+                    TableFormat.UNICODE,
                 ],
             ],
             [FormatAttr.BIN, [TableFormat.EXCEL_XLS, TableFormat.EXCEL_XLSX, TableFormat.SQLITE]],

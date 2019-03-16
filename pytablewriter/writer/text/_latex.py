@@ -32,8 +32,12 @@ class LatexWriter(IndentationTextTableWriter):
         self.indent_string = "    "
         self.column_delimiter = " & "
         self.char_right_side_row = r" \\"
+        self.char_opening_row_cross_point = ""
+        self.char_closing_row_cross_point = ""
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
+
+        self._init_cross_point_maps()
 
     def _is_math_parts(self, value_dp):
         if value_dp.typecode in [Typecode.INTEGER, Typecode.REAL_NUMBER]:

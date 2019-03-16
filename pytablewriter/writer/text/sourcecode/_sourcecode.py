@@ -40,9 +40,13 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         self.indent_string = "    "
         self.column_delimiter = ", "
+
         self.char_left_side_row = "["
         self.char_right_side_row = "],"
         self.char_cross_point = ""
+        self.char_opening_row_cross_point = ""
+        self.char_closing_row_cross_point = ""
+
         self.is_padding = False
         self.is_write_header_separator_row = False
         self.is_write_opening_row = True
@@ -53,6 +57,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         self._quoting_flags[typepy.Typecode.DATETIME] = False
         self._is_require_table_name = True
+
+        self._init_cross_point_maps()
 
     def _get_value_row_separator_items(self):
         return []

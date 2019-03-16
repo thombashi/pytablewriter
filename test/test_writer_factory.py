@@ -49,6 +49,7 @@ class Test_WriterFactory_get_format_names(object):
             "sqlite",
             "toml",
             "tsv",
+            "unicode",
         ]
 
 
@@ -223,6 +224,8 @@ class Test_FileLoaderFactory_create_from_format_name(object):
             ["TSV", ptw.TsvTableWriter],
             ["toml", ptw.TomlTableWriter],
             ["TOML", ptw.TomlTableWriter],
+            ["unicode", ptw.UnicodeTableWriter],
+            ["Unicode", ptw.UnicodeTableWriter],
         ],
     )
     def test_normal(self, format_name, expected):

@@ -23,6 +23,16 @@ class RstTableWriter(IndentationTextTableWriter):
         self.table_name = ""
         self.char_header_row_separator = "="
         self.char_cross_point = "+"
+        self.char_left_cross_point = "+"
+        self.char_right_cross_point = "+"
+        self.char_top_left_cross_point = "+"
+        self.char_top_right_cross_point = "+"
+        self.char_bottom_left_cross_point = "+"
+        self.char_bottom_right_cross_point = "+"
+
+        self.char_opening_row_cross_point = "+"
+        self.char_closing_row_cross_point = "+"
+
         self.indent_string = "    "
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = True
@@ -30,6 +40,8 @@ class RstTableWriter(IndentationTextTableWriter):
         self.is_write_closing_row = True
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
+
+        self._init_cross_point_maps()
 
     def write_table(self):
         with self._logger:
@@ -212,8 +224,12 @@ class RstSimpleTableWriter(RstTableWriter):
 
         self.column_delimiter = "  "
         self.char_cross_point = "  "
+        self.char_opening_row_cross_point = "  "
+        self.char_closing_row_cross_point = "  "
 
         self.char_opening_row = "="
         self.char_closing_row = "="
 
         self.is_write_value_separator_row = False
+
+        self._init_cross_point_maps()
