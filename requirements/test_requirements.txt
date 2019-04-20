@@ -1,6 +1,7 @@
 pytablereader[excel,sqlite]>=0.25.4
 pytest
 simplejson
+sqliteschema
 tablib
 termcolor
 tox

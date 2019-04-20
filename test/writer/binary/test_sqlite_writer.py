@@ -7,11 +7,13 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
+from collections import OrderedDict
 from decimal import Decimal
 
 import pytablewriter as ptw
 import pytest
 from pytablereader import SqliteFileLoader
+from sqliteschema import SQLiteSchemaExtractor
 from tabledata import TableData
 
 from ..._common import print_test_result
@@ -107,6 +109,45 @@ class Test_SqliteTableWriter_write_table(object):
             print_test_result(expected=expected_dump, actual=actual_dump)
 
             assert actual_dump == expected_dump
+
+    def test_normal_type_hints(self, tmpdir):
+        test_file_path = str(tmpdir.join("test.sqlite"))
+
+        writer = ptw.SqliteTableWriter()
+        writer.open(test_file_path)
+        writer.table_name = "hoge"
+        writer.headers = ["a", "b"]
+        writer.value_matrix = [[1, 2], [11, 12]]
+        writer.type_hints = [ptw.String]
+        writer.write_table()
+        writer.close()
+
+        schema = SQLiteSchemaExtractor(test_file_path).fetch_database_schema_as_dict()
+
+        assert schema[writer.table_name] == [
+            OrderedDict(
+                [
+                    ("Field", "a"),
+                    ("Index", False),
+                    ("Type", "TEXT"),
+                    ("Null", "YES"),
+                    ("Key", ""),
+                    ("Default", "NULL"),
+                    ("Extra", ""),
+                ]
+            ),
+            OrderedDict(
+                [
+                    ("Field", "b"),
+                    ("Index", False),
+                    ("Type", "INTEGER"),
+                    ("Null", "YES"),
+                    ("Key", ""),
+                    ("Default", "NULL"),
+                    ("Extra", ""),
+                ]
+            ),
+        ]
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],

@@ -106,6 +106,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
                 [value_dp.data for value_dp in value_dp_list]
                 for value_dp_list in self._table_value_dp_matrix
             ],
+            type_hints=self.type_hints,
         )
         self.stream.create_table_from_tabledata(table_data)
 
