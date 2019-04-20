@@ -20,7 +20,7 @@ def dateutil_datetime_formatter(value):
     )
 
 
-def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
+def dumps_tabledata(value, format_name="rst_grid_table", **kwargs):
     """
     :param tabledata.TableData value: Tabular data to dump.
     :param str format_name:
@@ -31,7 +31,7 @@ def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
     :Example:
         .. code:: python
 
-            >>> dump_tabledata(value)
+            >>> dumps_tabledata(value)
             .. table:: sample_data
 
                 ======  ======  ======
@@ -56,6 +56,11 @@ def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
     writer.from_tabledata(value)
 
     return writer.dumps()
+
+
+def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
+    # depreated: alias to dumps_tabledata()
+    return dumps_tabledata(value, format_name, **kwargs)
 
 
 def normalize_enum(value, enum_class):

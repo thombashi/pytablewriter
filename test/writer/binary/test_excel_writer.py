@@ -115,8 +115,8 @@ class Test_ExcelTableWriter_write_table(object):
         writer.close()
 
         for table_data in ExcelTableFileLoader(str(test_file_path)).load():
-            expected_dump = ptw.dump_tabledata(expected)
-            actual_dump = ptw.dump_tabledata(table_data)
+            expected_dump = ptw.dumps_tabledata(expected)
+            actual_dump = ptw.dumps_tabledata(table_data)
 
             print_test_result(expected=expected_dump, actual=actual_dump)
 
