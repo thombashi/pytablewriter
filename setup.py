@@ -55,12 +55,12 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
-excel_requires = ["xlwt", "XlsxWriter>=1.1.5,<2.0.0"]
+excel_requires = ["xlwt", "XlsxWriter>=1.1.6,<2.0.0"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
-from_requires = ["pytablereader>=0.25.1,<1.0.0"]
+from_requires = ["pytablereader>=0.25.5,<1.0.0"]
 html_requires = ["dominate>=2.3.5,<3.0.0"]
 logging_requires = ["Logbook>=1.1.0,<2.0.0"]
-sqlite_requires = ["SimpleSQLite>=0.41.1,<1.0.0"]
+sqlite_requires = ["SimpleSQLite>=0.44.1,<1.0.0"]
 toml_requires = ["toml>=0.9.4,<1.0.0"]
 optional_requires = ["simplejson>=3.16,<4.0"]
 all_requires = (
