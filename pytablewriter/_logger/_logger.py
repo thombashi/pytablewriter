@@ -158,8 +158,8 @@ class WriterLogger(object):
 
     def __get_typehint_message(self):
         try:
-            return "type-hint={}".format(
+            return "type-hints={}".format(
                 [type_hint(None).typename for type_hint in self.__writer.type_hints]
             )
         except (TypeError, AttributeError):
-            return "type-hint=[]"
+            return "type-hints=[]"
