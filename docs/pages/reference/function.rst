@@ -1,4 +1,4 @@
 Functions
 ---------------
 
-.. autofunction:: pytablewriter.dump_tabledata
+.. autofunction:: pytablewriter.dumps_tabledata
