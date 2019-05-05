@@ -697,7 +697,7 @@ Some of the formats require additional dependency packages, you can install the 
 
 Dependencies
 ============
-Python 2.7+ or 3.4+
+Python 2.7+ or 3.5+
 
 - `DataProperty <https://github.com/thombashi/DataProperty>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
