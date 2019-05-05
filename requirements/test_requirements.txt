@@ -1,4 +1,4 @@
-pytablereader[excel,sqlite]>=0.25.4
+pytablereader[excel,sqlite]>=0.26
 pytest
 simplejson
 sqliteschema
