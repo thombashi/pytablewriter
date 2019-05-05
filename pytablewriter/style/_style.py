@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import, unicode_literals
 
-import enum
+from enum import Enum, unique
 
 from dataproperty import Align
 
@@ -10,8 +10,8 @@ from .._function import normalize_enum
 from ._font import FontSize, FontStyle, FontWeight
 
 
-@enum.unique
-class ThousandSeparator(enum.Enum):
+@unique
+class ThousandSeparator(Enum):
     NONE = "none"
     COMMA = "comma"
     SPACE = "space"

@@ -2,11 +2,11 @@
 
 from __future__ import absolute_import
 
-import enum
+from enum import Enum, unique
 
 
-@enum.unique
-class FontSize(enum.Enum):
+@unique
+class FontSize(Enum):
     NONE = "none"
     TINY = "tiny"
     SMALL = "small"
@@ -14,13 +14,13 @@ class FontSize(enum.Enum):
     LARGE = "large"
 
 
-@enum.unique
-class FontStyle(enum.Enum):
+@unique
+class FontStyle(Enum):
     NORMAL = "normal"
     ITALIC = "italic"
 
 
-@enum.unique
-class FontWeight(enum.Enum):
+@unique
+class FontWeight(Enum):
     NORMAL = "normal"
     BOLD = "bold"
