@@ -1,5 +1,8 @@
 Installation
 ============
+
+Install from PyPI
+------------------------------
 ::
 
     pip install pytablewriter
@@ -18,6 +21,14 @@ Some of the formats require additional dependency packages, you can install the 
     - ``pip install pytablewriter[toml]``
 - All of the extra dependencies
     - ``pip install pytablewriter[all]``
+
+Install from PPA (for Ubuntu)
+------------------------------
+::
+
+    sudo add-apt-repository ppa:thombashi/ppa
+    sudo apt update
+    sudo apt install python3-pytablewriter
 
 
 Dependencies
