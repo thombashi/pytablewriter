@@ -1022,7 +1022,10 @@ class Test_MarkdownTableWriter_dump(object):
 
 class Test_MarkdownTableWriter_from_tablib(object):
     def test_normal_multiple_write(self, capsys):
-        import tablib
+        try:
+            import tablib
+        except ImportError:
+            pytest.skip("requires tablib")
 
         data = tablib.Dataset()
         data.headers = ["a", "b", "c"]
