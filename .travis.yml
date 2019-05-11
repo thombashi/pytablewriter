@@ -26,6 +26,11 @@ matrix:
           env: TOXENV=py37
 
         - os: linux
+          dist: xenial
+          python: 3.8-dev
+          env: TOXENV=py38
+
+        - os: linux
           python: 3.6
           env: TOXENV=cov
           after_success:
