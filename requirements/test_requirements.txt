@@ -4,4 +4,3 @@ simplejson
 sqliteschema
 tablib
 termcolor
-tox
