@@ -13,7 +13,7 @@ build:
 	@cd $(BUILD_WORK_DIR); \
 		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git; \
 		cd $(PACKAGE); \
-		python setup.py build
+		python setup.py sdist bdist_wheel
 	@twine check $(DIST_DIR)/*
 	ls -l $(DIST_DIR)
 
