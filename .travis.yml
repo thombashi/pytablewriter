@@ -7,23 +7,23 @@ matrix:
         - os: linux
           python: 2.7
           sudo: required
-          env: TOXENV=python2.7
+          env: TOXENV=py27
 
         - os: linux
           python: 3.5
           sudo: required
-          env: TOXENV=python3.5
+          env: TOXENV=py35
 
         - os: linux
           python: 3.6
           sudo: required
-          env: TOXENV=python3.6
+          env: TOXENV=py36
 
         - os: linux
           dist: xenial
           python: 3.7
           sudo: required
-          env: TOXENV=python3.7
+          env: TOXENV=py37
 
         - os: linux
           python: 3.6
@@ -35,7 +35,7 @@ matrix:
 
         - os: osx
           language: generic
-          env: TOXENV=python3.6
+          env: TOXENV=py36
 
 install:
     - travis_retry bash -x .travis/install.sh
