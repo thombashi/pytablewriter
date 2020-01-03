@@ -17,6 +17,12 @@ build:
 	@twine check $(DIST_DIR)/*
 	ls -l $(DIST_DIR)
 
+.PHONY: check
+check:
+	python setup.py check
+	codespell -q2 pytablewriter docs test
+	pylama
+
 .PHONY: clean
 clean:
 	@rm -rf $(PACKAGE)-*.*.*/ \
