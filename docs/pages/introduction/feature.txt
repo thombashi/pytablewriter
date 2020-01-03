@@ -32,7 +32,7 @@ Features
     - Text alignment
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
-- Configure ouput:
+- Configure output:
     - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
     - Get rendered tabular text
 - Data source

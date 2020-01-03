@@ -83,7 +83,7 @@ def write_examples(maker):
     maker.write_file(examples_root.joinpath("jupyter_notebook", "jupyter_notebook_example.txt"))
 
     maker.set_indent_level(1)
-    maker.write_chapter("Multibyte charater support")
+    maker.write_chapter("Multibyte character support")
     maker.inc_indent_level()
 
     maker.write_chapter("Write a table using multibyte character")
