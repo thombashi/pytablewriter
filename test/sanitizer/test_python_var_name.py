@@ -11,6 +11,7 @@ import string
 
 import pytest
 from pathvalidate import InvalidCharError, NullNameError, ReservedNameError
+
 from pytablewriter.sanitizer import sanitize_python_var_name, validate_python_var_name
 
 from ._common import INVALID_PYTHON_VAR_CHARS

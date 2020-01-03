@@ -9,6 +9,7 @@ from __future__ import absolute_import, unicode_literals
 import itertools
 
 import pytest
+
 from pytablewriter.sanitizer import ElasticsearchIndexNameSanitizer
 
 

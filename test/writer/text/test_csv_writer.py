@@ -11,8 +11,9 @@ import io
 import itertools
 from textwrap import dedent
 
-import pytablewriter as ptw
 import pytest
+
+import pytablewriter as ptw
 
 from ..._common import print_test_result
 from ...data import (

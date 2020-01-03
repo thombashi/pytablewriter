@@ -10,11 +10,12 @@ import collections
 from collections import OrderedDict
 from decimal import Decimal
 
-import pytablewriter as ptw
 import pytest
 from pytablereader import SqliteFileLoader
 from sqliteschema import SQLiteSchemaExtractor
 from tabledata import TableData
+
+import pytablewriter as ptw
 
 from ..._common import print_test_result
 from ...data import headers, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter

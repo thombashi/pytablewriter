@@ -5,6 +5,7 @@ from __future__ import print_function, unicode_literals
 import sys
 
 import pytest
+
 from pytablewriter.style import Align, FontSize, FontStyle, FontWeight, Style, ThousandSeparator
 
 

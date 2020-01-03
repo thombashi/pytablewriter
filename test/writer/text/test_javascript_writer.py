@@ -11,9 +11,10 @@ import datetime
 import itertools
 from textwrap import dedent
 
-import pytablewriter
 import pytest
 import typepy
+
+import pytablewriter
 
 from ..._common import print_test_result
 from ...data import (

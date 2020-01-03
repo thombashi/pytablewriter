@@ -7,6 +7,7 @@
 from __future__ import print_function, unicode_literals
 
 import pytest
+
 from pytablewriter import set_log_level, set_logger
 
 

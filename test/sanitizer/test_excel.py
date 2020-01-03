@@ -11,6 +11,7 @@ import random
 
 import pytest
 from pathvalidate import InvalidCharError, InvalidLengthError, NullNameError
+
 from pytablewriter.sanitizer import sanitize_excel_sheet_name, validate_excel_sheet_name
 
 from ._common import VALID_PATH_CHARS, make_random_str

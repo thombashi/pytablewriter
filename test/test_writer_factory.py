@@ -8,8 +8,9 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import itertools
 
-import pytablewriter as ptw
 import pytest
+
+import pytablewriter as ptw
 
 
 class Test_WriterFactory_get_format_names(object):

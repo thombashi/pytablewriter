@@ -6,8 +6,9 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 
-import pytablewriter as ptw
 import pytest
+
+import pytablewriter as ptw
 
 
 class Test_CsvTableWriter_write_table(object):

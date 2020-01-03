@@ -11,10 +11,11 @@ import datetime
 import platform  # noqa: W0611
 from decimal import Decimal
 
-import pytablewriter as ptw
 import pytest
 import simplejson as json
 import six  # noqa: W0611
+
+import pytablewriter as ptw
 
 from ._common import print_test_result
 from .data import headers, value_matrix

@@ -9,8 +9,9 @@ from __future__ import absolute_import, print_function, unicode_literals
 import collections
 from textwrap import dedent
 
-import pytablewriter
 import pytest
+
+import pytablewriter
 
 from ..._common import print_test_result
 from ...data import (

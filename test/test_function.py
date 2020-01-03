@@ -5,8 +5,9 @@ from __future__ import print_function, unicode_literals
 from textwrap import dedent
 
 import pytest
-from pytablewriter import LineBreakHandling, dumps_tabledata
 from tabledata import TableData
+
+from pytablewriter import LineBreakHandling, dumps_tabledata
 
 from ._common import print_test_result
 

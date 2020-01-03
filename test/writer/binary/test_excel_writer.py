@@ -10,10 +10,11 @@ import collections
 import itertools
 from decimal import Decimal
 
-import pytablewriter as ptw
 import pytest
 from pytablereader import ExcelTableFileLoader
 from tabledata import TableData
+
+import pytablewriter as ptw
 
 from ..._common import print_test_result
 from ...data import headers, mix_header_list, mix_value_matrix, value_matrix, value_matrix_iter

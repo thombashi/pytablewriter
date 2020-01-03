@@ -10,12 +10,13 @@ import collections
 import re
 from textwrap import dedent
 
-import pytablewriter as ptw
 import pytest
 import six  # noqa: W0611
-from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
 from tabledata import TableData
 from termcolor import colored
+
+import pytablewriter as ptw
+from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
 
 from ..._common import print_test_result
 from ...data import (
