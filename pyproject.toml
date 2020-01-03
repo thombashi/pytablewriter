@@ -17,12 +17,20 @@ exclude = '''
 '''
 
 [tool.isort]
-dont_skip="*/**/__init__.py"
-known_third_party= """
-pandas
-"""
+dont_skip = '*/**/__init__.py'
+known_third_party = [
+    'pandas',
+    'pathvalidate',
+    'pytablereader',
+    'sqliteschema',
+    'tabledata',
+    'typepy',
+]
 include_trailing_comma = true
-line_length=100
-lines_after_imports=2
-multi_line_output=3
-skip_glob="*/.eggs/*,*/.tox*"
+line_length = 100
+lines_after_imports = 2
+multi_line_output = 3
+skip_glob = [
+    '*/.eggs/*',
+    '*/.tox/*',
+]
