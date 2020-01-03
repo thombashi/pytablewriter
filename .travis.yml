@@ -25,11 +25,9 @@ matrix:
       env: TOXENV=py38
 
     - os: linux
-      python: 3.6
+      python: 3.7
       env: TOXENV=cov
       after_success:
-        - travis_retry pip install pytest-cov coveralls --upgrade
-        - python setup.py test --addopts "-v --cov pytablewriter --cov-report term-missing"
         - coveralls
 
     - os: osx
@@ -40,7 +38,7 @@ install:
   - travis_retry bash -x .travis/install.sh
 
 script:
-  - bash -x .travis/run_test.sh
+  - tox
 
 notifications:
   slack:
