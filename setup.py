@@ -57,6 +57,7 @@ pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<2.0.0"]
 es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
+es7_requires = ["elasticsearch>=7.0.5,<8.0.0"]
 from_requires = ["pytablereader>=0.26.1,<1.0.0"]
 html_requires = ["dominate>=2.1.5,<3.0.0"]
 logging_requires = ["Logbook>=0.12.3,<2.0.0"]
@@ -65,7 +66,7 @@ toml_requires = ["toml>=0.9.3,<1.0.0"]
 optional_requires = ["simplejson>=3.8.1,<4.0"]
 all_requires = (
     excel_requires
-    + es6_requires
+    + es7_requires
     + from_requires
     + html_requires
     + logging_requires
@@ -108,6 +109,7 @@ setuptools.setup(
         "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
         "es6": es6_requires,
+        "es7": es7_requires,
         "html": html_requires,
         "from": from_requires,
         "logging": logging_requires,
