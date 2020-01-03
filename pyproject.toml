@@ -1,19 +1,20 @@
 [tool.black]
 line-length = 100
-exclude = """
-.eggs/
-| .git/
-| .tox/
-| .venv/
-| _build/
-| build/
-| dist/
-| examples/
-| _sandbox/
+exclude = '''
+/(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
 | docs/conf.py
 | setup.py
-| test/data.py
-"""
+'''
 
 [tool.isort]
 dont_skip="*/**/__init__.py"
