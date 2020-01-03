@@ -104,7 +104,7 @@ setuptools.setup(
     tests_require=tests_requires,
     extras_require={
         "all": all_requires,
-        "build": ["twine", "wheel"],
+        "dev": ["releasecmd>=0.1.0,<1", "twine", "wheel"],
         "docs": docs_requires,
         "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.2,<6.0.0"],
@@ -113,7 +113,6 @@ setuptools.setup(
         "html": html_requires,
         "from": from_requires,
         "logging": logging_requires,
-        "release": ["releasecmd>=0.0.18,<0.1.0"],
         "sqlite": sqlite_requires,
         "test": tests_requires,
         "toml": toml_requires,
