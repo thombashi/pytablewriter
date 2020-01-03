@@ -2,7 +2,7 @@
 
 Type Hint: Python Code
 -----------------------------
-You can specify type hints to a writer via 
+You can specify type hints to a writer via
 :py:attr:`~AbstractTableWriter.type_hints`.
 
 :Sample Code:
@@ -12,22 +12,26 @@ You can specify type hints to a writer via
         from datetime import datetime
         import pytablewriter as ptw
 
-        writer = ptw.PythonCodeTableWriter()
-        writer.value_matrix = [
-            [-1.1, float("inf"), "2017-01-02 03:04:05", datetime(2017, 1, 2, 3, 4, 5)],
-            [0.12, float("nan"), "2017-02-03 04:05:06", datetime(2017, 2, 3, 4, 5, 6)],
-        ]
+        def main():
+            writer = ptw.PythonCodeTableWriter()
+            writer.value_matrix = [
+                [-1.1, float("inf"), "2017-01-02 03:04:05", datetime(2017, 1, 2, 3, 4, 5)],
+                [0.12, float("nan"), "2017-02-03 04:05:06", datetime(2017, 2, 3, 4, 5, 6)],
+            ]
 
-        # column data types detected automatically by default
-        writer.table_name = "python variable without type hints"
-        writer.headers = ["float", "infnan", "string", "datetime"]
-        writer.write_table()
+            # column data types detected automatically by default
+            writer.table_name = "python variable without type hints"
+            writer.headers = ["float", "infnan", "string", "datetime"]
+            writer.write_table()
 
-        # set type hints
-        writer.table_name = "python variable with type hints"
-        writer.headers = ["hint_int", "hint_str", "hint_datetime", "hint_str"]
-        writer.type_hints = [ptw.Integer, ptw.String, ptw.DateTime, ptw.String]
-        writer.write_table()
+            # set type hints
+            writer.table_name = "python variable with type hints"
+            writer.headers = ["hint_int", "hint_str", "hint_datetime", "hint_str"]
+            writer.type_hints = [ptw.Integer, ptw.String, ptw.DateTime, ptw.String]
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block:: python

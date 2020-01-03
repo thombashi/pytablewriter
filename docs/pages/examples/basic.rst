@@ -12,20 +12,24 @@ The next example show how to write a table with markdown format:
     .. code-block:: python
         :caption: Write a table
 
-        from pytablewriter import MarkdownTableWriter
+        def main():
+            from pytablewriter import MarkdownTableWriter
 
-        writer = MarkdownTableWriter()
-        writer.table_name = "zone"
-        writer.headers = ["zone_id", "country_code", "zone_name"]
-        writer.value_matrix = [
-            ["1", "AD", "Europe/Andorra"],
-            ["2", "AE", "Asia/Dubai"],
-            ["3", "AF", "Asia/Kabul"],
-            ["4", "AG", "America/Antigua"],
-            ["5", "AI", "America/Anguilla"],
-        ]
+            writer = MarkdownTableWriter()
+            writer.table_name = "zone"
+            writer.headers = ["zone_id", "country_code", "zone_name"]
+            writer.value_matrix = [
+                ["1", "AD", "Europe/Andorra"],
+                ["2", "AE", "Asia/Dubai"],
+                ["3", "AF", "Asia/Kabul"],
+                ["4", "AG", "America/Antigua"],
+                ["5", "AI", "America/Anguilla"],
+            ]
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block:: none

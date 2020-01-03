@@ -1,4 +1,4 @@
-Writers can specify cell 
+Writers can specify cell
 `Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
 for each column manually by ``styles`` attribute of writer classes.
 
@@ -8,32 +8,36 @@ for each column manually by ``styles`` attribute of writer classes.
         from pytablewriter import MarkdownTableWriter
         from pytablewriter.style import Style
 
-        writer = MarkdownTableWriter()
-        writer.table_name = "set style by styles"
-        writer.headers = [
-            "auto align",
-            "left align",
-            "center align",
-            "bold",
-            "italic",
-            "bold italic ts",
-        ]
-        writer.value_matrix = [
-            [11, 11, 11, 11, 11, 11],
-            [1234, 1234, 1234, 1234, 1234, 1234],
-        ]
+        def main():
+            writer = MarkdownTableWriter()
+            writer.table_name = "set style by styles"
+            writer.headers = [
+                "auto align",
+                "left align",
+                "center align",
+                "bold",
+                "italic",
+                "bold italic ts",
+            ]
+            writer.value_matrix = [
+                [11, 11, 11, 11, 11, 11],
+                [1234, 1234, 1234, 1234, 1234, 1234],
+            ]
 
-        # specify styles for each column
-        writer.styles = [
-            Style(),
-            Style(align="left"),
-            Style(align="center"),
-            Style(font_weight="bold"),
-            Style(font_style="italic"),
-            Style(font_weight="bold", font_style="italic", thousand_separator=","),
-        ]
+            # specify styles for each column
+            writer.styles = [
+                Style(),
+                Style(align="left"),
+                Style(align="center"),
+                Style(font_weight="bold"),
+                Style(font_style="italic"),
+                Style(font_weight="bold", font_style="italic", thousand_separator=","),
+            ]
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block:: none
@@ -55,19 +59,23 @@ You can also set ``Style`` to a specific column with index or header by using ``
         from pytablewriter import MarkdownTableWriter
         from pytablewriter.style import Style
 
-        writer = MarkdownTableWriter()
-        writer.headers = ["A", "B", "C",]
-        writer.value_matrix = [[11, 11, 11], [1234, 1234, 1234]]
+        def main():
+            writer = MarkdownTableWriter()
+            writer.headers = ["A", "B", "C",]
+            writer.value_matrix = [[11, 11, 11], [1234, 1234, 1234]]
 
-        writer.table_name = "set style by index"
-        writer.set_style(1, Style(align="center", font_weight="bold"))
-        writer.set_style(2, Style(thousand_separator=" "))
-        writer.write_table()
-        writer.write_null_line()
+            writer.table_name = "set style by index"
+            writer.set_style(1, Style(align="center", font_weight="bold"))
+            writer.set_style(2, Style(thousand_separator=" "))
+            writer.write_table()
+            writer.write_null_line()
 
-        writer.table_name = "set style by header"
-        writer.set_style("B", Style(font_style="italic"))
-        writer.write_table()
+            writer.table_name = "set style by header"
+            writer.set_style("B", Style(font_style="italic"))
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block:: none

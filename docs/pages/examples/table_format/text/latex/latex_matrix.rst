@@ -2,7 +2,7 @@
 
 LaTeX matrix
 -------------------------------------------
-|LatexMatrixWriter| class can writes a table 
+|LatexMatrixWriter| class can writes a table
 with LaTeX ``array`` environment to the |stream| from a matrix of data.
 
 :Sample Code 1:
@@ -10,14 +10,18 @@ with LaTeX ``array`` environment to the |stream| from a matrix of data.
 
         import pytablewriter
 
-        writer = pytablewriter.LatexMatrixWriter()
-        writer.table_name = "A"
-        writer.value_matrix = [
-            [0.01, 0.00125, 0.0],
-            [1.0, 99.9,  0.01],
-            [1.2, 999999.123, 0.001],
-        ]
-        writer.write_table()
+        def main():
+            writer = pytablewriter.LatexMatrixWriter()
+            writer.table_name = "A"
+            writer.value_matrix = [
+                [0.01, 0.00125, 0.0],
+                [1.0, 99.9,  0.01],
+                [1.2, 999999.123, 0.001],
+            ]
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output 1:
     .. code-block:: TeX
@@ -41,15 +45,19 @@ with LaTeX ``array`` environment to the |stream| from a matrix of data.
 
         import pytablewriter
 
-        writer = pytablewriter.LatexMatrixWriter()
-        writer.table_name = "B"
-        writer.value_matrix = [
-            ["a_{11}", "a_{12}", "\\ldots", "a_{1n}"],
-            ["a_{21}", "a_{22}", "\\ldots", "a_{2n}"],
-            [r"\vdots", "\\vdots", "\\ddots", "\\vdots"],
-            ["a_{n1}", "a_{n2}", "\\ldots", "a_{nn}"],
-        ]
-        writer.write_table()
+        def main():
+            writer = pytablewriter.LatexMatrixWriter()
+            writer.table_name = "B"
+            writer.value_matrix = [
+                ["a_{11}", "a_{12}", "\\ldots", "a_{1n}"],
+                ["a_{21}", "a_{22}", "\\ldots", "a_{2n}"],
+                [r"\vdots", "\\vdots", "\\ddots", "\\vdots"],
+                ["a_{n1}", "a_{n2}", "\\ldots", "a_{nn}"],
+            ]
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output 2:
     .. code-block:: TeX
