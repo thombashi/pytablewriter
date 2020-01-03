@@ -64,7 +64,7 @@ Features
     - Text alignment
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
-- Configure ouput:
+- Configure output:
     - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
     - Get rendered tabular text
 - Data source
@@ -87,17 +87,21 @@ Write a Markdown table
 
         from pytablewriter import MarkdownTableWriter
 
-        writer = MarkdownTableWriter()
-        writer.table_name = "example_table"
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
+        def main():
+            writer = MarkdownTableWriter()
+            writer.table_name = "example_table"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -124,18 +128,22 @@ Write a Markdown table with a margin
 
         from pytablewriter import MarkdownTableWriter
 
-        writer = MarkdownTableWriter()
-        writer.table_name = "write example with a margin"
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
-        writer.margin = 1  # add a whitespace for both sides of each cell
+        def main():
+            writer = MarkdownTableWriter()
+            writer.table_name = "write example with a margin"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
+            writer.margin = 1  # add a whitespace for both sides of each cell
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -157,17 +165,21 @@ Write a reStructuredText table (Grid Tables)
 
         import pytablewriter
 
-        writer = pytablewriter.RstGridTableWriter()
-        writer.table_name = "example_table"
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
+        def main():
+            writer = pytablewriter.RstGridTableWriter()
+            writer.table_name = "example_table"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block:: ReST
@@ -208,18 +220,21 @@ Write a table with JavaScript format (as a nested list variable definition)
 
         import pytablewriter
 
-        writer = pytablewriter.JavaScriptTableWriter()
-        writer.table_name = "example_table"
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
+        def main():
+            writer = pytablewriter.JavaScriptTableWriter()
+            writer.table_name = "example_table"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
 
-        writer.write_table()
+            writer.write_table()
 
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block:: js
@@ -239,16 +254,20 @@ Write a table to an Excel sheet
 
         from pytablewriter import ExcelXlsxTableWriter
 
-        writer = ExcelXlsxTableWriter()
-        writer.table_name = "example"
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
-        writer.dump("sample.xlsx")
+        def main():
+            writer = ExcelXlsxTableWriter()
+            writer.table_name = "example"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 12:34:51+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 22:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
+            writer.dump("sample.xlsx")
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. figure:: ss/excel_single.png
@@ -264,17 +283,21 @@ Write a Unicode table
 
         from pytablewriter import UnicodeTableWriter
 
-        writer = UnicodeTableWriter()
-        writer.table_name = "example_table"
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
+        def main():
+            writer = UnicodeTableWriter()
+            writer.table_name = "example_table"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -303,17 +326,21 @@ Write a Markdown table from ``pandas.DataFrame`` instance
         import six
         from pytablewriter import MarkdownTableWriter
 
-        csv_data = six.StringIO(dedent("""\
-            "i","f","c","if","ifc","bool","inf","nan","mix_num","time"
-            1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00+09:00"
-            2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
-            3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00+09:00"
-            """))
-        df = pd.read_csv(csv_data, sep=',')
+        def main():
+            csv_data = six.StringIO(dedent("""\
+                "i","f","c","if","ifc","bool","inf","nan","mix_num","time"
+                1,1.10,"aa",1.0,"1",True,Infinity,NaN,1,"2017-01-01 00:00:00+09:00"
+                2,2.20,"bbb",2.2,"2.2",False,Infinity,NaN,Infinity,"2017-01-02 03:04:05+09:00"
+                3,3.33,"cccc",-3.0,"ccc",True,Infinity,NaN,NaN,"2017-01-01 00:00:00+09:00"
+                """))
+            df = pd.read_csv(csv_data, sep=',')
 
-        writer = MarkdownTableWriter()
-        writer.from_dataframe(df)
-        writer.write_table()
+            writer = MarkdownTableWriter()
+            writer.from_dataframe(df)
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -333,13 +360,17 @@ Adding a column of the DataFrame index if you specify ``add_index_column=True``:
         import pandas as pd
         from pytablewriter import MarkdownTableWriter
 
-        writer = MarkdownTableWriter()
-        writer.table_name = "add_index_column"
-        writer.from_dataframe(
-            pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
-            add_index_column=True,
-        )
-        writer.write_table()
+        def main():
+            writer = MarkdownTableWriter()
+            writer.table_name = "add_index_column"
+            writer.from_dataframe(
+                pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
+                add_index_column=True,
+            )
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -358,19 +389,23 @@ Write a markdown table from a space-separated values
         from textwrap import dedent
         import pytablewriter
 
-        writer = pytablewriter.MarkdownTableWriter()
-        writer.table_name = "ps"
-        writer.from_csv(
-            dedent("""\
-                USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-                root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init
-                root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]
-                root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]
-                root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]
-                root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]
-            """),
-            delimiter=" ")
-        writer.write_table()
+        def main():
+            writer = pytablewriter.MarkdownTableWriter()
+            writer.table_name = "ps"
+            writer.from_csv(
+                dedent("""\
+                    USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+                    root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init
+                    root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]
+                    root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]
+                    root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]
+                    root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]
+                """),
+                delimiter=" ")
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -394,16 +429,20 @@ Get rendered tabular text as str
 
         import pytablewriter
 
-        writer = pytablewriter.MarkdownTableWriter()
-        writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-        writer.value_matrix = [
-            [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-            [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-            [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-            [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-        ]
+        def main():
+            writer = pytablewriter.MarkdownTableWriter()
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
 
-        print(writer.dumps())
+            print(writer.dumps())
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -427,32 +466,36 @@ for each column manually by ``styles`` attribute of writer classes.
         from pytablewriter import MarkdownTableWriter
         from pytablewriter.style import Style
 
-        writer = MarkdownTableWriter()
-        writer.table_name = "set style by styles"
-        writer.headers = [
-            "auto align",
-            "left align",
-            "center align",
-            "bold",
-            "italic",
-            "bold italic ts",
-        ]
-        writer.value_matrix = [
-            [11, 11, 11, 11, 11, 11],
-            [1234, 1234, 1234, 1234, 1234, 1234],
-        ]
+        def main():
+            writer = MarkdownTableWriter()
+            writer.table_name = "set style by styles"
+            writer.headers = [
+                "auto align",
+                "left align",
+                "center align",
+                "bold",
+                "italic",
+                "bold italic ts",
+            ]
+            writer.value_matrix = [
+                [11, 11, 11, 11, 11, 11],
+                [1234, 1234, 1234, 1234, 1234, 1234],
+            ]
 
-        # specify styles for each column
-        writer.styles = [
-            Style(),
-            Style(align="left"),
-            Style(align="center"),
-            Style(font_weight="bold"),
-            Style(font_style="italic"),
-            Style(font_weight="bold", font_style="italic", thousand_separator=","),
-        ]
+            # specify styles for each column
+            writer.styles = [
+                Style(),
+                Style(align="left"),
+                Style(align="center"),
+                Style(font_weight="bold"),
+                Style(font_style="italic"),
+                Style(font_weight="bold", font_style="italic", thousand_separator=","),
+            ]
 
-        writer.write_table()
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -474,19 +517,23 @@ You can also set ``Style`` to a specific column with index or header by using ``
         from pytablewriter import MarkdownTableWriter
         from pytablewriter.style import Style
 
-        writer = MarkdownTableWriter()
-        writer.headers = ["A", "B", "C",]
-        writer.value_matrix = [[11, 11, 11], [1234, 1234, 1234]]
+        def main():
+            writer = MarkdownTableWriter()
+            writer.headers = ["A", "B", "C",]
+            writer.value_matrix = [[11, 11, 11], [1234, 1234, 1234]]
 
-        writer.table_name = "set style by index"
-        writer.set_style(1, Style(align="center", font_weight="bold"))
-        writer.set_style(2, Style(thousand_separator=" "))
-        writer.write_table()
-        writer.write_null_line()
+            writer.table_name = "set style by index"
+            writer.set_style(1, Style(align="center", font_weight="bold"))
+            writer.set_style(2, Style(thousand_separator=" "))
+            writer.write_table()
+            writer.write_null_line()
 
-        writer.table_name = "set style by header"
-        writer.set_style("B", Style(font_style="italic"))
-        writer.write_table()
+            writer.table_name = "set style by header"
+            writer.set_style("B", Style(font_style="italic"))
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -516,49 +563,52 @@ Create Elasticsearch index and put data
         from elasticsearch import Elasticsearch
         import pytablewriter as ptw
 
-        es = Elasticsearch(hosts="localhost:9200")
+        def main():
+            es = Elasticsearch(hosts="localhost:9200")
 
-        writer = ptw.ElasticsearchWriter()
-        writer.stream = es
-        writer.index_name = "es writer example"
-        writer.headers = [
-            "str", "byte", "short", "int", "long", "float", "date", "bool", "ip",
-        ]
-        writer.value_matrix = [
-            [
-                "abc", 100, 10000, 2000000000, 200000000000, 0.1,
-                datetime.datetime(2017, 1, 2, 3, 4, 5), True, "127.0.0.1",
-            ],
-            [
-                "def", -10, -1000, -200000000, -20000000000, 100.1,
-                datetime.datetime(2017, 6, 5, 4, 5, 2), False, "::1",
-            ],
-        ]
+            writer = ptw.ElasticsearchWriter()
+            writer.stream = es
+            writer.index_name = "es writer example"
+            writer.headers = [
+                "str", "byte", "short", "int", "long", "float", "date", "bool", "ip",
+            ]
+            writer.value_matrix = [
+                [
+                    "abc", 100, 10000, 2000000000, 200000000000, 0.1,
+                    datetime.datetime(2017, 1, 2, 3, 4, 5), True, "127.0.0.1",
+                ],
+                [
+                    "def", -10, -1000, -200000000, -20000000000, 100.1,
+                    datetime.datetime(2017, 6, 5, 4, 5, 2), False, "::1",
+                ],
+            ]
 
-        # delete existing index ---
-        es.indices.delete(index=writer.index_name, ignore=404)
+            # delete existing index ---
+            es.indices.delete(index=writer.index_name, ignore=404)
 
-        # create an index and put data ---
-        writer.write_table()
+            # create an index and put data ---
+            writer.write_table()
 
-        # display the result ---
-        es.indices.refresh(index=writer.index_name)
+            # display the result ---
+            es.indices.refresh(index=writer.index_name)
 
-        print("----- mappings -----")
-        response = es.indices.get_mapping(index=writer.index_name, doc_type="table")
-        print("{}\n".format(json.dumps(response, indent=4)))
+            print("----- mappings -----")
+            response = es.indices.get_mapping(index=writer.index_name, doc_type="table")
+            print("{}\n".format(json.dumps(response, indent=4)))
 
-        print("----- documents -----")
-        response = es.search(
-            index=writer.index_name,
-            doc_type="table",
-            body={
-                "query": {"match_all": {}}
-            }
-        )
-        for hit in response["hits"]["hits"]:
-            print(json.dumps(hit["_source"], indent=4))
+            print("----- documents -----")
+            response = es.search(
+                index=writer.index_name,
+                doc_type="table",
+                body={
+                    "query": {"match_all": {}}
+                }
+            )
+            for hit in response["hits"]["hits"]:
+                print(json.dumps(hit["_source"], indent=4))
 
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. code-block::
@@ -637,11 +687,11 @@ https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples
 
    Table formatting for Jupyter Notebook
 
-Multibyte charater support
-----------------------------
+Multibyte character support
+-----------------------------
 Write a table using multibyte character
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-﻿You can use multibyte characters as table data.
+You can use multibyte characters as table data.
 Multibyte characters also properly padded and aligned.
 
 :Sample Code:
@@ -649,17 +699,21 @@ Multibyte characters also properly padded and aligned.
 
         import pytablewriter
 
-        writer = pytablewriter.RstSimpleTableWriter()
-        writer.table_name = "生成に関するパターン"
-        writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
-        writer.value_matrix = [
-            ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
-            ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
-            ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
-            ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
-            ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
-        ]
-        writer.write_table()
+        def main():
+            writer = pytablewriter.RstSimpleTableWriter()
+            writer.table_name = "生成に関するパターン"
+            writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
+            writer.value_matrix = [
+                ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
+                ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
+                ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
+                ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
+                ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
+            ]
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
 
 :Output:
     .. figure:: ss/multi_byte_char.png
