@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# encoding: utf-8
+#!/usr/bin/env python3
 
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
@@ -10,19 +9,16 @@ import datetime
 import json
 import sys
 
-import pytablewriter as ptw
 from elasticsearch import Elasticsearch
+
+import pytablewriter as ptw
 
 
 def parse_option():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument(
-        "--host", default="localhost",
-        help="default=%(default)s")
-    parser.add_argument(
-        "--port", type=int, default=9200,
-        help="default=%(default)s")
+    parser.add_argument("--host", default="localhost", help="default=%(default)s")
+    parser.add_argument("--port", type=int, default=9200, help="default=%(default)s")
 
     return parser.parse_args()
 
@@ -36,15 +32,38 @@ def main():
     writer.stream = es
     writer.index_name = "es writer example"
     writer.headers = [
-        "str", "byte", "short", "int", "long", "float", "date", "bool", "ip",
+        "str",
+        "byte",
+        "short",
+        "int",
+        "long",
+        "float",
+        "date",
+        "bool",
+        "ip",
     ]
     writer.value_matrix = [
         [
-            "abc", 100, 10000, 2000000000, 200000000000, 0.1,
-            datetime.datetime(2017, 1, 2, 3, 4, 5), True, "127.0.0.1",
-        ], [
-            "def", -10, -1000, -200000000, -20000000000, 100.1,
-            datetime.datetime(2017, 6, 5, 4, 5, 2), False, "::1",
+            "abc",
+            100,
+            10000,
+            2000000000,
+            200000000000,
+            0.1,
+            datetime.datetime(2017, 1, 2, 3, 4, 5),
+            True,
+            "127.0.0.1",
+        ],
+        [
+            "def",
+            -10,
+            -1000,
+            -200000000,
+            -20000000000,
+            100.1,
+            datetime.datetime(2017, 6, 5, 4, 5, 2),
+            False,
+            "::1",
         ],
     ]
 
@@ -58,17 +77,12 @@ def main():
     es.indices.refresh(index=writer.index_name)
 
     print("----- mappings -----")
-    response = es.indices.get_mapping(
-        index=writer.index_name, doc_type="table")
+    response = es.indices.get_mapping(index=writer.index_name, doc_type="table")
     print("{}\n".format(json.dumps(response, indent=4)))
 
     print("----- documents -----")
     response = es.search(
-        index=writer.index_name,
-        doc_type="table",
-        body={
-            "query": {"match_all": {}}
-        }
+        index=writer.index_name, doc_type="table", body={"query": {"match_all": {}}}
     )
     for hit in response["hits"]["hits"]:
         print(json.dumps(hit["_source"], indent=4))
