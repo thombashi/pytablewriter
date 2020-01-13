@@ -21,7 +21,7 @@ ENCODING = "utf8"
 pkg_info = {}
 
 
-def pytest_runner_requires() -> List[str]:
+def pytest_runner_requires():
     if set(["pytest", "test", "ptr"]).intersection(sys.argv):
         return ["pytest-runner"]
 
