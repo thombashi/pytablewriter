@@ -56,12 +56,11 @@ setuptools_require = ["setuptools>=38.3.0"]
 pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<2.0.0"]
-es6_requires = ["elasticsearch>=6.2.0,<7.0.0"]
 es7_requires = ["elasticsearch>=7.0.5,<8.0.0"]
-from_requires = ["pytablereader>=0.26.1,<1.0.0"]
+from_requires = ["pytablereader>=0.26.3,<1.0.0"]
 html_requires = ["dominate>=2.1.5,<3.0.0"]
 logging_requires = ["Logbook>=0.12.3,<2.0.0"]
-sqlite_requires = ["SimpleSQLite>=0.45.2,<1.0.0"]
+sqlite_requires = ["SimpleSQLite>=0.45.3,<1.0.0"]
 toml_requires = ["toml>=0.9.3,<1.0.0"]
 optional_requires = ["simplejson>=3.8.1,<4.0"]
 all_requires = (
@@ -105,11 +104,11 @@ setuptools.setup(
     tests_require=tests_requires,
     extras_require={
         "all": all_requires,
-        "dev": ["releasecmd>=0.1.0,<1", "twine", "wheel"],
+        "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"],
         "docs": docs_requires,
         "excel": excel_requires,
-        "es5": ["elasticsearch>=5.5.2,<6.0.0"],
-        "es6": es6_requires,
+        "es5": ["elasticsearch>=5.5.3,<6.0.0"],
+        "es6": ["elasticsearch>=6.3.1,<7.0.0"],
         "es7": es7_requires,
         "html": html_requires,
         "from": from_requires,
