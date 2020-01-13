@@ -79,14 +79,25 @@ setuptools.setup(
     name=MODULE_NAME,
     version=pkg_info["__version__"],
     url=REPOSITORY_URL,
-
     author=pkg_info["__author__"],
     author_email=pkg_info["__email__"],
     description=summary,
     include_package_data=True,
     keywords=[
-        "table", "CSV", "Excel", "JavaScript", "JSON", "LTSV", "Markdown", "MediaWiki", "HTML",
-        "pandas", "reStructuredText", "SQLite", "TSV", "TOML",
+        "table",
+        "CSV",
+        "Excel",
+        "JavaScript",
+        "JSON",
+        "LTSV",
+        "Markdown",
+        "MediaWiki",
+        "HTML",
+        "pandas",
+        "reStructuredText",
+        "SQLite",
+        "TSV",
+        "TOML",
     ],
     license=pkg_info["__license__"],
     long_description=long_description,
@@ -97,7 +108,6 @@ setuptools.setup(
         "Source": REPOSITORY_URL,
         "Tracker": "{:s}/issues".format(REPOSITORY_URL),
     },
-
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     install_requires=setuptools_require + install_requires,
     setup_requires=setuptools_require + pytest_runner_require,
@@ -117,7 +127,6 @@ setuptools.setup(
         "test": tests_requires,
         "toml": toml_requires,
     },
-
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
@@ -140,4 +149,5 @@ setuptools.setup(
         "Topic :: Text Processing :: Markup :: HTML",
         "Topic :: Text Processing :: Markup :: LaTeX",
     ],
-    cmdclass=get_release_command_class())
+    cmdclass=get_release_command_class(),
+)
