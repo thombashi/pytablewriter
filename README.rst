@@ -14,6 +14,10 @@ Summary
     :target: https://pypi.org/project/pytablewriter/
     :alt: Supported Python versions
 
+.. image:: https://img.shields.io/pypi/implementation/pytablewriter.svg
+    :target: https://pypi.org/project/pytablewriter
+    :alt: Supported Python implementations
+
 .. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS%20CI
     :target: https://travis-ci.org/thombashi/pytablewriter
     :alt: Linux/macOS CI status

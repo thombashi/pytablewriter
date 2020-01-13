@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# encoding: utf-8
+#!/usr/bin/env python3
 
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
-
-from __future__ import unicode_literals
 
 import sys
 
@@ -17,7 +14,7 @@ PROJECT_NAME = "pytablewriter"
 OUTPUT_DIR = ".."
 
 
-def write_examples(maker):
+def write_examples(maker: ReadmeMaker) -> None:
     maker.set_indent_level(0)
     maker.write_chapter("Examples")
 
