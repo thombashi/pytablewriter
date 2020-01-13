@@ -21,8 +21,11 @@ ENCODING = "utf8"
 pkg_info = {}
 
 
-def need_pytest():
-    return set(["pytest", "test", "ptr"]).intersection(sys.argv)
+def pytest_runner_requires() -> List[str]:
+    if set(["pytest", "test", "ptr"]).intersection(sys.argv):
+        return ["pytest-runner"]
+
+    return []
 
 
 def get_release_command_class():
@@ -53,7 +56,6 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
     docs_requires = [line.strip() for line in f if line.strip()]
 
 setuptools_require = ["setuptools>=38.3.0"]
-pytest_runner_require = ["pytest-runner"] if need_pytest() else []
 
 excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<2.0.0"]
 es7_requires = ["elasticsearch>=7.0.5,<8"]
@@ -110,7 +112,7 @@ setuptools.setup(
     },
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     install_requires=setuptools_require + install_requires,
-    setup_requires=setuptools_require + pytest_runner_require,
+    setup_requires=setuptools_require + pytest_runner_requires(),
     tests_require=tests_requires,
     extras_require={
         "all": all_requires,
