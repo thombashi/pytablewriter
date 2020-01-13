@@ -7,6 +7,7 @@ exclude = '''
     | \.mypy_cache
     | \.tox
     | \.venv
+    | \.pytype
     | _build
     | buck-out
     | build
@@ -19,11 +20,16 @@ exclude = '''
 [tool.isort]
 dont_skip = '*/**/__init__.py'
 known_third_party = [
+    'elasticsearch',
     'pandas',
     'pathvalidate',
     'pytablereader',
+    'pytest',
+    'simplejson',
+    'sphinx_rtd_theme',
     'sqliteschema',
     'tabledata',
+    'termcolor',
     'typepy',
 ]
 include_trailing_comma = true
@@ -32,25 +38,24 @@ lines_after_imports = 2
 multi_line_output = 3
 skip_glob = [
     '*/.eggs/*',
+    '*/.pytype/*',
     '*/.tox/*',
 ]
 
 [tool.coverage.run]
-source = ["pytablewriter"]
+source = ['pytablewriter']
 branch = true
 
 [tool.coverage.report]
 show_missing = true
 precision = 1
-
-# Regexes for lines to exclude from consideration
 exclude_lines = [
-    "except ImportError",
-    "raise NotImplementedError",
-    "pass",
-    "ABCmeta",
-    "abstractmethod",
-    "abstractproperty",
-    "abstractclassmethod",
-    "warnings.warn",
+    'except ImportError',
+    'raise NotImplementedError',
+    'pass',
+    'ABCmeta',
+    'abstractmethod',
+    'abstractproperty',
+    'abstractclassmethod',
+    'warnings.warn',
 ]
