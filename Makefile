@@ -19,9 +19,8 @@ build:
 
 .PHONY: check
 check:
-	python setup.py check
-	codespell -q2 pytablewriter docs test
-	pylama
+	travis lint
+	@tox -e lint
 
 .PHONY: clean
 clean:
