@@ -9,7 +9,7 @@ from __future__ import absolute_import, unicode_literals
 import abc
 import re
 
-from pathvalidate import InvalidCharError, NullNameError, ReservedNameError
+from pathvalidate import InvalidCharError, ReservedNameError
 from typepy import is_null_string
 
 from ._interface import NameSanitizer
@@ -51,13 +51,14 @@ class VarNameSanitizer(NameSanitizer):
                     "", sanitized_var_name
                 )
 
+        if not sanitized_var_name:
+            return ""
+
         try:
             self._validate(sanitized_var_name)
         except ReservedNameError as e:
             if e.reusable_name is False:
                 sanitized_var_name += "_"
-        except NullNameError:
-            pass
 
         return sanitized_var_name
 

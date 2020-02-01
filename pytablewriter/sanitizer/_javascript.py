@@ -100,7 +100,6 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
 def validate_js_var_name(var_name):
     """
     :param str var_name: Name to validate.
-    :raises pathvalidate.NullNameError: If the ``var_name`` is empty.
     :raises pathvalidate.InvalidCharError:
         If the ``var_name`` is invalid as a JavaScript identifier.
     :raises pathvalidate.ReservedNameError:

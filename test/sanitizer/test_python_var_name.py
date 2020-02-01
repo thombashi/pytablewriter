@@ -10,7 +10,7 @@ import itertools
 import string
 
 import pytest
-from pathvalidate import InvalidCharError, NullNameError, ReservedNameError
+from pathvalidate import InvalidCharError, ReservedNameError, ValidationError
 
 from pytablewriter.sanitizer import sanitize_python_var_name, validate_python_var_name
 
@@ -85,7 +85,7 @@ class Test_validate_python_var_name(object):
         ["value", "expected"],
         [
             [None, ValueError],
-            ["", NullNameError],
+            ["", ValidationError],
             ["123", ValueError],
             [1, TypeError],
             [True, TypeError],

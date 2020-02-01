@@ -10,7 +10,7 @@ import itertools
 import random
 
 import pytest
-from pathvalidate import InvalidCharError, InvalidLengthError, NullNameError
+from pathvalidate import InvalidCharError, InvalidLengthError, ValidationError
 
 from pytablewriter.sanitizer import sanitize_excel_sheet_name, validate_excel_sheet_name
 
@@ -54,8 +54,8 @@ class Test_validate_excel_sheet_name(object):
     @pytest.mark.parametrize(
         ["value", "expected"],
         [
-            [None, NullNameError],
-            ["", NullNameError],
+            [None, ValidationError],
+            ["", ValidationError],
             [1, TypeError],
             [True, TypeError],
             ["a" * 32, InvalidLengthError],

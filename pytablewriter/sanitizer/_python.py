@@ -73,7 +73,6 @@ class PythonVarNameSanitizer(VarNameSanitizer):
 def validate_python_var_name(var_name):
     """
     :param str var_name: Name to validate.
-    :raises pathvalidate.NullNameError: If the ``var_name`` is empty.
     :raises pathvalidate.InvalidCharError: If the ``var_name`` is invalid as
         `Python identifier
         <https://docs.python.org/3/reference/lexical_analysis.html#identifiers>`__.
