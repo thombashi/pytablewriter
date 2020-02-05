@@ -14,7 +14,7 @@ filename = "sample.csv"
 
 
 def main():
-    with io.open(filename, "w", encoding="utf8") as f:
+    with open(filename, "w", encoding="utf8") as f:
         f.write(
             dedent(
                 """\

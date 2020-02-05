@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 
 import dataproperty as dp
@@ -31,7 +27,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self):
-        super(MarkdownTableWriter, self).__init__()
+        super().__init__()
 
         self.indent_string = ""
         self.column_delimiter = "|"
@@ -49,12 +45,12 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     def _to_header_item(self, col_dp, value_dp):
         return self.__escape_vertical_bar_char(
-            super(MarkdownTableWriter, self)._to_header_item(col_dp, value_dp)
+            super()._to_header_item(col_dp, value_dp)
         )
 
     def _to_row_item(self, col_dp, value_dp):
         return self.__escape_vertical_bar_char(
-            super(MarkdownTableWriter, self)._to_row_item(col_dp, value_dp)
+            super()._to_row_item(col_dp, value_dp)
         )
 
     def _get_opening_row_items(self):
@@ -105,7 +101,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
     def _write_table_iter(self):
         self.__write_chapter()
-        super(MarkdownTableWriter, self)._write_table_iter()
+        super()._write_table_iter()
 
     def __write_chapter(self):
         if typepy.is_null_string(self.table_name):

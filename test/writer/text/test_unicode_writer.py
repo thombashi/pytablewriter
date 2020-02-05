@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from textwrap import dedent
 
@@ -17,7 +14,7 @@ from ...data import style_tabledata, styles
 table_writer_class = pytablewriter.UnicodeTableWriter
 
 
-class Test_UnicodeTableWriter_write_new_line(object):
+class Test_UnicodeTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -26,7 +23,7 @@ class Test_UnicodeTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_UnicodeTableWriter_write_table(object):
+class Test_UnicodeTableWriter_write_table:
     def test_normal_styles(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)

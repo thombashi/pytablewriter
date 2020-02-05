@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import
-
 from ._elasticsearch import ElasticsearchWriter
 from ._null import NullTableWriter
 from .binary import ExcelXlsTableWriter, ExcelXlsxTableWriter, SqliteTableWriter

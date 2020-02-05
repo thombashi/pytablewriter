@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import
-
 from dataproperty import Format
 
 from ._font import FontSize, FontStyle, FontWeight

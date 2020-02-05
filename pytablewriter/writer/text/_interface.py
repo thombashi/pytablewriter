@@ -1,12 +1,9 @@
-# encoding: utf-8
-
 import abc
 
 import six
 
 
-@six.add_metaclass(abc.ABCMeta)
-class TextWriterInterface(object):
+class TextWriterInterface(metaclass=abc.ABCMeta):
     """
     Interface class for writing texts.
     """
@@ -16,8 +13,7 @@ class TextWriterInterface(object):
         pass
 
 
-@six.add_metaclass(abc.ABCMeta)
-class IndentationInterface(object):
+class IndentationInterface(metaclass=abc.ABCMeta):
     """
     Interface class for indentation methods.
     """

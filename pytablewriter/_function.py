@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import dataproperty
 import six
@@ -64,7 +61,7 @@ def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
 
 
 def normalize_enum(value, enum_class):
-    if value is None or not isinstance(value, six.string_types):
+    if value is None or not isinstance(value, str):
         return value
 
     try:

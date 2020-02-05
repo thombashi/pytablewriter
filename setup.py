@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import unicode_literals
 
 import io
 import os.path
@@ -22,7 +19,7 @@ pkg_info = {}
 
 
 def pytest_runner_requires():
-    if set(["pytest", "test", "ptr"]).intersection(sys.argv):
+    if {"pytest", "test", "ptr"}.intersection(sys.argv):
         return ["pytest-runner"]
 
     return []
@@ -40,10 +37,10 @@ def get_release_command_class():
 with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
     exec(f.read(), pkg_info)
 
-with io.open("README.rst", encoding=ENCODING) as f:
+with open("README.rst", encoding=ENCODING) as f:
     long_description = f.read()
 
-with io.open(os.path.join("docs", "pages", "introduction", "summary.txt"), encoding=ENCODING) as f:
+with open(os.path.join("docs", "pages", "introduction", "summary.txt"), encoding=ENCODING) as f:
     summary = f.read().strip()
 
 with open(os.path.join(REQUIREMENT_DIR, "requirements.txt")) as f:

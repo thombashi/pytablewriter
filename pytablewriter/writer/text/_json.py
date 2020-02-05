@@ -1,14 +1,9 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 from decimal import Decimal
 
 import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
-from six.moves import zip
 from typepy import Typecode
 
 from ..._converter import strip_quote
@@ -56,7 +51,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self):
-        super(JsonTableWriter, self).__init__()
+        super().__init__()
 
         self.is_formatting_float = False
         self.is_write_opening_row = True

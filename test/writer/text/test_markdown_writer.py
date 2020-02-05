@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import re
@@ -421,7 +418,7 @@ def trans_func(value):
     return value
 
 
-class Test_MarkdownTableWriter_write_new_line(object):
+class Test_MarkdownTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -430,7 +427,7 @@ class Test_MarkdownTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_MarkdownTableWriter_write_table(object):
+class Test_MarkdownTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_formatting_float", "expected"],
         [
@@ -928,7 +925,7 @@ class Test_MarkdownTableWriter_write_table(object):
             writer.write_table()
 
 
-class Test_MarkdownTableWriter_write_table_iter(object):
+class Test_MarkdownTableWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [
@@ -997,7 +994,7 @@ class Test_MarkdownTableWriter_write_table_iter(object):
             writer.write_table_iter()
 
 
-class Test_MarkdownTableWriter_dump(object):
+class Test_MarkdownTableWriter_dump:
     def test_normal(self, tmpdir):
         test_filepath = str(tmpdir.join("test.sqlite"))
 
@@ -1021,7 +1018,7 @@ class Test_MarkdownTableWriter_dump(object):
         assert output == expected
 
 
-class Test_MarkdownTableWriter_from_tablib(object):
+class Test_MarkdownTableWriter_from_tablib:
     def test_normal_multiple_write(self, capsys):
         try:
             import tablib
@@ -1052,7 +1049,7 @@ class Test_MarkdownTableWriter_from_tablib(object):
         assert out == expected
 
 
-class Test_MarkdownTableWriter_line_break_handling(object):
+class Test_MarkdownTableWriter_line_break_handling:
     @pytest.mark.parametrize(
         ["value", "expected"],
         [
@@ -1095,7 +1092,7 @@ class Test_MarkdownTableWriter_line_break_handling(object):
 
 
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
-class Test_MarkdownTableWriter_from_dataframe(object):
+class Test_MarkdownTableWriter_from_dataframe:
     @pytest.mark.parametrize(
         ["add_index_column", "expected"],
         [
@@ -1146,7 +1143,7 @@ class Test_MarkdownTableWriter_from_dataframe(object):
 
 
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
-class Test_MarkdownTableWriter_from_series(object):
+class Test_MarkdownTableWriter_from_series:
     @pytest.mark.parametrize(
         ["add_index_column", "expected"],
         [

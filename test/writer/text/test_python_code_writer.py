@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import pytest
 
@@ -121,7 +118,7 @@ normal_test_data_list = [
 table_writer_class = ptw.PythonCodeTableWriter
 
 
-class Test_PythonCodeTableWriter_write_new_line(object):
+class Test_PythonCodeTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -130,7 +127,7 @@ class Test_PythonCodeTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_PythonCodeTableWriter_write_table(object):
+class Test_PythonCodeTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
@@ -198,7 +195,7 @@ class Test_PythonCodeTableWriter_write_table(object):
             writer.write_table()
 
 
-class Test_PythonCodeTableWriter_write_table_iter(object):
+class Test_PythonCodeTableWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [

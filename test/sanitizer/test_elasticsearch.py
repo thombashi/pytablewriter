@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import itertools
 
@@ -16,7 +13,7 @@ from pytablewriter.sanitizer import ElasticsearchIndexNameSanitizer
 INVALID_ES_CHARS = ["\\", "," "*", "?", '"', "<", ">", "|", " "]
 
 
-class Test_ElasticsearchIndexNameSanitizer(object):
+class Test_ElasticsearchIndexNameSanitizer:
     SANITIZE_CHAR_LIST = INVALID_ES_CHARS
     NOT_SANITIZE_CHAR_LIST = ["_"]
     REPLACE_TEXT_LIST = ["", "_"]

@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import itertools
 import random
@@ -22,7 +19,7 @@ random.seed(0)
 INVALID_EXCEL_CHARS = ["[", "]", ":", "*", "?", "/", "\\"]
 
 
-class Test_validate_excel_sheet_name(object):
+class Test_validate_excel_sheet_name:
     VALID_CHAR_LIST = set(VALID_PATH_CHARS).difference(set(INVALID_EXCEL_CHARS))
     INVALID_CHAR_LIST = INVALID_EXCEL_CHARS
 
@@ -66,7 +63,7 @@ class Test_validate_excel_sheet_name(object):
             validate_excel_sheet_name(value)
 
 
-class Test_sanitize_excel_sheet_name(object):
+class Test_sanitize_excel_sheet_name:
     SANITIZE_CHAR_LIST = INVALID_EXCEL_CHARS
     NOT_SANITIZE_CHAR_LIST = set(VALID_PATH_CHARS).difference(set(INVALID_EXCEL_CHARS))
     REPLACE_TEXT_LIST = ["", "_"]

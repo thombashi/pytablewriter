@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 
@@ -57,7 +53,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
         return self.FORMAT_NAME
 
     def __init__(self):
-        super(PandasDataFrameWriter, self).__init__()
+        super().__init__()
 
         self.table_name = ""
         self.import_pandas_as = "pd"
@@ -82,7 +78,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
         return ["])"]
 
     def _verify_property(self):
-        super(PandasDataFrameWriter, self)._verify_property()
+        super()._verify_property()
 
         if typepy.is_null_string(self.table_name):
             raise EmptyTableNameError("table_name must be a string of one or more characters")

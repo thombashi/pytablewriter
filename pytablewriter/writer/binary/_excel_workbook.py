@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import abc
 import warnings
 
@@ -14,8 +10,7 @@ from ...sanitizer import sanitize_excel_sheet_name
 from .._common import import_error_msg_template
 
 
-@six.add_metaclass(abc.ABCMeta)
-class ExcelWorkbookInterface(object):
+class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
     @abc.abstractproperty
     def workbook(self):  # pragma: no cover
         pass
@@ -61,7 +56,7 @@ class ExcelWorkbook(ExcelWorkbookInterface):
 
 class ExcelWorkbookXls(ExcelWorkbook):
     def __init__(self, file_path):
-        super(ExcelWorkbookXls, self).__init__(file_path)
+        super().__init__(file_path)
 
         self.open(file_path)
 
@@ -108,7 +103,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
 
 class ExcelWorkbookXlsx(ExcelWorkbook):
     def __init__(self, file_path):
-        super(ExcelWorkbookXlsx, self).__init__(file_path)
+        super().__init__(file_path)
 
         self.open(file_path)
 

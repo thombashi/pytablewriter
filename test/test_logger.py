@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import print_function, unicode_literals
 
 import pytest
 
@@ -16,13 +13,13 @@ logbook = pytest.importorskip("logbook", minversion="0.12.3")
 import logbook  # isort:skip
 
 
-class Test_set_logger(object):
+class Test_set_logger:
     @pytest.mark.parametrize(["value"], [[True], [False]])
     def test_smoke(self, value):
         set_logger(value)
 
 
-class Test_set_log_level(object):
+class Test_set_log_level:
     @pytest.mark.parametrize(
         ["value"],
         [

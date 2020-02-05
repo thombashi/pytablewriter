@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 import re
 
@@ -9,7 +5,6 @@ import dataproperty as dp
 import typepy
 from dataproperty import LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
-from six.moves import zip
 
 from ...style import Align
 from ._text_writer import TextTableWriter
@@ -35,7 +30,7 @@ class MediaWikiTableWriter(TextTableWriter):
         return True
 
     def __init__(self):
-        super(MediaWikiTableWriter, self).__init__()
+        super().__init__()
 
         self.column_delimiter = "\n"
 
@@ -56,7 +51,7 @@ class MediaWikiTableWriter(TextTableWriter):
         if typepy.is_not_null_string(self.table_name):
             self._write_line("|+" + MultiByteStrDecoder(self.table_name).unicode_str)
 
-        super(MediaWikiTableWriter, self)._write_header()
+        super()._write_header()
 
     def _write_value_row(self, values, value_dp_list):
         self._write_row(

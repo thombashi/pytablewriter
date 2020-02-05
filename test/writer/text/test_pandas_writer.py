@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from textwrap import dedent
 
@@ -150,7 +147,7 @@ exception_test_data_list = [
 table_writer_class = pytablewriter.PandasDataFrameWriter
 
 
-class Test_PandasDataFrameWriter_write_new_line(object):
+class Test_PandasDataFrameWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -159,7 +156,7 @@ class Test_PandasDataFrameWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_PandasDataFrameWriter_write_table(object):
+class Test_PandasDataFrameWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
@@ -198,7 +195,7 @@ class Test_PandasDataFrameWriter_write_table(object):
             writer.write_table()
 
 
-class Test_PandasDataFrameWriter_write_table_iter(object):
+class Test_PandasDataFrameWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [
@@ -248,7 +245,7 @@ class Test_PandasDataFrameWriter_write_table_iter(object):
 
 
 @pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
-class Test_PandasDataFrameWriter_from_dataframe(object):
+class Test_PandasDataFrameWriter_from_dataframe:
     def test_normal(self):
         import dateutil
 

@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 from ._text_writer import TextTableWriter
 
 
@@ -25,7 +21,7 @@ class TomlTableWriter(TextTableWriter):
         return True
 
     def __init__(self):
-        super(TomlTableWriter, self).__init__()
+        super().__init__()
 
         self.is_formatting_float = False
 

@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
@@ -107,7 +104,7 @@ def set_log_level(log_level):
         pass
 
 
-class WriterLogger(object):
+class WriterLogger:
     @property
     def logger(self):
         return self.__logger

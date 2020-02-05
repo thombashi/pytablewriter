@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from textwrap import dedent
 
@@ -227,7 +224,7 @@ normal_test_data_list = [
 table_writer_class = pytablewriter.RstGridTableWriter
 
 
-class Test_RstGridTableWriter_write_new_line(object):
+class Test_RstGridTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -237,7 +234,7 @@ class Test_RstGridTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_RstGridTableWriter_write_table(object):
+class Test_RstGridTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
@@ -354,7 +351,7 @@ class Test_RstGridTableWriter_write_table(object):
             writer.write_table()
 
 
-class Test_RstGridTableWriter_write_table_iter(object):
+class Test_RstGridTableWriter_write_table_iter:
     def test_exception(self):
         writer = table_writer_class()
 

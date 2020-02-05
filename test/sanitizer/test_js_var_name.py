@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import itertools
 import string
@@ -83,7 +80,7 @@ RESERVED_KEYWORDS = [
 ]
 
 
-class Test_validate_js_var_name(object):
+class Test_validate_js_var_name:
     VALID_CHAR_LIST = [c for c in string.digits + string.ascii_letters + "_"]
     INVALID_CHAR_LIST = INVALID_JS_VAR_CHARS
 
@@ -131,7 +128,7 @@ class Test_validate_js_var_name(object):
         assert e.value.reusable_name is False
 
 
-class Test_sanitize_js_var_name(object):
+class Test_sanitize_js_var_name:
     SANITIZE_CHAR_LIST = INVALID_JS_VAR_CHARS
     NOT_SANITIZE_CHAR_LIST = ["_"]
     REPLACE_TEXT_LIST = ["", "_"]

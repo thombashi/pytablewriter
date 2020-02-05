@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import sys
 
@@ -224,7 +222,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pytablewriter.tex', u'pytablewriter Documentation',
+    (master_doc, 'pytablewriter.tex', 'pytablewriter Documentation',
      __author__, 'manual'),
 ]
 
@@ -254,7 +252,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pytablewriter', u'pytablewriter Documentation',
+    (master_doc, 'pytablewriter', 'pytablewriter Documentation',
      [author], 1)
 ]
 
@@ -268,7 +266,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'pytablewriter', u'pytablewriter Documentation',
+    (master_doc, 'pytablewriter', 'pytablewriter Documentation',
      author, 'pytablewriter', 'One line description of project.',
      'Miscellaneous'),
 ]
@@ -286,11 +284,11 @@ texinfo_documents = [
 #texinfo_no_detailmenu = False
 
 
-rp_common = u"""
+rp_common = """
 .. |TM| replace:: :superscript:`TM`
 """
 
-rp_builtin = u"""
+rp_builtin = """
 .. |False| replace:: :py:obj:`False`
 .. |True| replace:: :py:obj:`True`
 .. |None| replace:: :py:obj:`None`
@@ -306,11 +304,11 @@ rp_builtin = u"""
 .. |tuple| replace:: :py:obj:`tuple`
 """
 
-rp_func = u"""
+rp_func = """
 .. |namedtuple| replace:: :py:func:`~collections.namedtuple`
 """
 
-rp_class = u"""
+rp_class = """
 .. |Connection| replace:: :py:class:`sqlite3.Connection`
 .. |datetime| replace:: :py:class:`datetime.datetime`
 .. |timedelta| replace:: :py:class:`datetime.timedelta`
@@ -345,13 +343,13 @@ rp_class = u"""
 .. |UnicodeTableWriter| replace:: :py:class:`~pytablewriter.UnicodeTableWriter`
 """
 
-rp_module = u"""
+rp_module = """
 .. |sqlite3| replace:: :py:mod:`sqlite3`
 
 .. |package| replace:: pytablewriter
 """
 
-rp_attr = u"""
+rp_attr = """
 .. |iteration_length| replace::
     :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.iteration_length`
 
@@ -381,14 +379,14 @@ rp_attr = u"""
     :py:attr:`~pytablewriter._text_writer.is_datetime_instance_formatting`
 """
 
-rp_method = u"""
+rp_method = """
 .. |write_table| replace:: Write a table to the |stream|
 
 .. |WriterNotFoundError_desc| replace::
     If an appropriate writer not found for
 """
 
-rp_raises = u"""
+rp_raises = """
 """
 
 rst_prolog = (

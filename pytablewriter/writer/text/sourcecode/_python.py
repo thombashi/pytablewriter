@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import typepy
 
 from ...._function import dateutil_datetime_formatter, quote_datetime_formatter
@@ -54,7 +50,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         return True
 
     def __init__(self):
-        super(PythonCodeTableWriter, self).__init__()
+        super().__init__()
 
         self.table_name = ""
         self._dp_extractor.type_value_map = {
@@ -73,7 +69,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         self.inc_indent_level()
-        super(PythonCodeTableWriter, self)._write_table()
+        super()._write_table()
         self.dec_indent_level()
 
     def _get_opening_row_items(self):
