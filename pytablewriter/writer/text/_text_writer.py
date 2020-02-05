@@ -2,7 +2,6 @@ import enum
 import io
 import sys
 
-import six
 import typepy
 from dataproperty import Align, LineBreakHandling
 
@@ -207,7 +206,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         old_stream = self.stream
 
         try:
-            self.stream = six.StringIO()
+            self.stream = io.StringIO()
             self.write_table()
             tabular_text = self.stream.getvalue()
         finally:

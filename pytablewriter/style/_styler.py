@@ -1,7 +1,5 @@
 import abc
 
-import six
-
 from ._font import FontSize, FontStyle, FontWeight
 from ._style import Style, ThousandSeparator
 

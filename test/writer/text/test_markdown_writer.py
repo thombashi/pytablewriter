@@ -7,8 +7,8 @@ import collections
 import re
 from textwrap import dedent
 
+import io
 import pytest
-import six  # noqa: W0611
 from tabledata import TableData
 from termcolor import colored
 
@@ -839,7 +839,7 @@ class Test_MarkdownTableWriter_write_table:
         writer = table_writer_class()
         writer.headers = ["a", "b"]
         writer.value_matrix = [["foo", "bar"]]
-        writer.stream = six.StringIO()
+        writer.stream = io.StringIO()
 
         expected = dedent(
             """\
@@ -860,7 +860,6 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=output)
         assert output == expected
 
-    @pytest.mark.skipif("six.PY2")
     def test_normal_escape_html_tag(self, capsys):
         writer = table_writer_class()
         writer.headers = ["no", "text"]
@@ -881,7 +880,6 @@ class Test_MarkdownTableWriter_write_table:
 
         assert out == expected
 
-    @pytest.mark.skipif("six.PY2")
     def test_normal_escape_html_tag_from_tabledata(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(

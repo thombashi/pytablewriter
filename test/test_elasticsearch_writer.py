@@ -10,7 +10,6 @@ from decimal import Decimal
 
 import pytest
 import simplejson as json
-import six  # noqa: W0611
 
 import pytablewriter as ptw
 
@@ -33,7 +32,6 @@ table_writer_class = ptw.ElasticsearchWriter
 
 
 class Test_ElasticsearchWriter__get_mappings:
-    @pytest.mark.skipif("platform.system() == 'Windows' and six.PY2")
     def test_normal(self):
         writer = table_writer_class()
         writer.table_name = "es mappings"

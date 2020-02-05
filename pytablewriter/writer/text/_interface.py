@@ -1,7 +1,5 @@
 import abc
 
-import six
-
 
 class TextWriterInterface(metaclass=abc.ABCMeta):
     """

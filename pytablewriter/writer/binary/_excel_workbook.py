@@ -2,7 +2,6 @@ import abc
 import warnings
 
 import msgfy
-import six
 import typepy
 
 from ..._logger import logger

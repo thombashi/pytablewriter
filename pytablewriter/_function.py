@@ -4,7 +4,6 @@
 
 
 import dataproperty
-import six
 
 
 def quote_datetime_formatter(value):

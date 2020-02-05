@@ -6,7 +6,6 @@
 import abc
 
 from pathvalidate import validate_null_string
-from six import add_metaclass, text_type
 
 
 class NameSanitizer(metaclass=abc.ABCMeta):

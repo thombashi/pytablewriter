@@ -5,8 +5,6 @@
 
 import abc
 
-import six
-
 
 class TableWriterInterface(metaclass=abc.ABCMeta):
     """

@@ -1,4 +1,4 @@
-import six
+import io
 from dataproperty import DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
 
@@ -102,7 +102,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         org_stream = self.stream
-        self.stream = six.StringIO()
+        self.stream = io.StringIO()
 
         self.inc_indent_level()
         super()._write_table()

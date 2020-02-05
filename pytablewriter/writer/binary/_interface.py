@@ -1,7 +1,5 @@
 import abc
 
-import six
-
 from .._table_writer import AbstractTableWriter
 
 

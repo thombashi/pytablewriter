@@ -9,7 +9,6 @@ import re
 import warnings
 
 import msgfy
-import six
 import typepy
 from dataproperty import DataPropertyExtractor, Format, MatrixFormatting, Preprocessor
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
