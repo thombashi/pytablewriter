@@ -4,7 +4,6 @@
 
 
 import collections
-import io
 import itertools
 from textwrap import dedent
 

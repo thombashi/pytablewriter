@@ -5,7 +5,6 @@
 
 import collections
 import datetime
-import platform  # noqa: W0611
 from decimal import Decimal
 
 import pytest

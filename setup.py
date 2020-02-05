@@ -3,7 +3,6 @@
 """
 
 
-import io
 import os.path
 import sys
 
