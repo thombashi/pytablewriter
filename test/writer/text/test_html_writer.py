@@ -377,7 +377,6 @@ class Test_HtmlTableWriter_write_table(object):
         print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
- 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
