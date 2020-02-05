@@ -20,8 +20,9 @@ from ._text_writer import TextTableWriter
 def _get_tags_module():
     try:
         from dominate import tags
+        from dominate.util import raw
 
-        return tags
+        return tags, raw
     except ImportError:
         warnings.warn(import_error_msg_template.format("html"))
         raise
@@ -51,6 +52,8 @@ class HtmlTableWriter(TextTableWriter):
         self.is_padding = False
         self.indent_string = "    "
 
+        self._dp_extractor.preprocessor.line_break_repl = "<br>"
+        self._dp_extractor.preprocessor.is_escape_html_tag = False
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self._table_tag = None
 
@@ -65,7 +68,7 @@ class HtmlTableWriter(TextTableWriter):
             - |None| is not written
         """
 
-        tags = _get_tags_module()
+        tags, raw = _get_tags_module()
 
         with self._logger:
             self._verify_property()
@@ -85,17 +88,17 @@ class HtmlTableWriter(TextTableWriter):
             self._write_body()
 
     def _write_header(self):
-        tags = _get_tags_module()
+        tags, raw = _get_tags_module()
 
         if not self.is_write_header:
             return
 
-        if typepy.is_empty_sequence(self.headers):
+        if typepy.is_empty_sequence(self._table_headers):
             raise EmptyHeaderError("headers is empty")
 
         tr_tag = tags.tr()
-        for header in self.headers:
-            tr_tag += tags.th(MultiByteStrDecoder(header).unicode_str)
+        for header in self._table_headers:
+            tr_tag += tags.th(raw(MultiByteStrDecoder(header).unicode_str))
 
         thead_tag = tags.thead()
         thead_tag += tr_tag
@@ -103,13 +106,13 @@ class HtmlTableWriter(TextTableWriter):
         self._table_tag += thead_tag
 
     def _write_body(self):
-        tags = _get_tags_module()
+        tags, raw = _get_tags_module()
         tbody_tag = tags.tbody()
 
         for values, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
             tr_tag = tags.tr()
             for value, value_dp, styler in zip(values, value_dp_list, self._styler_list):
-                td_tag = tags.td(MultiByteStrDecoder(value).unicode_str)
+                td_tag = tags.td(raw(MultiByteStrDecoder(value).unicode_str))
                 td_tag["align"] = value_dp.align.align_string
 
                 style_tag = self.__make_style_tag(styler)

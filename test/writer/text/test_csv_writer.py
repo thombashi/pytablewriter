@@ -124,8 +124,8 @@ normal_test_data_list = [
         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
         expected=dedent(
             """\
-            "a b","c d","e f"
-            "v1 v1","v2 v2","v3 v3"
+            "a b","c  d","e f"
+            "v1 v1","v2  v2","v3 v3"
             """
         ),
     ),
