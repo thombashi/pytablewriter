@@ -766,7 +766,7 @@ Install from PPA (for Ubuntu)
 
 Dependencies
 ============
-Python 2.7+ or 3.5+
+Python 3.5+
 
 - `DataProperty <https://github.com/thombashi/DataProperty>`__
 - `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
