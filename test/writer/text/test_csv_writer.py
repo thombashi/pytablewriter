@@ -222,6 +222,20 @@ class Test_CsvTableWriter_write_table(object):
         assert out == expected
         assert writer.dumps() == expected
 
+    def test_normal_escape_formula_injection(self, capsys):
+        writer = table_writer_class()
+        writer.headers = ["a", "b", "c", "d", "e"]
+        writer.value_matrix = [["a+b", "=a+b", "-a+b", "+a+b", "@a+b"]]
+        writer.escape_formula_injection = True
+        writer.write_table()
+        expected = r""""a","b","c","d","e"
+"a+b","\"=a+b","\"-a+b","\"+a+b","\"@a+b"
+"""
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["header", "value", "expected"],
         [[data.header, data.value, data.expected] for data in exception_test_data_list],

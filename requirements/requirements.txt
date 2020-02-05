@@ -1,4 +1,4 @@
-DataProperty>=0.44.0,<2
+DataProperty>=0.45.0,<2
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
 mbstrdecoder>=0.8.3,<2
