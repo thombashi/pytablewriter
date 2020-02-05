@@ -6,14 +6,14 @@ import enum
 import io
 import sys
 
-import dataproperty
 import six
 import typepy
+from dataproperty import Align, LineBreakHandling
 from six.moves import zip
 
 from ...error import EmptyHeaderError
 from ...style import TextStyler
-from .._table_writer import AbstractTableWriter, LineBreakHandling
+from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
 
 
@@ -135,7 +135,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.margin = 0
 
-        self.line_break_handling = LineBreakHandling.REPLACE
+        self._dp_extractor.preprocessor.line_break_handling = LineBreakHandling.REPLACE
         self.is_write_null_line_after_table = False
 
         self._init_cross_point_maps()
@@ -277,8 +277,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _get_header_format_string(self, col_dp, value_dp):
         return "{{:{:s}{:s}}}".format(
-            self._get_align_char(dataproperty.Align.CENTER),
-            str(self._get_padding_len(col_dp, value_dp)),
+            self._get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
         )
 
     def _to_header_item(self, col_dp, value_dp):

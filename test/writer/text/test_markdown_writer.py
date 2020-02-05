@@ -868,7 +868,7 @@ class Test_MarkdownTableWriter_write_table(object):
         writer = table_writer_class()
         writer.headers = ["no", "text"]
         writer.value_matrix = [[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]]
-        writer.is_escape_html_tag = True
+        writer.value_preprocessor = ptw.Preprocessor(is_escape_html_tag=True)
         writer.write_table()
 
         expected = dedent(
@@ -894,7 +894,7 @@ class Test_MarkdownTableWriter_write_table(object):
                 [[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]],
             )
         )
-        writer.is_escape_html_tag = True
+        writer.value_preprocessor = ptw.Preprocessor(is_escape_html_tag=True)
         writer.write_table()
 
         expected = dedent(
@@ -1086,7 +1086,7 @@ class Test_MarkdownTableWriter_line_break_handling(object):
         writer = table_writer_class()
         writer.headers = ["no", "text"]
         writer.value_matrix = [[1, "first\nsecond"]]
-        writer.line_break_handling = value
+        writer.value_preprocessor = ptw.Preprocessor(line_break_handling=value)
 
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)

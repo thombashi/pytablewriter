@@ -1,4 +1,4 @@
-DataProperty>=0.43.2,<2
+DataProperty>=0.44.0,<2
 enum34;python_version<"3.4"
 ipaddress;python_version<"3.3"
 mbstrdecoder>=0.8.3,<2
@@ -6,5 +6,5 @@ msgfy>=0.0.6,<1
 pathvalidate>=0.29.1<1; python_version < "3.5"
 pathvalidate<3; python_version >="3.5"
 six>=1.10.0,<2.0.0
-tabledata>=0.9.1,<2
+tabledata>=0.9.2,<2
 typepy[datetime]>=0.6.4,<2

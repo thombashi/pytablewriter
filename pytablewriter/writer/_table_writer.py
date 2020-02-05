@@ -14,12 +14,11 @@ import warnings
 import msgfy
 import six
 import typepy
-from dataproperty import DataPropertyExtractor, Format, LineBreakHandling, MatrixFormatting
+from dataproperty import DataPropertyExtractor, Format, MatrixFormatting, Preprocessor
 from six.moves import zip
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
 
-from .._function import normalize_enum
 from .._logger import WriterLogger
 from ..error import (
     EmptyHeaderError,
@@ -60,10 +59,6 @@ class AbstractTableWriter(TableWriterInterface):
     .. py:attribute:: is_padding
 
         Padding for each item in the table if the value is |True|.
-
-    .. py:attribute:: is_escape_html_tag
-
-        Escape HTML tags in cells in the table if the value is |True|.
 
     .. py:attribute:: iteration_length
 
@@ -157,7 +152,9 @@ class AbstractTableWriter(TableWriterInterface):
         :rtype: tabledata.TableData
         """
 
-        return TableData(self.table_name, self.headers, self.value_matrix)
+        return TableData(
+            self.table_name, self.headers, self.value_matrix, dp_extractor=self._dp_extractor
+        )
 
     @property
     def type_hints(self):
@@ -338,24 +335,15 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
-    def line_break_handling(self):
-        return self._dp_extractor.line_break_handling
+    def value_preprocessor(self):
+        return self._dp_extractor.preprocessor
 
-    @line_break_handling.setter
-    def line_break_handling(self, value):
-        if self._dp_extractor.line_break_handling == value:
+    @value_preprocessor.setter
+    def value_preprocessor(self, value):
+        if self._dp_extractor.preprocessor == value:
             return
 
-        self._dp_extractor.line_break_handling = normalize_enum(value, LineBreakHandling)
-        self.__clear_preprocess()
-
-    @property
-    def is_escape_html_tag(self):
-        return self._dp_extractor.is_escape_html_tag
-
-    @is_escape_html_tag.setter
-    def is_escape_html_tag(self, flag):
-        self._dp_extractor.is_escape_html_tag = flag
+        self._dp_extractor.preprocessor = value
         self.__clear_preprocess()
 
     @property
@@ -396,14 +384,13 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor = DataPropertyExtractor()
         self._dp_extractor.min_column_width = 1
         self._dp_extractor.strip_str_header = '"'
-        self._dp_extractor.strip_str_value = '"'
+        self._dp_extractor.preprocessor = Preprocessor(strip_str='"')
         self._dp_extractor.type_value_map[Typecode.NONE] = ""
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
         self._dp_extractor.strict_level_map[Typecode.BOOL] = 1
 
         self.is_formatting_float = True
         self.is_padding = True
-        self.is_escape_html_tag = False
 
         self.headers = None
         self.type_hints = None
@@ -424,9 +411,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_require_table_name = False
         self._is_require_header = False
-
-        self.__line_break_handling = None
-        self.line_break_handling = LineBreakHandling.NOP
 
         self.iteration_length = -1
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP

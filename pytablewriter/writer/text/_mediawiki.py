@@ -7,11 +7,11 @@ import re
 
 import dataproperty as dp
 import typepy
+from dataproperty import LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 from six.moves import zip
 
 from ...style import Align
-from .._table_writer import LineBreakHandling
 from ._text_writer import TextTableWriter
 
 
@@ -45,7 +45,7 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
-        self.line_break_handling = LineBreakHandling.NOP
+        self.value_preprocessor.line_break_handling = LineBreakHandling.NOP
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 

@@ -7,7 +7,7 @@ from textwrap import dedent
 import pytest
 from tabledata import TableData
 
-from pytablewriter import LineBreakHandling, dumps_tabledata
+from pytablewriter import LineBreakHandling, Preprocessor, dumps_tabledata
 
 from ._common import print_test_result
 
@@ -69,7 +69,7 @@ class Test_dump_tabledata(object):
             ],
             [
                 test_tabledata,
-                {"line_break_handling": LineBreakHandling.ESCAPE},
+                {"value_preprocessor": Preprocessor(line_break_handling=LineBreakHandling.ESCAPE)},
                 dedent(
                     r""".. table:: fake name and address
 

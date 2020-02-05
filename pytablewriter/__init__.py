@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import
 
+from dataproperty import LineBreakHandling, Preprocessor
 from typepy import (
     Bool,
     DateTime,
@@ -62,4 +63,3 @@ from .writer import (
     TsvTableWriter,
     UnicodeTableWriter,
 )
-from .writer._table_writer import LineBreakHandling
