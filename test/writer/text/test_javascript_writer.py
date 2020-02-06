@@ -196,8 +196,8 @@ normal_test_data_list = [
         expected=dedent(
             """\
             const line_breaks = [
-                ["a b", " c d ", "e f"],
-                ["v1 v1", "v2 v2", "v3 v3"]
+                ["a b", " c  d ", "e f"],
+                ["v1 v1", "v2  v2", "v3 v3"]
             ];
             """
         ),

@@ -120,8 +120,8 @@ normal_test_data_list = [
         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
         expected=dedent(
             """\
-            "a b","c d","e f"
-            "v1 v1","v2 v2","v3 v3"
+            "a b","c  d","e f"
+            "v1 v1","v2  v2","v3 v3"
             """
         ),
     ),
@@ -217,6 +217,20 @@ class Test_CsvTableWriter_write_table:
 
         assert out == expected
         assert writer.dumps() == expected
+
+    def test_normal_escape_formula_injection(self, capsys):
+        writer = table_writer_class()
+        writer.headers = ["a", "b", "c", "d", "e"]
+        writer.value_matrix = [["a+b", "=a+b", "-a+b", "+a+b", "@a+b"]]
+        writer.escape_formula_injection = True
+        writer.write_table()
+        expected = r""""a","b","c","d","e"
+"a+b","\"=a+b","\"-a+b","\"+a+b","\"@a+b"
+"""
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
 
     @pytest.mark.parametrize(
         ["header", "value", "expected"],

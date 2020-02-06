@@ -344,6 +344,36 @@ class Test_HtmlTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
+    def test_normal_line_breaks(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "line breaks"
+        writer.headers = ["a\nb", "\nc\n\nd\n", "e\r\nf"]
+        writer.value_matrix = [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]]
+        writer.write_table()
+
+        expected = """\
+<table id="linebreaks">
+    <caption>line breaks</caption>
+    <thead>
+        <tr>
+            <th>a<br>b</th>
+            <th><br>c<br><br>d<br></th>
+            <th>e<br>f</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="left">v1<br>v1</td>
+            <td align="left">v2<br><br>v2</td>
+            <td align="left">v3<br>v3</td>
+        </tr>
+    </tbody>
+</table>
+"""
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
