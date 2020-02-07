@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import print_function, unicode_literals
-
 from textwrap import dedent
 
 import pytest
@@ -22,7 +18,7 @@ test_tabledata = TableData(
 )
 
 
-class Test_dump_tabledata(object):
+class Test_dump_tabledata:
     @pytest.mark.parametrize(
         ["value", "format_name", "expected"],
         [

@@ -10,7 +10,7 @@ Reference: :py:attr:`~AbstractTableWriter.stream`.
         :caption: Change output stream of a writer object
 
         import pytablewriter
-        import six
+        import io
 
         def main():
             writer = pytablewriter.MarkdownTableWriter()
@@ -29,7 +29,7 @@ Reference: :py:attr:`~AbstractTableWriter.stream`.
 
             # change the stream to a string buffer to get the output as a string
             # you can also get tabular text by using dumps method
-            writer.stream = six.StringIO()
+            writer.stream = io.StringIO()
             writer.write_table()
             print(writer.stream.getvalue())
 

@@ -1,17 +1,10 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import abc
-
-import six
 
 from ._font import FontSize, FontStyle, FontWeight
 from ._style import Style, ThousandSeparator
 
 
-@six.add_metaclass(abc.ABCMeta)
-class StylerInterface(object):
+class StylerInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def apply(self, value):  # pragma: no cover
         raise NotImplementedError()
@@ -75,7 +68,7 @@ class HtmlStyler(TextStyler):
 
 
 class LatexStyler(TextStyler):
-    class Command(object):
+    class Command:
         BOLD = r"\bf"
         ITALIC = r"\it"
 
@@ -104,7 +97,7 @@ class LatexStyler(TextStyler):
         return width
 
     def apply(self, value):
-        value = super(LatexStyler, self).apply(value)
+        value = super().apply(value)
         if not value:
             return value
 
@@ -138,7 +131,7 @@ class MarkdownStyler(TextStyler):
         return width
 
     def apply(self, value):
-        value = super(MarkdownStyler, self).apply(value)
+        value = super().apply(value)
         if not value:
             return value
 
@@ -174,7 +167,7 @@ class ReStructuredTextStyler(TextStyler):
     def apply(self, value):
         from ..writer import RstCsvTableWriter
 
-        value = super(ReStructuredTextStyler, self).apply(value)
+        value = super().apply(value)
         if not value:
             return value
 

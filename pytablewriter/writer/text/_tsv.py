@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 from ._csv import CsvTableWriter
 
 
@@ -20,6 +16,6 @@ class TsvTableWriter(CsvTableWriter):
         return self.FORMAT_NAME
 
     def __init__(self):
-        super(TsvTableWriter, self).__init__()
+        super().__init__()
 
         self.column_delimiter = "\t"

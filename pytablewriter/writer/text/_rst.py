@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 
 import dataproperty
@@ -18,7 +14,7 @@ class RstTableWriter(IndentationTextTableWriter):
     """
 
     def __init__(self):
-        super(RstTableWriter, self).__init__()
+        super().__init__()
 
         self.table_name = ""
         self.char_header_row_separator = "="
@@ -59,7 +55,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
     def _write_table(self):
         self.inc_indent_level()
-        super(RstTableWriter, self)._write_table()
+        super()._write_table()
         self.dec_indent_level()
 
     def _create_styler(self, style, writer):
@@ -87,7 +83,7 @@ class RstCsvTableWriter(RstTableWriter):
         return True
 
     def __init__(self):
-        super(RstCsvTableWriter, self).__init__()
+        super().__init__()
 
         self.column_delimiter = ", "
         self.char_cross_point = ""
@@ -123,7 +119,7 @@ class RstCsvTableWriter(RstTableWriter):
 
     def _write_opening_row(self):
         self.dec_indent_level()
-        super(RstCsvTableWriter, self)._write_opening_row()
+        super()._write_opening_row()
         self.inc_indent_level()
 
     def _write_header(self):
@@ -183,7 +179,7 @@ class RstGridTableWriter(RstTableWriter):
         return False
 
     def __init__(self):
-        super(RstGridTableWriter, self).__init__()
+        super().__init__()
 
         self.char_left_side_row = "|"
         self.char_right_side_row = "|"
@@ -220,7 +216,7 @@ class RstSimpleTableWriter(RstTableWriter):
         return False
 
     def __init__(self):
-        super(RstSimpleTableWriter, self).__init__()
+        super().__init__()
 
         self.column_delimiter = "  "
         self.char_cross_point = "  "

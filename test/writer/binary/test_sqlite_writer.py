@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 from collections import OrderedDict
@@ -87,7 +84,7 @@ exception_test_data_list = [
 
 
 @pytest.mark.xfail(run=False)
-class Test_SqliteTableWriter_write_table(object):
+class Test_SqliteTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in normal_test_data_list],
@@ -166,7 +163,7 @@ class Test_SqliteTableWriter_write_table(object):
 
 
 @pytest.mark.xfail(run=False)
-class Test_SqliteTableWriter_dump(object):
+class Test_SqliteTableWriter_dump:
     def test_normal_single_table(self, tmpdir):
         test_filepath = str(tmpdir.join("test.sqlite"))
         data = TableData(
@@ -204,7 +201,7 @@ class Test_SqliteTableWriter_dump(object):
 
 
 @pytest.mark.xfail(run=False)
-class Test_SqliteTableWriter_write_table_iter(object):
+class Test_SqliteTableWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [
@@ -245,7 +242,7 @@ class Test_SqliteTableWriter_write_table_iter(object):
 
 
 @pytest.mark.xfail(run=False)
-class Test_SqliteTableWriter_dumps(object):
+class Test_SqliteTableWriter_dumps:
     def test_exception(self, tmpdir):
         writer = ptw.SqliteTableWriter()
         writer.open(":memory:")

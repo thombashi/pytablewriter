@@ -1,10 +1,5 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import pathvalidate
 import typepy
-from six.moves import zip
 
 from ._csv import CsvTableWriter
 
@@ -29,7 +24,7 @@ class LtsvTableWriter(CsvTableWriter):
         return True
 
     def __init__(self):
-        super(LtsvTableWriter, self).__init__()
+        super().__init__()
 
         self.is_write_header = False
 

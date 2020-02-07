@@ -1,14 +1,9 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import abc
 import copy
 import warnings
 
 import dataproperty
 import typepy
-from six.moves import range
 from typepy import Integer
 
 from .._common import import_error_msg_template
@@ -102,7 +97,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         return self._last_data_col
 
     def __init__(self):
-        super(ExcelTableWriter, self).__init__()
+        super().__init__()
 
         self._workbook = None
 
@@ -177,7 +172,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         :param tabledata.TableData value: Input table data.
         """
 
-        super(ExcelTableWriter, self).from_tabledata(value)
+        super().from_tabledata(value)
 
         if self.is_opened():
             self.make_worksheet(self.table_name)
@@ -271,7 +266,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
     """
 
     def __init__(self):
-        super(ExcelXlsTableWriter, self).__init__()
+        super().__init__()
 
         self.__col_style_table = {}
 
@@ -298,7 +293,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
         self.stream.write(row, col, value_dp.data)
 
     def _postprocess(self):
-        super(ExcelXlsTableWriter, self)._postprocess()
+        super()._postprocess()
 
         self.__col_style_table = {}
 
@@ -356,12 +351,12 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     MAX_CELL_WIDTH = 60
 
-    class TableFormat(object):
+    class TableFormat:
         HEADER = "header"
         CELL = "cell"
         NAN = "nan"
 
-    class Default(object):
+    class Default:
         FONT_NAME = "MS Gothic"
         FONT_SIZE = 9
 
@@ -402,7 +397,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
     def __init__(self):
-        super(ExcelXlsxTableWriter, self).__init__()
+        super().__init__()
 
         self.default_format = self.Default.CELL_FORMAT
         self.format_table = {
@@ -500,12 +495,12 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             self.stream.set_column(col_idx, col_idx, width=width)
 
     def _preprocess_table_property(self):
-        super(ExcelXlsxTableWriter, self)._preprocess_table_property()
+        super()._preprocess_table_property()
 
         self.__set_cell_width()
 
     def _postprocess(self):
-        super(ExcelXlsxTableWriter, self)._postprocess()
+        super()._postprocess()
 
         self.stream.autofilter(
             self.last_header_row, self.first_data_col, self.last_data_row, self.last_data_col

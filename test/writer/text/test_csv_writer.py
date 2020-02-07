@@ -1,13 +1,9 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
-import io
 import itertools
 from textwrap import dedent
 
@@ -139,7 +135,7 @@ exception_test_data_list = [
 table_writer_class = ptw.CsvTableWriter
 
 
-class Test_CsvTableWriter_write_new_line(object):
+class Test_CsvTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -148,7 +144,7 @@ class Test_CsvTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_CsvTableWriter_from_csv(object):
+class Test_CsvTableWriter_from_csv:
 
     __CSV_TEXT_INPUT = dedent(
         """\
@@ -184,7 +180,7 @@ class Test_CsvTableWriter_from_csv(object):
 
     def test_normal_from_file(self, capsys, tmpdir):
         file_path = str(tmpdir.join("test_data.csv"))
-        with io.open(file_path, "w", encoding="utf-8") as f:
+        with open(file_path, "w", encoding="utf-8") as f:
             f.write(self.__CSV_TEXT_INPUT)
 
         writer = table_writer_class()
@@ -201,7 +197,7 @@ class Test_CsvTableWriter_from_csv(object):
         assert out == self.__CSV_EXPECTED
 
 
-class Test_CsvTableWriter_write_table(object):
+class Test_CsvTableWriter_write_table:
     @pytest.mark.parametrize(
         ["col_delim", "header", "value", "expected"],
         [
@@ -249,7 +245,7 @@ class Test_CsvTableWriter_write_table(object):
             writer.write_table()
 
 
-class Test_CsvTableWriter_write_table_iter(object):
+class Test_CsvTableWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [

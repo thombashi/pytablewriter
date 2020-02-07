@@ -1,8 +1,4 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
-import six
+import io
 from dataproperty import DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
 
@@ -85,7 +81,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.__variable_declaration = value
 
     def __init__(self):
-        super(JavaScriptTableWriter, self).__init__()
+        super().__init__()
 
         self.variable_declaration = "const"
         self._dp_extractor.type_value_map = {
@@ -106,10 +102,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         org_stream = self.stream
-        self.stream = six.StringIO()
+        self.stream = io.StringIO()
 
         self.inc_indent_level()
-        super(JavaScriptTableWriter, self)._write_table()
+        super()._write_table()
         self.dec_indent_level()
         js_matrix_var_def_text = self.stream.getvalue().rstrip("\n")
         js_matrix_var_def_text = strip_quote(js_matrix_var_def_text, "true")
@@ -136,4 +132,4 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         if value_dp.data is None:
             value_dp = self.__NONE_VALUE_DP
 
-        return super(JavaScriptTableWriter, self)._to_row_item(col_dp, value_dp)
+        return super()._to_row_item(col_dp, value_dp)

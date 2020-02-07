@@ -1,19 +1,14 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import datetime
-import platform  # noqa: W0611
 from decimal import Decimal
 
 import pytest
 import simplejson as json
-import six  # noqa: W0611
 
 import pytablewriter as ptw
 
@@ -35,8 +30,7 @@ exception_test_data_list = [
 table_writer_class = ptw.ElasticsearchWriter
 
 
-class Test_ElasticsearchWriter__get_mappings(object):
-    @pytest.mark.skipif("platform.system() == 'Windows' and six.PY2")
+class Test_ElasticsearchWriter__get_mappings:
     def test_normal(self):
         writer = table_writer_class()
         writer.table_name = "es mappings"
@@ -177,7 +171,7 @@ class Test_ElasticsearchWriter__get_mappings(object):
         assert body == expected_body
 
 
-class Test_ElasticsearchWriter_write_table(object):
+class Test_ElasticsearchWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],

@@ -1,15 +1,9 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import enum
 import io
 import sys
 
-import six
 import typepy
 from dataproperty import Align, LineBreakHandling
-from six.moves import zip
 
 from ...error import EmptyHeaderError
 from ...style import TextStyler
@@ -108,7 +102,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.__closing_row_cell_format = self.__make_margin_format(self.char_closing_row)
 
     def __init__(self):
-        super(TextTableWriter, self).__init__()
+        super().__init__()
 
         self.stream = sys.stdout
 
@@ -172,7 +166,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             - |None| values are written as an empty string.
         """
 
-        super(TextTableWriter, self).write_table()
+        super().write_table()
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
@@ -191,7 +185,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             output.write
             self.stream = output
         except AttributeError:
-            self.stream = io.open(output, "w", encoding="utf-8")
+            self.stream = open(output, "w", encoding="utf-8")
 
         try:
             self.write_table()
@@ -212,7 +206,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         old_stream = self.stream
 
         try:
-            self.stream = six.StringIO()
+            self.stream = io.StringIO()
             self.write_table()
             tabular_text = self.stream.getvalue()
         finally:
@@ -224,7 +218,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         return TextStyler(style, writer)
 
     def _write_table_iter(self):
-        super(TextTableWriter, self)._write_table_iter()
+        super()._write_table_iter()
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
@@ -282,12 +276,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _to_header_item(self, col_dp, value_dp):
         return self.__value_cell_margin_format.format(
-            super(TextTableWriter, self)._to_header_item(col_dp, value_dp)
+            super()._to_header_item(col_dp, value_dp)
         )
 
     def _to_row_item(self, col_dp, value_dp):
         return self.__value_cell_margin_format.format(
-            super(TextTableWriter, self)._to_row_item(col_dp, value_dp)
+            super()._to_row_item(col_dp, value_dp)
         )
 
     def _write_raw_string(self, unicode_text):
@@ -382,7 +376,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     """
 
     def __init__(self):
-        super(IndentationTextTableWriter, self).__init__()
+        super().__init__()
 
         self.set_indent_level(0)
         self.indent_string = ""

@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
@@ -72,7 +69,7 @@ exception_test_data_list = [
 table_writer_class = ptw.SpaceAlignedTableWriter
 
 
-class Test_SpaceAlignedTableWriter_write_new_line(object):
+class Test_SpaceAlignedTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -82,7 +79,7 @@ class Test_SpaceAlignedTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_SpaceAlignedTableWriter_write_table(object):
+class Test_SpaceAlignedTableWriter_write_table:
     @pytest.mark.parametrize(
         ["header", "value", "expected"],
         [[data.header, data.value, data.expected] for data in normal_test_data_list],

@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import
-
 from ._csv import CsvTableWriter
 from ._html import HtmlTableWriter
 from ._json import JsonTableWriter

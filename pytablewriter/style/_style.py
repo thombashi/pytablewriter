@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 from enum import Enum, unique
 
 from dataproperty import Align
@@ -20,7 +16,7 @@ class ThousandSeparator(Enum):
 _s_to_ts = {"": ThousandSeparator.NONE, ",": ThousandSeparator.COMMA, " ": ThousandSeparator.SPACE}
 
 
-class Style(object):
+class Style:
     """Style specifier class for table elements.
 
     Args:

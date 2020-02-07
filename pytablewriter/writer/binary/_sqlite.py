@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 from os.path import abspath
 
 import tabledata
@@ -41,7 +37,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
         import copy
         import dataproperty
 
-        super(SqliteTableWriter, self).__init__()
+        super().__init__()
 
         self.is_padding = False
         self.is_formatting_float = False

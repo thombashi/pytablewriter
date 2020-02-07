@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import abc
 import math
@@ -12,10 +9,8 @@ import re
 import warnings
 
 import msgfy
-import six
 import typepy
 from dataproperty import DataPropertyExtractor, Format, MatrixFormatting, Preprocessor
-from six.moves import zip
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
 
@@ -471,9 +466,9 @@ class AbstractTableWriter(TableWriterInterface):
         while len(self.headers) > len(self.__style_list):
             self.__style_list.append(None)
 
-        if isinstance(column, six.integer_types):
+        if isinstance(column, int):
             column_idx = column
-        elif isinstance(column, six.string_types):
+        elif isinstance(column, str):
             try:
                 column_idx = self.headers.index(column)
             except ValueError:
@@ -892,7 +887,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _verify_stream(self):
         if self.stream is None:
-            raise IOError("null output stream")
+            raise OSError("null output stream")
 
     def _verify_header(self):
         if self._is_require_header and not self._use_default_header:
