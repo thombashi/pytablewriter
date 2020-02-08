@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import typepy
 
 from ._text_writer import TextTableWriter
@@ -27,7 +23,7 @@ class CsvTableWriter(TextTableWriter):
         return True
 
     def __init__(self):
-        super(CsvTableWriter, self).__init__()
+        super().__init__()
 
         self.indent_string = ""
         self.column_delimiter = ","
@@ -41,7 +37,7 @@ class CsvTableWriter(TextTableWriter):
         if typepy.is_empty_sequence(self.headers):
             return
 
-        super(CsvTableWriter, self)._write_header()
+        super()._write_header()
 
     def _get_opening_row_items(self):
         return []

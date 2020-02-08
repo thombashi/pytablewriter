@@ -1,14 +1,9 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 import warnings
 
 import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
-from six.moves import zip
 
 from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
@@ -47,7 +42,7 @@ class HtmlTableWriter(TextTableWriter):
         return False
 
     def __init__(self):
-        super(HtmlTableWriter, self).__init__()
+        super().__init__()
 
         self.is_padding = False
         self.indent_string = "    "

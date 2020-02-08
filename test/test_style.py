@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import print_function, unicode_literals
-
 import sys
 
 import pytest
@@ -9,7 +5,7 @@ import pytest
 from pytablewriter.style import Align, FontSize, FontStyle, FontWeight, Style, ThousandSeparator
 
 
-class Test_Style_constructor(object):
+class Test_Style_constructor:
     @pytest.mark.parametrize(
         ["value", "expected"],
         [
@@ -63,7 +59,7 @@ class Test_Style_constructor(object):
         assert style.thousand_separator is expected.get("thousand_separator")
 
 
-class Test_Style_eq(object):
+class Test_Style_eq:
     @pytest.mark.parametrize(
         ["lhs", "rhs", "expected"],
         [
@@ -136,7 +132,7 @@ class Test_Style_eq(object):
             Style(align=align, font_size=font_size, thousand_separator=thousand_separator)
 
 
-class Test_Style_repr(object):
+class Test_Style_repr:
     @pytest.mark.parametrize(
         ["value", "expected"],
         [

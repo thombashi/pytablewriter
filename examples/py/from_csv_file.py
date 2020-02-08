@@ -4,7 +4,6 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-import io
 from textwrap import dedent
 
 import pytablewriter
@@ -14,7 +13,7 @@ filename = "sample.csv"
 
 
 def main():
-    with io.open(filename, "w", encoding="utf8") as f:
+    with open(filename, "w", encoding="utf8") as f:
         f.write(
             dedent(
                 """\

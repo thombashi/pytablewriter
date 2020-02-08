@@ -1,17 +1,14 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import pytest
 
 import pytablewriter as ptw
 
 
-class Test_CsvTableWriter_write_table(object):
+class Test_CsvTableWriter_write_table:
     @pytest.mark.parametrize(
         ["format_name"],
         [

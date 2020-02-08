@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
@@ -91,7 +88,7 @@ table_writer_class_list = [ptw.ExcelXlsTableWriter, ptw.ExcelXlsxTableWriter]
 
 
 @pytest.mark.xfail(run=False)
-class Test_ExcelTableWriter_write_table(object):
+class Test_ExcelTableWriter_write_table:
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
         [
@@ -172,7 +169,7 @@ class Test_ExcelTableWriter_write_table(object):
 
 
 @pytest.mark.xfail(run=False)
-class Test_ExcelTableWriter_write_table_iter(object):
+class Test_ExcelTableWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["writer_class", "table", "header", "value", "expected"],
         [
@@ -243,7 +240,7 @@ class Test_ExcelTableWriter_write_table_iter(object):
 
 
 @pytest.mark.xfail(run=False)
-class Test_ExcelTableWriter_dump(object):
+class Test_ExcelTableWriter_dump:
     def test_normal_single_sheet(self, tmpdir):
         for writer_class in table_writer_class_list:
             test_filepath = str(tmpdir.join("test.xlsx"))
@@ -291,7 +288,7 @@ class Test_ExcelTableWriter_dump(object):
 
 
 @pytest.mark.xfail(run=False)
-class Test_ExcelTableWriter_dumps(object):
+class Test_ExcelTableWriter_dumps:
     def test_exception(self, tmpdir):
         for writer_class in table_writer_class_list:
             test_filepath = tmpdir.join("test.xlsx")

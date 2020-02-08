@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import itertools
@@ -142,7 +139,7 @@ exception_test_data_list = [
 table_writer_class = ptw.TomlTableWriter
 
 
-class Test_TomlTableWriter_write_new_line(object):
+class Test_TomlTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -151,7 +148,7 @@ class Test_TomlTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_TomlTableWriter_write_table(object):
+class Test_TomlTableWriter_write_table:
     @pytest.mark.xfail(run=False)
     @pytest.mark.parametrize(
         ["table_name", "header", "value", "expected"],

@@ -1,16 +1,12 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import copy
 
 import dataproperty
 import msgfy
-from six.moves import zip
 from typepy import Typecode
 
 from ._table_writer import AbstractTableWriter
@@ -62,7 +58,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @property
     def table_name(self):
-        return super(ElasticsearchWriter, self).table_name
+        return super().table_name
 
     @table_name.setter
     def table_name(self, value):
@@ -86,7 +82,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         self.table_name = value
 
     def __init__(self):
-        super(ElasticsearchWriter, self).__init__()
+        super().__init__()
 
         self.stream = None
         self.is_padding = False

@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import pytablewriter
 
@@ -12,25 +9,25 @@ import pytablewriter
 table_writer_class = pytablewriter.NullTableWriter
 
 
-class Test_NullTableWriter_set_indent_level(object):
+class Test_NullTableWriter_set_indent_level:
     def test_smoke(self):
         writer = table_writer_class()
         writer.set_indent_level(0)
 
 
-class Test_NullTableWriter_inc_indent_level(object):
+class Test_NullTableWriter_inc_indent_level:
     def test_smoke(self):
         writer = table_writer_class()
         writer.inc_indent_level()
 
 
-class Test_NullTableWriter_dec_indent_level(object):
+class Test_NullTableWriter_dec_indent_level:
     def test_smoke(self):
         writer = table_writer_class()
         writer.dec_indent_level()
 
 
-class Test_NullTableWriter_write_new_line(object):
+class Test_NullTableWriter_write_new_line:
     def test_smoke(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -39,7 +36,7 @@ class Test_NullTableWriter_write_new_line(object):
         assert out == ""
 
 
-class Test_NullTableWriter_write_table(object):
+class Test_NullTableWriter_write_table:
     def test_smoke(self, capsys):
         writer = table_writer_class()
         writer.write_table()
@@ -48,14 +45,14 @@ class Test_NullTableWriter_write_table(object):
         assert out == ""
 
 
-class Test_NullTableWriter_dumps(object):
+class Test_NullTableWriter_dumps:
     def test_smoke(self):
         writer = table_writer_class()
 
         assert writer.dumps() == ""
 
 
-class Test_NullTableWriter_write_table_iter(object):
+class Test_NullTableWriter_write_table_iter:
     def test_smoke(self, capsys):
         writer = table_writer_class()
         writer.write_table_iter()

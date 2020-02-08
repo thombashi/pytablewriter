@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 import re
 
@@ -25,7 +21,7 @@ class LatexWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self):
-        super(LatexWriter, self).__init__()
+        super().__init__()
 
         self.is_write_opening_row = True
         self.is_write_closing_row = True
@@ -71,12 +67,12 @@ class LatexWriter(IndentationTextTableWriter):
         return col_align_list
 
     def _write_opening_row(self):
-        super(LatexWriter, self)._write_opening_row()
+        super()._write_opening_row()
         self.inc_indent_level()
 
     def _write_closing_row(self):
         self.dec_indent_level()
-        super(LatexWriter, self)._write_closing_row()
+        super()._write_closing_row()
 
     def _to_math_parts(self, value):
         # dollar characters for both sides of math parts are not required in
@@ -112,13 +108,13 @@ class LatexMatrixWriter(LatexWriter):
         return self.FORMAT_NAME
 
     def __init__(self):
-        super(LatexMatrixWriter, self).__init__()
+        super().__init__()
 
         self.is_write_header = False
         self.is_write_header_separator_row = False
 
     def _to_row_item(self, col_dp, value_dp):
-        row_item = super(LatexMatrixWriter, self)._to_row_item(col_dp, value_dp)
+        row_item = super()._to_row_item(col_dp, value_dp)
 
         if self._RE_VAR.search(row_item):
             return row_item
@@ -151,10 +147,10 @@ class LatexMatrixWriter(LatexWriter):
     def _write_opening_row(self):
         self._write_line(r"\begin{equation}")
         self.inc_indent_level()
-        super(LatexMatrixWriter, self)._write_opening_row()
+        super()._write_opening_row()
 
     def _write_closing_row(self):
-        super(LatexMatrixWriter, self)._write_closing_row()
+        super()._write_closing_row()
         self.dec_indent_level()
         self._write_line(r"\end{equation}")
 
@@ -181,7 +177,7 @@ class LatexTableWriter(LatexWriter):
         return self.FORMAT_NAME
 
     def __init__(self):
-        super(LatexTableWriter, self).__init__()
+        super().__init__()
 
         self.char_right_side_row = r" \\ \hline"
         self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"
@@ -207,10 +203,10 @@ class LatexTableWriter(LatexWriter):
         return r"\verb" + "|{:s}|".format(value)
 
     def _to_header_item(self, col_dp, value_dp):
-        return self.__verbatim(super(LatexTableWriter, self)._to_header_item(col_dp, value_dp))
+        return self.__verbatim(super()._to_header_item(col_dp, value_dp))
 
     def _to_row_item(self, col_dp, value_dp):
-        row_item = super(LatexTableWriter, self)._to_row_item(col_dp, value_dp)
+        row_item = super()._to_row_item(col_dp, value_dp)
 
         if self._is_math_parts(value_dp):
             return self._to_math_parts(row_item)

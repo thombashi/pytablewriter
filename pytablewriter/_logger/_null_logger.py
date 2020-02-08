@@ -1,7 +1,4 @@
-# encoding: utf-8
-
-
-class NullLogger(object):
+class NullLogger:
     level_name = None
 
     def catch_exceptions(self, *args, **kwargs):  # pragma: no cover

@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import typepy
 
 from ._python import PythonCodeTableWriter
@@ -48,7 +44,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
         return self.FORMAT_NAME
 
     def __init__(self):
-        super(NumpyTableWriter, self).__init__()
+        super().__init__()
 
         self.import_numpy_as = "np"
         self._dp_extractor.type_value_map[typepy.Typecode.INFINITY] = "{:s}.inf".format(

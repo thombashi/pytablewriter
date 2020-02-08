@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 
 import dataproperty
@@ -31,7 +27,7 @@ class SpaceAlignedTableWriter(CsvTableWriter):
         return self.FORMAT_NAME
 
     def __init__(self):
-        super(SpaceAlignedTableWriter, self).__init__()
+        super().__init__()
 
         self.column_delimiter = "  "
         self.is_padding = True

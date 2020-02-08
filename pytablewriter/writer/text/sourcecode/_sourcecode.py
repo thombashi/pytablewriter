@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import abc
 
 import typepy
@@ -36,7 +32,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         return self.get_variable_name(self.table_name)
 
     def __init__(self):
-        super(SourceCodeTableWriter, self).__init__()
+        super().__init__()
 
         self.indent_string = "    "
         self.column_delimiter = ", "
@@ -65,10 +61,10 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
     def _write_opening_row(self):
         self.dec_indent_level()
-        super(SourceCodeTableWriter, self)._write_opening_row()
+        super()._write_opening_row()
         self.inc_indent_level()
 
     def _write_closing_row(self):
         self.dec_indent_level()
-        super(SourceCodeTableWriter, self)._write_closing_row()
+        super()._write_closing_row()
         self.inc_indent_level()

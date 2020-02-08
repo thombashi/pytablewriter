@@ -1,19 +1,14 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import abc
 
 from pathvalidate import validate_null_string
-from six import add_metaclass, text_type
 
 
-@add_metaclass(abc.ABCMeta)
-class NameSanitizer(object):
+class NameSanitizer(metaclass=abc.ABCMeta):
     @abc.abstractproperty
     def reserved_keywords(self):  # pragma: no cover
         pass
@@ -28,7 +23,7 @@ class NameSanitizer(object):
 
     @property
     def _str(self):
-        return text_type(self._value)
+        return str(self._value)
 
     def __init__(self, value):
         self._validate_null_string(value)

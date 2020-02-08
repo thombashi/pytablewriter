@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-from __future__ import absolute_import, unicode_literals
-
 import copy
 
 import dataproperty as dp
@@ -28,7 +24,7 @@ class UnicodeTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self):
-        super(UnicodeTableWriter, self).__init__()
+        super().__init__()
 
         self.table_name = ""
 

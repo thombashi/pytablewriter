@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import collections
 import datetime
@@ -233,7 +230,7 @@ exception_test_data_list = [
 table_writer_class = pytablewriter.JavaScriptTableWriter
 
 
-class Test_JavaScriptTableWriter_write_new_line(object):
+class Test_JavaScriptTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()
         writer.write_null_line()
@@ -242,7 +239,7 @@ class Test_JavaScriptTableWriter_write_new_line(object):
         assert out == "\n"
 
 
-class Test_JavaScriptTableWriter_type_hint(object):
+class Test_JavaScriptTableWriter_type_hint:
     DATATIME_DATA = datetime.datetime(2017, 1, 2, 3, 4, 5)
     STR_DATA = "2017-01-02 03:04:05"
     DATA_MATRIX = [[STR_DATA, DATATIME_DATA], [STR_DATA, DATATIME_DATA]]
@@ -298,7 +295,7 @@ class Test_JavaScriptTableWriter_type_hint(object):
         assert writer.dumps() == expected
 
 
-class Test_JavaScriptTableWriter_write_table(object):
+class Test_JavaScriptTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_write_header", "is_dti_fmt", "expected"],
         [
@@ -452,7 +449,7 @@ class Test_JavaScriptTableWriter_write_table(object):
             writer.write_table()
 
 
-class Test_JavaScriptTableWriter_write_table_iter(object):
+class Test_JavaScriptTableWriter_write_table_iter:
     @pytest.mark.parametrize(
         ["table", "header", "value", "iter_len", "expected"],
         [

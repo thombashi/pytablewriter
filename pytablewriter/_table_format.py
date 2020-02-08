@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import enum
 import warnings
@@ -38,7 +35,7 @@ from .writer import (
 )
 
 
-class FormatAttr(object):
+class FormatAttr:
     """
     Bitmaps to represent table attributes.
     """

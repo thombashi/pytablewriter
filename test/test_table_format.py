@@ -1,17 +1,14 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import
 
 import pytest
 
 from pytablewriter import FormatAttr, TableFormat
 
 
-class Test_TableFormat_search_table_format(object):
+class Test_TableFormat_search_table_format:
     @pytest.mark.parametrize(
         ["value", "expected"],
         [

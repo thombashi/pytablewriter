@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import itertools
 
@@ -13,7 +10,7 @@ import pytest
 import pytablewriter as ptw
 
 
-class Test_WriterFactory_get_format_names(object):
+class Test_WriterFactory_get_format_names:
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_names() == [
             "csv",
@@ -54,7 +51,7 @@ class Test_WriterFactory_get_format_names(object):
         ]
 
 
-class Test_WriterFactory_get_extensions(object):
+class Test_WriterFactory_get_extensions:
     def test_normal(self):
         assert ptw.TableWriterFactory.get_extensions() == [
             "csv",
@@ -79,7 +76,7 @@ class Test_WriterFactory_get_extensions(object):
         ]
 
 
-class Test_WriterFactory_create_from_file_extension(object):
+class Test_WriterFactory_create_from_file_extension:
     @pytest.mark.parametrize(
         ["value", "expected"],
         list(
@@ -177,7 +174,7 @@ class Test_WriterFactory_create_from_file_extension(object):
             ptw.TableWriterFactory.create_from_file_extension(value)
 
 
-class Test_FileLoaderFactory_create_from_format_name(object):
+class Test_FileLoaderFactory_create_from_format_name:
     @pytest.mark.parametrize(
         ["format_name", "expected"],
         [

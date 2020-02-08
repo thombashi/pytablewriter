@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 """
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from __future__ import absolute_import, unicode_literals
 
 import os
 import warnings
@@ -15,7 +12,7 @@ from ._table_format import FormatAttr, TableFormat
 from .error import WriterNotFoundError
 
 
-class TableWriterFactory(object):
+class TableWriterFactory:
     """
     A factor class of table writer classes.
     """
