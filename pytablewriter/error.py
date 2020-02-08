@@ -3,7 +3,6 @@
 """
 
 
-
 class NotSupportedError(Exception):
     pass
 

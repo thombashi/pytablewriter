@@ -4,10 +4,10 @@
 
 
 import collections
+import io
 import re
 from textwrap import dedent
 
-import io
 import pytest
 from tabledata import TableData
 from termcolor import colored

@@ -1,4 +1,5 @@
 import io
+
 from dataproperty import DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
 

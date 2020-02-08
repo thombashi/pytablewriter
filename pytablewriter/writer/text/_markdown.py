@@ -44,14 +44,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         self._init_cross_point_maps()
 
     def _to_header_item(self, col_dp, value_dp):
-        return self.__escape_vertical_bar_char(
-            super()._to_header_item(col_dp, value_dp)
-        )
+        return self.__escape_vertical_bar_char(super()._to_header_item(col_dp, value_dp))
 
     def _to_row_item(self, col_dp, value_dp):
-        return self.__escape_vertical_bar_char(
-            super()._to_row_item(col_dp, value_dp)
-        )
+        return self.__escape_vertical_bar_char(super()._to_row_item(col_dp, value_dp))
 
     def _get_opening_row_items(self):
         return []

@@ -275,14 +275,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         )
 
     def _to_header_item(self, col_dp, value_dp):
-        return self.__value_cell_margin_format.format(
-            super()._to_header_item(col_dp, value_dp)
-        )
+        return self.__value_cell_margin_format.format(super()._to_header_item(col_dp, value_dp))
 
     def _to_row_item(self, col_dp, value_dp):
-        return self.__value_cell_margin_format.format(
-            super()._to_row_item(col_dp, value_dp)
-        )
+        return self.__value_cell_margin_format.format(super()._to_row_item(col_dp, value_dp))
 
     def _write_raw_string(self, unicode_text):
         self.stream.write(unicode_text)
