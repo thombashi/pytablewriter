@@ -47,3 +47,7 @@ readme:
 release:
 	@cd $(BUILD_WORK_DIR)/$(PACKAGE); python setup.py release --sign
 	@make clean
+
+.PHONY: setup
+setup:
+	@pip install --upgrade -e .[test] tox
