@@ -147,9 +147,7 @@ class AbstractTableWriter(TableWriterInterface):
         :rtype: tabledata.TableData
         """
 
-        return TableData(
-            self.table_name, self.headers, self.value_matrix, dp_extractor=self._dp_extractor
-        )
+        return TableData(self.table_name, self.headers, self.value_matrix)
 
     @property
     def type_hints(self):
@@ -340,6 +338,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._dp_extractor.preprocessor = value
         self.__clear_preprocess()
+
+    def update_preprocessor(self, **kwargs):
+        self._dp_extractor.update_preprocessor(**kwargs)
 
     @property
     def escape_formula_injection(self):
