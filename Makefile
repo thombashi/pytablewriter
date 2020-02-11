@@ -3,7 +3,7 @@ PACKAGE := pytablewriter
 DOCS_DIR := docs
 DOCS_BUILD_DIR := $(DOCS_DIR)/_build
 BUILD_WORK_DIR := _work
-DIST_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)/dist
+BUILD_PKG_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)
 
 
 .PHONY: build-remote
