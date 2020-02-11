@@ -9,99 +9,45 @@ from mbstrdecoder import MultiByteStrDecoder
 from ._null_logger import NullLogger
 
 
-def _disable_logger(l):
-    try:
-        l.disable()
-    except AttributeError:
-        l.disabled = True  # to support Logbook<1.0.0
-
+MODULE_NAME = "pytablewriter"
 
 try:
-    import logbook
+    from loguru import logger
 
-    logger = logbook.Logger("pytablewriter")
-    _disable_logger(logger)
-    LOGBOOK_INSTALLED = True
+    logger.disable(MODULE_NAME)
 except ImportError:
-    logger = NullLogger()
-    LOGBOOK_INSTALLED = False
+    logger = NullLogger()  # type: ignore
 
 
-def set_logger(is_enable):
-    if not LOGBOOK_INSTALLED:
-        return
-
-    if is_enable != logger.disabled:
-        # logger setting have not changed
-        return
-
+def set_logger(is_enable, propagation_depth=1):
     if is_enable:
-        try:
-            logger.enable()
-        except AttributeError:
-            logger.disabled = False  # to support Logbook<1.0.0
+        logger.enable(MODULE_NAME)
     else:
-        _disable_logger(logger)
+        logger.disable(MODULE_NAME)
 
-    dataproperty.set_logger(is_enable)
+    if propagation_depth <= 0:
+        return
+
+    dataproperty.set_logger(is_enable, propagation_depth - 1)
 
     try:
         import simplesqlite
 
-        simplesqlite.set_logger(is_enable)
+        simplesqlite.set_logger(is_enable, propagation_depth - 1)
     except ImportError:
         pass
 
     try:
         import pytablereader
 
-        pytablereader.set_logger(is_enable)
+        pytablereader.set_logger(is_enable, propagation_depth - 1)
     except ImportError:
         pass
 
 
 def set_log_level(log_level):
-    """
-    Set logging level of this module. Using
-    `logbook <https://logbook.readthedocs.io/en/stable/>`__ module for logging.
-
-    :param int log_level:
-        One of the log level of
-        `logbook <https://logbook.readthedocs.io/en/stable/api/base.html>`__.
-        Disabled logging if ``log_level`` is ``logbook.NOTSET``.
-    :raises LookupError: If ``log_level`` is an invalid value.
-    """
-
-    if not LOGBOOK_INSTALLED:
-        return
-
-    # validate log level
-    logbook.get_level_name(log_level)
-
-    if log_level == logger.level:
-        return
-
-    if log_level == logbook.NOTSET:
-        set_logger(is_enable=False)
-    else:
-        set_logger(is_enable=True)
-
-    logger.level = log_level
-    dataproperty.set_log_level(log_level)
-
-    try:
-        import simplesqlite
-
-        simplesqlite.set_log_level(log_level)
-    except ImportError:
-        pass
-
-    try:
-        import pytablereader
-
-        pytablereader.set_log_level(log_level)
-    except ImportError:
-        pass
+    # deprecated
+    return
 
 
 class WriterLogger:

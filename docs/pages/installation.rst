@@ -44,8 +44,8 @@ Python 3.5+
 
 Optional dependencies
 ---------------------
-- `logbook <https://logbook.readthedocs.io/en/stable/>`__
-    - Logging using logbook if the package installed
+- `loguru <https://github.com/Delgan/loguru>`__
+    - Used for logging if the package installed
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - Elasticsearch:
