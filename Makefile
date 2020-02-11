@@ -50,7 +50,7 @@ readme:
 
 .PHONY: release
 release:
-	@cd $(BUILD_WORK_DIR)/$(PACKAGE); python setup.py release --sign
+	@cd $(BUILD_PKG_DIR) && tox -e release
 	@make clean
 
 .PHONY: setup
