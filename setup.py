@@ -103,7 +103,7 @@ setuptools.setup(
     setup_requires=setuptools_require,
     extras_require={
         "all": all_requires,
-        "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"],
+        "dev": ["releasecmd>=0.2.0,<1"],
         "docs": docs_requires,
         "excel": excel_requires,
         "es5": ["elasticsearch>=5.5.3,<6"],
