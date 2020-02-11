@@ -45,14 +45,14 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 
 setuptools_require = ["setuptools>=38.3.0"]
 
-excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<2.0.0"]
+excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<2"]
 es7_requires = ["elasticsearch>=7.0.5,<8"]
-from_requires = ["pytablereader>=0.26.4,<2"]
-html_requires = ["dominate>=2.1.5,<3.0.0"]
+from_requires = ["pytablereader>=0.27.1,<2"]
+html_requires = ["dominate>=2.1.5,<3"]
 logging_requires = ["Logbook>=0.12.3,<2.0.0"]
-sqlite_requires = ["SimpleSQLite>=0.45.3,<2"]
-toml_requires = ["toml>=0.9.3,<1.0.0"]
-optional_requires = ["simplejson>=3.8.1,<4.0"]
+sqlite_requires = ["SimpleSQLite>=0.47.2,<2"]
+toml_requires = ["toml>=0.9.3,<1"]
+optional_requires = ["simplejson>=3.8.1,<4"]
 all_requires = (
     excel_requires
     + es7_requires
