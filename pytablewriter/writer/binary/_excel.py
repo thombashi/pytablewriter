@@ -139,16 +139,6 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
     def _open(self, workbook_path):  # pragma: no cover
         pass
 
-    def open_workbook(self, workbook_path):
-        import warnings
-
-        warnings.warn(
-            "open_workbook method deleted in the future, use open method instead.",
-            DeprecationWarning,
-        )
-
-        self.open(workbook_path)
-
     def close(self):
         """
         Close the current workbook.

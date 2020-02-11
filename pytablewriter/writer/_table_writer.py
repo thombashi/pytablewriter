@@ -6,7 +6,6 @@
 import abc
 import math
 import re
-import warnings
 
 import msgfy
 import typepy
@@ -209,55 +208,8 @@ class AbstractTableWriter(TableWriterInterface):
     def type_hint_list(self, value):
         self.type_hints = value
 
-    @property
-    def align_list(self):
-        # deprecated: align_list property has integrated into styles property
-
-        return self.__align_list
-
-    @align_list.setter
-    def align_list(self, value):
-        if self.align_list == value:
-            return
-
-        warnings.warn(
-            "align_list property has integrated into styles property.", DeprecationWarning
-        )
-
-        self.__align_list = value
-        self.__clear_preprocess()
-
-    @property
-    def format_list(self):
-        # deprecated: format_list property has integrated into styles property.
-
-        return self._dp_extractor.format_flags_list
-
-    @format_list.setter
-    def format_list(self, value):
-        if self.format_list == value:
-            return
-
-        warnings.warn(
-            "format_list property has integrated into styles property.", DeprecationWarning
-        )
-
-        self._dp_extractor.format_flags_list = value
-        self.__clear_preprocess()
-
     def __get_thousand_separator(self, col_idx):
         thousand_separator = self._get_style_attr_from_style(col_idx, "thousand_separator")
-
-        if not thousand_separator:
-            try:
-                thousand_separator = self.format_list[col_idx]
-            except (IndexError, KeyError):
-                pass
-
-            if thousand_separator == Format.NONE:
-                return ThousandSeparator.NONE
-            elif thousand_separator == Format.THOUSAND_SEPARATOR:
-                return ThousandSeparator.COMMA
 
         if thousand_separator is None:
             return ThousandSeparator.NONE
@@ -302,26 +254,6 @@ class AbstractTableWriter(TableWriterInterface):
     @style_list.setter
     def style_list(self, value):
         self.styles = value
-
-    @property
-    def trans_func(self):
-        warnings.warn(
-            "trans_func property now deprecated, register_trans_func() instead.", DeprecationWarning
-        )
-
-        return self._dp_extractor.trans_func
-
-    @trans_func.setter
-    def trans_func(self, value):
-        warnings.warn(
-            "trans_func property now deprecated, register_trans_func() instead.", DeprecationWarning
-        )
-
-        if self._dp_extractor.trans_func is value:
-            return
-
-        self._dp_extractor.trans_func = value
-        self.__clear_preprocess()
 
     def register_trans_func(self, trans_func):
         self._dp_extractor.register_trans_func(trans_func)
@@ -804,12 +736,6 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _get_align(self, col_idx, default_align):
         align = self._get_style_attr_from_style(col_idx, "align")
-
-        if not align:
-            try:
-                align = self.align_list[col_idx]
-            except (IndexError, KeyError):
-                pass
 
         if align is None:
             return default_align

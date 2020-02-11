@@ -4,7 +4,6 @@
 
 
 import os
-import warnings
 
 import typepy
 
@@ -202,13 +201,6 @@ class TableWriterFactory:
         return sorted(list(format_name_set))
 
     @classmethod
-    def get_format_name_list(cls):
-        warnings.warn(
-            "'get_format_name_list()' has moved to 'get_format_names()'", DeprecationWarning
-        )
-        return cls.get_format_names()
-
-    @classmethod
     def get_extensions(cls):
         """
         :return: Available file extensions.
@@ -248,8 +240,3 @@ class TableWriterFactory:
                 file_extension_set.add(file_extension)
 
         return sorted(list(file_extension_set))
-
-    @classmethod
-    def get_extension_list(cls):
-        warnings.warn("'get_extension_list()' has moved to 'get_extensions()'", DeprecationWarning)
-        return cls.get_extensions()

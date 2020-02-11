@@ -4,7 +4,6 @@
 
 
 import enum
-import warnings
 
 from .writer import (
     CsvTableWriter,
@@ -209,11 +208,6 @@ class TableFormat(enum.Enum):
         return self.__names
 
     @property
-    def name_list(self):
-        warnings.warn("'name_list' has moved to 'names'", DeprecationWarning)
-        return self.names
-
-    @property
     def writer_class(self):
         """
         :return: Table writer class associated with the table format.
@@ -241,11 +235,6 @@ class TableFormat(enum.Enum):
 
         return self.__file_extensions
 
-    @property
-    def file_extension_list(self):
-        warnings.warn("'file_extension_list' has moved to 'file_extensions'", DeprecationWarning)
-        return self.file_extensions
-
     def __init__(self, names, writer_class, format_attribute, file_extensions):
         self.__names = names
         self.__writer_class = writer_class
@@ -268,14 +257,3 @@ class TableFormat(enum.Enum):
             for table_format in TableFormat
             if table_format.format_attribute & format_attribute
         ]
-
-    @classmethod
-    def search_table_format(cls, format_attribute):
-        import warnings
-
-        warnings.warn(
-            "search_table_format will be deleted in the future, " "use find_all_attr instead.",
-            DeprecationWarning,
-        )
-
-        return cls.find_all_attr(format_attribute)

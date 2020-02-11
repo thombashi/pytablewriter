@@ -621,25 +621,6 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-        writer.styles = None
-        writer.format_list = [
-            ptw.Format.NONE,
-            ptw.Format.THOUSAND_SEPARATOR,
-            ptw.Format.THOUSAND_SEPARATOR,
-            ptw.Format.THOUSAND_SEPARATOR,
-        ]
-        out = writer.dumps()
-        expected = dedent(
-            """\
-            |none_format|thousand_separator_i|thousand_separator_f|   f   |  wo_f   |
-            |----------:|-------------------:|-------------------:|------:|--------:|
-            |       1000|           1,234,567|         1,234,567.8|1,234.6|1234567.8|
-            |       1000|           1,234,567|         1,234,567.8|1,234.6|1234567.8|
-            """
-        )
-        print_test_result(expected=expected, actual=out)
-        assert out == expected
-
     def test_normal_style_font_size(self):
         writer = table_writer_class()
         writer.table_name = "style test: font size will not be affected"
