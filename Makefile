@@ -16,6 +16,12 @@ build-remote:
 		tox -e build
 	ls -lh $(BUILD_PKG_DIR)/dist/*
 
+.PHONY: build
+build:
+	@make clean
+	@tox -e build
+	ls -lh dist/*
+
 .PHONY: check
 check:
 	travis lint
