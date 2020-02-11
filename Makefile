@@ -7,7 +7,7 @@ DIST_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)/dist
 
 
 .PHONY: build-remote
-build:
+build-remote:
 	@rm -rf $(BUILD_WORK_DIR)
 	@mkdir -p $(BUILD_WORK_DIR)
 	@cd $(BUILD_WORK_DIR) && \
