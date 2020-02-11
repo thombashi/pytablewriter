@@ -6,16 +6,15 @@ BUILD_WORK_DIR := _work
 DIST_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)/dist
 
 
-.PHONY: build
+.PHONY: build-remote
 build:
-	@rm -rf $(BUILD_WORK_DIR)/
-	@mkdir -p $(BUILD_WORK_DIR)/
-	@cd $(BUILD_WORK_DIR); \
-		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git; \
-		cd $(PACKAGE); \
-		python setup.py sdist bdist_wheel
-	@twine check $(DIST_DIR)/*
-	ls -l $(DIST_DIR)
+	@rm -rf $(BUILD_WORK_DIR)
+	@mkdir -p $(BUILD_WORK_DIR)
+	@cd $(BUILD_WORK_DIR) && \
+		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git && \
+		cd $(PACKAGE) && \
+		tox -e build
+	ls -lh $(BUILD_PKG_DIR)/dist/*
 
 .PHONY: check
 check:
