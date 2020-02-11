@@ -4,7 +4,6 @@
 
 
 import os.path
-import sys
 
 import setuptools
 
@@ -15,13 +14,6 @@ REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
 pkg_info = {}
-
-
-def pytest_runner_requires():
-    if {"pytest", "test", "ptr"}.intersection(sys.argv):
-        return ["pytest-runner"]
-
-    return []
 
 
 def get_release_command_class():
@@ -108,8 +100,7 @@ setuptools.setup(
     },
     python_requires=">=3.5",
     install_requires=setuptools_require + install_requires,
-    setup_requires=setuptools_require + pytest_runner_requires(),
-    tests_require=tests_requires,
+    setup_requires=setuptools_require,
     extras_require={
         "all": all_requires,
         "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"],
