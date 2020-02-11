@@ -583,13 +583,6 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-        # test for backward compatibility
-        writer.styles = None
-        writer.align_list = [Align.LEFT, Align.RIGHT, Align.CENTER, Align.AUTO, Align.AUTO, None]
-        out = writer.dumps()
-        print_test_result(expected=expected, actual=out)
-        assert out == expected
-
     def test_normal_style_thousand_separator(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(
