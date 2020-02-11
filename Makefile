@@ -41,7 +41,7 @@ fmt:
 
 .PHONY: readme
 readme:
-	@cd $(DOCS_DIR); python make_readme.py
+	@cd $(DOCS_DIR) && tox -e readme
 
 .PHONY: release
 release:
