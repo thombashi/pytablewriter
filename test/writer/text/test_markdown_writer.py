@@ -1063,7 +1063,7 @@ class Test_MarkdownTableWriter_line_break_handling:
         assert out == expected
 
 
-@pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
+@pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")
 class Test_MarkdownTableWriter_from_dataframe:
     @pytest.mark.parametrize(
         ["add_index_column", "expected"],
@@ -1114,7 +1114,7 @@ class Test_MarkdownTableWriter_from_dataframe:
         assert out == expected
 
 
-@pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
+@pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")
 class Test_MarkdownTableWriter_from_series:
     @pytest.mark.parametrize(
         ["add_index_column", "expected"],

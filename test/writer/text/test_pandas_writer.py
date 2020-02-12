@@ -244,7 +244,7 @@ class Test_PandasDataFrameWriter_write_table_iter:
             writer.write_table_iter()
 
 
-@pytest.mark.skipif("SKIP_DATAFRAME_TEST is True")
+@pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")
 class Test_PandasDataFrameWriter_from_dataframe:
     def test_normal(self):
         import dateutil
