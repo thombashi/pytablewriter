@@ -323,3 +323,14 @@ class Test_PandasDataFrameWriter_from_dataframe:
         print_test_result(expected=expected, actual=out)
 
         assert out == expected
+
+
+@pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")
+class Test_as_dataframe:
+    def test_normal(self):
+        writer = table_writer_class()
+        writer.table_name = "table"
+        writer.headers = ["c", "d"]
+        writer.value_matrix = [["without_mirrors", 4593356]]
+
+        assert str(writer.tabledata.as_dataframe().to_numpy()) == "[['without_mirrors' 4593356]]"
