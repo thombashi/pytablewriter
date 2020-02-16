@@ -1,4 +1,4 @@
-DataProperty>=0.46.3,<2
+DataProperty>=0.46.4,<2
 mbstrdecoder>=0.8.3,<2
 msgfy>=0.0.6,<1
 pathvalidate<3
