@@ -562,7 +562,7 @@ class Test_MarkdownTableWriter_write_table:
         assert out == expected
 
         writer.table_name = "specify alignment for each column manually"
-        writer.styles = [
+        writer.column_styles = [
             Style(align=Align.LEFT),
             Style(align=Align.RIGHT),
             Style(align=Align.CENTER),
@@ -596,7 +596,7 @@ class Test_MarkdownTableWriter_write_table:
             )
         )
 
-        writer.styles = [
+        writer.column_styles = [
             Style(thousand_separator=ThousandSeparator.NONE),
             Style(thousand_separator=ThousandSeparator.COMMA),
             Style(thousand_separator=ThousandSeparator.COMMA),
@@ -619,7 +619,7 @@ class Test_MarkdownTableWriter_write_table:
         writer.table_name = "style test: font size will not be affected"
         writer.headers = ["none", "empty_style", "tiny", "small", "medium", "large"]
         writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
-        writer.styles = [
+        writer.column_styles = [
             None,
             Style(),
             Style(font_size=FontSize.TINY),
@@ -647,7 +647,7 @@ class Test_MarkdownTableWriter_write_table:
         writer.table_name = "style test: bold"
         writer.headers = ["normal", "bold"]
         writer.value_matrix = [[11, 11], [123456, 123456]]
-        writer.styles = [Style(font_weight="normal"), Style(font_weight="bold")]
+        writer.column_styles = [Style(font_weight="normal"), Style(font_weight="bold")]
 
         expected = dedent(
             """\
@@ -666,7 +666,7 @@ class Test_MarkdownTableWriter_write_table:
     def test_normal_style_mix(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.styles = styles
+        writer.column_styles = styles
 
         expected = dedent(
             """\

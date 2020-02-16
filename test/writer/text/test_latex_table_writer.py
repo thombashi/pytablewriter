@@ -99,7 +99,7 @@ class Test_LatexTableWriter_write_table:
     def test_normal_styles(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.styles = styles
+        writer.column_styles = styles
 
         expected = r"""\begin{array}{r | r | r | r | r | r | l | r | r | r} \hline
     \verb|none| & \verb|empty| & \verb|  tiny   | & \verb|  small   | & \verb|     medium     | & \verb|   large   | & \verb|null w/ bold| & \verb|   L bold    | & \verb|  S italic   | & \verb| L bold italic  | \\ \hline

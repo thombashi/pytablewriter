@@ -313,7 +313,7 @@ class Test_RstGridTableWriter_write_table:
     def test_normal_styles(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.styles = styles
+        writer.column_styles = styles
 
         expected = dedent(
             """\

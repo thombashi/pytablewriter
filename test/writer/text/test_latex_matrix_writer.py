@@ -115,7 +115,7 @@ class Test_LatexMatrixWriter_write_table:
     def test_normal_styles(self):
         writer = table_writer_class()
         writer.from_tabledata(style_tabledata)
-        writer.styles = styles
+        writer.column_styles = styles
 
         expected = r"""\begin{equation}
     style test = \left( \begin{array}{rrrrrrlrrr}
@@ -128,7 +128,7 @@ class Test_LatexMatrixWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
-        writer.styles = [
+        writer.column_styles = [
             None,
             Style(align="auto"),
             Style(align="auto", font_size="tiny", thousand_separator=","),

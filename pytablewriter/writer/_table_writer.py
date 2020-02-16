@@ -217,7 +217,7 @@ class AbstractTableWriter(TableWriterInterface):
         return thousand_separator
 
     @property
-    def styles(self):
+    def column_styles(self):
         """Output |Style| for each column.
 
         Returns:
@@ -226,8 +226,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         return self.__col_style_list
 
-    @styles.setter
-    def styles(self, value):
+    @column_styles.setter
+    def column_styles(self, value):
         if self.__col_style_list == value:
             return
 
@@ -244,16 +244,26 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
-    def style_list(self):
-        warnings.warn("'style_list' has moved to 'styles'", DeprecationWarning)
+    def styles(self):
+        # deprecated
+        return self.column_styles
 
-        return self.styles
+    @styles.setter
+    def styles(self, value):
+        # deprecated
+        self.column_styles = value
+
+    @property
+    def style_list(self):
+        warnings.warn("'style_list' has moved to 'column_styles'", DeprecationWarning)
+
+        return self.column_styles
 
     @style_list.setter
     def style_list(self, value):
-        warnings.warn("'style_list' has moved to 'styles'", DeprecationWarning)
+        warnings.warn("'style_list' has moved to 'column_styles'", DeprecationWarning)
 
-        self.styles = value
+        self.column_styles = value
 
     def register_trans_func(self, trans_func):
         self._dp_extractor.register_trans_func(trans_func)
@@ -383,7 +393,7 @@ class AbstractTableWriter(TableWriterInterface):
         writer.table_name = self.table_name
         writer.headers = self.headers
         writer.value_matrix = self.value_matrix
-        writer.styles = self.styles
+        writer.column_styles = self.column_styles
 
         return writer.dumps()
 
@@ -728,7 +738,7 @@ class AbstractTableWriter(TableWriterInterface):
 
     def __get_style(self, col_idx):
         try:
-            return self.styles[col_idx]
+            return self.column_styles[col_idx]
         except (TypeError, IndexError, KeyError):
             return None
 
