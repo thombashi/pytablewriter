@@ -209,7 +209,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.type_hints = value
 
     def __get_thousand_separator(self, col_idx):
-        thousand_separator = self._get_style(col_idx).thousand_separator
+        thousand_separator = self._get_col_style(col_idx).thousand_separator
 
         if thousand_separator is None:
             return ThousandSeparator.NONE
@@ -755,7 +755,7 @@ class AbstractTableWriter(TableWriterInterface):
             styler.apply(col_dp.dp_to_str(value_dp))
         )
 
-    def _get_style(self, col_idx):
+    def _get_col_style(self, col_idx):
         try:
             style = self.column_styles[col_idx]
         except (TypeError, IndexError, KeyError):
@@ -768,7 +768,7 @@ class AbstractTableWriter(TableWriterInterface):
         return self.default_style
 
     def _get_align(self, col_idx, default_align):
-        align = self._get_style(col_idx).align
+        align = self._get_col_style(col_idx).align
 
         if align is None:
             return default_align
@@ -901,7 +901,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._styler_list = []
 
         for col_dp in self._column_dp_list:
-            style = self._get_style(col_dp.column_index)
+            style = self._get_col_style(col_dp.column_index)
             self._styler_list.append(self._create_styler(style, self))
 
         self._is_complete_styler_proprocess = True
