@@ -222,7 +222,7 @@ class Test_CsvTableWriter_write_table:
         writer = table_writer_class()
         writer.headers = ["a", "b", "c", "d", "e"]
         writer.value_matrix = [["a+b", "=a+b", "-a+b", "+a+b", "@a+b"]]
-        writer.escape_formula_injection = True
+        writer.update_preprocessor(is_escape_formula_injection=True)
         writer.write_table()
         expected = r""""a","b","c","d","e"
 "a+b","\"=a+b","\"-a+b","\"+a+b","\"@a+b"
