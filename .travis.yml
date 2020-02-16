@@ -21,6 +21,10 @@ matrix:
       env: TOXENV=py38
 
     - os: linux
+      python: 3.9-dev
+      env: TOXENV=py39
+
+    - os: linux
       python: pypy3
       env: TOXENV=pypy3
 
@@ -34,6 +38,11 @@ matrix:
     - os: osx
       language: generic
       env: TOXENV=py37
+
+  allow_failures:
+    - os: linux
+      python: 3.9-dev
+      env: TOXENV=py39
 
 install:
   - travis_retry bash -x .travis/install.sh
