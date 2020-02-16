@@ -107,7 +107,7 @@ class Style:
         )
         self.__validate_attr("font_weight", FontWeight)
 
-        self.__thousand_separator = self.__normalie_thousand_separator(
+        self.__thousand_separator = self.__normalize_thousand_separator(
             normalize_enum(
                 kwargs.pop("thousand_separator", ThousandSeparator.NONE), ThousandSeparator
             )
@@ -158,7 +158,7 @@ class Style:
             )
 
     @staticmethod
-    def __normalie_thousand_separator(value):
+    def __normalize_thousand_separator(value):
         if isinstance(value, ThousandSeparator):
             return value
 
