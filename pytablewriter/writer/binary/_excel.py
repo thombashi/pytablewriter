@@ -135,7 +135,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter):
         self.close()
         self._open(file_path)
 
-    @abc.abstractproperty
+    @abc.abstractmethod
     def _open(self, workbook_path):  # pragma: no cover
         pass
 
