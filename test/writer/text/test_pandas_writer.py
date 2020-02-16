@@ -8,7 +8,7 @@ from textwrap import dedent
 import pytest
 from typepy import Integer, RealNumber
 
-import pytablewriter
+import pytablewriter as ptw
 
 from ..._common import print_test_result
 from ...data import (
@@ -133,18 +133,18 @@ exception_test_data_list = [
         indent=normal_test_data_list[0].indent,
         header=[],
         value=[],
-        expected=pytablewriter.EmptyTableDataError,
+        expected=ptw.EmptyTableDataError,
     ),
     Data(
         table="",
         indent=normal_test_data_list[0].indent,
         header=normal_test_data_list[0].header,
         value=normal_test_data_list[0].value,
-        expected=pytablewriter.EmptyTableNameError,
+        expected=ptw.EmptyTableNameError,
     ),
 ]
 
-table_writer_class = pytablewriter.PandasDataFrameWriter
+table_writer_class = ptw.PandasDataFrameWriter
 
 
 class Test_PandasDataFrameWriter_write_new_line:
