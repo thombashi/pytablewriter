@@ -462,7 +462,7 @@ Configure table styles
 ------------------------
 Writers can specify cell
 `Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
-for each column manually by ``styles`` attribute of writer classes.
+for each column manually by ``column_styles`` attribute of writer classes.
 
 :Sample Code:
     .. code-block:: python
@@ -472,7 +472,7 @@ for each column manually by ``styles`` attribute of writer classes.
 
         def main():
             writer = MarkdownTableWriter()
-            writer.table_name = "set style by styles"
+            writer.table_name = "set style by column_styles"
             writer.headers = [
                 "auto align",
                 "left align",
@@ -487,7 +487,7 @@ for each column manually by ``styles`` attribute of writer classes.
             ]
 
             # specify styles for each column
-            writer.styles = [
+            writer.column_styles = [
                 Style(),
                 Style(align="left"),
                 Style(align="center"),
@@ -777,8 +777,8 @@ Python 3.5+
 
 Optional dependencies
 ---------------------
-- `logbook <https://logbook.readthedocs.io/en/stable/>`__
-    - Logging using logbook if the package installed
+- `loguru <https://github.com/Delgan/loguru>`__
+    - Used for logging if the package installed
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
 - `simplejson <https://github.com/simplejson/simplejson>`__
 - Elasticsearch:
@@ -797,7 +797,6 @@ Optional dependencies
 Test dependencies
 -----------------
 - `pytest <https://docs.pytest.org/en/latest/>`__
-- `pytest-runner <https://github.com/pytest-dev/pytest-runner>`__
 - `tox <https://testrun.org/tox/latest/>`__
 
 Documentation
