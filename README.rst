@@ -526,7 +526,7 @@ You can also set ``Style`` to a specific column with index or header by using ``
             writer.headers = ["A", "B", "C",]
             writer.value_matrix = [[11, 11, 11], [1234, 1234, 1234]]
 
-            writer.table_name = "set style by index"
+            writer.table_name = "set style by column index"
             writer.set_style(1, Style(align="center", font_weight="bold"))
             writer.set_style(2, Style(thousand_separator=" "))
             writer.write_table()
@@ -542,7 +542,7 @@ You can also set ``Style`` to a specific column with index or header by using ``
 :Output:
     .. code-block::
 
-        # set style by index
+        # set style by column index
         | A  |   B    |  C  |
         |---:|:------:|----:|
         |  11| **11** |   11|
