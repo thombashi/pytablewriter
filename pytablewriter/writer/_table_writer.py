@@ -209,12 +209,30 @@ class AbstractTableWriter(TableWriterInterface):
         self.type_hints = value
 
     def __get_thousand_separator(self, col_idx):
-        thousand_separator = self._get_style_attr_from_style(col_idx, "thousand_separator")
+        thousand_separator = self._get_style(col_idx).thousand_separator
 
         if thousand_separator is None:
             return ThousandSeparator.NONE
 
         return thousand_separator
+
+    @property
+    def default_style(self):
+        """Default |Style| for each cell.
+        """
+
+        return self.__default_style
+
+    @default_style.setter
+    def default_style(self, style):
+        if style is None:
+            style = Style()
+
+        if self.__default_style == style:
+            return
+
+        self.__default_style = style
+        self.__clear_preprocess()
 
     @property
     def column_styles(self):
@@ -382,6 +400,7 @@ class AbstractTableWriter(TableWriterInterface):
             Align.CENTER: "^",
         }
 
+        self.__default_style = Style()
         self.__col_style_list = []
 
         self.__clear_preprocess()
@@ -736,22 +755,20 @@ class AbstractTableWriter(TableWriterInterface):
             styler.apply(col_dp.dp_to_str(value_dp))
         )
 
-    def __get_style(self, col_idx):
+    def _get_style(self, col_idx):
         try:
-            return self.column_styles[col_idx]
+            style = self.column_styles[col_idx]
         except (TypeError, IndexError, KeyError):
-            return None
-
-    def _get_style_attr_from_style(self, col_idx, attr_name):
-        try:
-            return getattr(self.__get_style(col_idx), attr_name)
-        except AttributeError:
             pass
+        else:
+            if style is None:
+                return self.default_style
+            return style
 
-        return None
+        return self.default_style
 
     def _get_align(self, col_idx, default_align):
-        align = self._get_style_attr_from_style(col_idx, "align")
+        align = self._get_style(col_idx).align
 
         if align is None:
             return default_align
@@ -884,11 +901,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._styler_list = []
 
         for col_dp in self._column_dp_list:
-            style = self.__get_style(col_dp.column_index)
-
-            if style is None:
-                style = Style()
-
+            style = self._get_style(col_dp.column_index)
             self._styler_list.append(self._create_styler(style, self))
 
         self._is_complete_styler_proprocess = True

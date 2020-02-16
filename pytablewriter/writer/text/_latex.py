@@ -51,7 +51,7 @@ class LatexWriter(IndentationTextTableWriter):
         col_align_list = []
 
         for col_dp in self._column_dp_list:
-            align = self._get_style_attr_from_style(col_dp.column_index, "align")
+            align = self._get_style(col_dp.column_index).align
             if align is None or align == Align.AUTO:
                 align = col_dp.align
 
