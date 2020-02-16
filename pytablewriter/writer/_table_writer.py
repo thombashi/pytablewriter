@@ -224,19 +224,19 @@ class AbstractTableWriter(TableWriterInterface):
             list of |Style|:
         """
 
-        return self.__style_list
+        return self.__col_style_list
 
     @styles.setter
     def styles(self, value):
-        if self.__style_list == value:
+        if self.__col_style_list == value:
             return
 
-        self.__style_list = value
+        self.__col_style_list = value
 
-        if self.__style_list:
+        if self.__col_style_list:
             self._dp_extractor.format_flags_list = [
                 _ts_to_flag[self.__get_thousand_separator(col_idx)]
-                for col_idx in range(len(self.__style_list))
+                for col_idx in range(len(self.__col_style_list))
             ]
         else:
             self._dp_extractor.format_flags_list = []
@@ -372,7 +372,7 @@ class AbstractTableWriter(TableWriterInterface):
             Align.CENTER: "^",
         }
 
-        self.__style_list = []
+        self.__col_style_list = []
 
         self.__clear_preprocess()
 
@@ -402,8 +402,8 @@ class AbstractTableWriter(TableWriterInterface):
 
         column_idx = None
 
-        while len(self.headers) > len(self.__style_list):
-            self.__style_list.append(None)
+        while len(self.headers) > len(self.__col_style_list):
+            self.__col_style_list.append(None)
 
         if isinstance(column, int):
             column_idx = column
@@ -414,11 +414,11 @@ class AbstractTableWriter(TableWriterInterface):
                 pass
 
         if column_idx is not None:
-            self.__style_list[column_idx] = style
+            self.__col_style_list[column_idx] = style
             self.__clear_preprocess()
             self._dp_extractor.format_flags_list = [
                 _ts_to_flag[self.__get_thousand_separator(col_idx)]
-                for col_idx in range(len(self.__style_list))
+                for col_idx in range(len(self.__col_style_list))
             ]
             return
 
