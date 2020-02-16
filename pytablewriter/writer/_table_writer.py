@@ -208,14 +208,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.type_hints = value
 
-    def __get_thousand_separator(self, col_idx):
-        thousand_separator = self._get_col_style(col_idx).thousand_separator
-
-        if thousand_separator is None:
-            return ThousandSeparator.NONE
-
-        return thousand_separator
-
     @property
     def default_style(self):
         """Default |Style| for each cell.
@@ -253,7 +245,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         if self.__col_style_list:
             self._dp_extractor.format_flags_list = [
-                _ts_to_flag[self.__get_thousand_separator(col_idx)]
+                _ts_to_flag[self._get_col_style(col_idx).thousand_separator]
                 for col_idx in range(len(self.__col_style_list))
             ]
         else:
@@ -446,7 +438,7 @@ class AbstractTableWriter(TableWriterInterface):
             self.__col_style_list[column_idx] = style
             self.__clear_preprocess()
             self._dp_extractor.format_flags_list = [
-                _ts_to_flag[self.__get_thousand_separator(col_idx)]
+                _ts_to_flag[self._get_col_style(col_idx).thousand_separator]
                 for col_idx in range(len(self.__col_style_list))
             ]
             return
