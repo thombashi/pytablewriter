@@ -11,7 +11,7 @@ from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import AbstractBinaryTableWriter
 
 
-class ExcelTableWriter(AbstractBinaryTableWriter):
+class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     """
     An abstract class of a table writer for Excel file format.
     """
