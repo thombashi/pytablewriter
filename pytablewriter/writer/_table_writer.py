@@ -274,7 +274,11 @@ class AbstractTableWriter(TableWriterInterface):
     def update_preprocessor(self, **kwargs):
         # TODO: documentation
         #   is_escape_formula_injection: for CSV/Excel
-        self._dp_extractor.update_preprocessor(**kwargs)
+
+        if not self._dp_extractor.update_preprocessor(**kwargs):
+            return
+
+        self.__clear_preprocess()
 
     @property
     def escape_formula_injection(self):
