@@ -6,6 +6,7 @@
 import abc
 import math
 import re
+import warnings
 
 import msgfy
 import typepy
@@ -116,14 +117,13 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def header_list(self):
-        """
-        alias for :py:attr:`~.headers`.
-        """
+        warnings.warn("'header_list' has moved to 'headers'", DeprecationWarning)
 
         return self.headers
 
     @header_list.setter
     def header_list(self, value):
+        warnings.warn("'header_list' has moved to 'headers'", DeprecationWarning)
         self.headers = value
 
     @property
@@ -198,14 +198,14 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def type_hint_list(self):
-        """
-        alias for :py:attr:`~.type_hints`.
-        """
+        warnings.warn("'type_hint_list' has moved to 'type_hints'", DeprecationWarning)
 
         return self.type_hints
 
     @type_hint_list.setter
     def type_hint_list(self, value):
+        warnings.warn("'type_hint_list' has moved to 'type_hints'", DeprecationWarning)
+
         self.type_hints = value
 
     def __get_thousand_separator(self, col_idx):
@@ -245,14 +245,14 @@ class AbstractTableWriter(TableWriterInterface):
 
     @property
     def style_list(self):
-        """
-        alias for :py:attr:`~.styles`.
-        """
+        warnings.warn("'style_list' has moved to 'styles'", DeprecationWarning)
 
         return self.styles
 
     @style_list.setter
     def style_list(self, value):
+        warnings.warn("'style_list' has moved to 'styles'", DeprecationWarning)
+
         self.styles = value
 
     def register_trans_func(self, trans_func):
