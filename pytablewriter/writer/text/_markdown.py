@@ -109,8 +109,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             )
         )
 
-    def _create_styler(self, style, writer):
-        return MarkdownStyler(style, writer)
+    def _create_styler(self, writer):
+        return MarkdownStyler(writer)
 
     @staticmethod
     def __escape_vertical_bar_char(value):

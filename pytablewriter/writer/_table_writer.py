@@ -412,6 +412,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.__default_style = Style()
         self.__col_style_list = []
+        self._styler = self._create_styler(self)
 
         self.__clear_preprocess()
 
@@ -759,10 +760,10 @@ class AbstractTableWriter(TableWriterInterface):
         return "{:s}"
 
     def _to_row_item(self, col_dp, value_dp):
-        styler = self._styler_list[col_dp.column_index]
-
         return self.__get_align_format(col_dp, value_dp).format(
-            styler.apply(col_dp.dp_to_str(value_dp))
+            self._styler.apply(
+                col_dp.dp_to_str(value_dp), style=self._get_col_style(col_dp.column_index)
+            )
         )
 
     def _get_col_style(self, col_idx):
@@ -875,8 +876,8 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-    def _create_styler(self, style, writer):
-        return NullStyler(style, writer)
+    def _create_styler(self, writer):
+        return NullStyler(writer)
 
     def _preprocess_table_dp(self):
         if self._is_complete_table_dp_preprocess:
@@ -904,18 +905,6 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_dp_preprocess = True
 
-    def _preprocess_styler(self):
-        if self._is_complete_styler_proprocess:
-            return
-
-        self._styler_list = []
-
-        for col_dp in self._column_dp_list:
-            style = self._get_col_style(col_dp.column_index)
-            self._styler_list.append(self._create_styler(style, self))
-
-        self._is_complete_styler_proprocess = True
-
     def _preprocess_table_property(self):
         if self._is_complete_table_property_preprocess:
             return
@@ -927,11 +916,8 @@ class AbstractTableWriter(TableWriterInterface):
                 column_dp.extend_width(int(math.ceil(column_dp.ascii_char_width * 0.25)))
 
         for column_dp in self._column_dp_list:
-            try:
-                styler = self._styler_list[column_dp.column_index]
-                column_dp.extend_body_width(styler.additional_char_width)
-            except IndexError:
-                pass
+            style = self._get_col_style(column_dp.column_index)
+            column_dp.extend_body_width(self._styler.get_additional_char_width(style))
 
         self._is_complete_table_property_preprocess = True
 
@@ -970,7 +956,6 @@ class AbstractTableWriter(TableWriterInterface):
 
     def _preprocess(self):
         self._preprocess_table_dp()
-        self._preprocess_styler()
         self._preprocess_table_property()
         self._preprocess_header()
         self._preprocess_value_matrix()
@@ -980,7 +965,6 @@ class AbstractTableWriter(TableWriterInterface):
             if any(
                 [
                     self._is_complete_table_dp_preprocess,
-                    self._is_complete_styler_proprocess,
                     self._is_complete_table_property_preprocess,
                     self._is_complete_header_preprocess,
                     self._is_complete_value_matrix_preprocess,
@@ -991,7 +975,6 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         self._is_complete_table_dp_preprocess = False
-        self._is_complete_styler_proprocess = False
         self._is_complete_table_property_preprocess = False
         self._is_complete_header_preprocess = False
         self._is_complete_value_matrix_preprocess = False
@@ -1001,7 +984,6 @@ class AbstractTableWriter(TableWriterInterface):
             if any(
                 [
                     self._column_dp_list,
-                    self._styler_list,
                     self._table_headers,
                     self._table_value_matrix,
                     self._table_value_dp_matrix,
@@ -1012,7 +994,6 @@ class AbstractTableWriter(TableWriterInterface):
             pass
 
         self._column_dp_list = []
-        self._styler_list = []
         self._table_headers = []
         self._table_value_matrix = []
         self._table_value_dp_matrix = []

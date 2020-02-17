@@ -106,11 +106,11 @@ class HtmlTableWriter(TextTableWriter):
 
         for values, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
             tr_tag = tags.tr()
-            for value, value_dp, styler in zip(values, value_dp_list, self._styler_list):
+            for value, value_dp, column_dp in zip(values, value_dp_list, self._column_dp_list):
                 td_tag = tags.td(raw(MultiByteStrDecoder(value).unicode_str))
                 td_tag["align"] = value_dp.align.align_string
 
-                style_tag = self.__make_style_tag(styler)
+                style_tag = self.__make_style_tag(style=self._get_col_style(column_dp.column_index))
                 if style_tag:
                     td_tag["style"] = style_tag
 
@@ -120,15 +120,14 @@ class HtmlTableWriter(TextTableWriter):
         self._table_tag += tbody_tag
         self._write_line(self._table_tag.render(indent=self.indent_string))
 
-    @staticmethod
-    def __make_style_tag(styler):
+    def __make_style_tag(self, style):
         styles = []
 
-        if styler.font_size:
-            styles.append(styler.font_size)
-        if styler._style.font_weight == FontWeight.BOLD:
+        if self._styler.get_font_size(style):
+            styles.append(self._styler.get_font_size(style))
+        if style.font_weight == FontWeight.BOLD:
             styles.append("font-weight:bold")
-        if styler._style.font_style == FontStyle.ITALIC:
+        if style.font_style == FontStyle.ITALIC:
             styles.append("font-style:italic")
 
         if not styles:
@@ -136,5 +135,5 @@ class HtmlTableWriter(TextTableWriter):
 
         return "; ".join(styles)
 
-    def _create_styler(self, style, writer):
-        return HtmlStyler(style, writer)
+    def _create_styler(self, writer):
+        return HtmlStyler(writer)

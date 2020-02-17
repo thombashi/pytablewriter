@@ -58,8 +58,8 @@ class RstTableWriter(IndentationTextTableWriter):
         super()._write_table()
         self.dec_indent_level()
 
-    def _create_styler(self, style, writer):
-        return ReStructuredTextStyler(style, writer)
+    def _create_styler(self, writer):
+        return ReStructuredTextStyler(writer)
 
 
 class RstCsvTableWriter(RstTableWriter):

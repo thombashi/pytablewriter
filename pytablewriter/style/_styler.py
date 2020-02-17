@@ -1,4 +1,5 @@
 import abc
+from typing import Any, Optional, cast
 
 from ._font import FontSize, FontStyle, FontWeight
 from ._style import Style, ThousandSeparator
@@ -6,51 +7,44 @@ from ._style import Style, ThousandSeparator
 
 class StylerInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
-    def apply(self, value):  # pragma: no cover
+    def apply(self, value: Any, style: Style) -> str:  # pragma: no cover
         raise NotImplementedError()
 
-    @abc.abstractproperty
-    def font_size(self):  # pragma: no cover
+    @abc.abstractmethod
+    def get_font_size(self, style: Style) -> Optional[str]:  # pragma: no cover
         raise NotImplementedError()
 
-    @abc.abstractproperty
-    def additional_char_width(self):  # pragma: no cover
+    @abc.abstractmethod
+    def get_additional_char_width(self, style: Style) -> int:  # pragma: no cover
         raise NotImplementedError()
 
 
 class AbstractStyler(StylerInterface):
-    def _get_font_size_map(self):
-        return {}
-
-    @property
-    def font_size(self):
-        return self._font_size_map.get(self._style.font_size)
-
-    @property
-    def additional_char_width(self):
-        return 0
-
-    def __init__(self, style, writer):
-        if not isinstance(style, Style):
-            raise TypeError("style must be a Style instance")
-
-        self._style = style
+    def __init__(self, writer):
         self._writer = writer
         self._font_size_map = self._get_font_size_map()
 
-    def apply(self, value):
+    def get_font_size(self, style: Style) -> Optional[str]:
+        return self._font_size_map.get(style.font_size)
+
+    def get_additional_char_width(self, style: Style) -> int:
+        return 0
+
+    def apply(self, value: Any, style: Style) -> str:
         return value
+
+    def _get_font_size_map(self):
+        return {}
 
 
 class NullStyler(AbstractStyler):
-    @property
-    def font_size(self):
-        return self._style.font_size
+    def get_font_size(self, style: Style) -> Optional[str]:
+        return style.font_size
 
 
 class TextStyler(AbstractStyler):
-    def apply(self, value):
-        if value and self._style.thousand_separator == ThousandSeparator.SPACE:
+    def apply(self, value: Any, style: Style) -> str:
+        if value and style.thousand_separator == ThousandSeparator.SPACE:
             value = value.replace(",", " ")
 
         return value
@@ -71,36 +65,35 @@ class LatexStyler(TextStyler):
         BOLD = r"\bf"
         ITALIC = r"\it"
 
-    @property
-    def additional_char_width(self):
+    def get_additional_char_width(self, style: Style) -> int:
         width = 0
 
-        if self.font_size:
-            width += len(self.font_size)
+        if self.get_font_size(style):
+            width += len(cast(str, self.get_font_size(style)))
 
-        if self._style.font_weight == FontWeight.BOLD:
+        if style.font_weight == FontWeight.BOLD:
             width += len(self.Command.BOLD)
 
-        if self._style.font_style == FontStyle.ITALIC:
+        if style.font_style == FontStyle.ITALIC:
             width += len(self.Command.ITALIC)
 
         return width
 
-    def apply(self, value):
-        value = super().apply(value)
+    def apply(self, value: Any, style: Style) -> str:
+        value = super().apply(value, style)
         if not value:
             return value
 
-        font_size = self.font_size
+        font_size = self.get_font_size(style)
         item_list = []
 
         if font_size:
             item_list.append(font_size)
 
-        if self._style.font_weight == FontWeight.BOLD:
+        if style.font_weight == FontWeight.BOLD:
             item_list.append(self.Command.BOLD)
 
-        if self._style.font_style == FontStyle.ITALIC:
+        if style.font_style == FontStyle.ITALIC:
             item_list.append(self.Command.ITALIC)
 
         item_list.append(value)
@@ -116,68 +109,66 @@ class LatexStyler(TextStyler):
 
 
 class MarkdownStyler(TextStyler):
-    @property
-    def additional_char_width(self):
+    def get_additional_char_width(self, style: Style) -> int:
         width = 0
 
-        if self._style.font_weight == FontWeight.BOLD:
+        if style.font_weight == FontWeight.BOLD:
             width += 4
 
-        if self._style.font_style == FontStyle.ITALIC:
+        if style.font_style == FontStyle.ITALIC:
             width += 2
 
         return width
 
-    def apply(self, value):
-        value = super().apply(value)
+    def apply(self, value: Any, style: Style) -> str:
+        value = super().apply(value, style)
         if not value:
             return value
 
-        if self._style.font_weight == FontWeight.BOLD:
+        if style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
 
-        if self._style.font_style == FontStyle.ITALIC:
+        if style.font_style == FontStyle.ITALIC:
             value = "_{}_".format(value)
 
         return value
 
 
 class ReStructuredTextStyler(TextStyler):
-    @property
-    def additional_char_width(self):
+    def get_additional_char_width(self, style: Style) -> int:
         from ..writer import RstCsvTableWriter
 
         width = 0
 
-        if self._style.font_weight == FontWeight.BOLD:
+        if style.font_weight == FontWeight.BOLD:
             width += 4
-        elif self._style.font_style == FontStyle.ITALIC:
+        elif style.font_style == FontStyle.ITALIC:
             width += 2
 
         if (
-            self._style.thousand_separator == ThousandSeparator.COMMA
+            style.thousand_separator == ThousandSeparator.COMMA
             and self._writer.format_name == RstCsvTableWriter.FORMAT_NAME
         ):
             width += 2
 
         return width
 
-    def apply(self, value):
+    def apply(self, value: Any, style: Style) -> str:
         from ..writer import RstCsvTableWriter
 
-        value = super().apply(value)
+        value = super().apply(value, style)
         if not value:
             return value
 
-        if self._style.font_weight == FontWeight.BOLD:
+        if style.font_weight == FontWeight.BOLD:
             value = "**{}**".format(value)
-        elif self._style.font_style == FontStyle.ITALIC:
+        elif style.font_style == FontStyle.ITALIC:
             # in reStructuredText, some custom style definition will be required to
             # set for both bold and italic (currently not supported)
             value = "*{}*".format(value)
 
         if (
-            self._style.thousand_separator == ThousandSeparator.COMMA
+            style.thousand_separator == ThousandSeparator.COMMA
             and self._writer.format_name == RstCsvTableWriter.FORMAT_NAME
         ):
             value = '"{}"'.format(value)

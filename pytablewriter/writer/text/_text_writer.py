@@ -214,8 +214,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         return tabular_text
 
-    def _create_styler(self, style, writer):
-        return TextStyler(style, writer)
+    def _create_styler(self, writer):
+        return TextStyler(writer)
 
     def _write_table_iter(self):
         super()._write_table_iter()
