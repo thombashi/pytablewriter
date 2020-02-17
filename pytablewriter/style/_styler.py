@@ -19,8 +19,7 @@ class StylerInterface(metaclass=abc.ABCMeta):
 
 
 class AbstractStyler(StylerInterface):
-    @property
-    def _font_size_map(self):
+    def _get_font_size_map(self):
         return {}
 
     @property
@@ -37,6 +36,7 @@ class AbstractStyler(StylerInterface):
 
         self._style = style
         self._writer = writer
+        self._font_size_map = self._get_font_size_map()
 
     def apply(self, value):
         return value
@@ -57,8 +57,7 @@ class TextStyler(AbstractStyler):
 
 
 class HtmlStyler(TextStyler):
-    @property
-    def _font_size_map(self):
+    def _get_font_size_map(self):
         return {
             FontSize.TINY: "font-size:x-small",
             FontSize.SMALL: "font-size:small",
@@ -71,15 +70,6 @@ class LatexStyler(TextStyler):
     class Command:
         BOLD = r"\bf"
         ITALIC = r"\it"
-
-    @property
-    def _font_size_map(self):
-        return {
-            FontSize.TINY: r"\tiny",
-            FontSize.SMALL: r"\small",
-            FontSize.MEDIUM: r"\normalsize",
-            FontSize.LARGE: r"\large",
-        }
 
     @property
     def additional_char_width(self):
@@ -115,6 +105,14 @@ class LatexStyler(TextStyler):
 
         item_list.append(value)
         return " ".join(item_list)
+
+    def _get_font_size_map(self):
+        return {
+            FontSize.TINY: r"\tiny",
+            FontSize.SMALL: r"\small",
+            FontSize.MEDIUM: r"\normalsize",
+            FontSize.LARGE: r"\large",
+        }
 
 
 class MarkdownStyler(TextStyler):
