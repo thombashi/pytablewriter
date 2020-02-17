@@ -285,6 +285,11 @@ class AbstractTableWriter(TableWriterInterface):
 
     @value_preprocessor.setter
     def value_preprocessor(self, value):
+        warnings.warn(
+            "this setter will be deleted in the future. use update_preprocessor instead",
+            DeprecationWarning,
+        )
+
         if self._dp_extractor.preprocessor == value:
             return
 
