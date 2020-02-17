@@ -40,7 +40,7 @@ class MediaWikiTableWriter(TextTableWriter):
         self.is_write_opening_row = True
         self.is_write_closing_row = True
 
-        self.value_preprocessor.line_break_handling = LineBreakHandling.NOP
+        self.update_preprocessor(line_break_handling=LineBreakHandling.NOP)
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 

@@ -3,7 +3,7 @@
 """
 
 
-from dataproperty import LineBreakHandling, Preprocessor
+from dataproperty import LineBreakHandling
 from typepy import (
     Bool,
     DateTime,

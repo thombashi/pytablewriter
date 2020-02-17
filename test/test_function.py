@@ -3,7 +3,7 @@ from textwrap import dedent
 import pytest
 from tabledata import TableData
 
-from pytablewriter import LineBreakHandling, Preprocessor, dumps_tabledata
+from pytablewriter import dumps_tabledata
 
 from ._common import print_test_result
 
@@ -61,22 +61,6 @@ class Test_dump_tabledata:
                         |Amanda Johnson |3608 Samuel Mews Apt. 337 Housebury, WA 13608|
                         +---------------+---------------------------------------------+
                     """
-                ),
-            ],
-            [
-                test_tabledata,
-                {"value_preprocessor": Preprocessor(line_break_handling=LineBreakHandling.ESCAPE)},
-                dedent(
-                    r""".. table:: fake name and address
-
-    +---------------+----------------------------------------------+
-    |     name      |                   address                    |
-    +===============+==============================================+
-    |vRyan Gallagher|6317 Mary Light\nSmithview, HI 13900          |
-    +---------------+----------------------------------------------+
-    |Amanda Johnson |3608 Samuel Mews Apt. 337\nHousebury, WA 13608|
-    +---------------+----------------------------------------------+
-"""
                 ),
             ],
         ],
