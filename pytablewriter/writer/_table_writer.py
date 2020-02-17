@@ -146,7 +146,9 @@ class AbstractTableWriter(TableWriterInterface):
         :rtype: tabledata.TableData
         """
 
-        return TableData(self.table_name, self.headers, self.value_matrix)
+        return TableData(
+            self.table_name, self.headers, self.value_matrix, max_workers=self.max_workers
+        )
 
     @property
     def type_hints(self):
@@ -338,6 +340,14 @@ class AbstractTableWriter(TableWriterInterface):
     def _quoting_flags(self, value):
         self._dp_extractor.quoting_flags = value
         self.__clear_preprocess()
+
+    @property
+    def max_workers(self) -> int:
+        return self._dp_extractor.max_workers
+
+    @max_workers.setter
+    def max_workers(self, value: int):
+        self._dp_extractor.max_workers = value
 
     @abc.abstractmethod
     def _write_table(self):

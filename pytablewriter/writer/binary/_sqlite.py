@@ -103,6 +103,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
                 for value_dp_list in self._table_value_dp_matrix
             ],
             type_hints=self.type_hints,
+            max_workers=self.max_workers,
         )
         self.stream.create_table_from_tabledata(table_data)
 
