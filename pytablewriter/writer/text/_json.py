@@ -14,7 +14,7 @@ from ._text_writer import IndentationTextTableWriter
 try:
     import simplejson as json
 except ImportError:
-    import json
+    import json  # type: ignore
 
 
 class JsonTableWriter(IndentationTextTableWriter):

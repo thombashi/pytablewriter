@@ -4,7 +4,7 @@ from ._json import JsonTableWriter
 try:
     import simplejson as json
 except ImportError:
-    import json
+    import json  # type: ignore
 
 
 class JsonLinesTableWriter(JsonTableWriter):
