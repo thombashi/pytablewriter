@@ -220,6 +220,9 @@ class AbstractTableWriter(TableWriterInterface):
         if style is None:
             style = Style()
 
+        if not isinstance(style, Style):
+            raise TypeError("default_style must be a Style instance")
+
         if self.__default_style == style:
             return
 
