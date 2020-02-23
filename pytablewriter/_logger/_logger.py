@@ -69,7 +69,7 @@ class WriterLogger:
         self.logging_complete_write()
         return False
 
-    def logging_start_write(self, extra_message_list=None):
+    def logging_start_write(self):
         log_entry_list = [
             self.__get_format_name_message(),
             self.__get_table_name_message(),
