@@ -39,7 +39,7 @@ class AbstractStyler(StylerInterface):
 
 class NullStyler(AbstractStyler):
     def get_font_size(self, style: Style) -> Optional[str]:
-        return style.font_size
+        return ""
 
 
 class TextStyler(AbstractStyler):
