@@ -1,4 +1,5 @@
 from enum import Enum, unique
+from typing import Union, cast
 
 from dataproperty import Align
 
@@ -73,26 +74,26 @@ class Style:
     """
 
     @property
-    def align(self):
+    def align(self) -> Align:
         return self.__align
 
     @property
-    def font_size(self):
+    def font_size(self) -> FontSize:
         return self.__font_size
 
     @property
-    def font_style(self):
+    def font_style(self) -> FontStyle:
         return self.__font_style
 
     @property
-    def font_weight(self):
+    def font_weight(self) -> FontWeight:
         return self.__font_weight
 
     @property
-    def thousand_separator(self):
+    def thousand_separator(self) -> ThousandSeparator:
         return self.__thousand_separator
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         self.__align = normalize_enum(kwargs.pop("align", Align.AUTO), Align)
         self.__validate_attr("align", Align)
 
@@ -114,7 +115,7 @@ class Style:
         )
         self.__validate_attr("thousand_separator", ThousandSeparator)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         items = []
 
         if self.align:
@@ -148,7 +149,7 @@ class Style:
         equal = self.__eq__(other)
         return NotImplemented if equal is NotImplemented else not equal
 
-    def __validate_attr(self, attr_name, expected_type):
+    def __validate_attr(self, attr_name: str, expected_type) -> None:
         value = getattr(self, attr_name)
         if value is not None and not isinstance(value, expected_type):
             raise TypeError(
@@ -158,12 +159,12 @@ class Style:
             )
 
     @staticmethod
-    def __normalize_thousand_separator(value):
+    def __normalize_thousand_separator(value: Union[str, ThousandSeparator]) -> ThousandSeparator:
         if isinstance(value, ThousandSeparator):
             return value
 
         norm_value = _s_to_ts.get(value)
         if norm_value is None:
-            return value
+            return cast(ThousandSeparator, value)
 
         return norm_value

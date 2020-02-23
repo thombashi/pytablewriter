@@ -2,8 +2,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import enum
+from typing import Any, List
 
 from .writer import (
     CsvTableWriter,
@@ -68,7 +68,12 @@ class TableFormat(enum.Enum):
     """
 
     CSV = ([CsvTableWriter.FORMAT_NAME], CsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
-    ELASTICSEARCH = ([ElasticsearchWriter.FORMAT_NAME], ElasticsearchWriter, FormatAttr.API, [])
+    ELASTICSEARCH = (
+        [ElasticsearchWriter.FORMAT_NAME],  # type: ignore
+        ElasticsearchWriter,
+        FormatAttr.API,
+        [],
+    )
     EXCEL_XLS = (
         [ExcelXlsTableWriter.FORMAT_NAME],
         ExcelXlsTableWriter,
@@ -130,12 +135,17 @@ class TableFormat(enum.Enum):
         ["md"],
     )
     MEDIAWIKI = (
-        [MediaWikiTableWriter.FORMAT_NAME],
+        [MediaWikiTableWriter.FORMAT_NAME],  # type: ignore
         MediaWikiTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
     )
-    NULL = ([NullTableWriter.FORMAT_NAME], NullTableWriter, FormatAttr.NONE, [])
+    NULL = (
+        [NullTableWriter.FORMAT_NAME],  # type: ignore
+        NullTableWriter,
+        FormatAttr.NONE,
+        [],
+    )
     NUMPY = (
         [NumpyTableWriter.FORMAT_NAME],
         NumpyTableWriter,
@@ -173,7 +183,7 @@ class TableFormat(enum.Enum):
         ["rst"],
     )
     SPACE_ALIGNED = (
-        [SpaceAlignedTableWriter.FORMAT_NAME],
+        [SpaceAlignedTableWriter.FORMAT_NAME],  # type: ignore
         SpaceAlignedTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
@@ -192,14 +202,14 @@ class TableFormat(enum.Enum):
     )
     TSV = ([TsvTableWriter.FORMAT_NAME], TsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["tsv"])
     UNICODE = (
-        [UnicodeTableWriter.FORMAT_NAME],
+        [UnicodeTableWriter.FORMAT_NAME],  # type: ignore
         UnicodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
     )
 
     @property
-    def names(self):
+    def names(self) -> List[str]:
         """
         :return: Names associated with the table format.
         :rtype: list
@@ -208,7 +218,7 @@ class TableFormat(enum.Enum):
         return self.__names
 
     @property
-    def writer_class(self):
+    def writer_class(self) -> Any:
         """
         :return: Table writer class associated with the table format.
         :rtype:
@@ -218,7 +228,7 @@ class TableFormat(enum.Enum):
         return self.__writer_class
 
     @property
-    def format_attribute(self):
+    def format_attribute(self) -> int:
         """
         :return: Table attributes bitmap.
         :rtype: :py:class:`pytablewriter.FormatAttr`
@@ -227,7 +237,7 @@ class TableFormat(enum.Enum):
         return self.__format_attribute
 
     @property
-    def file_extensions(self):
+    def file_extensions(self) -> List[str]:
         """
         :return: File extensions associated with the table format.
         :rtype: list
@@ -242,7 +252,7 @@ class TableFormat(enum.Enum):
         self.__file_extensions = file_extensions
 
     @classmethod
-    def find_all_attr(cls, format_attribute):
+    def find_all_attr(cls, format_attribute: int) -> List:
         """
         Searching table formats which have specific attributes.
 

@@ -2,13 +2,14 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import os
+from typing import List
 
 import typepy
 
 from ._table_format import FormatAttr, TableFormat
 from .error import WriterNotFoundError
+from .writer._table_writer import AbstractTableWriter
 
 
 class TableWriterFactory:
@@ -17,7 +18,7 @@ class TableWriterFactory:
     """
 
     @classmethod
-    def create_from_file_extension(cls, file_extension):
+    def create_from_file_extension(cls, file_extension: str) -> AbstractTableWriter:
         """
         Create a table writer class instance from a file extension.
         Supported file extensions are as follows:
@@ -84,7 +85,7 @@ class TableWriterFactory:
         )
 
     @classmethod
-    def create_from_format_name(cls, format_name):
+    def create_from_format_name(cls, format_name: str) -> AbstractTableWriter:
         """
         Create a table writer class instance from a format name.
         Supported file format names are as follows:
@@ -143,7 +144,7 @@ class TableWriterFactory:
         )
 
     @classmethod
-    def get_format_names(cls):
+    def get_format_names(cls) -> List[str]:
         """
         :return: Available format names.
         :rtype: list
@@ -201,7 +202,7 @@ class TableWriterFactory:
         return sorted(list(format_name_set))
 
     @classmethod
-    def get_extensions(cls):
+    def get_extensions(cls) -> List[str]:
         """
         :return: Available file extensions.
         :rtype: list

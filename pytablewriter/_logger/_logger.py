@@ -2,6 +2,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
+from typing import List
 
 import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
@@ -19,7 +20,7 @@ except ImportError:
     logger = NullLogger()  # type: ignore
 
 
-def set_logger(is_enable, propagation_depth=1):
+def set_logger(is_enable: bool, propagation_depth: int = 1) -> None:
     if is_enable:
         logger.enable(MODULE_NAME)
     else:
@@ -55,7 +56,7 @@ class WriterLogger:
     def logger(self):
         return self.__logger
 
-    def __init__(self, writer):
+    def __init__(self, writer) -> None:
         self.__writer = writer
         self.__logger = logger
 
@@ -69,7 +70,7 @@ class WriterLogger:
         self.logging_complete_write()
         return False
 
-    def logging_start_write(self):
+    def logging_start_write(self) -> None:
         log_entry_list = [
             self.__get_format_name_message(),
             self.__get_table_name_message(),
@@ -86,16 +87,16 @@ class WriterLogger:
 
         self.logger.debug("start write table: {}".format(", ".join(log_entry_list)))
 
-    def logging_complete_write(self):
+    def logging_complete_write(self) -> None:
         log_entry_list = [self.__get_format_name_message(), self.__get_table_name_message()]
         log_entry_list.extend(self.__get_extra_log_entry_list())
 
         self.logger.debug("complete write table: {}".format(", ".join(log_entry_list)))
 
-    def __get_format_name_message(self):
+    def __get_format_name_message(self) -> str:
         return "format={:s}".format(self.__writer.format_name)
 
-    def __get_table_name_message(self):
+    def __get_table_name_message(self) -> str:
         if self.__writer.table_name:
             table_name = MultiByteStrDecoder(self.__writer.table_name).unicode_str
         else:
@@ -103,13 +104,13 @@ class WriterLogger:
 
         return "table-name='{}'".format(table_name)
 
-    def __get_extra_log_entry_list(self):
+    def __get_extra_log_entry_list(self) -> List[str]:
         if self.__writer._iter_count is None:
             return []
 
         return ["iteration={}/{}".format(self.__writer._iter_count, self.__writer.iteration_length)]
 
-    def __get_typehint_message(self):
+    def __get_typehint_message(self) -> str:
         try:
             return "type-hints={}".format(
                 [type_hint(None).typename for type_hint in self.__writer.type_hints]

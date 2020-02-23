@@ -12,7 +12,7 @@ from typepy import is_null_string
 from ._interface import NameSanitizer
 
 
-def _preprocess(name):
+def _preprocess(name: str) -> str:
     return name.strip()
 
 
@@ -25,10 +25,10 @@ class VarNameSanitizer(NameSanitizer):
     def _invalid_var_name_re(self):  # pragma: no cover
         pass
 
-    def validate(self):
+    def validate(self) -> None:
         self._validate(self._value)
 
-    def sanitize(self, replacement_text=""):
+    def sanitize(self, replacement_text: str = "") -> str:
         sanitized_var_name = self._invalid_var_name_re.sub(replacement_text, self._str)
 
         # delete invalid char(s) in the beginning of the variable name
@@ -59,7 +59,7 @@ class VarNameSanitizer(NameSanitizer):
 
         return sanitized_var_name
 
-    def _validate(self, value):
+    def _validate(self, value: str) -> None:
         self._validate_null_string(value)
 
         unicode_var_name = _preprocess(value)

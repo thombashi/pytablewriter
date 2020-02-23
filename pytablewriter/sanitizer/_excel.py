@@ -2,7 +2,6 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import re
 
 from pathvalidate import InvalidCharError, InvalidLengthError, validate_null_string
@@ -19,7 +18,7 @@ __RE_INVALID_EXCEL_SHEET_NAME = re.compile(
 )
 
 
-def validate_excel_sheet_name(sheet_name):
+def validate_excel_sheet_name(sheet_name: str) -> None:
     """
     :param str sheet_name: Excel sheet name to validate.
     :raises pathvalidate.InvalidCharError:
@@ -46,7 +45,7 @@ def validate_excel_sheet_name(sheet_name):
         )
 
 
-def sanitize_excel_sheet_name(sheet_name, replacement_text=""):
+def sanitize_excel_sheet_name(sheet_name: str, replacement_text: str = "") -> str:
     """
     Replace invalid characters for an Excel sheet name within
     the ``sheet_name`` with the ``replacement_text``.

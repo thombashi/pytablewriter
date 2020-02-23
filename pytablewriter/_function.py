@@ -2,8 +2,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import dataproperty
+from tabledata._core import TableData
 
 
 def quote_datetime_formatter(value):
@@ -16,7 +16,7 @@ def dateutil_datetime_formatter(value):
     )
 
 
-def dumps_tabledata(value, format_name="rst_grid_table", **kwargs):
+def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwargs) -> str:
     """
     :param tabledata.TableData value: Tabular data to dump.
     :param str format_name:

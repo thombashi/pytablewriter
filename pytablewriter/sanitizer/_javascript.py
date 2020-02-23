@@ -2,8 +2,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import re
+from typing import List, Pattern
 
 from ._base import VarNameSanitizer
 
@@ -78,7 +78,7 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
     __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z$]+")
 
     @property
-    def reserved_keywords(self):
+    def reserved_keywords(self) -> List:
         return (
             self.__JS_RESERVED_KEYWORDS_ES6
             + self.__JS_RESERVED_KEYWORDS_FUTURE
@@ -86,15 +86,15 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
         )
 
     @property
-    def _invalid_var_name_head_re(self):
+    def _invalid_var_name_head_re(self) -> Pattern:
         return self.__RE_INVALID_VAR_NAME_HEAD
 
     @property
-    def _invalid_var_name_re(self):
+    def _invalid_var_name_re(self) -> Pattern:
         return self.__RE_INVALID_VAR_NAME
 
 
-def validate_js_var_name(var_name):
+def validate_js_var_name(var_name: str) -> None:
     """
     :param str var_name: Name to validate.
     :raises pathvalidate.InvalidCharError:
@@ -112,7 +112,7 @@ def validate_js_var_name(var_name):
     JavaScriptVarNameSanitizer(var_name).validate()
 
 
-def sanitize_js_var_name(var_name, replacement_text=""):
+def sanitize_js_var_name(var_name: str, replacement_text: str = "") -> str:
     """
     Make a valid JavaScript variable name from ``var_name``.
 
