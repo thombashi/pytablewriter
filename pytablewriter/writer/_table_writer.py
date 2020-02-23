@@ -7,10 +7,19 @@ import abc
 import math
 import re
 import warnings
+from typing import Callable, Dict, List, Optional, Union, cast  # noqa
 
 import msgfy
 import typepy
-from dataproperty import DataPropertyExtractor, Format, MatrixFormatting, Preprocessor
+from dataproperty import (
+    Align,
+    ColumnDataProperty,
+    DataProperty,
+    DataPropertyExtractor,
+    Format,
+    MatrixFormatting,
+    Preprocessor,
+)
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode
 
@@ -22,7 +31,7 @@ from ..error import (
     EmptyValueError,
     NotSupportedError,
 )
-from ..style import Align, NullStyler, Style, ThousandSeparator
+from ..style import Align, NullStyler, Style, StylerInterface, ThousandSeparator  # noqa
 from ._interface import TableWriterInterface
 
 
@@ -80,11 +89,11 @@ class AbstractTableWriter(TableWriterInterface):
     """
 
     @property
-    def is_formatting_float(self):
+    def is_formatting_float(self) -> bool:
         return self._dp_extractor.is_formatting_float
 
     @is_formatting_float.setter
-    def is_formatting_float(self, value):
+    def is_formatting_float(self, value: bool) -> None:
         if self._dp_extractor.is_formatting_float == value:
             return
 
@@ -92,7 +101,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.__clear_preprocess()
 
     @property
-    def table_name(self):
+    def table_name(self) -> str:
         """
         Name of the table.
         """
@@ -100,11 +109,11 @@ class AbstractTableWriter(TableWriterInterface):
         return self._table_name
 
     @table_name.setter
-    def table_name(self, value):
+    def table_name(self, value) -> None:
         self._table_name = value
 
     @property
-    def headers(self):
+    def headers(self) -> List[str]:
         """
         List of table header to write.
         """
@@ -112,7 +121,7 @@ class AbstractTableWriter(TableWriterInterface):
         return self._dp_extractor.headers
 
     @headers.setter
-    def headers(self, value):
+    def headers(self, value: List[str]) -> None:
         self._dp_extractor.headers = value
 
     @property
@@ -127,7 +136,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.headers = value
 
     @property
-    def value_matrix(self):
+    def value_matrix(self) -> List:
         """
         Tabular data to write.
         """
@@ -135,12 +144,12 @@ class AbstractTableWriter(TableWriterInterface):
         return self.__value_matrix_org
 
     @value_matrix.setter
-    def value_matrix(self, value_matrix):
+    def value_matrix(self, value_matrix) -> None:
         self.__set_value_matrix(value_matrix)
         self.__clear_preprocess()
 
     @property
-    def tabledata(self):
+    def tabledata(self) -> TableData:
         """
         :return: Table data.
         :rtype: tabledata.TableData
@@ -151,7 +160,7 @@ class AbstractTableWriter(TableWriterInterface):
         )
 
     @property
-    def type_hints(self):
+    def type_hints(self) -> List:
         """
         Type hints for each column of the tabular data.
         Writers convert data for each column using the type hints information
@@ -191,7 +200,7 @@ class AbstractTableWriter(TableWriterInterface):
         return self._dp_extractor.column_type_hints
 
     @type_hints.setter
-    def type_hints(self, value):
+    def type_hints(self, value: List) -> None:
         if self.type_hints == value:
             return
 
@@ -209,54 +218,6 @@ class AbstractTableWriter(TableWriterInterface):
         warnings.warn("'type_hint_list' has moved to 'type_hints'", DeprecationWarning)
 
         self.type_hints = value
-
-    @property
-    def default_style(self):
-        """Default |Style| for each cell.
-        """
-
-        return self.__default_style
-
-    @default_style.setter
-    def default_style(self, style):
-        if style is None:
-            style = Style()
-
-        if not isinstance(style, Style):
-            raise TypeError("default_style must be a Style instance")
-
-        if self.__default_style == style:
-            return
-
-        self.__default_style = style
-        self.__clear_preprocess()
-
-    @property
-    def column_styles(self):
-        """Output |Style| for each column.
-
-        Returns:
-            list of |Style|:
-        """
-
-        return self.__col_style_list
-
-    @column_styles.setter
-    def column_styles(self, value):
-        if self.__col_style_list == value:
-            return
-
-        self.__col_style_list = value
-
-        if self.__col_style_list:
-            self._dp_extractor.format_flags_list = [
-                _ts_to_flag[self._get_col_style(col_idx).thousand_separator]
-                for col_idx in range(len(self.__col_style_list))
-            ]
-        else:
-            self._dp_extractor.format_flags_list = []
-
-        self.__clear_preprocess()
 
     @property
     def styles(self):
@@ -280,7 +241,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.column_styles = value
 
-    def register_trans_func(self, trans_func):
+    def register_trans_func(self, trans_func: Callable) -> None:
         self._dp_extractor.register_trans_func(trans_func)
         self.__clear_preprocess()
 
@@ -301,7 +262,7 @@ class AbstractTableWriter(TableWriterInterface):
         self._dp_extractor.preprocessor = value
         self.__clear_preprocess()
 
-    def update_preprocessor(self, **kwargs):
+    def update_preprocessor(self, **kwargs) -> None:
         # TODO: documentation
         #   is_escape_formula_injection: for CSV/Excel
 
@@ -316,7 +277,7 @@ class AbstractTableWriter(TableWriterInterface):
         return self._dp_extractor.preprocessor.is_escape_formula_injection
 
     @escape_formula_injection.setter
-    def escape_formula_injection(self, value):
+    def escape_formula_injection(self, value) -> None:
         # Deprecated
         if self._dp_extractor.preprocessor.is_escape_formula_injection == value:
             return
@@ -329,7 +290,7 @@ class AbstractTableWriter(TableWriterInterface):
         return self._stream
 
     @stream.setter
-    def stream(self, value):
+    def stream(self, value) -> None:
         self._stream = value
 
     @property
@@ -337,7 +298,7 @@ class AbstractTableWriter(TableWriterInterface):
         return self._dp_extractor.quoting_flags
 
     @_quoting_flags.setter
-    def _quoting_flags(self, value):
+    def _quoting_flags(self, value) -> None:
         self._dp_extractor.quoting_flags = value
         self.__clear_preprocess()
 
@@ -346,18 +307,18 @@ class AbstractTableWriter(TableWriterInterface):
         return self._dp_extractor.max_workers
 
     @max_workers.setter
-    def max_workers(self, value: int):
+    def max_workers(self, value: int) -> None:
         self._dp_extractor.max_workers = value
 
     @abc.abstractmethod
-    def _write_table(self):
+    def _write_table(self) -> None:
         pass
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._logger = WriterLogger(self)
 
         self._table_name = None
-        self.value_matrix = None
+        self.value_matrix = []
 
         self.is_write_header = True
         self.is_write_header_separator_row = True
@@ -378,8 +339,8 @@ class AbstractTableWriter(TableWriterInterface):
         self.is_formatting_float = True
         self.is_padding = True
 
-        self.headers = None
-        self.type_hints = None
+        self.headers = []
+        self.type_hints = []
         self._quoting_flags = {
             Typecode.BOOL: False,
             Typecode.DATETIME: True,
@@ -400,9 +361,9 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.iteration_length = -1
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
-        self._iter_count = None
+        self._iter_count = None  # type: Optional[int]
 
-        self.__align_list = []
+        self.__align_list = []  # type: List[Align]
         self.__align_char_mapping = {
             Align.AUTO: "<",
             Align.LEFT: "<",
@@ -411,12 +372,12 @@ class AbstractTableWriter(TableWriterInterface):
         }
 
         self.__default_style = Style()
-        self.__col_style_list = []
+        self.__col_style_list = []  # type: List[Optional[Style]]
         self._styler = self._create_styler(self)
 
         self.__clear_preprocess()
 
-    def _repr_html_(self):
+    def _repr_html_(self) -> str:
         from .text._html import HtmlTableWriter
 
         writer = HtmlTableWriter()
@@ -427,7 +388,67 @@ class AbstractTableWriter(TableWriterInterface):
 
         return writer.dumps()
 
-    def set_style(self, column, style):
+    def __clear_preprocess_status(self) -> None:
+        self._is_complete_table_dp_preprocess = False
+        self._is_complete_table_property_preprocess = False
+        self._is_complete_header_preprocess = False
+        self._is_complete_value_matrix_preprocess = False
+
+    def __clear_preprocess_data(self) -> None:
+        self._column_dp_list = []  # type: List[ColumnDataProperty]
+        self._table_headers = []  # type: List[str]
+        self._table_value_matrix = []  # type: List[Union[List[str], Dict]]
+        self._table_value_dp_matrix = []  # type: List[List[DataProperty]]
+
+    @property
+    def default_style(self) -> Style:
+        """Default |Style| for each cell.
+        """
+
+        return self.__default_style
+
+    @default_style.setter
+    def default_style(self, style) -> None:
+        if style is None:
+            style = Style()
+
+        if not isinstance(style, Style):
+            raise TypeError("default_style must be a Style instance")
+
+        if self.__default_style == style:
+            return
+
+        self.__default_style = style
+        self.__clear_preprocess()
+
+    @property
+    def column_styles(self) -> List[Optional[Style]]:
+        """Output |Style| for each column.
+
+        Returns:
+            list of |Style|:
+        """
+
+        return self.__col_style_list
+
+    @column_styles.setter
+    def column_styles(self, value) -> None:
+        if self.__col_style_list == value:
+            return
+
+        self.__col_style_list = value
+
+        if self.__col_style_list:
+            self._dp_extractor.format_flags_list = [
+                _ts_to_flag[self._get_col_style(col_idx).thousand_separator]
+                for col_idx in range(len(self.__col_style_list))
+            ]
+        else:
+            self._dp_extractor.format_flags_list = []
+
+        self.__clear_preprocess()
+
+    def set_style(self, column: Union[str, int], style: Style) -> None:
         """Set |Style| for a specific column.
 
         Args:
@@ -464,7 +485,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         raise ValueError("column must be an int or string: actual={}".format(column))
 
-    def close(self):
+    def close(self) -> None:
         """
         Close the current |stream|.
         """
@@ -511,7 +532,7 @@ class AbstractTableWriter(TableWriterInterface):
         finally:
             self._stream = None
 
-    def from_tabledata(self, value, is_overwrite_table_name=True):
+    def from_tabledata(self, value: TableData, is_overwrite_table_name: bool = True) -> None:
         """
         Set tabular attributes to the writer from |TableData|.
         Following attributes are configured:
@@ -546,7 +567,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_dp_preprocess = True
 
-    def from_csv(self, csv_source, delimiter=","):
+    def from_csv(self, csv_source: str, delimiter: str = ",") -> None:
         """
         Set tabular attributes to the writer from a character-separated values (CSV) data source.
         Following attributes are set to the writer by the method:
@@ -584,7 +605,7 @@ class AbstractTableWriter(TableWriterInterface):
         for table_data in loader.load():
             self.from_tabledata(table_data)
 
-    def from_dataframe(self, dataframe, add_index_column=False):
+    def from_dataframe(self, dataframe, add_index_column: bool = False) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
         Following attributes are set by the method:
@@ -623,7 +644,7 @@ class AbstractTableWriter(TableWriterInterface):
         else:
             self.value_matrix = dataframe.values.tolist()
 
-    def from_series(self, series, add_index_column=True):
+    def from_series(self, series, add_index_column: bool = True) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.Series`.
         Following attributes are set by the method:
@@ -657,7 +678,7 @@ class AbstractTableWriter(TableWriterInterface):
         else:
             self.value_matrix = [[value] for value in series.tolist()]
 
-    def from_tablib(self, tablib_dataset):
+    def from_tablib(self, tablib_dataset) -> None:
         """
         Set tabular attributes to the writer from :py:class:`tablib.Dataset`.
         """
@@ -665,7 +686,7 @@ class AbstractTableWriter(TableWriterInterface):
         self.headers = tablib_dataset.headers
         self.value_matrix = [row for row in tablib_dataset]
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table|.
         """
@@ -674,7 +695,7 @@ class AbstractTableWriter(TableWriterInterface):
             self._verify_property()
             self._write_table()
 
-    def _write_table_iter(self):
+    def _write_table_iter(self) -> None:
         if not self.support_split_write:
             raise NotSupportedError("the class not supported the write_table_iter method")
 
@@ -740,33 +761,36 @@ class AbstractTableWriter(TableWriterInterface):
             self.is_write_closing_row = stash_is_write_closing_row
             self._iter_count = None
 
-    def _get_padding_len(self, column_dp, value_dp=None):
+    def _get_padding_len(
+        self, column_dp: ColumnDataProperty, value_dp: Optional[DataProperty] = None
+    ) -> int:
         if not self.is_padding:
             return 0
 
         try:
-            return value_dp.get_padding_len(column_dp.ascii_char_width)
+            return cast(DataProperty, value_dp).get_padding_len(column_dp.ascii_char_width)
         except AttributeError:
             return column_dp.ascii_char_width
 
-    def _to_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
 
         return format_string.format(header)
 
-    @staticmethod
-    def _get_header_format_string(_col_dp, _value_dp):
+    def _get_header_format_string(
+        self, _col_dp: ColumnDataProperty, _value_dp: DataProperty
+    ) -> str:
         return "{:s}"
 
-    def _to_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__get_align_format(col_dp, value_dp).format(
             self._styler.apply(
                 col_dp.dp_to_str(value_dp), style=self._get_col_style(col_dp.column_index)
             )
         )
 
-    def _get_col_style(self, col_idx):
+    def _get_col_style(self, col_idx: int) -> Style:
         try:
             style = self.column_styles[col_idx]
         except (TypeError, IndexError, KeyError):
@@ -778,7 +802,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         return self.default_style
 
-    def _get_align(self, col_idx, default_align):
+    def _get_align(self, col_idx: int, default_align: Align) -> Align:
         align = self._get_col_style(col_idx).align
 
         if align is None:
@@ -793,10 +817,10 @@ class AbstractTableWriter(TableWriterInterface):
 
         return align
 
-    def _get_align_char(self, align):
+    def _get_align_char(self, align: Align) -> str:
         return self.__align_char_mapping[align]
 
-    def __get_align_format(self, col_dp, value_dp):
+    def __get_align_format(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         if col_dp.typecode == Typecode.STRING and (
             value_dp.typecode in (Typecode.INTEGER, Typecode.REAL_NUMBER)
             or value_dp.typecode == Typecode.STRING
@@ -825,7 +849,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         return None
 
-    def _verify_property(self):
+    def _verify_property(self) -> None:
         self._verify_table_name()
         self._verify_stream()
 
@@ -850,21 +874,21 @@ class AbstractTableWriter(TableWriterInterface):
     def __set_type_hints(self, type_hints):
         self._dp_extractor.column_type_hints = type_hints
 
-    def _verify_table_name(self):
+    def _verify_table_name(self) -> None:
         if all([self._is_require_table_name, typepy.is_null_string(self.table_name)]):
             raise EmptyTableNameError(
                 "table_name must be a string, with at least one or more character."
             )
 
-    def _verify_stream(self):
+    def _verify_stream(self) -> None:
         if self.stream is None:
             raise OSError("null output stream")
 
-    def _verify_header(self):
+    def _verify_header(self) -> None:
         if self._is_require_header and not self._use_default_header:
             self._validate_empty_header()
 
-    def _validate_empty_header(self):
+    def _validate_empty_header(self) -> None:
         """
         :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
         """
@@ -872,14 +896,14 @@ class AbstractTableWriter(TableWriterInterface):
         if typepy.is_empty_sequence(self.headers):
             raise EmptyHeaderError("headers expected to have one or more header names")
 
-    def _verify_value_matrix(self):
+    def _verify_value_matrix(self) -> None:
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-    def _create_styler(self, writer):
+    def _create_styler(self, writer) -> StylerInterface:
         return NullStyler(writer)
 
-    def _preprocess_table_dp(self):
+    def _preprocess_table_dp(self) -> None:
         if self._is_complete_table_dp_preprocess:
             return
 
@@ -905,7 +929,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_dp_preprocess = True
 
-    def _preprocess_table_property(self):
+    def _preprocess_table_property(self) -> None:
         if self._is_complete_table_property_preprocess:
             return
 
@@ -921,7 +945,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_table_property_preprocess = True
 
-    def _preprocess_header(self):
+    def _preprocess_header(self) -> None:
         if self._is_complete_header_preprocess:
             return
 
@@ -936,7 +960,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_header_preprocess = True
 
-    def _preprocess_value_matrix(self):
+    def _preprocess_value_matrix(self) -> None:
         if self._is_complete_value_matrix_preprocess:
             return
 
@@ -954,50 +978,12 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._is_complete_value_matrix_preprocess = True
 
-    def _preprocess(self):
+    def _preprocess(self) -> None:
         self._preprocess_table_dp()
         self._preprocess_table_property()
         self._preprocess_header()
         self._preprocess_value_matrix()
 
-    def __clear_preprocess_status(self):
-        try:
-            if any(
-                [
-                    self._is_complete_table_dp_preprocess,
-                    self._is_complete_table_property_preprocess,
-                    self._is_complete_header_preprocess,
-                    self._is_complete_value_matrix_preprocess,
-                ]
-            ):
-                self._logger.logger.debug("__clear_preprocess_status")
-        except AttributeError:
-            pass
-
-        self._is_complete_table_dp_preprocess = False
-        self._is_complete_table_property_preprocess = False
-        self._is_complete_header_preprocess = False
-        self._is_complete_value_matrix_preprocess = False
-
-    def __clear_preprocess_data(self):
-        try:
-            if any(
-                [
-                    self._column_dp_list,
-                    self._table_headers,
-                    self._table_value_matrix,
-                    self._table_value_dp_matrix,
-                ]
-            ):
-                self._logger.logger.debug("__clear_preprocess_data")
-        except AttributeError:
-            pass
-
-        self._column_dp_list = []
-        self._table_headers = []
-        self._table_value_matrix = []
-        self._table_value_dp_matrix = []
-
-    def __clear_preprocess(self):
+    def __clear_preprocess(self) -> None:
         self.__clear_preprocess_status()
         self.__clear_preprocess_data()

@@ -1,9 +1,10 @@
 import copy
 import re
+from typing import List, Sequence
 
 import dataproperty as dp
 import typepy
-from dataproperty import LineBreakHandling
+from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 
 from ...style import Align
@@ -22,14 +23,14 @@ class MediaWikiTableWriter(TextTableWriter):
     __RE_TABLE_SEQUENCE = re.compile(r"^[\s]+[*|#]+")
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.column_delimiter = "\n"
@@ -44,7 +45,7 @@ class MediaWikiTableWriter(TextTableWriter):
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         if not self.is_write_header:
             return
 
@@ -53,7 +54,9 @@ class MediaWikiTableWriter(TextTableWriter):
 
         super()._write_header()
 
-    def _write_value_row(self, values, value_dp_list):
+    def _write_value_row(
+        self, values: Sequence[str], value_dp_list: Sequence[DataProperty]
+    ) -> None:
         self._write_row(
             [
                 self.__modify_table_element(value, value_dp)
@@ -61,24 +64,24 @@ class MediaWikiTableWriter(TextTableWriter):
             ]
         )
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         return ['{| class="wikitable"']
 
-    def _get_header_row_separator_items(self):
+    def _get_header_row_separator_items(self) -> List[str]:
         return ["|-"]
 
-    def _get_value_row_separator_items(self):
+    def _get_value_row_separator_items(self) -> List[str]:
         return self._get_header_row_separator_items()
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return ["|}"]
 
-    def _get_header_format_string(self, col_dp, value_dp):
+    def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return "! {{:{:s}{:s}}}".format(
             self._get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )
 
-    def __modify_table_element(self, value, value_dp):
+    def __modify_table_element(self, value: str, value_dp: DataProperty):
         if value_dp.align is Align.LEFT:
             forma_stirng = "| {1:s}"
         else:

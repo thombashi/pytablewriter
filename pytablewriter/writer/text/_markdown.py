@@ -1,10 +1,13 @@
 import copy
+from typing import List
 
 import dataproperty as dp
 import typepy
+from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import Align, MarkdownStyler
+from ...style import Align, MarkdownStyler, StylerInterface
+from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -19,14 +22,14 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     FORMAT_NAME = "markdown"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.indent_string = ""
@@ -43,16 +46,16 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def _to_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__escape_vertical_bar_char(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__escape_vertical_bar_char(super()._to_row_item(col_dp, value_dp))
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         return []
 
-    def _get_header_row_separator_items(self):
+    def _get_header_row_separator_items(self) -> List[str]:
         header_separator_list = []
         for col_dp in self._column_dp_list:
             padding_len = self._get_padding_len(col_dp) + self.margin * 2
@@ -69,13 +72,13 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         return header_separator_list
 
-    def _get_value_row_separator_items(self):
+    def _get_value_row_separator_items(self) -> List[str]:
         return []
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return []
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table| with Markdown table format.
 
@@ -95,11 +98,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             if self.is_write_null_line_after_table:
                 self.write_null_line()
 
-    def _write_table_iter(self):
+    def _write_table_iter(self) -> None:
         self.__write_chapter()
         super()._write_table_iter()
 
-    def __write_chapter(self):
+    def __write_chapter(self) -> None:
         if typepy.is_null_string(self.table_name):
             return
 
@@ -109,9 +112,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             )
         )
 
-    def _create_styler(self, writer):
+    def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return MarkdownStyler(writer)
 
     @staticmethod
-    def __escape_vertical_bar_char(value):
+    def __escape_vertical_bar_char(value: str) -> str:
         return value.replace("|", r"\|")

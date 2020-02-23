@@ -1,4 +1,5 @@
 import abc
+from typing import List
 
 import typepy
 
@@ -17,11 +18,11 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
     """
 
     @abc.abstractmethod
-    def get_variable_name(self, value):  # pragma: no cover
+    def get_variable_name(self, value: str) -> str:  # pragma: no cover
         pass
 
     @property
-    def variable_name(self):
+    def variable_name(self) -> str:
         """
         Return a valid variable name that converted from the |table_name|.
 
@@ -31,7 +32,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         return self.get_variable_name(self.table_name)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.indent_string = "    "
@@ -56,15 +57,15 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def _get_value_row_separator_items(self):
+    def _get_value_row_separator_items(self) -> List[str]:
         return []
 
-    def _write_opening_row(self):
+    def _write_opening_row(self) -> None:
         self.dec_indent_level()
         super()._write_opening_row()
         self.inc_indent_level()
 
-    def _write_closing_row(self):
+    def _write_closing_row(self) -> None:
         self.dec_indent_level()
         super()._write_closing_row()
         self.inc_indent_level()

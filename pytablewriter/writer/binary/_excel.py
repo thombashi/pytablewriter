@@ -1,13 +1,16 @@
 import abc
 import copy
 import warnings
+from typing import Any, Dict, Optional, cast  # noqa
 
 import dataproperty
 import typepy
+from dataproperty import DataProperty
+from tabledata import TableData
 from typepy import Integer
 
 from .._common import import_error_msg_template
-from ._excel_workbook import ExcelWorkbookXls, ExcelWorkbookXlsx
+from ._excel_workbook import ExcelWorkbookInterface, ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import AbstractBinaryTableWriter
 
 
@@ -19,19 +22,19 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     FORMAT_NAME = "excel"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
     @property
-    def workbook(self):
+    def workbook(self) -> Optional[ExcelWorkbookInterface]:
         return self._workbook
 
     @property
-    def first_header_row(self):
+    def first_header_row(self) -> int:
         """
         :return: Index of the first row of the header.
         :rtype: int
@@ -42,7 +45,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         return self._first_header_row
 
     @property
-    def last_header_row(self):
+    def last_header_row(self) -> int:
         """
         :return: Index of the last row of the header.
         :rtype: int
@@ -53,7 +56,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         return self._last_header_row
 
     @property
-    def first_data_row(self):
+    def first_data_row(self) -> int:
         """
         :return: Index of the first row of the data (table body).
         :rtype: int
@@ -64,7 +67,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         return self._first_data_row
 
     @property
-    def last_data_row(self):
+    def last_data_row(self) -> Optional[int]:
         """
         :return: Index of the last row of the data (table body).
         :rtype: int
@@ -75,7 +78,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         return self._last_data_row
 
     @property
-    def first_data_col(self):
+    def first_data_col(self) -> int:
         """
         :return: Index of the first column of the table.
         :rtype: int
@@ -86,7 +89,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         return self._first_data_col
 
     @property
-    def last_data_col(self):
+    def last_data_col(self) -> Optional[int]:
         """
         :return: Index of the last column of the table.
         :rtype: int
@@ -96,10 +99,10 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
         return self._last_data_col
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-        self._workbook = None
+        self._workbook = None  # type: Optional[ExcelWorkbookInterface]
 
         self._dp_extractor.type_value_map = {
             typepy.Typecode.INFINITY: "Inf",
@@ -110,45 +113,45 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         self._last_header_row = self.first_header_row
         self._first_data_row = self.last_header_row + 1
         self._first_data_col = 0
-        self._last_data_row = None
-        self._last_data_col = None
+        self._last_data_row = None  # type: Optional[int]
+        self._last_data_col = None  # type: Optional[int]
 
         self._current_data_row = self._first_data_row
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self._quoting_flags[typepy.Typecode.DATETIME] = True
 
-    def is_opened(self):
+    def is_opened(self) -> bool:
         return self.workbook is not None
 
-    def open(self, file_path):
+    def open(self, file_path: str) -> None:
         """
         Open an Excel workbook file.
 
         :param str file_path: Excel workbook file path to open.
         """
 
-        if self.is_opened() and self.workbook.file_path == file_path:
-            self._logger.logger.debug("workbook already opened: {}".format(self.workbook.file_path))
+        if self.is_opened() and self.workbook.file_path == file_path:  # type: ignore
+            self._logger.logger.debug("workbook already opened: {}".format(self.workbook.file_path))  # type: ignore
             return
 
         self.close()
         self._open(file_path)
 
     @abc.abstractmethod
-    def _open(self, workbook_path):  # pragma: no cover
+    def _open(self, workbook_path: str) -> None:  # pragma: no cover
         pass
 
-    def close(self):
+    def close(self) -> None:
         """
         Close the current workbook.
         """
 
         if self.is_opened():
-            self.workbook.close()
+            self.workbook.close()  # type: ignore
             self._workbook = None
 
-    def from_tabledata(self, value, is_overwrite_table_name=True):
+    def from_tabledata(self, value: TableData, is_overwrite_table_name: bool = True) -> None:
         """
         Set following attributes from |TableData|
 
@@ -167,7 +170,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         if self.is_opened():
             self.make_worksheet(self.table_name)
 
-    def make_worksheet(self, sheet_name=None):
+    def make_worksheet(self, sheet_name: Optional[str] = None) -> None:
         """Make a worksheet to the current workbook.
 
         Args:
@@ -181,10 +184,10 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         if not sheet_name:
             sheet_name = ""
 
-        self._stream = self.workbook.add_worksheet(sheet_name)
+        self._stream = self.workbook.add_worksheet(sheet_name)  # type: ignore
         self._current_data_row = self._first_data_row
 
-    def dump(self, output, close_after_write=True):
+    def dump(self, output: str, close_after_write: bool = True) -> None:
         """Write a worksheet to the current workbook.
 
         Args:
@@ -203,24 +206,32 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
             if close_after_write:
                 self.close()
 
-    def _write_table(self):
+    @abc.abstractmethod
+    def _write_header(self) -> None:
+        pass
+
+    @abc.abstractmethod
+    def _write_cell(self, row: int, col: int, value_dp: DataProperty) -> None:
+        pass
+
+    def _write_table(self) -> None:
         self._preprocess_table_dp()
         self._preprocess_table_property()
         self._write_header()
         self._write_value_matrix()
         self._postprocess()
 
-    def _write_value_row_separator(self):
+    def _write_value_row_separator(self) -> None:
         pass
 
-    def _write_value_matrix(self):
+    def _write_value_matrix(self) -> None:
         for value_dp_list in self._table_value_dp_matrix:
             for col_idx, value_dp in enumerate(value_dp_list):
                 self._write_cell(self._current_data_row, col_idx, value_dp)
 
             self._current_data_row += 1
 
-    def _get_last_column(self):
+    def _get_last_column(self) -> int:
         if typepy.is_not_empty_sequence(self.headers):
             return len(self.headers) - 1
 
@@ -229,7 +240,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
         raise ValueError("data not found")
 
-    def _postprocess(self):
+    def _postprocess(self) -> None:
         self._last_data_row = self._current_data_row
         self._last_data_col = self._get_last_column()
 
@@ -254,22 +265,22 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             - |nan|: written as ``NaN``
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-        self.__col_style_table = {}
+        self.__col_style_table = {}  # type: Dict[int, Any]
 
-    def _open(self, workbook_path):
+    def _open(self, workbook_path: str) -> None:
         self._workbook = ExcelWorkbookXls(workbook_path)
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         if not self.is_write_header or typepy.is_empty_sequence(self.headers):
             return
 
         for col, value in enumerate(self.headers):
             self.stream.write(self.first_header_row, col, value)
 
-    def _write_cell(self, row, col, value_dp):
+    def _write_cell(self, row: int, col: int, value_dp: DataProperty) -> None:
         if value_dp.typecode in [typepy.Typecode.REAL_NUMBER]:
             try:
                 cell_style = self.__get_cell_style(col)
@@ -281,12 +292,12 @@ class ExcelXlsTableWriter(ExcelTableWriter):
 
         self.stream.write(row, col, value_dp.data)
 
-    def _postprocess(self):
+    def _postprocess(self) -> None:
         super()._postprocess()
 
         self.__col_style_table = {}
 
-    def __get_cell_style(self, col):
+    def __get_cell_style(self, col: int):
         try:
             import xlwt
         except ImportError:
@@ -378,14 +389,14 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         }
 
     @property
-    def __nan_format_property(self):
+    def __nan_format_property(self) -> Dict:
         return self.format_table.get(self.TableFormat.NAN, self.default_format)
 
     @property
-    def __cell_format_property(self):
+    def __cell_format_property(self) -> Dict:
         return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.default_format = self.Default.CELL_FORMAT
@@ -395,13 +406,13 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             self.TableFormat.NAN: self.Default.NAN_FORMAT,
         }
 
-        self.__col_cell_format_cache = {}
-        self.__col_numprops_table = {}
+        self.__col_cell_format_cache = {}  # type: Dict[int, Any]
+        self.__col_numprops_table = {}  # type: Dict[int, Dict]
 
-    def _open(self, workbook_path):
+    def _open(self, workbook_path: str) -> None:
         self._workbook = ExcelWorkbookXlsx(workbook_path)
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         if not self.is_write_header or typepy.is_empty_sequence(self.headers):
             return
 
@@ -416,7 +427,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
                 row=row, col=0, data=[""] * len(self.headers), cell_format=header_format
             )
 
-    def _write_cell(self, row, col, value_dp):
+    def _write_cell(self, row: int, col: int, value_dp: DataProperty) -> None:
         base_props = dict(self.__cell_format_property)
         format_key = "{:d}_{:s}".format(col, value_dp.typecode.name)
 
@@ -437,9 +448,9 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         cell_format = self.__get_cell_format(format_key, base_props)
         self.stream.write(row, col, value_dp.data, cell_format)
 
-    def __get_number_property(self, col):
+    def __get_number_property(self, col: int) -> Dict:
         if col in self.__col_numprops_table:
-            return self.__col_numprops_table.get(col)
+            return cast(Dict, self.__col_numprops_table.get(col))
 
         try:
             col_dp = self._column_dp_list[col]
@@ -459,7 +470,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
         return num_props
 
-    def __get_cell_format(self, format_key, cell_props):
+    def __get_cell_format(self, format_key, cell_props) -> Dict:
         cell_format = self.__col_cell_format_cache.get(format_key)
         if cell_format is not None:
             return cell_format
@@ -483,12 +494,12 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             width = min(col_dp.ascii_char_width, self.MAX_CELL_WIDTH) * (font_size / 10.0) + 2
             self.stream.set_column(col_idx, col_idx, width=width)
 
-    def _preprocess_table_property(self):
+    def _preprocess_table_property(self) -> None:
         super()._preprocess_table_property()
 
         self.__set_cell_width()
 
-    def _postprocess(self):
+    def _postprocess(self) -> None:
         super()._postprocess()
 
         self.stream.autofilter(

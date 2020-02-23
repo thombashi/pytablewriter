@@ -1,3 +1,5 @@
+from typing import List
+
 import typepy
 
 from ._text_writer import TextTableWriter
@@ -15,14 +17,14 @@ class CsvTableWriter(TextTableWriter):
     FORMAT_NAME = "csv"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.indent_string = ""
@@ -33,17 +35,17 @@ class CsvTableWriter(TextTableWriter):
 
         self._quoting_flags[typepy.Typecode.NULL_STRING] = False
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         if typepy.is_empty_sequence(self.headers):
             return
 
         super()._write_header()
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         return []
 
-    def _get_value_row_separator_items(self):
+    def _get_value_row_separator_items(self) -> List[str]:
         return []
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return []

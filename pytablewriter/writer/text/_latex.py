@@ -1,11 +1,14 @@
 import copy
 import re
+from typing import List
 
 import dataproperty as dp
 import typepy
+from dataproperty import ColumnDataProperty, DataProperty
 from typepy import Typecode
 
-from ...style import Align, LatexStyler
+from ...style import Align, LatexStyler, StylerInterface
+from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -20,7 +23,7 @@ class LatexWriter(IndentationTextTableWriter):
     def support_split_write(self):
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.is_write_opening_row = True
@@ -35,7 +38,7 @@ class LatexWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def _is_math_parts(self, value_dp):
+    def _is_math_parts(self, value_dp: DataProperty) -> bool:
         if value_dp.typecode in [Typecode.INTEGER, Typecode.REAL_NUMBER]:
             return False
 
@@ -47,7 +50,7 @@ class LatexWriter(IndentationTextTableWriter):
 
         return False
 
-    def _get_col_align_char_list(self):
+    def _get_col_align_char_list(self) -> List[str]:
         col_align_list = []
 
         for col_dp in self._column_dp_list:
@@ -66,22 +69,22 @@ class LatexWriter(IndentationTextTableWriter):
 
         return col_align_list
 
-    def _write_opening_row(self):
+    def _write_opening_row(self) -> None:
         super()._write_opening_row()
         self.inc_indent_level()
 
-    def _write_closing_row(self):
+    def _write_closing_row(self) -> None:
         self.dec_indent_level()
         super()._write_closing_row()
 
-    def _to_math_parts(self, value):
+    def _to_math_parts(self, value: str) -> str:
         # dollar characters for both sides of math parts are not required in
         # Jupyter latex.
         # return r"${:s}$".format(value)
 
         return value
 
-    def _create_styler(self, writer):
+    def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return LatexStyler(writer)
 
 
@@ -104,16 +107,16 @@ class LatexMatrixWriter(LatexWriter):
     _RE_VAR = re.compile(r"^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.is_write_header = False
         self.is_write_header_separator_row = False
 
-    def _to_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         row_item = super()._to_row_item(col_dp, value_dp)
 
         if self._RE_VAR.search(row_item):
@@ -127,7 +130,7 @@ class LatexMatrixWriter(LatexWriter):
     def _get_header_row_separator_items(self):
         return []
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         row_item_list = []
 
         if typepy.is_not_null_string(self.table_name):
@@ -141,15 +144,15 @@ class LatexMatrixWriter(LatexWriter):
 
         return ["".join(row_item_list)]
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return [r"\end{array} \right)"]
 
-    def _write_opening_row(self):
+    def _write_opening_row(self) -> None:
         self._write_line(r"\begin{equation}")
         self.inc_indent_level()
         super()._write_opening_row()
 
-    def _write_closing_row(self):
+    def _write_closing_row(self) -> None:
         super()._write_closing_row()
         self.dec_indent_level()
         self._write_line(r"\end{equation}")
@@ -173,16 +176,16 @@ class LatexTableWriter(LatexWriter):
     FORMAT_NAME = "latex_table"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.char_right_side_row = r" \\ \hline"
         self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         return [
             "".join(
                 [
@@ -202,10 +205,10 @@ class LatexTableWriter(LatexWriter):
     def __verbatim(self, value):
         return r"\verb" + "|{:s}|".format(value)
 
-    def _to_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__verbatim(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         row_item = super()._to_row_item(col_dp, value_dp)
 
         if self._is_math_parts(value_dp):
@@ -216,8 +219,8 @@ class LatexTableWriter(LatexWriter):
 
         return row_item
 
-    def _get_header_row_separator_items(self):
+    def _get_header_row_separator_items(self) -> List[str]:
         return [r"\hline"]
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return [r"\end{array}"]

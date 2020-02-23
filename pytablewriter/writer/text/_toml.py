@@ -13,14 +13,14 @@ class TomlTableWriter(TextTableWriter):
     FORMAT_NAME = "toml"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
     def support_split_write(self):
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.is_formatting_float = False
@@ -28,7 +28,7 @@ class TomlTableWriter(TextTableWriter):
         self._is_require_table_name = True
         self._is_require_header = True
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table| with
         `TOML <https://github.com/toml-lang/toml>`__ format.

@@ -16,14 +16,14 @@ class UnicodeTableWriter(IndentationTextTableWriter):
     FORMAT_NAME = "unicode"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.table_name = ""

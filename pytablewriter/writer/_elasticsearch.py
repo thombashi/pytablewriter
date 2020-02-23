@@ -4,9 +4,11 @@
 
 
 import copy
+from typing import Dict, Generator
 
 import dataproperty
 import msgfy
+from dataproperty import ColumnDataProperty
 from typepy import Typecode
 
 from ._table_writer import AbstractTableWriter
@@ -49,19 +51,19 @@ class ElasticsearchWriter(AbstractTableWriter):
     FORMAT_NAME = "elasticsearch"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
     @property
-    def table_name(self):
+    def table_name(self) -> str:
         return super().table_name
 
     @table_name.setter
-    def table_name(self, value):
+    def table_name(self, value) -> None:
         from ..sanitizer import ElasticsearchIndexNameSanitizer
         from pathvalidate import ValidationError, ErrorReason
 
@@ -74,14 +76,14 @@ class ElasticsearchWriter(AbstractTableWriter):
                 raise
 
     @property
-    def index_name(self):
+    def index_name(self) -> str:
         return self.table_name
 
     @index_name.setter
-    def index_name(self, value):
+    def index_name(self, value: str) -> None:
         self.table_name = value
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.stream = None
@@ -93,11 +95,11 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         self.document_type = "table"
 
-    def write_null_line(self):
+    def write_null_line(self) -> None:
         pass
 
     @staticmethod
-    def __get_es_datatype(column_dp):
+    def __get_es_datatype(column_dp: ColumnDataProperty) -> Dict[str, str]:
         if column_dp.typecode in (
             Typecode.NONE,
             Typecode.NULL_STRING,
@@ -139,7 +141,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         raise ValueError("unknown typecode: {}".format(column_dp.typecode))
 
-    def _get_mappings(self):
+    def _get_mappings(self) -> Dict[str, Dict]:
         properties = {}
 
         for header, column_dp in zip(self.headers, self._column_dp_list):
@@ -147,7 +149,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
         return {"mappings": {self.document_type: {"properties": properties}}}
 
-    def _get_body(self):
+    def _get_body(self) -> Generator:
         str_datatype = (Typecode.DATETIME, Typecode.IP_ADDRESS, Typecode.INFINITY, Typecode.NAN)
 
         for value_dp_list in self._table_value_dp_matrix:
@@ -158,7 +160,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
             yield dict(zip(self.headers, values))
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         import elasticsearch as es
 
         if not isinstance(self.stream, es.Elasticsearch):
@@ -185,5 +187,5 @@ class ElasticsearchWriter(AbstractTableWriter):
             except es.exceptions.RequestError as e:
                 self._logger.logger.error("{}, body={}".format(msgfy.to_error_message(e), body))
 
-    def _write_value_row_separator(self):
+    def _write_value_row_separator(self) -> None:
         pass

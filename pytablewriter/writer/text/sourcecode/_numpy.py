@@ -1,3 +1,5 @@
+from typing import List
+
 import typepy
 
 from ._python import PythonCodeTableWriter
@@ -40,10 +42,10 @@ class NumpyTableWriter(PythonCodeTableWriter):
     FORMAT_NAME = "numpy"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.import_numpy_as = "np"
@@ -54,7 +56,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
             self.import_numpy_as
         )
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         array_def = "{:s}.array([".format(self.import_numpy_as)
 
         if typepy.is_not_null_string(self.table_name):
@@ -62,5 +64,5 @@ class NumpyTableWriter(PythonCodeTableWriter):
 
         return [array_def]
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return ["])"]

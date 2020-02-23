@@ -1,6 +1,7 @@
 import io
+from typing import List
 
-from dataproperty import DataProperty, DefaultValue
+from dataproperty import ColumnDataProperty, DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
 
 from ...._converter import strip_quote
@@ -10,7 +11,7 @@ from .._common import bool_to_str
 from ._sourcecode import SourceCodeTableWriter
 
 
-def js_datetime_formatter(value):
+def js_datetime_formatter(value) -> str:
     try:
         return 'new Date("{:s}")'.format(value.strftime(DefaultValue.DATETIME_FORMAT))
     except ValueError:
@@ -62,26 +63,26 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     __NONE_VALUE_DP = DataProperty("null")
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
     @property
-    def variable_declaration(self):
+    def variable_declaration(self) -> str:
         return self.__variable_declaration
 
     @variable_declaration.setter
-    def variable_declaration(self, value):
+    def variable_declaration(self, value: str):
         value = value.strip().lower()
         if value not in self.__VALID_VAR_DECLARATION:
             raise ValueError("declaration must be either var, let or const")
 
         self.__variable_declaration = value
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.variable_declaration = "const"
@@ -93,10 +94,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._dp_extractor.strict_level_map[Typecode.BOOL] = StrictLevel.MAX
         self.register_trans_func(bool_to_str)
 
-    def get_variable_name(self, value):
+    def get_variable_name(self, value: str) -> str:
         return sanitize_js_var_name(value, "_").lower()
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = js_datetime_formatter
         else:
@@ -123,13 +124,13 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._write_line(js_matrix_var_def_text)
         self.inc_indent_level()
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         return ["{:s} {:s} = [".format(self.variable_declaration, self.variable_name)]
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return ["];"]
 
-    def _to_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         if value_dp.data is None:
             value_dp = self.__NONE_VALUE_DP
 

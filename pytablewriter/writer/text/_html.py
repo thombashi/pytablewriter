@@ -1,5 +1,6 @@
 import copy
 import warnings
+from typing import Any, Optional, Tuple, cast  # noqa
 
 import dataproperty
 import typepy
@@ -7,12 +8,13 @@ from mbstrdecoder import MultiByteStrDecoder
 
 from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
-from ...style import FontStyle, FontWeight, HtmlStyler
+from ...style import FontStyle, FontWeight, HtmlStyler, Style, StylerInterface
 from .._common import import_error_msg_template
+from .._table_writer import AbstractTableWriter
 from ._text_writer import TextTableWriter
 
 
-def _get_tags_module():
+def _get_tags_module() -> Tuple:
     try:
         from dominate import tags
         from dominate.util import raw
@@ -34,14 +36,14 @@ class HtmlTableWriter(TextTableWriter):
     FORMAT_NAME = "html"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return False
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.is_padding = False
@@ -50,9 +52,9 @@ class HtmlTableWriter(TextTableWriter):
         self._dp_extractor.preprocessor.line_break_repl = "<br>"
         self._dp_extractor.preprocessor.is_escape_html_tag = False
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-        self._table_tag = None
+        self._table_tag = None  # type: Any
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table| with HTML table format.
 
@@ -82,7 +84,7 @@ class HtmlTableWriter(TextTableWriter):
 
             self._write_body()
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         tags, raw = _get_tags_module()
 
         if not self.is_write_header:
@@ -100,7 +102,7 @@ class HtmlTableWriter(TextTableWriter):
 
         self._table_tag += thead_tag
 
-    def _write_body(self):
+    def _write_body(self) -> None:
         tags, raw = _get_tags_module()
         tbody_tag = tags.tbody()
 
@@ -120,11 +122,11 @@ class HtmlTableWriter(TextTableWriter):
         self._table_tag += tbody_tag
         self._write_line(self._table_tag.render(indent=self.indent_string))
 
-    def __make_style_tag(self, style):
-        styles = []
+    def __make_style_tag(self, style: Style) -> Optional[str]:
+        styles = []  # List[str]
 
         if self._styler.get_font_size(style):
-            styles.append(self._styler.get_font_size(style))
+            styles.append(cast(str, self._styler.get_font_size(style)))
         if style.font_weight == FontWeight.BOLD:
             styles.append("font-weight:bold")
         if style.font_style == FontStyle.ITALIC:
@@ -135,5 +137,5 @@ class HtmlTableWriter(TextTableWriter):
 
         return "; ".join(styles)
 
-    def _create_styler(self, writer):
+    def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return HtmlStyler(writer)

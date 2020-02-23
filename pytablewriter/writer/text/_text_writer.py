@@ -1,12 +1,13 @@
 import enum
 import io
 import sys
+from typing import List, cast
 
 import typepy
-from dataproperty import Align, LineBreakHandling
+from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
 
 from ...error import EmptyHeaderError
-from ...style import TextStyler
+from ...style import StylerInterface, TextStyler
 from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
 
@@ -84,11 +85,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     """
 
     @property
-    def margin(self):
+    def margin(self) -> int:
         return self.__margin
 
     @margin.setter
-    def margin(self, value):
+    def margin(self, value: int) -> None:
         self.__margin = value
 
         self.__value_cell_margin_format = self.__make_margin_format(" ")
@@ -101,7 +102,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         )
         self.__closing_row_cell_format = self.__make_margin_format(self.char_closing_row)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.stream = sys.stdout
@@ -134,7 +135,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._init_cross_point_maps()
 
-    def _init_cross_point_maps(self):
+    def _init_cross_point_maps(self) -> None:
         self.__cross_point_maps = {
             RowType.OPENING: self.char_opening_row_cross_point,
             RowType.MIDDLE: self.char_cross_point,
@@ -151,14 +152,14 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             RowType.CLOSING: self.char_bottom_right_cross_point,
         }
 
-    def write_null_line(self):
+    def write_null_line(self) -> None:
         """
         Write a null line to the |stream|.
         """
 
         self._write_line()
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table|.
 
@@ -170,7 +171,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def dump(self, output, close_after_write=True):
+    def dump(self, output, close_after_write: bool = True) -> None:
         """Write data to the output with tabular format.
 
         Args:
@@ -194,7 +195,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                 self.stream.close()
                 self.stream = sys.stdout
 
-    def dumps(self):
+    def dumps(self) -> str:
         """Get rendered tabular text from the table data.
 
         Only available for text format table writers.
@@ -214,15 +215,15 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         return tabular_text
 
-    def _create_styler(self, writer):
+    def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return TextStyler(writer)
 
-    def _write_table_iter(self):
+    def _write_table_iter(self) -> None:
         super()._write_table_iter()
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         self._preprocess()
         self._write_opening_row()
 
@@ -241,58 +242,58 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                     if self.is_write_value_separator_row:
                         self._write_value_row_separator()
 
-                self._write_value_row(values, value_dp_list)
+                self._write_value_row(cast(List[str], values), value_dp_list)
             except TypeError:
                 continue
 
         self._write_closing_row()
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         return self.__get_row_separator_items(self.__opening_row_cell_format, self.char_opening_row)
 
-    def _get_header_row_separator_items(self):
+    def _get_header_row_separator_items(self) -> List[str]:
         return self.__get_row_separator_items(
             self._header_row_separator_cell_format, self.char_header_row_separator
         )
 
-    def _get_value_row_separator_items(self):
+    def _get_value_row_separator_items(self) -> List[str]:
         return self.__get_row_separator_items(
             self.__value_row_separator_cell_format, self.char_value_row_separator
         )
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return self.__get_row_separator_items(self.__closing_row_cell_format, self.char_closing_row)
 
-    def __get_row_separator_items(self, margin_format, separator_char):
+    def __get_row_separator_items(self, margin_format: str, separator_char: str) -> List[str]:
         return [
             margin_format.format(separator_char * self._get_padding_len(col_dp))
             for col_dp in self._column_dp_list
         ]
 
-    def _get_header_format_string(self, col_dp, value_dp):
+    def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return "{{:{:s}{:s}}}".format(
             self._get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
         )
 
-    def _to_header_item(self, col_dp, value_dp):
+    def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__value_cell_margin_format.format(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, col_dp, value_dp):
+    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__value_cell_margin_format.format(super()._to_row_item(col_dp, value_dp))
 
-    def _write_raw_string(self, unicode_text):
+    def _write_raw_string(self, unicode_text: str) -> None:
         self.stream.write(unicode_text)
 
-    def _write_raw_line(self, unicode_text=""):
+    def _write_raw_line(self, unicode_text: str = "") -> None:
         self._write_raw_string(unicode_text + "\n")
 
     def _write(self, text):
         self._write_raw_string(text)
 
-    def _write_line(self, text=""):
+    def _write_line(self, text: str = "") -> None:
         self._write_raw_line(text)
 
-    def _write_row(self, values):
+    def _write_row(self, values: List[str]) -> None:
         if typepy.is_empty_sequence(values):
             return
 
@@ -300,7 +301,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.char_left_side_row + self.column_delimiter.join(values) + self.char_right_side_row
         )
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         if not self.is_write_header:
             return
 
@@ -309,7 +310,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_row(self._table_headers)
 
-    def _write_value_row(self, values, value_dp_list):
+    def _write_value_row(self, values: List[str], value_dp_list: List[DataProperty]) -> None:
         self._write_row(values)
 
     def __write_separator_row(self, values, row_type=RowType.MIDDLE):
@@ -329,7 +330,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_line(left_cross_point + cross_point.join(values) + right_cross_point)
 
-    def _write_opening_row(self):
+    def _write_opening_row(self) -> None:
         if not self.is_write_opening_row:
             return
 
@@ -341,7 +342,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_header_row_separator_items())
 
-    def _write_value_row_separator(self):
+    def _write_value_row_separator(self) -> None:
         """
         Write row separator of the table which matched to the table type
         regardless of the value of the
@@ -350,7 +351,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_value_row_separator_items())
 
-    def _write_closing_row(self):
+    def _write_closing_row(self) -> None:
         if not self.is_write_closing_row:
             return
 
@@ -371,13 +372,13 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         Indentation string for each level.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.set_indent_level(0)
         self.indent_string = ""
 
-    def set_indent_level(self, indent_level):
+    def set_indent_level(self, indent_level: int) -> None:
         """
         Set the current indent level.
 
@@ -386,27 +387,27 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
 
         self._indent_level = indent_level
 
-    def inc_indent_level(self):
+    def inc_indent_level(self) -> None:
         """
         Increment the current indent level.
         """
 
         self._indent_level += 1
 
-    def dec_indent_level(self):
+    def dec_indent_level(self) -> None:
         """
         Decrement the current indent level.
         """
 
         self._indent_level -= 1
 
-    def _get_indent_string(self):
+    def _get_indent_string(self) -> str:
         return self.indent_string * self._indent_level
 
     def _write(self, text):
         self._write_raw_string(self._get_indent_string() + text)
 
-    def _write_line(self, text=""):
+    def _write_line(self, text: str = "") -> None:
         if typepy.is_not_null_string(text):
             self._write_raw_line(self._get_indent_string() + text)
         else:

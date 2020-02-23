@@ -18,14 +18,14 @@ class JsonLinesTableWriter(JsonTableWriter):
     FORMAT_NAME = "json_lines"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table| with
         `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__

@@ -26,14 +26,14 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
     FORMAT_NAME = "sqlite"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         import copy
         import dataproperty
 
@@ -48,13 +48,13 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.close()
 
-    def is_opened(self):
+    def is_opened(self) -> bool:
         return self.stream is not None
 
-    def open(self, file_path):
+    def open(self, file_path: str) -> None:
         """
         Open a SQLite database file.
 
@@ -74,7 +74,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         self._stream = SimpleSQLite(file_path, "w")
 
-    def dump(self, output, close_after_write=True):
+    def dump(self, output: str, close_after_write: bool = True) -> None:
         """Write data to the SQLite database file.
 
         Args:
@@ -91,7 +91,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
             if close_after_write:
                 self.close()
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         self._verify_value_matrix()
         self._preprocess()
 
@@ -107,5 +107,5 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
         )
         self.stream.create_table_from_tabledata(table_data)
 
-    def _write_value_row_separator(self):
+    def _write_value_row_separator(self) -> None:
         pass

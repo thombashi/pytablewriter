@@ -1,3 +1,5 @@
+from typing import List
+
 import typepy
 
 from ...._function import dateutil_datetime_formatter, quote_datetime_formatter
@@ -42,14 +44,14 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     FORMAT_NAME = "python"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.table_name = ""
@@ -59,10 +61,10 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
             typepy.Typecode.NAN: 'float("nan")',
         }
 
-    def get_variable_name(self, value):
+    def get_variable_name(self, value: str) -> str:
         return sanitize_python_var_name(self.table_name, "_").lower()
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = dateutil_datetime_formatter
         else:
@@ -72,11 +74,11 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super()._write_table()
         self.dec_indent_level()
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         if typepy.is_not_null_string(self.table_name):
             return [self.variable_name + " = ["]
 
         return ["["]
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return ["]"]

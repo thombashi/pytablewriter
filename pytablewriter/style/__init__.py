@@ -8,5 +8,6 @@ from ._styler import (
     MarkdownStyler,
     NullStyler,
     ReStructuredTextStyler,
+    StylerInterface,
     TextStyler,
 )

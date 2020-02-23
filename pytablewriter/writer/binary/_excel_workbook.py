@@ -1,5 +1,6 @@
 import abc
 import warnings
+from typing import Dict, Optional  # noqa
 
 import msgfy
 import typepy
@@ -19,7 +20,7 @@ class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def open(self, file_path):  # pragma: no cover
+    def open(self, file_path: str) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod
@@ -37,29 +38,29 @@ class ExcelWorkbook(ExcelWorkbookInterface):
         return self._workbook
 
     @property
-    def file_path(self):
+    def file_path(self) -> Optional[str]:
         return self._file_path
 
-    def __init__(self, file_path):
+    def _clear(self) -> None:
+        self._workbook = None
+        self._file_path = None  # type: Optional[str]
+        self._worksheet_table = {}  # type: Dict
+
+    def __init__(self, file_path: str) -> None:
         self._clear()
         self._file_path = file_path
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.close()
-
-    def _clear(self):
-        self._workbook = None
-        self._file_path = None
-        self._worksheet_table = {}
 
 
 class ExcelWorkbookXls(ExcelWorkbook):
-    def __init__(self, file_path):
+    def __init__(self, file_path: str) -> None:
         super().__init__(file_path)
 
         self.open(file_path)
 
-    def open(self, file_path):
+    def open(self, file_path: str) -> None:
         try:
             import xlwt
         except ImportError:
@@ -68,7 +69,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
 
         self._workbook = xlwt.Workbook()
 
-    def close(self):
+    def close(self) -> None:
         if self.workbook is None:
             return
 
@@ -101,12 +102,12 @@ class ExcelWorkbookXls(ExcelWorkbook):
 
 
 class ExcelWorkbookXlsx(ExcelWorkbook):
-    def __init__(self, file_path):
+    def __init__(self, file_path: str) -> None:
         super().__init__(file_path)
 
         self.open(file_path)
 
-    def open(self, file_path):
+    def open(self, file_path: str) -> None:
         try:
             import xlsxwriter
         except ImportError:
@@ -115,11 +116,11 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
 
         self._workbook = xlsxwriter.Workbook(file_path)
 
-    def close(self):
+    def close(self) -> None:
         if self.workbook is None:
             return
 
-        self._workbook.close()
+        self._workbook.close()  # type: ignore
         self._clear()
 
     def add_worksheet(self, worksheet_name):

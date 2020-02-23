@@ -1,10 +1,12 @@
 import copy
+from typing import List
 
 import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import ReStructuredTextStyler
+from ...style import ReStructuredTextStyler, StylerInterface
+from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -13,7 +15,7 @@ class RstTableWriter(IndentationTextTableWriter):
     A base class of reStructuredText table writer.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.table_name = ""
@@ -39,7 +41,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def write_table(self):
+    def write_table(self) -> None:
         with self._logger:
             self._write_line(self._get_table_directive())
             self._verify_property()
@@ -47,18 +49,18 @@ class RstTableWriter(IndentationTextTableWriter):
             if self.is_write_null_line_after_table:
                 self.write_null_line()
 
-    def _get_table_directive(self):
+    def _get_table_directive(self) -> str:
         if typepy.is_null_string(self.table_name):
             return ".. table:: \n"
 
         return ".. table:: {}\n".format(MultiByteStrDecoder(self.table_name).unicode_str)
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         self.inc_indent_level()
         super()._write_table()
         self.dec_indent_level()
 
-    def _create_styler(self, writer):
+    def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return ReStructuredTextStyler(writer)
 
 
@@ -75,14 +77,14 @@ class RstCsvTableWriter(RstTableWriter):
     FORMAT_NAME = "rst_csv_table"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.column_delimiter = ", "
@@ -94,7 +96,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         self._quoting_flags[typepy.Typecode.STRING] = True
 
-    def write_table(self):
+    def write_table(self) -> None:
         """
         |write_table| with reStructuredText CSV table format.
 
@@ -109,7 +111,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         IndentationTextTableWriter.write_table(self)
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         directive = ".. csv-table:: "
 
         if typepy.is_null_string(self.table_name):
@@ -117,12 +119,12 @@ class RstCsvTableWriter(RstTableWriter):
 
         return [directive + MultiByteStrDecoder(self.table_name).unicode_str]
 
-    def _write_opening_row(self):
+    def _write_opening_row(self) -> None:
         self.dec_indent_level()
         super()._write_opening_row()
         self.inc_indent_level()
 
-    def _write_header(self):
+    def _write_header(self) -> None:
         if not self.is_write_header:
             return
 
@@ -141,10 +143,10 @@ class RstCsvTableWriter(RstTableWriter):
         )
         self._write_line()
 
-    def _get_value_row_separator_items(self):
+    def _get_value_row_separator_items(self) -> List[str]:
         return []
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         return []
 
 
@@ -171,14 +173,14 @@ class RstGridTableWriter(RstTableWriter):
     FORMAT_NAME = "rst_grid_table"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return False
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.char_left_side_row = "|"
@@ -208,14 +210,14 @@ class RstSimpleTableWriter(RstTableWriter):
     FORMAT_NAME = "rst_simple_table"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return False
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.column_delimiter = "  "

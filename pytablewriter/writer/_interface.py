@@ -12,14 +12,14 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
     """
 
     @abc.abstractproperty
-    def format_name(self):  # pragma: no cover
+    def format_name(self) -> str:  # pragma: no cover
         """
         :return: Format name for the writer.
         :rtype: str
         """
 
     @abc.abstractproperty
-    def support_split_write(self):  # pragma: no cover
+    def support_split_write(self) -> bool:  # pragma: no cover
         """
         :return:
             |True| if the writer supported iterative table writing (``write_table_iter`` method).
@@ -27,18 +27,18 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
         """
 
     @abc.abstractmethod
-    def write_table(self):  # pragma: no cover
+    def write_table(self) -> None:  # pragma: no cover
         """
         |write_table|.
         """
 
-    def dump(self, output, close_after_write):  # pragma: no cover
+    def dump(self, output, close_after_write: bool) -> None:  # pragma: no cover
         raise NotImplementedError("{} writer did not support dump method".format(self.format_name))
 
-    def dumps(self):  # pragma: no cover
+    def dumps(self) -> str:  # pragma: no cover
         raise NotImplementedError("{} writer did not support dumps method".format(self.format_name))
 
-    def write_table_iter(self):  # pragma: no cover
+    def write_table_iter(self) -> None:  # pragma: no cover
         """
         Write a table with iteration. "Iteration" means that divide the table
         writing into multiple processes.
@@ -66,13 +66,13 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
         self._write_table_iter()
 
     @abc.abstractmethod
-    def _write_table_iter(self):  # pragma: no cover
+    def _write_table_iter(self) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def close(self):  # pragma: no cover
+    def close(self) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def _write_value_row_separator(self):  # pragma: no cover
+    def _write_value_row_separator(self) -> None:  # pragma: no cover
         pass

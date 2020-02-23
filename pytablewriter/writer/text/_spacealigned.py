@@ -23,10 +23,10 @@ class SpaceAlignedTableWriter(CsvTableWriter):
     FORMAT_NAME = "space_aligned"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.column_delimiter = "  "

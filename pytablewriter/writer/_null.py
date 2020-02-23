@@ -11,39 +11,39 @@ class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInte
     FORMAT_NAME = "null"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def set_indent_level(self, indent_level):
+    def set_indent_level(self, indent_level: int) -> None:
         pass
 
-    def inc_indent_level(self):
+    def inc_indent_level(self) -> None:
         pass
 
-    def dec_indent_level(self):
+    def dec_indent_level(self) -> None:
         pass
 
-    def write_null_line(self):
+    def write_null_line(self) -> None:
         pass
 
-    def write_table(self):
+    def write_table(self) -> None:
         pass
 
-    def dump(self, output, close_after_write=True):
+    def dump(self, output, close_after_write: bool = True) -> None:
         pass
 
-    def dumps(self):
+    def dumps(self) -> str:
         return ""
 
-    def _write_table_iter(self):
+    def _write_table_iter(self) -> None:
         pass
 
-    def close(self):
+    def close(self) -> None:
         pass
 
-    def _write_value_row_separator(self):
+    def _write_value_row_separator(self) -> None:
         pass

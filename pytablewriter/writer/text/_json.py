@@ -1,5 +1,6 @@
 import copy
 from decimal import Decimal
+from typing import Any, List
 
 import dataproperty
 import typepy
@@ -43,14 +44,14 @@ class JsonTableWriter(IndentationTextTableWriter):
     FORMAT_NAME = "json"
 
     @property
-    def format_name(self):
+    def format_name(self) -> str:
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.is_formatting_float = False
@@ -72,11 +73,11 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def write_null_line(self):
+    def write_null_line(self) -> None:
         self._verify_stream()
         self.stream.write("\n")
 
-    def _write_table(self):
+    def _write_table(self) -> None:
         self._preprocess_value_matrix()
 
         with self._logger:
@@ -103,7 +104,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             self.dec_indent_level()
             self._write_closing_row()
 
-    def _preprocess_value_matrix(self):
+    def _preprocess_value_matrix(self) -> None:
         if self._is_complete_value_matrix_preprocess:
             return
 
@@ -119,7 +120,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._is_complete_value_matrix_preprocess = True
 
     @staticmethod
-    def __get_data_helper(dp):
+    def __get_data_helper(dp: dataproperty.DataProperty) -> Any:
         if dp.typecode == Typecode.REAL_NUMBER and isinstance(dp.data, Decimal):
             return float(dp.data)
 
@@ -128,13 +129,13 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         return dp.data
 
-    def _get_opening_row_items(self):
+    def _get_opening_row_items(self) -> List[str]:
         if typepy.is_not_null_string(self.table_name):
             return ['{{ "{:s}" : ['.format(MultiByteStrDecoder(self.table_name).unicode_str)]
 
         return ["["]
 
-    def _get_closing_row_items(self):
+    def _get_closing_row_items(self) -> List[str]:
         if typepy.is_not_null_string(self.table_name):
             return ["]}"]
 
