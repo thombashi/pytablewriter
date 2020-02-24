@@ -14,6 +14,47 @@ from typepy import Typecode
 from ._table_writer import AbstractTableWriter
 
 
+def _get_es_datatype(column_dp: ColumnDataProperty) -> Dict[str, str]:
+    if column_dp.typecode in (
+        Typecode.NONE,
+        Typecode.NULL_STRING,
+        Typecode.INFINITY,
+        Typecode.NAN,
+    ):
+        return {"type": "keyword"}
+
+    if column_dp.typecode == Typecode.STRING:
+        return {"type": "text"}
+
+    if column_dp.typecode == Typecode.DATETIME:
+        return {"type": "date", "format": "date_optional_time"}
+
+    if column_dp.typecode == Typecode.REAL_NUMBER:
+        return {"type": "double"}
+
+    if column_dp.typecode == Typecode.BOOL:
+        return {"type": "boolean"}
+
+    if column_dp.typecode == Typecode.IP_ADDRESS:
+        return {"type": "ip"}
+
+    if column_dp.typecode == Typecode.INTEGER:
+        if column_dp.bit_length <= 8:
+            return {"type": "byte"}
+        elif column_dp.bit_length <= 16:
+            return {"type": "short"}
+        elif column_dp.bit_length <= 32:
+            return {"type": "integer"}
+        elif column_dp.bit_length <= 64:
+            return {"type": "long"}
+
+        raise ValueError(
+            "too large integer bits: expected<=64bits, actual={:d}bits".format(column_dp.bit_length)
+        )
+
+    raise ValueError("unknown typecode: {}".format(column_dp.typecode))
+
+
 class ElasticsearchWriter(AbstractTableWriter):
     """
     A table writer class for Elasticsearch.
@@ -98,54 +139,11 @@ class ElasticsearchWriter(AbstractTableWriter):
     def write_null_line(self) -> None:
         pass
 
-    @staticmethod
-    def __get_es_datatype(column_dp: ColumnDataProperty) -> Dict[str, str]:
-        if column_dp.typecode in (
-            Typecode.NONE,
-            Typecode.NULL_STRING,
-            Typecode.INFINITY,
-            Typecode.NAN,
-        ):
-            return {"type": "keyword"}
-
-        if column_dp.typecode == Typecode.STRING:
-            return {"type": "text"}
-
-        if column_dp.typecode == Typecode.DATETIME:
-            return {"type": "date", "format": "date_optional_time"}
-
-        if column_dp.typecode == Typecode.REAL_NUMBER:
-            return {"type": "double"}
-
-        if column_dp.typecode == Typecode.BOOL:
-            return {"type": "boolean"}
-
-        if column_dp.typecode == Typecode.IP_ADDRESS:
-            return {"type": "ip"}
-
-        if column_dp.typecode == Typecode.INTEGER:
-            if column_dp.bit_length <= 8:
-                return {"type": "byte"}
-            elif column_dp.bit_length <= 16:
-                return {"type": "short"}
-            elif column_dp.bit_length <= 32:
-                return {"type": "integer"}
-            elif column_dp.bit_length <= 64:
-                return {"type": "long"}
-
-            raise ValueError(
-                "too large integer bits: expected<=64bits, actual={:d}bits".format(
-                    column_dp.bit_length
-                )
-            )
-
-        raise ValueError("unknown typecode: {}".format(column_dp.typecode))
-
     def _get_mappings(self) -> Dict[str, Dict]:
         properties = {}
 
         for header, column_dp in zip(self.headers, self._column_dp_list):
-            properties[header] = self.__get_es_datatype(column_dp)
+            properties[header] = _get_es_datatype(column_dp)
 
         return {"mappings": {self.document_type: {"properties": properties}}}
 

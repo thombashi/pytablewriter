@@ -42,6 +42,18 @@ _ts_to_flag = {
 }
 
 
+def _get_typehint_from_dtype(col_dtype):
+    col_dtype = str(col_dtype)
+
+    if re.search("^float", col_dtype):
+        return typepy.RealNumber
+
+    if re.search("^int", col_dtype):
+        return typepy.Integer
+
+    return None
+
+
 class AbstractTableWriter(TableWriterInterface):
     """
     An abstract base class of table writer classes.
@@ -631,7 +643,7 @@ class AbstractTableWriter(TableWriterInterface):
             dataframe = pd.read_pickle(dataframe)
 
         self.headers = list(dataframe.columns.values)
-        self.type_hints = [self.__get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
+        self.type_hints = [_get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
 
         if add_index_column:
             self.headers = [""] + self.headers
@@ -666,7 +678,7 @@ class AbstractTableWriter(TableWriterInterface):
         else:
             self.headers = ["value"]
 
-        self.type_hints = [self.__get_typehint_from_dtype(series.dtype)]
+        self.type_hints = [_get_typehint_from_dtype(series.dtype)]
 
         if add_index_column:
             self.headers = [""] + self.headers
@@ -838,18 +850,6 @@ class AbstractTableWriter(TableWriterInterface):
         format_list.append("s}")
 
         return "".join(format_list)
-
-    @staticmethod
-    def __get_typehint_from_dtype(col_dtype):
-        col_dtype = str(col_dtype)
-
-        if re.search("^float", col_dtype):
-            return typepy.RealNumber
-
-        if re.search("^int", col_dtype):
-            return typepy.Integer
-
-        return None
 
     def _verify_property(self) -> None:
         self._verify_table_name()

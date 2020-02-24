@@ -17,6 +17,17 @@ class ThousandSeparator(Enum):
 _s_to_ts = {"": ThousandSeparator.NONE, ",": ThousandSeparator.COMMA, " ": ThousandSeparator.SPACE}
 
 
+def _normalize_thousand_separator(value: Union[str, ThousandSeparator]) -> ThousandSeparator:
+    if isinstance(value, ThousandSeparator):
+        return value
+
+    norm_value = _s_to_ts.get(value)
+    if norm_value is None:
+        return cast(ThousandSeparator, value)
+
+    return norm_value
+
+
 class Style:
     """Style specifier class for table elements.
 
@@ -108,7 +119,7 @@ class Style:
         )
         self.__validate_attr("font_weight", FontWeight)
 
-        self.__thousand_separator = self.__normalize_thousand_separator(
+        self.__thousand_separator = _normalize_thousand_separator(
             normalize_enum(
                 kwargs.pop("thousand_separator", ThousandSeparator.NONE), ThousandSeparator
             )
@@ -157,14 +168,3 @@ class Style:
                     attr_name, expected_type.__name__, type(value)
                 )
             )
-
-    @staticmethod
-    def __normalize_thousand_separator(value: Union[str, ThousandSeparator]) -> ThousandSeparator:
-        if isinstance(value, ThousandSeparator):
-            return value
-
-        norm_value = _s_to_ts.get(value)
-        if norm_value is None:
-            return cast(ThousandSeparator, value)
-
-        return norm_value
