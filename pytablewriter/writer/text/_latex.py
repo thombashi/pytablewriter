@@ -20,7 +20,7 @@ class LatexWriter(IndentationTextTableWriter):
     _RE_MATH_PARTS = re.compile("^[\\]?[a-zA-z]+$")
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
     def __init__(self) -> None:
@@ -127,7 +127,7 @@ class LatexMatrixWriter(LatexWriter):
 
         return row_item
 
-    def _get_header_row_separator_items(self):
+    def _get_header_row_separator_items(self) -> List[str]:
         return []
 
     def _get_opening_row_items(self) -> List[str]:
@@ -196,13 +196,13 @@ class LatexTableWriter(LatexWriter):
             )
         ]
 
-    def __is_requre_verbatim(self, value_dp):
+    def __is_requre_verbatim(self, value_dp: DataProperty) -> bool:
         if value_dp.typecode != typepy.Typecode.STRING:
             return False
 
         return True
 
-    def __verbatim(self, value):
+    def __verbatim(self, value: str) -> str:
         return r"\verb" + "|{:s}|".format(value)
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
