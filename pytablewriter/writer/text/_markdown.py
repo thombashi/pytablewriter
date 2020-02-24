@@ -49,8 +49,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__escape_vertical_bar_char(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        return self.__escape_vertical_bar_char(super()._to_row_item(col_dp, value_dp))
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        return self.__escape_vertical_bar_char(super()._to_row_item(row_idx, col_dp, value_dp))
 
     def _get_opening_row_items(self) -> List[str]:
         return []

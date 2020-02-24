@@ -130,8 +130,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def _get_closing_row_items(self) -> List[str]:
         return ["];"]
 
-    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         if value_dp.data is None:
             value_dp = self.__NONE_VALUE_DP
 
-        return super()._to_row_item(col_dp, value_dp)
+        return super()._to_row_item(row_idx, col_dp, value_dp)

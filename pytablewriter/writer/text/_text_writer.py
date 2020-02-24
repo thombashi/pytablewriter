@@ -278,8 +278,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__value_cell_margin_format.format(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        return self.__value_cell_margin_format.format(super()._to_row_item(col_dp, value_dp))
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        return self.__value_cell_margin_format.format(
+            super()._to_row_item(row_idx, col_dp, value_dp)
+        )
 
     def _write_raw_string(self, unicode_text: str) -> None:
         self.stream.write(unicode_text)

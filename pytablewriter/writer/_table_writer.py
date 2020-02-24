@@ -7,7 +7,7 @@ import abc
 import math
 import re
 import warnings
-from typing import Callable, Dict, List, Optional, Union, cast  # noqa
+from typing import Any, Callable, Dict, List, Optional, Union, cast  # noqa
 
 import msgfy
 import typepy
@@ -33,6 +33,9 @@ from ..error import (
 )
 from ..style import Align, NullStyler, Style, StylerInterface, ThousandSeparator  # noqa
 from ._interface import TableWriterInterface
+
+
+StyleFilterFunc = Callable[[int, int, Any, Style], Optional[Style]]
 
 
 _ts_to_flag = {
@@ -385,6 +388,7 @@ class AbstractTableWriter(TableWriterInterface):
 
         self.__default_style = Style()
         self.__col_style_list = []  # type: List[Optional[Style]]
+        self._style_filters = []  # type: List[StyleFilterFunc]
         self._styler = self._create_styler(self)
 
         self.__clear_preprocess()
@@ -459,6 +463,9 @@ class AbstractTableWriter(TableWriterInterface):
             self._dp_extractor.format_flags_list = []
 
         self.__clear_preprocess()
+
+    def add_style_filter(self, style_filter: StyleFilterFunc) -> None:
+        self._style_filters.insert(0, style_filter)
 
     def set_style(self, column: Union[str, int], style: Style) -> None:
         """Set |Style| for a specific column.
@@ -795,12 +802,25 @@ class AbstractTableWriter(TableWriterInterface):
     ) -> str:
         return "{:s}"
 
-    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        default_style = self._get_col_style(col_dp.column_index)
+
         return self.__get_align_format(col_dp, value_dp).format(
             self._styler.apply(
-                col_dp.dp_to_str(value_dp), style=self._get_col_style(col_dp.column_index)
+                col_dp.dp_to_str(value_dp),
+                style=self._fetch_style(row_idx, col_dp.column_index, value_dp, default_style),
             )
         )
+
+    def _fetch_style(
+        self, row_idx: int, col_idx: int, value_dp: DataProperty, default_style: Style
+    ) -> Style:
+        for style_filter in self._style_filters:
+            style = style_filter(row_idx, col_idx, value_dp.data, default_style)
+            if style:
+                return style
+
+        return default_style
 
     def _get_col_style(self, col_idx: int) -> Style:
         try:
@@ -972,10 +992,10 @@ class AbstractTableWriter(TableWriterInterface):
 
         self._table_value_matrix = [
             [
-                self._to_row_item(col_dp, value_dp)
+                self._to_row_item(row_idx, col_dp, value_dp)
                 for col_dp, value_dp in zip(self._column_dp_list, value_dp_list)
             ]
-            for value_dp_list in self._table_value_dp_matrix
+            for row_idx, value_dp_list in enumerate(self._table_value_dp_matrix)
         ]
 
         self._is_complete_value_matrix_preprocess = True

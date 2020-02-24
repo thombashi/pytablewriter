@@ -116,8 +116,8 @@ class LatexMatrixWriter(LatexWriter):
         self.is_write_header = False
         self.is_write_header_separator_row = False
 
-    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        row_item = super()._to_row_item(col_dp, value_dp)
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        row_item = super()._to_row_item(row_idx, col_dp, value_dp)
 
         if self._RE_VAR.search(row_item):
             return row_item
@@ -208,8 +208,8 @@ class LatexTableWriter(LatexWriter):
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__verbatim(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        row_item = super()._to_row_item(col_dp, value_dp)
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        row_item = super()._to_row_item(row_idx, col_dp, value_dp)
 
         if self._is_math_parts(value_dp):
             return self._to_math_parts(row_item)
