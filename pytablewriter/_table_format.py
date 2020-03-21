@@ -74,17 +74,17 @@ class TableFormat(enum.Enum):
         FormatAttr.API,
         [],
     )
-    EXCEL_XLS = (
-        [ExcelXlsTableWriter.FORMAT_NAME],
-        ExcelXlsTableWriter,
-        FormatAttr.FILE | FormatAttr.BIN | FormatAttr.SECONDARY_NAME,
-        ["xls"],
-    )
     EXCEL_XLSX = (
         [ExcelXlsxTableWriter.FORMAT_NAME],
         ExcelXlsxTableWriter,
         FormatAttr.FILE | FormatAttr.BIN,
         ["xlsx"],
+    )
+    EXCEL_XLS = (
+        [ExcelXlsTableWriter.FORMAT_NAME],
+        ExcelXlsTableWriter,
+        FormatAttr.FILE | FormatAttr.BIN | FormatAttr.SECONDARY_NAME,
+        ["xls"],
     )
     HTML = (
         [HtmlTableWriter.FORMAT_NAME, "htm"],
