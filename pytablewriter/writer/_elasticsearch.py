@@ -112,7 +112,7 @@ class ElasticsearchWriter(AbstractTableWriter):
             self._table_name = ElasticsearchIndexNameSanitizer(value).sanitize(replacement_text="_")
         except ValidationError as e:
             if e.reason is ErrorReason.NULL_NAME:
-                self._table_name = None
+                self._table_name = ""
             else:
                 raise
 

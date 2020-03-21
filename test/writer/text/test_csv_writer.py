@@ -170,7 +170,7 @@ class Test_CsvTableWriter_from_csv:
 
         out, _err = capsys.readouterr()
 
-        assert writer.table_name is None
+        assert writer.table_name == ""
         assert writer.headers == ["a", "b", "c", "dd", "e"]
 
         print_test_result(expected=self.__CSV_EXPECTED, actual=out)
