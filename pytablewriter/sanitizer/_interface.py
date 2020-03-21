@@ -5,7 +5,7 @@
 import abc
 from typing import List
 
-from pathvalidate import validate_null_string
+from pathvalidate import validate_pathtype
 
 
 class NameSanitizer(metaclass=abc.ABCMeta):
@@ -35,4 +35,4 @@ class NameSanitizer(metaclass=abc.ABCMeta):
 
     @staticmethod
     def _validate_null_string(text: str) -> None:
-        validate_null_string(text, error_msg="null name")
+        validate_pathtype(text, error_msg="null name")

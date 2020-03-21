@@ -4,7 +4,7 @@
 
 import re
 
-from pathvalidate import InvalidCharError, InvalidLengthError, validate_null_string
+from pathvalidate import InvalidCharError, InvalidLengthError, validate_pathtype
 
 from ._base import _preprocess
 
@@ -28,7 +28,7 @@ def validate_excel_sheet_name(sheet_name: str) -> None:
         If the ``sheet_name`` is longer than 31 characters.
     """
 
-    validate_null_string(sheet_name)
+    validate_pathtype(sheet_name)
 
     if len(sheet_name) > __MAX_SHEET_NAME_LEN:
         raise InvalidLengthError(
