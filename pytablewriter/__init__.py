@@ -33,6 +33,7 @@ from .error import (
 )
 from .style import Align, Format
 from .writer import (
+    AbstractTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
     ExcelXlsTableWriter,
