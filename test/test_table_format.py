@@ -43,3 +43,12 @@ class Test_TableFormat_search_table_format:
     )
     def test_normal(self, value, expected):
         assert set(TableFormat.find_all_attr(value)) == set(expected)
+
+
+class Test_TableFormat_from_name:
+    @pytest.mark.parametrize(
+        ["value", "expected"],
+        [["csv", TableFormat.CSV], ["CSV", TableFormat.CSV], ["excel", TableFormat.EXCEL_XLSX],],
+    )
+    def test_normal(self, value, expected):
+        assert TableFormat.from_name(value) == expected

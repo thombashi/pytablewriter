@@ -267,3 +267,22 @@ class TableFormat(enum.Enum):
             for table_format in TableFormat
             if table_format.format_attribute & format_attribute
         ]
+
+    @classmethod
+    def from_name(cls, format_name: str):
+        """Get a table format from a name.
+
+        Args:
+            format_name (str): Table format specifier.
+
+        Returns:
+            TableFormat: A table format enum value corresponding to the ``format_name``.
+        """
+
+        format_name = format_name.lower().strip()
+
+        for table_format in TableFormat:
+            if format_name in table_format.names:
+                return table_format
+
+        return None
