@@ -64,6 +64,6 @@ def normalize_enum(value, enum_class):
         return value
 
     try:
-        return enum_class[value.upper()]
+        return enum_class[value.strip().upper()]
     except KeyError:
         return value
