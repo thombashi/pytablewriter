@@ -6,11 +6,11 @@ import dataproperty
 from tabledata._core import TableData
 
 
-def quote_datetime_formatter(value):
+def quote_datetime_formatter(value) -> str:
     return '"{:s}"'.format(value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
 
 
-def dateutil_datetime_formatter(value):
+def dateutil_datetime_formatter(value) -> str:
     return 'dateutil.parser.parse("{:s}")'.format(
         value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT)
     )

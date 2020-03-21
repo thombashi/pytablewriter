@@ -7,7 +7,7 @@ import abc
 import math
 import re
 import warnings
-from typing import Any, Callable, Dict, List, Optional, Union, cast  # noqa
+from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast  # noqa
 
 import msgfy
 import typepy
@@ -124,11 +124,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._table_name
 
     @table_name.setter
-    def table_name(self, value) -> None:
+    def table_name(self, value: str) -> None:
         self._table_name = value
 
     @property
-    def headers(self) -> List[str]:
+    def headers(self) -> Sequence[str]:
         """
         List of table header to write.
         """
@@ -136,7 +136,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._dp_extractor.headers
 
     @headers.setter
-    def headers(self, value: List[str]) -> None:
+    def headers(self, value: Sequence[str]) -> None:
         self._dp_extractor.headers = value
 
     @property
@@ -159,7 +159,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self.__value_matrix_org
 
     @value_matrix.setter
-    def value_matrix(self, value_matrix) -> None:
+    def value_matrix(self, value_matrix: Sequence) -> None:
         self.__set_value_matrix(value_matrix)
         self.__clear_preprocess()
 
@@ -175,7 +175,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         )
 
     @property
-    def type_hints(self) -> List:
+    def type_hints(self) -> Sequence:
         """
         Type hints for each column of the tabular data.
         Writers convert data for each column using the type hints information
@@ -215,11 +215,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._dp_extractor.column_type_hints
 
     @type_hints.setter
-    def type_hints(self, value: List) -> None:
-        if self.type_hints == value:
+    def type_hints(self, value: Sequence) -> None:
+        hints = list(value)
+        if self.type_hints == hints:
             return
 
-        self.__set_type_hints(value)
+        self.__set_type_hints(hints)
         self.__clear_preprocess()
 
     @property
@@ -309,11 +310,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._stream = value
 
     @property
-    def _quoting_flags(self):
+    def _quoting_flags(self) -> Dict[Typecode, bool]:
         return self._dp_extractor.quoting_flags
 
     @_quoting_flags.setter
-    def _quoting_flags(self, value) -> None:
+    def _quoting_flags(self, value: Dict[Typecode, bool]) -> None:
         self._dp_extractor.quoting_flags = value
         self.__clear_preprocess()
 
@@ -322,7 +323,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._dp_extractor.max_workers
 
     @max_workers.setter
-    def max_workers(self, value: int) -> None:
+    def max_workers(self, value: Optional[int]) -> None:
         self._dp_extractor.max_workers = value
 
     @abc.abstractmethod
@@ -414,7 +415,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._column_dp_list = []  # type: List[ColumnDataProperty]
         self._table_headers = []  # type: List[str]
         self._table_value_matrix = []  # type: List[Union[List[str], Dict]]
-        self._table_value_dp_matrix = []  # type: List[List[DataProperty]]
+        self._table_value_dp_matrix = []  # type: Sequence[Sequence[DataProperty]]
 
     @property
     def default_style(self) -> Style:
@@ -448,11 +449,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self.__col_style_list
 
     @column_styles.setter
-    def column_styles(self, value) -> None:
+    def column_styles(self, value: Sequence[Optional[Style]]) -> None:
         if self.__col_style_list == value:
             return
 
-        self.__col_style_list = value
+        self.__col_style_list = list(value)
 
         if self.__col_style_list:
             self._dp_extractor.format_flags_list = [
@@ -570,10 +571,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
         if is_overwrite_table_name:
-            self.table_name = value.table_name
+            self.table_name = str(value.table_name)
 
         self.headers = value.headers
-        self.value_matrix = value.rows
+        self.value_matrix = list(value.rows)
 
         if not value.has_value_dp_matrix:
             return

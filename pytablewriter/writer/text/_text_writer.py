@@ -1,7 +1,7 @@
 import enum
 import io
 import sys
-from typing import List, cast
+from typing import List, Sequence, cast
 
 import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
@@ -295,7 +295,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _write_line(self, text: str = "") -> None:
         self._write_raw_line(text)
 
-    def _write_row(self, values: List[str]) -> None:
+    def _write_row(self, values: Sequence[str]) -> None:
         if typepy.is_empty_sequence(values):
             return
 
@@ -312,7 +312,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_row(self._table_headers)
 
-    def _write_value_row(self, values: List[str], value_dp_list: List[DataProperty]) -> None:
+    def _write_value_row(
+        self, values: Sequence[str], value_dp_list: Sequence[DataProperty]
+    ) -> None:
         self._write_row(values)
 
     def __write_separator_row(self, values, row_type=RowType.MIDDLE):
