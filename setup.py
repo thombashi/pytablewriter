@@ -94,7 +94,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/x-rst",
     packages=setuptools.find_packages(exclude=["test*"]),
-    package_data={"pytablewriter": ["py.typed"]},
+    package_data={MODULE_NAME: ["py.typed"]},
     project_urls={
         "Documentation": "https://{:s}.rtfd.io/".format(MODULE_NAME),
         "Source": REPOSITORY_URL,
