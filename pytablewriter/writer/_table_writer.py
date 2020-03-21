@@ -57,7 +57,7 @@ def _get_typehint_from_dtype(col_dtype):
     return None
 
 
-class AbstractTableWriter(TableWriterInterface):
+class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     """
     An abstract base class of table writer classes.
 
