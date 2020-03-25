@@ -829,9 +829,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         except (TypeError, IndexError, KeyError):
             pass
         else:
-            if style is None:
-                return self.default_style
-            return style
+            if style:
+                return style
 
         return self.default_style
 
