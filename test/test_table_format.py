@@ -14,6 +14,7 @@ class Test_TableFormat_search_table_format:
             [
                 FormatAttr.TEXT,
                 [
+                    TableFormat.BOLD_UNICODE,
                     TableFormat.CSV,
                     TableFormat.HTML,
                     TableFormat.JAVASCRIPT,

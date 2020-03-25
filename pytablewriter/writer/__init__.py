@@ -3,6 +3,7 @@ from ._null import NullTableWriter
 from ._table_writer import AbstractTableWriter
 from .binary import ExcelXlsTableWriter, ExcelXlsxTableWriter, SqliteTableWriter
 from .text import (
+    BoldUnicodeTableWriter,
     CsvTableWriter,
     HtmlTableWriter,
     JsonLinesTableWriter,

@@ -6,6 +6,7 @@ import enum
 from typing import Any, List
 
 from .writer import (
+    BoldUnicodeTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
     ExcelXlsTableWriter,
@@ -204,6 +205,12 @@ class TableFormat(enum.Enum):
     UNICODE = (
         [UnicodeTableWriter.FORMAT_NAME],  # type: ignore
         UnicodeTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT,
+        [],
+    )
+    BOLD_UNICODE = (
+        [BoldUnicodeTableWriter.FORMAT_NAME],  # type: ignore
+        BoldUnicodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
     )
