@@ -116,6 +116,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     @property
+    def margin(self) -> int:
+        raise NotImplementedError()
+
+    @margin.setter
+    def margin(self, value: int) -> None:
+        raise NotImplementedError()
+
+    @property
     def table_name(self) -> str:
         """
         Name of the table.
