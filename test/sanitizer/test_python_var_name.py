@@ -6,7 +6,7 @@ import itertools
 import string
 
 import pytest
-from pathvalidate import InvalidCharError, ReservedNameError, ValidationError
+from pathvalidate.error import ErrorReason, ValidationError
 
 from pytablewriter.sanitizer import sanitize_python_var_name, validate_python_var_name
 
@@ -67,15 +67,17 @@ class Test_validate_python_var_name:
         ["value"], [["abc" + invalid_c + "hoge123"] for invalid_c in INVALID_CHAR_LIST]
     )
     def test_exception_invalid_char(self, value):
-        with pytest.raises(InvalidCharError):
+        with pytest.raises(ValidationError) as e:
             validate_python_var_name(value)
+        assert e.value.reason == ErrorReason.INVALID_CHARACTER
 
     @pytest.mark.parametrize(
         ["value"], [[invalid_c + "hoge123"] for invalid_c in string.digits + "_"]
     )
     def test_exception_invalid_first_char(self, value):
-        with pytest.raises(InvalidCharError):
+        with pytest.raises(ValidationError) as e:
             validate_python_var_name(value)
+        assert e.value.reason == ErrorReason.INVALID_CHARACTER
 
     @pytest.mark.parametrize(
         ["value", "expected"],
@@ -94,13 +96,14 @@ class Test_validate_python_var_name:
     @pytest.mark.parametrize(
         ["value", "expected"],
         [
-            [reserved_keyword, ReservedNameError]
+            [reserved_keyword, ErrorReason.RESERVED_NAME]
             for reserved_keyword in RESERVED_KEYWORDS + ["__debug__"]
         ],
     )
     def test_exception_reserved(self, value, expected):
-        with pytest.raises(expected) as e:
+        with pytest.raises(ValidationError) as e:
             validate_python_var_name(value)
+        assert e.value.reason == expected
         assert e.value.reusable_name is False
 
 

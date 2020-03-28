@@ -97,9 +97,9 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
 def validate_js_var_name(var_name: str) -> None:
     """
     :param str var_name: Name to validate.
-    :raises pathvalidate.InvalidCharError:
+    :raises pathvalidate.ValidationError (ErrorReason.INVALID_CHARACTER):
         If the ``var_name`` is invalid as a JavaScript identifier.
-    :raises pathvalidate.ReservedNameError:
+    :raises pathvalidate.ValidationError (ErrorReason.RESERVED_NAME):
         If the ``var_name`` is equals to
         `JavaScript reserved keywords
         <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords>`__.

@@ -4,7 +4,8 @@
 
 import re
 
-from pathvalidate import InvalidCharError, InvalidLengthError, validate_pathtype
+from pathvalidate import validate_pathtype
+from pathvalidate.error import ErrorReason, ValidationError
 
 from ._base import _preprocess
 
@@ -21,27 +22,31 @@ __RE_INVALID_EXCEL_SHEET_NAME = re.compile(
 def validate_excel_sheet_name(sheet_name: str) -> None:
     """
     :param str sheet_name: Excel sheet name to validate.
-    :raises pathvalidate.InvalidCharError:
+    :raises pathvalidate.ValidationError (ErrorReason.INVALID_CHARACTER):
         If the ``sheet_name`` includes invalid char(s):
         |invalid_excel_sheet_chars|.
-    :raises pathvalidate.InvalidLengthError:
+    :raises pathvalidate.ValidationError (ErrorReason.INVALID_LENGTH):
         If the ``sheet_name`` is longer than 31 characters.
     """
 
     validate_pathtype(sheet_name)
 
     if len(sheet_name) > __MAX_SHEET_NAME_LEN:
-        raise InvalidLengthError(
-            "sheet name is too long: expected<={:d}, actual={:d}".format(
+        raise ValidationError(
+            description="sheet name is too long: expected<={:d}, actual={:d}".format(
                 __MAX_SHEET_NAME_LEN, len(sheet_name)
-            )
+            ),
+            reason=ErrorReason.INVALID_LENGTH,
         )
 
     unicode_sheet_name = _preprocess(sheet_name)
     match = __RE_INVALID_EXCEL_SHEET_NAME.search(unicode_sheet_name)
     if match is not None:
-        raise InvalidCharError(
-            "invalid char found in the sheet name: '{:s}'".format(re.escape(match.group()))
+        raise ValidationError(
+            description="invalid char found in the sheet name: '{:s}'".format(
+                re.escape(match.group())
+            ),
+            reason=ErrorReason.INVALID_CHARACTER,
         )
 
 

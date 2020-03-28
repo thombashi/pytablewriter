@@ -6,7 +6,7 @@ import itertools
 import random
 
 import pytest
-from pathvalidate import InvalidCharError, InvalidLengthError, ValidationError
+from pathvalidate.error import ErrorReason, ValidationError
 
 from pytablewriter.sanitizer import sanitize_excel_sheet_name, validate_excel_sheet_name
 
@@ -44,8 +44,9 @@ class Test_validate_excel_sheet_name:
         ],
     )
     def test_exception_invalid_char(self, value):
-        with pytest.raises(InvalidCharError):
+        with pytest.raises(ValidationError) as e:
             validate_excel_sheet_name(value)
+        assert e.value.reason == ErrorReason.INVALID_CHARACTER
 
     @pytest.mark.parametrize(
         ["value", "expected"],
@@ -54,7 +55,7 @@ class Test_validate_excel_sheet_name:
             ["", ValidationError],
             [1, TypeError],
             [True, TypeError],
-            ["a" * 32, InvalidLengthError],
+            ["a" * 32, ValidationError],
         ],
     )
     def test_exception(self, value, expected):

@@ -5,7 +5,7 @@
 import abc
 import re
 
-from pathvalidate import InvalidCharError, ReservedNameError
+from pathvalidate.error import ErrorReason, ValidationError
 from typepy import is_null_string
 
 from ._interface import NameSanitizer
@@ -52,8 +52,8 @@ class VarNameSanitizer(NameSanitizer):
 
         try:
             self._validate(sanitized_var_name)
-        except ReservedNameError as e:
-            if e.reusable_name is False:
+        except ValidationError as e:
+            if e.reason == ErrorReason.RESERVED_NAME and e.reusable_name is False:
                 sanitized_var_name += "_"
 
         return sanitized_var_name
@@ -64,22 +64,27 @@ class VarNameSanitizer(NameSanitizer):
         unicode_var_name = _preprocess(value)
 
         if self._is_reserved_keyword(unicode_var_name):
-            raise ReservedNameError(
-                "{:s} is a reserved keyword by python".format(unicode_var_name),
+            raise ValidationError(
+                description="{:s} is a reserved keyword by python".format(unicode_var_name),
+                reason=ErrorReason.RESERVED_NAME,
                 reusable_name=False,
                 reserved_name=unicode_var_name,
             )
 
         match = self._invalid_var_name_re.search(unicode_var_name)
         if match is not None:
-            raise InvalidCharError(
-                "invalid char found in the variable name: '{}'".format(re.escape(match.group()))
+            raise ValidationError(
+                description="invalid char found in the variable name: '{}'".format(
+                    re.escape(match.group())
+                ),
+                reason=ErrorReason.INVALID_CHARACTER,
             )
 
         match = self._invalid_var_name_head_re.search(unicode_var_name)
         if match is not None:
-            raise InvalidCharError(
-                "the first character of the variable name is invalid: '{}'".format(
+            raise ValidationError(
+                description="the first character of the variable name is invalid: '{}'".format(
                     re.escape(match.group())
-                )
+                ),
+                reason=ErrorReason.INVALID_CHARACTER,
             )

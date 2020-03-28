@@ -70,10 +70,10 @@ class PythonVarNameSanitizer(VarNameSanitizer):
 def validate_python_var_name(var_name: str) -> None:
     """
     :param str var_name: Name to validate.
-    :raises pathvalidate.InvalidCharError: If the ``var_name`` is invalid as
+    :raises pathvalidate.ValidationError (ErrorReason.INVALID_CHARACTER): If the ``var_name`` is invalid as
         `Python identifier
         <https://docs.python.org/3/reference/lexical_analysis.html#identifiers>`__.
-    :raises pathvalidate.ReservedNameError:
+    :raises pathvalidate.ValidationError (ErrorReason.RESERVED_NAME):
         If the ``var_name`` is equals to
         `Python reserved keywords
         <https://docs.python.org/3/reference/lexical_analysis.html#keywords>`__
