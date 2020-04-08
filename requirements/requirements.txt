@@ -1,6 +1,6 @@
-DataProperty>=0.46.4,<2
-mbstrdecoder>=0.8.3,<2
+DataProperty>=0.47.0,<2
+mbstrdecoder>=1.0.0,<2
 msgfy>=0.0.6,<1
-pathvalidate<3
-tabledata>=0.10.3,<2
-typepy[datetime]>=0.6.4,<2
+pathvalidate>=2.2.2,<3
+tabledata>=1.1.1,<2
+typepy[datetime]>=1.0.0,<2
