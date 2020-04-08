@@ -5,7 +5,6 @@
 
 import abc
 import math
-import re
 import warnings
 from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast  # noqa
 
@@ -21,7 +20,7 @@ from dataproperty import (
     Preprocessor,
 )
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
-from typepy import String, Typecode
+from typepy import String, Typecode, extract_typepy_from_dtype
 
 from .._logger import WriterLogger
 from ..error import (
@@ -43,18 +42,6 @@ _ts_to_flag = {
     ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
     ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
 }
-
-
-def _get_typehint_from_dtype(col_dtype):
-    col_dtype = str(col_dtype)
-
-    if re.search("^float", col_dtype):
-        return typepy.RealNumber
-
-    if re.search("^int", col_dtype):
-        return typepy.Integer
-
-    return None
 
 
 class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
@@ -659,7 +646,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             dataframe = pd.read_pickle(dataframe)
 
         self.headers = list(dataframe.columns.values)
-        self.type_hints = [_get_typehint_from_dtype(dtype) for dtype in dataframe.dtypes]
+        self.type_hints = [extract_typepy_from_dtype(dtype) for dtype in dataframe.dtypes]
 
         if add_index_column:
             self.headers = [""] + self.headers
@@ -694,7 +681,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         else:
             self.headers = ["value"]
 
-        self.type_hints = [_get_typehint_from_dtype(series.dtype)]
+        self.type_hints = [extract_typepy_from_dtype(series.dtype)]
 
         if add_index_column:
             self.headers = [""] + self.headers
