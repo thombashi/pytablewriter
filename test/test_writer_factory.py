@@ -13,6 +13,7 @@ class Test_WriterFactory_get_format_names:
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_names() == [
             "bold_unicode",
+            "borderless",
             "csv",
             "elasticsearch",
             "excel",

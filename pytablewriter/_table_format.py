@@ -7,6 +7,7 @@ from typing import Any, List
 
 from .writer import (
     BoldUnicodeTableWriter,
+    BorderlessTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
     ExcelXlsTableWriter,
@@ -212,6 +213,12 @@ class TableFormat(enum.Enum):
         [BoldUnicodeTableWriter.FORMAT_NAME],  # type: ignore
         BoldUnicodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
+        [],
+    )
+    BORDERLESS = (
+        [BorderlessTableWriter.FORMAT_NAME],  # type: ignore
+        BorderlessTableWriter,
+        FormatAttr.TEXT,
         [],
     )
 

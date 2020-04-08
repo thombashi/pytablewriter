@@ -35,6 +35,7 @@ from .style import Align, Format
 from .writer import (
     AbstractTableWriter,
     BoldUnicodeTableWriter,
+    BorderlessTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
     ExcelXlsTableWriter,
