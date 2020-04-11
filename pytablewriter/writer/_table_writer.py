@@ -6,7 +6,7 @@
 import abc
 import math
 import warnings
-from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast  # noqa
+from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast
 
 import msgfy
 import typepy
