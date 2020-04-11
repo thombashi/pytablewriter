@@ -100,7 +100,7 @@ class WriterLogger:
         if self.__writer.table_name:
             table_name = MultiByteStrDecoder(self.__writer.table_name).unicode_str
         else:
-            table_name = None
+            table_name = ""
 
         return "table-name='{}'".format(table_name)
 
