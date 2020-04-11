@@ -29,7 +29,7 @@ from ..error import (
     EmptyValueError,
     NotSupportedError,
 )
-from ..style import Align, NullStyler, Style, StylerInterface, ThousandSeparator  # noqa
+from ..style import Align, NullStyler, Style, StylerInterface, ThousandSeparator
 from ._interface import TableWriterInterface
 
 
