@@ -15,6 +15,26 @@ class ThousandSeparator(Enum):
     UNDERSCORE = "underscore"
 
 
+@unique
+class VerticalAlign(Enum):
+    BASELINE = (1 << 0, "baseline")
+    TOP = (1 << 1, "top")
+    MIDDLE = (1 << 2, "middle")
+    BOTTOM = (1 << 3, "bottom")
+
+    @property
+    def align_code(self):
+        return self.__align_code
+
+    @property
+    def align_str(self):
+        return self.__align_string
+
+    def __init__(self, code, string):
+        self.__align_code = code
+        self.__align_string = string
+
+
 _s_to_ts = {
     "": ThousandSeparator.NONE,
     ",": ThousandSeparator.COMMA,
@@ -49,6 +69,16 @@ class Style:
             - ``"left"``/``pytablewriter.Align.LEFT``
             - ``"right"``/``pytablewriter.Align.RIGHT``
             - ``"center"``/``pytablewriter.Align.CENTER``
+
+        vertical_align (str / pytablewriter.style.VerticalAlign):
+            Vertical text alignment for cells.
+            This can be only applied for HtmlTableWriter class.
+            Possible values are:
+
+            - ``"baseline"`` (default)
+            - ``"top"``
+            - ``"middle"``
+            - ``"bottom"``
 
         font_size (str / pytablewriter.style.FontSize):
             Font size specification for cells in a column.
@@ -97,6 +127,10 @@ class Style:
         return self.__align
 
     @property
+    def vertical_align(self) -> VerticalAlign:
+        return self.__valign
+
+    @property
     def font_size(self) -> FontSize:
         return self.__font_size
 
@@ -115,6 +149,10 @@ class Style:
     def __init__(self, **kwargs) -> None:
         self.__align = normalize_enum(kwargs.pop("align", Align.AUTO), Align)
         self.__validate_attr("align", Align)
+
+        self.__valign = normalize_enum(
+            kwargs.pop("vertical_align", VerticalAlign.BASELINE), VerticalAlign
+        )
 
         self.__font_size = normalize_enum(
             kwargs.pop("font_size", FontSize.NONE), FontSize, validate=False

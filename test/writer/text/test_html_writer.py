@@ -7,6 +7,7 @@ from textwrap import dedent
 import pytest
 
 import pytablewriter
+from pytablewriter.style import Style
 
 from ..._common import print_test_result
 from ...data import (
@@ -341,6 +342,64 @@ class Test_HtmlTableWriter_write_table:
 
         out = writer._repr_html_()
         print_test_result(expected=expected, actual=out)
+        assert out == expected
+
+    def test_normal_valign(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "vertical-align"
+        writer.headers = [
+            "",
+            "top",
+            "middle",
+            "bottom",
+            "top-right",
+            "middle-right",
+            "bottom-right",
+        ]
+        writer.value_matrix = [
+            ["te\nst", "x", "x", "x", "x", "x", "x"],
+        ]
+        writer.column_styles = [
+            Style(vertical_align="baseline"),
+            Style(vertical_align="top"),
+            Style(vertical_align="middle"),
+            Style(vertical_align="bottom"),
+            Style(align="right", vertical_align="top"),
+            Style(align="right", vertical_align="middle"),
+            Style(align="right", vertical_align="bottom"),
+        ]
+
+        writer.write_table()
+
+        expected = """\
+<table id="verticalalign">
+    <caption>vertical-align</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th>top</th>
+            <th>middle</th>
+            <th>bottom</th>
+            <th>top-right</th>
+            <th>middle-right</th>
+            <th>bottom-right</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="left">te<br>st</td>
+            <td align="left" valign="top">x</td>
+            <td align="left" valign="middle">x</td>
+            <td align="left" valign="bottom">x</td>
+            <td align="right" valign="top">x</td>
+            <td align="right" valign="middle">x</td>
+            <td align="right" valign="bottom">x</td>
+        </tr>
+    </tbody>
+</table>
+"""
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
     def test_normal_line_breaks(self, capsys):

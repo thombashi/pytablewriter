@@ -8,7 +8,7 @@ from mbstrdecoder import MultiByteStrDecoder
 
 from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
-from ...style import FontStyle, FontWeight, HtmlStyler, Style, StylerInterface
+from ...style import Align, FontStyle, FontWeight, HtmlStyler, Style, StylerInterface, VerticalAlign
 from .._common import import_error_msg_template
 from .._table_writer import AbstractTableWriter
 from ._text_writer import TextTableWriter
@@ -121,6 +121,9 @@ class HtmlTableWriter(TextTableWriter):
                     td_tag["align"] = value_dp.align.align_string
                 else:
                     td_tag["align"] = style.align.align_string
+
+                if style.vertical_align != VerticalAlign.BASELINE:
+                    td_tag["valign"] = style.vertical_align.align_str
 
                 if style_tag:
                     td_tag["style"] = style_tag

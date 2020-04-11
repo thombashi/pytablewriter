@@ -1,7 +1,7 @@
 from dataproperty import Format
 
 from ._font import FontSize, FontStyle, FontWeight
-from ._style import Align, Style, ThousandSeparator
+from ._style import Align, Style, ThousandSeparator, VerticalAlign
 from ._styler import (
     HtmlStyler,
     LatexStyler,
