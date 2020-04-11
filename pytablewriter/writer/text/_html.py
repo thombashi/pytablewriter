@@ -112,11 +112,16 @@ class HtmlTableWriter(TextTableWriter):
             tr_tag = tags.tr()
             for value, value_dp, column_dp in zip(values, value_dp_list, self._column_dp_list):
                 td_tag = tags.td(raw(MultiByteStrDecoder(value).unicode_str))
-                td_tag["align"] = value_dp.align.align_string
 
                 default_style = self._get_col_style(column_dp.column_index)
                 style = self._fetch_style(row_idx, column_dp.column_index, value_dp, default_style)
                 style_tag = self.__make_style_tag(style=style)
+
+                if style.align == Align.AUTO:
+                    td_tag["align"] = value_dp.align.align_string
+                else:
+                    td_tag["align"] = style.align.align_string
+
                 if style_tag:
                     td_tag["style"] = style_tag
 
