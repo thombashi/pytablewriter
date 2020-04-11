@@ -174,11 +174,12 @@ class Style:
 
     def __validate_attr(self, attr_name: str, expected_type) -> None:
         value = getattr(self, attr_name)
-        if value is not None and not isinstance(value, expected_type):
-            if isinstance(expected_type, (list, tuple)):
-                expected = " or ".join([c.__name__ for c in expected_type])
-            else:
-                expected = expected_type.__name__
+        if isinstance(expected_type, (list, tuple)):
+            expected = " or ".join([c.__name__ for c in expected_type])
+        else:
+            expected = expected_type.__name__
+
+        if not isinstance(value, expected_type):
             raise TypeError(
                 "{} must be a {} instancce: actual={}".format(attr_name, expected, type(value))
             )
