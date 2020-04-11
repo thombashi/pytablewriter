@@ -21,6 +21,7 @@ build:
 	@make clean
 	@tox -e build
 	ls -lh dist/*
+	pip check
 
 .PHONY: check
 check:
@@ -57,3 +58,4 @@ release:
 .PHONY: setup
 setup:
 	@pip install --upgrade -e .[test] tox
+	pip check
