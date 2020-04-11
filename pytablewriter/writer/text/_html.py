@@ -106,13 +106,17 @@ class HtmlTableWriter(TextTableWriter):
         tags, raw = _get_tags_module()
         tbody_tag = tags.tbody()
 
-        for values, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
+        for row_idx, (values, value_dp_list) in enumerate(
+            zip(self._table_value_matrix, self._table_value_dp_matrix)
+        ):
             tr_tag = tags.tr()
             for value, value_dp, column_dp in zip(values, value_dp_list, self._column_dp_list):
                 td_tag = tags.td(raw(MultiByteStrDecoder(value).unicode_str))
                 td_tag["align"] = value_dp.align.align_string
 
-                style_tag = self.__make_style_tag(style=self._get_col_style(column_dp.column_index))
+                default_style = self._get_col_style(column_dp.column_index)
+                style = self._fetch_style(row_idx, column_dp.column_index, value_dp, default_style)
+                style_tag = self.__make_style_tag(style=style)
                 if style_tag:
                     td_tag["style"] = style_tag
 
