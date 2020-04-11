@@ -11,7 +11,6 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast
 import msgfy
 import typepy
 from dataproperty import (
-    Align,
     ColumnDataProperty,
     DataProperty,
     DataPropertyExtractor,
