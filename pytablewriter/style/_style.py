@@ -12,9 +12,15 @@ class ThousandSeparator(Enum):
     NONE = "none"
     COMMA = "comma"
     SPACE = "space"
+    UNDERSCORE = "underscore"
 
 
-_s_to_ts = {"": ThousandSeparator.NONE, ",": ThousandSeparator.COMMA, " ": ThousandSeparator.SPACE}
+_s_to_ts = {
+    "": ThousandSeparator.NONE,
+    ",": ThousandSeparator.COMMA,
+    " ": ThousandSeparator.SPACE,
+    "_": ThousandSeparator.UNDERSCORE,
+}
 
 
 def _normalize_thousand_separator(value: Union[str, ThousandSeparator]) -> ThousandSeparator:
@@ -76,9 +82,11 @@ class Style:
             This can be only applied for text format writer classes.
             Possible values are:
 
-            - ``","``/``"comma"``/``pytablewriter.style.ThousandSeparator.COMMA``
-            - ``" "``/``"space"``/``pytablewriter.style.ThousandSeparator.SPACE``
-            - ``""``/``"none"``/``pytablewriter.style.ThousandSeparator.NONE``
+            - ``","``/``"comma"``
+            - ``" "``/``"space"``
+            - ``"_"``/``"underscore"``
+            - ``""``/``"none"``
+            - pytablewriter.style.ThousandSeparator
 
     Example:
         :ref:`example-style`

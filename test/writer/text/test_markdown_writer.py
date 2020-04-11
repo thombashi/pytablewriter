@@ -598,7 +598,7 @@ class Test_MarkdownTableWriter_write_table:
         writer.column_styles = [
             Style(thousand_separator=ThousandSeparator.NONE),
             Style(thousand_separator=ThousandSeparator.COMMA),
-            Style(thousand_separator=ThousandSeparator.COMMA),
+            Style(thousand_separator=ThousandSeparator.UNDERSCORE),
             Style(thousand_separator=ThousandSeparator.SPACE),
         ]
         out = writer.dumps()
@@ -606,8 +606,8 @@ class Test_MarkdownTableWriter_write_table:
             """\
             |none_format|thousand_separator_i|thousand_separator_f|   f   |  wo_f   |
             |----------:|-------------------:|-------------------:|------:|--------:|
-            |       1000|           1,234,567|         1,234,567.8|1 234.6|1234567.8|
-            |       1000|           1,234,567|         1,234,567.8|1 234.6|1234567.8|
+            |       1000|           1,234,567|         1_234_567.8|1 234.6|1234567.8|
+            |       1000|           1,234,567|         1_234_567.8|1 234.6|1234567.8|
             """
         )
         print_test_result(expected=expected, actual=out)

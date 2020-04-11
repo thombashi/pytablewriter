@@ -44,8 +44,11 @@ class NullStyler(AbstractStyler):
 
 class TextStyler(AbstractStyler):
     def apply(self, value: Any, style: Style) -> str:
-        if value and style.thousand_separator == ThousandSeparator.SPACE:
-            value = value.replace(",", " ")
+        if value:
+            if style.thousand_separator == ThousandSeparator.SPACE:
+                value = value.replace(",", " ")
+            elif style.thousand_separator == ThousandSeparator.UNDERSCORE:
+                value = value.replace(",", "_")
 
         return value
 

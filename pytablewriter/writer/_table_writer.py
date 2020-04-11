@@ -41,6 +41,7 @@ _ts_to_flag = {
     ThousandSeparator.NONE: Format.NONE,
     ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
     ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
+    ThousandSeparator.UNDERSCORE: Format.THOUSAND_SEPARATOR,
 }
 
 
