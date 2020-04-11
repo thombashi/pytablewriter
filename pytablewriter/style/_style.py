@@ -116,8 +116,10 @@ class Style:
         self.__align = normalize_enum(kwargs.pop("align", Align.AUTO), Align)
         self.__validate_attr("align", Align)
 
-        self.__font_size = normalize_enum(kwargs.pop("font_size", FontSize.NONE), FontSize)
-        self.__validate_attr("font_size", FontSize)
+        self.__font_size = normalize_enum(
+            kwargs.pop("font_size", FontSize.NONE), FontSize, validate=False
+        )
+        self.__validate_attr("font_size", (FontSize, str))
 
         self.__font_style = normalize_enum(kwargs.pop("font_style", FontStyle.NORMAL), FontStyle)
         self.__validate_attr("font_style", FontStyle)
@@ -129,7 +131,9 @@ class Style:
 
         self.__thousand_separator = _normalize_thousand_separator(
             normalize_enum(
-                kwargs.pop("thousand_separator", ThousandSeparator.NONE), ThousandSeparator
+                kwargs.pop("thousand_separator", ThousandSeparator.NONE),
+                ThousandSeparator,
+                validate=False,
             )
         )
         self.__validate_attr("thousand_separator", ThousandSeparator)
@@ -171,8 +175,10 @@ class Style:
     def __validate_attr(self, attr_name: str, expected_type) -> None:
         value = getattr(self, attr_name)
         if value is not None and not isinstance(value, expected_type):
+            if isinstance(expected_type, (list, tuple)):
+                expected = " or ".join([c.__name__ for c in expected_type])
+            else:
+                expected = expected_type.__name__
             raise TypeError(
-                "{} must be a {} instancce: actual={}".format(
-                    attr_name, expected_type.__name__, type(value)
-                )
+                "{} must be a {} instancce: actual={}".format(attr_name, expected, type(value))
             )

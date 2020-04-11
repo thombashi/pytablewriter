@@ -59,11 +59,16 @@ def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
     return dumps_tabledata(value, format_name, **kwargs)
 
 
-def normalize_enum(value, enum_class):
+def normalize_enum(value, enum_class, validate=True):
     if value is None or not isinstance(value, str):
         return value
 
     try:
         return enum_class[value.strip().upper()]
     except KeyError:
-        return value
+        if validate:
+            raise ValueError(
+                "valid values are: {}".format(", ".join([item.name for item in enum_class]))
+            )
+
+    return value

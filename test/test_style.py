@@ -121,9 +121,9 @@ class Test_Style_eq:
     @pytest.mark.parametrize(
         ["align", "font_size", "thousand_separator", "expected"],
         [
-            ["invali", None, None, TypeError],
+            ["invali", None, None, ValueError],
             [FontSize.TINY, None, None, TypeError],
-            [None, "invali", None, TypeError],
+            [None, 12, None, TypeError],
             [None, Align.LEFT, None, TypeError],
             [None, None, "invalid", TypeError],
         ],
