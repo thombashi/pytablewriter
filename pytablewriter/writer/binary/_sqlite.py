@@ -91,7 +91,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
             if close_after_write:
                 self.close()
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         self._verify_value_matrix()
         self._preprocess()
 

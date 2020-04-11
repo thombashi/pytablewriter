@@ -54,7 +54,7 @@ class HtmlTableWriter(TextTableWriter):
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self._table_tag = None  # type: Any
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table| with HTML table format.
 

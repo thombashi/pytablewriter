@@ -158,7 +158,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
             yield dict(zip(self.headers, values))
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         import elasticsearch as es
 
         if not isinstance(self.stream, es.Elasticsearch):

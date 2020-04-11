@@ -78,7 +78,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _get_closing_row_items(self) -> List[str]:
         return []
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table| with Markdown table format.
 
@@ -94,11 +94,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         with self._logger:
             self._verify_property()
             self.__write_chapter()
-            self._write_table()
+            self._write_table(**kwargs)
             if self.is_write_null_line_after_table:
                 self.write_null_line()
 
-    def _write_table_iter(self) -> None:
+    def _write_table_iter(self, **kwargs) -> None:
         self.__write_chapter()
         super()._write_table_iter()
 

@@ -30,7 +30,7 @@ class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInte
     def write_null_line(self) -> None:
         pass
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         pass
 
     def dump(self, output, close_after_write: bool = True) -> None:
@@ -39,7 +39,7 @@ class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInte
     def dumps(self) -> str:
         return ""
 
-    def _write_table_iter(self) -> None:
+    def _write_table_iter(self, **kwargs) -> None:
         pass
 
     def close(self) -> None:

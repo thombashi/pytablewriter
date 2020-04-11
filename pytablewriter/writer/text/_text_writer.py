@@ -159,7 +159,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_line()
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table|.
 
@@ -167,7 +167,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             - |None| values are written as an empty string.
         """
 
-        super().write_table()
+        super().write_table(**kwargs)
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
@@ -195,7 +195,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                 self.stream.close()
                 self.stream = sys.stdout
 
-    def dumps(self) -> str:
+    def dumps(self, **kwargs) -> str:
         """Get rendered tabular text from the table data.
 
         Only available for text format table writers.
@@ -208,7 +208,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         try:
             self.stream = io.StringIO()
-            self.write_table()
+            self.write_table(**kwargs)
             tabular_text = self.stream.getvalue()
         finally:
             self.stream = old_stream
@@ -218,12 +218,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return TextStyler(writer)
 
-    def _write_table_iter(self) -> None:
+    def _write_table_iter(self, **kwargs) -> None:
         super()._write_table_iter()
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         self._preprocess()
         self._write_opening_row()
 

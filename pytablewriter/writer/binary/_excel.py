@@ -214,7 +214,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     def _write_cell(self, row: int, col: int, value_dp: DataProperty) -> None:
         pass
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         self._preprocess_table_dp()
         self._preprocess_table_property()
         self._write_header()

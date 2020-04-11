@@ -41,11 +41,11 @@ class RstTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         with self._logger:
             self._write_line(self._get_table_directive())
             self._verify_property()
-            self._write_table()
+            self._write_table(**kwargs)
             if self.is_write_null_line_after_table:
                 self.write_null_line()
 
@@ -55,9 +55,9 @@ class RstTableWriter(IndentationTextTableWriter):
 
         return ".. table:: {}\n".format(MultiByteStrDecoder(self.table_name).unicode_str)
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         self.inc_indent_level()
-        super()._write_table()
+        super()._write_table(**kwargs)
         self.dec_indent_level()
 
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
@@ -96,7 +96,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         self._quoting_flags[typepy.Typecode.STRING] = True
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table| with reStructuredText CSV table format.
 
@@ -109,7 +109,7 @@ class RstCsvTableWriter(RstTableWriter):
             - |None| values are written as an empty string
         """
 
-        IndentationTextTableWriter.write_table(self)
+        IndentationTextTableWriter.write_table(self, **kwargs)
 
     def _get_opening_row_items(self) -> List[str]:
         directive = ".. csv-table:: "

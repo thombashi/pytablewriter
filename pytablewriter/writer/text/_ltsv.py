@@ -30,7 +30,7 @@ class LtsvTableWriter(CsvTableWriter):
 
         self._is_require_header = True
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table| with
         `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.

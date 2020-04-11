@@ -77,7 +77,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self._verify_stream()
         self.stream.write("\n")
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         self._preprocess_value_matrix()
 
         with self._logger:

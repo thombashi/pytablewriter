@@ -322,7 +322,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor.max_workers = value
 
     @abc.abstractmethod
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         pass
 
     def __init__(self) -> None:
@@ -701,16 +701,16 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.headers = tablib_dataset.headers
         self.value_matrix = [row for row in tablib_dataset]
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table|.
         """
 
         with self._logger:
             self._verify_property()
-            self._write_table()
+            self._write_table(**kwargs)
 
-    def _write_table_iter(self) -> None:
+    def _write_table_iter(self, **kwargs) -> None:
         if not self.support_split_write:
             raise NotSupportedError("the class not supported the write_table_iter method")
 
@@ -748,7 +748,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                 self.__clear_preprocess_status()
 
                 with self._logger:
-                    self._write_table()
+                    self._write_table(**kwargs)
 
                     if not is_final_iter:
                         self._write_value_row_separator()

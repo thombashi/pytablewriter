@@ -64,14 +64,14 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     def get_variable_name(self, value: str) -> str:
         return sanitize_python_var_name(self.table_name, "_").lower()
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = dateutil_datetime_formatter
         else:
             self._dp_extractor.datetime_formatter = quote_datetime_formatter
 
         self.inc_indent_level()
-        super()._write_table()
+        super()._write_table(**kwargs)
         self.dec_indent_level()
 
     def _get_opening_row_items(self) -> List[str]:

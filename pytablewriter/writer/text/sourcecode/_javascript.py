@@ -97,7 +97,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def get_variable_name(self, value: str) -> str:
         return sanitize_js_var_name(value, "_").lower()
 
-    def _write_table(self) -> None:
+    def _write_table(self, **kwargs) -> None:
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = js_datetime_formatter
         else:
@@ -107,7 +107,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.stream = io.StringIO()
 
         self.inc_indent_level()
-        super()._write_table()
+        super()._write_table(**kwargs)
         self.dec_indent_level()
         js_matrix_var_def_text = self.stream.getvalue().rstrip("\n")
         js_matrix_var_def_text = strip_quote(js_matrix_var_def_text, "true")

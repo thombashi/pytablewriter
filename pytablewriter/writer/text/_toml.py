@@ -28,7 +28,7 @@ class TomlTableWriter(TextTableWriter):
         self._is_require_table_name = True
         self._is_require_header = True
 
-    def write_table(self) -> None:
+    def write_table(self, **kwargs) -> None:
         """
         |write_table| with
         `TOML <https://github.com/toml-lang/toml>`__ format.
