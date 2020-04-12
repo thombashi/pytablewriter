@@ -458,6 +458,40 @@ class Test_HtmlTableWriter_write_table:
         print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
+    def test_normal_write_css(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "write_css"
+        writer.headers = ["int"]
+        writer.value_matrix = [[1]]
+        writer.write_table(write_css=True)
+
+        expected = """\
+<style type="text/css">
+    .write-css thead th:nth-child(1) {
+        text-align: left;
+    }
+    .write-css tbody tr:nth-child(1) td:nth-child(1) {
+        text-align: right;
+    }
+</style>
+<table class="write-css" id="write_css">
+    <caption>write_css</caption>
+    <thead>
+        <tr>
+            <th>int</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table>
+"""
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [

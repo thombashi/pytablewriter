@@ -1,16 +1,18 @@
 import copy
 import warnings
-from typing import Any, Optional, Tuple, cast  # noqa
+from typing import Any, List, Optional, Tuple, cast  # noqa
 
 import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
+from pathvalidate import replace_symbol
 
 from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
 from ...style import Align, FontStyle, FontWeight, HtmlStyler, Style, StylerInterface, VerticalAlign
 from .._common import import_error_msg_template
 from .._table_writer import AbstractTableWriter
+from ._css import CssTableWriter
 from ._text_writer import TextTableWriter
 
 
@@ -58,7 +60,12 @@ class HtmlTableWriter(TextTableWriter):
         """
         |write_table| with HTML table format.
 
-        :Example:
+        Args:
+            write_css (bool):
+                If |True|, write CSS corresponding to the specified styles,
+                instead of attributes of HTML tags.
+
+        Example:
             :ref:`example-html-table-writer`
 
         .. note::
@@ -66,13 +73,31 @@ class HtmlTableWriter(TextTableWriter):
         """
 
         tags, raw = _get_tags_module()
+        write_css = kwargs.get("write_css", False)
 
         with self._logger:
             self._verify_property()
             self._preprocess()
 
+            css_class = None
+
+            if write_css:
+                css_class = kwargs.get("css_class")
+                css_class = css_class if css_class else "{}-css".format(self.table_name)
+                css_class = replace_symbol(self.table_name, replacement_text="-")
+
+                css_writer = CssTableWriter()
+                css_writer.from_writer(self)
+                css_writer.table_name = css_class
+                css_writer.write_table(write_style_tag=True)
+
             if typepy.is_not_null_string(self.table_name):
-                self._table_tag = tags.table(id=sanitize_python_var_name(self.table_name))
+                if css_class:
+                    self._table_tag = tags.table(
+                        id=sanitize_python_var_name(self.table_name), class_name=css_class
+                    )
+                else:
+                    self._table_tag = tags.table(id=sanitize_python_var_name(self.table_name))
                 self._table_tag += tags.caption(MultiByteStrDecoder(self.table_name).unicode_str)
             else:
                 self._table_tag = tags.table()
@@ -82,7 +107,7 @@ class HtmlTableWriter(TextTableWriter):
             except EmptyHeaderError:
                 pass
 
-            self._write_body()
+            self._write_body(not write_css)
 
     def _write_header(self) -> None:
         tags, raw = _get_tags_module()
@@ -102,7 +127,7 @@ class HtmlTableWriter(TextTableWriter):
 
         self._table_tag += thead_tag
 
-    def _write_body(self) -> None:
+    def _write_body(self, write_attr: bool) -> None:
         tags, raw = _get_tags_module()
         tbody_tag = tags.tbody()
 
@@ -115,18 +140,19 @@ class HtmlTableWriter(TextTableWriter):
 
                 default_style = self._get_col_style(column_dp.column_index)
                 style = self._fetch_style(row_idx, column_dp.column_index, value_dp, default_style)
-                style_tag = self.__make_style_tag(style=style)
 
-                if style.align == Align.AUTO:
-                    td_tag["align"] = value_dp.align.align_string
-                else:
-                    td_tag["align"] = style.align.align_string
+                if write_attr:
+                    if style.align == Align.AUTO:
+                        td_tag["align"] = value_dp.align.align_string
+                    else:
+                        td_tag["align"] = style.align.align_string
 
-                if style.vertical_align != VerticalAlign.BASELINE:
-                    td_tag["valign"] = style.vertical_align.align_str
+                    if style.vertical_align != VerticalAlign.BASELINE:
+                        td_tag["valign"] = style.vertical_align.align_str
 
-                if style_tag:
-                    td_tag["style"] = style_tag
+                    style_tag = self.__make_style_tag(style=style)
+                    if style_tag:
+                        td_tag["style"] = style_tag
 
                 tr_tag += td_tag
             tbody_tag += tr_tag
