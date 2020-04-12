@@ -36,6 +36,7 @@ from .writer import (
     AbstractTableWriter,
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
+    CssTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
     ExcelXlsTableWriter,

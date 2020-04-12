@@ -16,6 +16,7 @@ class Test_TableFormat_search_table_format:
                 [
                     TableFormat.BOLD_UNICODE,
                     TableFormat.BORDERLESS,
+                    TableFormat.CSS,
                     TableFormat.CSV,
                     TableFormat.HTML,
                     TableFormat.JAVASCRIPT,

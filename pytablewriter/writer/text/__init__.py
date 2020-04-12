@@ -1,4 +1,5 @@
 from ._borderless import BorderlessTableWriter
+from ._css import CssTableWriter
 from ._csv import CsvTableWriter
 from ._html import HtmlTableWriter
 from ._json import JsonTableWriter

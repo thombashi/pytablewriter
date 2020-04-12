@@ -14,6 +14,7 @@ class Test_WriterFactory_get_format_names:
         assert ptw.TableWriterFactory.get_format_names() == [
             "bold_unicode",
             "borderless",
+            "css",
             "csv",
             "elasticsearch",
             "excel",
@@ -55,6 +56,7 @@ class Test_WriterFactory_get_format_names:
 class Test_WriterFactory_get_extensions:
     def test_normal(self):
         assert ptw.TableWriterFactory.get_extensions() == [
+            "css",
             "csv",
             "htm",
             "html",
@@ -83,6 +85,11 @@ class Test_WriterFactory_create_from_file_extension:
         list(
             itertools.product(
                 ["valid_ext.csv", "valid_ext.CSV", ".csv", "CSV"], [ptw.CsvTableWriter]
+            )
+        )
+        + list(
+            itertools.product(
+                ["valid_ext.css", "valid_ext.CSS", ".css", "CSS"], [ptw.CssTableWriter]
             )
         )
         + list(

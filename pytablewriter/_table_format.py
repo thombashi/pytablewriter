@@ -8,6 +8,7 @@ from typing import Any, List
 from .writer import (
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
+    CssTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
     ExcelXlsTableWriter,
@@ -70,6 +71,12 @@ class TableFormat(enum.Enum):
     """
 
     CSV = ([CsvTableWriter.FORMAT_NAME], CsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
+    CSS = (
+        [CssTableWriter.FORMAT_NAME],
+        HtmlTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT,
+        ["css"],
+    )
     ELASTICSEARCH = (
         [ElasticsearchWriter.FORMAT_NAME],  # type: ignore
         ElasticsearchWriter,

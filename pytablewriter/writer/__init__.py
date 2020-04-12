@@ -5,6 +5,7 @@ from .binary import ExcelXlsTableWriter, ExcelXlsxTableWriter, SqliteTableWriter
 from .text import (
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
+    CssTableWriter,
     CsvTableWriter,
     HtmlTableWriter,
     JsonLinesTableWriter,

@@ -26,6 +26,7 @@ class TableWriterFactory:
             ==================  ===================================
             Extension           Writer Class
             ==================  ===================================
+            ``".css"``          :py:class:`~.CssTableWriter`
             ``".csv"``          :py:class:`~.CsvTableWriter`
             ``".htm"``          :py:class:`~.HtmlTableWriter`
             ``".html"``         :py:class:`~.HtmlTableWriter`
@@ -93,6 +94,7 @@ class TableWriterFactory:
             =============================================  ===================================
             Format name                                    Writer Class
             =============================================  ===================================
+            ``"css"``                                      :py:class:`~.CssTableWriter`
             ``"csv"``                                      :py:class:`~.CsvTableWriter`
             ``"elasticsearch"``                            :py:class:`~.ElasticsearchWriter`
             ``"excel"``                                    :py:class:`~.ExcelXlsxTableWriter`
@@ -156,6 +158,7 @@ class TableWriterFactory:
                 >>> for name in ptw.TableWriterFactory.get_format_names():
                 ...     print(name)
                 ...
+                css
                 csv
                 elasticsearch
                 excel
@@ -214,6 +217,7 @@ class TableWriterFactory:
                 >>> for name in ptw.TableWriterFactory.get_extensions():
                 ...     print(name)
                 ...
+                css
                 csv
                 htm
                 html
