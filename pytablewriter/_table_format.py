@@ -73,7 +73,7 @@ class TableFormat(enum.Enum):
     CSV = ([CsvTableWriter.FORMAT_NAME], CsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
     CSS = (
         [CssTableWriter.FORMAT_NAME],
-        HtmlTableWriter,
+        CssTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["css"],
     )
