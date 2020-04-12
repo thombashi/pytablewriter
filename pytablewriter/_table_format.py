@@ -224,37 +224,40 @@ class TableFormat(enum.Enum):
 
     @property
     def names(self) -> List[str]:
-        """
-        :return: Names associated with the table format.
-        :rtype: list
+        """Names associated with the table format.
+
+        Returns:
+            List[str]: format names
         """
 
         return self.__names
 
     @property
     def writer_class(self) -> Any:
-        """
-        :return: Table writer class associated with the table format.
-        :rtype:
-            :py:class:`~pytablewriter.writer._table_writer.TableWriterInterface`
+        """Table writer class associated with the table format.
+
+        Returns:
+            Type[AbstractTableWriter]:
         """
 
         return self.__writer_class
 
     @property
     def format_attribute(self) -> int:
-        """
-        :return: Table attributes bitmap.
-        :rtype: :py:class:`pytablewriter.FormatAttr`
+        """Table attributes bitmap.
+
+        Returns:
+            :py:class:`pytablewriter.FormatAttr`:
         """
 
         return self.__format_attribute
 
     @property
     def file_extensions(self) -> List[str]:
-        """
-        :return: File extensions associated with the table format.
-        :rtype: list
+        """File extensions associated with the table format.
+
+        Returns:
+            List[str]:
         """
 
         return self.__file_extensions
@@ -267,13 +270,14 @@ class TableFormat(enum.Enum):
 
     @classmethod
     def find_all_attr(cls, format_attribute: int) -> List:
-        """
-        Searching table formats which have specific attributes.
+        """Searching table formats which have specific attributes.
 
-        :param FormatAttr format_attribute:
-            Table format attributes to look for.
-        :return: Table formats that matched the attribute.
-        :rtype: list
+        Args:
+            format_attribute (FormatAttr):
+                Table format attributes to look for.
+
+        Returns:
+            List[TableFormat]: Table formats that matched the attribute.
         """
 
         return [
@@ -290,7 +294,7 @@ class TableFormat(enum.Enum):
             format_name (str): Table format specifier.
 
         Returns:
-            TableFormat: A table format enum value corresponding to the ``format_name``.
+            Optional[TableFormat]: A table format enum value corresponding to the ``format_name``.
         """
 
         format_name = format_name.lower().strip()

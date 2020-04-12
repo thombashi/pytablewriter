@@ -16,11 +16,11 @@ class PandasDataFrameWriter(NumpyTableWriter):
 
     .. py:attribute:: import_pandas_as
 
-        Specify ``pandas`` module import name. Defaults to ``"pd"``.
+        Specify ``pandas`` module import name of an output. Defaults to ``"pd"``.
 
     .. py:attribute:: import_numpy_as
 
-        Specify ``numpy`` module import name. Defaults to ``"np"``.
+        Specify ``numpy`` module import name of an output. Defaults to ``"np"``.
 
     .. py:method:: write_table
 

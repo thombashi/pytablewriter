@@ -10,7 +10,12 @@ class BinaryWriterInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def open(self, file_path: str) -> None:  # pragma: no cover
-        pass
+        """
+        Open a file for output stream.
+
+        Args:
+            file_path (str): path to the file.
+        """
 
 
 class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):

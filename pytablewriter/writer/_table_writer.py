@@ -160,9 +160,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def tabledata(self) -> TableData:
-        """
-        :return: Table data.
-        :rtype: tabledata.TableData
+        """Get tabular data of the writer.
+
+        Returns:
+            tabledata.TableData:
         """
 
         return TableData(

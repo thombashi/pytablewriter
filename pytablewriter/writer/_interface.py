@@ -13,17 +13,18 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractproperty
     def format_name(self) -> str:  # pragma: no cover
-        """
-        :return: Format name for the writer.
-        :rtype: str
+        """Format name for the writer.
+
+        Returns:
+            |str|
         """
 
     @abc.abstractproperty
     def support_split_write(self) -> bool:  # pragma: no cover
-        """
-        :return:
-            |True| if the writer supported iterative table writing (``write_table_iter`` method).
-        :rtype: bool
+        """Represents the writer class supported iterative table writing (``write_table_iter`` method).
+
+        Returns:
+            bool: |True| if the writer supported iterative table writing.
         """
 
     @abc.abstractmethod

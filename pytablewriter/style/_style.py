@@ -58,65 +58,64 @@ class Style:
     """Style specifier class for table elements.
 
     Args:
-        align (str / pytablewriter.Align):
-            Text alignment specification for cells in a column.
+        align (|str| / :py:class:`~.style.Align`):
+            Horizontal text alignment for cells.
             This can be only applied for text format writer classes.
-            Possible values are:
+            Possible string values are:
 
-            - ``"auto"``/``pytablewriter.Align.AUTO``
+            - ``"auto"`` (default)
                 - Detect data type for each column and set alignment that appropriate
                   for the type automatically
-            - ``"left"``/``pytablewriter.Align.LEFT``
-            - ``"right"``/``pytablewriter.Align.RIGHT``
-            - ``"center"``/``pytablewriter.Align.CENTER``
+            - ``"left"``
+            - ``"right"``
+            - ``"center"``
 
-        vertical_align (str / pytablewriter.style.VerticalAlign):
+        vertical_align (|str| / :py:class:`~.style.VerticalAlign`):
             Vertical text alignment for cells.
             This can be only applied for HtmlTableWriter class.
-            Possible values are:
+            Possible string values are:
 
             - ``"baseline"`` (default)
             - ``"top"``
             - ``"middle"``
             - ``"bottom"``
 
-        font_size (str / pytablewriter.style.FontSize):
+        font_size (|str| / :py:class:`~.style.FontSize`):
             Font size specification for cells in a column.
             This can be only applied for HTML/Latex writer classes.
-            Possible values are:
+            Possible string values are:
 
-            - ``"tiny"``/``pytablewriter.style.FontSize.TINY``
-            - ``"small"``/``pytablewriter.style.FontSize.SMALL``
-            - ``"medium"``/``pytablewriter.style.FontSize.MEDIUM``
-            - ``"large"``/``pytablewriter.style.FontSize.LARGE``
-            - ``pytablewriter.style.FontSize.NONE`` (no font size specification)
+            - ``"tiny"``
+            - ``"small"``
+            - ``"medium"``
+            - ``"large"``
+            - ``"none"`` (no font size specification)
 
-        font_weight (str / pytablewriter.style.FontWeight):
+        font_weight (|str| / :py:class:`~.style.FontWeight`):
             Font weight specification for cells in a column.
             This can be only applied for HTML/Latex/Markdown writer classes.
-            Possible values are:
+            Possible string values are:
 
-            - ``"normal"``/``pytablewriter.style.FontWeight.NORMAL``
-            - ``"bold"``/``pytablewriter.style.FontWeight.BOLD``
+            - ``"normal"`` (default)
+            - ``"bold"``
 
-        font_style (str / pytablewriter.style.FontStyle):
+        font_style (|str| / :py:class:`~.style.FontStyle`):
             Font style specification for cells in a column.
             This can be applied only for HTML/Latex/Markdown writer classes.
-            Possible values are:
+            Possible string values are:
 
-            - ``"normal"``/``pytablewriter.style.FontStyle.NORMAL``
-            - ``"italic"``/``pytablewriter.style.FontStyle.ITALIC``
+            - ``"normal"`` (default)
+            - ``"italic"``
 
-        thousand_separator (str / pytablewriter.style.ThousandSeparator):
+        thousand_separator (|str| / :py:class:`~.style.ThousandSeparator`):
             Thousand separator specification for numbers in a column.
             This can be only applied for text format writer classes.
-            Possible values are:
+            Possible string values are:
 
             - ``","``/``"comma"``
             - ``" "``/``"space"``
             - ``"_"``/``"underscore"``
-            - ``""``/``"none"``
-            - pytablewriter.style.ThousandSeparator
+            - ``""``/``"none"`` (default)
 
     Example:
         :ref:`example-style`
