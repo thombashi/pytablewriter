@@ -6,3 +6,7 @@ Table Format
 
 .. autoclass:: pytablewriter.TableFormat
     :members:
+
+    .. automethod:: find_all_attr
+
+    .. automethod:: from_name
