@@ -39,6 +39,7 @@ Features
 - Write a table in various formats:
     - Text formats:
         - CSV / Tab-separated values (TSV)
+        - CSS
         - HTML
         - JSON
         - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
