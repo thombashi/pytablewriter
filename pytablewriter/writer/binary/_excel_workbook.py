@@ -24,7 +24,7 @@ class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def close(self):  # pragma: no cover
+    def close(self) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod
