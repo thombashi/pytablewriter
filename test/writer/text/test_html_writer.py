@@ -432,6 +432,32 @@ class Test_HtmlTableWriter_write_table:
         print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
+    def test_normal_none_values(self, capsys):
+        writer = table_writer_class()
+        writer.table_name = "none value"
+        writer.headers = ["none"]
+        writer.value_matrix = [[None]]
+        writer.write_table()
+
+        expected = """\
+<table id="nonevalue">
+    <caption>none value</caption>
+    <thead>
+        <tr>
+            <th>none</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="left"></td>
+        </tr>
+    </tbody>
+</table>
+"""
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
