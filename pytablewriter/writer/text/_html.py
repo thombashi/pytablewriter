@@ -62,7 +62,7 @@ class HtmlTableWriter(TextTableWriter):
             :ref:`example-html-table-writer`
 
         .. note::
-            - |None| is not written
+            - |None| values will be replaced with an empty value
         """
 
         tags, raw = _get_tags_module()
