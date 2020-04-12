@@ -374,7 +374,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
         self._iter_count = None  # type: Optional[int]
 
-        self.__align_list = []  # type: List[Align]
         self.__align_char_mapping = {
             Align.AUTO: "<",
             Align.LEFT: "<",
