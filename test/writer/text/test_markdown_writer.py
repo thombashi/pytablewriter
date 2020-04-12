@@ -989,6 +989,35 @@ class Test_MarkdownTableWriter_dump:
         assert output == expected
 
 
+class Test_MarkdownTableWriter_from_writer:
+    def test_normal(self):
+        writer_rhs = table_writer_class()
+        writer_rhs.from_tabledata(
+            TableData(
+                "loader_mapping",
+                ["Name", "Loader"],
+                [
+                    ["csv", "CsvTableFileLoader"],
+                    ["excel", "ExcelTableFileLoader"],
+                    ["html", "HtmlTableFileLoader"],
+                    ["markdown", "MarkdownTableFileLoader"],
+                    ["mediawiki", "MediaWikiTableFileLoader"],
+                    ["json", "JsonTableFileLoader"],
+                    ["Long Format Name", "Loader"],
+                ],
+            )
+        )
+        rhs = writer_rhs.dumps()
+
+        writer_lhs = table_writer_class()
+        writer_lhs.from_writer(writer_rhs)
+        lhs = writer_lhs.dumps()
+
+        print_test_result(expected=lhs, actual=rhs)
+
+        assert lhs == rhs
+
+
 class Test_MarkdownTableWriter_from_tablib:
     def test_normal_multiple_write(self, capsys):
         try:

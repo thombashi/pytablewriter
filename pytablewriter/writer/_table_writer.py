@@ -701,6 +701,35 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.headers = tablib_dataset.headers
         self.value_matrix = [row for row in tablib_dataset]
 
+    def from_writer(
+        self, writer: "AbstractTableWriter", is_overwrite_table_name: bool = True
+    ) -> None:
+        """
+        Set tabular attributes to the writer from an another table writer class incetance.
+        """
+
+        self.__clear_preprocess()
+
+        if is_overwrite_table_name:
+            self.table_name = str(writer.table_name)
+
+        self.headers = writer.headers
+        self.value_matrix = writer.value_matrix
+
+        self.type_hints = writer.type_hints
+        self.column_styles = writer.column_styles
+        self._style_filters = writer._style_filters
+
+        self._table_headers = writer._table_headers
+        self._table_value_dp_matrix = writer._table_value_dp_matrix
+        self._column_dp_list = writer._column_dp_list
+        self._table_value_matrix = writer._table_value_matrix
+
+        self._is_complete_table_dp_preprocess = writer._is_complete_table_dp_preprocess
+        self._is_complete_table_property_preprocess = writer._is_complete_table_property_preprocess
+        self._is_complete_header_preprocess = writer._is_complete_header_preprocess
+        self._is_complete_value_matrix_preprocess = writer._is_complete_value_matrix_preprocess
+
     def write_table(self, **kwargs) -> None:
         """
         |write_table|.
