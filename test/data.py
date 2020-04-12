@@ -84,7 +84,7 @@ null_test_data_list = [
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
-style_tabledata = TableData(
+vut_style_tabledata = TableData(
     "style test",
     [
         "none",
@@ -103,7 +103,7 @@ style_tabledata = TableData(
         [1234, 1234, 1234, 1234, 1234, 1234, "", 1234, 1234, 1234],
     ],
 )
-styles = [
+vut_styles = [
     None,
     Style(),
     Style(font_size="TINY"),

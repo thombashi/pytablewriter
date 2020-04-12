@@ -9,7 +9,7 @@ import pytest
 from pytablewriter import BoldUnicodeTableWriter, UnicodeTableWriter
 
 from ..._common import print_test_result
-from ...data import style_tabledata, styles
+from ...data import vut_style_tabledata, vut_styles
 
 
 class Test_UnicodeTableWriter_write_new_line:
@@ -27,8 +27,8 @@ class Test_UnicodeTableWriter_write_new_line:
 class Test_UnicodeTableWriter_write_table:
     def test_normal_styles(self, capsys):
         writer = UnicodeTableWriter()
-        writer.from_tabledata(style_tabledata)
-        writer.column_styles = styles
+        writer.from_tabledata(vut_style_tabledata)
+        writer.column_styles = vut_styles
         writer.write_table()
 
         expected = dedent(
@@ -51,8 +51,8 @@ class Test_UnicodeTableWriter_write_table:
 class Test_BoldUnicodeTableWriter_write_table:
     def test_normal_styles(self, capsys):
         writer = BoldUnicodeTableWriter()
-        writer.from_tabledata(style_tabledata)
-        writer.column_styles = styles
+        writer.from_tabledata(vut_style_tabledata)
+        writer.column_styles = vut_styles
         writer.write_table()
 
         expected = dedent(

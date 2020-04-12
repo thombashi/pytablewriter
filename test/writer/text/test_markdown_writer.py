@@ -21,12 +21,12 @@ from ...data import (
     headers,
     mix_header_list,
     mix_value_matrix,
-    style_tabledata,
-    styles,
     value_matrix,
     value_matrix_iter,
     value_matrix_iter_1,
     value_matrix_with_none,
+    vut_style_tabledata,
+    vut_styles,
 )
 
 
@@ -664,8 +664,8 @@ class Test_MarkdownTableWriter_write_table:
 
     def test_normal_style_mix(self):
         writer = table_writer_class()
-        writer.from_tabledata(style_tabledata)
-        writer.column_styles = styles
+        writer.from_tabledata(vut_style_tabledata)
+        writer.column_styles = vut_styles
 
         expected = dedent(
             """\

@@ -11,7 +11,13 @@ import pytablewriter as ptw
 from pytablewriter.style import Style
 
 from ..._common import print_test_result
-from ...data import float_header_list, float_value_matrix, style_tabledata, styles, value_matrix
+from ...data import (
+    float_header_list,
+    float_value_matrix,
+    value_matrix,
+    vut_style_tabledata,
+    vut_styles,
+)
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -113,8 +119,8 @@ class Test_LatexMatrixWriter_write_table:
 
     def test_normal_styles(self):
         writer = table_writer_class()
-        writer.from_tabledata(style_tabledata)
-        writer.column_styles = styles
+        writer.from_tabledata(vut_style_tabledata)
+        writer.column_styles = vut_styles
 
         expected = r"""\begin{equation}
     style test = \left( \begin{array}{rrrrrrlrrr}

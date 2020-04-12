@@ -16,10 +16,10 @@ from ...data import (
     mix_header_list,
     mix_value_matrix,
     null_test_data_list,
-    style_tabledata,
-    styles,
     value_matrix,
     value_matrix_with_none,
+    vut_style_tabledata,
+    vut_styles,
 )
 
 
@@ -284,8 +284,8 @@ class Test_HtmlTableWriter_write_table:
 
     def test_normal_styles(self, capsys):
         writer = table_writer_class()
-        writer.from_tabledata(style_tabledata)
-        writer.column_styles = styles
+        writer.from_tabledata(vut_style_tabledata)
+        writer.column_styles = vut_styles
         writer.write_table()
 
         expected = dedent(
