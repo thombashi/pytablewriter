@@ -218,5 +218,5 @@ class Style:
 
         if not isinstance(value, expected_type):
             raise TypeError(
-                "{} must be a {} instancce: actual={}".format(attr_name, expected, type(value))
+                "{} must be instance of {}: actual={}".format(attr_name, expected, type(value))
             )
