@@ -39,6 +39,8 @@ def _get_es_datatype(column_dp: ColumnDataProperty) -> Dict[str, str]:
         return {"type": "ip"}
 
     if column_dp.typecode == Typecode.INTEGER:
+        assert column_dp.bit_length is not None
+
         if column_dp.bit_length <= 8:
             return {"type": "byte"}
         elif column_dp.bit_length <= 16:
