@@ -2,6 +2,9 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
+from enum import Enum
+from typing import Optional, Type
+
 import dataproperty
 from tabledata._core import TableData
 
@@ -59,13 +62,18 @@ def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
     return dumps_tabledata(value, format_name, **kwargs)
 
 
-def normalize_enum(value, enum_class, validate=True):
-    if value is None or not isinstance(value, str):
+def normalize_enum(
+    value, enum_class: Type[Enum], validate: bool = True, default: Optional[Enum] = None
+):
+    if value is None:
+        return default
+
+    if isinstance(value, Enum):
         return value
 
     try:
         return enum_class[value.strip().upper()]
-    except KeyError:
+    except (KeyError, AttributeError):
         if validate:
             raise ValueError(
                 "valid values are: {}".format(", ".join([item.name for item in enum_class]))

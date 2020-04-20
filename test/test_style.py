@@ -46,6 +46,20 @@ class Test_Style_constructor:
                     "thousand_separator": ThousandSeparator.NONE,
                 },
             ],
+            [
+                {
+                    "align": None,
+                    "font_size": None,
+                    "font_weight": None,
+                    "thousand_separator": None,
+                },
+                {
+                    "align": Align.AUTO,
+                    "font_size": FontSize.NONE,
+                    "font_weight": FontWeight.NORMAL,
+                    "thousand_separator": ThousandSeparator.NONE,
+                },
+            ],
         ],
     )
     def test_normal(self, value, expected):

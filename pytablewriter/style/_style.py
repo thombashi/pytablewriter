@@ -146,30 +146,33 @@ class Style:
         return self.__thousand_separator
 
     def __init__(self, **kwargs) -> None:
-        self.__align = normalize_enum(kwargs.pop("align", Align.AUTO), Align)
+        self.__align = normalize_enum(kwargs.get("align"), Align, default=Align.AUTO)
         self.__validate_attr("align", Align)
 
         self.__valign = normalize_enum(
-            kwargs.pop("vertical_align", VerticalAlign.BASELINE), VerticalAlign
+            kwargs.get("vertical_align"), VerticalAlign, default=VerticalAlign.BASELINE
         )
 
         self.__font_size = normalize_enum(
-            kwargs.pop("font_size", FontSize.NONE), FontSize, validate=False
+            kwargs.get("font_size"), FontSize, validate=False, default=FontSize.NONE
         )
         self.__validate_attr("font_size", (FontSize, str))
 
-        self.__font_style = normalize_enum(kwargs.pop("font_style", FontStyle.NORMAL), FontStyle)
+        self.__font_style = normalize_enum(
+            kwargs.get("font_style"), FontStyle, default=FontStyle.NORMAL
+        )
         self.__validate_attr("font_style", FontStyle)
 
         self.__font_weight = normalize_enum(
-            kwargs.pop("font_weight", FontWeight.NORMAL), FontWeight
+            kwargs.get("font_weight"), FontWeight, default=FontWeight.NORMAL
         )
         self.__validate_attr("font_weight", FontWeight)
 
         self.__thousand_separator = _normalize_thousand_separator(
             normalize_enum(
-                kwargs.pop("thousand_separator", ThousandSeparator.NONE),
+                kwargs.get("thousand_separator"),
                 ThousandSeparator,
+                default=ThousandSeparator.NONE,
                 validate=False,
             )
         )
