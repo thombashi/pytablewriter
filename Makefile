@@ -21,7 +21,6 @@ build:
 	@make clean
 	@tox -e build
 	ls -lh dist/*
-	pip check
 
 .PHONY: check
 check:
