@@ -5,9 +5,9 @@
 from textwrap import dedent
 
 import pytest
-from typepy import Integer, RealNumber
 
 import pytablewriter as ptw
+from pytablewriter.typehint import Integer, RealNumber
 
 from ..._common import print_test_result
 from ...data import (
