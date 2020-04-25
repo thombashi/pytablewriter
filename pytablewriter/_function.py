@@ -73,10 +73,17 @@ def normalize_enum(
 
     try:
         return enum_class[value.strip().upper()]
-    except (KeyError, AttributeError):
+    except AttributeError:
+        if validate:
+            raise TypeError(
+                "value must be a {} or a str: actual={}".format(enum_class, type(value))
+            )
+    except KeyError:
         if validate:
             raise ValueError(
-                "valid values are: {}".format(", ".join([item.name for item in enum_class]))
+                "invalid valid found: expected={}, actual={}".format(
+                    "/".join([item.name for item in enum_class]), value
+                )
             )
 
     return value
