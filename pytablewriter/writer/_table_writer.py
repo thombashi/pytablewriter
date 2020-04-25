@@ -321,7 +321,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @max_workers.setter
     def max_workers(self, value: Optional[int]) -> None:
-        self._dp_extractor.max_workers = value
+        self._dp_extractor.max_workers = value  # type: ignore
 
     @abc.abstractmethod
     def _write_table(self, **kwargs) -> None:
