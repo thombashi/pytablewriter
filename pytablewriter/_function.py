@@ -68,7 +68,7 @@ def normalize_enum(
     if value is None:
         return default
 
-    if isinstance(value, Enum):
+    if isinstance(value, enum_class):
         return value
 
     try:
