@@ -10,10 +10,11 @@ You can specify type hints to a writer via
         :caption: Using type hint to change data type to write Python code
 
         from datetime import datetime
-        import pytablewriter as ptw
+        from pytablewriter import PythonCodeTableWriter
+        from pytablewriter.typehint import DateTime, Integer, String
 
         def main():
-            writer = ptw.PythonCodeTableWriter()
+            writer = PythonCodeTableWriter()
             writer.value_matrix = [
                 [-1.1, float("inf"), "2017-01-02 03:04:05", datetime(2017, 1, 2, 3, 4, 5)],
                 [0.12, float("nan"), "2017-02-03 04:05:06", datetime(2017, 2, 3, 4, 5, 6)],
@@ -27,7 +28,7 @@ You can specify type hints to a writer via
             # set type hints
             writer.table_name = "python variable with type hints"
             writer.headers = ["hint_int", "hint_str", "hint_datetime", "hint_str"]
-            writer.type_hints = [ptw.Integer, ptw.String, ptw.DateTime, ptw.String]
+            writer.type_hints = [Integer, String, DateTime, String]
             writer.write_table()
 
         if __name__ == "__main__":

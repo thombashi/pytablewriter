@@ -10,10 +10,11 @@ You can specify type hints to a writer via
         :caption: Using type hint to change data type to write JavaScript code
 
         from datetime import datetime
-        import pytablewriter as ptw
+        from pytablewriter import JavaScriptTableWriter
+        from pytablewriter.typehint import DateTime, Integer, String
 
         def main():
-            writer = ptw.JavaScriptTableWriter()
+            writer = JavaScriptTableWriter()
             writer.headers = ["header_a", "header_b", "header_c"]
             writer.value_matrix = [
                 [-1.1, "2017-01-02 03:04:05", datetime(2017, 1, 2, 3, 4, 5)],
@@ -26,7 +27,7 @@ You can specify type hints to a writer via
 
             print("// with type hints: Integer, DateTime, String")
             writer.table_name = "with type hint"
-            writer.type_hints = [ptw.Integer, ptw.DateTime, ptw.String]
+            writer.type_hints = [Integer, DateTime, String]
             writer.write_table()
 
         if __name__ == "__main__":
