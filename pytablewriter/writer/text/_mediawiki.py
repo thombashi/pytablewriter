@@ -55,13 +55,14 @@ class MediaWikiTableWriter(TextTableWriter):
         super()._write_header()
 
     def _write_value_row(
-        self, values: Sequence[str], value_dp_list: Sequence[DataProperty]
+        self, row: int, values: Sequence[str], value_dp_list: Sequence[DataProperty]
     ) -> None:
         self._write_row(
+            row,
             [
                 self.__modify_table_element(value, value_dp)
                 for value, value_dp, in zip(values, value_dp_list)
-            ]
+            ],
         )
 
     def _get_opening_row_items(self) -> List[str]:

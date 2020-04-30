@@ -234,7 +234,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             pass
 
         is_first_value_row = True
-        for values, value_dp_list in zip(self._table_value_matrix, self._table_value_dp_matrix):
+        for row, (values, value_dp_list) in enumerate(
+            zip(self._table_value_matrix, self._table_value_dp_matrix)
+        ):
             try:
                 if is_first_value_row:
                     is_first_value_row = False
@@ -242,7 +244,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                     if self.is_write_value_separator_row:
                         self._write_value_row_separator()
 
-                self._write_value_row(cast(List[str], values), value_dp_list)
+                self._write_value_row(row, cast(List[str], values), value_dp_list)
             except TypeError:
                 continue
 
@@ -295,7 +297,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _write_line(self, text: str = "") -> None:
         self._write_raw_line(text)
 
-    def _write_row(self, values: Sequence[str]) -> None:
+    def _write_row(self, row: int, values: Sequence[str]) -> None:
         if typepy.is_empty_sequence(values):
             return
 
@@ -310,12 +312,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if typepy.is_empty_sequence(self._table_headers):
             raise EmptyHeaderError("header is empty")
 
-        self._write_row(self._table_headers)
+        self._write_row(-1, self._table_headers)
 
     def _write_value_row(
-        self, values: Sequence[str], value_dp_list: Sequence[DataProperty]
+        self, row: int, values: Sequence[str], value_dp_list: Sequence[DataProperty]
     ) -> None:
-        self._write_row(values)
+        self._write_row(row, values)
 
     def __write_separator_row(self, values, row_type=RowType.MIDDLE):
         if typepy.is_empty_sequence(values):
