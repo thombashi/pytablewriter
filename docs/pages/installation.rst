@@ -41,6 +41,7 @@ Python 3.5+
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
 - `typepy <https://github.com/thombashi/typepy>`__
+- `typing-extensions · PyPI <https://pypi.org/project/typing-extensions/>`__
 
 Optional dependencies
 ---------------------

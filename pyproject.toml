@@ -31,6 +31,7 @@ known_third_party = [
     'tabledata',
     'termcolor',
     'typepy',
+    'typing_extensions',
 ]
 include_trailing_comma = true
 line_length = 100
