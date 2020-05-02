@@ -20,6 +20,7 @@ from dataproperty import (
 )
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode, extract_typepy_from_dtype
+from typing_extensions import Protocol
 
 from .._logger import WriterLogger
 from ..error import (
@@ -29,11 +30,13 @@ from ..error import (
     EmptyValueError,
     NotSupportedError,
 )
-from ..style import Align, NullStyler, Style, StylerInterface, ThousandSeparator
+from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
 from ._interface import TableWriterInterface
 
 
-StyleFilterFunc = Callable[[int, int, Any, Style], Optional[Style]]
+class StyleFilterFunc(Protocol):
+    def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
+        ...
 
 
 _ts_to_flag = {
@@ -842,8 +845,13 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _fetch_style(
         self, row_idx: int, col_idx: int, value_dp: DataProperty, default_style: Style
     ) -> Style:
+        self.style_filter_kwargs.update({"writer": self})
+
         for style_filter in self._style_filters:
-            style = style_filter(row_idx, col_idx, value_dp.data, default_style)
+            style = style_filter(
+                Cell(row=row_idx, col=col_idx, value=value_dp.data, default_style=default_style),
+                **self.style_filter_kwargs
+            )
             if style:
                 return style
 
