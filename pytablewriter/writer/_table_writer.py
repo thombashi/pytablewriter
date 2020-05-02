@@ -387,6 +387,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__col_style_list = []  # type: List[Optional[Style]]
         self._style_filters = []  # type: List[StyleFilterFunc]
         self._styler = self._create_styler(self)
+        self.style_filter_kwargs = {}  # type: Dict[str, Any]
 
         self.__clear_preprocess()
 
