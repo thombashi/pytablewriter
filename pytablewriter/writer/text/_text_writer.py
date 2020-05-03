@@ -369,6 +369,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         return margin_str + "{:s}" + margin_str
 
+    def _preprocess_table_property(self) -> None:
+        super()._preprocess_table_property()
+
+        self.__update_template()
+        self._init_cross_point_maps()
+
 
 class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     """
