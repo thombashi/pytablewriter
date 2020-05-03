@@ -108,17 +108,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.stream = sys.stdout
 
-        self.column_delimiter = "|"
-        self.char_left_side_row = ""
-        self.char_right_side_row = ""
+        self._set_chars("")
 
-        self.char_cross_point = ""
-        self.char_left_cross_point = ""
-        self.char_right_cross_point = ""
-        self.char_top_left_cross_point = ""
-        self.char_top_right_cross_point = ""
-        self.char_bottom_left_cross_point = ""
-        self.char_bottom_right_cross_point = ""
+        self.column_delimiter = "|"
 
         self.char_opening_row = "-"
         self.char_opening_row_cross_point = "-"
@@ -215,6 +207,29 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.stream = old_stream
 
         return tabular_text
+
+    def _set_chars(self, c: str) -> None:
+        self.char_left_side_row = c
+        self.char_right_side_row = c
+
+        self.char_cross_point = c
+        self.char_left_cross_point = c
+        self.char_right_cross_point = c
+        self.char_top_left_cross_point = c
+        self.char_top_right_cross_point = c
+        self.char_bottom_left_cross_point = c
+        self.char_bottom_right_cross_point = c
+
+        self.char_opening_row = c
+        self.char_opening_row_cross_point = c
+
+        self.char_header_row_separator = c
+        self.char_value_row_separator = c
+
+        self.char_closing_row = c
+        self.char_closing_row_cross_point = c
+
+        self._init_cross_point_maps()
 
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return TextStyler(writer)
