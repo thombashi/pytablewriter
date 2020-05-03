@@ -15,6 +15,7 @@ from ._interface import IndentationInterface, TextWriterInterface
 @enum.unique
 class RowType(enum.Enum):
     OPENING = "opening"
+    HEADER_SEPARATOR = "header separator"
     MIDDLE = "middle"
     CLOSING = "closing"
 
@@ -116,6 +117,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_opening_row_cross_point = "-"
 
         self.char_header_row_separator = "-"
+        self.char_header_row_cross_point = "-"
+
         self.char_value_row_separator = "-"
 
         self.char_closing_row = "-"
@@ -131,16 +134,19 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _init_cross_point_maps(self) -> None:
         self.__cross_point_maps = {
             RowType.OPENING: self.char_opening_row_cross_point,
+            RowType.HEADER_SEPARATOR: self.char_header_row_cross_point,
             RowType.MIDDLE: self.char_cross_point,
             RowType.CLOSING: self.char_closing_row_cross_point,
         }
         self.__left_cross_point_maps = {
             RowType.OPENING: self.char_top_left_cross_point,
+            RowType.HEADER_SEPARATOR: self.char_header_row_left_cross_point,
             RowType.MIDDLE: self.char_left_cross_point,
             RowType.CLOSING: self.char_bottom_left_cross_point,
         }
         self.__right_cross_point_maps = {
             RowType.OPENING: self.char_top_right_cross_point,
+            RowType.HEADER_SEPARATOR: self.char_header_row_right_cross_point,
             RowType.MIDDLE: self.char_right_cross_point,
             RowType.CLOSING: self.char_bottom_right_cross_point,
         }
@@ -224,6 +230,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_opening_row_cross_point = c
 
         self.char_header_row_separator = c
+        self.char_header_row_cross_point = c
+        self.char_header_row_left_cross_point = c
+        self.char_header_row_right_cross_point = c
+
         self.char_value_row_separator = c
 
         self.char_closing_row = c
@@ -362,7 +372,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if any([not self.is_write_header, not self.is_write_header_separator_row]):
             return
 
-        self.__write_separator_row(self._get_header_row_separator_items())
+        self.__write_separator_row(
+            self._get_header_row_separator_items(), row_type=RowType.HEADER_SEPARATOR
+        )
 
     def _write_value_row_separator(self) -> None:
         """

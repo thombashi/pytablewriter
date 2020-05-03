@@ -27,6 +27,9 @@ class RstTableWriter(IndentationTextTableWriter):
         self.char_top_right_cross_point = "+"
         self.char_bottom_left_cross_point = "+"
         self.char_bottom_right_cross_point = "+"
+        self.char_header_row_cross_point = "+"
+        self.char_header_row_left_cross_point = "+"
+        self.char_header_row_right_cross_point = "+"
 
         self.char_opening_row_cross_point = "+"
         self.char_closing_row_cross_point = "+"
@@ -224,6 +227,9 @@ class RstSimpleTableWriter(RstTableWriter):
         self.char_cross_point = "  "
         self.char_opening_row_cross_point = "  "
         self.char_closing_row_cross_point = "  "
+        self.char_header_row_cross_point = "  "
+        self.char_header_row_left_cross_point = "  "
+        self.char_header_row_right_cross_point = "  "
 
         self.char_opening_row = "="
         self.char_closing_row = "="

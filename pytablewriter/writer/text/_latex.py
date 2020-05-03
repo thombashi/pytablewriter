@@ -26,13 +26,13 @@ class LatexWriter(IndentationTextTableWriter):
     def __init__(self) -> None:
         super().__init__()
 
+        self._set_chars("")
+
         self.is_write_opening_row = True
         self.is_write_closing_row = True
         self.indent_string = "    "
         self.column_delimiter = " & "
         self.char_right_side_row = r" \\"
-        self.char_opening_row_cross_point = ""
-        self.char_closing_row_cross_point = ""
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 
