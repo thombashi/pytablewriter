@@ -27,8 +27,10 @@ class CsvTableWriter(TextTableWriter):
     def __init__(self) -> None:
         super().__init__()
 
+        self._set_chars("")
         self.indent_string = ""
         self.column_delimiter = ","
+
         self.is_padding = False
         self.is_formatting_float = False
         self.is_write_header_separator_row = False
