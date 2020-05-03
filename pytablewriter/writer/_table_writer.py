@@ -392,6 +392,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._styler = self._create_styler(self)
         self.style_filter_kwargs = {}  # type: Dict[str, Any]
 
+        self.max_workers = 1
+
         self.__clear_preprocess()
 
     def _repr_html_(self) -> str:
