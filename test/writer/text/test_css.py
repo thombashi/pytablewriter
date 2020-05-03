@@ -11,7 +11,6 @@ from pytablewriter.style import Style
 
 from ..._common import print_test_result
 from ...data import (
-    Data,
     headers,
     mix_header_list,
     mix_value_matrix,
