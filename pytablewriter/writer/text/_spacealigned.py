@@ -30,6 +30,8 @@ class SpaceAlignedTableWriter(CsvTableWriter):
         super().__init__()
 
         self.column_delimiter = "  "
+        self.char_cross_point = "  "
+
         self.is_padding = True
         self.is_formatting_float = True
 
