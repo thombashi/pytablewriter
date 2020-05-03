@@ -92,6 +92,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def margin(self, value: int) -> None:
         self.__margin = value
 
+    def __update_template(self) -> None:
         self.__value_cell_margin_format = self.__make_margin_format(" ")
         self.__opening_row_cell_format = self.__make_margin_format(self.char_opening_row)
         self._header_row_separator_cell_format = self.__make_margin_format(
