@@ -1,6 +1,5 @@
 import copy
-from decimal import Decimal
-from typing import Any, List
+from typing import List
 
 import dataproperty
 import typepy
@@ -8,7 +7,7 @@ from mbstrdecoder import MultiByteStrDecoder
 from typepy import Typecode
 
 from ..._converter import strip_quote
-from ._common import bool_to_str
+from ._common import bool_to_str, serialize_dp
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -114,21 +113,11 @@ class JsonTableWriter(IndentationTextTableWriter):
         except TypeError:
             dp_matrix = []
 
-        value_matrix = [[self.__get_data_helper(dp) for dp in dp_list] for dp_list in dp_matrix]
+        value_matrix = [[serialize_dp(dp) for dp in dp_list] for dp_list in dp_matrix]
 
         self._table_value_matrix = [dict(zip(self.headers, values)) for values in value_matrix]
 
         self._is_complete_value_matrix_preprocess = True
-
-    @staticmethod
-    def __get_data_helper(dp: dataproperty.DataProperty) -> Any:
-        if dp.typecode == Typecode.REAL_NUMBER and isinstance(dp.data, Decimal):
-            return float(dp.data)
-
-        if dp.typecode == Typecode.DATETIME:
-            return dp.to_str()
-
-        return dp.data
 
     def _get_opening_row_items(self) -> List[str]:
         if typepy.is_not_null_string(self.table_name):
