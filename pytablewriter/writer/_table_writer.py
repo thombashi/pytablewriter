@@ -6,6 +6,7 @@
 import abc
 import math
 import warnings
+from typing import Mapping  # noqa
 from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast
 
 import msgfy
@@ -314,7 +315,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._dp_extractor.quoting_flags
 
     @_quoting_flags.setter
-    def _quoting_flags(self, value: Dict[Typecode, bool]) -> None:
+    def _quoting_flags(self, value: Mapping[Typecode, bool]) -> None:
         self._dp_extractor.quoting_flags = value
         self.__clear_preprocess()
 
