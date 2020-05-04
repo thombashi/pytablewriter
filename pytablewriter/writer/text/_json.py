@@ -113,9 +113,9 @@ class JsonTableWriter(IndentationTextTableWriter):
         except TypeError:
             dp_matrix = []
 
-        value_matrix = [[serialize_dp(dp) for dp in dp_list] for dp_list in dp_matrix]
-
-        self._table_value_matrix = [dict(zip(self.headers, values)) for values in value_matrix]
+        self._table_value_matrix = [
+            dict(zip(self.headers, [serialize_dp(dp) for dp in dp_list])) for dp_list in dp_matrix
+        ]
 
         self._is_complete_value_matrix_preprocess = True
 
