@@ -14,6 +14,7 @@ exclude = '''
     | dist
 )/
 | docs/conf.py
+| pytablewriter/_typing.py
 | setup.py
 '''
 
@@ -42,6 +43,7 @@ skip_glob = [
     '*/.eggs/*',
     '*/.pytype/*',
     '*/.tox/*',
+    'pytablewriter/_typing.py',
 ]
 
 [tool.coverage.run]
