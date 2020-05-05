@@ -21,7 +21,6 @@ from dataproperty import (
 )
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode, extract_typepy_from_dtype
-from typing_extensions import Protocol
 
 from .._logger import WriterLogger
 from ..error import (
@@ -33,6 +32,13 @@ from ..error import (
 )
 from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
 from ._interface import TableWriterInterface
+
+
+try:
+    from typing import Protocol
+except ImportError:
+    # typing.Protocol is only available starting from Python 3.8.
+    from .._typing import Protocol  # noqa
 
 
 class StyleFilterFunc(Protocol):
