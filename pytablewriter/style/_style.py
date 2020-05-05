@@ -162,6 +162,14 @@ class Style:
     def thousand_separator(self) -> ThousandSeparator:
         return self.__thousand_separator
 
+    @property
+    def padding(self):
+        return self.__padding
+
+    @padding.setter
+    def padding(self, value: Optional[int]):
+        self.__padding = value
+
     def __init__(self, **kwargs) -> None:
         self.__fg_color = kwargs.pop("color", None)
         if self.__fg_color:
@@ -173,6 +181,8 @@ class Style:
 
         self.__align = normalize_enum(kwargs.get("align"), Align, default=Align.AUTO)
         self.__validate_attr("align", Align)
+
+        self.__padding = kwargs.pop("padding", None)
 
         self.__valign = normalize_enum(
             kwargs.get("vertical_align"), VerticalAlign, default=VerticalAlign.BASELINE
@@ -208,6 +218,8 @@ class Style:
 
         if self.align:
             items.append("align={}".format(self.align.align_string))
+        if self.padding is not None:
+            items.append("padding={}".format(self.padding))
         if self.vertical_align:
             items.append("valign={}".format(self.vertical_align.align_str))
         if self.color:

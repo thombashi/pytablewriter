@@ -156,6 +156,7 @@ class Test_Style_repr:
             [
                 Style(
                     align="left",
+                    padding=1,
                     vertical_align="bottom",
                     color="red",
                     bg_color="#2f2f2f",
@@ -164,7 +165,7 @@ class Test_Style_repr:
                     font_weight="bold",
                     thousand_separator=",",
                 ),
-                "(align=left, valign=bottom, "
+                "(align=left, padding=1, valign=bottom, "
                 "color=Color(code=#cd3131, rgb=(205, 49, 49), name=RED), "
                 "bg_color=Color(code=#2f2f2f, rgb=(47, 47, 47)), "
                 "font_size=tiny, font_style=italic, font_weight=bold, thousand_separator=comma)",
