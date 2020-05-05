@@ -15,7 +15,7 @@ _align_char_mapping = {
 }
 
 
-def _get_align_char(align: Align) -> str:
+def get_align_char(align: Align) -> str:
     return _align_char_mapping[align]
 
 
@@ -82,7 +82,7 @@ class TextStyler(AbstractStyler):
         return tcolor(value, color=style.color, bg_color=style.bg_color, styles=ansi_styles)
 
     def __get_align_format(self, style: Style) -> str:
-        align_char = _get_align_char(style.align)
+        align_char = get_align_char(style.align)
         format_items = ["{:" + align_char]
         if style.padding is not None and style.padding > 0:
             format_items.append(str(style.padding))

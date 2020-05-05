@@ -9,6 +9,7 @@ from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandl
 
 from ...error import EmptyHeaderError
 from ...style import Cell, Style, StylerInterface, TextStyler
+from ...style._styler import get_align_char
 from .._table_writer import AbstractTableWriter, ColSeparatorStyleFilterFunc
 from ._interface import IndentationInterface, TextWriterInterface
 
@@ -306,7 +307,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return "{{:{:s}{:s}}}".format(
-            _get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
+            get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
         )
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
