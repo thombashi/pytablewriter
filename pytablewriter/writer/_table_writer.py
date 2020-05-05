@@ -121,18 +121,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         raise NotImplementedError()
 
     @property
-    def table_name(self) -> str:
-        """
-        Name of the table.
-        """
-
-        return self._table_name
-
-    @table_name.setter
-    def table_name(self, value: str) -> None:
-        self._table_name = value
-
-    @property
     def headers(self) -> Sequence[str]:
         """
         List of table header to write.
@@ -425,6 +413,18 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._table_headers = []  # type: List[str]
         self._table_value_matrix = []  # type: List[Union[List[str], Dict]]
         self._table_value_dp_matrix = []  # type: Sequence[Sequence[DataProperty]]
+
+    @property
+    def table_name(self) -> str:
+        """
+        Name of the table.
+        """
+
+        return self._table_name
+
+    @table_name.setter
+    def table_name(self, value: str) -> None:
+        self._table_name = value
 
     @property
     def default_style(self) -> Style:
