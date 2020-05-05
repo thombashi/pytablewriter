@@ -55,18 +55,24 @@ dd = 3
         ],
         expected="""[[sparse]]
 a = 1
-c = "a"
 b = ""
+c = "a"
 dd = 1
+
 [[sparse]]
-dd = 2.2
 b = 2.2
+dd = 2.2
 e = 2.2
+
+[[sparse]]
+
 [[sparse]]
 a = 3
-c = "ccc"
 b = 3.3
+c = "ccc"
 e = "cccc"
+
+[[sparse]]
 """,
     ),
     Data(
@@ -95,15 +101,16 @@ e = "cccc"
             [-1, Decimal("4.4"), False, parse("2022-01-01T00:00:00")],
         ],
         expected="""[[mixtype]]
-float = 2.2
-datetime = 2017-01-02T03:04:05
 int = 0
+float = 2.2
 bool = true
+datetime = "2017-01-02T03:04:05"
+
 [[mixtype]]
-float = 4.4
-datetime = 2022-01-01T00:00:00
 int = -1
+float = 4.4
 bool = false
+datetime = "2022-01-01T00:00:00"
 """,
     ),
     Data(
@@ -114,15 +121,16 @@ bool = false
 a = 0.01
 b = 0.00125
 c = 0
+
 [[float]]
 a = 1
-b = 99.9
+b = 99.90000000000001
 c = 0.01
+
 [[float]]
 a = 1.2
 b = 999999.123
 c = 0.001
-
 """,
     ),
 ]
@@ -148,7 +156,6 @@ class Test_TomlTableWriter_write_new_line:
 
 
 class Test_TomlTableWriter_write_table:
-    @pytest.mark.xfail(run=False)
     @pytest.mark.parametrize(
         ["table_name", "header", "value", "expected"],
         [

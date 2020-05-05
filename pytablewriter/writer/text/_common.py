@@ -15,7 +15,9 @@ def bool_to_str(value) -> str:
 
 
 def serialize_dp(dp: DataProperty) -> Any:
-    if dp.typecode == Typecode.REAL_NUMBER and isinstance(dp.data, Decimal):
+    if dp.typecode in (Typecode.REAL_NUMBER, Typecode.INFINITY, Typecode.NAN) and isinstance(
+        dp.data, Decimal
+    ):
         return float(dp.data)
 
     if dp.typecode == Typecode.DATETIME:
