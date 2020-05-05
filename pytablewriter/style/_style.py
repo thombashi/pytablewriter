@@ -1,7 +1,8 @@
 from enum import Enum, unique
-from typing import Union, cast
+from typing import Optional, Union, cast
 
 from dataproperty import Align
+from tcolorpy import Color
 
 from .._function import normalize_enum
 from ._font import FontSize, FontStyle, FontWeight
@@ -58,6 +59,14 @@ class Style:
     """Style specifier class for table elements.
 
     Args:
+        color (Optional[Color]):
+            text color for cells.
+            Only applicable for part of text format writer classes.
+
+        bg_color (Optional[Color]):
+            background color for cells.
+            Only applicable for part of text format writer classes.
+
         align (|str| / :py:class:`~.style.Align`):
             Horizontal text alignment for cells.
             This can be only applied for text format writer classes.
@@ -142,10 +151,26 @@ class Style:
         return self.__font_weight
 
     @property
+    def color(self) -> Optional[Color]:
+        return self.__fg_color
+
+    @property
+    def bg_color(self) -> Optional[Color]:
+        return self.__bg_color
+
+    @property
     def thousand_separator(self) -> ThousandSeparator:
         return self.__thousand_separator
 
     def __init__(self, **kwargs) -> None:
+        self.__fg_color = kwargs.pop("color", None)
+        if self.__fg_color:
+            self.__fg_color = Color(self.__fg_color)
+
+        self.__bg_color = kwargs.pop("bg_color", None)
+        if self.__bg_color:
+            self.__bg_color = Color(self.__bg_color)
+
         self.__align = normalize_enum(kwargs.get("align"), Align, default=Align.AUTO)
         self.__validate_attr("align", Align)
 

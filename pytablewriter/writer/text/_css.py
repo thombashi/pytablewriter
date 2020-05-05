@@ -56,6 +56,12 @@ class CssTableWriter(IndentationTextTableWriter):
         if style.font_style == FontStyle.ITALIC:
             css_tags.append("font-style:italic")
 
+        if style.color:
+            css_tags.append("color: {}".format(style.color.color_code))
+
+        if style.bg_color:
+            css_tags.append("background-color: {}".format(style.bg_color.color_code))
+
         css_tag = self.__extract_align_tag(value_dp, style)
         if css_tag:
             css_tags.append(css_tag)

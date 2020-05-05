@@ -20,6 +20,7 @@ from ...data import (
     vut_style_tabledata,
     vut_styles,
 )
+from ._common import regexp_ansi_escape
 
 
 normal_test_data_list = [
@@ -185,7 +186,8 @@ class Test_RstSimpleTableWriter_write_table:
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
 
-        assert out == expected
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],

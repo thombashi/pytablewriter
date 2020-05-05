@@ -1,14 +1,14 @@
 import enum
 import io
 import sys
-from typing import List, Sequence, cast
+from itertools import chain
+from typing import List, Optional, Sequence, cast
 
 import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
 
 from ...error import EmptyHeaderError
-from ...style import StylerInterface, TextStyler
-from .._table_writer import AbstractTableWriter
+from ...style import Cell, Style, StylerInterface, TextStyler
 from ._interface import IndentationInterface, TextWriterInterface
 
 
@@ -306,9 +306,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__value_cell_margin_format.format(super()._to_header_item(col_dp, value_dp))
 
-    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+    def _apply_style_to_row_item(
+        self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
+    ) -> str:
         return self.__value_cell_margin_format.format(
-            super()._to_row_item(row_idx, col_dp, value_dp)
+            super()._apply_style_to_row_item(row_idx, col_dp, value_dp, style)
         )
 
     def _write_raw_string(self, unicode_text: str) -> None:

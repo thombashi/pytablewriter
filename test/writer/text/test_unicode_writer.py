@@ -10,6 +10,7 @@ from pytablewriter import BoldUnicodeTableWriter, UnicodeTableWriter
 
 from ..._common import print_test_result
 from ...data import vut_style_tabledata, vut_styles
+from ._common import regexp_ansi_escape
 
 
 class Test_UnicodeTableWriter_write_new_line:
@@ -45,7 +46,8 @@ class Test_UnicodeTableWriter_write_table:
 
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
-        assert out == expected
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
 
 
 class Test_BoldUnicodeTableWriter_write_table:
@@ -69,4 +71,5 @@ class Test_BoldUnicodeTableWriter_write_table:
 
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
-        assert out == expected
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected

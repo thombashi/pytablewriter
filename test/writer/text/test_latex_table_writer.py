@@ -19,6 +19,7 @@ from ...data import (
     vut_style_tabledata,
     vut_styles,
 )
+from ._common import regexp_ansi_escape
 
 
 Data = collections.namedtuple("Data", "header value expected")
@@ -111,7 +112,8 @@ class Test_LatexTableWriter_write_table:
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
 
-        assert out == expected
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
 
     @pytest.mark.parametrize(
         ["header", "value", "expected"],

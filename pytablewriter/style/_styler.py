@@ -1,6 +1,8 @@
 import abc
 from typing import Any, Optional, cast
 
+from tcolorpy import tcolor
+
 from ._font import FontSize, FontStyle, FontWeight
 from ._style import Style, ThousandSeparator
 
@@ -8,6 +10,10 @@ from ._style import Style, ThousandSeparator
 class StylerInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def apply(self, value: Any, style: Style) -> str:  # pragma: no cover
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def apply_terminal_style(self, value: Any, style: Style) -> str:  # pragma: no cover
         raise NotImplementedError()
 
     @abc.abstractmethod
@@ -33,6 +39,9 @@ class AbstractStyler(StylerInterface):
     def apply(self, value: Any, style: Style) -> str:
         return value
 
+    def apply_terminal_style(self, value: Any, style: Style) -> str:
+        return value
+
     def _get_font_size_map(self):
         return {}
 
@@ -43,6 +52,16 @@ class NullStyler(AbstractStyler):
 
 
 class TextStyler(AbstractStyler):
+    def apply_terminal_style(self, value: Any, style: Style) -> str:
+        if not self._writer.colorize_terminal:
+            return value
+
+        ansi_styles = []
+        if style.font_weight == FontWeight.BOLD:
+            ansi_styles.append("bold")
+
+        return tcolor(value, color=style.color, bg_color=style.bg_color, styles=ansi_styles)
+
     def apply(self, value: Any, style: Style) -> str:
         if value:
             if style.thousand_separator == ThousandSeparator.SPACE:
