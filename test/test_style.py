@@ -154,14 +154,20 @@ class Test_Style_repr:
             [
                 Style(
                     align="left",
+                    vertical_align="bottom",
+                    color="red",
+                    bg_color="#2f2f2f",
                     font_size="tiny",
                     font_style="italic",
                     font_weight="bold",
                     thousand_separator=",",
                 ),
-                "(align=left, font_size=tiny, font_style=italic, font_weight=bold, thousand_separator=comma)",
+                "(align=left, valign=bottom, "
+                "color=Color(code=#cd3131, rgb=(205, 49, 49), name=RED), "
+                "bg_color=Color(code=#2f2f2f, rgb=(47, 47, 47)), "
+                "font_size=tiny, font_style=italic, font_weight=bold, thousand_separator=comma)",
             ],
-            [Style(), "(align=auto, font_style=normal, font_weight=normal)"],
+            [Style(), "(align=auto, valign=baseline, font_style=normal, font_weight=normal)"],
         ],
     )
     def test_normal(self, value, expected):

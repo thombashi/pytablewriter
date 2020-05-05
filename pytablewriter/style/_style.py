@@ -208,6 +208,12 @@ class Style:
 
         if self.align:
             items.append("align={}".format(self.align.align_string))
+        if self.vertical_align:
+            items.append("valign={}".format(self.vertical_align.align_str))
+        if self.color:
+            items.append("color={}".format(self.color))
+        if self.bg_color:
+            items.append("bg_color={}".format(self.bg_color))
         if self.font_size is not FontSize.NONE:
             items.append("font_size={}".format(self.font_size.value))
         if self.font_style:
