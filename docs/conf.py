@@ -340,6 +340,7 @@ rp_class = """
 .. |SqliteTableWriter| replace:: :py:class:`~pytablewriter.SqliteTableWriter`
 .. |TsvTableWriter| replace:: :py:class:`~pytablewriter.TsvTableWriter`
 .. |TomlTableWriter| replace:: :py:class:`~pytablewriter.TomlTableWriter`
+.. |YamlTableWriter| replace:: :py:class:`~pytablewriter.YamlTableWriter`
 .. |UnicodeTableWriter| replace:: :py:class:`~pytablewriter.UnicodeTableWriter`
 """
 

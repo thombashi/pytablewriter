@@ -143,6 +143,13 @@ TOML table writer class
     :show-inheritance:
 
 
+YAML table writer class
+-------------------------------
+.. autoclass:: pytablewriter.YamlTableWriter
+    :members:
+    :show-inheritance:
+
+
 Unicode table writer classes
 -------------------------------
 .. autoclass:: pytablewriter.UnicodeTableWriter

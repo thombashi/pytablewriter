@@ -19,7 +19,7 @@ Some of the formats require additional dependency packages, you can install the 
     - ``pip install pytablewriter[sqlite]``
 - TOML
     - ``pip install pytablewriter[toml]``
-- All of the extra dependencies
+- Install all of the optioanal dependencies
     - ``pip install pytablewriter[all]``
 
 Install from PPA (for Ubuntu)
@@ -40,8 +40,8 @@ Python 3.5+
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
+- `tcolorpy <https://github.com/thombashi/tcolorpy>`__
 - `typepy <https://github.com/thombashi/typepy>`__
-- `typing-extensions · PyPI <https://pypi.org/project/typing-extensions/>`__
 
 Optional dependencies
 ---------------------

@@ -27,3 +27,7 @@ Style
 .. autoclass:: pytablewriter.style.VerticalAlign
    :members:
    :undoc-members:
+
+.. autoclass:: pytablewriter.style.Cell
+   :members:
+   :undoc-members:

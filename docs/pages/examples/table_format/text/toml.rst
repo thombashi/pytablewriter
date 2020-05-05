@@ -14,6 +14,7 @@ format table to the |stream| from a matrix of data.
 
         def main():
             writer = pytablewriter.TomlTableWriter()
+            writer.table_name = "example_table"
             writer.headers = ["int", "float", "str", "bool", "mix", "time"]
             writer.value_matrix = [
                 [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
@@ -28,32 +29,35 @@ format table to the |stream| from a matrix of data.
             main()
 
 :Output:
-    .. code-block:: none
+    .. code-block:: toml
 
         [[example_table]]
         int = 0
         float = 0.1
-        mix = 0
-        bool = true
         str = "hoge"
+        bool = true
+        mix = 0
         time = "2017-01-01 03:04:05+0900"
+
         [[example_table]]
         int = 2
         float = -2.23
-        bool = false
         str = "foo"
-        time = "2017-12-23 12:34:51+0900"
+        bool = false
+        time = "2017-12-23 45:01:23+0900"
+
         [[example_table]]
         int = 3
         float = 0
-        mix = Infinity
-        bool = true
         str = "bar"
-        time = "2017-03-03 22:44:55+0900"
+        bool = true
+        mix = inf
+        time = "2017-03-03 33:44:55+0900"
+
         [[example_table]]
         int = -10
         float = -9.9
-        mix = NaN
-        bool = false
         str = ""
+        bool = false
+        mix = nan
         time = "2017-01-01 00:00:00+0900"

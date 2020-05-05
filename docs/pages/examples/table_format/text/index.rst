@@ -16,3 +16,4 @@ Text formats
    space_aligned
    toml
    unicode
+   yaml
