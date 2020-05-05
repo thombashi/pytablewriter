@@ -4,10 +4,10 @@
 
 import collections
 import datetime
+import json
 from decimal import Decimal
 
 import pytest
-import simplejson as json
 
 import pytablewriter as ptw
 

@@ -4,9 +4,9 @@
 
 import collections
 import itertools
+import json
 
 import pytest
-import simplejson as json
 
 import pytablewriter as ptw
 

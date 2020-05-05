@@ -3,9 +3,9 @@
 """
 
 import collections
+import json
 
 import pytest
-import simplejson as json
 
 import pytablewriter
 
