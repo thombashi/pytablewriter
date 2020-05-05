@@ -908,17 +908,22 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _get_align_char(self, align: Align) -> str:
         return self.__align_char_mapping[align]
 
-    def __get_align_format(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+    def __retrieve_align_from_data(
+        self, col_dp: ColumnDataProperty, value_dp: DataProperty
+    ) -> Align:
         if col_dp.typecode == Typecode.STRING and (
             value_dp.typecode in (Typecode.INTEGER, Typecode.REAL_NUMBER)
             or value_dp.typecode == Typecode.STRING
             and value_dp.is_include_ansi_escape
         ):
-            default_align = value_dp.align
-        else:
-            default_align = col_dp.align
+            return value_dp.align
 
-        align_char = self._get_align_char(self._get_align(col_dp.column_index, default_align))
+        return col_dp.align
+
+    def __get_align_format(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        align_char = self._get_align_char(
+            self._get_align(col_dp.column_index, self.__retrieve_align_from_data(col_dp, value_dp))
+        )
         format_list = ["{:" + align_char]
         col_padding_len = self._get_padding_len(col_dp, value_dp)
         if col_padding_len > 0:
