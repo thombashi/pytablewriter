@@ -12,3 +12,8 @@ Examples
    multibyte/index
    typehint/index
    jupyter_notebook/index
+
+
+Multi processing
+----------------------------
+.. include:: customize/multi_process.txt

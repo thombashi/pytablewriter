@@ -87,6 +87,10 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_file(examples_root.joinpath("multibyte", "multibyte_table_example.txt"))
 
     maker.set_indent_level(1)
+    maker.write_chapter("Multi processing")
+    maker.write_file(examples_root.joinpath("customize", "multi_process.txt"))
+
+    maker.set_indent_level(1)
     maker.write_chapter("For more information")
     maker.write_lines(
         [

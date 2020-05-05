@@ -1,0 +1,2 @@
+You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
+The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
