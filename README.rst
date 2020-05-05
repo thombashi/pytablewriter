@@ -4,7 +4,7 @@
 
 Summary
 =========
-`pytablewriter <https://github.com/thombashi/pytablewriter>`__ is a Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV.
+`pytablewriter <https://github.com/thombashi/pytablewriter>`__ is a Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV / YAML.
 
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
@@ -55,6 +55,7 @@ Features
             - Python code (Definition of a nested list variable)
         - Space aligned values
         - `TOML <https://github.com/toml-lang/toml>`__
+        - `YAML <https://yaml.org/>`__
         - Unicode
     - Binary file formats:
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
@@ -727,6 +728,11 @@ Multibyte characters also properly padded and aligned.
 
        Output of multi-byte character table
 
+Multi processing
+------------------
+You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
+The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
+
 For more information
 ----------------------
 More examples are available at 
@@ -753,7 +759,7 @@ Some of the formats require additional dependency packages, you can install the 
     - ``pip install pytablewriter[sqlite]``
 - TOML
     - ``pip install pytablewriter[toml]``
-- All of the extra dependencies
+- Install all of the optioanal dependencies
     - ``pip install pytablewriter[all]``
 
 Install from PPA (for Ubuntu)
@@ -774,6 +780,7 @@ Python 3.5+
 - `msgfy <https://github.com/thombashi/msgfy>`__
 - `pathvalidate <https://github.com/thombashi/pathvalidate>`__
 - `tabledata <https://github.com/thombashi/tabledata>`__
+- `tcolorpy <https://github.com/thombashi/tcolorpy>`__
 - `typepy <https://github.com/thombashi/typepy>`__
 
 Optional dependencies
