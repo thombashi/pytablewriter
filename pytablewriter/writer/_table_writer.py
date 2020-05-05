@@ -580,7 +580,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
         if is_overwrite_table_name:
-            self.table_name = str(value.table_name)
+            self.table_name = value.table_name if value.table_name else ""
 
         self.headers = value.headers
         self.value_matrix = list(value.rows)
