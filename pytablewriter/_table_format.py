@@ -34,6 +34,7 @@ from .writer import (
     TomlTableWriter,
     TsvTableWriter,
     UnicodeTableWriter,
+    YamlTableWriter,
 )
 
 
@@ -215,6 +216,12 @@ class TableFormat(enum.Enum):
         UnicodeTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
+    )
+    YAML = (
+        [YamlTableWriter.FORMAT_NAME],
+        YamlTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT,
+        ["yml"],
     )
     BOLD_UNICODE = (
         [BoldUnicodeTableWriter.FORMAT_NAME],  # type: ignore

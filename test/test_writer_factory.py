@@ -50,6 +50,7 @@ class Test_WriterFactory_get_format_names:
             "toml",
             "tsv",
             "unicode",
+            "yaml",
         ]
 
 
@@ -76,6 +77,7 @@ class Test_WriterFactory_get_extensions:
             "tsv",
             "xls",
             "xlsx",
+            "yml",
         ]
 
 
@@ -162,6 +164,9 @@ class Test_WriterFactory_create_from_file_extension:
             itertools.product(
                 ["valid_ext.xlsx", "valid_ext.XLSX", ".xlsx"], [ptw.ExcelXlsxTableWriter]
             )
+        )
+        + list(
+            itertools.product(["valid_ext.yml", "valid_ext.YML", ".yml"], [ptw.YamlTableWriter])
         ),
     )
     def test_normal(self, value, expected):
@@ -232,6 +237,8 @@ class Test_FileLoaderFactory_create_from_format_name:
             ["TOML", ptw.TomlTableWriter],
             ["unicode", ptw.UnicodeTableWriter],
             ["Unicode", ptw.UnicodeTableWriter],
+            ["yaml", ptw.YamlTableWriter],
+            ["YAML", ptw.YamlTableWriter],
         ],
     )
     def test_normal(self, format_name, expected):

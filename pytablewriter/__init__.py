@@ -62,4 +62,5 @@ from .writer import (
     TomlTableWriter,
     TsvTableWriter,
     UnicodeTableWriter,
+    YamlTableWriter,
 )

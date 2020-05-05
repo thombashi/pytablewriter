@@ -58,6 +58,7 @@ mix_value_matrix = [
     ],
     [3, 3.33, "cccc", -3, "ccc", True, float("infinity"), float("NAN"), NAN, TIME,],
 ]
+mix_tabledata = TableData(table_name="mix data", headers=mix_header_list, rows=mix_value_matrix)
 
 float_header_list = ["a", "b", "c"]
 float_value_matrix = [
@@ -65,6 +66,9 @@ float_value_matrix = [
     [1.0, 99.9, 0.01],
     [1.2, 999999.123, 0.001],
 ]
+float_tabledata = TableData(
+    table_name="float data", headers=float_header_list, rows=float_value_matrix
+)
 
 value_matrix_iter = [
     [[1, 2, 3], [11, 12, 13],],

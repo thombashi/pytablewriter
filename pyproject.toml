@@ -32,6 +32,7 @@ known_third_party = [
     'termcolor',
     'typepy',
     'typing_extensions',
+    'yaml',
 ]
 include_trailing_comma = true
 line_length = 100

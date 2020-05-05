@@ -46,6 +46,7 @@ class TableWriterFactory:
             ``".sqlite3"``      :py:class:`~.SqliteTableWriter`
             ``".tsv"``          :py:class:`~.TsvTableWriter`
             ``".toml"``         :py:class:`~.TomlTableWriter`
+            ``".yml"``          :py:class:`~.YamlTableWriter`
             ==================  ===================================
 
         :param str file_extension:
@@ -118,6 +119,7 @@ class TableWriterFactory:
             ``"tsv"``                                      :py:class:`~.TsvTableWriter`
             ``"toml"``                                     :py:class:`~.TomlTableWriter`
             ``"unicode"``                                  :py:class:`~.UnicodeTableWriter`
+            ``"yaml"``                                     :py:class:`~.YamlTableWriter`
             =============================================  ===================================
 
         :param str format_name: Format name string (case insensitive).
@@ -194,6 +196,7 @@ class TableWriterFactory:
                 toml
                 tsv
                 unicode
+                yaml
 
         """
 
@@ -237,6 +240,7 @@ class TableWriterFactory:
                 tsv
                 xls
                 xlsx
+                yml
         """
 
         file_extension_set = set()

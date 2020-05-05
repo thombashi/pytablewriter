@@ -22,6 +22,7 @@ from .text import (
     TomlTableWriter,
     TsvTableWriter,
     UnicodeTableWriter,
+    YamlTableWriter,
 )
 from .text.sourcecode import (
     JavaScriptTableWriter,

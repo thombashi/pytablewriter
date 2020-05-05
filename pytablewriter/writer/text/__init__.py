@@ -13,3 +13,4 @@ from ._spacealigned import SpaceAlignedTableWriter
 from ._toml import TomlTableWriter
 from ._tsv import TsvTableWriter
 from ._unicode import BoldUnicodeTableWriter, UnicodeTableWriter
+from ._yaml import YamlTableWriter
