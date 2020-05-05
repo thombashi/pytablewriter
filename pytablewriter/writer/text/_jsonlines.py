@@ -41,4 +41,4 @@ class JsonLinesTableWriter(JsonTableWriter):
             self._preprocess()
 
             for values in self._table_value_matrix:
-                self._write_line(json.dumps(values))
+                self._write_line(json.dumps(values, ensure_ascii=False))
