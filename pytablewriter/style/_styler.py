@@ -29,7 +29,7 @@ class StylerInterface(metaclass=abc.ABCMeta):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def apply_terminal_style(self, value: Any, style: Style) -> str:  # pragma: no cover
+    def apply_terminal_style(self, value: str, style: Style) -> str:  # pragma: no cover
         raise NotImplementedError()
 
     @abc.abstractmethod
@@ -58,7 +58,7 @@ class AbstractStyler(StylerInterface):
     def apply_align(self, value: str, style: Style) -> str:
         return value
 
-    def apply_terminal_style(self, value: Any, style: Style) -> str:
+    def apply_terminal_style(self, value: str, style: Style) -> str:
         return value
 
     def _get_font_size_map(self):
@@ -71,7 +71,7 @@ class NullStyler(AbstractStyler):
 
 
 class TextStyler(AbstractStyler):
-    def apply_terminal_style(self, value: Any, style: Style) -> str:
+    def apply_terminal_style(self, value: str, style: Style) -> str:
         if not self._writer.colorize_terminal:
             return value
 
