@@ -834,8 +834,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
+        default_style = self._get_col_style(col_dp.column_index)
+        style = self._fetch_style(-1, col_dp.column_index, value_dp, default_style)
 
-        return format_string.format(header)
+        return self._styler.apply_terminal_style(format_string.format(header), style=style)
 
     def _get_header_format_string(
         self, _col_dp: ColumnDataProperty, _value_dp: DataProperty
