@@ -9,6 +9,7 @@ from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandl
 
 from ...error import EmptyHeaderError
 from ...style import Cell, Style, StylerInterface, TextStyler
+from .._table_writer import AbstractTableWriter, ColSeparatorStyleFilterFunc
 from ._interface import IndentationInterface, TextWriterInterface
 
 
@@ -131,6 +132,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._init_cross_point_maps()
 
+        self._col_separator_style_filters = []  # type: List[ColSeparatorStyleFilterFunc]
+
     def _init_cross_point_maps(self) -> None:
         self.__cross_point_maps = {
             RowType.OPENING: self.char_opening_row_cross_point,
@@ -150,6 +153,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             RowType.MIDDLE: self.char_right_cross_point,
             RowType.CLOSING: self.char_bottom_right_cross_point,
         }
+
+    def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
+        self._col_separator_style_filters.insert(0, style_filter)
 
     def write_null_line(self) -> None:
         """
@@ -325,13 +331,78 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _write_line(self, text: str = "") -> None:
         self._write_raw_line(text)
 
+    def _fetch_col_separator_style(
+        self, left_cell: Optional[Cell], right_cell: Optional[Cell], default_style: Style
+    ) -> Style:
+        for style_filter in self._col_separator_style_filters:
+            style = style_filter(left_cell, right_cell, **self.style_filter_kwargs)
+            if style:
+                return style
+
+        return default_style
+
+    def __to_column_delimiter(
+        self,
+        row: int,
+        left_col_dp: Optional[ColumnDataProperty],
+        right_col_dp: Optional[ColumnDataProperty],
+        col_delimiter: str,
+    ) -> str:
+        left_cell = None
+        if left_col_dp:
+            left_cell = Cell(
+                row=row,
+                col=left_col_dp.column_index,
+                value=col_delimiter,
+                default_style=self._get_col_style(left_col_dp.column_index),
+            )
+
+        right_cell = None
+        if right_col_dp:
+            right_cell = Cell(
+                row=row,
+                col=right_col_dp.column_index,
+                value=col_delimiter,
+                default_style=self._get_col_style(right_col_dp.column_index),
+            )
+
+        style = self._fetch_col_separator_style(
+            left_cell=left_cell, right_cell=right_cell, default_style=self.default_style,
+        )
+
+        return self._styler.apply_terminal_style(col_delimiter, style=style)
+
     def _write_row(self, row: int, values: Sequence[str]) -> None:
         if typepy.is_empty_sequence(values):
             return
 
-        self._write_line(
-            self.char_left_side_row + self.column_delimiter.join(values) + self.char_right_side_row
+        col_delimiters = (
+            [
+                self.__to_column_delimiter(
+                    row, None, self._column_dp_list[0], self.char_left_side_row,
+                )
+            ]
+            + [
+                self.__to_column_delimiter(
+                    row,
+                    self._column_dp_list[col_idx],
+                    self._column_dp_list[col_idx + 1],
+                    self.column_delimiter,
+                )
+                for col_idx in range(len(self._column_dp_list) - 1)
+            ]
+            + [
+                self.__to_column_delimiter(
+                    row, self._column_dp_list[-1], None, self.char_right_side_row,
+                )
+            ]
         )
+
+        row_items = [""] * (len(col_delimiters) + len(values))
+        row_items[::2] = col_delimiters
+        row_items[1::2] = list(values)
+
+        self._write_line("".join(chain.from_iterable(row_items)))
 
     def _write_header(self) -> None:
         if not self.is_write_header:

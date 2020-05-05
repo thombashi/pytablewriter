@@ -46,6 +46,13 @@ class StyleFilterFunc(Protocol):
         ...
 
 
+class ColSeparatorStyleFilterFunc(Protocol):
+    def __call__(
+        self, lft_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Any
+    ) -> Optional[Style]:
+        ...
+
+
 _ts_to_flag = {
     ThousandSeparator.NONE: Format.NONE,
     ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
@@ -477,6 +484,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     def add_style_filter(self, style_filter: StyleFilterFunc) -> None:
         self._style_filters.insert(0, style_filter)
+
+    def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
+        raise NotImplementedError("this method only implemented in text format writer classes")
 
     def set_style(self, column: Union[str, int], style: Style) -> None:
         """Set |Style| for a specific column.
