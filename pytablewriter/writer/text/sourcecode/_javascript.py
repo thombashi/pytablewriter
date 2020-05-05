@@ -91,7 +91,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
-        self._dp_extractor.strict_level_map[Typecode.BOOL] = StrictLevel.MAX
+        self._dp_extractor.update_strict_level_map({Typecode.BOOL: StrictLevel.MAX})
         self.register_trans_func(bool_to_str)
 
     def get_variable_name(self, value: str) -> str:

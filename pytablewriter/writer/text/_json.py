@@ -66,7 +66,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
-        self._dp_extractor.strict_level_map[Typecode.BOOL] = typepy.StrictLevel.MAX
+        self._dp_extractor.update_strict_level_map({Typecode.BOOL: typepy.StrictLevel.MAX})
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
         self.register_trans_func(bool_to_str)
 

@@ -345,7 +345,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor.preprocessor = Preprocessor(strip_str='"')
         self._dp_extractor.type_value_map[Typecode.NONE] = ""
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
-        self._dp_extractor.strict_level_map[Typecode.BOOL] = 1
+        self._dp_extractor.update_strict_level_map({Typecode.BOOL: 1})
 
         self.is_formatting_float = True
         self.is_padding = True

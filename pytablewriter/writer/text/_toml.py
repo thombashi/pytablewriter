@@ -51,7 +51,7 @@ class TomlTableWriter(TextTableWriter):
         try:
             import toml
 
-            class TomlTableEncoder(toml.encoder.TomlEncoder):
+            class TomlTableEncoder(toml.encoder.TomlEncoder):  # type: ignore
                 def __init__(self, _dict=dict, preserve=False):
                     super().__init__(_dict=_dict, preserve=preserve)
 
@@ -80,4 +80,6 @@ class TomlTableWriter(TextTableWriter):
 
                 body.append(row)
 
-            self.stream.write(toml.dumps({self.table_name: body}, encoder=TomlTableEncoder()))
+            self.stream.write(
+                toml.dumps({self.table_name: body}, encoder=TomlTableEncoder())  # type: ignore
+            )
