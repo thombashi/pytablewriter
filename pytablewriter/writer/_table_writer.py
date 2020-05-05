@@ -845,7 +845,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
         default_style = self._get_col_style(col_dp.column_index)
-        style = self._fetch_style(-1, col_dp.column_index, value_dp, default_style)
+        style = self._fetch_style_from_filter(-1, col_dp.column_index, value_dp, default_style)
 
         return self._styler.apply_terminal_style(format_string.format(header), style=style)
 
@@ -856,7 +856,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         default_style = self._get_col_style(col_dp.column_index)
-        style = self._fetch_style(row_idx, col_dp.column_index, value_dp, default_style)
+        style = self._fetch_style_from_filter(row_idx, col_dp.column_index, value_dp, default_style)
         value = self._apply_style_to_row_item(row_idx, col_dp, value_dp, style)
 
         return self._styler.apply_terminal_style(value, style=style)
@@ -868,7 +868,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
         )
 
-    def _fetch_style(
+    def _fetch_style_from_filter(
         self, row_idx: int, col_idx: int, value_dp: DataProperty, default_style: Style
     ) -> Style:
         self.style_filter_kwargs.update({"writer": self})
