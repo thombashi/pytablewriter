@@ -82,7 +82,7 @@ class CssTableWriter(IndentationTextTableWriter):
     def __write_css_thead(self, css_class: str, base_indent_level: int) -> None:
         for col_dp, header_dp in zip(self._column_dp_list, self._dp_extractor.to_header_dp_list()):
             default_style = self._get_col_style(col_dp.column_index)
-            style = self._fetch_style_from_filter(-1, col_dp.column_index, header_dp, default_style)
+            style = self._fetch_style_from_filter(-1, col_dp, header_dp, default_style)
             css_tags = self.__extract_css_tags(header_dp, style)
 
             if not css_tags:
@@ -108,9 +108,7 @@ class CssTableWriter(IndentationTextTableWriter):
         ):
             for value, value_dp, col_dp in zip(values, value_dp_list, self._column_dp_list):
                 default_style = self._get_col_style(col_dp.column_index)
-                style = self._fetch_style_from_filter(
-                    row_idx, col_dp.column_index, value_dp, default_style
-                )
+                style = self._fetch_style_from_filter(row_idx, col_dp, value_dp, default_style)
                 css_tags = self.__extract_css_tags(value_dp, style)
 
                 if not css_tags:

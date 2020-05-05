@@ -6,13 +6,14 @@ import collections
 import io
 import re
 from textwrap import dedent
+from typing import Optional
 
 import pytest
 from tabledata import TableData
 from termcolor import colored
 
 import pytablewriter as ptw
-from pytablewriter.style import Align, FontSize, Style, ThousandSeparator
+from pytablewriter.style import Align, Cell, FontSize, Style, ThousandSeparator
 
 from ..._common import print_test_result
 from ...data import (
@@ -683,6 +684,51 @@ class Test_MarkdownTableWriter_write_table:
 
         assert regexp_ansi_escape.search(out)
         assert regexp_ansi_escape.sub("", out) == expected
+
+    def test_normal_style_filter(self):
+        def style_filter(cell: Cell, **kwargs) -> Optional[Style]:
+            if isinstance(cell.value, int):
+                return Style(align="left")
+
+            if cell.value == "c":
+                return Style(align="center")
+
+            if cell.value == "r":
+                return Style(align="right")
+
+            return None
+
+        writer = table_writer_class()
+        writer.table_name = "style filter"
+        writer.headers = ["left", "center", "right", "overwrite l", "overwrite c", "overwrite r"]
+        writer.value_matrix = [
+            [1, "c", "r", 1, "c", "r"],
+            [2.2, "left", "left", 2.2, "right", "center"],
+        ]
+        writer.margin = 1
+        writer.column_styles = [
+            None,
+            None,
+            None,
+            Style(align="center"),
+            Style(align="right"),
+            Style(align="center"),
+        ]
+        writer.add_style_filter(style_filter)
+
+        expected = dedent(
+            """\
+            # style filter
+            | left | center | right | overwrite l | overwrite c | overwrite r |
+            |-----:|--------|-------|:-----------:|------------:|:-----------:|
+            | 1.0  |   c    |     r | 1.0         |      c      |           r |
+            |  2.2 | left   | left  |     2.2     |       right |   center    |
+            """
+        )
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+
+        assert output == expected
 
     def test_normal_set_style(self):
         writer = table_writer_class()

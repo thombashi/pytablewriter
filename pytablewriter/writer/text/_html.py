@@ -141,9 +141,7 @@ class HtmlTableWriter(TextTableWriter):
                 td_tag = tags.td(raw(MultiByteStrDecoder(value).unicode_str))
 
                 default_style = self._get_col_style(column_dp.column_index)
-                style = self._fetch_style_from_filter(
-                    row_idx, column_dp.column_index, value_dp, default_style
-                )
+                style = self._fetch_style_from_filter(row_idx, column_dp, value_dp, default_style)
 
                 if write_attr:
                     if style.align == Align.AUTO:

@@ -8,6 +8,7 @@ from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 
 from ...style import Align
+from ...style._styler import _get_align_char
 from ._text_writer import TextTableWriter
 
 
@@ -79,7 +80,7 @@ class MediaWikiTableWriter(TextTableWriter):
 
     def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return "! {{:{:s}{:s}}}".format(
-            self._get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
+            _get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )
 
     def __modify_table_element(self, value: str, value_dp: DataProperty):

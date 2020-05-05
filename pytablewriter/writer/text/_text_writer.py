@@ -306,7 +306,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return "{{:{:s}{:s}}}".format(
-            self._get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
+            _get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
         )
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:

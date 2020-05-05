@@ -154,13 +154,13 @@ normal_test_data_list = [
   <tbody>
     <tr>
       <td align="right">1</td>
-      <td align="left"></td>
+      <td align="right"></td>
       <td align="left">a</td>
       <td align="right">1.0</td>
       <td align="left"></td>
     </tr>
     <tr>
-      <td align="left"></td>
+      <td align="right"></td>
       <td align="right">2.2</td>
       <td align="left"></td>
       <td align="right">2.2</td>
@@ -170,14 +170,14 @@ normal_test_data_list = [
       <td align="right">3</td>
       <td align="right">3.3</td>
       <td align="left">ccc</td>
-      <td align="left"></td>
+      <td align="right"></td>
       <td align="left">cccc</td>
     </tr>
     <tr>
+      <td align="right"></td>
+      <td align="right"></td>
       <td align="left"></td>
-      <td align="left"></td>
-      <td align="left"></td>
-      <td align="left"></td>
+      <td align="right"></td>
       <td align="left"></td>
     </tr>
   </tbody>
@@ -227,7 +227,7 @@ normal_test_data_list = [
             <td align="left">False</td>
             <td align="left">Infinity</td>
             <td align="left">NaN</td>
-            <td align="left">Infinity</td>
+            <td align="right">Infinity</td>
             <td align="left">2017-01-02 03:04:05+09:00</td>
         </tr>
         <tr>
@@ -239,7 +239,7 @@ normal_test_data_list = [
             <td align="left">True</td>
             <td align="left">Infinity</td>
             <td align="left">NaN</td>
-            <td align="left">NaN</td>
+            <td align="right">NaN</td>
             <td align="left">2017-01-01T00:00:00</td>
         </tr>
     </tbody>

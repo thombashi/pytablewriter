@@ -2,8 +2,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import abc
+import copy
 import math
 import warnings
 from typing import Mapping  # noqa
@@ -380,13 +380,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.iteration_length = -1
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
         self._iter_count = None  # type: Optional[int]
-
-        self.__align_char_mapping = {
-            Align.AUTO: "<",
-            Align.LEFT: "<",
-            Align.RIGHT: ">",
-            Align.CENTER: "^",
-        }
 
         self.__default_style = Style()
         self.__col_style_list = []  # type: List[Optional[Style]]
@@ -845,7 +838,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         format_string = self._get_header_format_string(col_dp, value_dp)
         header = String(value_dp.data).force_convert().strip()
         default_style = self._get_col_style(col_dp.column_index)
-        style = self._fetch_style_from_filter(-1, col_dp.column_index, value_dp, default_style)
+        style = self._fetch_style_from_filter(-1, col_dp, value_dp, default_style)
 
         return self._styler.apply_terminal_style(format_string.format(header), style=style)
 
@@ -856,7 +849,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         default_style = self._get_col_style(col_dp.column_index)
-        style = self._fetch_style_from_filter(row_idx, col_dp.column_index, value_dp, default_style)
+        style = self._fetch_style_from_filter(row_idx, col_dp, value_dp, default_style)
         value = self._apply_style_to_row_item(row_idx, col_dp, value_dp, style)
 
         return self._styler.apply_terminal_style(value, style=style)
@@ -864,24 +857,40 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _apply_style_to_row_item(
         self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
     ) -> str:
-        return self.__get_align_format(col_dp, value_dp).format(
-            self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        return self._styler.apply_align(
+            self._styler.apply(col_dp.dp_to_str(value_dp), style=style), style=style
         )
 
     def _fetch_style_from_filter(
-        self, row_idx: int, col_idx: int, value_dp: DataProperty, default_style: Style
+        self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty, default_style: Style
     ) -> Style:
         self.style_filter_kwargs.update({"writer": self})
 
+        style = None  # Optional[Style]
+
         for style_filter in self._style_filters:
             style = style_filter(
-                Cell(row=row_idx, col=col_idx, value=value_dp.data, default_style=default_style),
+                Cell(
+                    row=row_idx,
+                    col=col_dp.column_index,
+                    value=value_dp.data,
+                    default_style=default_style,
+                ),
                 **self.style_filter_kwargs
             )
             if style:
-                return style
+                break
 
-        return default_style
+        if style is None:
+            style = copy.deepcopy(default_style)
+
+        if style.align is None or (style.align == Align.AUTO and row_idx >= 0):
+            style.align = self.__retrieve_align_from_data(col_dp, value_dp)
+
+        if style.padding is None:
+            style.padding = self._get_padding_len(col_dp, value_dp)
+
+        return style
 
     def _get_col_style(self, col_idx: int) -> Style:
         try:
@@ -905,9 +914,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         return align
 
-    def _get_align_char(self, align: Align) -> str:
-        return self.__align_char_mapping[align]
-
     def __retrieve_align_from_data(
         self, col_dp: ColumnDataProperty, value_dp: DataProperty
     ) -> Align:
@@ -919,18 +925,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return value_dp.align
 
         return col_dp.align
-
-    def __get_align_format(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        align_char = self._get_align_char(
-            self._get_align(col_dp.column_index, self.__retrieve_align_from_data(col_dp, value_dp))
-        )
-        format_list = ["{:" + align_char]
-        col_padding_len = self._get_padding_len(col_dp, value_dp)
-        if col_padding_len > 0:
-            format_list.append(str(col_padding_len))
-        format_list.append("s}")
-
-        return "".join(format_list)
 
     def _verify_property(self) -> None:
         self._verify_table_name()
