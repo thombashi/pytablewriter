@@ -134,6 +134,10 @@ class Style:
     def align(self) -> Align:
         return self.__align
 
+    @align.setter
+    def align(self, value: Align) -> None:
+        self.__align = value
+
     @property
     def vertical_align(self) -> VerticalAlign:
         return self.__valign
