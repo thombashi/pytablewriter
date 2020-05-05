@@ -900,10 +900,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         if align is None:
             return default_align
 
-        if align not in Align:
-            self._logger.logger.debug("invalid alignment: {}".format(align))
-            return default_align
-
         if align == Align.AUTO:
             return default_align
 
