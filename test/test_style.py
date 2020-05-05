@@ -4,6 +4,8 @@ import pytest
 
 from pytablewriter.style import Align, FontSize, FontStyle, FontWeight, Style, ThousandSeparator
 
+from ._common import print_test_result
+
 
 class Test_Style_constructor:
     @pytest.mark.parametrize(
@@ -171,4 +173,7 @@ class Test_Style_repr:
         ],
     )
     def test_normal(self, value, expected):
-        assert str(value) == expected
+        out = str(value)
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
