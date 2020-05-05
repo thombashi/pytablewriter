@@ -63,3 +63,6 @@ exclude_lines = [
     'abstractclassmethod',
     'warnings.warn',
 ]
+omit = [
+    'pytablewriter/_typing.py',
+]
