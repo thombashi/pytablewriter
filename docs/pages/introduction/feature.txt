@@ -31,6 +31,7 @@ Features
     - Padding
     - Decimal places of numbers
 - Configure cell styles:
+    - Text/Background color
     - Text alignment
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
