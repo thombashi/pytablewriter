@@ -70,11 +70,20 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_file(examples_root.joinpath("style", "style_example.txt"))
 
     maker.set_indent_level(1)
+    maker.write_chapter("Style filter")
+    maker.write_lines(
+        [
+            "Example:",
+            "",
+            ".. figure:: ss/color_filter.png",
+            "    :scale: 60%",
+            "    :alt: true_color_and_styles",
+        ]
+    )
+
+    maker.set_indent_level(1)
     maker.write_chapter("Make tables for specific applications")
     maker.inc_indent_level()
-
-    maker.write_chapter("Create Elasticsearch index and put data")
-    maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
 
     maker.write_chapter("Render a table on Jupyter Notebook")
     maker.write_file(examples_root.joinpath("jupyter_notebook", "jupyter_notebook_example.txt"))
@@ -89,6 +98,9 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.set_indent_level(1)
     maker.write_chapter("Multi processing")
     maker.write_file(examples_root.joinpath("customize", "multi_process.txt"))
+
+    maker.write_chapter("Create Elasticsearch index and put data")
+    maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
 
     maker.set_indent_level(1)
     maker.write_chapter("For more information")

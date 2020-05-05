@@ -67,6 +67,7 @@ Features
     - Padding
     - Decimal places of numbers
 - Configure cell styles:
+    - Text/Background color
     - Text alignment
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
@@ -556,10 +557,68 @@ You can also set ``Style`` to a specific column with index or header by using ``
         |  11|  _11_|   11|
         |1234|_1234_|1 234|
 
+Style filter
+--------------
+Example:
+
+.. figure:: ss/color_filter.png
+    :scale: 60%
+    :alt: true_color_and_styles
+
 Make tables for specific applications
 ---------------------------------------
-Create Elasticsearch index and put data
+Render a table on Jupyter Notebook
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
+
+.. figure:: ss/jupyter_notebook.png
+   :scale: 100%
+   :alt: jupyter_notebook_table
+
+   Table formatting for Jupyter Notebook
+
+Multibyte character support
+-----------------------------
+Write a table using multibyte character
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You can use multibyte characters as table data.
+Multibyte characters also properly padded and aligned.
+
+:Sample Code:
+    .. code-block:: python
+
+        import pytablewriter
+
+        def main():
+            writer = pytablewriter.RstSimpleTableWriter()
+            writer.table_name = "生成に関するパターン"
+            writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
+            writer.value_matrix = [
+                ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
+                ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
+                ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
+                ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
+                ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
+            ]
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
+
+:Output:
+    .. figure:: ss/multi_byte_char.png
+       :scale: 100%
+       :alt: multi_byte_char_table
+
+       Output of multi-byte character table
+
+Multi processing
+------------------
+You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
+The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
+
+Create Elasticsearch index and put data
+-----------------------------------------
 :Sample Code:
     .. code-block:: python
 
@@ -682,56 +741,6 @@ Create Elasticsearch index and put data
             "bool": true,
             "ip": "127.0.0.1"
         }
-
-Render a table on Jupyter Notebook
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
-
-.. figure:: ss/jupyter_notebook.png
-   :scale: 100%
-   :alt: jupyter_notebook_table
-
-   Table formatting for Jupyter Notebook
-
-Multibyte character support
------------------------------
-Write a table using multibyte character
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-You can use multibyte characters as table data.
-Multibyte characters also properly padded and aligned.
-
-:Sample Code:
-    .. code-block:: python
-
-        import pytablewriter
-
-        def main():
-            writer = pytablewriter.RstSimpleTableWriter()
-            writer.table_name = "生成に関するパターン"
-            writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
-            writer.value_matrix = [
-                ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
-                ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
-                ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
-                ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
-                ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
-            ]
-            writer.write_table()
-
-        if __name__ == "__main__":
-            main()
-
-:Output:
-    .. figure:: ss/multi_byte_char.png
-       :scale: 100%
-       :alt: multi_byte_char_table
-
-       Output of multi-byte character table
-
-Multi processing
-------------------
-You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
-The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
 
 For more information
 ----------------------
