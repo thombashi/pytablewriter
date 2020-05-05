@@ -4,12 +4,28 @@ from typing import Any, Optional, cast
 from tcolorpy import tcolor
 
 from ._font import FontSize, FontStyle, FontWeight
-from ._style import Style, ThousandSeparator
+from ._style import Align, Style, ThousandSeparator
+
+
+_align_char_mapping = {
+    Align.AUTO: "<",
+    Align.LEFT: "<",
+    Align.RIGHT: ">",
+    Align.CENTER: "^",
+}
+
+
+def _get_align_char(align: Align) -> str:
+    return _align_char_mapping[align]
 
 
 class StylerInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def apply(self, value: Any, style: Style) -> str:  # pragma: no cover
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def apply_align(self, value: str, style: Style) -> str:  # pragma: no cover
         raise NotImplementedError()
 
     @abc.abstractmethod
@@ -39,6 +55,9 @@ class AbstractStyler(StylerInterface):
     def apply(self, value: Any, style: Style) -> str:
         return value
 
+    def apply_align(self, value: str, style: Style) -> str:
+        return value
+
     def apply_terminal_style(self, value: Any, style: Style) -> str:
         return value
 
@@ -61,6 +80,18 @@ class TextStyler(AbstractStyler):
             ansi_styles.append("bold")
 
         return tcolor(value, color=style.color, bg_color=style.bg_color, styles=ansi_styles)
+
+    def __get_align_format(self, style: Style) -> str:
+        align_char = _get_align_char(style.align)
+        format_items = ["{:" + align_char]
+        if style.padding is not None and style.padding > 0:
+            format_items.append(str(style.padding))
+        format_items.append("s}")
+
+        return "".join(format_items)
+
+    def apply_align(self, value: str, style: Style) -> str:
+        return self.__get_align_format(style).format(value)
 
     def apply(self, value: Any, style: Style) -> str:
         if value:
