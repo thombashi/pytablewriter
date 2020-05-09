@@ -10,3 +10,10 @@ class Cell:
         self.col = col
         self.value = value
         self.default_style = default_style
+
+    def is_header_row(self) -> bool:
+        """
+        Return |True| if the cell is a header.
+        """
+
+        return self.row < 0

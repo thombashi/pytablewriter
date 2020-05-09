@@ -2,9 +2,26 @@ import sys
 
 import pytest
 
-from pytablewriter.style import Align, FontSize, FontStyle, FontWeight, Style, ThousandSeparator
+from pytablewriter.style import (
+    Align,
+    Cell,
+    FontSize,
+    FontStyle,
+    FontWeight,
+    Style,
+    ThousandSeparator,
+)
 
 from ._common import print_test_result
+
+
+class Test_Cell_is_header_row:
+    @pytest.mark.parametrize(
+        ["row", "expected"], [[-1, True], [0, False], [sys.maxsize, False]],
+    )
+    def test_normal(self, row, expected):
+        cell = Cell(row=row, col=0, value=None, default_style=None)
+        assert cell.is_header_row() is expected
 
 
 class Test_Style_constructor:
