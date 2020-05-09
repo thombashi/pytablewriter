@@ -4,14 +4,13 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import io
 
-import pytablewriter
+import pytablewriter as ptw
 
 
 def main():
-    writer = pytablewriter.MarkdownTableWriter()
+    writer = ptw.MarkdownTableWriter()
     writer.table_name = "zone"
     writer.headers = ["zone_id", "country_code", "zone_name"]
     writer.value_matrix = [
@@ -24,6 +23,7 @@ def main():
 
     # writer instance writes a table to stdout by default
     writer.write_table()
+    writer.write_null_line()
 
     # change the stream to a string buffer to get the output as a string
     # you can also get tabular text by using dumps method
