@@ -56,7 +56,10 @@ class TomlTableWriter(TextTableWriter):
                     super().__init__(_dict=_dict, preserve=preserve)
 
                     self.dump_funcs[str] = str
+
+                    # pytype: disable=module-attr
                     self.dump_funcs[Decimal] = toml.encoder._dump_float
+                    # pytype: enable=module-attr
 
         except ImportError:
             warnings.warn(import_error_msg_template.format("toml"))
