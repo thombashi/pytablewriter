@@ -26,6 +26,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     """
     A base class for table writer with text formats.
 
+    .. figure:: ss/table_char.png
+       :scale: 60%
+       :alt: table_char
+
+       Character attributes that compose a table
+
     .. py:attribute:: column_delimiter
 
         A column delimiter of a table.
@@ -80,11 +86,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         Write a blank line of after writing a table if the value is |True|.
 
-    .. figure:: ss/table_char.png
-       :scale: 60%
-       :alt: table_char
+    .. py:attribute:: margin
 
-       Character attributes that compose a table
+        Margin size for each cells
+
     """
 
     @property
