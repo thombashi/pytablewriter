@@ -19,6 +19,7 @@ from dataproperty import (
     MatrixFormatting,
     Preprocessor,
 )
+from dataproperty.typing import TransFunc
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode, extract_typepy_from_dtype
 
@@ -259,7 +260,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self.column_styles = value
 
-    def register_trans_func(self, trans_func: Callable) -> None:
+    def register_trans_func(self, trans_func: TransFunc) -> None:
         self._dp_extractor.register_trans_func(trans_func)
         self.__clear_preprocess()
 
