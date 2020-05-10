@@ -838,7 +838,7 @@ class Test_MarkdownTableWriter_write_table:
 
         assert out == expected
 
-    def test_normal_value_map(self):
+    def test_normal_register_trans_func(self):
         writer = table_writer_class()
         writer.headers = ["a", "b"]
         writer.value_matrix = [["foo", True], ["bar", False]]
