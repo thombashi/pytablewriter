@@ -21,11 +21,11 @@ You can specify type hints to a writer via
                 [0.12, "2017-02-03 04:05:06", datetime(2017, 2, 3, 4, 5, 6)],
             ]
 
-            print("// without type hints:  column data types detected automatically by default")
+            print("// without type hints: column data types detected automatically by default")
             writer.table_name = "without type hint"
             writer.write_table()
 
-            print("// with type hints: Integer, DateTime, String")
+            print("// with type hints: values will be converted with type of hints if it possible")
             writer.table_name = "with type hint"
             writer.type_hints = [Integer, DateTime, String]
             writer.write_table()
@@ -37,14 +37,14 @@ You can specify type hints to a writer via
     .. code-block:: javascript
         :caption: JavaScript variable declaration code with/without type hints
 
-        // without type hints:  column data types detected automatically by default
+        // without type hints: column data types detected automatically by default
         const without_type_hint = [
             ["header_a", "header_b", "header_c"],
             [-1.1, "2017-01-02 03:04:05", new Date("2017-01-02T03:04:05")],
             [0.12, "2017-02-03 04:05:06", new Date("2017-02-03T04:05:06")]
         ];
 
-        // with type hints: Integer, DateTime, String
+        // with type hints: values will be converted with type of hints if it possible
         const with_type_hint = [
             ["header_a", "header_b", "header_c"],
             [-1, new Date("2017-01-02T03:04:05"), "2017-01-02 03:04:05"],

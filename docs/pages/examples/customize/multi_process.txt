@@ -1,2 +1,17 @@
 You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
 The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
+
+if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problemes caused by multi processing:
+
+.. code-block:: python
+
+    from multiprocessing import cpu_count
+    import pytablewriter as ptw
+
+    def main():
+        writer = ptw.MarkdownTableWriter()
+        writer.max_workers = cpu_count()
+        ...
+
+    if __name__ == "__main__":
+        main()

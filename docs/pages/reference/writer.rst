@@ -216,7 +216,7 @@ Elasticsearch writer
 Base writer classes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Base writer classes of text formats
+Abstract class
 --------------------------------------------------------------
 .. autoclass:: pytablewriter.writer._interface.TableWriterInterface
     :members:
@@ -225,6 +225,8 @@ Base writer classes of text formats
     :members:
     :show-inheritance:
 
+Base writer classes of text formats
+--------------------------------------------------------------
 .. autoclass:: pytablewriter.writer.text._text_writer.TextTableWriter
     :members:
     :show-inheritance:

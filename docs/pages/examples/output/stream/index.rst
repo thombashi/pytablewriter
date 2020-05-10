@@ -9,11 +9,11 @@ Reference: :py:attr:`~AbstractTableWriter.stream`.
     .. code-block:: python
         :caption: Change output stream of a writer object
 
-        import pytablewriter
         import io
+        import pytablewriter as ptw
 
         def main():
-            writer = pytablewriter.MarkdownTableWriter()
+            writer = ptw.MarkdownTableWriter()
             writer.table_name = "zone"
             writer.headers = ["zone_id", "country_code", "zone_name"]
             writer.value_matrix = [
