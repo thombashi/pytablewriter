@@ -7,7 +7,7 @@ import copy
 import math
 import warnings
 from typing import Mapping  # noqa
-from typing import Any, Callable, Dict, List, Optional, Sequence, Union, cast
+from typing import Any, Dict, List, Optional, Sequence, Union, cast
 
 import msgfy
 import typepy

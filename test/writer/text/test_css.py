@@ -10,16 +10,7 @@ import pytablewriter
 from pytablewriter.style import Style
 
 from ..._common import print_test_result
-from ...data import (
-    headers,
-    mix_header_list,
-    mix_value_matrix,
-    null_test_data_list,
-    value_matrix,
-    value_matrix_with_none,
-    vut_style_tabledata,
-    vut_styles,
-)
+from ...data import null_test_data_list, vut_style_tabledata, vut_styles
 
 
 table_writer_class = pytablewriter.CssTableWriter
