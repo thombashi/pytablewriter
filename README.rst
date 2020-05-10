@@ -45,7 +45,7 @@ Features
         - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
         - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
         - LaTeX: ``tabular``/``array`` environment
-        - Markdown
+        - Markdown: GitHub Flavored Markdown (GFM), etc.
         - MediaWiki
         - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
         - Source code
@@ -616,6 +616,21 @@ Multi processing
 ------------------
 You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
 The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
+
+if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problemes caused by multi processing:
+
+.. code-block:: python
+
+    from multiprocessing import cpu_count
+    import pytablewriter as ptw
+
+    def main():
+        writer = ptw.MarkdownTableWriter()
+        writer.max_workers = cpu_count()
+        ...
+
+    if __name__ == "__main__":
+        main()
 
 Create Elasticsearch index and put data
 -----------------------------------------
