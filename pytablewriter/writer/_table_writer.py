@@ -100,6 +100,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         These arguments will passing to filter functions added by
         :py:meth:`.add_style_filter` or :py:meth:`.add_col_separator_style_filter`
 
+    .. py:attribute:: colorize_terminal
+        :type: bool
+        :value: True
+
+        [Only for text format writers] If |True|, colorize text with |Style| for terminals.
+
     .. py:attribute:: write_callback
 
         The value expected to a function.
