@@ -9,6 +9,14 @@ from ._font import FontSize, FontStyle, FontWeight
 
 
 @unique
+class DecorationLine(Enum):
+    NONE = "none"
+    LINE_THROUGH = "line_through"
+    STRIKE = "strike"
+    UNDERLINE = "underline"
+
+
+@unique
 class ThousandSeparator(Enum):
     NONE = "none"  #: no thousands separator
     COMMA = "comma"  #: ``','`` as thousands separator
@@ -116,6 +124,16 @@ class Style:
             - ``"normal"`` (default)
             - ``"italic"``
 
+        decoration_line (|str| / :py:class:`~.style.DecorationLine`)
+
+            Experiental.
+            Possible string values are:
+
+            - ``"none"`` (default)
+            - ``"line-through"``
+            - ``"strike"`` (alias for ``"line-through"``)
+            - ``"underline"``
+
         thousand_separator (|str| / :py:class:`~.style.ThousandSeparator`):
             Thousand separator specification for numbers in a column.
             This can be only applied for text format writer classes.
@@ -141,6 +159,10 @@ class Style:
     @property
     def vertical_align(self) -> VerticalAlign:
         return self.__valign
+
+    @property
+    def decoration_line(self) -> DecorationLine:
+        return self.__decoration_line
 
     @property
     def font_size(self) -> FontSize:
@@ -192,6 +214,11 @@ class Style:
             kwargs.get("vertical_align"), VerticalAlign, default=VerticalAlign.BASELINE
         )
 
+        self.__decoration_line = normalize_enum(
+            kwargs.get("decoration_line"), DecorationLine, default=DecorationLine.NONE
+        )
+        self.__validate_attr("decoration_line", DecorationLine)
+
         self.__font_size = normalize_enum(
             kwargs.get("font_size"), FontSize, validate=False, default=FontSize.NONE
         )
@@ -230,6 +257,8 @@ class Style:
             items.append("color={}".format(self.color))
         if self.bg_color:
             items.append("bg_color={}".format(self.bg_color))
+        if self.decoration_line is not DecorationLine.NONE:
+            items.append("decoration_line={}".format(self.decoration_line.value))
         if self.font_size is not FontSize.NONE:
             items.append("font_size={}".format(self.font_size.value))
         if self.font_style:

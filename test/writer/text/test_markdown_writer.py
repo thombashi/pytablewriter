@@ -795,6 +795,29 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.search(out)
         assert regexp_ansi_escape.sub("", out) == expected
 
+    def test_normal_ansi_style(self):
+        writer = table_writer_class()
+        writer.column_styles = [
+            Style(decoration_line="strike"),
+            Style(decoration_line="line-through"),
+        ]
+        writer.headers = ["w/ strike", "w/ line through"]
+        writer.value_matrix = [["strike", "line-through"]]
+
+        expected = dedent(
+            """\
+            |w/ strike|w/ line through|
+            |---------|---------------|
+            |strike   |line-through   |
+            """
+        )
+
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
+
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData("", headers, value_matrix))

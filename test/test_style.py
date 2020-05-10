@@ -5,6 +5,7 @@ import pytest
 from pytablewriter.style import (
     Align,
     Cell,
+    DecorationLine,
     FontSize,
     FontStyle,
     FontWeight,
@@ -31,12 +32,14 @@ class Test_Style_constructor:
             [
                 {
                     "align": Align.RIGHT,
+                    "decoration_line": DecorationLine.LINE_THROUGH,
                     "font_size": FontSize.TINY,
                     "font_weight": FontWeight.BOLD,
                     "thousand_separator": ThousandSeparator.SPACE,
                 },
                 {
                     "align": Align.RIGHT,
+                    "decoration_line": DecorationLine.LINE_THROUGH,
                     "font_size": FontSize.TINY,
                     "font_weight": FontWeight.BOLD,
                     "thousand_separator": ThousandSeparator.SPACE,
@@ -45,12 +48,14 @@ class Test_Style_constructor:
             [
                 {
                     "align": "left",
+                    "decoration_line": "underline",
                     "font_size": "small",
                     "font_weight": "bold",
                     "thousand_separator": ",",
                 },
                 {
                     "align": Align.LEFT,
+                    "decoration_line": DecorationLine.UNDERLINE,
                     "font_size": FontSize.SMALL,
                     "font_weight": FontWeight.BOLD,
                     "thousand_separator": ThousandSeparator.COMMA,
@@ -60,6 +65,7 @@ class Test_Style_constructor:
                 {"font_size": "TINY"},
                 {
                     "align": Align.AUTO,
+                    "decoration_line": DecorationLine.NONE,
                     "font_size": FontSize.TINY,
                     "font_weight": FontWeight.NORMAL,
                     "thousand_separator": ThousandSeparator.NONE,
@@ -74,6 +80,7 @@ class Test_Style_constructor:
                 },
                 {
                     "align": Align.AUTO,
+                    "decoration_line": DecorationLine.NONE,
                     "font_size": FontSize.NONE,
                     "font_weight": FontWeight.NORMAL,
                     "thousand_separator": ThousandSeparator.NONE,
@@ -177,6 +184,7 @@ class Test_Style_repr:
                     vertical_align="bottom",
                     color="red",
                     bg_color="#2f2f2f",
+                    decoration_line="line-through",
                     font_size="tiny",
                     font_style="italic",
                     font_weight="bold",
@@ -185,7 +193,9 @@ class Test_Style_repr:
                 "(align=left, padding=1, valign=bottom, "
                 "color=Color(code=#cd3131, rgb=(205, 49, 49), name=RED), "
                 "bg_color=Color(code=#2f2f2f, rgb=(47, 47, 47)), "
-                "font_size=tiny, font_style=italic, font_weight=bold, thousand_separator=comma)",
+                "decoration_line=line_through, "
+                "font_size=tiny, font_style=italic, font_weight=bold, "
+                "thousand_separator=comma)",
             ],
             [Style(), "(align=auto, valign=baseline, font_style=normal, font_weight=normal)"],
         ],

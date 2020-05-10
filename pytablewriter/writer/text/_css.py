@@ -4,7 +4,7 @@ from typing import List, cast
 from dataproperty import NOT_QUOTING_FLAGS, DataProperty
 from pathvalidate import replace_symbol
 
-from ...style import Align, FontStyle, FontWeight, Style, VerticalAlign
+from ...style import Align, DecorationLine, FontStyle, FontWeight, Style, VerticalAlign
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -68,6 +68,11 @@ class CssTableWriter(IndentationTextTableWriter):
 
         if style.vertical_align != VerticalAlign.BASELINE:
             css_tags.append("vertical-align: {}".format(style.vertical_align.align_str))
+
+        if style.decoration_line in (DecorationLine.LINE_THROUGH, DecorationLine.STRIKE):
+            css_tags.append("text-decoration-line: line-through")
+        elif style.decoration_line == DecorationLine.UNDERLINE:
+            css_tags.append("text-decoration-line: underline")
 
         return css_tags
 

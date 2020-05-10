@@ -253,6 +253,49 @@ class Test_CssTableWriter_write_table:
         print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
+    def test_normal_flavor(self):
+        writer = table_writer_class()
+        writer.table_name = "decoration line"
+        writer.column_styles = [
+            Style(decoration_line="underline"),
+            Style(decoration_line="strike"),
+            Style(decoration_line="line-through"),
+        ]
+        writer.headers = ["w/o style", "w/ strike", "w/ line through"]
+        writer.value_matrix = [["u", "s", "lt"]]
+
+        expected = """\
+.decoration-line thead th:nth-child(1) {
+    text-align: left;
+    text-decoration-line: underline;
+}
+.decoration-line thead th:nth-child(2) {
+    text-align: left;
+    text-decoration-line: line-through;
+}
+.decoration-line thead th:nth-child(3) {
+    text-align: left;
+    text-decoration-line: line-through;
+}
+.decoration-line tbody tr:nth-child(1) td:nth-child(1) {
+    text-align: left;
+    text-decoration-line: underline;
+}
+.decoration-line tbody tr:nth-child(1) td:nth-child(2) {
+    text-align: left;
+    text-decoration-line: line-through;
+}
+.decoration-line tbody tr:nth-child(1) td:nth-child(3) {
+    text-align: left;
+    text-decoration-line: line-through;
+}
+"""
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+
+        assert output == expected
+
     def test_normal_dumps(self):
         writer = table_writer_class()
         writer.table_name = "none value"

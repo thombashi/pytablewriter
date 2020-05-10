@@ -4,7 +4,7 @@ from typing import Any, Optional, cast
 from tcolorpy import tcolor
 
 from ._font import FontSize, FontStyle, FontWeight
-from ._style import Align, Style, ThousandSeparator
+from ._style import Align, DecorationLine, Style, ThousandSeparator
 
 
 _align_char_mapping = {
@@ -76,6 +76,12 @@ class TextStyler(AbstractStyler):
             return value
 
         ansi_styles = []
+
+        if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
+            ansi_styles.append("strike")
+        if style.decoration_line == DecorationLine.UNDERLINE:
+            ansi_styles.append("underline")
+
         if style.font_weight == FontWeight.BOLD:
             ansi_styles.append("bold")
 
