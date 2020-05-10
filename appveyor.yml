@@ -21,7 +21,7 @@ install:
     - "%PYTHON%/Scripts/pip.exe install .[excel,es6,sqlite,test]"
 
 test_script:
-    - "%PYTHON%/python.exe invoke_pytest.py"
+    - "%PYTHON%/python.exe -m pytest -vv --md-report-color text"
 
 notifications:
     - provider: Slack
