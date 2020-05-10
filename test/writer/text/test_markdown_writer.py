@@ -792,9 +792,8 @@ class Test_MarkdownTableWriter_write_table:
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
 
-        _ansi_escape = re.compile(r"(\x9b|\x1b\[)[0-?]*[ -\/]*[@-~]", re.IGNORECASE)
-
-        assert _ansi_escape.sub("", out) == expected
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
