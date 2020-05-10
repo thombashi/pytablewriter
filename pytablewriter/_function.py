@@ -6,6 +6,7 @@ from enum import Enum
 from typing import Optional, Type
 
 import dataproperty
+from pathvalidate import replace_symbol
 from tabledata._core import TableData
 
 
@@ -72,7 +73,7 @@ def normalize_enum(
         return value
 
     try:
-        return enum_class[value.strip().upper()]
+        return enum_class[replace_symbol(value.strip(), "_").upper()]
     except AttributeError:
         if validate:
             raise TypeError(
