@@ -4,7 +4,6 @@
 
 import collections
 import io
-import re
 from textwrap import dedent
 from typing import Optional
 
@@ -876,6 +875,30 @@ class Test_MarkdownTableWriter_write_table:
         )
 
         output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+
+        assert output == expected
+
+    def test_normal_flavor(self):
+        writer = table_writer_class()
+        writer.colorize_terminal = False
+        writer.column_styles = [
+            None,
+            Style(decoration_line="strike"),
+            Style(decoration_line="line-through"),
+        ]
+        writer.headers = ["w/o style", "w/ strike", "w/ line through"]
+        writer.value_matrix = [["no", "strike", "line-through"]]
+
+        expected = dedent(
+            """\
+            |w/o style|w/ strike |w/ line through |
+            |---------|----------|----------------|
+            |no       |~~strike~~|~~line-through~~|
+            """
+        )
+
+        output = writer.dumps(flavor="gfm")
         print_test_result(expected=expected, actual=output)
 
         assert output == expected

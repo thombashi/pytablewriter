@@ -6,7 +6,7 @@ import typepy
 from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import Align, MarkdownStyler, StylerInterface
+from ...style import Align, GFMarkdownStyler, MarkdownStyler, StylerInterface
 from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
 
@@ -30,6 +30,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self) -> None:
+        self.__flavor = ""
+
         super().__init__()
 
         self.indent_string = ""
@@ -95,6 +97,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             - Vertical bar characters (``'|'``) in table items are escaped
         """
 
+        self.__flavor = kwargs.pop("flavor", "")
+        if self.__flavor:
+            self.__flavor = self.__flavor.lower()
+            self._styler = self._create_styler(self)
+
         with self._logger:
             self._verify_property()
             self.__write_chapter()
@@ -117,6 +124,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         )
 
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
+        if self.__flavor in ("gfm", "github"):
+            return GFMarkdownStyler(writer)
+
         return MarkdownStyler(writer)
 
     @staticmethod

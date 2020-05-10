@@ -193,6 +193,26 @@ class MarkdownStyler(TextStyler):
         return value
 
 
+class GFMarkdownStyler(MarkdownStyler):
+    def get_additional_char_width(self, style: Style) -> int:
+        width = super().get_additional_char_width(style)
+
+        if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
+            width += 4
+
+        return width
+
+    def apply(self, value: Any, style: Style) -> str:
+        value = super().apply(value, style)
+        if not value:
+            return value
+
+        if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
+            value = "~~{}~~".format(value)
+
+        return value
+
+
 class ReStructuredTextStyler(TextStyler):
     def get_additional_char_width(self, style: Style) -> int:
         from ..writer import RstCsvTableWriter
