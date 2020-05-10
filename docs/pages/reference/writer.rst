@@ -216,7 +216,7 @@ Elasticsearch writer
 Base writer classes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Abstract class
+Abstract classes
 --------------------------------------------------------------
 .. autoclass:: pytablewriter.writer._interface.TableWriterInterface
     :members:

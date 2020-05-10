@@ -8,6 +8,10 @@ Style
    :members:
    :undoc-members:
 
+.. autoclass:: pytablewriter.style.DecorationLine
+   :members:
+   :undoc-members:
+
 .. autoclass:: pytablewriter.style.FontWeight
    :members:
    :undoc-members:
