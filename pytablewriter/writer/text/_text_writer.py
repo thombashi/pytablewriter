@@ -33,60 +33,74 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
        Character attributes that compose a table
 
     .. py:attribute:: column_delimiter
+        :type: str
 
         A column delimiter of a table.
 
     .. py:attribute:: char_left_side_row
+        :type: str
 
         A character of a left side of a row.
 
     .. py:attribute:: char_right_side_row
+        :type: str
 
         A character of a right side of a row.
 
     .. py:attribute:: char_cross_point
+        :type: str
 
         A character of the crossing point of column delimiter and row
         delimiter.
 
     .. py:attribute:: char_opening_row
+        :type: str
 
         A character of the first line of a table.
 
     .. py:attribute:: char_header_row_separator
+        :type: str
 
         A character of a separator line of the header and
         the body of the table.
 
     .. py:attribute:: char_value_row_separator
+        :type: str
 
         A character of a row separator line of the table.
 
     .. py:attribute:: char_closing_row
+        :type: str
 
         A character of the last line of a table.
 
     .. py:attribute:: is_write_header_separator_row
+        :type: bool
 
         Write a header separator line of the table if the value is |True|.
 
     .. py:attribute:: is_write_value_separator_row
+        :type: bool
 
         Write row separator line(s) of the table if the value is |True|.
 
     .. py:attribute:: is_write_opening_row
+        :type: bool
 
         Write an opening line of the table if the value is |True|.
 
     .. py:attribute:: is_write_closing_row
+        :type: bool
 
         Write a closing line of the table if the value is |True|.
 
     .. py:attribute:: is_write_null_line_after_table
+        :type: bool
 
         Write a blank line of after writing a table if the value is |True|.
 
     .. py:attribute:: margin
+        :type: int
 
         Margin size for each cells
 

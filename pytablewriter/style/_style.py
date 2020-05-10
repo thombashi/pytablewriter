@@ -10,10 +10,10 @@ from ._font import FontSize, FontStyle, FontWeight
 
 @unique
 class ThousandSeparator(Enum):
-    NONE = "none"
-    COMMA = "comma"
-    SPACE = "space"
-    UNDERSCORE = "underscore"
+    NONE = "none"  #: no thousands separator
+    COMMA = "comma"  #: ``','`` as thousands separator
+    SPACE = "space"  #: ``' '`` as thousands separator
+    UNDERSCORE = "underscore"  #: ``'_'`` as thousands separator
 
 
 @unique

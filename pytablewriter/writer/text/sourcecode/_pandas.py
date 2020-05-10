@@ -15,12 +15,16 @@ class PandasDataFrameWriter(NumpyTableWriter):
             :ref:`example-pandas-dataframe-writer`
 
     .. py:attribute:: import_pandas_as
+        :type: str
+        :value: "pd"
 
-        Specify ``pandas`` module import name of an output. Defaults to ``"pd"``.
+        Specify ``pandas`` module import name of an output source code.
 
     .. py:attribute:: import_numpy_as
+        :type: str
+        :value: "np"
 
-        Specify ``numpy`` module import name of an output. Defaults to ``"np"``.
+        Specify ``numpy`` module import name of an output source code.
 
     .. py:method:: write_table
 

@@ -65,12 +65,15 @@ class ElasticsearchWriter(AbstractTableWriter):
         - `elasticsearch-py <https://github.com/elastic/elasticsearch-py>`__
 
     .. py:attribute:: index_name
+        :type: str
 
         Alias attribute for |table_name|.
 
     .. py:attribute:: document_type
+        :type: str
+        :value: "table"
 
-        Specify document type for indices. Defaults to ``"table"``.
+        Specify document type for indices.
 
     .. py:method:: write_table()
 

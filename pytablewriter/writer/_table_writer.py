@@ -77,18 +77,28 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             :ref:`example-configure-stream`
 
     .. py:attribute:: is_write_header
+        :type: bool
 
         Write headers of a table if the value is |True|.
 
     .. py:attribute:: is_padding
+        :type: bool
 
         Padding for each item in the table if the value is |True|.
 
     .. py:attribute:: iteration_length
+        :type: int
 
         The number of iterations to write a table.
         This value used in :py:meth:`.write_table_iter` method.
         (defaults to ``-1`` which means number of iterations is indefinite)
+
+    .. py:attribute:: style_filter_kwargs
+        :type: Dict[str, Any]
+
+        Extra keyword arguments for style filter functions.
+        These arguments will passing to filter functions added by
+        :py:meth:`.add_style_filter` or :py:meth:`.add_col_separator_style_filter`
 
     .. py:attribute:: write_callback
 

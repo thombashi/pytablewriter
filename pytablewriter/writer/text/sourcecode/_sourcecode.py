@@ -11,6 +11,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
     Base class of table writer with a source code (variable definition) format.
 
     .. py:attribute:: is_datetime_instance_formatting
+        :type: bool
 
         Write |datetime| values in the table as definition of |datetime| class
         instances coincide with specific language if this value is |True|.
