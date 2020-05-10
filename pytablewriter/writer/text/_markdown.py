@@ -88,8 +88,19 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         """
         |write_table| with Markdown table format.
 
-        :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
-        :Example:
+        Args:
+            flavor (Optional[str]):
+                possible flavors are:
+
+                    - ``"github"``
+                    - ``"gfm"`` (alias for ``"github"``)
+
+                Defaults to |None|.
+
+        Raises:
+            pytablewriter.error.EmptyHeaderError: If the |headers| is empty.
+
+        Example:
             :ref:`example-markdown-table-writer`
 
         .. note::
