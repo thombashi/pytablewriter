@@ -18,7 +18,7 @@ install:
     - "%PYTHON%/python.exe C:/get-pip.py"
     - "%PYTHON%/Scripts/pip.exe --version"
     - "%PYTHON%/Scripts/pip.exe install setuptools --upgrade"
-    - "%PYTHON%/Scripts/pip.exe install .[excel,es6,sqlite,test]"
+    - "%PYTHON%/Scripts/pip.exe install .[excel,es6,sqlite,test] pytest-md-report"
 
 test_script:
     - "%PYTHON%/python.exe -m pytest -vv --md-report-color text"
