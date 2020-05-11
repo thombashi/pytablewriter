@@ -1,6 +1,5 @@
 pytablereader[excel,sqlite]>=0.29
 pytest
-pytest-md-report>=0.0.6
 sqliteschema
 tablib
 termcolor
