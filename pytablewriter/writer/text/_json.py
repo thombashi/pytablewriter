@@ -6,8 +6,7 @@ import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from typepy import Typecode
 
-from ..._converter import strip_quote
-from ._common import bool_to_str, serialize_dp
+from ._common import serialize_dp
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -67,7 +66,6 @@ class JsonTableWriter(IndentationTextTableWriter):
         }
         self._dp_extractor.update_strict_level_map({Typecode.BOOL: typepy.StrictLevel.MAX})
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-        self.register_trans_func(bool_to_str)
 
         self._init_cross_point_maps()
 
@@ -86,8 +84,6 @@ class JsonTableWriter(IndentationTextTableWriter):
             json_text_list = []
             for json_data in self._table_value_matrix:
                 json_text = json.dumps(json_data, indent=4 * self._indent_level, ensure_ascii=False)
-                json_text = strip_quote(json_text, "true")
-                json_text = strip_quote(json_text, "false")
                 json_text_list.append(json_text)
 
             joint_text = self.char_right_side_row + "\n"
