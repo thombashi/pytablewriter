@@ -62,7 +62,6 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         self._is_require_header = True
         self._dp_extractor.type_value_map = {
-            Typecode.NONE: "null",
             Typecode.INFINITY: "Infinity",
             Typecode.NAN: "NaN",
         }
@@ -87,9 +86,6 @@ class JsonTableWriter(IndentationTextTableWriter):
             json_text_list = []
             for json_data in self._table_value_matrix:
                 json_text = json.dumps(json_data, indent=4 * self._indent_level, ensure_ascii=False)
-                json_text = strip_quote(
-                    json_text, self._dp_extractor.type_value_map.get(Typecode.NONE)
-                )
                 json_text = strip_quote(json_text, "true")
                 json_text = strip_quote(json_text, "false")
                 json_text_list.append(json_text)

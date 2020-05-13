@@ -36,11 +36,11 @@ normal_test_data_list = [
             [None, None, None, None, None],
         ],
         expected_list=[
-            {"a": 1, "b": "", "c": "a", "dd": 1, "e": "null"},
-            {"a": "null", "b": 2.2, "c": "null", "dd": 2.2, "e": 2.2},
-            {"a": "null", "b": "null", "c": "null", "dd": "null", "e": "null"},
-            {"a": 3, "b": 3.3, "c": "ccc", "dd": "null", "e": "cccc"},
-            {"a": "null", "b": "null", "c": "null", "dd": "null", "e": "null"},
+            {"a": 1, "b": "", "c": "a", "dd": 1, "e": None},
+            {"a": None, "b": 2.2, "c": None, "dd": 2.2, "e": 2.2},
+            {"a": None, "b": None, "c": None, "dd": None, "e": None},
+            {"a": 3, "b": 3.3, "c": "ccc", "dd": None, "e": "cccc"},
+            {"a": None, "b": None, "c": None, "dd": None, "e": None},
         ],
     ),
     Data(
