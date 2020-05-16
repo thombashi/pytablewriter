@@ -4,6 +4,7 @@
 
 import collections
 import json
+from textwrap import dedent
 
 import pytest
 
