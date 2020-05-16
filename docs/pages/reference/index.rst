@@ -4,7 +4,7 @@ Reference
 .. toctree::
    :maxdepth: 4
    
-   writer
+   writers/index
    writer_factory
    table_format
    style
