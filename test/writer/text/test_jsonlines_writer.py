@@ -5,6 +5,8 @@
 import collections
 import itertools
 import json
+from decimal import Decimal
+from textwrap import dedent
 
 import pytest
 
@@ -96,3 +98,24 @@ class Test_JsonLinesTableWriter_write_table:
 
         with pytest.raises(expected_list):
             writer.write_table()
+
+    def test_normal_mix_types(self):
+        expected_list = dedent(
+            """\
+            {"a": "abc", "b": true, "f": "NaN", "i": 0, "n": 0.1}
+            {"a": "abcdef", "b": false, "f": "Infinity", "i": -1, "n": null}
+            {"a": "", "b": false, "f": "Infinity", "i": 1, "n": null}
+            """
+        ).splitlines()
+
+        writer = table_writer_class()
+        writer.headers = ["a", "i", "f", "b", "n"]
+        writer.value_matrix = [
+            ["abc", 0, float("nan"), True, 0.1],
+            ["abcdef", -1, float("inf"), False, None],
+            ["", 1, Decimal("inf"), False, None],
+        ]
+
+        for actual, expected in zip(writer.dumps(sort_keys=True).splitlines(), expected_list):
+            print_test_result(expected=expected, actual=actual)
+            assert actual == expected
