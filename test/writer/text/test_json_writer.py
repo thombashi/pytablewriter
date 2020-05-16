@@ -373,7 +373,8 @@ class Test_JsonTableWriter_write_table_iter:
         writer.iteration_length = len(value)
         writer.write_table_iter()
 
-        out, _err = capsys.readouterr()
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
         assert json.loads(out) == expected
 
     @pytest.mark.parametrize(
