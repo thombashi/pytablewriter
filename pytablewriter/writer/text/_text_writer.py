@@ -539,6 +539,28 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
 
         self._indent_level -= 1
 
+    def write_table(self, **kwargs) -> None:
+        """
+        |write_table|.
+
+        Args:
+            indent (Optional[int]):
+                Indent level of an output.
+                Interpretation of indent level value differ format to format.
+                Some writer classes may ignore this value.
+
+        .. note::
+            - |None| values are written as an empty string.
+        """
+
+        indent = kwargs.pop("indent", None)
+
+        if indent is not None:
+            self._logger.logger.debug("indent: {}".format(indent))
+            self.set_indent_level(int(indent))
+
+        super().write_table(**kwargs)
+
     def _get_indent_string(self) -> str:
         return self.indent_string * self._indent_level
 
