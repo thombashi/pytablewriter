@@ -7,6 +7,7 @@ from typing import List
 
 import typepy
 
+from ._logger import logger
 from ._table_format import FormatAttr, TableFormat
 from .error import WriterNotFoundError
 from .writer._table_writer import AbstractTableWriter
@@ -74,6 +75,8 @@ class TableWriterFactory:
             if table_format.format_attribute & FormatAttr.SECONDARY_EXT:
                 continue
 
+            logger.debug("create a {} instance".format(table_format.writer_class.__name__))
+
             return table_format.writer_class()
 
         raise WriterNotFoundError(
@@ -136,6 +139,8 @@ class TableWriterFactory:
             if format_name in table_format.names and not (
                 table_format.format_attribute & FormatAttr.SECONDARY_NAME
             ):
+                logger.debug("create a {} instance".format(table_format.writer_class.__name__))
+
                 return table_format.writer_class()
 
         raise WriterNotFoundError(
