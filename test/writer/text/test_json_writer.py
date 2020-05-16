@@ -4,6 +4,8 @@
 
 import collections
 import json
+import platform as m_platform
+import sys
 from textwrap import dedent
 
 import pytest
@@ -221,6 +223,9 @@ class Test_JsonTableWriter_write_new_line:
 
 
 class Test_JsonTableWriter_write_table:
+    @pytest.mark.skipif(
+        m_platform.system() == "Windows" and sys.version_info < (3, 6), reason="env dependent tests"
+    )
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in normal_test_data_list],
