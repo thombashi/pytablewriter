@@ -196,18 +196,18 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         Acceptable values are as follows:
 
             - |None| (automatically detect column type from values in the column)
-            - :py:class:`pytablewriter.typepy.Bool`
-            - :py:class:`pytablewriter.typepy.DateTime`
-            - :py:class:`pytablewriter.typepy.Dictionary`
-            - :py:class:`pytablewriter.typepy.Infinity`
-            - :py:class:`pytablewriter.typepy.Integer`
-            - :py:class:`pytablewriter.typepy.IpAddress`
-            - :py:class:`pytablewriter.typepy.List`
-            - :py:class:`pytablewriter.typepy.Nan`
-            - :py:class:`pytablewriter.typepy.NoneType`
-            - :py:class:`pytablewriter.typepy.NullString`
-            - :py:class:`pytablewriter.typepy.RealNumber`
-            - :py:class:`pytablewriter.typepy.String`
+            - :py:class:`pytablewriter.typehint.Bool`
+            - :py:class:`pytablewriter.typehint.DateTime`
+            - :py:class:`pytablewriter.typehint.Dictionary`
+            - :py:class:`pytablewriter.typehint.Infinity`
+            - :py:class:`pytablewriter.typehint.Integer`
+            - :py:class:`pytablewriter.typehint.IpAddress`
+            - :py:class:`pytablewriter.typehint.List`
+            - :py:class:`pytablewriter.typehint.Nan`
+            - :py:class:`pytablewriter.typehint.NoneType`
+            - :py:class:`pytablewriter.typehint.NullString`
+            - :py:class:`pytablewriter.typehint.RealNumber`
+            - :py:class:`pytablewriter.typehint.String`
 
         If a type-hint value is not |None|, the writer tries to
         convert data for each data in a column to type-hint class.
