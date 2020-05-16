@@ -2,8 +2,11 @@ import copy
 from typing import List
 
 import dataproperty
+import msgfy
 import typepy
+from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
+from tabledata import to_value_matrix
 from typepy import Typecode
 
 from ._common import serialize_dp
@@ -74,8 +77,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.stream.write("\n")
 
     def _write_table(self, **kwargs) -> None:
-        self._preprocess_table_property()
-        self._preprocess_value_matrix()
+        self._preprocess()
 
         with self._logger:
             self._write_opening_row()
@@ -96,17 +98,44 @@ class JsonTableWriter(IndentationTextTableWriter):
             self.dec_indent_level()
             self._write_closing_row()
 
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        return value_dp.to_str()
+
+    def _preprocess_table_dp(self) -> None:
+        if self._is_complete_table_dp_preprocess:
+            return
+
+        self._logger.logger.debug("_preprocess_table_dp")
+
+        try:
+            self._table_value_dp_matrix = self._dp_extractor.to_dp_matrix(
+                to_value_matrix(self.headers, self.value_matrix)
+            )
+        except TypeError as e:
+            self._logger.logger.debug(msgfy.to_error_message(e))
+            self._table_value_dp_matrix = []
+
+        self._is_complete_table_dp_preprocess = True
+
+    def _preprocess_header(self) -> None:
+        if self._is_complete_header_preprocess:
+            return
+
+        self._logger.logger.debug("_preprocess_header")
+
+        self._table_headers = [
+            header_dp.to_str() for header_dp in self._dp_extractor.to_header_dp_list()
+        ]
+
+        self._is_complete_header_preprocess = True
+
     def _preprocess_value_matrix(self) -> None:
         if self._is_complete_value_matrix_preprocess:
             return
 
-        try:
-            dp_matrix = self._dp_extractor.to_dp_matrix(self.value_matrix)
-        except TypeError:
-            dp_matrix = []
-
         self._table_value_matrix = [
-            dict(zip(self.headers, [serialize_dp(dp) for dp in dp_list])) for dp_list in dp_matrix
+            dict(zip(self.headers, [serialize_dp(dp) for dp in dp_list]))
+            for dp_list in self._table_value_dp_matrix
         ]
 
         self._is_complete_value_matrix_preprocess = True

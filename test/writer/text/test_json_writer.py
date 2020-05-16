@@ -241,6 +241,47 @@ class Test_JsonTableWriter_write_table:
 
         assert json.loads(out) == expected
 
+    def test_normal_json_rows(self):
+        writer = table_writer_class()
+        writer.headers = ["a", "i", "f", "b", "n"]
+        writer.value_matrix = [
+            {"a": "abc", "b": True, "f": "NaN", "i": 0, "n": 0.1},
+            {"a": "abcdef", "b": False, "f": "Infinity", "i": -1, "n": None},
+            {"n": None, "f": "Infinity", "a": "", "i": 1, "b": False},
+        ]
+        out = writer.dumps(sort_keys=True)
+
+        expected = dedent(
+            """\
+            [
+                {
+                    "a": "abc",
+                    "i": 0,
+                    "f": "NaN",
+                    "b": true,
+                    "n": 0.1
+                },
+                {
+                    "a": "abcdef",
+                    "i": -1,
+                    "f": "Infinity",
+                    "b": false,
+                    "n": null
+                },
+                {
+                    "a": "",
+                    "i": 1,
+                    "f": "Infinity",
+                    "b": false,
+                    "n": null
+                }
+            ]
+            """
+        )
+
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
