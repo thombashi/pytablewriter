@@ -55,6 +55,8 @@ class JsonTableWriter(IndentationTextTableWriter):
     def __init__(self) -> None:
         super().__init__()
 
+        self.set_indent_level(4)
+
         self.is_formatting_float = False
         self.is_write_opening_row = True
         self.is_write_closing_row = True
