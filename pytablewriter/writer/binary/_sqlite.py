@@ -72,7 +72,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         self._stream = SimpleSQLite(file_path, "w")
 
-    def dump(self, output: str, close_after_write: bool = True) -> None:
+    def dump(self, output: str, close_after_write: bool = True, **kwargs) -> None:
         """Write data to the SQLite database file.
 
         Args:
@@ -84,7 +84,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         self.open(output)
         try:
-            self.write_table()
+            self.write_table(**kwargs)
         finally:
             if close_after_write:
                 self.close()

@@ -187,7 +187,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         self._stream = self.workbook.add_worksheet(sheet_name)  # type: ignore
         self._current_data_row = self._first_data_row
 
-    def dump(self, output: str, close_after_write: bool = True) -> None:
+    def dump(self, output: str, close_after_write: bool = True, **kwargs) -> None:
         """Write a worksheet to the current workbook.
 
         Args:
@@ -201,7 +201,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         self.open(output)
         try:
             self.make_worksheet(self.table_name)
-            self.write_table()
+            self.write_table(**kwargs)
         finally:
             if close_after_write:
                 self.close()

@@ -195,7 +195,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def dump(self, output, close_after_write: bool = True) -> None:
+    def dump(self, output, close_after_write: bool = True, **kwargs) -> None:
         """Write data to the output with tabular format.
 
         Args:
@@ -214,7 +214,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.stream = open(output, "w", encoding="utf-8")
 
         try:
-            self.write_table()
+            self.write_table(**kwargs)
         finally:
             if close_after_write:
                 self.stream.close()

@@ -33,7 +33,7 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
         |write_table|.
         """
 
-    def dump(self, output, close_after_write: bool) -> None:  # pragma: no cover
+    def dump(self, output, close_after_write: bool, **kwargs) -> None:  # pragma: no cover
         raise NotImplementedError("{} writer did not support dump method".format(self.format_name))
 
     def dumps(self) -> str:  # pragma: no cover
