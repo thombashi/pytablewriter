@@ -31,8 +31,12 @@ class JsonLinesTableWriter(JsonTableWriter):
         `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
         /NDJSON/JSON Lines format.
 
-        :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
-        :Example:
+        Args:
+            sort_keys (Optional[bool]):
+                If |True|, the output of dictionaries will be sorted by key.
+                Defaults to |False|.
+
+        Example:
             :ref:`example-jsonl-writer`
         """
 

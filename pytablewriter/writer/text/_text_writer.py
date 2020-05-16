@@ -202,6 +202,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         Args:
             output (file descriptor or str):
                 file descriptor or path to the output file.
+
             close_after_write (bool, optional):
                 Close the output after write.
                 Defaults to |True|.
@@ -224,6 +225,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         """Get rendered tabular text from the table data.
 
         Only available for text format table writers.
+
+        Args:
+            **kwargs:
+                Optional arguments that the writer takes.
 
         Returns:
             str: Rendered tabular text.

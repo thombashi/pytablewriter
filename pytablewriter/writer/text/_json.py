@@ -31,8 +31,18 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         |write_table| with JSON format.
 
-        :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
-        :Examples:
+        Args:
+            indent (Optional[int]):
+                Indent level of an output.
+                Interpretation of indent level value differ format to format.
+                Some writer classes may ignore this value.
+                Defaults to 4.
+
+            sort_keys (Optional[bool]):
+                If |True|, the output of dictionaries will be sorted by key.
+                Defaults to |False|.
+
+        Examples:
             :ref:`example-json-table-writer`
 
         .. note::
