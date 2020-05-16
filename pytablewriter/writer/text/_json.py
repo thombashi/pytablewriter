@@ -80,6 +80,8 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.stream.write("\n")
 
     def _write_table(self, **kwargs) -> None:
+        sort_keys = kwargs.get("sort_keys", False)
+
         self._preprocess()
 
         with self._logger:
@@ -87,7 +89,9 @@ class JsonTableWriter(IndentationTextTableWriter):
 
             json_text_list = []
             for json_data in self._table_value_matrix:
-                json_text = json.dumps(json_data, indent=self._indent_level, ensure_ascii=False)
+                json_text = json.dumps(
+                    json_data, indent=self._indent_level, ensure_ascii=False, sort_keys=sort_keys
+                )
                 json_text_list.append(json_text)
 
             joint_text = self.char_right_side_row + "\n"

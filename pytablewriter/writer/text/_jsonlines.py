@@ -36,9 +36,11 @@ class JsonLinesTableWriter(JsonTableWriter):
             :ref:`example-jsonl-writer`
         """
 
+        sort_keys = kwargs.get("sort_keys", False)
+
         with self._logger:
             self._verify_property()
             self._preprocess()
 
             for values in self._table_value_matrix:
-                self._write_line(json.dumps(values, ensure_ascii=False))
+                self._write_line(json.dumps(values, ensure_ascii=False, sort_keys=sort_keys))

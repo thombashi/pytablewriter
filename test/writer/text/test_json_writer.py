@@ -241,6 +241,16 @@ class Test_JsonTableWriter_write_table:
 
         assert json.loads(out) == expected
 
+    def test_normal_sort_keys(self):
+        writer = table_writer_class()
+        writer.headers = ["z", "i"]
+        writer.value_matrix = [
+            {"z": "abc", "i": 1},
+            {"z": "efg", "i": 2},
+        ]
+
+        assert writer.dumps(sort_keys=True) != writer.dumps(sort_keys=False)
+
     def test_normal_json_rows(self):
         writer = table_writer_class()
         writer.headers = ["a", "i", "f", "b", "n"]
@@ -256,23 +266,23 @@ class Test_JsonTableWriter_write_table:
             [
                 {
                     "a": "abc",
-                    "i": 0,
-                    "f": "NaN",
                     "b": true,
+                    "f": "NaN",
+                    "i": 0,
                     "n": 0.1
                 },
                 {
                     "a": "abcdef",
-                    "i": -1,
-                    "f": "Infinity",
                     "b": false,
+                    "f": "Infinity",
+                    "i": -1,
                     "n": null
                 },
                 {
                     "a": "",
-                    "i": 1,
-                    "f": "Infinity",
                     "b": false,
+                    "f": "Infinity",
+                    "i": 1,
                     "n": null
                 }
             ]
