@@ -1,4 +1,5 @@
 import copy
+from textwrap import indent
 from typing import List
 
 import dataproperty
@@ -83,11 +84,10 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         with self._logger:
             self._write_opening_row()
-            self.inc_indent_level()
 
             json_text_list = []
             for json_data in self._table_value_matrix:
-                json_text = json.dumps(json_data, indent=4 * self._indent_level, ensure_ascii=False)
+                json_text = json.dumps(json_data, indent=self._indent_level, ensure_ascii=False)
                 json_text_list.append(json_text)
 
             joint_text = self.char_right_side_row + "\n"
@@ -95,9 +95,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             if all([not self.is_write_closing_row, typepy.is_not_null_string(json_text)]):
                 json_text += joint_text
 
-            self.stream.write(json_text)
-
-            self.dec_indent_level()
+            self.stream.write(indent(json_text, " " * self._indent_level))
             self._write_closing_row()
 
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
@@ -150,6 +148,6 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def _get_closing_row_items(self) -> List[str]:
         if typepy.is_not_null_string(self.table_name):
-            return ["]}"]
+            return ["\n]}"]
 
-        return ["]"]
+        return ["\n]"]

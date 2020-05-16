@@ -282,6 +282,20 @@ class Test_JsonTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert out == expected
 
+    def test_normal_indent_wo_table_name(self):
+        writer = table_writer_class()
+        writer.headers = ["a", "i"]
+        writer.value_matrix = [
+            ["abc", 1],
+            ["efg", 2],
+        ]
+
+        assert writer.dumps(sort_keys=True) == writer.dumps(sort_keys=True, indent=4)
+        assert writer.dumps(sort_keys=True, indent=2) != writer.dumps(sort_keys=True, indent=4)
+
+        writer.table_name = "example"
+        assert writer.dumps(sort_keys=True, indent=2) != writer.dumps(sort_keys=True, indent=4)
+
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
