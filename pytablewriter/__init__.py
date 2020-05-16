@@ -24,7 +24,6 @@ from ._function import dump_tabledata, dumps_tabledata
 from ._logger import set_log_level, set_logger
 from ._table_format import FormatAttr, TableFormat
 from .error import (
-    EmptyHeaderError,
     EmptyTableDataError,
     EmptyTableNameError,
     EmptyValueError,

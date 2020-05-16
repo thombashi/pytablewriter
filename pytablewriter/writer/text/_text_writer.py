@@ -7,7 +7,6 @@ from typing import List, Optional, Sequence, cast
 import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
 
-from ...error import EmptyHeaderError
 from ...style import Cell, Style, StylerInterface, TextStyler
 from ...style._styler import get_align_char
 from .._table_writer import AbstractTableWriter, ColSeparatorStyleFilterFunc
@@ -287,7 +286,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         try:
             self._write_header()
             self.__write_header_row_separator()
-        except EmptyHeaderError:
+        except ValueError:
             pass
 
         is_first_value_row = True
@@ -434,7 +433,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             return
 
         if typepy.is_empty_sequence(self._table_headers):
-            raise EmptyHeaderError("header is empty")
+            raise ValueError("header is empty")
 
         self._write_row(-1, self._table_headers)
 

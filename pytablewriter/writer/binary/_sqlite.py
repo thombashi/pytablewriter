@@ -15,8 +15,6 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
-        :raises pytablewriter.EmptyHeaderError:
-            If the |headers| is empty.
         :raises pytablewriter.EmptyValueError:
             If the |value_matrix| is empty.
         :Example:

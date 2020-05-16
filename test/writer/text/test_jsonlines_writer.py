@@ -58,7 +58,7 @@ normal_test_data_list = [
 exception_test_data_list = [
     Data(header=header, value=value, expected_list=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
-] + [Data(header=None, value=value_matrix, expected_list=ptw.EmptyHeaderError)]
+] + [Data(header=None, value=value_matrix, expected_list=ValueError)]
 table_writer_class = ptw.JsonLinesTableWriter
 
 

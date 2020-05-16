@@ -7,7 +7,6 @@ import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from pathvalidate import replace_symbol
 
-from ...error import EmptyHeaderError
 from ...sanitizer import sanitize_python_var_name
 from ...style import Align, FontStyle, FontWeight, HtmlStyler, Style, StylerInterface, VerticalAlign
 from .._common import import_error_msg_template
@@ -106,7 +105,7 @@ class HtmlTableWriter(TextTableWriter):
 
             try:
                 self._write_header()
-            except EmptyHeaderError:
+            except ValueError:
                 pass
 
             self._write_body(not write_css)
@@ -118,7 +117,7 @@ class HtmlTableWriter(TextTableWriter):
             return
 
         if typepy.is_empty_sequence(self._table_headers):
-            raise EmptyHeaderError("headers is empty")
+            raise ValueError("headers is empty")
 
         tr_tag = tags.tr()
         for header in self._table_headers:

@@ -4,9 +4,6 @@ Errors
 .. autoexception:: pytablewriter.EmptyTableNameError
     :undoc-members:
 
-.. autoexception:: pytablewriter.EmptyHeaderError
-    :undoc-members:
-
 .. autoexception:: pytablewriter.EmptyValueError
     :undoc-members:
 

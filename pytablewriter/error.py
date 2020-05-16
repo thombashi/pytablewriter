@@ -14,13 +14,6 @@ class EmptyTableNameError(Exception):
     """
 
 
-class EmptyHeaderError(Exception):
-    """
-    Exception raised when a table writer class of the |headers| attribute
-    is null, and the class is not accepted null |headers|.
-    """
-
-
 class EmptyValueError(Exception):
     """
     Exception raised when a table writer class of the |value_matrix| attribute

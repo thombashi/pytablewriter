@@ -70,7 +70,7 @@ normal_test_data_list = [
 exception_test_data_list = [
     Data(header=header, value=value, expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
-] + [Data(header=None, value=value_matrix, expected=ptw.EmptyHeaderError)]
+] + [Data(header=None, value=value_matrix, expected=ValueError)]
 
 table_writer_class = ptw.LtsvTableWriter
 

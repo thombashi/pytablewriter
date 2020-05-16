@@ -24,13 +24,7 @@ from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
 from typepy import String, Typecode, extract_typepy_from_dtype
 
 from .._logger import WriterLogger
-from ..error import (
-    EmptyHeaderError,
-    EmptyTableDataError,
-    EmptyTableNameError,
-    EmptyValueError,
-    NotSupportedError,
-)
+from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
 from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
 from ._interface import TableWriterInterface
 
@@ -984,11 +978,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     def _validate_empty_header(self) -> None:
         """
-        :raises pytablewriter.EmptyHeaderError: If the |headers| is empty.
+        Raises:
+            ValueError: If the |headers| is empty.
         """
 
         if typepy.is_empty_sequence(self.headers):
-            raise EmptyHeaderError("headers expected to have one or more header names")
+            raise ValueError("headers expected to have one or more header names")
 
     def _verify_value_matrix(self) -> None:
         if typepy.is_empty_sequence(self.value_matrix):

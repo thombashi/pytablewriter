@@ -97,9 +97,6 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
                 Defaults to |None|.
 
-        Raises:
-            pytablewriter.error.EmptyHeaderError: If the |headers| is empty.
-
         Example:
             :ref:`example-markdown-table-writer`
 

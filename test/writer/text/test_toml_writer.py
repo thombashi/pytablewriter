@@ -139,7 +139,7 @@ exception_test_data_list = [
     Data(table_name="dummy", header=header, value=value, expected=ptw.EmptyTableDataError)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ] + [
-    Data(table_name="empty_header", header=None, value=value_matrix, expected=ptw.EmptyHeaderError),
+    Data(table_name="empty_header", header=None, value=value_matrix, expected=ValueError),
     Data(table_name=None, header=headers, value=value_matrix, expected=ptw.EmptyTableNameError),
 ]
 

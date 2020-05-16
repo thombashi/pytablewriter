@@ -317,8 +317,6 @@ rp_class = """
 .. |TableData| replace:: `TableData <https://tabledata.rtfd.io/en/latest/pages/reference/data.html#tabledata>`__
 .. |Typecode| replace:: :py:class:`typepy.Typecode`
 
-.. |EmptyHeaderError| replace:: :py:class:`~pytablewriter.EmptyHeaderError`
-
 .. |CsvTableWriter| replace:: :py:class:`~pytablewriter.CsvTableWriter`
 .. |ElasticsearchWriter| replace:: :py:class:`~pytablewriter.ElasticsearchWriter`
 .. |ExcelXlsxTableWriter| replace:: :py:class:`~pytablewriter.ExcelXlsxTableWriter`
