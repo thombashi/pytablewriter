@@ -134,7 +134,7 @@ class JsonTableWriter(IndentationTextTableWriter):
             return
 
         self._table_value_matrix = [
-            dict(zip(self.headers, [serialize_dp(dp) for dp in dp_list]))
+            dict(zip(self._table_headers, [serialize_dp(dp) for dp in dp_list]))
             for dp_list in self._table_value_dp_matrix
         ]
 
