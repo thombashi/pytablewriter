@@ -99,8 +99,8 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_chapter("Multi processing")
     maker.write_file(examples_root.joinpath("customize", "multi_process.txt"))
 
-    maker.write_chapter("Create Elasticsearch index and put data")
-    maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
+    # maker.write_chapter("Create Elasticsearch index and put data")
+    # maker.write_file(examples_root.joinpath("table_format", "elasticsearch_example.txt"))
 
     maker.set_indent_level(1)
     maker.write_chapter("For more information")
