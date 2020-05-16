@@ -223,9 +223,6 @@ class Test_JsonTableWriter_write_new_line:
 
 
 class Test_JsonTableWriter_write_table:
-    @pytest.mark.skipif(
-        m_platform.system() == "Windows" and sys.version_info < (3, 6), reason="env dependent tests"
-    )
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in normal_test_data_list],
@@ -242,6 +239,9 @@ class Test_JsonTableWriter_write_table:
 
         assert json.loads(out) == expected
 
+    @pytest.mark.skipif(
+        m_platform.system() == "Windows" and sys.version_info < (3, 6), reason="env dependent tests"
+    )
     def test_normal_sort_keys(self):
         writer = table_writer_class()
         writer.headers = ["z", "i"]
