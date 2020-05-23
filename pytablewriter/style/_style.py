@@ -197,18 +197,18 @@ class Style:
         self.__padding = value
 
     def __init__(self, **kwargs) -> None:
-        self.__fg_color = kwargs.pop("color", None)
+        self.__fg_color = kwargs.get("color")
         if self.__fg_color:
             self.__fg_color = Color(self.__fg_color)
 
-        self.__bg_color = kwargs.pop("bg_color", None)
+        self.__bg_color = kwargs.get("bg_color")
         if self.__bg_color:
             self.__bg_color = Color(self.__bg_color)
 
+        self.__padding = kwargs.get("padding")
+
         self.__align = normalize_enum(kwargs.get("align"), Align, default=Align.AUTO)
         self.__validate_attr("align", Align)
-
-        self.__padding = kwargs.pop("padding", None)
 
         self.__valign = normalize_enum(
             kwargs.get("vertical_align"), VerticalAlign, default=VerticalAlign.BASELINE
