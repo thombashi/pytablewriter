@@ -142,9 +142,6 @@ def main():
         ]
     )
 
-    maker.write_chapter("Tasks")
-    maker.write_lines(["https://trello.com/b/kE0XG34y"])
-
     return 0
 
 
