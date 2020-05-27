@@ -715,7 +715,3 @@ Related Project
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
     - Tabular data loaded by ``pytablereader`` can be written another tabular data format with ``pytablewriter``.
 
-Tasks
-=======
-https://trello.com/b/kE0XG34y
-
