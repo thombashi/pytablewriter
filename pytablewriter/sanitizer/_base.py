@@ -28,7 +28,7 @@ class VarNameSanitizer(NameSanitizer):
         self._validate(self._value)
 
     def sanitize(self, replacement_text: str = "") -> str:
-        sanitized_var_name = self._invalid_var_name_re.sub(replacement_text, self._str)
+        var_name = self._invalid_var_name_re.sub(replacement_text, self._str)
 
         # delete invalid char(s) in the beginning of the variable name
         is_require_remove_head = any(
@@ -39,24 +39,24 @@ class VarNameSanitizer(NameSanitizer):
         )
 
         if is_require_remove_head:
-            sanitized_var_name = self._invalid_var_name_head_re.sub("", sanitized_var_name)
+            var_name = self._invalid_var_name_head_re.sub("", var_name)
         else:
-            match = self._invalid_var_name_head_re.search(sanitized_var_name)
+            match = self._invalid_var_name_head_re.search(var_name)
             if match is not None:
-                sanitized_var_name = match.end() * replacement_text + self._invalid_var_name_head_re.sub(
-                    "", sanitized_var_name
+                var_name = match.end() * replacement_text + self._invalid_var_name_head_re.sub(
+                    "", var_name
                 )
 
-        if not sanitized_var_name:
+        if not var_name:
             return ""
 
         try:
-            self._validate(sanitized_var_name)
+            self._validate(var_name)
         except ValidationError as e:
             if e.reason == ErrorReason.RESERVED_NAME and e.reusable_name is False:
-                sanitized_var_name += "_"
+                var_name += "_"
 
-        return sanitized_var_name
+        return var_name
 
     def _validate(self, value: str) -> None:
         self._validate_null_string(value)
