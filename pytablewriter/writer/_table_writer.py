@@ -487,6 +487,20 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     def add_style_filter(self, style_filter: StyleFilterFunc) -> None:
+        """Add a style filter function.
+
+        Args:
+            style_filter:
+                A function for filtering table cells, the function required to implement
+                the following Protocol:
+
+                .. code-block:: python
+
+                    class StyleFilterFunc(Protocol):
+                        def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
+                            ...
+        """
+
         self._style_filters.insert(0, style_filter)
 
     def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:

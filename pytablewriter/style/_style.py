@@ -67,13 +67,19 @@ class Style:
     """Style specifier class for table elements.
 
     Args:
-        color (Optional[Color]):
-            text color for cells.
-            Only applicable for part of text format writer classes.
+        color (Union[|str|, tcolorpy.Color, |None|]):
+            Text color for cells.
+            When using str, specify a color code (``"#XXXXXX"``) or a color name.
 
-        bg_color (Optional[Color]):
+            .. note::
+                In the current version, only applicable for part of text format writer classes.
+
+        bg_color (Union[|str|, tcolorpy.Color, |None|]):
             background color for cells.
-            Only applicable for part of text format writer classes.
+            When using str, specify a color code (``"#XXXXXX"``) or a color name.
+
+            .. note::
+                In the current version, only applicable for part of text format writer classes.
 
         align (|str| / :py:class:`~.style.Align`):
             Horizontal text alignment for cells.
@@ -106,7 +112,7 @@ class Style:
             - ``"small"``
             - ``"medium"``
             - ``"large"``
-            - ``"none"`` (no font size specification)
+            - ``"none"`` (default: no font size specification)
 
         font_weight (|str| / :py:class:`~.style.FontWeight`):
             Font weight specification for cells in a column.
@@ -129,10 +135,10 @@ class Style:
             Experiental.
             Possible string values are:
 
-            - ``"none"`` (default)
             - ``"line-through"``
             - ``"strike"`` (alias for ``"line-through"``)
             - ``"underline"``
+            - ``"none"`` (default)
 
         thousand_separator (|str| / :py:class:`~.style.ThousandSeparator`):
             Thousand separator specification for numbers in a column.
