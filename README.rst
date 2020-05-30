@@ -463,9 +463,11 @@ Get rendered tabular text as str
 
 Configure table styles
 ------------------------
-Writers can specify cell
+Column styles
+~~~~~~~~~~~~~~~
+Writers can specify
 `Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
-for each column manually by ``column_styles`` attribute of writer classes.
+for each column by ``column_styles`` attribute of writer classes.
 
 :Sample Code:
     .. code-block:: python
@@ -558,7 +560,7 @@ You can also set ``Style`` to a specific column with index or header by using ``
         |1234|_1234_|1 234|
 
 Style filter
---------------
+~~~~~~~~~~~~~~
 Example:
 
 .. figure:: ss/color_filter.png
