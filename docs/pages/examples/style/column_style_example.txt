@@ -1,6 +1,6 @@
-Writers can specify cell
+Writers can specify 
 `Style <https://pytablewriter.rtfd.io/en/latest/pages/reference/style.html>`__
-for each column manually by ``column_styles`` attribute of writer classes.
+for each column by ``column_styles`` attribute of writer classes.
 
 :Sample Code:
     .. code-block:: python

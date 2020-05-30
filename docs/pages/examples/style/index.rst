@@ -3,4 +3,4 @@
 Specify Cell Styles For Each Column
 ================================================================
 
-.. include:: style_example.txt
+.. include:: column_style_example.txt

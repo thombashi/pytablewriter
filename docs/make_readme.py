@@ -67,9 +67,9 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.set_indent_level(1)
     maker.write_chapter("Configure table styles")
     maker.inc_indent_level()
-    maker.write_file(examples_root.joinpath("style", "style_example.txt"))
+    maker.write_chapter("Column styles")
+    maker.write_file(examples_root.joinpath("style", "column_style_example.txt"))
 
-    maker.set_indent_level(1)
     maker.write_chapter("Style filter")
     maker.write_lines(
         [
