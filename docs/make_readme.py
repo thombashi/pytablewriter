@@ -133,14 +133,7 @@ def main():
     maker.write_chapter("Documentation")
     maker.write_lines(["https://{:s}.rtfd.io/".format(PROJECT_NAME)])
 
-    maker.write_chapter("Related Project")
-    maker.write_lines(
-        [
-            "- `pytablereader <https://github.com/thombashi/pytablereader>`__",
-            "    - Tabular data loaded by ``pytablereader`` can be written "
-            "another tabular data format with ``pytablewriter``.",
-        ]
-    )
+    maker.write_file(maker.doc_page_root_dir_path.joinpath("related.rst"))
 
     return 0
 

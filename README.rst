@@ -640,16 +640,16 @@ https://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 Installation
 ============
 
-Install from PyPI
+Installation: pip
 ------------------------------
 ::
 
     pip install pytablewriter
 
-Some of the formats require additional dependency packages, you can install the dependency packages as follows:
+Some of the formats require additional dependency packages, you can install these packages as follows:
 
 - Elasticsearch
-    - ``pip install pytablewriter[es6]`` or ``pip install pytablewriter[es5]``
+    - ``pip install pytablewriter[es7]`` or ``pip install pytablewriter[es6]``
 - Excel
     - ``pip install pytablewriter[excel]``
 - HTML
@@ -661,7 +661,7 @@ Some of the formats require additional dependency packages, you can install the 
 - Install all of the optioanal dependencies
     - ``pip install pytablewriter[all]``
 
-Install from PPA (for Ubuntu)
+Installation: apt
 ------------------------------
 ::
 
@@ -687,7 +687,6 @@ Optional dependencies
 - `loguru <https://github.com/Delgan/loguru>`__
     - Used for logging if the package installed
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
-- `simplejson <https://github.com/simplejson/simplejson>`__
 - Elasticsearch:
     - `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
 - Excel
@@ -701,17 +700,18 @@ Optional dependencies
     - `toml <https://github.com/uiri/toml>`__
 
 
-Test dependencies
------------------
-- `pytest <https://docs.pytest.org/en/latest/>`__
-- `tox <https://testrun.org/tox/latest/>`__
 
 Documentation
 ===============
 https://pytablewriter.rtfd.io/
 
-Related Project
-=================
+Projects using pytablewriter
+==================================
+- `pytest-md-report <https://github.com/thombashi/pytest-md-report>`__
+
+
+Related Projects
+==================================
 - `pytablereader <https://github.com/thombashi/pytablereader>`__
     - Tabular data loaded by ``pytablereader`` can be written another tabular data format with ``pytablewriter``.
 
