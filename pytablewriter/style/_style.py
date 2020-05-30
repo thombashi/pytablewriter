@@ -203,52 +203,7 @@ class Style:
         self.__padding = value
 
     def __init__(self, **kwargs) -> None:
-        self.__fg_color = kwargs.get("color")
-        if self.__fg_color:
-            self.__fg_color = Color(self.__fg_color)
-
-        self.__bg_color = kwargs.get("bg_color")
-        if self.__bg_color:
-            self.__bg_color = Color(self.__bg_color)
-
-        self.__padding = kwargs.get("padding")
-
-        self.__align = normalize_enum(kwargs.get("align"), Align, default=Align.AUTO)
-        self.__validate_attr("align", Align)
-
-        self.__valign = normalize_enum(
-            kwargs.get("vertical_align"), VerticalAlign, default=VerticalAlign.BASELINE
-        )
-
-        self.__decoration_line = normalize_enum(
-            kwargs.get("decoration_line"), DecorationLine, default=DecorationLine.NONE
-        )
-        self.__validate_attr("decoration_line", DecorationLine)
-
-        self.__font_size = normalize_enum(
-            kwargs.get("font_size"), FontSize, validate=False, default=FontSize.NONE
-        )
-        self.__validate_attr("font_size", (FontSize, str))
-
-        self.__font_style = normalize_enum(
-            kwargs.get("font_style"), FontStyle, default=FontStyle.NORMAL
-        )
-        self.__validate_attr("font_style", FontStyle)
-
-        self.__font_weight = normalize_enum(
-            kwargs.get("font_weight"), FontWeight, default=FontWeight.NORMAL
-        )
-        self.__validate_attr("font_weight", FontWeight)
-
-        self.__thousand_separator = _normalize_thousand_separator(
-            normalize_enum(
-                kwargs.get("thousand_separator"),
-                ThousandSeparator,
-                default=ThousandSeparator.NONE,
-                validate=False,
-            )
-        )
-        self.__validate_attr("thousand_separator", ThousandSeparator)
+        self.__update(initialize=True, **kwargs)
 
     def __repr__(self) -> str:
         items = []
@@ -293,6 +248,85 @@ class Style:
     def __ne__(self, other):
         equal = self.__eq__(other)
         return NotImplemented if equal is NotImplemented else not equal
+
+    def update(self, **kwargs) -> None:
+        """Update specified style attributes.
+        """
+        self.__update(initialize=False, **kwargs)
+
+    def __update(self, initialize: bool, **kwargs) -> None:
+        fg_color = kwargs.get("color")
+        if fg_color:
+            self.__fg_color = Color(fg_color)
+        elif initialize:
+            self.__fg_color = None  # type: ignore
+
+        bg_color = kwargs.get("bg_color")
+        if bg_color:
+            self.__bg_color = Color(bg_color)
+        elif initialize:
+            self.__bg_color = None  # type: ignore
+
+        padding = kwargs.get("padding")
+        if padding is not None:
+            self.__padding = padding
+        elif initialize:
+            self.__padding = None
+
+        align = kwargs.get("align")
+        if align:
+            self.__align = normalize_enum(align, Align, default=Align.AUTO)
+        elif initialize:
+            self.__align = Align.AUTO
+
+        valign = kwargs.get("vertical_align")
+        if valign:
+            self.__valign = normalize_enum(valign, VerticalAlign, default=VerticalAlign.BASELINE)
+        elif initialize:
+            self.__valign = VerticalAlign.BASELINE
+
+        decoration_line = kwargs.get("decoration_line")
+        if decoration_line:
+            self.__decoration_line = normalize_enum(
+                decoration_line, DecorationLine, default=DecorationLine.NONE
+            )
+        elif initialize:
+            self.__decoration_line = DecorationLine.NONE
+
+        font_size = kwargs.get("font_size")
+        if font_size:
+            self.__font_size = normalize_enum(
+                kwargs.get("font_size"), FontSize, validate=False, default=FontSize.NONE
+            )
+        elif initialize:
+            self.__font_size = FontSize.NONE
+        self.__validate_attr("font_size", (FontSize, str))
+
+        font_style = kwargs.get("font_style")
+        if font_style:
+            self.__font_style = normalize_enum(font_style, FontStyle, default=FontStyle.NORMAL)
+        elif initialize:
+            self.__font_style = FontStyle.NORMAL
+
+        font_weight = kwargs.get("font_weight")
+        if font_weight:
+            self.__font_weight = normalize_enum(font_weight, FontWeight, default=FontWeight.NORMAL)
+        elif initialize:
+            self.__font_weight = FontWeight.NORMAL
+
+        thousand_separator = kwargs.get("thousand_separator")
+        if thousand_separator:
+            self.__thousand_separator = _normalize_thousand_separator(
+                normalize_enum(
+                    thousand_separator,
+                    ThousandSeparator,
+                    default=ThousandSeparator.NONE,
+                    validate=False,
+                )
+            )
+        elif initialize:
+            self.__thousand_separator = ThousandSeparator.NONE
+        self.__validate_attr("thousand_separator", ThousandSeparator)
 
     def __validate_attr(self, attr_name: str, expected_type) -> None:
         value = getattr(self, attr_name)

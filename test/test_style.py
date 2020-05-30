@@ -1,3 +1,4 @@
+import copy
 import sys
 
 import pytest
@@ -205,3 +206,24 @@ class Test_Style_repr:
         print_test_result(expected=expected, actual=out)
 
         assert out == expected
+
+
+class Test_Style_update:
+    def test_normal(self):
+        lhs = Style(
+            align="left",
+            padding=1,
+            vertical_align="bottom",
+            color="red",
+            bg_color="#2f2f2f",
+            decoration_line="line-through",
+            font_size="tiny",
+            font_style="italic",
+            font_weight="bold",
+            thousand_separator=",",
+        )
+        rhs = copy.deepcopy(lhs)
+        rhs.update(color="black")
+
+        assert lhs.color != rhs.color
+        assert lhs.bg_color == rhs.bg_color
