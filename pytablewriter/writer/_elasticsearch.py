@@ -110,8 +110,9 @@ class ElasticsearchWriter(AbstractTableWriter):
 
     @table_name.setter
     def table_name(self, value) -> None:
+        from pathvalidate import ErrorReason, ValidationError
+
         from ..sanitizer import ElasticsearchIndexNameSanitizer
-        from pathvalidate import ValidationError, ErrorReason
 
         try:
             self._table_name = ElasticsearchIndexNameSanitizer(value).sanitize(replacement_text="_")

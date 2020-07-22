@@ -33,6 +33,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
     def __init__(self) -> None:
         import copy
+
         import dataproperty
 
         super().__init__()

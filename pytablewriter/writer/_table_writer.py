@@ -563,8 +563,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             pass
 
         try:
-            from _pytest.compat import CaptureIO
             from _pytest.capture import EncodedFile
+            from _pytest.compat import CaptureIO
 
             if isinstance(self.stream, (CaptureIO, EncodedFile)):
                 # avoid closing streams for pytest
