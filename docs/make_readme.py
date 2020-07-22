@@ -134,6 +134,7 @@ def main():
     maker.write_lines(["https://{:s}.rtfd.io/".format(PROJECT_NAME)])
 
     maker.write_file(maker.doc_page_root_dir_path.joinpath("related.rst"))
+    maker.write_file(maker.doc_page_root_dir_path.joinpath("sponsors.rst"))
 
     return 0
 
