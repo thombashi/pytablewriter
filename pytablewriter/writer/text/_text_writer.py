@@ -2,7 +2,7 @@ import enum
 import io
 import sys
 from itertools import chain
-from typing import List, Optional, Sequence, cast
+from typing import IO, List, Optional, Sequence, Union, cast
 
 import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
@@ -195,7 +195,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def dump(self, output, close_after_write: bool = True, **kwargs) -> None:
+    def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs) -> None:
         """Write data to the output with tabular format.
 
         Args:
@@ -208,16 +208,16 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         """
 
         try:
-            output.write
+            output.write  # type: ignore
             self.stream = output
         except AttributeError:
-            self.stream = open(output, "w", encoding="utf-8")
+            self.stream = open(output, "w", encoding="utf-8")  # type: ignore
 
         try:
             self.write_table(**kwargs)
         finally:
             if close_after_write:
-                self.stream.close()
+                self.stream.close()  # type: ignore
                 self.stream = sys.stdout
 
     def dumps(self, **kwargs) -> str:
