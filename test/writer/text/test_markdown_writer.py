@@ -817,6 +817,23 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.search(out)
         assert regexp_ansi_escape.sub("", out) == expected
 
+    def test_normal_enable_ansi_escape(self):
+        writer = table_writer_class()
+        writer.column_styles = [
+            Style(font_weight="bold"),
+            Style(decoration_line="line-through"),
+        ]
+        writer.headers = ["w/ bold", "w/ line through"]
+        writer.value_matrix = [["hoge", "foo"]]
+
+        writer.enable_ansi_escape = True
+        out = writer.dumps()
+        assert regexp_ansi_escape.search(out)
+
+        writer.enable_ansi_escape = False
+        out = writer.dumps()
+        assert regexp_ansi_escape.search(out) is None
+
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
         writer.from_tabledata(TableData("", headers, value_matrix))

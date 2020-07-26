@@ -72,7 +72,7 @@ class NullStyler(AbstractStyler):
 
 class TextStyler(AbstractStyler):
     def apply_terminal_style(self, value: str, style: Style) -> str:
-        if not self._writer.colorize_terminal:
+        if not self._writer.colorize_terminal or not self._writer.enable_ansi_escape:
             return value
 
         ansi_styles = []

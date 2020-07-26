@@ -398,6 +398,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._styler = self._create_styler(self)
         self.style_filter_kwargs = {}  # type: Dict[str, Any]
         self.colorize_terminal = True
+        self.__enable_ansi_escape = True
 
         self.max_workers = 1
 
@@ -484,6 +485,18 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         else:
             self._dp_extractor.format_flags_list = []
 
+        self.__clear_preprocess()
+
+    @property
+    def enable_ansi_escape(self) -> bool:
+        return self.__enable_ansi_escape
+
+    @enable_ansi_escape.setter
+    def enable_ansi_escape(self, value: bool) -> None:
+        if self.__enable_ansi_escape == value:
+            return
+
+        self.__enable_ansi_escape = value
         self.__clear_preprocess()
 
     def add_style_filter(self, style_filter: StyleFilterFunc) -> None:
