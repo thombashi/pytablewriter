@@ -825,6 +825,7 @@ class Test_MarkdownTableWriter_write_table:
         ]
         writer.headers = ["w/ bold", "w/ line through"]
         writer.value_matrix = [["hoge", "foo"]]
+        writer.colorize_terminal = True
 
         writer.enable_ansi_escape = True
         out = writer.dumps()
@@ -833,6 +834,11 @@ class Test_MarkdownTableWriter_write_table:
         writer.enable_ansi_escape = False
         out = writer.dumps()
         assert regexp_ansi_escape.search(out) is None
+
+        writer.colorize_terminal = False
+        writer.enable_ansi_escape = True
+        out = writer.dumps()
+        assert regexp_ansi_escape.search(out)
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()
@@ -898,7 +904,7 @@ class Test_MarkdownTableWriter_write_table:
 
     def test_normal_flavor(self):
         writer = table_writer_class()
-        writer.colorize_terminal = False
+        writer.enable_ansi_escape = False
         writer.column_styles = [
             None,
             Style(decoration_line="strike"),

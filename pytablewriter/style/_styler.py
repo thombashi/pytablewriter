@@ -72,7 +72,7 @@ class NullStyler(AbstractStyler):
 
 class TextStyler(AbstractStyler):
     def apply_terminal_style(self, value: str, style: Style) -> str:
-        if not self._writer.colorize_terminal or not self._writer.enable_ansi_escape:
+        if not self._writer.enable_ansi_escape:
             return value
 
         ansi_styles = []
@@ -85,7 +85,10 @@ class TextStyler(AbstractStyler):
         if style.font_weight == FontWeight.BOLD:
             ansi_styles.append("bold")
 
-        return tcolor(value, color=style.color, bg_color=style.bg_color, styles=ansi_styles)
+        if self._writer.colorize_terminal:
+            return tcolor(value, color=style.color, bg_color=style.bg_color, styles=ansi_styles)
+
+        return tcolor(value, styles=ansi_styles)
 
     def __get_align_format(self, style: Style) -> str:
         align_char = get_align_char(style.align)
