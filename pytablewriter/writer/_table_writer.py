@@ -98,7 +98,16 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         :type: bool
         :value: True
 
-        [Only for text format writers] If |True|, colorize text with |Style| for terminals.
+        [Only for text format writers] [experimental]
+        If |True|, colorize text outputs with |Style|.
+
+    .. py:attribute:: enable_ansi_escape
+        :type: bool
+        :value: True
+
+        [Only for text format writers]
+        If |True|, applies ANSI escape sequences to terminal's text outputs
+        with |Style|.
 
     .. py:attribute:: write_callback
 

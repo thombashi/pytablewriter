@@ -198,11 +198,15 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs) -> None:
         """Write data to the output with tabular format.
 
-        Args:
-            output (file descriptor or str):
-                file descriptor or path to the output file.
+        During the executing this method,
+        :py:attr:`~pytablewriter.writer._table_writer.AbstractTableWriter.enable_ansi_escape`
+        attribute will be temporarily set to |False|.
 
-            close_after_write (bool, optional):
+        Args:
+            output:
+                The value must either an output stream or a path to an output file.
+
+            close_after_write:
                 Close the output after write.
                 Defaults to |True|.
         """
