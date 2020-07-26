@@ -412,6 +412,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         writer.headers = self.headers
         writer.value_matrix = self.value_matrix
         writer.column_styles = self.column_styles
+        writer.colorize_terminal = self.colorize_terminal
+        writer.enable_ansi_escape = self.enable_ansi_escape
 
         return writer.dumps()
 
