@@ -397,7 +397,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._style_filters = []  # type: List[StyleFilterFunc]
         self._styler = self._create_styler(self)
         self.style_filter_kwargs = {}  # type: Dict[str, Any]
-        self.colorize_terminal = True
+        self.__colorize_terminal = True
         self.__enable_ansi_escape = True
 
         self.max_workers = 1
@@ -487,6 +487,18 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         else:
             self._dp_extractor.format_flags_list = []
 
+        self.__clear_preprocess()
+
+    @property
+    def colorize_terminal(self) -> bool:
+        return self.__colorize_terminal
+
+    @colorize_terminal.setter
+    def colorize_terminal(self, value: bool) -> None:
+        if self.__colorize_terminal == value:
+            return
+
+        self.__colorize_terminal = value
         self.__clear_preprocess()
 
     @property

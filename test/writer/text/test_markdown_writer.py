@@ -817,6 +817,23 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.search(out)
         assert regexp_ansi_escape.sub("", out) == expected
 
+    def test_normal_colorize_terminal(self):
+        writer = table_writer_class()
+        writer.column_styles = [
+            Style(color="red"),
+            Style(bg_color="white"),
+        ]
+        writer.headers = ["fg color", "bg color"]
+        writer.value_matrix = [["hoge", "foo"]]
+
+        writer.colorize_terminal = True
+        out = writer.dumps()
+        assert regexp_ansi_escape.search(out)
+
+        writer.colorize_terminal = False
+        out = writer.dumps()
+        assert regexp_ansi_escape.search(out) is None
+
     def test_normal_enable_ansi_escape(self):
         writer = table_writer_class()
         writer.column_styles = [
