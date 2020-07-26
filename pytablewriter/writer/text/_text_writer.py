@@ -214,11 +214,15 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             self.stream = open(output, "w", encoding="utf-8")  # type: ignore
 
         try:
+            stash = self.enable_ansi_escape
+            self.enable_ansi_escape = False
             self.write_table(**kwargs)
         finally:
             if close_after_write:
                 self.stream.close()  # type: ignore
                 self.stream = sys.stdout
+
+            self.enable_ansi_escape = stash
 
     def dumps(self, **kwargs) -> str:
         """Get rendered tabular text from the table data.

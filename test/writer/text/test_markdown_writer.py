@@ -1107,6 +1107,10 @@ class Test_MarkdownTableWriter_dump:
         writer = table_writer_class()
         writer.headers = ["a", "b"]
         writer.value_matrix = [["foo", "bar"]]
+        writer.column_styles = [
+            Style(color="red"),
+            Style(bg_color="white"),
+        ]
         writer.dump(test_filepath)
 
         expected = dedent(
