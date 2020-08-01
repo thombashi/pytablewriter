@@ -112,6 +112,7 @@ setuptools.setup(
         "es5": ["elasticsearch>=5.5.3,<6"],
         "es6": ["elasticsearch>=6.3.1,<7"],
         "es7": es7_requires,
+        "es": es7_requires,
         "html": html_requires,
         "from": from_requires,
         "logging": logging_requires,
