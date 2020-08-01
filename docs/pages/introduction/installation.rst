@@ -10,7 +10,7 @@ Installation: pip
 Some of the formats require additional dependency packages, you can install these packages as follows:
 
 - Elasticsearch
-    - ``pip install pytablewriter[es7]`` or ``pip install pytablewriter[es6]``
+    - ``pip install pytablewriter[es]``
 - Excel
     - ``pip install pytablewriter[excel]``
 - HTML
@@ -33,31 +33,26 @@ Installation: apt
 
 Dependencies
 ============
-Python 3.5+
+- Python 3.5+
+- `Python package dependencies (automatically installed) <https://github.com/thombashi/pytablewriter/network/dependencies>`__
 
-- `DataProperty <https://github.com/thombashi/DataProperty>`__
-- `mbstrdecoder <https://github.com/thombashi/mbstrdecoder>`__
-- `msgfy <https://github.com/thombashi/msgfy>`__
-- `pathvalidate <https://github.com/thombashi/pathvalidate>`__
-- `tabledata <https://github.com/thombashi/tabledata>`__
-- `tcolorpy <https://github.com/thombashi/tcolorpy>`__
-- `typepy <https://github.com/thombashi/typepy>`__
 
 Optional dependencies
 ---------------------
-- `loguru <https://github.com/Delgan/loguru>`__
-    - Used for logging if the package installed
-- `pytablereader <https://github.com/thombashi/pytablereader>`__
-- Elasticsearch:
+- ``logging`` extras
+    - `loguru <https://github.com/Delgan/loguru>`__: Used for logging if the package installed
+- ``from`` extras
+    - `pytablereader <https://github.com/thombashi/pytablereader>`__
+- ``es`` extra
     - `elasticsearch <https://github.com/elastic/elasticsearch-py>`__
-- Excel
+- ``excel`` extras
     - `xlwt <http://www.python-excel.org/>`__
     - `XlsxWriter <https://github.com/jmcnamara/XlsxWriter>`__
-- HTML
+- ``html`` extras
     - `dominate <https://github.com/Knio/dominate/>`__
-- SQLite
+- ``sqlite`` extras
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
-- TOML
+- ``toml`` extras
     - `toml <https://github.com/uiri/toml>`__
 
 

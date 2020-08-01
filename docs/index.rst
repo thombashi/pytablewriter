@@ -18,9 +18,6 @@ Welcome to pytablewriter's documentation!
    pages/examples/index
    pages/reference/index
    pages/links
-   pages/sponsors
-   pages/related
-   pages/genindex
 
 
 Indices and tables
