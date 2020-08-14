@@ -65,3 +65,8 @@ exclude_lines = [
 omit = [
     'pytablewriter/_typing.py',
 ]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]
