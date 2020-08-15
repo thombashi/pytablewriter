@@ -26,6 +26,7 @@ from typepy import String, Typecode, extract_typepy_from_dtype
 from .._logger import WriterLogger
 from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
 from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
+from ._common import Theme
 from ._interface import TableWriterInterface
 
 
@@ -408,6 +409,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.style_filter_kwargs = {}  # type: Dict[str, Any]
         self.__colorize_terminal = True
         self.__enable_ansi_escape = True
+        self.__loaded_themes = self.__load_theme_plugin()
 
         self.max_workers = 1
 
@@ -578,6 +580,40 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return
 
         raise ValueError("column must be an int or string: actual={}".format(column))
+
+    def set_theme(self, theme: str, **kwargs) -> None:
+        """Set style filters for a theme.
+
+        Args:
+            theme (str):
+                Name of the theme. pytablewriter theme plugin must be installed
+                corresponding to the theme name.
+
+        Raises:
+            RuntimeError: Raised when a theme plugin does not installed.
+        """
+
+        theme_plugin = "pytablewriter_{}_theme".format(theme.strip().lower())
+
+        if theme_plugin not in self.__loaded_themes:
+            err_msgs = ["{} theme not installed.".format(theme_plugin)]
+
+            if theme_plugin in Theme.KNOWN_PLUGINS:
+                err_msgs.append("try 'pip install {}'".format(theme_plugin))
+
+            raise RuntimeError(" ".join(err_msgs))
+
+        _theme = self.__loaded_themes[theme_plugin]
+
+        if Theme.Key.STYLE_FILTER in _theme:
+            self.add_style_filter(cast(StyleFilterFunc, _theme[Theme.Key.STYLE_FILTER]))
+
+        if Theme.Key.COL_SEPARATOR_STYLE_FILTER in _theme:
+            self.add_col_separator_style_filter(
+                cast(ColSeparatorStyleFilterFunc, _theme[Theme.Key.COL_SEPARATOR_STYLE_FILTER])
+            )
+
+        self.style_filter_kwargs.update(**kwargs)
 
     def close(self) -> None:
         """
@@ -990,6 +1026,31 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return default_align
 
         return align
+
+    def __load_theme_plugin(
+        self,
+    ) -> Dict[str, Dict[str, Union[StyleFilterFunc, ColSeparatorStyleFilterFunc]]]:
+
+        import importlib
+        import pkgutil
+        import re
+
+        plugin_regexp = re.compile("^pytablewriter_.+_theme", re.IGNORECASE)
+        discovered_plugins = {
+            name: importlib.import_module(name)
+            for finder, name, ispkg in pkgutil.iter_modules()
+            if plugin_regexp.search(name) is not None
+        }
+
+        self._logger.logger.debug("discovered_plugins: {}".format(list(discovered_plugins)))
+
+        return {
+            theme: {
+                Theme.Key.STYLE_FILTER: plugin.style_filter,  # type: ignore
+                Theme.Key.COL_SEPARATOR_STYLE_FILTER: plugin.col_separator_style_filter,  # type: ignore
+            }
+            for theme, plugin in discovered_plugins.items()
+        }
 
     def __retrieve_align_from_data(
         self, col_dp: ColumnDataProperty, value_dp: DataProperty

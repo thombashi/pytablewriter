@@ -729,6 +729,12 @@ class Test_MarkdownTableWriter_write_table:
 
         assert output == expected
 
+    def test_except_set_theme(self):
+        writer = table_writer_class()
+
+        with pytest.raises(RuntimeError):
+            writer.set_theme("not_existing_theme")
+
     def test_normal_set_style(self):
         writer = table_writer_class()
         writer.table_name = "set style method"
