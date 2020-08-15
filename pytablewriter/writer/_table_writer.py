@@ -600,13 +600,29 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         try:
             from _pytest.capture import EncodedFile
-            from _pytest.compat import CaptureIO
 
-            if isinstance(self.stream, (CaptureIO, EncodedFile)):
+            if isinstance(self.stream, EncodedFile):
                 # avoid closing streams for pytest
                 return
         except ImportError:
             pass
+
+        try:
+            from _pytest.capture import CaptureIO
+
+            if isinstance(self.stream, CaptureIO):
+                # avoid closing streams for pytest
+                return
+        except ImportError:
+            try:
+                # for pytest 5.4.1 or older versions
+                from _pytest.compat import CaptureIO  # type: ignore
+
+                if isinstance(self.stream, CaptureIO):
+                    # avoid closing streams for pytest
+                    return
+            except ImportError:
+                pass
 
         try:
             from ipykernel.iostream import OutStream
