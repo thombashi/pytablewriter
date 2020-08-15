@@ -48,7 +48,7 @@ def set_logger(is_enable: bool, propagation_depth: int = 1) -> None:
 
 def set_log_level(log_level):
     # deprecated
-    return
+    logger.disable(MODULE_NAME)
 
 
 class WriterLogger:
