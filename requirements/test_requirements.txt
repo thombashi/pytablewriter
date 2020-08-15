@@ -1,5 +1,6 @@
 pytablereader[excel,sqlite]>=0.29
 pytest
+pytest-discord>=0.0.3
 pytest-md-report>=0.1
 sqliteschema
 tablib
