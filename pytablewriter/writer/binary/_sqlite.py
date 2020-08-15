@@ -71,7 +71,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
             self.close()
 
-        self._stream = SimpleSQLite(file_path, "w")
+        self._stream = SimpleSQLite(file_path, "w", max_workers=self.max_workers)
 
     def dump(self, output: str, close_after_write: bool = True, **kwargs) -> None:
         """Write data to the SQLite database file.
