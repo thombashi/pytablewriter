@@ -14,3 +14,4 @@ from ._styler import (
     StylerInterface,
     TextStyler,
 )
+from ._theme import list_themes

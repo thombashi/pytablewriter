@@ -2,7 +2,7 @@ import importlib
 import pkgutil
 import re
 from collections import namedtuple
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Sequence
 
 from .._logger import logger
 from ..style import Cell, Style
@@ -30,6 +30,10 @@ class ColSeparatorStyleFilterFunc(Protocol):
         self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Any
     ) -> Optional[Style]:
         ...
+
+
+def list_themes() -> Sequence[str]:
+    return list(load_ptw_plugins())
 
 
 def load_ptw_plugins() -> Dict[str, Theme]:
