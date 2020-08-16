@@ -52,6 +52,8 @@ Optional dependencies
     - `dominate <https://github.com/Knio/dominate/>`__
 - ``sqlite`` extras
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
+- ``theme`` extras
+    - `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
 - ``toml`` extras
     - `toml <https://github.com/uiri/toml>`__
 
