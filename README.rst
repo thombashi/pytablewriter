@@ -122,9 +122,9 @@ Write a Markdown table
         |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
 
 :Rendering Result:
-    .. figure:: ss/markdown.png
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/table_format/text/ss/markdown.png
        :scale: 80%
-       :alt: markdown_ss
+       :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/table_format/text/ss/markdown.png
 
        Rendered markdown at GitHub
 
@@ -277,9 +277,9 @@ Write a table to an Excel sheet
             main()
 
 :Output:
-    .. figure:: ss/excel_single.png
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/table_format/binary/spreadsheet/ss/excel_single.png
        :scale: 100%
-       :alt: excel_single
+       :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/table_format/binary/spreadsheet/ss/excel_single.png
 
        Output excel file (``sample_single.xlsx``)
 
@@ -563,9 +563,9 @@ Style filter
 ~~~~~~~~~~~~~~
 Example:
 
-.. figure:: ss/color_filter.png
+.. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/ss/color_filter.png
     :scale: 60%
-    :alt: true_color_and_styles
+    :alt: https://github.com/thombashi/pytablewriter/blob/master/ss/color_filter.png
 
 Make tables for specific applications
 ---------------------------------------
@@ -573,9 +573,9 @@ Render a table on Jupyter Notebook
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
 
-.. figure:: ss/jupyter_notebook.png
+.. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/jupyter_notebook/ss/jupyter_notebook.png
    :scale: 100%
-   :alt: jupyter_notebook_table
+   :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/jupyter_notebook/ss/jupyter_notebook.png
 
    Table formatting for Jupyter Notebook
 
@@ -608,9 +608,9 @@ Multibyte characters also properly padded and aligned.
             main()
 
 :Output:
-    .. figure:: ss/multi_byte_char.png
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/multibyte/ss/multi_byte_char.png
        :scale: 100%
-       :alt: multi_byte_char_table
+       :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/multibyte/ss/multi_byte_char.png
 
        Output of multi-byte character table
 

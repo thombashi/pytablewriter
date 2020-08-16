@@ -75,9 +75,10 @@ def write_examples(maker: ReadmeMaker) -> None:
         [
             "Example:",
             "",
-            ".. figure:: ss/color_filter.png",
+            ".. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/ss/color_filter.png",
             "    :scale: 60%",
-            "    :alt: true_color_and_styles",
+            "    :alt: https://github.com/thombashi/pytablewriter/blob/master/ss/color_filter.png",
+            
         ]
     )
 
