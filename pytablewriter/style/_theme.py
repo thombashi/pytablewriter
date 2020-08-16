@@ -1,3 +1,6 @@
+import importlib
+import pkgutil
+import re
 from collections import namedtuple
 from typing import Any, Dict, Optional
 
@@ -30,11 +33,6 @@ class ColSeparatorStyleFilterFunc(Protocol):
 
 
 def load_plugin_name() -> Dict[str, Theme]:
-
-    import importlib
-    import pkgutil
-    import re
-
     plugin_regexp = re.compile("^pytablewriter_.+_theme", re.IGNORECASE)
     discovered_plugins = {
         name: importlib.import_module(name)
