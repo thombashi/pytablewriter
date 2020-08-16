@@ -20,8 +20,8 @@
             main()
 
 :Output:
-    .. figure:: ss/excel_single.png
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/table_format/binary/spreadsheet/ss/excel_single.png
        :scale: 100%
-       :alt: excel_single
+       :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/table_format/binary/spreadsheet/ss/excel_single.png
 
        Output excel file (``sample_single.xlsx``)

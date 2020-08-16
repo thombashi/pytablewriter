@@ -32,8 +32,8 @@
         |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
 
 :Rendering Result:
-    .. figure:: ss/markdown.png
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/table_format/text/ss/markdown.png
        :scale: 80%
-       :alt: markdown_ss
+       :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/table_format/text/ss/markdown.png
 
        Rendered markdown at GitHub

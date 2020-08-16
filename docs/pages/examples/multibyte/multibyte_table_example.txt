@@ -24,8 +24,8 @@ Multibyte characters also properly padded and aligned.
             main()
 
 :Output:
-    .. figure:: ss/multi_byte_char.png
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/multibyte/ss/multi_byte_char.png
        :scale: 100%
-       :alt: multi_byte_char_table
+       :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/multibyte/ss/multi_byte_char.png
 
        Output of multi-byte character table
