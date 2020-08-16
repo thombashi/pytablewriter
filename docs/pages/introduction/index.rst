@@ -21,3 +21,6 @@ Summary
 
 
 .. include:: installation.rst
+
+
+.. include:: dependencies.rst
