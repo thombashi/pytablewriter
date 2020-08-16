@@ -52,7 +52,7 @@ install:
   - travis_retry bash -x .travis/install.sh
 
 script:
-  - bash -x .travis/run_test.sh
+  - tox
 
 notifications:
   slack:
