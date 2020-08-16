@@ -104,3 +104,4 @@ class Test_SpaceAlignedTableWriter_write_table:
         writer.value_matrix = value
 
         assert writer.dumps() == ""
+        assert str(writer) == ""

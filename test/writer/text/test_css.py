@@ -330,6 +330,7 @@ class Test_CssTableWriter_write_table:
         writer.value_matrix = value
 
         assert writer.dumps() == ""
+        assert str(writer) == ""
 
 
 class Test_CssTableWriter_write_table_iter:

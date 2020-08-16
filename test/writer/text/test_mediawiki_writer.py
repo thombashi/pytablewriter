@@ -268,6 +268,7 @@ class Test_MediaWikiTableWriter_write_table:
 
         assert out == expected
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],

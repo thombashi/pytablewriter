@@ -49,6 +49,7 @@ class Test_NullTableWriter_dumps:
         writer = table_writer_class()
 
         assert writer.dumps() == ""
+        assert str(writer) == ""
 
 
 class Test_NullTableWriter_write_table_iter:

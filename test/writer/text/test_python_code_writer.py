@@ -182,6 +182,7 @@ class Test_PythonCodeTableWriter_write_table:
         writer.value_matrix = value
 
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],

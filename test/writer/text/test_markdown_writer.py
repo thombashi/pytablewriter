@@ -417,6 +417,35 @@ class Test_MarkdownTableWriter_write_new_line:
         assert out == "\n"
 
 
+class Test_MarkdownTableWriter_repr:
+    def test_normal_empty(self):
+        writer = table_writer_class()
+        assert str(writer).strip() == ""
+
+    def test_normal_ansi(self):
+        writer = table_writer_class()
+        writer.column_styles = [
+            Style(decoration_line="strike"),
+            Style(decoration_line="line-through"),
+        ]
+        writer.headers = ["w/ strike", "w/ line through"]
+        writer.value_matrix = [["strike", "line-through"]]
+
+        expected = dedent(
+            """\
+            |w/ strike|w/ line through|
+            |---------|---------------|
+            |strike   |line-through   |
+            """
+        )
+
+        out = str(writer)
+        print_test_result(expected=expected, actual=out)
+
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
+
+
 class Test_MarkdownTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_formatting_float", "expected"],
@@ -447,6 +476,7 @@ class Test_MarkdownTableWriter_write_table:
 
         assert out == expected
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
     def test_normal_single_tabledata(self, capsys):
         writer = table_writer_class()

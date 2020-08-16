@@ -255,6 +255,7 @@ class Test_RstGridTableWriter_write_table:
 
         assert out == expected
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
     def test_normal_margin_1(self, capsys):
         writer = table_writer_class()

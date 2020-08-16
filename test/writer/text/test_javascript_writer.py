@@ -289,6 +289,7 @@ class Test_JavaScriptTableWriter_type_hint:
 
         assert out == expected
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
 
 class Test_JavaScriptTableWriter_write_table:

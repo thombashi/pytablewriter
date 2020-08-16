@@ -94,3 +94,4 @@ class Test_TsvTableWriter_write_table:
         writer.value_matrix = value
 
         assert writer.dumps() == ""
+        assert str(writer) == ""

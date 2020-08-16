@@ -154,6 +154,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._col_separator_style_filters = []  # type: List[ColSeparatorStyleFilterFunc]
 
+    def __repr__(self) -> str:
+        return self.dumps()
+
     def _init_cross_point_maps(self) -> None:
         self.__cross_point_maps = {
             RowType.OPENING: self.char_opening_row_cross_point,

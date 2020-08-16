@@ -10,6 +10,9 @@ from .text._interface import IndentationInterface, TextWriterInterface
 class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInterface):
     FORMAT_NAME = "null"
 
+    def __repr__(self) -> str:
+        return self.dumps()
+
     @property
     def format_name(self) -> str:
         return self.FORMAT_NAME

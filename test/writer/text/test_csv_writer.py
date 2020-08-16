@@ -216,6 +216,7 @@ class Test_CsvTableWriter_write_table:
 
         assert out == expected
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
     def test_normal_escape_formula_injection(self, capsys):
         writer = table_writer_class()
@@ -241,6 +242,7 @@ class Test_CsvTableWriter_write_table:
         writer.value_matrix = value
 
         assert writer.dumps() == ""
+        assert str(writer) == ""
 
 
 class Test_CsvTableWriter_write_table_iter:

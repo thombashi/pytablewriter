@@ -113,6 +113,7 @@ class Test_LatexMatrixWriter_write_table:
 
         assert out == expected
         assert writer.dumps() == expected
+        assert str(writer) == expected
 
     def test_normal_styles(self):
         writer = table_writer_class()
