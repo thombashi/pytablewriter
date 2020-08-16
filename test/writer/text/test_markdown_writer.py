@@ -9,7 +9,7 @@ from typing import Optional
 
 import pytest
 from tabledata import TableData
-from termcolor import colored
+from tcolorpy import tcolor
 
 import pytablewriter as ptw
 from pytablewriter.style import Align, Cell, FontSize, Style, ThousandSeparator
@@ -800,8 +800,18 @@ class Test_MarkdownTableWriter_write_table:
         writer.table_name = "ANCI escape sequence"
         writer.headers = ["colored_i", "colored_f", "colored_s", "wo_anci"]
         writer.value_matrix = [
-            [colored(111, "red"), colored(1.1, "green"), colored("abc", "blue"), "abc"],
-            [colored(0, "red"), colored(0.12, "green"), colored("abcdef", "blue"), "abcdef"],
+            [
+                tcolor("111", color="red"),
+                tcolor("1.1", color="green"),
+                tcolor("abc", color="blue"),
+                "abc",
+            ],
+            [
+                tcolor("0", color="red"),
+                tcolor("0.12", color="green"),
+                tcolor("abcdef", color="blue"),
+                "abcdef",
+            ],
         ]
         writer.write_table()
 

@@ -29,7 +29,6 @@ known_third_party = [
     'sphinx_rtd_theme',
     'sqliteschema',
     'tabledata',
-    'termcolor',
     'typepy',
     'typing_extensions',
     'yaml',

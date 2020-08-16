@@ -4,4 +4,3 @@ pytest-discord>=0.0.3
 pytest-md-report>=0.1
 sqliteschema
 tablib
-termcolor
