@@ -52,6 +52,7 @@ from_requires = ["pytablereader>=0.30.0,<2"]
 html_requires = ["dominate>=2.1.5,<3"]
 logging_requires = ["loguru>=0.4.1,<1"]
 sqlite_requires = ["SimpleSQLite>=1.1.3,<2"]
+theme_requires = ["pytablewriter-altrow-theme>=0.0.1,<1"]
 toml_requires = ["toml>=0.9.3,<1"]
 yaml_requires = ["PyYAML>=3.11,<6"]
 optional_requires = ["simplejson>=3.8.1,<4"]
@@ -62,6 +63,7 @@ all_requires = (
     + html_requires
     + logging_requires
     + sqlite_requires
+    + theme_requires
     + toml_requires
     + yaml_requires
     + optional_requires
@@ -118,6 +120,7 @@ setuptools.setup(
         "logging": logging_requires,
         "sqlite": sqlite_requires,
         "test": tests_requires,
+        "theme": theme_requires,
         "toml": toml_requires,
         "yaml": yaml_requires,
     },
