@@ -71,16 +71,7 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_file(examples_root.joinpath("style", "column_style_example.txt"))
 
     maker.write_chapter("Style filter")
-    maker.write_lines(
-        [
-            "Example:",
-            "",
-            ".. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/ss/color_filter.png",
-            "    :scale: 60%",
-            "    :alt: https://github.com/thombashi/pytablewriter/blob/master/ss/color_filter.png",
-            
-        ]
-    )
+    maker.write_file(examples_root.joinpath("style", "theme.txt"))
 
     maker.set_indent_level(1)
     maker.write_chapter("Make tables for specific applications")

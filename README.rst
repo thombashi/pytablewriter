@@ -561,11 +561,31 @@ You can also set ``Style`` to a specific column with index or header by using ``
 
 Style filter
 ~~~~~~~~~~~~~~
-Example:
+``set_theme`` method can set predefined style filters.
+The following command will install themes:
 
-.. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/ss/color_filter.png
-    :scale: 60%
-    :alt: https://github.com/thombashi/pytablewriter/blob/master/ss/color_filter.png
+::
+
+    pip install pytablewriter[theme]
+
+``altrow`` theme will colored rows alternatively:
+
+:Sample Code:
+    .. code-block:: python
+
+        writer = TableWriterFactory.create_from_format_name("md")
+        writer.headers = ["INT", "STR"]
+        writer.value_matrix = [[1, "hoge"], [2, "foo"], [3, "bar"]]
+        writer.margin = 1
+
+        writer.set_theme("altrow")
+
+        writer.write_table()
+
+:Output:
+    .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter-altrow-theme@master/ss/ptw-altrow-theme_example_default.png
+       :scale: 100%
+       :alt: https://github.com/thombashi/pytablewriter-altrow-theme/blob/master/ss/ptw-altrow-theme_example_default.png
 
 Make tables for specific applications
 ---------------------------------------
@@ -693,6 +713,8 @@ Optional dependencies
     - `dominate <https://github.com/Knio/dominate/>`__
 - ``sqlite`` extras
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
+- ``theme`` extras
+    - `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
 - ``toml`` extras
     - `toml <https://github.com/uiri/toml>`__
 
