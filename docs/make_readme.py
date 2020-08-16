@@ -116,10 +116,11 @@ def main():
     maker.write_introduction_file("summary.txt")
     maker.write_introduction_file("badges.txt")
     maker.write_introduction_file("feature.txt")
+    maker.write_introduction_file("installation.rst")
 
     write_examples(maker)
 
-    maker.write_introduction_file("installation.rst")
+    maker.write_introduction_file("dependencies.rst")
 
     maker.set_indent_level(0)
     maker.write_chapter("Documentation")

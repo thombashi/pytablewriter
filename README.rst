@@ -10,6 +10,10 @@ Summary
     :target: https://badge.fury.io/py/pytablewriter
     :alt: PyPI package version
 
+.. image:: https://anaconda.org/conda-forge/pytablewriter/badges/version.svg
+    :target: https://anaconda.org/conda-forge/pytablewriter
+    :alt: conda-forge package version
+
 .. image:: https://img.shields.io/pypi/pyversions/pytablewriter.svg
     :target: https://pypi.org/project/pytablewriter/
     :alt: Supported Python versions
@@ -82,6 +86,44 @@ Features
     - etc.
 - Multibyte character support
 - ANSI color support
+
+Installation
+============
+
+Installation: pip
+------------------------------
+::
+
+    pip install pytablewriter
+
+Some of the formats require additional dependency packages, you can install these packages as follows:
+
+- Elasticsearch
+    - ``pip install pytablewriter[es]``
+- Excel
+    - ``pip install pytablewriter[excel]``
+- HTML
+    - ``pip install pytablewriter[html]``
+- SQLite
+    - ``pip install pytablewriter[sqlite]``
+- TOML
+    - ``pip install pytablewriter[toml]``
+- Install all of the optioanal dependencies
+    - ``pip install pytablewriter[all]``
+
+Installation: conda
+------------------------------
+::
+
+    conda install -c conda-forge pytablewriter
+
+Installation: apt
+------------------------------
+::
+
+    sudo add-apt-repository ppa:thombashi/ppa
+    sudo apt update
+    sudo apt install python3-pytablewriter
 
 Examples
 ==========
@@ -659,39 +701,6 @@ For more information
 More examples are available at 
 https://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 
-Installation
-============
-
-Installation: pip
-------------------------------
-::
-
-    pip install pytablewriter
-
-Some of the formats require additional dependency packages, you can install these packages as follows:
-
-- Elasticsearch
-    - ``pip install pytablewriter[es]``
-- Excel
-    - ``pip install pytablewriter[excel]``
-- HTML
-    - ``pip install pytablewriter[html]``
-- SQLite
-    - ``pip install pytablewriter[sqlite]``
-- TOML
-    - ``pip install pytablewriter[toml]``
-- Install all of the optioanal dependencies
-    - ``pip install pytablewriter[all]``
-
-Installation: apt
-------------------------------
-::
-
-    sudo add-apt-repository ppa:thombashi/ppa
-    sudo apt update
-    sudo apt install python3-pytablewriter
-
-
 Dependencies
 ============
 - Python 3.5+
@@ -717,8 +726,6 @@ Optional dependencies
     - `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
 - ``toml`` extras
     - `toml <https://github.com/uiri/toml>`__
-
-
 
 Documentation
 ===============
