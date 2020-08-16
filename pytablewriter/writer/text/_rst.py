@@ -5,6 +5,7 @@ import dataproperty
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
 
+from ...error import EmptyTableDataError
 from ...style import ReStructuredTextStyler, StylerInterface
 from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
@@ -47,7 +48,13 @@ class RstTableWriter(IndentationTextTableWriter):
     def write_table(self, **kwargs) -> None:
         with self._logger:
             self._write_line(self._get_table_directive())
-            self._verify_property()
+
+            try:
+                self._verify_property()
+            except EmptyTableDataError:
+                self._logger.logger.debug("no tabular data found")
+                return
+
             self._write_table(**kwargs)
             if self.is_write_null_line_after_table:
                 self.write_null_line()
@@ -103,8 +110,6 @@ class RstCsvTableWriter(RstTableWriter):
         """
         |write_table| with reStructuredText CSV table format.
 
-        :raises pytablewriter.EmptyTableDataError:
-            If the |headers| and the |value_matrix| is empty.
         :Example:
             :ref:`example-rst-csv-table-writer`
 

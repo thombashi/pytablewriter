@@ -4,7 +4,6 @@
 
 import collections
 import datetime
-import itertools
 from textwrap import dedent
 
 import pytest
@@ -201,6 +200,15 @@ normal_test_data_list = [
             """
         ),
     ),
+    Data(
+        table="empty",
+        indent=0,
+        header=[],
+        value=[],
+        is_write_header=False,
+        is_dti_fmt=False,
+        expected="",
+    ),
 ]
 
 exception_test_data_list = [
@@ -213,17 +221,6 @@ exception_test_data_list = [
         is_dti_fmt=True,
         expected=pytablewriter.EmptyTableNameError,
     )
-] + [
-    Data(
-        table="dummy",
-        indent=0,
-        header=header,
-        value=value,
-        is_write_header=True,
-        is_dti_fmt=True,
-        expected=pytablewriter.EmptyTableDataError,
-    )
-    for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
 table_writer_class = pytablewriter.JavaScriptTableWriter

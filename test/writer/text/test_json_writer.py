@@ -59,7 +59,7 @@ normal_test_data_list = [
         """
         ),
     ),
-    Data(table="", header=headers, value=None, expected=json.loads("[]")),
+    Data(table="", header=headers, value=None, expected="[\n\n]\n"),
     Data(
         table="tablename",
         header=headers,
@@ -203,10 +203,10 @@ normal_test_data_list = [
 """
         ),
     ),
+    Data(table="", header=[], value=[], expected=""),
 ]
 
 exception_test_data_list = [
-    Data(table="", header=[], value=[], expected=pytablewriter.EmptyTableDataError),
     Data(table="", header=[], value=normal_test_data_list[0].value, expected=ValueError,),
 ]
 
@@ -237,7 +237,10 @@ class Test_JsonTableWriter_write_table:
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
 
-        assert json.loads(out) == expected
+        if not value:
+            assert out == expected
+        else:
+            assert json.loads(out) == expected
 
     @pytest.mark.skipif(
         m_platform.system() == "Windows" and sys.version_info < (3, 6), reason="env dependent tests"

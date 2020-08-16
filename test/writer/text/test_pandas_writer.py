@@ -124,16 +124,10 @@ normal_test_data_list = [
             """
         ),
     ),
+    Data(table="empty", indent=0, header=[], value=[], expected="",),
 ]
 
 exception_test_data_list = [
-    Data(
-        table="dummy",
-        indent=normal_test_data_list[0].indent,
-        header=[],
-        value=[],
-        expected=ptw.EmptyTableDataError,
-    ),
     Data(
         table="",
         indent=normal_test_data_list[0].indent,
@@ -233,14 +227,13 @@ class Test_PandasDataFrameWriter_write_table_iter:
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
     )
-    def test_exception(self, table, header, value, expected):
+    def test_normal_smoke_empty(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table_iter()
+        writer.write_table_iter()
 
 
 @pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")

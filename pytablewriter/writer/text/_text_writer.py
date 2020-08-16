@@ -7,6 +7,7 @@ from typing import IO, List, Optional, Sequence, Union, cast
 import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
 
+from ...error import EmptyTableDataError
 from ...style import Cell, Style, StylerInterface, TextStyler
 from ...style._styler import get_align_char
 from .._table_writer import AbstractTableWriter, ColSeparatorStyleFilterFunc
@@ -191,7 +192,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             - |None| values are written as an empty string.
         """
 
-        super().write_table(**kwargs)
+        try:
+            super().write_table(**kwargs)
+        except EmptyTableDataError:
+            raise
+
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
@@ -566,7 +571,11 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
             self._logger.logger.debug("indent: {}".format(indent))
             self.set_indent_level(int(indent))
 
-        super().write_table(**kwargs)
+        try:
+            super().write_table(**kwargs)
+        except EmptyTableDataError:
+            self._logger.logger.debug("no tabular data found")
+            return
 
     def _get_indent_string(self) -> str:
         return self.indent_string * self._indent_level

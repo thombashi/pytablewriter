@@ -128,7 +128,7 @@ class Test_ExcelTableWriter_write_table:
             )
         ],
     )
-    def test_exception(self, tmpdir, writer_class, table, header, value, expected):
+    def test_smoke_empty(self, tmpdir, writer_class, table, header, value, expected):
         if writer_class == ptw.ExcelXlsTableWriter and not HAS_XLWT:
             pytest.skip()
 
@@ -140,8 +140,7 @@ class Test_ExcelTableWriter_write_table:
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table()
+        writer.write_table()
 
     @pytest.mark.parametrize(
         ["writer_class", "header", "value"],

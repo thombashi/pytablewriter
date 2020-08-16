@@ -75,10 +75,12 @@ normal_test_data_list = [
     ),
 ]
 
+empty_test_data_list = [
+    Data(table="dummy", header=[], value=[], expected=None),
+    Data(table="dummy", header=headers, value=[], expected=None),
+]
 exception_test_data_list = [
     Data(table="", header=headers, value=value_matrix, expected=ptw.EmptyTableNameError),
-    Data(table="dummy", header=[], value=[], expected=ptw.EmptyTableDataError),
-    Data(table="dummy", header=headers, value=[], expected=ptw.EmptyValueError),
 ]
 
 
@@ -148,9 +150,22 @@ class Test_SqliteTableWriter_write_table:
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
+        [[data.table, data.header, data.value, data.expected] for data in empty_test_data_list],
+    )
+    def test_smoke_empty(self, tmpdir, table, header, value, expected):
+        writer = ptw.SqliteTableWriter()
+        writer.open(":memory:")
+        writer.table_name = table
+        writer.headers = header
+        writer.value_matrix = value
+
+        writer.write_table()
+
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
     )
-    def test_exception(self, tmpdir, table, header, value, expected):
+    def test_exception(self, table, header, value, expected):
         writer = ptw.SqliteTableWriter()
         writer.open(":memory:")
         writer.table_name = table

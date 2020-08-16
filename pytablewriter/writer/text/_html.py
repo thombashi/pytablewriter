@@ -7,6 +7,7 @@ import typepy
 from mbstrdecoder import MultiByteStrDecoder
 from pathvalidate import replace_symbol
 
+from ...error import EmptyTableDataError
 from ...sanitizer import sanitize_python_var_name
 from ...style import Align, FontStyle, FontWeight, HtmlStyler, Style, StylerInterface, VerticalAlign
 from .._common import import_error_msg_template
@@ -77,7 +78,12 @@ class HtmlTableWriter(TextTableWriter):
         write_css = kwargs.get("write_css", False)
 
         with self._logger:
-            self._verify_property()
+            try:
+                self._verify_property()
+            except EmptyTableDataError:
+                self._logger.logger.debug("no tabular data found")
+                return
+
             self._preprocess()
 
             css_class = None

@@ -6,7 +6,7 @@ from textwrap import dedent
 
 import pytest
 
-import pytablewriter
+import pytablewriter as ptw
 
 from ..._common import print_test_result
 from ...data import (
@@ -133,7 +133,7 @@ normal_test_data_list = [
     ),
 ]
 
-table_writer_class = pytablewriter.RstSimpleTableWriter
+table_writer_class = ptw.RstSimpleTableWriter
 
 
 class Test_RstSimpleTableWriter_write_new_line:
@@ -203,13 +203,12 @@ class Test_RstSimpleTableWriter_write_table:
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table()
+        assert writer.dumps() == ".. table:: dummy\n\n"
 
 
 class Test_RstSimpleTableWriter_write_table_iter:
     def test_exception(self):
         writer = table_writer_class()
 
-        with pytest.raises(pytablewriter.NotSupportedError):
+        with pytest.raises(ptw.NotSupportedError):
             writer.write_table_iter()

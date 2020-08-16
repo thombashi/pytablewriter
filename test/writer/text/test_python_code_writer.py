@@ -172,7 +172,22 @@ class Test_PythonCodeTableWriter_write_table:
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in null_test_data_list
-            + [
+        ],
+    )
+    def test_normal_empty(self, table, indent, header, value, expected):
+        writer = table_writer_class()
+        writer.table_name = table
+        writer.set_indent_level(indent)
+        writer.headers = header
+        writer.value_matrix = value
+
+        assert writer.dumps() == expected
+
+    @pytest.mark.parametrize(
+        ["table", "indent", "header", "value", "expected"],
+        [
+            [data.table, data.indent, data.header, data.value, data.expected]
+            for data in [
                 Data(
                     table=None,
                     indent=0,
@@ -190,7 +205,7 @@ class Test_PythonCodeTableWriter_write_table:
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
+        with pytest.raises(ptw.EmptyTableNameError):
             writer.write_table()
 
 
@@ -230,11 +245,10 @@ class Test_PythonCodeTableWriter_write_table_iter:
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
     )
-    def test_exception(self, table, header, value, expected):
+    def test_smoke(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table_iter()
+        writer.write_table_iter()

@@ -3,7 +3,6 @@
 """
 
 import collections
-import itertools
 
 import pytest
 
@@ -59,12 +58,9 @@ normal_test_data_list = [
 \end{array}
 """,
     ),
+    Data(header=[], value=[], expected="",),
 ]
 
-exception_test_data_list = [
-    Data(header=header, value=value, expected=ptw.EmptyTableDataError)
-    for header, value in itertools.product([None, [], ""], [None, [], ""])
-]
 
 table_writer_class = ptw.LatexTableWriter
 
@@ -114,15 +110,3 @@ class Test_LatexTableWriter_write_table:
 
         assert regexp_ansi_escape.search(out)
         assert regexp_ansi_escape.sub("", out) == expected
-
-    @pytest.mark.parametrize(
-        ["header", "value", "expected"],
-        [[data.header, data.value, data.expected] for data in exception_test_data_list],
-    )
-    def test_exception(self, header, value, expected):
-        writer = table_writer_class()
-        writer.headers = header
-        writer.value_matrix = value
-
-        with pytest.raises(expected):
-            writer.write_table()

@@ -273,14 +273,13 @@ class Test_MediaWikiTableWriter_write_table:
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
     )
-    def test_exception(self, table, header, value, expected):
+    def test_normal_empty(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table()
+        assert writer.dumps() == ""
 
 
 def simple_write_callback(iter_count, iteration_length):
@@ -387,11 +386,10 @@ class Test_MediaWikiTableWriter_write_table_iter:
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],
     )
-    def test_exception(self, table, header, value, expected):
+    def test_smoke_empty(self, table, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table_iter()
+        writer.write_table_iter()

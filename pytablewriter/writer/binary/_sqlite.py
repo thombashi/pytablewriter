@@ -2,6 +2,7 @@ from os.path import abspath
 
 import tabledata
 
+from ...error import EmptyValueError
 from ._interface import AbstractBinaryTableWriter
 
 
@@ -15,8 +16,6 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
-        :raises pytablewriter.EmptyValueError:
-            If the |value_matrix| is empty.
         :Example:
             :ref:`example-sqlite-table-writer`
     """
@@ -91,7 +90,12 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
                 self.close()
 
     def _write_table(self, **kwargs) -> None:
-        self._verify_value_matrix()
+        try:
+            self._verify_value_matrix()
+        except EmptyValueError:
+            self._logger.logger.debug("no tabular data found")
+            return
+
         self._preprocess()
 
         table_data = tabledata.TableData(

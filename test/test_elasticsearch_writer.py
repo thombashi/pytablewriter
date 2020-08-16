@@ -7,6 +7,7 @@ import datetime
 import json
 from decimal import Decimal
 
+import elasticsearch
 import pytest
 
 import pytablewriter as ptw
@@ -20,10 +21,12 @@ nan = None
 
 Data = collections.namedtuple("Data", "table header value expected")
 
+empty_test_data_list = [
+    Data(table="dummy", header=[], value=[], expected=None),
+    Data(table="dummy", header=headers, value=[], expected=None),
+]
 exception_test_data_list = [
     Data(table="", header=headers, value=value_matrix, expected=ptw.EmptyTableNameError),
-    Data(table="dummy", header=[], value=[], expected=ptw.EmptyTableDataError),
-    Data(table="dummy", header=headers, value=[], expected=ptw.EmptyValueError),
 ]
 
 table_writer_class = ptw.ElasticsearchWriter
@@ -173,11 +176,22 @@ class Test_ElasticsearchWriter__get_mappings:
 class Test_ElasticsearchWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
+        [[data.table, data.header, data.value, data.expected] for data in empty_test_data_list],
+    )
+    def test_smoke_empty(self, table, header, value, expected):
+        writer = table_writer_class()
+        writer.stream = elasticsearch.Elasticsearch()
+        writer.table_name = table
+        writer.headers = header
+        writer.value_matrix = value
+
+        writer.write_table()
+
+    @pytest.mark.parametrize(
+        ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
     )
     def test_exception(self, table, header, value, expected):
-        import elasticsearch
-
         writer = table_writer_class()
         writer.stream = elasticsearch.Elasticsearch()
         writer.table_name = table

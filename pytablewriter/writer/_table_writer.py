@@ -867,7 +867,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         """
 
         with self._logger:
-            self._verify_property()
+            try:
+                self._verify_property()
+            except EmptyTableDataError:
+                self._logger.logger.debug("no tabular data found")
+                return
+
             self._write_table(**kwargs)
 
     def _write_table_iter(self, **kwargs) -> None:
@@ -880,7 +885,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         if all(
             [typepy.is_empty_sequence(self.headers), typepy.is_empty_sequence(self.value_matrix)]
         ):
-            raise EmptyTableDataError()
+            self._logger.logger.debug("no tabular data found")
+            return
 
         self._verify_header()
 

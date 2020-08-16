@@ -60,8 +60,8 @@ normal_test_data_list = [
     ),
 ]
 
-exception_test_data_list = [
-    Data(header=header, value=value, expected=ptw.EmptyTableDataError)
+empty_test_data_list = [
+    Data(header=header, value=value, expected=None)
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 
@@ -96,12 +96,11 @@ class Test_SpaceAlignedTableWriter_write_table:
 
     @pytest.mark.parametrize(
         ["header", "value", "expected"],
-        [[data.header, data.value, data.expected] for data in exception_test_data_list],
+        [[data.header, data.value, data.expected] for data in empty_test_data_list],
     )
-    def test_exception(self, header, value, expected):
+    def test_normal_empty(self, header, value, expected):
         writer = table_writer_class()
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table()
+        assert writer.dumps() == ""

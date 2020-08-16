@@ -240,8 +240,7 @@ class Test_CsvTableWriter_write_table:
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table()
+        assert writer.dumps() == ""
 
 
 class Test_CsvTableWriter_write_table_iter:
@@ -283,10 +282,9 @@ class Test_CsvTableWriter_write_table_iter:
         ["header", "value", "expected"],
         [[data.header, data.value, data.expected] for data in exception_test_data_list],
     )
-    def test_exception(self, header, value, expected):
+    def test_smoke_empty(self, header, value, expected):
         writer = table_writer_class()
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table_iter()
+        writer.write_table_iter()

@@ -392,17 +392,7 @@ normal_test_data_list = [
             """
         ),
     ),
-]
-
-exception_test_data_list = [
-    Data(
-        table="",
-        indent=0,
-        header=[],
-        value=[],
-        is_formatting_float=True,
-        expected=ptw.EmptyTableDataError,
-    )
+    Data(table="", indent=0, header=[], value=[], is_formatting_float=True, expected="",),
 ]
 
 table_writer_class = ptw.MarkdownTableWriter
@@ -1019,23 +1009,6 @@ class Test_MarkdownTableWriter_write_table:
 
         assert out == expected
 
-    @pytest.mark.parametrize(
-        ["table", "indent", "header", "value", "expected"],
-        [
-            [data.table, data.indent, data.header, data.value, data.expected]
-            for data in exception_test_data_list
-        ],
-    )
-    def test_exception(self, table, indent, header, value, expected):
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.set_indent_level(indent)
-        writer.headers = header
-        writer.value_matrix = value
-
-        with pytest.raises(expected):
-            writer.write_table()
-
 
 class Test_MarkdownTableWriter_write_table_iter:
     @pytest.mark.parametrize(
@@ -1091,19 +1064,6 @@ class Test_MarkdownTableWriter_write_table_iter:
         print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
-
-    @pytest.mark.parametrize(
-        ["table", "header", "value", "expected"],
-        [[data.table, data.header, data.value, data.expected] for data in exception_test_data_list],
-    )
-    def test_exception(self, table, header, value, expected):
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.headers = header
-        writer.value_matrix = value
-
-        with pytest.raises(expected):
-            writer.write_table_iter()
 
 
 class Test_MarkdownTableWriter_dump:

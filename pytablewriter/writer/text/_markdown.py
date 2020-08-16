@@ -6,6 +6,7 @@ import typepy
 from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
 
+from ...error import EmptyTableDataError
 from ...style import Align, GFMarkdownStyler, MarkdownStyler, StylerInterface
 from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
@@ -111,7 +112,12 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             self._styler = self._create_styler(self)
 
         with self._logger:
-            self._verify_property()
+            try:
+                self._verify_property()
+            except EmptyTableDataError:
+                self._logger.logger.debug("no tabular data found")
+                return
+
             self.__write_chapter()
             self._write_table(**kwargs)
             if self.is_write_null_line_after_table:

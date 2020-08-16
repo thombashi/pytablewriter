@@ -11,6 +11,7 @@ import msgfy
 from dataproperty import ColumnDataProperty
 from typepy import Typecode
 
+from ..error import EmptyValueError
 from ._table_writer import AbstractTableWriter
 
 
@@ -170,7 +171,12 @@ class ElasticsearchWriter(AbstractTableWriter):
         if not isinstance(self.stream, es.Elasticsearch):
             raise ValueError("stream must be an elasticsearch.Elasticsearch instance")
 
-        self._verify_value_matrix()
+        try:
+            self._verify_value_matrix()
+        except EmptyValueError:
+            self._logger.logger.debug("no tabular data found")
+            return
+
         self._preprocess()
 
         mappings = self._get_mappings()

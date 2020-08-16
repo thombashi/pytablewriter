@@ -499,15 +499,14 @@ class Test_HtmlTableWriter_write_table:
             for data in null_test_data_list
         ],
     )
-    def test_exception(self, table, indent, header, value, expected):
+    def test_normal_empty(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.indent_string = indent
         writer.headers = header
         writer.value_matrix = value
 
-        with pytest.raises(expected):
-            writer.write_table()
+        assert writer.dumps() == ""
 
 
 class Test_HtmlTableWriter_write_table_iter:

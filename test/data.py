@@ -9,7 +9,6 @@ from decimal import Decimal
 
 from tabledata import TableData
 
-from pytablewriter import EmptyTableDataError
 from pytablewriter.style import Style
 
 
@@ -84,7 +83,7 @@ value_matrix_iter_1 = [
 
 Data = collections.namedtuple("Data", "table indent header value expected")
 null_test_data_list = [
-    Data(table="dummy", indent=0, header=header, value=value, expected=EmptyTableDataError)
+    Data(table="dummy", indent=0, header=header, value=value, expected="")
     for header, value in itertools.product([None, [], ""], [None, [], ""])
 ]
 

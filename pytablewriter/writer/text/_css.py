@@ -4,6 +4,7 @@ from typing import List, cast
 from dataproperty import NOT_QUOTING_FLAGS, DataProperty
 from pathvalidate import replace_symbol
 
+from ...error import EmptyTableDataError
 from ...style import Align, DecorationLine, FontStyle, FontWeight, Style, VerticalAlign
 from ._text_writer import IndentationTextTableWriter
 
@@ -38,7 +39,12 @@ class CssTableWriter(IndentationTextTableWriter):
         """
 
         with self._logger:
-            self._verify_property()
+            try:
+                self._verify_property()
+            except EmptyTableDataError:
+                self._logger.logger.debug("no tabular data found")
+                return
+
             self._preprocess()
 
             self.__write_css(
