@@ -12,8 +12,8 @@ import pytest
 
 import pytablewriter as ptw
 
-from ._common import print_test_result
-from .data import headers, value_matrix
+from .._common import print_test_result
+from ..data import headers, value_matrix
 
 
 inf = Decimal("Infinity")
