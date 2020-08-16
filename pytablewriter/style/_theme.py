@@ -32,7 +32,7 @@ class ColSeparatorStyleFilterFunc(Protocol):
         ...
 
 
-def load_plugin_name() -> Dict[str, Theme]:
+def load_ptw_plugins() -> Dict[str, Theme]:
     plugin_regexp = re.compile("^pytablewriter_.+_theme", re.IGNORECASE)
     discovered_plugins = {
         name: importlib.import_module(name)
@@ -49,7 +49,7 @@ def load_plugin_name() -> Dict[str, Theme]:
 
 
 def fetch_theme(plugin_name: str) -> Theme:
-    loaded_themes = load_plugin_name()
+    loaded_themes = load_ptw_plugins()
 
     if plugin_name not in loaded_themes:
         err_msgs = ["{} theme not installed.".format(plugin_name)]
