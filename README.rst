@@ -52,11 +52,8 @@ Features
         - Markdown: GitHub Flavored Markdown (GFM), etc.
         - MediaWiki
         - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
-        - Source code
-            - JavaScript code (Definition of a nested list variable)
-            - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-            - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ variable)
-            - Python code (Definition of a nested list variable)
+        - Source code (definition of a variable that represents tabular data)
+            - JavaScript (nested list) / `NumPy <https://www.numpy.org/>`__ (`numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__) / `Pandas <https://pandas.pydata.org/>`__ (`pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__) / Python (nested list)
         - Space aligned values
         - `TOML <https://github.com/toml-lang/toml>`__
         - `YAML <https://yaml.org/>`__
@@ -98,18 +95,15 @@ Installation: pip
 
 Some of the formats require additional dependency packages, you can install these packages as follows:
 
-- Elasticsearch
-    - ``pip install pytablewriter[es]``
-- Excel
-    - ``pip install pytablewriter[excel]``
-- HTML
-    - ``pip install pytablewriter[html]``
-- SQLite
-    - ``pip install pytablewriter[sqlite]``
-- TOML
-    - ``pip install pytablewriter[toml]``
-- Install all of the optioanal dependencies
-    - ``pip install pytablewriter[all]``
+.. csv-table:: Installation of optional dependencies
+    :header: Installation example, Remark
+
+    ``pip install pytablewriter[es]``, Elasticsearch
+    ``pip install pytablewriter[excel]``, Excel
+    ``pip install pytablewriter[html]``, HTML
+    ``pip install pytablewriter[sqlite]``, SQLite
+    ``pip install pytablewriter[toml]``, TOML
+    ``pip install pytablewriter[all]``, Install all of the optioanal dependencies
 
 Installation: conda
 ------------------------------
@@ -615,7 +609,7 @@ The following command will install themes:
 :Sample Code:
     .. code-block:: python
 
-        writer = TableWriterFactory.create_from_format_name("md")
+        writer = TableWriterFactory.create_from_format_name("markdown")
         writer.headers = ["INT", "STR"]
         writer.value_matrix = [[1, "hoge"], [2, "foo"], [3, "bar"]]
         writer.margin = 1
