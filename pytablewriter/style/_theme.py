@@ -47,7 +47,12 @@ def load_ptw_plugins() -> Dict[str, Theme]:
     logger.debug("discovered_plugins: {}".format(list(discovered_plugins)))
 
     return {
-        theme: Theme(plugin.style_filter, plugin.col_separator_style_filter)  # type: ignore
+        theme: Theme(
+            plugin.style_filter if hasattr(plugin, "style_filter") else None,  # type: ignore
+            plugin.col_separator_style_filter  # type: ignore
+            if hasattr(plugin, "col_separator_style_filter")
+            else None,
+        )
         for theme, plugin in discovered_plugins.items()
     }
 
