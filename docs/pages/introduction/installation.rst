@@ -9,18 +9,15 @@ Installation: pip
 
 Some of the formats require additional dependency packages, you can install these packages as follows:
 
-- Elasticsearch
-    - ``pip install pytablewriter[es]``
-- Excel
-    - ``pip install pytablewriter[excel]``
-- HTML
-    - ``pip install pytablewriter[html]``
-- SQLite
-    - ``pip install pytablewriter[sqlite]``
-- TOML
-    - ``pip install pytablewriter[toml]``
-- Install all of the optioanal dependencies
-    - ``pip install pytablewriter[all]``
+.. csv-table:: Installation of optional dependencies
+    :header: Installation example, Remark
+
+    ``pip install pytablewriter[es]``, Elasticsearch
+    ``pip install pytablewriter[excel]``, Excel
+    ``pip install pytablewriter[html]``, HTML
+    ``pip install pytablewriter[sqlite]``, SQLite
+    ``pip install pytablewriter[toml]``, TOML
+    ``pip install pytablewriter[all]``, Install all of the optioanal dependencies
 
 Installation: conda
 ------------------------------

@@ -12,11 +12,8 @@ Features
         - Markdown: GitHub Flavored Markdown (GFM), etc.
         - MediaWiki
         - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
-        - Source code
-            - JavaScript code (Definition of a nested list variable)
-            - `NumPy <https://www.numpy.org/>`__ (Definition of a `numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__ variable)
-            - `Pandas <https://pandas.pydata.org/>`__ (Definition of a `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ variable)
-            - Python code (Definition of a nested list variable)
+        - Source code (definition of a variable that represents tabular data)
+            - JavaScript (nested list) / `NumPy <https://www.numpy.org/>`__ (`numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__) / `Pandas <https://pandas.pydata.org/>`__ (`pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__) / Python (nested list)
         - Space aligned values
         - `TOML <https://github.com/toml-lang/toml>`__
         - `YAML <https://yaml.org/>`__
