@@ -45,15 +45,14 @@ Features
         - CSV / Tab-separated values (TSV)
         - CSS
         - HTML
-        - JSON
+        - JSON / `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
         - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
-        - `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__/NDJSON/JSON Lines
         - LaTeX: ``tabular``/``array`` environment
         - Markdown: GitHub Flavored Markdown (GFM), etc.
         - MediaWiki
         - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
         - Source code (definition of a variable that represents tabular data)
-            - JavaScript (nested list) / `NumPy <https://www.numpy.org/>`__ (`numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__) / `Pandas <https://pandas.pydata.org/>`__ (`pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__) / Python (nested list)
+            - JavaScript / `NumPy <https://www.numpy.org/>`__ (`numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__) / `Pandas <https://pandas.pydata.org/>`__ (`pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__) / Python
         - Space aligned values
         - `TOML <https://github.com/toml-lang/toml>`__
         - `YAML <https://yaml.org/>`__
