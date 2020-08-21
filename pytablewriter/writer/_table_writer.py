@@ -178,6 +178,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         )
 
     @property
+    def table_format(self):
+        from .._table_format import TableFormat
+
+        return TableFormat.from_name(self.format_name)
+
+    @property
     def type_hints(self) -> Sequence:
         """
         Type hints for each column of the tabular data.

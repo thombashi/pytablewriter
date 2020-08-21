@@ -6,14 +6,19 @@ from textwrap import dedent
 
 import pytest
 
-import pytablewriter
+import pytablewriter as ptw
 from pytablewriter.style import Style
 
 from ..._common import print_test_result
 from ...data import null_test_data_list, vut_style_tabledata, vut_styles
 
 
-table_writer_class = pytablewriter.CssTableWriter
+table_writer_class = ptw.CssTableWriter
+
+
+class Test_CssTableWriter_table_format:
+    def test_normal(self):
+        assert table_writer_class().table_format is ptw.TableFormat.CSS
 
 
 class Test_CssTableWriter_write_new_line:
@@ -337,5 +342,5 @@ class Test_CssTableWriter_write_table_iter:
     def test_exception(self):
         writer = table_writer_class()
 
-        with pytest.raises(pytablewriter.NotSupportedError):
+        with pytest.raises(ptw.NotSupportedError):
             writer.write_table_iter()

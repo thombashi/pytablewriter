@@ -446,6 +446,11 @@ class Test_MarkdownTableWriter_repr:
         assert regexp_ansi_escape.sub("", out) == expected
 
 
+class Test_MarkdownTableWriter_table_format:
+    def test_normal(self):
+        assert table_writer_class().table_format is ptw.TableFormat.MARKDOWN
+
+
 class Test_MarkdownTableWriter_write_table:
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "is_formatting_float", "expected"],

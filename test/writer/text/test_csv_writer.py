@@ -134,6 +134,11 @@ exception_test_data_list = [
 table_writer_class = ptw.CsvTableWriter
 
 
+class Test_CsvTableWriter_table_format:
+    def test_normal(self):
+        assert table_writer_class().table_format is ptw.TableFormat.CSV
+
+
 class Test_CsvTableWriter_write_new_line:
     def test_normal(self, capsys):
         writer = table_writer_class()

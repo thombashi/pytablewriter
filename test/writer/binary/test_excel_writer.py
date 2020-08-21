@@ -86,6 +86,11 @@ invalid_test_data_list = [
 table_writer_class_list = [ptw.ExcelXlsTableWriter, ptw.ExcelXlsxTableWriter]
 
 
+class Test_ExcelTableWriter_table_format:
+    def test_normal(self):
+        assert ptw.ExcelXlsTableWriter().table_format is ptw.TableFormat.EXCEL_XLSX
+
+
 @pytest.mark.xfail(run=False)
 class Test_ExcelTableWriter_write_table:
     @pytest.mark.parametrize(
