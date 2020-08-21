@@ -248,7 +248,7 @@ class TableFormat(enum.Enum):
 
     @property
     def writer_class(self) -> Any:
-        """Table writer class associated with the table format.
+        """Table writer class object associated with the table format.
 
         Returns:
             Type[AbstractTableWriter]:
