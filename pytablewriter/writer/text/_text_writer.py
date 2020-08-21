@@ -181,6 +181,18 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self._col_separator_style_filters.insert(0, style_filter)
         self._clear_preprocess()
 
+    def clear_theme(self) -> None:
+        """Remove all of the style filters.
+        """
+
+        super().clear_theme()
+
+        if not self._col_separator_style_filters:
+            return
+
+        self._col_separator_style_filters = []
+        self._clear_preprocess()
+
     def write_null_line(self) -> None:
         """
         Write a null line to the |stream|.

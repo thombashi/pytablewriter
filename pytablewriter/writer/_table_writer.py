@@ -531,6 +531,16 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
         raise NotImplementedError("this method only implemented in text format writer classes")
 
+    def clear_theme(self) -> None:
+        """Remove all of the style filters.
+        """
+
+        if not self._style_filters:
+            return
+
+        self._style_filters = []
+        self.__clear_preprocess()
+
     def set_style(self, column: Union[str, int], style: Style) -> None:
         """Set |Style| for a specific column.
 

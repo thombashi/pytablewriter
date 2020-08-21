@@ -757,8 +757,21 @@ class Test_MarkdownTableWriter_write_table:
         assert output_w_theme != output_wo_theme
         assert output_w_theme == expected
 
+    def test_normal_clear_theme(self):
+        writer = table_writer_class()
+        writer.table_name = "style test: bold"
+        writer.headers = ["normal", "bold"]
+        writer.value_matrix = [[11, 11], [123456, 123456]]
+        out_wo_theme = writer.dumps()
 
-        assert output == expected
+        writer.set_theme("altrow")
+        out_w_theme = writer.dumps()
+        assert out_w_theme != out_wo_theme
+
+        writer.clear_theme()
+        out_wo_theme = writer.dumps()
+        assert out_w_theme != out_wo_theme
+        assert regexp_ansi_escape.search(out_wo_theme) is None
 
     def test_except_set_theme(self):
         writer = table_writer_class()
