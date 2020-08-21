@@ -179,6 +179,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
         self._col_separator_style_filters.insert(0, style_filter)
+        self._clear_preprocess()
 
     def write_null_line(self) -> None:
         """

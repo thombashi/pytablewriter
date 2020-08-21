@@ -733,6 +733,8 @@ class Test_MarkdownTableWriter_write_table:
             Style(align="right"),
             Style(align="center"),
         ]
+        output_wo_theme = writer.dumps()
+
         writer.add_style_filter(style_filter)
 
         expected = dedent(
@@ -744,8 +746,12 @@ class Test_MarkdownTableWriter_write_table:
             |  2.2 | left   | left  |     2.2     |       right |   center    |
             """
         )
-        output = writer.dumps()
-        print_test_result(expected=expected, actual=output)
+        output_w_theme = writer.dumps()
+        print_test_result(expected=expected, actual=output_w_theme)
+
+        assert output_w_theme != output_wo_theme
+        assert output_w_theme == expected
+
 
         assert output == expected
 

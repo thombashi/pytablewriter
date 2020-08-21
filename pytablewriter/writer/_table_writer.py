@@ -520,6 +520,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         """
 
         self._style_filters.insert(0, style_filter)
+        self.__clear_preprocess()
 
     def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
         raise NotImplementedError("this method only implemented in text format writer classes")
