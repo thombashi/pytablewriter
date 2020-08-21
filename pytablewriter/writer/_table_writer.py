@@ -1156,6 +1156,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._preprocess_header()
         self._preprocess_value_matrix()
 
+    def _clear_preprocess(self) -> None:
+        self.__clear_preprocess()
+
     def __clear_preprocess(self) -> None:
         self.__clear_preprocess_status()
         self.__clear_preprocess_data()
