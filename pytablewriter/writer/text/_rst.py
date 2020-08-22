@@ -16,8 +16,8 @@ class RstTableWriter(IndentationTextTableWriter):
     A base class of reStructuredText table writer.
     """
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.table_name = ""
         self.char_header_row_separator = "="
@@ -94,8 +94,8 @@ class RstCsvTableWriter(RstTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.column_delimiter = ", "
         self.char_cross_point = ""
@@ -188,8 +188,8 @@ class RstGridTableWriter(RstTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.char_left_side_row = "|"
         self.char_right_side_row = "|"
@@ -225,8 +225,8 @@ class RstSimpleTableWriter(RstTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.column_delimiter = "  "
         self.char_cross_point = "  "

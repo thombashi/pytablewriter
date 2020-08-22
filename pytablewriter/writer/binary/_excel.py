@@ -99,8 +99,8 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
         return self._last_data_col
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self._workbook = None  # type: Optional[ExcelWorkbookInterface]
 
@@ -265,8 +265,8 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             - |nan|: written as ``NaN``
     """
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.__col_style_table = {}  # type: Dict[int, Any]
 
@@ -396,8 +396,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def __cell_format_property(self) -> Dict:
         return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.default_format = self.Default.CELL_FORMAT
         self.format_table = {

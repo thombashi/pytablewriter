@@ -23,8 +23,8 @@ class LatexWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self._set_chars("")
 
@@ -110,8 +110,8 @@ class LatexMatrixWriter(LatexWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.is_write_header = False
         self.is_write_header_separator_row = False
@@ -179,8 +179,8 @@ class LatexTableWriter(LatexWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.char_right_side_row = r" \\ \hline"
         self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"

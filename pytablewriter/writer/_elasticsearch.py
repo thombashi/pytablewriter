@@ -131,8 +131,8 @@ class ElasticsearchWriter(AbstractTableWriter):
     def index_name(self, value: str) -> None:
         self.table_name = value
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.stream = None
         self.is_padding = False

@@ -344,7 +344,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _write_table(self, **kwargs) -> None:
         pass
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         self._logger = WriterLogger(self)
 
         self.table_name = ""

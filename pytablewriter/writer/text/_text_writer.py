@@ -125,8 +125,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         )
         self.__closing_row_cell_format = self.__make_margin_format(self.char_closing_row)
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.stream = sys.stdout
 
@@ -538,8 +538,8 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         Indentation string for each level.
     """
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.set_indent_level(0)
         self.indent_string = ""

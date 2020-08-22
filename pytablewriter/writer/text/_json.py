@@ -63,8 +63,8 @@ class JsonTableWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.set_indent_level(4)
 

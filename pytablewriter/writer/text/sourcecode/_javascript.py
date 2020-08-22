@@ -81,8 +81,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
         self.__variable_declaration = value
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.variable_declaration = "const"
         self._dp_extractor.type_value_map = {

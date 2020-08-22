@@ -33,8 +33,8 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         return self.get_variable_name(self.table_name)
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.indent_string = "    "
         self.column_delimiter = ", "

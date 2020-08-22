@@ -29,8 +29,8 @@ class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
             "cannot assign a stream to binary format writers. use open method instead."
         )
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self._stream = None
 

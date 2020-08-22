@@ -58,8 +58,8 @@ class PandasDataFrameWriter(NumpyTableWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.table_name = ""
         self.import_pandas_as = "pd"

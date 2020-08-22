@@ -30,12 +30,12 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         import copy
 
         import dataproperty
 
-        super().__init__()
+        super().__init__(**kwargs)
 
         self.is_padding = False
         self.is_formatting_float = False

@@ -30,10 +30,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         self.__flavor = ""
 
-        super().__init__()
+        super().__init__(**kwargs)
 
         self.indent_string = ""
         self.column_delimiter = "|"

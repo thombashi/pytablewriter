@@ -24,8 +24,8 @@ class CssTableWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.is_padding = False
         self.indent_string = "    "

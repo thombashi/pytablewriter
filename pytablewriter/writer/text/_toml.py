@@ -27,8 +27,8 @@ class TomlTableWriter(TextTableWriter):
     def support_split_write(self):
         return True
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
 
         self.is_formatting_float = False
 
