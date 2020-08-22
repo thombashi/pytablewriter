@@ -17,6 +17,7 @@ Some of the formats require additional dependency packages, you can install thes
     ``pip install pytablewriter[html]``, HTML
     ``pip install pytablewriter[sqlite]``, SQLite
     ``pip install pytablewriter[toml]``, TOML
+    ``pip install pytablewriter[theme]``, Theme plugins
     ``pip install pytablewriter[all]``, Install all of the optioanal dependencies
 
 Installation: conda

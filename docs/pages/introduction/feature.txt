@@ -3,8 +3,7 @@ Features
 - Write a table in various formats:
     - Text formats:
         - CSV / Tab-separated values (TSV)
-        - CSS
-        - HTML
+        - HTML / CSS
         - JSON / `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
         - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
         - LaTeX: ``tabular``/``array`` environment
@@ -22,11 +21,11 @@ Features
         - SQLite database
     - Application specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
-- Automatic tabular data formatting
+- Automatic table cell formatting:
     - Alignment
     - Padding
     - Decimal places of numbers
-- Configure cell styles:
+- Customize table cell styles:
     - Text/Background color
     - Text alignment
     - Font size/weight
@@ -34,11 +33,10 @@ Features
 - Configure output:
     - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
     - Get rendered tabular text
-- Data source
+- Data sources:
     - nested list
     - CSV
-    - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
-    - `pandas.Series <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html>`__
+    - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ / `pandas.Series <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html>`__
     - etc.
 - Multibyte character support
 - ANSI color support
