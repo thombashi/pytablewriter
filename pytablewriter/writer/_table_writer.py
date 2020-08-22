@@ -347,8 +347,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def __init__(self, **kwargs) -> None:
         self._logger = WriterLogger(self)
 
-        self.table_name = ""
-        self.value_matrix = []
+        self.table_name = kwargs.get("table_name", "")
+        self.value_matrix = kwargs.get("value_matrix", [])
 
         self.is_write_header = True
         self.is_write_header_separator_row = True
@@ -366,11 +366,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
         self._dp_extractor.update_strict_level_map({Typecode.BOOL: 1})
 
-        self.is_formatting_float = True
+        self.is_formatting_float = kwargs.get("is_formatting_float", True)
         self.is_padding = True
 
-        self.headers = []
-        self.type_hints = []
+        self.headers = kwargs.get("headers", [])
+        self.type_hints = kwargs.get("type_hints", [])
         self._quoting_flags = {
             Typecode.BOOL: False,
             Typecode.DATETIME: True,
@@ -394,14 +394,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._iter_count = None  # type: Optional[int]
 
         self.__default_style = Style()
-        self.__col_style_list = []  # type: List[Optional[Style]]
+        self.__col_style_list = kwargs.get("column_styles", [])  # type: List[Optional[Style]]
         self._style_filters = []  # type: List[StyleFilterFunc]
         self._styler = self._create_styler(self)
         self.style_filter_kwargs = {}  # type: Dict[str, Any]
-        self.__colorize_terminal = True
+        self.__colorize_terminal = kwargs.get("colorize_terminal", True)
         self.__enable_ansi_escape = True
 
-        self.max_workers = 1
+        self.max_workers = kwargs.get("max_workers", 1)
 
         self.__clear_preprocess()
 

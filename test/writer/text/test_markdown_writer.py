@@ -417,6 +417,29 @@ class Test_MarkdownTableWriter_write_new_line:
         assert out == "\n"
 
 
+class Test_MarkdownTableWriter_constructor:
+    def test_normal_kwargs(self):
+        writer = table_writer_class(
+            headers=["w/ strike", "w/ line through"],
+            value_matrix=[["strike", "line-through"]],
+            column_styles=[Style(decoration_line="strike"), Style(decoration_line="line-through"),],
+        )
+
+        expected = dedent(
+            """\
+            |w/ strike|w/ line through|
+            |---------|---------------|
+            |strike   |line-through   |
+            """
+        )
+
+        out = str(writer)
+        print_test_result(expected=expected, actual=out)
+
+        assert regexp_ansi_escape.search(out)
+        assert regexp_ansi_escape.sub("", out) == expected
+
+
 class Test_MarkdownTableWriter_repr:
     def test_normal_empty(self):
         writer = table_writer_class()
@@ -482,6 +505,16 @@ class Test_MarkdownTableWriter_write_table:
         assert out == expected
         assert writer.dumps() == expected
         assert str(writer) == expected
+
+        writer = table_writer_class(
+            table_name=table,
+            headers=header,
+            value_matrix=value,
+            indent_level=indent,
+            is_formatting_float=is_formatting_float,
+        )
+        writer.register_trans_func(trans_func)
+        assert writer.dumps() == expected
 
     def test_normal_single_tabledata(self, capsys):
         writer = table_writer_class()
@@ -757,6 +790,27 @@ class Test_MarkdownTableWriter_write_table:
         assert output_w_theme != output_wo_theme
         assert output_w_theme == expected
 
+        assert (
+            table_writer_class(
+                table_name="style filter",
+                headers=["left", "center", "right", "overwrite l", "overwrite c", "overwrite r"],
+                value_matrix=[
+                    [1, "c", "r", 1, "c", "r"],
+                    [2.2, "left", "left", 2.2, "right", "center"],
+                ],
+                margin=1,
+                column_styles=[
+                    None,
+                    None,
+                    None,
+                    Style(align="center"),
+                    Style(align="right"),
+                    Style(align="center"),
+                ],
+            ).dumps()
+            == output_wo_theme
+        )
+
     def test_normal_clear_theme(self):
         writer = table_writer_class()
         writer.table_name = "style test: bold"
@@ -878,21 +932,40 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.sub("", out) == expected
 
     def test_normal_colorize_terminal(self):
-        writer = table_writer_class()
-        writer.column_styles = [
+        column_styles = [
             Style(color="red"),
             Style(bg_color="white"),
         ]
+        writer = table_writer_class()
+        writer.column_styles = column_styles
         writer.headers = ["fg color", "bg color"]
         writer.value_matrix = [["hoge", "foo"]]
 
         writer.colorize_terminal = True
         out = writer.dumps()
         assert regexp_ansi_escape.search(out)
+        assert (
+            table_writer_class(
+                headers=["fg color", "bg color"],
+                value_matrix=[["hoge", "foo"]],
+                column_styles=column_styles,
+                colorize_terminal=True,
+            ).dumps()
+            == out
+        )
 
         writer.colorize_terminal = False
         out = writer.dumps()
         assert regexp_ansi_escape.search(out) is None
+        assert (
+            table_writer_class(
+                headers=["fg color", "bg color"],
+                value_matrix=[["hoge", "foo"]],
+                column_styles=column_styles,
+                colorize_terminal=False,
+            ).dumps()
+            == out
+        )
 
     def test_normal_enable_ansi_escape(self):
         writer = table_writer_class()

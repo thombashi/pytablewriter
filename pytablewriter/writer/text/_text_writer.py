@@ -145,7 +145,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_closing_row = "-"
         self.char_closing_row_cross_point = "-"
 
-        self.margin = 0
+        self.margin = kwargs.get("margin", 0)
 
         self._dp_extractor.preprocessor.line_break_handling = LineBreakHandling.REPLACE
         self.is_write_null_line_after_table = False
@@ -541,7 +541,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.set_indent_level(0)
+        self.set_indent_level(kwargs.get("indent_level", 0))
         self.indent_string = ""
 
     def set_indent_level(self, indent_level: int) -> None:
