@@ -131,8 +131,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def headers(self) -> Sequence[str]:
-        """
-        List of table header to write.
+        """Headers of a table to be outputted.
         """
 
         return self._dp_extractor.headers
@@ -154,8 +153,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def value_matrix(self) -> List:
-        """
-        Tabular data to write.
+        """Data of a table to be outputted.
         """
 
         return self.__value_matrix_org
@@ -179,6 +177,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def table_format(self):
+        """Get the format of the writer.
+
+        Returns:
+            TableFormat: 
+        """
+
         from .._table_format import TableFormat
 
         return TableFormat.from_name(self.format_name)
@@ -428,8 +432,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def table_name(self) -> str:
-        """
-        Name of the table.
+        """Name of a table.
         """
 
         return self._table_name
@@ -440,7 +443,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def default_style(self) -> Style:
-        """Default |Style| for each cell.
+        """Default |Style| of table cells.
         """
 
         return self.__default_style
