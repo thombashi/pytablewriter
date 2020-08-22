@@ -34,18 +34,6 @@ def write_examples(maker: ReadmeMaker) -> None:
     )
     maker.dec_indent_level()
 
-    maker.write_chapter("Write a reStructuredText table (Grid Tables)")
-    maker.write_file(
-        examples_root.joinpath("table_format", "text", "rst", "rst_grid_table_example.txt")
-    )
-
-    maker.write_chapter(
-        "Write a table with JavaScript format (as a nested list variable definition)"
-    )
-    maker.write_file(
-        examples_root.joinpath("table_format", "text", "sourcecode", "javascript_example.txt")
-    )
-
     maker.write_chapter("Write a table to an Excel sheet")
     maker.write_file(
         examples_root.joinpath("table_format", "binary", "spreadsheet", "exel_single_example.txt")
@@ -53,6 +41,13 @@ def write_examples(maker: ReadmeMaker) -> None:
 
     maker.write_chapter("Write a Unicode table")
     maker.write_file(examples_root.joinpath("table_format", "text", "unicode_example.txt"))
+
+    maker.write_chapter(
+        "Write a table with JavaScript format (as a nested list variable definition)"
+    )
+    maker.write_file(
+        examples_root.joinpath("table_format", "text", "sourcecode", "javascript_example.txt")
+    )
 
     maker.write_chapter("Write a Markdown table from ``pandas.DataFrame`` instance")
     maker.write_file(examples_root.joinpath("datasource", "from_pandas_dataframe_example.txt"))

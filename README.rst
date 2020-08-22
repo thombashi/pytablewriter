@@ -34,17 +34,12 @@ Summary
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
     :alt: Test coverage
 
-.. image:: https://img.shields.io/github/stars/thombashi/pytablewriter.svg?style=social&label=Star
-    :target: https://github.com/thombashi/pytablewriter
-    :alt: GitHub stars
-
 Features
 --------
 - Write a table in various formats:
     - Text formats:
         - CSV / Tab-separated values (TSV)
-        - CSS
-        - HTML
+        - HTML / CSS
         - JSON / `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
         - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
         - LaTeX: ``tabular``/``array`` environment
@@ -62,11 +57,11 @@ Features
         - SQLite database
     - Application specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
-- Automatic tabular data formatting
+- Automatic table cell formatting:
     - Alignment
     - Padding
     - Decimal places of numbers
-- Configure cell styles:
+- Customize table cell styles:
     - Text/Background color
     - Text alignment
     - Font size/weight
@@ -74,11 +69,10 @@ Features
 - Configure output:
     - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
     - Get rendered tabular text
-- Data source
+- Data sources:
     - nested list
     - CSV
-    - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
-    - `pandas.Series <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html>`__
+    - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ / `pandas.Series <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html>`__
     - etc.
 - Multibyte character support
 - ANSI color support
@@ -102,6 +96,7 @@ Some of the formats require additional dependency packages, you can install thes
     ``pip install pytablewriter[html]``, HTML
     ``pip install pytablewriter[sqlite]``, SQLite
     ``pip install pytablewriter[toml]``, TOML
+    ``pip install pytablewriter[theme]``, Theme plugins
     ``pip install pytablewriter[all]``, Install all of the optioanal dependencies
 
 Installation: conda
@@ -130,16 +125,16 @@ Write a Markdown table
         from pytablewriter import MarkdownTableWriter
 
         def main():
-            writer = MarkdownTableWriter()
-            writer.table_name = "example_table"
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
-
+            writer = MarkdownTableWriter(
+                table_name="example_table",
+                headers=["int", "float", "str", "bool", "mix", "time"],
+                value_matrix=[
+                    [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                    [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                    [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                    [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+                ],
+            )
             writer.write_table()
 
         if __name__ == "__main__":
@@ -171,17 +166,17 @@ Write a Markdown table with a margin
         from pytablewriter import MarkdownTableWriter
 
         def main():
-            writer = MarkdownTableWriter()
-            writer.table_name = "write example with a margin"
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
-            writer.margin = 1  # add a whitespace for both sides of each cell
-
+            writer = MarkdownTableWriter(
+                table_name="write example with a margin",
+                headers=["int", "float", "str", "bool", "mix", "time"],
+                value_matrix=[
+                    [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                    [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                    [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                    [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+                ],
+                margin=1  # add a whitespace for both sides of each cell
+            )
             writer.write_table()
 
         if __name__ == "__main__":
@@ -199,95 +194,6 @@ Write a Markdown table with a margin
         | -10 | -9.90 |      | False |      NaN | 2017-01-01 00:00:00+0900 |
 
 ``margin`` attribute can be available for all of the text format writer classes.
-
-Write a reStructuredText table (Grid Tables)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-:Sample Code:
-    .. code-block:: python
-
-        import pytablewriter
-
-        def main():
-            writer = pytablewriter.RstGridTableWriter()
-            writer.table_name = "example_table"
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
-
-            writer.write_table()
-
-        if __name__ == "__main__":
-            main()
-
-:Output:
-    .. code-block:: ReST
-
-        .. table:: example_table
-
-            +---+-----+----+-----+--------+------------------------+
-            |int|float|str |bool |  mix   |          time          |
-            +===+=====+====+=====+========+========================+
-            |  0| 0.10|hoge|True |       0|2017-01-01 03:04:05+0900|
-            +---+-----+----+-----+--------+------------------------+
-            |  2|-2.23|foo |False|        |2017-12-23 12:34:51+0900|
-            +---+-----+----+-----+--------+------------------------+
-            |  3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900|
-            +---+-----+----+-----+--------+------------------------+
-            |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
-            +---+-----+----+-----+--------+------------------------+
-
-:Rendering Result:
-    .. table:: example_table
-
-        +---+-----+----+-----+--------+------------------------+
-        |int|float|str |bool |  mix   |          time          |
-        +===+=====+====+=====+========+========================+
-        |  0| 0.10|hoge|True |       0|2017-01-01 03:04:05+0900|
-        +---+-----+----+-----+--------+------------------------+
-        |  2|-2.23|foo |False|        |2017-12-23 12:34:51+0900|
-        +---+-----+----+-----+--------+------------------------+
-        |  3| 0.00|bar |True |Infinity|2017-03-03 22:44:55+0900|
-        +---+-----+----+-----+--------+------------------------+
-        |-10|-9.90|    |False|     NaN|2017-01-01 00:00:00+0900|
-        +---+-----+----+-----+--------+------------------------+
-
-Write a table with JavaScript format (as a nested list variable definition)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-:Sample Code:
-    .. code-block:: python
-
-        import pytablewriter
-
-        def main():
-            writer = pytablewriter.JavaScriptTableWriter()
-            writer.table_name = "example_table"
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
-
-            writer.write_table()
-
-        if __name__ == "__main__":
-            main()
-
-:Output:
-    .. code-block:: js
-
-        const example_table = [
-            ["int", "float", "str", "bool", "mix", "time"],
-            [0, 0.10, "hoge", true, 0, "2017-01-01 03:04:05+0900"],
-            [2, -2.23, "foo", false, null, "2017-12-23 12:34:51+0900"],
-            [3, 0.00, "bar", true, Infinity, "2017-03-03 22:44:55+0900"],
-            [-10, -9.90, "", false, NaN, "2017-01-01 00:00:00+0900"]
-        ];
 
 Write a table to an Excel sheet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -355,6 +261,40 @@ Write a Unicode table
         ├───┼─────┼────┼─────┼────────┼────────────────────────┤
         │-10│-9.90│    │False│     NaN│2017-01-01 00:00:00+0900│
         └───┴─────┴────┴─────┴────────┴────────────────────────┘
+
+Write a table with JavaScript format (as a nested list variable definition)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:Sample Code:
+    .. code-block:: python
+
+        import pytablewriter
+
+        def main():
+            writer = pytablewriter.JavaScriptTableWriter()
+            writer.table_name = "example_table"
+            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
+            writer.value_matrix = [
+                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+            ]
+
+            writer.write_table()
+
+        if __name__ == "__main__":
+            main()
+
+:Output:
+    .. code-block:: js
+
+        const example_table = [
+            ["int", "float", "str", "bool", "mix", "time"],
+            [0, 0.10, "hoge", true, 0, "2017-01-01 03:04:05+0900"],
+            [2, -2.23, "foo", false, null, "2017-12-23 12:34:51+0900"],
+            [3, 0.00, "bar", true, Infinity, "2017-03-03 22:44:55+0900"],
+            [-10, -9.90, "", false, NaN, "2017-01-01 00:00:00+0900"]
+        ];
 
 Write a Markdown table from ``pandas.DataFrame`` instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
