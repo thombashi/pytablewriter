@@ -302,7 +302,7 @@ class TableFormat(enum.Enum):
 
     @classmethod
     def from_name(cls, format_name: str):
-        """Get a table format from a name.
+        """Get a table format from a format name.
 
         Args:
             format_name (str): Table format specifier.

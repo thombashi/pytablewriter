@@ -530,8 +530,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
 
 class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
-    """
-    A base class for table writer with indentation text formats.
+    """A base class for table writer with indentation text formats.
+
+    Args:
+        indent_level (int): Indentation level. Defaults to ``0``.
 
     .. py:attribute:: indent_string
 
@@ -545,24 +547,22 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         self.indent_string = ""
 
     def set_indent_level(self, indent_level: int) -> None:
-        """
-        Set the current indent level.
+        """Set the indentation level.
 
-        :param int indent_level: New indent level.
+        Args:
+            indent_level (int): New indentation level.
         """
 
         self._indent_level = indent_level
 
     def inc_indent_level(self) -> None:
-        """
-        Increment the current indent level.
+        """Increment the indentation level.
         """
 
         self._indent_level += 1
 
     def dec_indent_level(self) -> None:
-        """
-        Decrement the current indent level.
+        """Decrement the indentation level.
         """
 
         self._indent_level -= 1
