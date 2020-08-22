@@ -343,7 +343,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def __init__(self) -> None:
         self._logger = WriterLogger(self)
 
-        self._table_name = ""
+        self.table_name = ""
         self.value_matrix = []
 
         self.is_write_header = True
