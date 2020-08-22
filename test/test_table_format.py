@@ -56,3 +56,17 @@ class Test_TableFormat_from_name:
     )
     def test_normal(self, value, expected):
         assert TableFormat.from_name(value) == expected
+
+
+class Test_TableFormat_from_file_extension:
+    @pytest.mark.parametrize(
+        ["value", "expected"],
+        [
+            ["csv", TableFormat.CSV],
+            [".CSV", TableFormat.CSV],
+            ["xlsx", TableFormat.EXCEL_XLSX],
+            ["md", TableFormat.MARKDOWN],
+        ],
+    )
+    def test_normal(self, value, expected):
+        assert TableFormat.from_file_extension(value) == expected

@@ -318,3 +318,23 @@ class TableFormat(enum.Enum):
                 return table_format
 
         return None
+
+    @classmethod
+    def from_file_extension(cls, file_extension: str):
+        """Get a table format from a file extension.
+
+        Args:
+            file_extension (str): File extension.
+
+        Returns:
+            Optional[TableFormat]:
+                A table format enum value corresponding to the ``file_extension``.
+        """
+
+        ext = file_extension.lower().strip().lstrip(".")
+
+        for table_format in TableFormat:
+            if ext in table_format.file_extensions:
+                return table_format
+
+        return None
