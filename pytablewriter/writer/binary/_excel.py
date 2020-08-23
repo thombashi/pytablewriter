@@ -33,6 +33,28 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     def workbook(self) -> Optional[ExcelWorkbookInterface]:
         return self._workbook
 
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+
+        self._workbook = None  # type: Optional[ExcelWorkbookInterface]
+
+        self._dp_extractor.type_value_map = {
+            typepy.Typecode.INFINITY: "Inf",
+            typepy.Typecode.NAN: "NaN",
+        }
+
+        self._first_header_row = 0
+        self._last_header_row = self.first_header_row
+        self._first_data_row = self.last_header_row + 1
+        self._first_data_col = 0
+        self._last_data_row = None  # type: Optional[int]
+        self._last_data_col = None  # type: Optional[int]
+
+        self._current_data_row = self._first_data_row
+
+        self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
+        self._quoting_flags[typepy.Typecode.DATETIME] = True
+
     @property
     def first_header_row(self) -> int:
         """
@@ -98,28 +120,6 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         """
 
         return self._last_data_col
-
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
-
-        self._workbook = None  # type: Optional[ExcelWorkbookInterface]
-
-        self._dp_extractor.type_value_map = {
-            typepy.Typecode.INFINITY: "Inf",
-            typepy.Typecode.NAN: "NaN",
-        }
-
-        self._first_header_row = 0
-        self._last_header_row = self.first_header_row
-        self._first_data_row = self.last_header_row + 1
-        self._first_data_col = 0
-        self._last_data_row = None  # type: Optional[int]
-        self._last_data_col = None  # type: Optional[int]
-
-        self._current_data_row = self._first_data_row
-
-        self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-        self._quoting_flags[typepy.Typecode.DATETIME] = True
 
     def is_opened(self) -> bool:
         return self.workbook is not None

@@ -110,35 +110,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     """
 
     @property
-    def is_formatting_float(self) -> bool:
-        return self._dp_extractor.is_formatting_float
-
-    @is_formatting_float.setter
-    def is_formatting_float(self, value: bool) -> None:
-        if self._dp_extractor.is_formatting_float == value:
-            return
-
-        self._dp_extractor.is_formatting_float = value
-        self.__clear_preprocess()
-
-    @property
     def margin(self) -> int:
         raise NotImplementedError()
 
     @margin.setter
     def margin(self, value: int) -> None:
         raise NotImplementedError()
-
-    @property
-    def headers(self) -> Sequence[str]:
-        """Headers of a table to be outputted.
-        """
-
-        return self._dp_extractor.headers
-
-    @headers.setter
-    def headers(self, value: Sequence[str]) -> None:
-        self._dp_extractor.headers = value
 
     @property
     def header_list(self):
@@ -180,62 +157,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         """Get the format of the writer.
 
         Returns:
-            TableFormat: 
+            TableFormat:
         """
 
         from .._table_format import TableFormat
 
         return TableFormat.from_name(self.format_name)
-
-    @property
-    def type_hints(self) -> Sequence:
-        """
-        Type hints for each column of the tabular data.
-        Writers convert data for each column using the type hints information
-        before writing tables when you call ``write_xxx`` methods.
-
-        Acceptable values are as follows:
-
-            - |None| (automatically detect column type from values in the column)
-            - :py:class:`pytablewriter.typehint.Bool`
-            - :py:class:`pytablewriter.typehint.DateTime`
-            - :py:class:`pytablewriter.typehint.Dictionary`
-            - :py:class:`pytablewriter.typehint.Infinity`
-            - :py:class:`pytablewriter.typehint.Integer`
-            - :py:class:`pytablewriter.typehint.IpAddress`
-            - :py:class:`pytablewriter.typehint.List`
-            - :py:class:`pytablewriter.typehint.Nan`
-            - :py:class:`pytablewriter.typehint.NoneType`
-            - :py:class:`pytablewriter.typehint.NullString`
-            - :py:class:`pytablewriter.typehint.RealNumber`
-            - :py:class:`pytablewriter.typehint.String`
-
-        If a type-hint value is not |None|, the writer tries to
-        convert data for each data in a column to type-hint class.
-        If the type-hint value is |None| or failed to convert data,
-        the writer automatically detect column data type from
-        the column data.
-
-        If ``type_hints`` is |None|, the writer detects data types for all
-        of the columns automatically and writes a table by using detected column types.
-
-        Defaults to |None|.
-
-        :Examples:
-            - :ref:`example-type-hint-js`
-            - :ref:`example-type-hint-python`
-        """
-
-        return self._dp_extractor.column_type_hints
-
-    @type_hints.setter
-    def type_hints(self, value: Sequence) -> None:
-        hints = list(value)
-        if self.type_hints == hints:
-            return
-
-        self.__set_type_hints(hints)
-        self.__clear_preprocess()
 
     @property
     def type_hint_list(self):
@@ -271,10 +198,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self.column_styles = value
 
-    def register_trans_func(self, trans_func: TransFunc) -> None:
-        self._dp_extractor.register_trans_func(trans_func)
-        self.__clear_preprocess()
-
     @property
     def value_preprocessor(self):
         return self._dp_extractor.preprocessor
@@ -290,15 +213,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return
 
         self._dp_extractor.preprocessor = value
-        self.__clear_preprocess()
-
-    def update_preprocessor(self, **kwargs) -> None:
-        # TODO: documentation
-        #   is_escape_formula_injection: for CSV/Excel
-
-        if not self._dp_extractor.update_preprocessor(**kwargs):
-            return
-
         self.__clear_preprocess()
 
     @property
@@ -322,23 +236,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     @stream.setter
     def stream(self, value) -> None:
         self._stream = value
-
-    @property
-    def _quoting_flags(self) -> Dict[Typecode, bool]:
-        return self._dp_extractor.quoting_flags
-
-    @_quoting_flags.setter
-    def _quoting_flags(self, value: Mapping[Typecode, bool]) -> None:
-        self._dp_extractor.quoting_flags = value
-        self.__clear_preprocess()
-
-    @property
-    def max_workers(self) -> int:
-        return self._dp_extractor.max_workers
-
-    @max_workers.setter
-    def max_workers(self, value: Optional[int]) -> None:
-        self._dp_extractor.max_workers = value  # type: ignore
 
     @abc.abstractmethod
     def _write_table(self, **kwargs) -> None:
@@ -431,6 +328,37 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._table_value_dp_matrix = []  # type: Sequence[Sequence[DataProperty]]
 
     @property
+    def headers(self) -> Sequence[str]:
+        """Headers of a table to be outputted.
+        """
+
+        return self._dp_extractor.headers
+
+    @headers.setter
+    def headers(self, value: Sequence[str]) -> None:
+        self._dp_extractor.headers = value
+
+    @property
+    def is_formatting_float(self) -> bool:
+        return self._dp_extractor.is_formatting_float
+
+    @is_formatting_float.setter
+    def is_formatting_float(self, value: bool) -> None:
+        if self._dp_extractor.is_formatting_float == value:
+            return
+
+        self._dp_extractor.is_formatting_float = value
+        self.__clear_preprocess()
+
+    @property
+    def max_workers(self) -> int:
+        return self._dp_extractor.max_workers
+
+    @max_workers.setter
+    def max_workers(self, value: Optional[int]) -> None:
+        self._dp_extractor.max_workers = value  # type: ignore
+
+    @property
     def table_name(self) -> str:
         """Name of a table.
         """
@@ -440,6 +368,56 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     @table_name.setter
     def table_name(self, value: str) -> None:
         self._table_name = value
+
+    @property
+    def type_hints(self) -> Sequence:
+        """
+        Type hints for each column of the tabular data.
+        Writers convert data for each column using the type hints information
+        before writing tables when you call ``write_xxx`` methods.
+
+        Acceptable values are as follows:
+
+            - |None| (automatically detect column type from values in the column)
+            - :py:class:`pytablewriter.typehint.Bool`
+            - :py:class:`pytablewriter.typehint.DateTime`
+            - :py:class:`pytablewriter.typehint.Dictionary`
+            - :py:class:`pytablewriter.typehint.Infinity`
+            - :py:class:`pytablewriter.typehint.Integer`
+            - :py:class:`pytablewriter.typehint.IpAddress`
+            - :py:class:`pytablewriter.typehint.List`
+            - :py:class:`pytablewriter.typehint.Nan`
+            - :py:class:`pytablewriter.typehint.NoneType`
+            - :py:class:`pytablewriter.typehint.NullString`
+            - :py:class:`pytablewriter.typehint.RealNumber`
+            - :py:class:`pytablewriter.typehint.String`
+
+        If a type-hint value is not |None|, the writer tries to
+        convert data for each data in a column to type-hint class.
+        If the type-hint value is |None| or failed to convert data,
+        the writer automatically detect column data type from
+        the column data.
+
+        If ``type_hints`` is |None|, the writer detects data types for all
+        of the columns automatically and writes a table by using detected column types.
+
+        Defaults to |None|.
+
+        :Examples:
+            - :ref:`example-type-hint-js`
+            - :ref:`example-type-hint-python`
+        """
+
+        return self._dp_extractor.column_type_hints
+
+    @type_hints.setter
+    def type_hints(self, value: Sequence) -> None:
+        hints = list(value)
+        if self.type_hints == hints:
+            return
+
+        self.__set_type_hints(hints)
+        self.__clear_preprocess()
 
     @property
     def default_style(self) -> Style:
@@ -511,6 +489,15 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return
 
         self.__enable_ansi_escape = value
+        self.__clear_preprocess()
+
+    @property
+    def _quoting_flags(self) -> Dict[Typecode, bool]:
+        return self._dp_extractor.quoting_flags
+
+    @_quoting_flags.setter
+    def _quoting_flags(self, value: Mapping[Typecode, bool]) -> None:
+        self._dp_extractor.quoting_flags = value
         self.__clear_preprocess()
 
     def add_style_filter(self, style_filter: StyleFilterFunc) -> None:
@@ -848,6 +835,19 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._is_complete_table_property_preprocess = writer._is_complete_table_property_preprocess
         self._is_complete_header_preprocess = writer._is_complete_header_preprocess
         self._is_complete_value_matrix_preprocess = writer._is_complete_value_matrix_preprocess
+
+    def register_trans_func(self, trans_func: TransFunc) -> None:
+        self._dp_extractor.register_trans_func(trans_func)
+        self.__clear_preprocess()
+
+    def update_preprocessor(self, **kwargs) -> None:
+        # TODO: documentation
+        #   is_escape_formula_injection: for CSV/Excel
+
+        if not self._dp_extractor.update_preprocessor(**kwargs):
+            return
+
+        self.__clear_preprocess()
 
     def write_table(self, **kwargs) -> None:
         """
