@@ -216,20 +216,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     @property
-    def escape_formula_injection(self):
-        # Deprecated
-        return self._dp_extractor.preprocessor.is_escape_formula_injection
-
-    @escape_formula_injection.setter
-    def escape_formula_injection(self, value) -> None:
-        # Deprecated
-        if self._dp_extractor.preprocessor.is_escape_formula_injection == value:
-            return
-
-        self._dp_extractor.preprocessor.is_escape_formula_injection = value
-        self.__clear_preprocess()
-
-    @property
     def stream(self):
         return self._stream
 
