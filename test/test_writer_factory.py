@@ -3,10 +3,12 @@
 """
 
 import itertools
+import sys
 
 import pytest
 
 import pytablewriter as ptw
+from pytablewriter.typehint import Integer
 
 
 class Test_WriterFactory_get_format_names:
@@ -170,9 +172,28 @@ class Test_WriterFactory_create_from_file_extension:
         ),
     )
     def test_normal(self, value, expected):
-        writer = ptw.TableWriterFactory.create_from_file_extension(value)
+        table_name = "dummy"
+        headers = ["a", "b"]
+        value_matrix = [[1, 2]]
+        type_hints = [Integer, Integer]
+        is_formatting_float = False
 
+        writer = ptw.TableWriterFactory.create_from_file_extension(
+            value,
+            table_name=table_name,
+            headers=headers,
+            value_matrix=value_matrix,
+            type_hints=type_hints,
+            is_formatting_float=is_formatting_float,
+        )
+
+        print(type(writer), file=sys.stderr)
         assert isinstance(writer, expected)
+        assert writer.table_name == table_name
+        assert writer.headers == headers
+        assert writer.value_matrix == value_matrix
+        assert writer.type_hints == type_hints
+        assert writer.is_formatting_float == is_formatting_float
 
     @pytest.mark.parametrize(
         ["value", "expected"],
@@ -242,9 +263,28 @@ class Test_FileLoaderFactory_create_from_format_name:
         ],
     )
     def test_normal(self, format_name, expected):
-        writer = ptw.TableWriterFactory.create_from_format_name(format_name)
+        table_name = "dummy"
+        headers = ["a", "b"]
+        value_matrix = [[1, 2]]
+        type_hints = [Integer, Integer]
+        is_formatting_float = False
 
+        writer = ptw.TableWriterFactory.create_from_format_name(
+            format_name,
+            table_name=table_name,
+            headers=headers,
+            value_matrix=value_matrix,
+            type_hints=type_hints,
+            is_formatting_float=is_formatting_float,
+        )
+
+        print(format_name, type(writer), file=sys.stderr)
         assert isinstance(writer, expected)
+        assert writer.table_name == table_name
+        assert writer.headers == headers
+        assert writer.value_matrix == value_matrix
+        assert writer.type_hints == type_hints
+        assert writer.is_formatting_float == is_formatting_float
 
     @pytest.mark.parametrize(
         ["format_name", "expected"],

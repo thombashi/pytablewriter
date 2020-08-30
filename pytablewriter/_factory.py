@@ -19,7 +19,7 @@ class TableWriterFactory:
     """
 
     @classmethod
-    def create_from_file_extension(cls, file_extension: str) -> AbstractTableWriter:
+    def create_from_file_extension(cls, file_extension: str, **kwargs) -> AbstractTableWriter:
         """
         Create a table writer class instance from a file extension.
         Supported file extensions are as follows:
@@ -52,6 +52,8 @@ class TableWriterFactory:
 
         :param str file_extension:
             File extension string (case insensitive).
+        :param kwargs:
+            Keyword arguments that passing to writer class constructor.
         :return:
             Writer instance that coincides with the ``file_extension``.
         :rtype:
@@ -77,7 +79,7 @@ class TableWriterFactory:
 
             logger.debug("create a {} instance".format(table_format.writer_class.__name__))
 
-            return table_format.writer_class()
+            return table_format.writer_class(**kwargs)
 
         raise WriterNotFoundError(
             "\n".join(
@@ -90,7 +92,7 @@ class TableWriterFactory:
         )
 
     @classmethod
-    def create_from_format_name(cls, format_name: str) -> AbstractTableWriter:
+    def create_from_format_name(cls, format_name: str, **kwargs) -> AbstractTableWriter:
         """
         Create a table writer class instance from a format name.
         Supported file format names are as follows:
@@ -126,6 +128,8 @@ class TableWriterFactory:
             =============================================  ===================================
 
         :param str format_name: Format name string (case insensitive).
+        :param kwargs:
+            Keyword arguments that passing to writer class constructor.
         :return: Writer instance that coincides with the ``format_name``:
         :rtype:
             :py:class:`~pytablewriter.writer._table_writer.TableWriterInterface`
@@ -141,7 +145,7 @@ class TableWriterFactory:
             ):
                 logger.debug("create a {} instance".format(table_format.writer_class.__name__))
 
-                return table_format.writer_class()
+                return table_format.writer_class(**kwargs)
 
         raise WriterNotFoundError(
             "\n".join(
