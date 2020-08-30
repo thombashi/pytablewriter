@@ -1,7 +1,12 @@
 from ._elasticsearch import ElasticsearchWriter
 from ._null import NullTableWriter
 from ._table_writer import AbstractTableWriter
-from .binary import ExcelXlsTableWriter, ExcelXlsxTableWriter, SqliteTableWriter
+from .binary import (
+    ExcelXlsTableWriter,
+    ExcelXlsxTableWriter,
+    PandasDataFramePickleWriter,
+    SqliteTableWriter,
+)
 from .text import (
     BoldUnicodeTableWriter,
     BorderlessTableWriter,

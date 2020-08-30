@@ -51,6 +51,7 @@ from .writer import (
     MediaWikiTableWriter,
     NullTableWriter,
     NumpyTableWriter,
+    PandasDataFramePickleWriter,
     PandasDataFrameWriter,
     PythonCodeTableWriter,
     RstCsvTableWriter,

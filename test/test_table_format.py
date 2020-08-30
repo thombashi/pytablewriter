@@ -40,7 +40,15 @@ class Test_TableFormat_search_table_format:
                     TableFormat.YAML,
                 ],
             ],
-            [FormatAttr.BIN, [TableFormat.EXCEL_XLS, TableFormat.EXCEL_XLSX, TableFormat.SQLITE]],
+            [
+                FormatAttr.BIN,
+                [
+                    TableFormat.EXCEL_XLS,
+                    TableFormat.EXCEL_XLSX,
+                    TableFormat.SQLITE,
+                    TableFormat.PANDAS_PICKLE,
+                ],
+            ],
             [FormatAttr.API, [TableFormat.ELASTICSEARCH]],
             [0, []],
         ],

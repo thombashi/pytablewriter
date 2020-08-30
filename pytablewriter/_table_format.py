@@ -24,6 +24,7 @@ from .writer import (
     MediaWikiTableWriter,
     NullTableWriter,
     NumpyTableWriter,
+    PandasDataFramePickleWriter,
     PandasDataFrameWriter,
     PythonCodeTableWriter,
     RstCsvTableWriter,
@@ -167,6 +168,12 @@ class TableFormat(enum.Enum):
         PandasDataFrameWriter,
         FormatAttr.FILE | FormatAttr.TEXT | FormatAttr.SOURCECODE | FormatAttr.SECONDARY_EXT,
         ["py"],
+    )
+    PANDAS_PICKLE = (
+        [PandasDataFramePickleWriter.FORMAT_NAME],  # type: ignore
+        PandasDataFramePickleWriter,
+        FormatAttr.FILE | FormatAttr.BIN,
+        [],
     )
     PYTHON = (
         [PythonCodeTableWriter.FORMAT_NAME, "py"],
