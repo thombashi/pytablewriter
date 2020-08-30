@@ -52,7 +52,6 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.table_name = ""
         self._dp_extractor.type_value_map = {
             typepy.Typecode.NONE: None,
             typepy.Typecode.INFINITY: 'float("inf")',

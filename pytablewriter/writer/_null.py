@@ -10,6 +10,14 @@ from .text._interface import IndentationInterface, TextWriterInterface
 class NullTableWriter(IndentationInterface, TextWriterInterface, TableWriterInterface):
     FORMAT_NAME = "null"
 
+    def __init__(self, **kwargs) -> None:
+        self.table_name = kwargs.get("table_name", "")
+        self.value_matrix = kwargs.get("value_matrix", [])
+        self.is_formatting_float = kwargs.get("is_formatting_float", True)
+        self.headers = kwargs.get("headers", [])
+        self.type_hints = kwargs.get("type_hints", [])
+        self.max_workers = kwargs.get("max_workers", 1)
+
     def __repr__(self) -> str:
         return self.dumps()
 

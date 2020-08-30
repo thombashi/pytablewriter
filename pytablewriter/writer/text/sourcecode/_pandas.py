@@ -61,7 +61,6 @@ class PandasDataFrameWriter(NumpyTableWriter):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.table_name = ""
         self.import_pandas_as = "pd"
         self.is_write_header = False
 

@@ -19,7 +19,6 @@ class RstTableWriter(IndentationTextTableWriter):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.table_name = ""
         self.char_header_row_separator = "="
         self.char_cross_point = "+"
         self.char_left_cross_point = "+"

@@ -26,8 +26,6 @@ class UnicodeTableWriter(IndentationTextTableWriter):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.table_name = ""
-
         self.column_delimiter = "│"
         self.char_left_side_row = "│"
         self.char_right_side_row = "│"

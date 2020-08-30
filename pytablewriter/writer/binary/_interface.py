@@ -32,6 +32,8 @@ class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
+        self.table_name = kwargs.get("table_name", "")
+
         self._stream = None
 
     def dumps(self) -> str:

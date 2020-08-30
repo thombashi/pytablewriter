@@ -33,6 +33,6 @@ class SpaceAlignedTableWriter(CsvTableWriter):
         self.char_cross_point = "  "
 
         self.is_padding = True
-        self.is_formatting_float = True
+        self.is_formatting_float = kwargs.get("is_formatting_float", True)
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
