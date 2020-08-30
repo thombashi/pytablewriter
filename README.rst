@@ -54,6 +54,7 @@ Features
         - Unicode
     - Binary file formats:
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
+        - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ pickle file
         - SQLite database
     - Application specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
