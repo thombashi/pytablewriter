@@ -26,10 +26,6 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    @property
-    def support_split_write(self) -> bool:
-        return True
-
     def __init__(self, **kwargs) -> None:
         import copy
 
@@ -45,12 +41,6 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
         self._is_require_header = True
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-
-    def __del__(self) -> None:
-        self.close()
-
-    def is_opened(self) -> bool:
-        return self.stream is not None
 
     def open(self, file_path: str) -> None:
         """
@@ -109,6 +99,3 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
             max_workers=self.max_workers,
         )
         self.stream.create_table_from_tabledata(table_data)
-
-    def _write_value_row_separator(self) -> None:
-        pass

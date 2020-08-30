@@ -29,6 +29,10 @@ class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
             "cannot assign a stream to binary format writers. use open method instead."
         )
 
+    @property
+    def support_split_write(self) -> bool:
+        return True
+
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
@@ -36,9 +40,18 @@ class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
 
         self._stream = None
 
+    def __del__(self) -> None:
+        self.close()
+
+    def is_opened(self) -> bool:
+        return self.stream is not None
+
     def dumps(self) -> str:
         raise NotImplementedError("binary format writers did not support dumps method")
 
     def _verify_stream(self) -> None:
         if self.stream is None:
             raise OSError("null output stream. required to open(file_path) first.")
+
+    def _write_value_row_separator(self) -> None:
+        pass

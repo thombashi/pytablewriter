@@ -26,10 +26,6 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self) -> bool:
-        return True
-
-    @property
     def workbook(self) -> Optional[ExcelWorkbookInterface]:
         return self._workbook
 
@@ -220,9 +216,6 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         self._write_header()
         self._write_value_matrix()
         self._postprocess()
-
-    def _write_value_row_separator(self) -> None:
-        pass
 
     def _write_value_matrix(self) -> None:
         for value_dp_list in self._table_value_dp_matrix:
