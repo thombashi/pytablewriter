@@ -22,6 +22,7 @@ Binary formats
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. toctree::
    binary/excel
+   binary/pandas_pickle
    binary/sqlite
 
 
