@@ -151,14 +151,14 @@ class Test_NumpyTableWriter_write_table:
             for data in null_test_data_list
         ],
     )
-    def test_exception(self, table, indent, header, value, expected):
+    def test_exception_null(self, table, indent, header, value, expected):
         writer = table_writer_class()
         writer.table_name = table
         writer.set_indent_level(indent)
         writer.headers = header
         writer.value_matrix = value
 
-        assert writer.write_table() == ""
+        assert writer.dumps() == ""
 
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
