@@ -58,7 +58,11 @@ normal_test_data_list = [
 \end{array}
 """,
     ),
-    Data(header=[], value=[], expected="",),
+    Data(
+        header=[],
+        value=[],
+        expected="",
+    ),
 ]
 
 

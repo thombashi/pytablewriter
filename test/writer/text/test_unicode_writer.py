@@ -15,7 +15,11 @@ from ._common import regexp_ansi_escape
 
 class Test_UnicodeTableWriter_write_new_line:
     @pytest.mark.parametrize(
-        ["table_writer_class"], [[UnicodeTableWriter], [BoldUnicodeTableWriter],]
+        ["table_writer_class"],
+        [
+            [UnicodeTableWriter],
+            [BoldUnicodeTableWriter],
+        ],
     )
     def test_normal(self, capsys, table_writer_class):
         writer = table_writer_class()

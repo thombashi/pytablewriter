@@ -124,7 +124,13 @@ normal_test_data_list = [
             """
         ),
     ),
-    Data(table="empty", indent=0, header=[], value=[], expected="",),
+    Data(
+        table="empty",
+        indent=0,
+        header=[],
+        value=[],
+        expected="",
+    ),
 ]
 
 exception_test_data_list = [

@@ -207,7 +207,12 @@ normal_test_data_list = [
 ]
 
 exception_test_data_list = [
-    Data(table="", header=[], value=normal_test_data_list[0].value, expected=ValueError,),
+    Data(
+        table="",
+        header=[],
+        value=normal_test_data_list[0].value,
+        expected=ValueError,
+    ),
 ]
 
 table_writer_class = pytablewriter.JsonTableWriter

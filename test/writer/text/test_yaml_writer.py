@@ -55,7 +55,11 @@ normal_test_data_list = [
         ),
     ),
     Data(
-        tabledata=TableData(table_name=None, headers=[], rows=value_matrix,),
+        tabledata=TableData(
+            table_name=None,
+            headers=[],
+            rows=value_matrix,
+        ),
         expected=dedent(
             """\
             - - 1
@@ -118,7 +122,8 @@ class Test_YamlTableWriter_write_new_line:
 
 class Test_YamlTableWriter_write_table:
     @pytest.mark.parametrize(
-        ["value", "expected"], [[data.tabledata, data.expected] for data in normal_test_data_list],
+        ["value", "expected"],
+        [[data.tabledata, data.expected] for data in normal_test_data_list],
     )
     def test_normal(self, capsys, value, expected):
         writer = table_writer_class()

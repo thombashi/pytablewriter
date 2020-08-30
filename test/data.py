@@ -42,7 +42,18 @@ mix_header_list = [
     "time",
 ]
 mix_value_matrix = [
-    [1, 1.1, "aa", 1, 1, True, INF, NAN, 1.0, TIME,],
+    [
+        1,
+        1.1,
+        "aa",
+        1,
+        1,
+        True,
+        INF,
+        NAN,
+        1.0,
+        TIME,
+    ],
     [
         2,
         2.2,
@@ -55,7 +66,18 @@ mix_value_matrix = [
         INF,
         "2017-01-02 03:04:05+09:00",
     ],
-    [3, 3.33, "cccc", -3, "ccc", True, float("infinity"), float("NAN"), NAN, TIME,],
+    [
+        3,
+        3.33,
+        "cccc",
+        -3,
+        "ccc",
+        True,
+        float("infinity"),
+        float("NAN"),
+        NAN,
+        TIME,
+    ],
 ]
 mix_tabledata = TableData(table_name="mix data", headers=mix_header_list, rows=mix_value_matrix)
 
@@ -70,15 +92,33 @@ float_tabledata = TableData(
 )
 
 value_matrix_iter = [
-    [[1, 2, 3], [11, 12, 13],],
-    [[1, 2, 3], [11, 12, 13],],
-    [[101, 102, 103], [1001, 1002, 1003],],
+    [
+        [1, 2, 3],
+        [11, 12, 13],
+    ],
+    [
+        [1, 2, 3],
+        [11, 12, 13],
+    ],
+    [
+        [101, 102, 103],
+        [1001, 1002, 1003],
+    ],
 ]
 
 value_matrix_iter_1 = [
-    [["a b c d e f g h i jklmn", 2.1, 3], ["aaaaa", 12.1, 13],],
-    [["bbb", 2, 3], ["cc", 12, 13],],
-    [["a", 102, 103], ["", 1002, 1003],],
+    [
+        ["a b c d e f g h i jklmn", 2.1, 3],
+        ["aaaaa", 12.1, 13],
+    ],
+    [
+        ["bbb", 2, 3],
+        ["cc", 12, 13],
+    ],
+    [
+        ["a", 102, 103],
+        ["", 1002, 1003],
+    ],
 ]
 
 Data = collections.namedtuple("Data", "table indent header value expected")

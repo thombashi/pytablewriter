@@ -392,7 +392,14 @@ normal_test_data_list = [
             """
         ),
     ),
-    Data(table="", indent=0, header=[], value=[], is_formatting_float=True, expected="",),
+    Data(
+        table="",
+        indent=0,
+        header=[],
+        value=[],
+        is_formatting_float=True,
+        expected="",
+    ),
 ]
 
 table_writer_class = ptw.MarkdownTableWriter
@@ -422,7 +429,10 @@ class Test_MarkdownTableWriter_constructor:
         writer = table_writer_class(
             headers=["w/ strike", "w/ line through"],
             value_matrix=[["strike", "line-through"]],
-            column_styles=[Style(decoration_line="strike"), Style(decoration_line="line-through"),],
+            column_styles=[
+                Style(decoration_line="strike"),
+                Style(decoration_line="line-through"),
+            ],
         )
 
         expected = dedent(

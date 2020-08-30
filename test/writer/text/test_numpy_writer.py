@@ -165,7 +165,13 @@ class Test_NumpyTableWriter_write_table:
         [
             [data.table, data.indent, data.header, data.value, data.expected]
             for data in [
-                Data(table=None, indent=0, header=headers, value=value_matrix, expected="",)
+                Data(
+                    table=None,
+                    indent=0,
+                    header=headers,
+                    value=value_matrix,
+                    expected="",
+                )
             ]
         ],
     )

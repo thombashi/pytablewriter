@@ -130,8 +130,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def value_matrix(self) -> List:
-        """Data of a table to be outputted.
-        """
+        """Data of a table to be outputted."""
 
         return self.__value_matrix_org
 
@@ -315,8 +314,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def headers(self) -> Sequence[str]:
-        """Headers of a table to be outputted.
-        """
+        """Headers of a table to be outputted."""
 
         return self._dp_extractor.headers
 
@@ -346,8 +344,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def table_name(self) -> str:
-        """Name of a table.
-        """
+        """Name of a table."""
 
         return self._table_name
 
@@ -407,8 +404,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def default_style(self) -> Style:
-        """Default |Style| of table cells.
-        """
+        """Default |Style| of table cells."""
 
         return self.__default_style
 
@@ -508,8 +504,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         raise NotImplementedError("this method only implemented in text format writer classes")
 
     def clear_theme(self) -> None:
-        """Remove all of the style filters.
-        """
+        """Remove all of the style filters."""
 
         if not self._style_filters:
             return

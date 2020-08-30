@@ -250,8 +250,7 @@ class Style:
         return NotImplemented if equal is NotImplemented else not equal
 
     def update(self, **kwargs) -> None:
-        """Update specified style attributes.
-        """
+        """Update specified style attributes."""
         self.__update(initialize=False, **kwargs)
 
     def __update(self, initialize: bool, **kwargs) -> None:

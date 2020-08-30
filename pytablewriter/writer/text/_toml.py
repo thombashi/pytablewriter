@@ -72,7 +72,8 @@ class TomlTableWriter(TextTableWriter):
                 row = {}
 
                 for header, value in zip(
-                    self.headers, [serialize_dp(value_dp) for value_dp in value_dp_list],
+                    self.headers,
+                    [serialize_dp(value_dp) for value_dp in value_dp_list],
                 ):
                     if typepy.is_null_string(value):
                         continue

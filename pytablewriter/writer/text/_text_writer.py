@@ -182,8 +182,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self._clear_preprocess()
 
     def clear_theme(self) -> None:
-        """Remove all of the style filters.
-        """
+        """Remove all of the style filters."""
 
         super().clear_theme()
 
@@ -359,7 +358,8 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return "{{:{:s}{:s}}}".format(
-            get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp)),
+            get_align_char(Align.CENTER),
+            str(self._get_padding_len(col_dp, value_dp)),
         )
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
@@ -420,7 +420,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             )
 
         style = self._fetch_col_separator_style(
-            left_cell=left_cell, right_cell=right_cell, default_style=self.default_style,
+            left_cell=left_cell,
+            right_cell=right_cell,
+            default_style=self.default_style,
         )
 
         return self._styler.apply_terminal_style(col_delimiter, style=style)
@@ -432,7 +434,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         col_delimiters = (
             [
                 self.__to_column_delimiter(
-                    row, None, self._column_dp_list[0], self.char_left_side_row,
+                    row,
+                    None,
+                    self._column_dp_list[0],
+                    self.char_left_side_row,
                 )
             ]
             + [
@@ -446,7 +451,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             ]
             + [
                 self.__to_column_delimiter(
-                    row, self._column_dp_list[-1], None, self.char_right_side_row,
+                    row,
+                    self._column_dp_list[-1],
+                    None,
+                    self.char_right_side_row,
                 )
             ]
         )
@@ -556,14 +564,12 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         self._indent_level = indent_level
 
     def inc_indent_level(self) -> None:
-        """Increment the indentation level.
-        """
+        """Increment the indentation level."""
 
         self._indent_level += 1
 
     def dec_indent_level(self) -> None:
-        """Decrement the indentation level.
-        """
+        """Decrement the indentation level."""
 
         self._indent_level -= 1
 
