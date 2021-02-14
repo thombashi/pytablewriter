@@ -1,7 +1,7 @@
 You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
 The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
 
-if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problemes caused by multi processing:
+if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problems caused by multi processing:
 
 .. code-block:: python
 
