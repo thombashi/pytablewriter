@@ -495,6 +495,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                     class StyleFilterFunc(Protocol):
                         def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
                             ...
+
+                You can pass args to kwargs via :py:attr:`~.style_filter_kwargs`
+                In default, kwargs includes:
+
+                - ``writer``: the writer instance that the caller of the ``style_filter function``.
         """
 
         self._style_filters.insert(0, style_filter)
