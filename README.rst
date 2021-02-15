@@ -22,13 +22,9 @@ Summary
     :target: https://pypi.org/project/pytablewriter
     :alt: Supported Python implementations
 
-.. image:: https://img.shields.io/travis/thombashi/pytablewriter/master.svg?label=Linux/macOS%20CI
-    :target: https://travis-ci.org/thombashi/pytablewriter
-    :alt: Linux/macOS CI status
-
-.. image:: https://img.shields.io/appveyor/ci/thombashi/pytablewriter/master.svg?label=Windows%20CI
-    :target: https://ci.appveyor.com/project/thombashi/pytablewriter
-    :alt: Windows CI status
+.. image:: https://github.com/thombashi/pytablewriter/workflows/Tests/badge.svg
+    :target: https://github.com/thombashi/pytablewriter/actions?query=workflow%3ATests
+    :alt: Linux/macOS/Windows CI status
 
 .. image:: https://coveralls.io/repos/github/thombashi/pytablewriter/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
@@ -615,7 +611,7 @@ Multi processing
 You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
 The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
 
-if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problemes caused by multi processing:
+if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problems caused by multi processing:
 
 .. code-block:: python
 
@@ -637,7 +633,7 @@ https://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 
 Dependencies
 ============
-- Python 3.5+
+- Python 3.6+
 - `Python package dependencies (automatically installed) <https://github.com/thombashi/pytablewriter/network/dependencies>`__
 
 
