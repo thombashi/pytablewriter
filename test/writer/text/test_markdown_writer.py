@@ -789,7 +789,7 @@ class Test_MarkdownTableWriter_write_table:
             """\
             # style filter
             | left | center | right | overwrite l | overwrite c | overwrite r |
-            |-----:|--------|-------|:-----------:|------------:|:-----------:|
+            | ---: | ------ | ----- | :---------: | ----------: | :---------: |
             | 1.0  |   c    |     r | 1.0         |      c      |           r |
             |  2.2 | left   | left  |     2.2     |       right |   center    |
             """
@@ -1009,7 +1009,7 @@ class Test_MarkdownTableWriter_write_table:
         expected = dedent(
             """\
             |  a  |   b   |  c  | dd  |  e   |
-            |----:|------:|-----|----:|------|
+            | --: | ----: | --- | --: | ---- |
             |   1 | 123.1 | a   | 1.0 |    1 |
             |   2 |   2.2 | bb  | 2.2 |  2.2 |
             |   3 |   3.3 | ccc | 3.0 | cccc |
@@ -1030,7 +1030,7 @@ class Test_MarkdownTableWriter_write_table:
         expected = dedent(
             """\
             |   a   |    b    |   c   |  dd   |   e    |
-            |------:|--------:|-------|------:|--------|
+            |  --:  |  ----:  |  ---  |  --:  |  ----  |
             |    1  |  123.1  |  a    |  1.0  |     1  |
             |    2  |    2.2  |  bb   |  2.2  |   2.2  |
             |    3  |    3.3  |  ccc  |  3.0  |  cccc  |
