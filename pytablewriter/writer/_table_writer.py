@@ -129,7 +129,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.headers = value
 
     @property
-    def value_matrix(self) -> List:
+    def value_matrix(self) -> Sequence:
         """Data of a table to be outputted."""
 
         return self.__value_matrix_org
@@ -1038,7 +1038,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         except EmptyValueError:
             pass
 
-    def __set_value_matrix(self, value_matrix):
+    def __set_value_matrix(self, value_matrix: Sequence):
         self.__value_matrix_org = value_matrix
 
     def __set_type_hints(self, type_hints):

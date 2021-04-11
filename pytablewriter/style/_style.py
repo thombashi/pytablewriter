@@ -256,15 +256,15 @@ class Style:
     def __update(self, initialize: bool, **kwargs) -> None:
         fg_color = kwargs.get("color")
         if fg_color:
-            self.__fg_color = Color(fg_color)
+            self.__fg_color: Optional[Color] = Color(fg_color)
         elif initialize:
-            self.__fg_color = None  # type: ignore
+            self.__fg_color = None
 
         bg_color = kwargs.get("bg_color")
         if bg_color:
-            self.__bg_color = Color(bg_color)
+            self.__bg_color: Optional[Color] = Color(bg_color)
         elif initialize:
-            self.__bg_color = None  # type: ignore
+            self.__bg_color = None
 
         padding = kwargs.get("padding")
         if padding is not None:
