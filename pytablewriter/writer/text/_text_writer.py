@@ -112,6 +112,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     @margin.setter
     def margin(self, value: int) -> None:
+        if value < 0:
+            raise ValueError("margin value must be zero or greater")
+
         self.__margin = value
 
     def __update_template(self) -> None:
