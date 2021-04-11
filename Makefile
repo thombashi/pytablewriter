@@ -37,7 +37,7 @@ docs:
 
 .PHONY: idocs
 idocs:
-	@pip install --upgrade .
+	@python3 -m pip install --upgrade .
 	@make docs
 
 .PHONY: fmt
@@ -55,5 +55,5 @@ release:
 
 .PHONY: setup
 setup:
-	@pip install --upgrade -e .[test] releasecmd tox
-	pip check
+	@python3 -m pip install --upgrade -e .[test] releasecmd tox
+	python3 -m pip check
