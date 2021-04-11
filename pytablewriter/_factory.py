@@ -137,7 +137,7 @@ class TableWriterFactory:
             |WriterNotFoundError_desc| for the format.
         """
 
-        format_name = format_name.lower()
+        format_name = format_name.casefold()
 
         for table_format in TableFormat:
             if format_name in table_format.names and not (

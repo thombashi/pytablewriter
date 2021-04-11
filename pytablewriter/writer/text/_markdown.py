@@ -110,9 +110,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             - Vertical bar characters (``'|'``) in table items are escaped
         """
 
-        self.__flavor = kwargs.pop("flavor", "")
+        self.__flavor = kwargs.pop("flavor", "").casefold()
         if self.__flavor:
-            self.__flavor = self.__flavor.lower()
             self._styler = self._create_styler(self)
 
         with self._logger:

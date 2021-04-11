@@ -75,7 +75,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
     @variable_declaration.setter
     def variable_declaration(self, value: str):
-        value = value.strip().lower()
+        value = value.strip().casefold()
         if value not in self.__VALID_VAR_DECLARATION:
             raise ValueError("declaration must be either var, let or const")
 
@@ -94,7 +94,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.register_trans_func(bool_to_str)
 
     def get_variable_name(self, value: str) -> str:
-        return sanitize_js_var_name(value, "_").lower()
+        return sanitize_js_var_name(value, "_").casefold()
 
     def _write_table(self, **kwargs) -> None:
         if self.is_datetime_instance_formatting:

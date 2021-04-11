@@ -318,7 +318,7 @@ class TableFormat(enum.Enum):
             Optional[TableFormat]: A table format enum value corresponding to the ``format_name``.
         """
 
-        format_name = format_name.lower().strip()
+        format_name = format_name.casefold().strip()
 
         for table_format in TableFormat:
             if format_name in table_format.names:
