@@ -4,6 +4,7 @@ DOCS_DIR := docs
 DOCS_BUILD_DIR := $(DOCS_DIR)/_build
 BUILD_WORK_DIR := _work
 PKG_BUILD_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)
+PYTHON := python3
 
 
 .PHONY: build-remote
@@ -50,10 +51,10 @@ readme:
 
 .PHONY: release
 release:
-	@cd $(PKG_BUILD_DIR) && python setup.py release --sign
+	@cd $(PKG_BUILD_DIR) && $(PYTHON) setup.py release --sign
 	@make clean
 
 .PHONY: setup
 setup:
-	@python3 -m pip install --upgrade -e .[test] releasecmd tox
-	python3 -m pip check
+	@$(PYTHON) -m pip install --upgrade -e .[test] releasecmd tox
+	$(PYTHON) -m pip check
