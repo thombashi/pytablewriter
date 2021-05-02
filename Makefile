@@ -56,5 +56,5 @@ release:
 
 .PHONY: setup
 setup:
-	@$(PYTHON) -m pip install --upgrade -e .[test] releasecmd tox
-	$(PYTHON) -m pip check
+	@$(PYTHON) -m pip install --upgrade -q --disable-pip-version-check -e .[test] releasecmd tox
+	@$(PYTHON) -m pip check
