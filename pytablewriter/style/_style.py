@@ -206,7 +206,7 @@ class Style:
         self.__update_color(initialize=True, **kwargs)
         self.__update_align(initialize=True, **kwargs)
         self.__update_font(initialize=True, **kwargs)
-        self.__update(initialize=True, **kwargs)
+        self.__update_misc(initialize=True, **kwargs)
 
     def __repr__(self) -> str:
         items = []
@@ -257,7 +257,7 @@ class Style:
         self.__update_color(initialize=False, **kwargs)
         self.__update_align(initialize=False, **kwargs)
         self.__update_font(initialize=False, **kwargs)
-        self.__update(initialize=False, **kwargs)
+        self.__update_misc(initialize=False, **kwargs)
 
     def __update_color(self, initialize: bool, **kwargs) -> None:
         fg_color = kwargs.get("color")
@@ -307,7 +307,7 @@ class Style:
         elif initialize:
             self.__valign = VerticalAlign.BASELINE
 
-    def __update(self, initialize: bool, **kwargs) -> None:
+    def __update_misc(self, initialize: bool, **kwargs) -> None:
         padding = kwargs.get("padding")
         if padding is not None:
             self.__padding = padding
