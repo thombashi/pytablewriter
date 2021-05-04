@@ -87,6 +87,12 @@ class Test_JsonLinesTableWriter_write_table:
             print_test_result(expected=expected, actual=actual, error=err)
             assert json.loads(actual) == expected
 
+        # margin setting must be ignored
+        writer.margin = 1
+        dumps_out = writer.dumps()
+        print_test_result(expected=out, actual=dumps_out)
+        assert dumps_out == out
+
     @pytest.mark.parametrize(
         ["header", "value", "expected_list"],
         [[data.header, data.value, data.expected_list] for data in exception_test_data_list],

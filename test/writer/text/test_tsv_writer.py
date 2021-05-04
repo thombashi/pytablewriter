@@ -84,6 +84,12 @@ class Test_TsvTableWriter_write_table:
 
         assert out == expected
 
+        # margin setting must be ignored
+        writer.margin = 1
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
     @pytest.mark.parametrize(
         ["header", "value", "expected"],
         [[data.header, data.value, data.expected] for data in empty_test_data_list],

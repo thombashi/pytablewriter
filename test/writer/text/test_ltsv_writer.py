@@ -97,7 +97,12 @@ class Test_LtsvTableWriter_write_table:
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
+        assert out == expected
 
+        # margin setting must be ignored
+        writer.margin = 1
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
         assert out == expected
 
     @pytest.mark.parametrize(

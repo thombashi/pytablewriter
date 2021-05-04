@@ -108,17 +108,17 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     @property
     def margin(self) -> int:
-        return self.__margin
+        return self._margin
 
     @margin.setter
     def margin(self, value: int) -> None:
         if value < 0:
             raise ValueError("margin value must be zero or greater")
 
-        if self.__margin == value:
+        if self._margin == value:
             return
 
-        self.__margin = value
+        self._margin = value
         self._clear_preprocess()
 
     def __update_template(self) -> None:
@@ -152,7 +152,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.char_closing_row = "-"
         self.char_closing_row_cross_point = "-"
 
-        self.margin = kwargs.get("margin", 0)
+        self._margin = kwargs.get("margin", 0)
 
         self._dp_extractor.preprocessor.line_break_handling = LineBreakHandling.REPLACE
         self.is_write_null_line_after_table = kwargs.get("is_write_null_line_after_table", False)
@@ -533,7 +533,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         self.__write_separator_row(self._get_closing_row_items(), row_type=RowType.CLOSING)
 
     def __make_margin_format(self, margin_char):
-        margin_str = margin_char * self.__margin
+        margin_str = margin_char * self._margin
 
         return margin_str + "{:s}" + margin_str
 

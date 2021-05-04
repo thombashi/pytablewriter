@@ -218,10 +218,15 @@ class Test_CsvTableWriter_write_table:
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
-
         assert out == expected
         assert writer.dumps() == expected
         assert str(writer) == expected
+
+        # margin setting must be ignored
+        writer.margin = 1
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
 
     def test_normal_escape_formula_injection(self, capsys):
         writer = table_writer_class()

@@ -24,12 +24,22 @@ class CsvTableWriter(TextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
+    @property
+    def margin(self) -> int:
+        return self._margin
+
+    @margin.setter
+    def margin(self, value: int) -> None:
+        # margin setting must be ignored
+        return
+
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
         self._set_chars("")
         self.indent_string = ""
         self.column_delimiter = ","
+        self._margin = 0
 
         self.is_padding = False
         self.is_formatting_float = False

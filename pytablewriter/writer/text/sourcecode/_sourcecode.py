@@ -33,11 +33,21 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         return self.get_variable_name(self.table_name)
 
+    @property
+    def margin(self) -> int:
+        return self._margin
+
+    @margin.setter
+    def margin(self, value: int) -> None:
+        # margin setting must be ignored
+        return
+
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
         self.indent_string = "    "
         self.column_delimiter = ", "
+        self._margin = 0
 
         self.char_left_side_row = "["
         self.char_right_side_row = "],"

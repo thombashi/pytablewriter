@@ -247,6 +247,12 @@ class Test_JsonTableWriter_write_table:
         else:
             assert json.loads(out) == expected
 
+        # margin setting must be ignored
+        writer.margin = 1
+        dumps_out = writer.dumps()
+        print_test_result(expected=out, actual=dumps_out)
+        assert dumps_out == out
+
     @pytest.mark.skipif(
         m_platform.system() == "Windows" and sys.version_info < (3, 6), reason="env dependent tests"
     )

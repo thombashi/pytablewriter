@@ -172,8 +172,13 @@ class Test_TomlTableWriter_write_table:
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
-
         assert toml.loads(out) == toml.loads(expected)
+
+        # margin setting must be ignored
+        writer.margin = 1
+        dumps_out = writer.dumps()
+        print_test_result(expected=out, actual=dumps_out)
+        assert dumps_out == out
 
     @pytest.mark.parametrize(
         ["table_name", "header", "value", "expected"],

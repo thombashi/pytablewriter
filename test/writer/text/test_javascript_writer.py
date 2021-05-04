@@ -291,6 +291,12 @@ class Test_JavaScriptTableWriter_type_hint:
         assert writer.dumps() == expected
         assert str(writer) == expected
 
+        # margin setting must be ignored
+        writer.margin = 1
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
 
 class Test_JavaScriptTableWriter_write_table:
     @pytest.mark.parametrize(

@@ -132,9 +132,14 @@ class Test_YamlTableWriter_write_table:
 
         out, err = capsys.readouterr()
         print_test_result(expected=expected, actual=out, error=err)
-
         assert out == expected
         assert yaml.safe_load(StringIO(out))
+
+        # margin setting must be ignored
+        writer.margin = 1
+        dumps_out = writer.dumps()
+        print_test_result(expected=out, actual=dumps_out)
+        assert dumps_out == out
 
     @pytest.mark.parametrize(
         ["value", "expected"],
