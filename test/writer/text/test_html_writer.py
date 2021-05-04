@@ -341,6 +341,7 @@ class Test_HtmlTableWriter_write_table:
         print_test_result(expected=expected, actual=out, error=err)
         assert out == expected
 
+        print("----- _repr_html_ -----")
         out = writer._repr_html_()
         print_test_result(expected=expected, actual=out)
         assert out == expected
