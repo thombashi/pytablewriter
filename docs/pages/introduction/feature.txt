@@ -19,7 +19,7 @@ Features
     - Binary file formats:
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
         - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ pickle file
-        - SQLite database
+        - `SQLite <https://www.sqlite.org/index.html>`__ database
     - Application specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
 - Automatic table cell formatting:

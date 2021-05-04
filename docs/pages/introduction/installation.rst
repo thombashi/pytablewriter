@@ -15,9 +15,9 @@ Some of the formats require additional dependency packages, you can install thes
     ``pip install pytablewriter[es]``, Elasticsearch
     ``pip install pytablewriter[excel]``, Excel
     ``pip install pytablewriter[html]``, HTML
-    ``pip install pytablewriter[sqlite]``, SQLite
+    ``pip install pytablewriter[sqlite]``, SQLite database
     ``pip install pytablewriter[toml]``, TOML
-    ``pip install pytablewriter[theme]``, Theme plugins
+    ``pip install pytablewriter[theme]``, pytablewriter theme plugins
     ``pip install pytablewriter[all]``, Install all of the optional dependencies
 
 Installation: conda

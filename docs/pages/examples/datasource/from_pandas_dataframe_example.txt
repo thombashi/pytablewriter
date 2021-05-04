@@ -42,11 +42,10 @@ Adding a column of the DataFrame index if you specify ``add_index_column=True``:
         :caption: Write a markdown table from a pandas DataFrame
 
         import pandas as pd
-        from pytablewriter import MarkdownTableWriter
+        import pytablewriter as ptw
 
         def main():
-            writer = MarkdownTableWriter()
-            writer.table_name = "add_index_column"
+            writer = ptw.MarkdownTableWriter(table_name="add_index_column")
             writer.from_dataframe(
                 pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
                 add_index_column=True,

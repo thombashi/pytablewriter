@@ -5,36 +5,36 @@ for each column by ``column_styles`` attribute of writer classes.
 :Sample Code:
     .. code-block:: python
 
-        from pytablewriter import MarkdownTableWriter
+        import pytablewriter as ptw
         from pytablewriter.style import Style
 
+
         def main():
-            writer = MarkdownTableWriter()
-            writer.table_name = "set style by column_styles"
-            writer.headers = [
-                "auto align",
-                "left align",
-                "center align",
-                "bold",
-                "italic",
-                "bold italic ts",
-            ]
-            writer.value_matrix = [
-                [11, 11, 11, 11, 11, 11],
-                [1234, 1234, 1234, 1234, 1234, 1234],
-            ]
-
-            # specify styles for each column
-            writer.column_styles = [
-                Style(),
-                Style(align="left"),
-                Style(align="center"),
-                Style(font_weight="bold"),
-                Style(font_style="italic"),
-                Style(font_weight="bold", font_style="italic", thousand_separator=","),
-            ]
-
+            writer = ptw.MarkdownTableWriter(
+                table_name="set style by column_styles",
+                headers=[
+                    "auto align",
+                    "left align",
+                    "center align",
+                    "bold",
+                    "italic",
+                    "bold italic ts",
+                ],
+                value_matrix=[
+                    [11, 11, 11, 11, 11, 11],
+                    [1234, 1234, 1234, 1234, 1234, 1234],
+                ],
+                column_styles=[
+                    Style(),
+                    Style(align="left"),
+                    Style(align="center"),
+                    Style(font_weight="bold"),
+                    Style(font_style="italic"),
+                    Style(font_weight="bold", font_style="italic", thousand_separator=","),
+                ],  # specify styles for each column
+            )
             writer.write_table()
+
 
         if __name__ == "__main__":
             main()
