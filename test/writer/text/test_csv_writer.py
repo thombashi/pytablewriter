@@ -210,10 +210,7 @@ class Test_CsvTableWriter_write_table:
         ],
     )
     def test_normal(self, capsys, col_delim, header, value, expected):
-        writer = table_writer_class()
-        writer.column_delimiter = col_delim
-        writer.headers = header
-        writer.value_matrix = value
+        writer = table_writer_class(column_delimiter=col_delim, headers=header, value_matrix=value)
         writer.write_table()
 
         out, err = capsys.readouterr()
@@ -229,9 +226,10 @@ class Test_CsvTableWriter_write_table:
         assert out == expected
 
     def test_normal_escape_formula_injection(self, capsys):
-        writer = table_writer_class()
-        writer.headers = ["a", "b", "c", "d", "e"]
-        writer.value_matrix = [["a+b", "=a+b", "-a+b", "+a+b", "@a+b"]]
+        writer = table_writer_class(
+            headers=["a", "b", "c", "d", "e"],
+            value_matrix=[["a+b", "=a+b", "-a+b", "+a+b", "@a+b"]],
+        )
         writer.update_preprocessor(is_escape_formula_injection=True)
         writer.write_table()
         expected = r""""a","b","c","d","e"
@@ -247,9 +245,7 @@ class Test_CsvTableWriter_write_table:
         [[data.header, data.value, data.expected] for data in exception_test_data_list],
     )
     def test_exception(self, header, value, expected):
-        writer = table_writer_class()
-        writer.headers = header
-        writer.value_matrix = value
+        writer = table_writer_class(headers=header, value_matrix=value)
 
         assert writer.dumps() == ""
         assert str(writer) == ""
@@ -278,11 +274,9 @@ class Test_CsvTableWriter_write_table_iter:
         ],
     )
     def test_normal(self, capsys, table, header, value, expected):
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.headers = header
-        writer.value_matrix = value
-        writer.iteration_length = len(value)
+        writer = table_writer_class(
+            table_name=table, headers=header, value_matrix=value, iteration_length=len(value)
+        )
         writer.write_table_iter()
 
         out, err = capsys.readouterr()
@@ -295,8 +289,6 @@ class Test_CsvTableWriter_write_table_iter:
         [[data.header, data.value, data.expected] for data in exception_test_data_list],
     )
     def test_smoke_empty(self, header, value, expected):
-        writer = table_writer_class()
-        writer.headers = header
-        writer.value_matrix = value
+        writer = table_writer_class(headers=header, value_matrix=value)
 
         writer.write_table_iter()

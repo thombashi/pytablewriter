@@ -269,11 +269,9 @@ class Test_HtmlTableWriter_write_table:
         ],
     )
     def test_normal(self, capsys, table, indent, header, value, expected):
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.indent_string = indent
-        writer.headers = header
-        writer.value_matrix = value
+        writer = table_writer_class(
+            table_name=table, indent_string=indent, headers=header, value_matrix=value
+        )
         writer.write_table()
 
         out, err = capsys.readouterr()
@@ -284,9 +282,8 @@ class Test_HtmlTableWriter_write_table:
         assert str(writer) == expected
 
     def test_normal_styles(self, capsys):
-        writer = table_writer_class()
+        writer = table_writer_class(column_styles=vut_styles)
         writer.from_tabledata(vut_style_tabledata)
-        writer.column_styles = vut_styles
         writer.write_table()
 
         expected = dedent(
@@ -347,29 +344,30 @@ class Test_HtmlTableWriter_write_table:
         assert out == expected
 
     def test_normal_valign(self, capsys):
-        writer = table_writer_class()
-        writer.table_name = "vertical-align"
-        writer.headers = [
-            "",
-            "top",
-            "middle",
-            "bottom",
-            "top-right",
-            "middle-right",
-            "bottom-right",
-        ]
-        writer.value_matrix = [
-            ["te\nst", "x", "x", "x", "x", "x", "x"],
-        ]
-        writer.column_styles = [
-            Style(vertical_align="baseline"),
-            Style(vertical_align="top"),
-            Style(vertical_align="middle"),
-            Style(vertical_align="bottom"),
-            Style(align="right", vertical_align="top"),
-            Style(align="right", vertical_align="middle"),
-            Style(align="right", vertical_align="bottom"),
-        ]
+        writer = table_writer_class(
+            table_name="vertical-align",
+            headers=[
+                "",
+                "top",
+                "middle",
+                "bottom",
+                "top-right",
+                "middle-right",
+                "bottom-right",
+            ],
+            value_matrix=[
+                ["te\nst", "x", "x", "x", "x", "x", "x"],
+            ],
+            column_styles=[
+                Style(vertical_align="baseline"),
+                Style(vertical_align="top"),
+                Style(vertical_align="middle"),
+                Style(vertical_align="bottom"),
+                Style(align="right", vertical_align="top"),
+                Style(align="right", vertical_align="middle"),
+                Style(align="right", vertical_align="bottom"),
+            ],
+        )
 
         writer.write_table()
 
@@ -405,10 +403,11 @@ class Test_HtmlTableWriter_write_table:
         assert out == expected
 
     def test_normal_line_breaks(self, capsys):
-        writer = table_writer_class()
-        writer.table_name = "line breaks"
-        writer.headers = ["a\nb", "\nc\n\nd\n", "e\r\nf"]
-        writer.value_matrix = [["v1\nv1", "v2\n\nv2", "v3\r\nv3"]]
+        writer = table_writer_class(
+            table_name="line breaks",
+            headers=["a\nb", "\nc\n\nd\n", "e\r\nf"],
+            value_matrix=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
+        )
         writer.write_table()
 
         expected = """\

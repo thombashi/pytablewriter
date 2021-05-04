@@ -152,30 +152,30 @@ class Test_CssTableWriter_write_table:
         assert out == expected
 
     def test_normal_valign(self, capsys):
-        writer = table_writer_class()
-        writer.table_name = "vertical-align"
-        writer.headers = [
-            "",
-            "top",
-            "middle",
-            "bottom",
-            "top-right",
-            "middle-right",
-            "bottom-right",
-        ]
-        writer.value_matrix = [
-            ["te\nst", "x", "x", "x", "x", "x", "x"],
-        ]
-        writer.column_styles = [
-            Style(vertical_align="baseline"),
-            Style(vertical_align="top"),
-            Style(vertical_align="middle"),
-            Style(vertical_align="bottom"),
-            Style(align="right", vertical_align="top"),
-            Style(align="right", vertical_align="middle"),
-            Style(align="right", vertical_align="bottom"),
-        ]
-
+        writer = table_writer_class(
+            table_name="vertical-align",
+            headers=[
+                "",
+                "top",
+                "middle",
+                "bottom",
+                "top-right",
+                "middle-right",
+                "bottom-right",
+            ],
+            value_matrix=[
+                ["te\nst", "x", "x", "x", "x", "x", "x"],
+            ],
+            column_styles=[
+                Style(vertical_align="baseline"),
+                Style(vertical_align="top"),
+                Style(vertical_align="middle"),
+                Style(vertical_align="bottom"),
+                Style(align="right", vertical_align="top"),
+                Style(align="right", vertical_align="middle"),
+                Style(align="right", vertical_align="bottom"),
+            ],
+        )
         writer.write_table()
 
         expected = """\
@@ -239,10 +239,9 @@ class Test_CssTableWriter_write_table:
         assert out == expected
 
     def test_normal_write_style_tag(self, capsys):
-        writer = table_writer_class()
-        writer.table_name = "none value"
-        writer.headers = ["none"]
-        writer.value_matrix = [[None]]
+        writer = table_writer_class(
+            table_name="none value", headers=["none"], value_matrix=[[None]]
+        )
         writer.write_table(write_style_tag=True)
         expected = """\
 <style type="text/css">
@@ -328,11 +327,9 @@ class Test_CssTableWriter_write_table:
         ],
     )
     def test_normal_empty(self, table, indent, header, value, expected):
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.indent_string = indent
-        writer.headers = header
-        writer.value_matrix = value
+        writer = table_writer_class(
+            table_name=table, indent_string=indent, headers=header, value_matrix=value
+        )
 
         assert writer.dumps() == ""
         assert str(writer) == ""

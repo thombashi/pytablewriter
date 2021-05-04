@@ -500,12 +500,20 @@ class Test_MarkdownTableWriter_write_table:
         ],
     )
     def test_normal(self, capsys, table, indent, header, value, is_formatting_float, expected):
-        writer = table_writer_class()
+        writer = table_writer_class(
+            table_name=table,
+            headers=header,
+            value_matrix=value,
+            is_formatting_float=is_formatting_float,
+        )
+        """
         writer.table_name = table
         writer.set_indent_level(indent)
         writer.headers = header
         writer.value_matrix = value
         writer.is_formatting_float = is_formatting_float
+        """
+        writer.set_indent_level(indent)
         writer.register_trans_func(trans_func)
         writer.write_table()
 
@@ -566,8 +574,7 @@ class Test_MarkdownTableWriter_write_table:
         assert out == expected
 
     def test_normal_multiple_write(self, capsys):
-        writer = table_writer_class()
-        writer.is_write_null_line_after_table = True
+        writer = table_writer_class(is_write_null_line_after_table=True)
         writer.from_tabledata(
             TableData(
                 "first",
@@ -733,9 +740,8 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.sub("", out) == expected
 
     def test_normal_style_mix(self):
-        writer = table_writer_class()
+        writer = table_writer_class(column_styles=vut_styles)
         writer.from_tabledata(vut_style_tabledata)
-        writer.column_styles = vut_styles
 
         expected = dedent(
             """\
@@ -765,22 +771,23 @@ class Test_MarkdownTableWriter_write_table:
 
             return None
 
-        writer = table_writer_class()
-        writer.table_name = "style filter"
-        writer.headers = ["left", "center", "right", "overwrite l", "overwrite c", "overwrite r"]
-        writer.value_matrix = [
-            [1, "c", "r", 1, "c", "r"],
-            [2.2, "left", "left", 2.2, "right", "center"],
-        ]
-        writer.margin = 1
-        writer.column_styles = [
-            None,
-            None,
-            None,
-            Style(align="center"),
-            Style(align="right"),
-            Style(align="center"),
-        ]
+        writer = table_writer_class(
+            table_name="style filter",
+            headers=["left", "center", "right", "overwrite l", "overwrite c", "overwrite r"],
+            value_matrix=[
+                [1, "c", "r", 1, "c", "r"],
+                [2.2, "left", "left", 2.2, "right", "center"],
+            ],
+            margin=1,
+            column_styles=[
+                None,
+                None,
+                None,
+                Style(align="center"),
+                Style(align="right"),
+                Style(align="center"),
+            ],
+        )
         output_wo_theme = writer.dumps()
 
         writer.add_style_filter(style_filter)
@@ -844,10 +851,11 @@ class Test_MarkdownTableWriter_write_table:
             writer.set_theme("not_existing_theme")
 
     def test_normal_set_style(self):
-        writer = table_writer_class()
-        writer.table_name = "set style method"
-        writer.headers = ["normal", "style by idx", "style by header"]
-        writer.value_matrix = [[11, 11, 11], [123456, 123456, 123456]]
+        writer = table_writer_class(
+            table_name="set style method",
+            headers=["normal", "style by idx", "style by header"],
+            value_matrix=[[11, 11, 11], [123456, 123456, 123456]],
+        )
 
         writer.set_style(1, Style(font_weight="bold", thousand_separator=","))
         writer.set_style(
@@ -919,13 +927,14 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.sub("", out) == expected
 
     def test_normal_ansi_style(self):
-        writer = table_writer_class()
-        writer.column_styles = [
-            Style(decoration_line="strike"),
-            Style(decoration_line="line-through"),
-        ]
-        writer.headers = ["w/ strike", "w/ line through"]
-        writer.value_matrix = [["strike", "line-through"]]
+        writer = table_writer_class(
+            headers=["w/ strike", "w/ line through"],
+            value_matrix=[["strike", "line-through"]],
+            column_styles=[
+                Style(decoration_line="strike"),
+                Style(decoration_line="line-through"),
+            ],
+        )
 
         expected = dedent(
             """\
@@ -946,12 +955,13 @@ class Test_MarkdownTableWriter_write_table:
             Style(color="red"),
             Style(bg_color="white"),
         ]
-        writer = table_writer_class()
-        writer.column_styles = column_styles
-        writer.headers = ["fg color", "bg color"]
-        writer.value_matrix = [["hoge", "foo"]]
+        writer = table_writer_class(
+            column_styles=column_styles,
+            headers=["fg color", "bg color"],
+            value_matrix=[["hoge", "foo"]],
+            colorize_terminal=True,
+        )
 
-        writer.colorize_terminal = True
         out = writer.dumps()
         assert regexp_ansi_escape.search(out)
         assert (
@@ -978,16 +988,17 @@ class Test_MarkdownTableWriter_write_table:
         )
 
     def test_normal_enable_ansi_escape(self):
-        writer = table_writer_class()
-        writer.column_styles = [
-            Style(font_weight="bold"),
-            Style(decoration_line="line-through"),
-        ]
-        writer.headers = ["w/ bold", "w/ line through"]
-        writer.value_matrix = [["hoge", "foo"]]
-        writer.colorize_terminal = True
+        writer = table_writer_class(
+            column_styles=[
+                Style(font_weight="bold"),
+                Style(decoration_line="line-through"),
+            ],
+            headers=["w/ bold", "w/ line through"],
+            value_matrix=[["hoge", "foo"]],
+            colorize_terminal=True,
+            enable_ansi_escape=True,
+        )
 
-        writer.enable_ansi_escape = True
         out = writer.dumps()
         assert regexp_ansi_escape.search(out)
 
@@ -1001,9 +1012,8 @@ class Test_MarkdownTableWriter_write_table:
         assert regexp_ansi_escape.search(out)
 
     def test_normal_margin_1(self, capsys):
-        writer = table_writer_class()
+        writer = table_writer_class(margin=1)
         writer.from_tabledata(TableData("", headers, value_matrix))
-        writer.margin = 1
         writer.write_table()
 
         expected = dedent(
@@ -1022,9 +1032,8 @@ class Test_MarkdownTableWriter_write_table:
         assert out == expected
 
     def test_normal_margin_2(self, capsys):
-        writer = table_writer_class()
+        writer = table_writer_class(margin=2)
         writer.from_tabledata(TableData("", headers, value_matrix))
-        writer.margin = 2
         writer.write_table()
 
         expected = dedent(
@@ -1043,9 +1052,9 @@ class Test_MarkdownTableWriter_write_table:
         assert out == expected
 
     def test_normal_register_trans_func(self):
-        writer = table_writer_class()
-        writer.headers = ["a", "b"]
-        writer.value_matrix = [["foo", True], ["bar", False]]
+        writer = table_writer_class(
+            headers=["a", "b"], value_matrix=[["foo", True], ["bar", False]]
+        )
         writer.register_trans_func(trans_func)
 
         expected = dedent(
@@ -1063,15 +1072,16 @@ class Test_MarkdownTableWriter_write_table:
         assert output == expected
 
     def test_normal_flavor(self):
-        writer = table_writer_class()
-        writer.enable_ansi_escape = False
-        writer.column_styles = [
-            None,
-            Style(decoration_line="strike"),
-            Style(decoration_line="line-through"),
-        ]
-        writer.headers = ["w/o style", "w/ strike", "w/ line through"]
-        writer.value_matrix = [["no", "strike", "line-through"]]
+        writer = table_writer_class(
+            enable_ansi_escape=False,
+            column_styles=[
+                None,
+                Style(decoration_line="strike"),
+                Style(decoration_line="line-through"),
+            ],
+            headers=["w/o style", "w/ strike", "w/ line through"],
+            value_matrix=[["no", "strike", "line-through"]],
+        )
 
         expected = dedent(
             """\
@@ -1087,9 +1097,7 @@ class Test_MarkdownTableWriter_write_table:
         assert output == expected
 
     def test_normal_avoid_overwrite_stream_by_dumps(self):
-        writer = table_writer_class()
-        writer.headers = ["a", "b"]
-        writer.value_matrix = [["foo", "bar"]]
+        writer = table_writer_class(headers=["a", "b"], value_matrix=[["foo", "bar"]])
         writer.stream = io.StringIO()
 
         expected = dedent(
@@ -1112,9 +1120,10 @@ class Test_MarkdownTableWriter_write_table:
         assert output == expected
 
     def test_normal_escape_html_tag(self, capsys):
-        writer = table_writer_class()
-        writer.headers = ["no", "text"]
-        writer.value_matrix = [[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]]
+        writer = table_writer_class(
+            headers=["no", "text"],
+            value_matrix=[[1, "<caption>Table 'formatting for Jupyter Notebook.</caption>"]],
+        )
         writer.update_preprocessor(is_escape_html_tag=True)
         writer.write_table()
 
@@ -1200,11 +1209,9 @@ class Test_MarkdownTableWriter_write_table_iter:
         ],
     )
     def test_normal(self, capsys, table, header, value, expected):
-        writer = table_writer_class()
-        writer.table_name = table
-        writer.headers = header
-        writer.value_matrix = value
-        writer.iteration_length = len(value)
+        writer = table_writer_class(
+            table_name=table, headers=header, value_matrix=value, iteration_length=len(value)
+        )
         writer.write_table_iter()
 
         out, err = capsys.readouterr()
@@ -1217,13 +1224,14 @@ class Test_MarkdownTableWriter_dump:
     def test_normal(self, tmpdir):
         test_filepath = str(tmpdir.join("test.sqlite"))
 
-        writer = table_writer_class()
-        writer.headers = ["a", "b"]
-        writer.value_matrix = [["foo", "bar"]]
-        writer.column_styles = [
-            Style(color="red"),
-            Style(bg_color="white"),
-        ]
+        writer = table_writer_class(
+            headers=["a", "b"],
+            value_matrix=[["foo", "bar"]],
+            column_styles=[
+                Style(color="red"),
+                Style(bg_color="white"),
+            ],
+        )
         writer.dump(test_filepath)
 
         expected = dedent(
@@ -1332,9 +1340,7 @@ class Test_MarkdownTableWriter_line_break_handling:
         ],
     )
     def test_normal_line(self, value, expected):
-        writer = table_writer_class()
-        writer.headers = ["no", "text"]
-        writer.value_matrix = [[1, "first\nsecond"]]
+        writer = table_writer_class(headers=["no", "text"], value_matrix=[[1, "first\nsecond"]])
         writer.update_preprocessor(line_break_handling=value)
 
         out = writer.dumps()
@@ -1375,8 +1381,7 @@ class Test_MarkdownTableWriter_from_dataframe:
         ],
     )
     def test_normal(self, tmpdir, add_index_column, expected):
-        writer = table_writer_class()
-        writer.table_name = "add_index_column: {}".format(add_index_column)
+        writer = table_writer_class(table_name="add_index_column: {}".format(add_index_column))
         df = pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"])
 
         writer.from_dataframe(df, add_index_column=add_index_column)
@@ -1438,8 +1443,7 @@ class Test_MarkdownTableWriter_from_series:
         ],
     )
     def test_normal(self, add_index_column, expected):
-        writer = table_writer_class()
-        writer.table_name = "add_index_column: {}".format(add_index_column)
+        writer = table_writer_class(table_name="add_index_column: {}".format(add_index_column))
 
         writer.from_series(
             pd.Series(list(range(100))).describe(), add_index_column=add_index_column
