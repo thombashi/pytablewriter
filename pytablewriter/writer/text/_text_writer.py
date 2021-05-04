@@ -115,7 +115,11 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if value < 0:
             raise ValueError("margin value must be zero or greater")
 
+        if self.__margin == value:
+            return
+
         self.__margin = value
+        self._clear_preprocess()
 
     def __update_template(self) -> None:
         self.__value_cell_margin_format = self.__make_margin_format(" ")
