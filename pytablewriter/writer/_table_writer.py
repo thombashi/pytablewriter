@@ -232,11 +232,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.table_name = kwargs.get("table_name", "")
         self.value_matrix = kwargs.get("value_matrix", [])
 
-        self.is_write_header = True
-        self.is_write_header_separator_row = True
-        self.is_write_value_separator_row = False
-        self.is_write_opening_row = False
-        self.is_write_closing_row = False
+        self.is_write_header = kwargs.get("is_write_header", True)
+        self.is_write_header_separator_row = kwargs.get("is_write_header_separator_row", True)
+        self.is_write_value_separator_row = kwargs.get("is_write_value_separator_row", False)
+        self.is_write_opening_row = kwargs.get("is_write_opening_row", False)
+        self.is_write_closing_row = kwargs.get("is_write_closing_row", False)
 
         self._use_default_header = False
 
@@ -249,7 +249,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor.update_strict_level_map({Typecode.BOOL: 1})
 
         self.is_formatting_float = kwargs.get("is_formatting_float", True)
-        self.is_padding = True
+        self.is_padding = kwargs.get("is_padding", True)
 
         self.headers = kwargs.get("headers", [])
         self.type_hints = kwargs.get("type_hints", [])
@@ -271,17 +271,17 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._is_require_table_name = False
         self._is_require_header = False
 
-        self.iteration_length = -1
+        self.iteration_length = kwargs.get("iteration_length", -1)
         self.write_callback = lambda _iter_count, _iter_length: None  # NOP
         self._iter_count = None  # type: Optional[int]
 
-        self.__default_style = Style()
+        self.__default_style = kwargs.get("default_style", Style())
         self.__col_style_list = kwargs.get("column_styles", [])  # type: List[Optional[Style]]
         self._style_filters = []  # type: List[StyleFilterFunc]
         self._styler = self._create_styler(self)
-        self.style_filter_kwargs = {}  # type: Dict[str, Any]
+        self.style_filter_kwargs = kwargs.get("style_filter_kwargs", {})  # type: Dict[str, Any]
         self.__colorize_terminal = kwargs.get("colorize_terminal", True)
-        self.__enable_ansi_escape = True
+        self.__enable_ansi_escape = kwargs.get("enable_ansi_escape", True)
 
         self.max_workers = kwargs.get("max_workers", 1)
 
@@ -290,13 +290,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _repr_html_(self) -> str:
         from .text._html import HtmlTableWriter
 
-        writer = HtmlTableWriter()
-        writer.table_name = self.table_name
-        writer.headers = self.headers
-        writer.value_matrix = self.value_matrix
-        writer.column_styles = self.column_styles
-        writer.colorize_terminal = self.colorize_terminal
-        writer.enable_ansi_escape = self.enable_ansi_escape
+        writer = HtmlTableWriter(
+            table_name=self.table_name,
+            headers=self.headers,
+            value_matrix=self.value_matrix,
+            column_styles=self.column_styles,
+            colorize_terminal=self.colorize_terminal,
+            enable_ansi_escape=self.enable_ansi_escape,
+        )
 
         return writer.dumps()
 
