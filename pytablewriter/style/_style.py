@@ -203,6 +203,9 @@ class Style:
         self.__padding = value
 
     def __init__(self, **kwargs) -> None:
+        self.__update_color(initialize=True, **kwargs)
+        self.__update_align(initialize=True, **kwargs)
+        self.__update_font(initialize=True, **kwargs)
         self.__update(initialize=True, **kwargs)
 
     def __repr__(self) -> str:
@@ -251,9 +254,12 @@ class Style:
 
     def update(self, **kwargs) -> None:
         """Update specified style attributes."""
+        self.__update_color(initialize=False, **kwargs)
+        self.__update_align(initialize=False, **kwargs)
+        self.__update_font(initialize=False, **kwargs)
         self.__update(initialize=False, **kwargs)
 
-    def __update(self, initialize: bool, **kwargs) -> None:
+    def __update_color(self, initialize: bool, **kwargs) -> None:
         fg_color = kwargs.get("color")
         if fg_color:
             self.__fg_color: Optional[Color] = Color(fg_color)
@@ -266,32 +272,7 @@ class Style:
         elif initialize:
             self.__bg_color = None
 
-        padding = kwargs.get("padding")
-        if padding is not None:
-            self.__padding = padding
-        elif initialize:
-            self.__padding = None
-
-        align = kwargs.get("align")
-        if align:
-            self.__align = normalize_enum(align, Align, default=Align.AUTO)
-        elif initialize:
-            self.__align = Align.AUTO
-
-        valign = kwargs.get("vertical_align")
-        if valign:
-            self.__valign = normalize_enum(valign, VerticalAlign, default=VerticalAlign.BASELINE)
-        elif initialize:
-            self.__valign = VerticalAlign.BASELINE
-
-        decoration_line = kwargs.get("decoration_line")
-        if decoration_line:
-            self.__decoration_line = normalize_enum(
-                decoration_line, DecorationLine, default=DecorationLine.NONE
-            )
-        elif initialize:
-            self.__decoration_line = DecorationLine.NONE
-
+    def __update_font(self, initialize: bool, **kwargs) -> None:
         font_size = kwargs.get("font_size")
         if font_size:
             self.__font_size = normalize_enum(
@@ -312,6 +293,34 @@ class Style:
             self.__font_weight = normalize_enum(font_weight, FontWeight, default=FontWeight.NORMAL)
         elif initialize:
             self.__font_weight = FontWeight.NORMAL
+
+    def __update_align(self, initialize: bool, **kwargs) -> None:
+        align = kwargs.get("align")
+        if align:
+            self.__align = normalize_enum(align, Align, default=Align.AUTO)
+        elif initialize:
+            self.__align = Align.AUTO
+
+        valign = kwargs.get("vertical_align")
+        if valign:
+            self.__valign = normalize_enum(valign, VerticalAlign, default=VerticalAlign.BASELINE)
+        elif initialize:
+            self.__valign = VerticalAlign.BASELINE
+
+    def __update(self, initialize: bool, **kwargs) -> None:
+        padding = kwargs.get("padding")
+        if padding is not None:
+            self.__padding = padding
+        elif initialize:
+            self.__padding = None
+
+        decoration_line = kwargs.get("decoration_line")
+        if decoration_line:
+            self.__decoration_line = normalize_enum(
+                decoration_line, DecorationLine, default=DecorationLine.NONE
+            )
+        elif initialize:
+            self.__decoration_line = DecorationLine.NONE
 
         thousand_separator = kwargs.get("thousand_separator")
         if thousand_separator:
