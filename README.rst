@@ -51,7 +51,7 @@ Features
     - Binary file formats:
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
         - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ pickle file
-        - SQLite database
+        - `SQLite <https://www.sqlite.org/index.html>`__ database
     - Application specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
 - Automatic table cell formatting:
@@ -91,9 +91,9 @@ Some of the formats require additional dependency packages, you can install thes
     ``pip install pytablewriter[es]``, Elasticsearch
     ``pip install pytablewriter[excel]``, Excel
     ``pip install pytablewriter[html]``, HTML
-    ``pip install pytablewriter[sqlite]``, SQLite
+    ``pip install pytablewriter[sqlite]``, SQLite database
     ``pip install pytablewriter[toml]``, TOML
-    ``pip install pytablewriter[theme]``, Theme plugins
+    ``pip install pytablewriter[theme]``, pytablewriter theme plugins
     ``pip install pytablewriter[all]``, Install all of the optional dependencies
 
 Installation: conda
@@ -229,16 +229,16 @@ Write a Unicode table
         from pytablewriter import UnicodeTableWriter
 
         def main():
-            writer = UnicodeTableWriter()
-            writer.table_name = "example_table"
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
-
+            writer = UnicodeTableWriter(
+                table_name="example_table",
+                headers=["int", "float", "str", "bool", "mix", "time"],
+                value_matrix=[
+                    [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
+                    [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
+                    [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
+                    [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+                ]
+            )
             writer.write_table()
 
         if __name__ == "__main__":
@@ -264,20 +264,23 @@ Write a table with JavaScript format (as a nested list variable definition)
 :Sample Code:
     .. code-block:: python
 
-        import pytablewriter
+        import pytablewriter as ptw
+
 
         def main():
-            writer = pytablewriter.JavaScriptTableWriter()
-            writer.table_name = "example_table"
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
+            writer = ptw.JavaScriptTableWriter(
+                table_name="js_variable",
+                headers=["int", "float", "str", "bool", "mix", "time"],
+                value_matrix=[
+                    [0, 0.1, "hoge", True, 0, "2017-01-01 03:04:05+0900"],
+                    [2, "-2.23", "foo", False, None, "2017-12-23 45:01:23+0900"],
+                    [3, 0, "bar", "true", "inf", "2017-03-03 33:44:55+0900"],
+                    [-10, -9.9, "", "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+                ],
+            )
 
             writer.write_table()
+
 
         if __name__ == "__main__":
             main()
@@ -285,12 +288,12 @@ Write a table with JavaScript format (as a nested list variable definition)
 :Output:
     .. code-block:: js
 
-        const example_table = [
+        const js_variable = [
             ["int", "float", "str", "bool", "mix", "time"],
-            [0, 0.10, "hoge", true, 0, "2017-01-01 03:04:05+0900"],
-            [2, -2.23, "foo", false, null, "2017-12-23 12:34:51+0900"],
-            [3, 0.00, "bar", true, Infinity, "2017-03-03 22:44:55+0900"],
-            [-10, -9.90, "", false, NaN, "2017-01-01 00:00:00+0900"]
+            [0, 0.1, "hoge", true, 0, "2017-01-01 03:04:05+0900"],
+            [2, -2.23, "foo", false, null, "2017-12-23 45:01:23+0900"],
+            [3, 0, "bar", true, Infinity, "2017-03-03 33:44:55+0900"],
+            [-10, -9.9, "", "FALSE", NaN, "2017-01-01 00:00:00+0900"]
         ];
 
 Write a Markdown table from ``pandas.DataFrame`` instance
@@ -337,11 +340,10 @@ Adding a column of the DataFrame index if you specify ``add_index_column=True``:
     .. code-block:: python
 
         import pandas as pd
-        from pytablewriter import MarkdownTableWriter
+        import pytablewriter as ptw
 
         def main():
-            writer = MarkdownTableWriter()
-            writer.table_name = "add_index_column"
+            writer = ptw.MarkdownTableWriter(table_name="add_index_column")
             writer.from_dataframe(
                 pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"]),
                 add_index_column=True,
@@ -365,23 +367,24 @@ Write a markdown table from a space-separated values
 :Sample Code:
     .. code-block:: python
 
-        from textwrap import dedent
-        import pytablewriter
+        import pytablewriter as ptw
+
 
         def main():
-            writer = pytablewriter.MarkdownTableWriter()
-            writer.table_name = "ps"
+            writer = ptw.MarkdownTableWriter(table_name="ps")
             writer.from_csv(
-                dedent("""\
-                    USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-                    root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init
-                    root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]
-                    root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]
-                    root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]
-                    root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]
-                """),
-                delimiter=" ")
+                """
+                USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+                root         1  0.0  0.4  77664  8784 ?        Ss   May11   0:02 /sbin/init
+                root         2  0.0  0.0      0     0 ?        S    May11   0:00 [kthreadd]
+                root         4  0.0  0.0      0     0 ?        I<   May11   0:00 [kworker/0:0H]
+                root         6  0.0  0.0      0     0 ?        I<   May11   0:00 [mm_percpu_wq]
+                root         7  0.0  0.0      0     0 ?        S    May11   0:01 [ksoftirqd/0]
+                """,
+                delimiter=" ",
+            )
             writer.write_table()
+
 
         if __name__ == "__main__":
             main()
@@ -406,19 +409,22 @@ Get rendered tabular text as str
 :Sample Code:
     .. code-block:: python
 
-        import pytablewriter
+        import pytablewriter as ptw
+
 
         def main():
-            writer = pytablewriter.MarkdownTableWriter()
-            writer.headers = ["int", "float", "str", "bool", "mix", "time"]
-            writer.value_matrix = [
-                [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-                [2,   "-2.23",  "foo",  False,  None,   "2017-12-23 45:01:23+0900"],
-                [3,   0,        "bar",  "true",  "inf", "2017-03-03 33:44:55+0900"],
-                [-10, -9.9,     "",     "FALSE", "nan", "2017-01-01 00:00:00+0900"],
-            ]
+            writer = ptw.MarkdownTableWriter(
+                headers=["int", "float", "str", "bool", "mix", "time"],
+                value_matrix=[
+                    [0, 0.1, "hoge", True, 0, "2017-01-01 03:04:05+0900"],
+                    [2, "-2.23", "foo", False, None, "2017-12-23 45:01:23+0900"],
+                    [3, 0, "bar", "true", "inf", "2017-03-03 33:44:55+0900"],
+                    [-10, -9.9, "", "FALSE", "nan", "2017-01-01 00:00:00+0900"],
+                ],
+            )
 
             print(writer.dumps())
+
 
         if __name__ == "__main__":
             main()
@@ -444,36 +450,36 @@ for each column by ``column_styles`` attribute of writer classes.
 :Sample Code:
     .. code-block:: python
 
-        from pytablewriter import MarkdownTableWriter
+        import pytablewriter as ptw
         from pytablewriter.style import Style
 
+
         def main():
-            writer = MarkdownTableWriter()
-            writer.table_name = "set style by column_styles"
-            writer.headers = [
-                "auto align",
-                "left align",
-                "center align",
-                "bold",
-                "italic",
-                "bold italic ts",
-            ]
-            writer.value_matrix = [
-                [11, 11, 11, 11, 11, 11],
-                [1234, 1234, 1234, 1234, 1234, 1234],
-            ]
-
-            # specify styles for each column
-            writer.column_styles = [
-                Style(),
-                Style(align="left"),
-                Style(align="center"),
-                Style(font_weight="bold"),
-                Style(font_style="italic"),
-                Style(font_weight="bold", font_style="italic", thousand_separator=","),
-            ]
-
+            writer = ptw.MarkdownTableWriter(
+                table_name="set style by column_styles",
+                headers=[
+                    "auto align",
+                    "left align",
+                    "center align",
+                    "bold",
+                    "italic",
+                    "bold italic ts",
+                ],
+                value_matrix=[
+                    [11, 11, 11, 11, 11, 11],
+                    [1234, 1234, 1234, 1234, 1234, 1234],
+                ],
+                column_styles=[
+                    Style(),
+                    Style(align="left"),
+                    Style(align="center"),
+                    Style(font_weight="bold"),
+                    Style(font_style="italic"),
+                    Style(font_weight="bold", font_style="italic", thousand_separator=","),
+                ],  # specify styles for each column
+            )
             writer.write_table()
+
 
         if __name__ == "__main__":
             main()
@@ -581,20 +587,23 @@ Multibyte characters also properly padded and aligned.
 :Sample Code:
     .. code-block:: python
 
-        import pytablewriter
+        import pytablewriter as ptw
+
 
         def main():
-            writer = pytablewriter.RstSimpleTableWriter()
-            writer.table_name = "生成に関するパターン"
-            writer.headers = ["パターン名", "概要", "GoF", "Code Complete[1]"]
-            writer.value_matrix = [
-                ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
-                ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
-                ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
-                ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
-                ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
-            ]
+            writer = ptw.RstSimpleTableWriter(
+                table_name="生成に関するパターン",
+                headers=["パターン名", "概要", "GoF", "Code Complete[1]"],
+                value_matrix=[
+                    ["Abstract Factory", "関連する一連のインスタンスを状況に応じて、適切に生成する方法を提供する。", "Yes", "Yes"],
+                    ["Builder", "複合化されたインスタンスの生成過程を隠蔽する。", "Yes", "No"],
+                    ["Factory Method", "実際に生成されるインスタンスに依存しない、インスタンスの生成方法を提供する。", "Yes", "Yes"],
+                    ["Prototype", "同様のインスタンスを生成するために、原型のインスタンスを複製する。", "Yes", "No"],
+                    ["Singleton", "あるクラスについて、インスタンスが単一であることを保証する。", "Yes", "Yes"],
+                ],
+            )
             writer.write_table()
+
 
         if __name__ == "__main__":
             main()
