@@ -483,12 +483,13 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     def add_style_filter(self, style_filter: StyleFilterFunc) -> None:
-        """Add a style filter function.
+        """Add a style filter function to the writer.
 
         Args:
             style_filter:
-                A function for filtering table cells, the function required to implement
-                the following Protocol:
+                A function that called for each cell in the table to apply a style
+                to table cells.
+                The function will be required to implement the following Protocol:
 
                 .. code-block:: python
 
@@ -496,10 +497,16 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                         def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
                             ...
 
-                You can pass args to kwargs via :py:attr:`~.style_filter_kwargs`
-                In default, kwargs includes:
+                If more than one style filter function is added to the writer,
+                it will be called from the last one added.
+                These style functions should return |None| when not needed to apply styles.
+                If all of the style functions returned |None|,
+                :py:attr:`~.default_style` will be applied.
 
-                - ``writer``: the writer instance that the caller of the ``style_filter function``.
+                You can pass keyword arguments to style filter functions via
+                :py:attr:`~.style_filter_kwargs`. In default, the attribute includes:
+
+                    - ``writer``: the writer instance that the caller of a ``style_filter function``
         """
 
         self._style_filters.insert(0, style_filter)
