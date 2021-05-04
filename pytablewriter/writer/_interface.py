@@ -21,7 +21,8 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractproperty
     def support_split_write(self) -> bool:  # pragma: no cover
-        """Represents the writer class supported iterative table writing (``write_table_iter`` method).
+        """Represents the writer class supported iterative table writing
+        (``write_table_iter`` method).
 
         Returns:
             bool: |True| if the writer supported iterative table writing.

@@ -197,7 +197,8 @@ class RstGridTableWriter(RstTableWriter):
 class RstSimpleTableWriter(RstTableWriter):
     """
     A table writer class for reStructuredText
-    `Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
+    `Simple Tables
+    <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__
     format.
 
         :Example:
