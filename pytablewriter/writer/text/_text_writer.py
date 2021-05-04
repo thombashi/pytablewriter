@@ -106,21 +106,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     """
 
-    @property
-    def margin(self) -> int:
-        return self._margin
-
-    @margin.setter
-    def margin(self, value: int) -> None:
-        if value < 0:
-            raise ValueError("margin value must be zero or greater")
-
-        if self._margin == value:
-            return
-
-        self._margin = value
-        self._clear_preprocess()
-
     def __update_template(self) -> None:
         self.__value_cell_margin_format = self.__make_margin_format(" ")
         self.__opening_row_cell_format = self.__make_margin_format(self.char_opening_row)
@@ -163,6 +148,21 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
     def __repr__(self) -> str:
         return self.dumps()
+
+    @property
+    def margin(self) -> int:
+        return self._margin
+
+    @margin.setter
+    def margin(self, value: int) -> None:
+        if value < 0:
+            raise ValueError("margin value must be zero or greater")
+
+        if self._margin == value:
+            return
+
+        self._margin = value
+        self._clear_preprocess()
 
     def _init_cross_point_maps(self) -> None:
         self.__cross_point_maps = {

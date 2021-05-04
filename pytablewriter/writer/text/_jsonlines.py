@@ -28,7 +28,8 @@ class JsonLinesTableWriter(JsonTableWriter):
     def write_table(self, **kwargs) -> None:
         """
         |write_table| with
-        `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
+        `Line-delimited JSON(LDJSON)
+        <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
         /NDJSON/JSON Lines format.
 
         Args:
