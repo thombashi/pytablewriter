@@ -298,6 +298,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             colorize_terminal=self.colorize_terminal,
             enable_ansi_escape=self.enable_ansi_escape,
         )
+        writer._dp_extractor = self._dp_extractor
 
         return writer.dumps()
 
