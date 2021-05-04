@@ -9,8 +9,8 @@ import pytest
 import pytablewriter as ptw
 from pytablewriter.typehint import Integer, RealNumber
 
-from ..._common import print_test_result
-from ...data import (
+from ...._common import print_test_result
+from ....data import (
     Data,
     headers,
     mix_header_list,

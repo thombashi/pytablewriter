@@ -8,8 +8,8 @@ import pytest
 
 import pytablewriter
 
-from ..._common import print_test_result
-from ...data import (
+from ...._common import print_test_result
+from ....data import (
     Data,
     headers,
     mix_header_list,
@@ -21,7 +21,7 @@ from ...data import (
     vut_style_tabledata,
     vut_styles,
 )
-from ._common import regexp_ansi_escape
+from .._common import regexp_ansi_escape
 
 
 normal_test_data_list = [
