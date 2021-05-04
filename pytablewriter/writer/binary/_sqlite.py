@@ -8,11 +8,11 @@ from ._interface import AbstractBinaryTableWriter
 
 class SqliteTableWriter(AbstractBinaryTableWriter):
     """
-    A table writer class for SQLite database.
+    A table writer class for `SQLite <https://www.sqlite.org/index.html>`__ database.
 
     .. py:method:: write_table()
 
-        Write a table to a SQLite database.
+        Write a table to a `SQLite <https://www.sqlite.org/index.html>`__ database.
 
         :raises pytablewriter.EmptyTableNameError:
             If the |table_name| is empty.
