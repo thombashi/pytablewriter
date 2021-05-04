@@ -38,7 +38,7 @@ docs:
 
 .PHONY: idocs
 idocs:
-	@python3 -m pip install --upgrade .
+	@$(PYTHON) -m pip install --upgrade -q --disable-pip-version-check -e .
 	@make docs
 
 .PHONY: fmt
