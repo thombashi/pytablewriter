@@ -38,7 +38,7 @@ class CsvTableWriter(TextTableWriter):
 
         self._set_chars("")
         self.indent_string = ""
-        self.column_delimiter = ","
+        self.column_delimiter = kwargs.get("column_delimiter", ",")
         self._margin = 0
 
         self.is_padding = False

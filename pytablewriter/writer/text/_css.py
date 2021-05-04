@@ -28,7 +28,7 @@ class CssTableWriter(IndentationTextTableWriter):
         super().__init__(**kwargs)
 
         self.is_padding = False
-        self.indent_string = "    "
+        self.indent_string = kwargs.get("indent_string", "    ")
 
         self._dp_extractor.preprocessor.is_escape_html_tag = False
         self._quoting_flags = copy.deepcopy(NOT_QUOTING_FLAGS)

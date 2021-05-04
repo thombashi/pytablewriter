@@ -45,7 +45,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.indent_string = "    "
+        self.indent_string = kwargs.get("indent_string", "    ")
         self.column_delimiter = ", "
         self._margin = 0
 

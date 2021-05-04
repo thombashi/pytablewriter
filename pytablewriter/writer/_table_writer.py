@@ -276,7 +276,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._iter_count = None  # type: Optional[int]
 
         self.__default_style = kwargs.get("default_style", Style())
-        self.__col_style_list = kwargs.get("column_styles", [])  # type: List[Optional[Style]]
+
+        self.__col_style_list = []  # type: List[Optional[Style]]
+        self.column_styles = kwargs.get("column_styles", [])
+
         self._style_filters = []  # type: List[StyleFilterFunc]
         self._styler = self._create_styler(self)
         self.style_filter_kwargs = kwargs.get("style_filter_kwargs", {})  # type: Dict[str, Any]

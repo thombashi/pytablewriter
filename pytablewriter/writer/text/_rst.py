@@ -34,7 +34,7 @@ class RstTableWriter(IndentationTextTableWriter):
         self.char_opening_row_cross_point = "+"
         self.char_closing_row_cross_point = "+"
 
-        self.indent_string = "    "
+        self.indent_string = kwargs.get("indent_string", "    ")
         self.is_write_header_separator_row = True
         self.is_write_value_separator_row = True
         self.is_write_opening_row = True

@@ -29,7 +29,7 @@ class BorderlessTableWriter(IndentationTextTableWriter):
         self.char_left_side_row = ""
         self.char_right_side_row = ""
 
-        self.indent_string = "    "
+        self.indent_string = kwargs.get("indent_string", "    ")
         self.is_write_header_separator_row = False
         self.is_write_value_separator_row = False
         self.is_write_opening_row = False

@@ -30,7 +30,7 @@ class LatexWriter(IndentationTextTableWriter):
 
         self.is_write_opening_row = True
         self.is_write_closing_row = True
-        self.indent_string = "    "
+        self.indent_string = kwargs.get("indent_string", "    ")
         self.column_delimiter = " & "
         self.char_right_side_row = r" \\"
 
