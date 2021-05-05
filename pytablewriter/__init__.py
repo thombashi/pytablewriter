@@ -3,20 +3,6 @@
 """
 
 from dataproperty import LineBreakHandling
-from typepy import (
-    Bool,
-    DateTime,
-    Dictionary,
-    Infinity,
-    Integer,
-    IpAddress,
-    List,
-    Nan,
-    NoneType,
-    NullString,
-    RealNumber,
-    String,
-)
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
 from ._factory import TableWriterFactory
@@ -31,6 +17,20 @@ from .error import (
     WriterNotFoundError,
 )
 from .style import Align, Format
+from .typehint import (
+    Bool,
+    DateTime,
+    Dictionary,
+    Infinity,
+    Integer,
+    IpAddress,
+    List,
+    Nan,
+    NoneType,
+    NullString,
+    RealNumber,
+    String,
+)
 from .writer import (
     AbstractTableWriter,
     BoldUnicodeTableWriter,
