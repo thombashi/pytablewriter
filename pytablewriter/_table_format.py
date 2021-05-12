@@ -6,6 +6,7 @@ import enum
 from typing import Any, List
 
 from .writer import (
+    AsciiDocTableWriter,
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
     CssTableWriter,
@@ -72,6 +73,12 @@ class TableFormat(enum.Enum):
     Enum to represent table format attributes.
     """
 
+    ASCIIDOC = (
+        [AsciiDocTableWriter.FORMAT_NAME, "adoc"],
+        AsciiDocTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT,
+        ["adoc", "asciidoc", "asc"],
+    )
     CSV = ([CsvTableWriter.FORMAT_NAME], CsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
     CSS = (
         [CssTableWriter.FORMAT_NAME],

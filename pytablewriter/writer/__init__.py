@@ -8,6 +8,7 @@ from .binary import (
     SqliteTableWriter,
 )
 from .text import (
+    AsciiDocTableWriter,
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
     CssTableWriter,

@@ -28,6 +28,9 @@ class TableWriterFactory:
             ==================  ===================================
             Extension           Writer Class
             ==================  ===================================
+            ``".adoc"``         :py:class:`~.AsciiDocTableWriter`
+            ``".asciidoc"``     :py:class:`~.AsciiDocTableWriter`
+            ``".asc"``          :py:class:`~.AsciiDocTableWriter`
             ``".css"``          :py:class:`~.CssTableWriter`
             ``".csv"``          :py:class:`~.CsvTableWriter`
             ``".htm"``          :py:class:`~.HtmlTableWriter`
@@ -101,6 +104,8 @@ class TableWriterFactory:
             =============================================  ===================================
             Format name                                    Writer Class
             =============================================  ===================================
+            ``"adoc"``                                     :py:class:`~.AsciiDocTableWriter`
+            ``"asciidoc"``                                 :py:class:`~.AsciiDocTableWriter`
             ``"css"``                                      :py:class:`~.CssTableWriter`
             ``"csv"``                                      :py:class:`~.CsvTableWriter`
             ``"elasticsearch"``                            :py:class:`~.ElasticsearchWriter`
@@ -170,6 +175,8 @@ class TableWriterFactory:
                 >>> for name in ptw.TableWriterFactory.get_format_names():
                 ...     print(name)
                 ...
+                adoc
+                asciidoc
                 bold_unicode
                 borderless
                 css
@@ -228,6 +235,9 @@ class TableWriterFactory:
                 >>> for name in ptw.TableWriterFactory.get_extensions():
                 ...     print(name)
                 ...
+                adoc
+                asc
+                asciidoc
                 css
                 csv
                 htm

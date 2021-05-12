@@ -1,3 +1,4 @@
+from ._asciidoc import AsciiDocTableWriter
 from ._borderless import BorderlessTableWriter
 from ._css import CssTableWriter
 from ._csv import CsvTableWriter

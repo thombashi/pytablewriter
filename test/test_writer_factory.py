@@ -14,6 +14,8 @@ from pytablewriter.typehint import Integer
 class Test_WriterFactory_get_format_names:
     def test_normal(self):
         assert ptw.TableWriterFactory.get_format_names() == [
+            "adoc",
+            "asciidoc",
             "bold_unicode",
             "borderless",
             "css",
@@ -60,6 +62,9 @@ class Test_WriterFactory_get_format_names:
 class Test_WriterFactory_get_extensions:
     def test_normal(self):
         assert ptw.TableWriterFactory.get_extensions() == [
+            "adoc",
+            "asc",
+            "asciidoc",
             "css",
             "csv",
             "htm",
@@ -88,6 +93,11 @@ class Test_WriterFactory_create_from_file_extension:
     @pytest.mark.parametrize(
         ["value", "expected"],
         list(
+            itertools.product(
+                ["valid_ext.adoc", "valid_ext.asciidoc", ".asc", "ADOC"], [ptw.AsciiDocTableWriter]
+            )
+        )
+        + list(
             itertools.product(
                 ["valid_ext.csv", "valid_ext.CSV", ".csv", "CSV"], [ptw.CsvTableWriter]
             )
@@ -213,6 +223,8 @@ class Test_FileLoaderFactory_create_from_format_name:
     @pytest.mark.parametrize(
         ["format_name", "expected"],
         [
+            ["adoc", ptw.AsciiDocTableWriter],
+            ["asciidoc", ptw.AsciiDocTableWriter],
             ["csv", ptw.CsvTableWriter],
             ["CSV", ptw.CsvTableWriter],
             ["excel", ptw.ExcelXlsxTableWriter],

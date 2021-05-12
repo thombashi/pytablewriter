@@ -14,6 +14,7 @@ class Test_TableFormat_search_table_format:
             [
                 FormatAttr.TEXT,
                 [
+                    TableFormat.ASCIIDOC,
                     TableFormat.BOLD_UNICODE,
                     TableFormat.BORDERLESS,
                     TableFormat.CSS,

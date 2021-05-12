@@ -33,6 +33,7 @@ from .typehint import (
 )
 from .writer import (
     AbstractTableWriter,
+    AsciiDocTableWriter,
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
     CssTableWriter,
