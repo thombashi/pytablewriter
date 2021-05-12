@@ -221,7 +221,7 @@ class TableFormat(enum.Enum):
     UNICODE = (
         [UnicodeTableWriter.FORMAT_NAME],  # type: ignore
         UnicodeTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT,
+        FormatAttr.TEXT,
         [],
     )
     YAML = (
@@ -233,7 +233,7 @@ class TableFormat(enum.Enum):
     BOLD_UNICODE = (
         [BoldUnicodeTableWriter.FORMAT_NAME],  # type: ignore
         BoldUnicodeTableWriter,
-        FormatAttr.FILE | FormatAttr.TEXT,
+        FormatAttr.TEXT,
         [],
     )
     BORDERLESS = (
