@@ -7,14 +7,14 @@ from ._csv import CsvTableWriter
 
 class SpaceAlignedTableWriter(CsvTableWriter):
     """
-    A table writer class for space aligned format.
+    A table writer class for space-separated values (SSV) format.
 
         :Example:
             :ref:`example-space-aligned-table-writer`
 
     .. py:method:: write_table
 
-        |write_table| with space aligned format.
+        |write_table| with SSV format.
 
         :Example:
             :ref:`example-space-aligned-table-writer`
