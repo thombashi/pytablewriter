@@ -170,6 +170,8 @@ class TableWriterFactory:
                 >>> for name in ptw.TableWriterFactory.get_format_names():
                 ...     print(name)
                 ...
+                bold_unicode
+                borderless
                 css
                 csv
                 elasticsearch
@@ -192,6 +194,7 @@ class TableWriterFactory:
                 null
                 numpy
                 pandas
+                pandas_pickle
                 py
                 python
                 rst
