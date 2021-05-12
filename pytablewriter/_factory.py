@@ -127,6 +127,7 @@ class TableWriterFactory:
             ``"rst_simple"``/``"rst_simple_table"``        :py:class:`~.RstSimpleTableWriter`
             ``"rst_csv"``/``"rst_csv_table"``              :py:class:`~.RstCsvTableWriter`
             ``"sqlite"``                                   :py:class:`~.SqliteTableWriter`
+            ``"ssv"``                                      :py:class:`~.SpaceAlignedTableWriter`
             ``"tsv"``                                      :py:class:`~.TsvTableWriter`
             ``"toml"``                                     :py:class:`~.TomlTableWriter`
             ``"unicode"``                                  :py:class:`~.UnicodeTableWriter`
@@ -213,6 +214,7 @@ class TableWriterFactory:
                 rst_simple_table
                 space_aligned
                 sqlite
+                ssv
                 toml
                 tsv
                 unicode

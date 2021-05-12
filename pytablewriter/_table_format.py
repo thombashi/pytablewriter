@@ -207,7 +207,7 @@ class TableFormat(enum.Enum):
         ["rst"],
     )
     SPACE_ALIGNED = (
-        [SpaceAlignedTableWriter.FORMAT_NAME],  # type: ignore
+        [SpaceAlignedTableWriter.FORMAT_NAME, "ssv"],  # type: ignore
         SpaceAlignedTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         [],
