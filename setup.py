@@ -112,8 +112,6 @@ setuptools.setup(
         "all": all_requires,
         "docs": docs_requires,
         "excel": excel_requires,
-        "es5": ["elasticsearch>=5.5.3,<6"],
-        "es6": ["elasticsearch>=6.3.1,<7"],
         "es7": es7_requires,
         "es": es7_requires,
         "html": html_requires,
