@@ -3,6 +3,7 @@
 """
 
 import os
+from itertools import chain
 from typing import List
 
 import typepy
@@ -209,12 +210,7 @@ class TableWriterFactory:
 
         """
 
-        format_name_set = set()
-        for table_format in TableFormat:
-            for format_name in table_format.names:
-                format_name_set.add(format_name)
-
-        return sorted(list(format_name_set))
+        return sorted(list(set(chain(*[table_format.names for table_format in TableFormat]))))
 
     @classmethod
     def get_extensions(cls) -> List[str]:
