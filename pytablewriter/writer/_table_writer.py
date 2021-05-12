@@ -272,7 +272,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._is_require_header = False
 
         self.iteration_length = kwargs.get("iteration_length", -1)
-        self.write_callback = lambda _iter_count, _iter_length: None  # NOP
+        self.write_callback = kwargs.get(
+            "write_callback", lambda _iter_count, _iter_length: None  # defaults to NOP callback
+        )
         self._iter_count = None  # type: Optional[int]
 
         self.__default_style = kwargs.get("default_style", Style())
