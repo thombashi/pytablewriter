@@ -2,6 +2,7 @@ Features
 --------
 - Write a table in various formats:
     - Text formats:
+        - `AsciiDoc <https://asciidoc.org/>`__
         - CSV / Tab-separated values (TSV)
         - HTML / CSS
         - JSON / `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
