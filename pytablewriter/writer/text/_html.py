@@ -89,9 +89,10 @@ class HtmlTableWriter(TextTableWriter):
             css_class = None
 
             if write_css:
-                css_class = kwargs.get("css_class")
-                css_class = css_class if css_class else "{}-css".format(self.table_name)
-                css_class = replace_symbol(self.table_name, replacement_text="-")
+                css_class = kwargs.get(
+                    "css_class",
+                    "{}-css".format(replace_symbol(self.table_name, replacement_text="-")),
+                )
 
                 css_writer = CssTableWriter(table_name=css_class)
                 css_writer.from_writer(self, is_overwrite_table_name=False)

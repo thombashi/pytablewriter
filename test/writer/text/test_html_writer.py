@@ -461,22 +461,22 @@ class Test_HtmlTableWriter_write_table:
 
     def test_normal_write_css(self, capsys):
         writer = table_writer_class()
-        writer.table_name = "write_css"
+        writer.table_name = "Write HTML with CSS"
         writer.headers = ["int"]
         writer.value_matrix = [[1]]
         writer.write_table(write_css=True)
 
         expected = """\
 <style type="text/css">
-    .write-css thead th:nth-child(1) {
+    .Write-HTML-with-CSS-css thead th:nth-child(1) {
         text-align: left;
     }
-    .write-css tbody tr:nth-child(1) td:nth-child(1) {
+    .Write-HTML-with-CSS-css tbody tr:nth-child(1) td:nth-child(1) {
         text-align: right;
     }
 </style>
-<table class="write-css" id="write_css">
-    <caption>write_css</caption>
+<table class="Write-HTML-with-CSS-css" id="WriteHTMLwithCSS">
+    <caption>Write HTML with CSS</caption>
     <thead>
         <tr>
             <th>int</th>
