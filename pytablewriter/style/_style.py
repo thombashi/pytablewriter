@@ -74,6 +74,9 @@ class Style:
             .. note::
                 In the current version, only applicable for part of text format writer classes.
 
+        fg_color (Union[|str|, tcolorpy.Color, |None|]):
+            Alias to :py:attr:`~.color`.
+
         bg_color (Union[|str|, tcolorpy.Color, |None|]):
             Background color for cells.
             When using str, specify a color code (``"#XXXXXX"``) or a color name.
@@ -187,6 +190,10 @@ class Style:
         return self.__fg_color
 
     @property
+    def fg_color(self) -> Optional[Color]:
+        return self.__fg_color
+
+    @property
     def bg_color(self) -> Optional[Color]:
         return self.__bg_color
 
@@ -260,7 +267,7 @@ class Style:
         self.__update_misc(initialize=False, **kwargs)
 
     def __update_color(self, initialize: bool, **kwargs) -> None:
-        fg_color = kwargs.get("color")
+        fg_color = kwargs.get("color") or kwargs.get("fg_color")
         if fg_color:
             self.__fg_color: Optional[Color] = Color(fg_color)
         elif initialize:

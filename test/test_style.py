@@ -224,7 +224,27 @@ class Test_Style_update:
             thousand_separator=",",
         )
         rhs = copy.deepcopy(lhs)
-        rhs.update(color="black")
-
+        rhs.update(fg_color="black")
         assert lhs.color != rhs.color
+        assert lhs.color == lhs.fg_color
+        assert rhs.color == rhs.fg_color
+        assert lhs.bg_color == rhs.bg_color
+
+        lhs = Style(
+            align="left",
+            padding=1,
+            vertical_align="bottom",
+            fg_color="red",
+            bg_color="#2f2f2f",
+            decoration_line="line-through",
+            font_size="tiny",
+            font_style="italic",
+            font_weight="bold",
+            thousand_separator=",",
+        )
+        rhs = copy.deepcopy(lhs)
+        rhs.update(color="black")
+        assert lhs.color != rhs.color
+        assert lhs.color == lhs.fg_color
+        assert rhs.color == rhs.fg_color
         assert lhs.bg_color == rhs.bg_color
