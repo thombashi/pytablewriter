@@ -197,6 +197,10 @@ class MarkdownStyler(TextStyler):
 
 
 class GFMarkdownStyler(MarkdownStyler):
+    """
+    A styler class for GitHub Flavored Markdown
+    """
+
     def get_additional_char_width(self, style: Style) -> int:
         width = super().get_additional_char_width(style)
 

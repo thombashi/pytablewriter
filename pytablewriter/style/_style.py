@@ -75,7 +75,7 @@ class Style:
                 In the current version, only applicable for part of text format writer classes.
 
         bg_color (Union[|str|, tcolorpy.Color, |None|]):
-            background color for cells.
+            Background color for cells.
             When using str, specify a color code (``"#XXXXXX"``) or a color name.
 
             .. note::
