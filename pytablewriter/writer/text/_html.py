@@ -93,9 +93,8 @@ class HtmlTableWriter(TextTableWriter):
                 css_class = css_class if css_class else "{}-css".format(self.table_name)
                 css_class = replace_symbol(self.table_name, replacement_text="-")
 
-                css_writer = CssTableWriter()
-                css_writer.from_writer(self)
-                css_writer.table_name = css_class
+                css_writer = CssTableWriter(table_name=css_class)
+                css_writer.from_writer(self, is_overwrite_table_name=False)
                 css_writer.write_table(write_style_tag=True)
 
             if typepy.is_not_null_string(self.table_name):
