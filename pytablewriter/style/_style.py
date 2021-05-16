@@ -240,11 +240,11 @@ class Style:
 
         return all(
             [
-                self.align is other.align,
-                self.font_size is other.font_size,
-                self.font_style is other.font_style,
-                self.font_weight is other.font_weight,
-                self.thousand_separator is other.thousand_separator,
+                self.align == other.align,
+                self.font_size == other.font_size,
+                self.font_style == other.font_style,
+                self.font_weight == other.font_weight,
+                self.thousand_separator == other.thousand_separator,
             ]
         )
 
