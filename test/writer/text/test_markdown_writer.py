@@ -839,8 +839,9 @@ class Test_MarkdownTableWriter_write_table:
         out_w_theme = writer.dumps()
         assert out_w_theme != out_wo_theme
 
+        # set theme at constructor
         writer = table_writer_class(
-            table_name="set theme at constructor",
+            table_name="style test: bold",
             headers=["normal", "bold"],
             value_matrix=[[11, 11], [123456, 123456]],
             theme="altrow",
