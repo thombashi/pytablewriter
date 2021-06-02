@@ -53,9 +53,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         if self.is_opened():
             if self.stream.database_path == abspath(file_path):
-                self._logger.logger.debug(
-                    "database already opened: {}".format(self.stream.database_path)
-                )
+                self._logger.logger.debug(f"database already opened: {self.stream.database_path}")
                 return
 
             self.close()

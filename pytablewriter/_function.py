@@ -11,7 +11,7 @@ from tabledata._core import TableData
 
 
 def quote_datetime_formatter(value) -> str:
-    return '"{:s}"'.format(value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT))
+    return f'"{value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT):s}"'
 
 
 def dateutil_datetime_formatter(value) -> str:
@@ -76,14 +76,12 @@ def normalize_enum(
         return enum_class[replace_symbol(value.strip(), "_").upper()]
     except AttributeError:
         if validate:
-            raise TypeError(
-                "value must be a {} or a str: actual={}".format(enum_class, type(value))
-            )
+            raise TypeError(f"value must be a {enum_class} or a str: actual={type(value)}")
     except KeyError:
         if validate:
             raise ValueError(
                 "invalid valid found: expected={}, actual={}".format(
-                    "/".join([item.name for item in enum_class]), value
+                    "/".join(item.name for item in enum_class), value
                 )
             )
 

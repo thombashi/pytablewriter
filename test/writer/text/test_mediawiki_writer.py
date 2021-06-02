@@ -284,7 +284,7 @@ class Test_MediaWikiTableWriter_write_table:
 
 
 def simple_write_callback(iter_count, iteration_length):
-    print("{:d}/{:d}".format(iter_count, iteration_length))
+    print(f"{iter_count:d}/{iteration_length:d}")
 
 
 class Test_MediaWikiTableWriter_write_table_iter:

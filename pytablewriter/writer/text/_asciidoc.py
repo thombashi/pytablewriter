@@ -54,10 +54,8 @@ class AsciiDocTableWriter(TextTableWriter):
 
     def _get_opening_row_items(self) -> List[str]:
         cols = ", ".join(
-            [
-                f"{get_align_char(col_dp.align)}{col_dp.ascii_char_width}"
-                for col_dp in self._column_dp_list
-            ]
+            f"{get_align_char(col_dp.align)}{col_dp.ascii_char_width}"
+            for col_dp in self._column_dp_list
         )
         rows = [f'[cols="{cols}" options="header"]']
 

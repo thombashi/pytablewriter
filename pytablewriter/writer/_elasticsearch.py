@@ -52,10 +52,10 @@ def _get_es_datatype(column_dp: ColumnDataProperty) -> Dict[str, str]:
             return {"type": "long"}
 
         raise ValueError(
-            "too large integer bits: expected<=64bits, actual={:d}bits".format(column_dp.bit_length)
+            f"too large integer bits: expected<=64bits, actual={column_dp.bit_length:d}bits"
         )
 
-    raise ValueError("unknown typecode: {}".format(column_dp.typecode))
+    raise ValueError(f"unknown typecode: {column_dp.typecode}")
 
 
 class ElasticsearchWriter(AbstractTableWriter):
@@ -195,7 +195,7 @@ class ElasticsearchWriter(AbstractTableWriter):
             try:
                 self.stream.index(index=self.index_name, body=body, doc_type=self.document_type)
             except es.exceptions.RequestError as e:
-                self._logger.logger.error("{}, body={}".format(msgfy.to_error_message(e), body))
+                self._logger.logger.error(f"{msgfy.to_error_message(e)}, body={body}")
 
     def _write_value_row_separator(self) -> None:
         pass

@@ -63,17 +63,17 @@ class CssTableWriter(IndentationTextTableWriter):
             css_tags.append("font-style:italic")
 
         if style.color:
-            css_tags.append("color: {}".format(style.color.color_code))
+            css_tags.append(f"color: {style.color.color_code}")
 
         if style.bg_color:
-            css_tags.append("background-color: {}".format(style.bg_color.color_code))
+            css_tags.append(f"background-color: {style.bg_color.color_code}")
 
         css_tag = self.__extract_align_tag(value_dp, style)
         if css_tag:
             css_tags.append(css_tag)
 
         if style.vertical_align != VerticalAlign.BASELINE:
-            css_tags.append("vertical-align: {}".format(style.vertical_align.align_str))
+            css_tags.append(f"vertical-align: {style.vertical_align.align_str}")
 
         if style.decoration_line in (DecorationLine.LINE_THROUGH, DecorationLine.STRIKE):
             css_tags.append("text-decoration-line: line-through")
@@ -88,7 +88,7 @@ class CssTableWriter(IndentationTextTableWriter):
         else:
             value = style.align.align_string
 
-        return "text-align: {}".format(value)
+        return f"text-align: {value}"
 
     def __write_css_thead(self, css_class: str, base_indent_level: int) -> None:
         for col_dp, header_dp in zip(self._column_dp_list, self._dp_extractor.to_header_dp_list()):
@@ -108,7 +108,7 @@ class CssTableWriter(IndentationTextTableWriter):
 
             self.set_indent_level(base_indent_level + 1)
             for css_tag in css_tags:
-                self._write_line("{};".format(css_tag))
+                self._write_line(f"{css_tag};")
 
             self.set_indent_level(base_indent_level)
             self._write_line("}")
@@ -134,7 +134,7 @@ class CssTableWriter(IndentationTextTableWriter):
 
                 self.set_indent_level(base_indent_level + 1)
                 for css_tag in css_tags:
-                    self._write_line("{};".format(css_tag))
+                    self._write_line(f"{css_tag};")
 
                 self.set_indent_level(base_indent_level)
                 self._write_line("}")

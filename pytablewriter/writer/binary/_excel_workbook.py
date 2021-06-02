@@ -90,7 +90,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
         else:
             sheet_id = 1
             while True:
-                worksheet_name = "Sheet{:d}".format(sheet_id)
+                worksheet_name = f"Sheet{sheet_id:d}"
                 if worksheet_name not in self._worksheet_table:
                     break
                 sheet_id += 1

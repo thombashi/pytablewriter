@@ -65,17 +65,14 @@ class PandasDataFrameWriter(NumpyTableWriter):
         self.is_write_header = False
 
     def _get_opening_row_items(self) -> List[str]:
-        return ["{} = {}.DataFrame([".format(self.variable_name, self.import_pandas_as)]
+        return [f"{self.variable_name} = {self.import_pandas_as}.DataFrame(["]
 
     def _get_closing_row_items(self) -> List[str]:
         if typepy.is_not_empty_sequence(self.headers):
             return [
                 "], columns=[{}])".format(
                     ", ".join(
-                        [
-                            '"{}"'.format(MultiByteStrDecoder(header).unicode_str)
-                            for header in self.headers
-                        ]
+                        f'"{MultiByteStrDecoder(header).unicode_str}"' for header in self.headers
                     )
                 )
             ]

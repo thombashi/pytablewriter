@@ -1381,7 +1381,7 @@ class Test_MarkdownTableWriter_from_dataframe:
         ],
     )
     def test_normal(self, tmpdir, add_index_column, expected):
-        writer = table_writer_class(table_name="add_index_column: {}".format(add_index_column))
+        writer = table_writer_class(table_name=f"add_index_column: {add_index_column}")
         df = pd.DataFrame({"A": [1, 2], "B": [10, 11]}, index=["a", "b"])
 
         writer.from_dataframe(df, add_index_column=add_index_column)
@@ -1443,7 +1443,7 @@ class Test_MarkdownTableWriter_from_series:
         ],
     )
     def test_normal(self, add_index_column, expected):
-        writer = table_writer_class(table_name="add_index_column: {}".format(add_index_column))
+        writer = table_writer_class(table_name=f"add_index_column: {add_index_column}")
 
         writer.from_series(
             pd.Series(list(range(100))).describe(), add_index_column=add_index_column

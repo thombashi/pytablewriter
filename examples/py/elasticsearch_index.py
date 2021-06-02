@@ -26,7 +26,7 @@ def parse_option():
 def main():
     options = parse_option()
 
-    es = Elasticsearch(hosts="{:s}:{:d}".format(options.host, options.port))
+    es = Elasticsearch(hosts=f"{options.host:s}:{options.port:d}")
 
     writer = ptw.ElasticsearchWriter()
     writer.stream = es
@@ -78,7 +78,7 @@ def main():
 
     print("----- mappings -----")
     response = es.indices.get_mapping(index=writer.index_name, doc_type="table")
-    print("{}\n".format(json.dumps(response, indent=4)))
+    print(f"{json.dumps(response, indent=4)}\n")
 
     print("----- documents -----")
     response = es.search(

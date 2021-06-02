@@ -65,7 +65,7 @@ class VarNameSanitizer(NameSanitizer):
 
         if self._is_reserved_keyword(unicode_var_name):
             raise ValidationError(
-                description="{:s} is a reserved keyword by python".format(unicode_var_name),
+                description=f"{unicode_var_name:s} is a reserved keyword by python",
                 reason=ErrorReason.RESERVED_NAME,
                 reusable_name=False,
                 reserved_name=unicode_var_name,

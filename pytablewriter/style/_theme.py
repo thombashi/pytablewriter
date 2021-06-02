@@ -44,7 +44,7 @@ def load_ptw_plugins() -> Dict[str, Theme]:
         if plugin_regexp.search(name) is not None
     }
 
-    logger.debug("discovered_plugins: {}".format(list(discovered_plugins)))
+    logger.debug(f"discovered_plugins: {list(discovered_plugins)}")
 
     return {
         theme: Theme(
@@ -61,10 +61,10 @@ def fetch_theme(plugin_name: str) -> Theme:
     loaded_themes = load_ptw_plugins()
 
     if plugin_name not in loaded_themes:
-        err_msgs = ["{} theme not installed.".format(plugin_name)]
+        err_msgs = [f"{plugin_name} theme not installed."]
 
         if plugin_name in KNOWN_PLUGINS:
-            err_msgs.append("try 'pip install {}'".format(plugin_name))
+            err_msgs.append(f"try 'pip install {plugin_name}'")
 
         raise RuntimeError(" ".join(err_msgs))
 

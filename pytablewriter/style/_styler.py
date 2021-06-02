@@ -188,10 +188,10 @@ class MarkdownStyler(TextStyler):
             return value
 
         if style.font_weight == FontWeight.BOLD:
-            value = "**{}**".format(value)
+            value = f"**{value}**"
 
         if style.font_style == FontStyle.ITALIC:
-            value = "_{}_".format(value)
+            value = f"_{value}_"
 
         return value
 
@@ -215,7 +215,7 @@ class GFMarkdownStyler(MarkdownStyler):
             return value
 
         if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
-            value = "~~{}~~".format(value)
+            value = f"~~{value}~~"
 
         return value
 
@@ -247,16 +247,16 @@ class ReStructuredTextStyler(TextStyler):
             return value
 
         if style.font_weight == FontWeight.BOLD:
-            value = "**{}**".format(value)
+            value = f"**{value}**"
         elif style.font_style == FontStyle.ITALIC:
             # in reStructuredText, some custom style definition will be required to
             # set for both bold and italic (currently not supported)
-            value = "*{}*".format(value)
+            value = f"*{value}*"
 
         if (
             style.thousand_separator == ThousandSeparator.COMMA
             and self._writer.format_name == RstCsvTableWriter.FORMAT_NAME
         ):
-            value = '"{}"'.format(value)
+            value = f'"{value}"'
 
         return value

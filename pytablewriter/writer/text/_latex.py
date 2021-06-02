@@ -203,7 +203,7 @@ class LatexTableWriter(LatexWriter):
         return True
 
     def __verbatim(self, value: str) -> str:
-        return r"\verb" + "|{:s}|".format(value)
+        return r"\verb" + f"|{value:s}|"
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__verbatim(super()._to_header_item(col_dp, value_dp))

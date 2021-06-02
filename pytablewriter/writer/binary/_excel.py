@@ -128,7 +128,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         """
 
         if self.workbook and self.workbook.file_path == file_path:
-            self._logger.logger.debug("workbook already opened: {}".format(self.workbook.file_path))
+            self._logger.logger.debug(f"workbook already opened: {self.workbook.file_path}")
             return
 
         self.close()
@@ -422,7 +422,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
     def _write_cell(self, row: int, col: int, value_dp: DataProperty) -> None:
         base_props = dict(self.__cell_format_property)
-        format_key = "{:d}_{:s}".format(col, value_dp.typecode.name)
+        format_key = f"{col:d}_{value_dp.typecode.name:s}"
 
         if value_dp.typecode in [typepy.Typecode.INTEGER, typepy.Typecode.REAL_NUMBER]:
             num_props = self.__get_number_property(col)

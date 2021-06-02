@@ -566,7 +566,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             ]
             return
 
-        raise ValueError("column must be an int or string: actual={}".format(column))
+        raise ValueError(f"column must be an int or string: actual={column}")
 
     def set_theme(self, theme: str, **kwargs) -> None:
         """Set style filters for a theme.
@@ -580,7 +580,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             RuntimeError: Raised when a theme plugin does not installed.
         """
 
-        _theme = fetch_theme("pytablewriter_{}_theme".format(theme.strip().lower()))
+        _theme = fetch_theme(f"pytablewriter_{theme.strip().lower()}_theme")
 
         if _theme.style_filter:
             self.add_style_filter(_theme.style_filter)
@@ -648,7 +648,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             self.stream.close()
         except AttributeError:
             self._logger.logger.warning(
-                "the stream has no close method implementation: type={}".format(type(self.stream))
+                f"the stream has no close method implementation: type={type(self.stream)}"
             )
         finally:
             self._stream = None
@@ -878,9 +878,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self._verify_header()
 
-        self._logger.logger.debug(
-            "_write_table_iter: iteration-length={:d}".format(self.iteration_length)
-        )
+        self._logger.logger.debug(f"_write_table_iter: iteration-length={self.iteration_length:d}")
 
         stash_is_write_header = self.is_write_header
         stach_is_write_opening_row = self.is_write_opening_row
@@ -1150,7 +1148,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return
 
         self._logger.logger.debug(
-            "_preprocess_value_matrix: value-rows={}".format(len(self._table_value_dp_matrix))
+            f"_preprocess_value_matrix: value-rows={len(self._table_value_dp_matrix)}"
         )
 
         self._table_value_matrix = [

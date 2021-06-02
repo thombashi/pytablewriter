@@ -13,10 +13,10 @@ from ._sourcecode import SourceCodeTableWriter
 
 def js_datetime_formatter(value) -> str:
     try:
-        return 'new Date("{:s}")'.format(value.strftime(DefaultValue.DATETIME_FORMAT))
+        return f'new Date("{value.strftime(DefaultValue.DATETIME_FORMAT):s}")'
     except ValueError:
         # the datetime strftime() methods require year >= 1900
-        return 'new Date("{}")'.format(value)
+        return f'new Date("{value}")'
 
 
 class JavaScriptTableWriter(SourceCodeTableWriter):
@@ -124,7 +124,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self.inc_indent_level()
 
     def _get_opening_row_items(self) -> List[str]:
-        return ["{:s} {:s} = [".format(self.variable_declaration, self.variable_name)]
+        return [f"{self.variable_declaration:s} {self.variable_name:s} = ["]
 
     def _get_closing_row_items(self) -> List[str]:
         return ["];"]

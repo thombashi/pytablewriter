@@ -81,14 +81,14 @@ class TableWriterFactory:
             if table_format.format_attribute & FormatAttr.SECONDARY_EXT:
                 continue
 
-            logger.debug("create a {} instance".format(table_format.writer_class.__name__))
+            logger.debug(f"create a {table_format.writer_class.__name__} instance")
 
             return table_format.writer_class(**kwargs)
 
         raise WriterNotFoundError(
             "\n".join(
                 [
-                    "{:s} (unknown file extension).".format(file_extension),
+                    f"{file_extension:s} (unknown file extension).",
                     "",
                     "acceptable file extensions are: {}.".format(", ".join(cls.get_extensions())),
                 ]
@@ -150,14 +150,14 @@ class TableWriterFactory:
             if format_name in table_format.names and not (
                 table_format.format_attribute & FormatAttr.SECONDARY_NAME
             ):
-                logger.debug("create a {} instance".format(table_format.writer_class.__name__))
+                logger.debug(f"create a {table_format.writer_class.__name__} instance")
 
                 return table_format.writer_class(**kwargs)
 
         raise WriterNotFoundError(
             "\n".join(
                 [
-                    "{} (unknown format name).".format(format_name),
+                    f"{format_name} (unknown format name).",
                     "acceptable format names are: {}.".format(", ".join(cls.get_format_names())),
                 ]
             )
@@ -222,7 +222,7 @@ class TableWriterFactory:
 
         """
 
-        return sorted(list(set(chain(*[table_format.names for table_format in TableFormat]))))
+        return sorted(list(set(chain(*(table_format.names for table_format in TableFormat)))))
 
     @classmethod
     def get_extensions(cls) -> List[str]:

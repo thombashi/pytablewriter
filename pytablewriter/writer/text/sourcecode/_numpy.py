@@ -55,10 +55,10 @@ class NumpyTableWriter(PythonCodeTableWriter):
         )
 
     def _get_opening_row_items(self) -> List[str]:
-        array_def = "{:s}.array([".format(self.import_numpy_as)
+        array_def = f"{self.import_numpy_as:s}.array(["
 
         if typepy.is_not_null_string(self.table_name):
-            return ["{} = {}".format(self.variable_name, array_def)]
+            return [f"{self.variable_name} = {array_def}"]
 
         return [array_def]
 

@@ -219,25 +219,25 @@ class Style:
         items = []
 
         if self.align:
-            items.append("align={}".format(self.align.align_string))
+            items.append(f"align={self.align.align_string}")
         if self.padding is not None:
-            items.append("padding={}".format(self.padding))
+            items.append(f"padding={self.padding}")
         if self.vertical_align:
-            items.append("valign={}".format(self.vertical_align.align_str))
+            items.append(f"valign={self.vertical_align.align_str}")
         if self.color:
-            items.append("color={}".format(self.color))
+            items.append(f"color={self.color}")
         if self.bg_color:
-            items.append("bg_color={}".format(self.bg_color))
+            items.append(f"bg_color={self.bg_color}")
         if self.decoration_line is not DecorationLine.NONE:
-            items.append("decoration_line={}".format(self.decoration_line.value))
+            items.append(f"decoration_line={self.decoration_line.value}")
         if self.font_size is not FontSize.NONE:
-            items.append("font_size={}".format(self.font_size.value))
+            items.append(f"font_size={self.font_size.value}")
         if self.font_style:
-            items.append("font_style={}".format(self.font_style.value))
+            items.append(f"font_style={self.font_style.value}")
         if self.font_weight:
-            items.append("font_weight={}".format(self.font_weight.value))
+            items.append(f"font_weight={self.font_weight.value}")
         if self.thousand_separator is not ThousandSeparator.NONE:
-            items.append("thousand_separator={}".format(self.thousand_separator.value))
+            items.append(f"thousand_separator={self.thousand_separator.value}")
 
         return "({})".format(", ".join(items))
 
@@ -346,11 +346,9 @@ class Style:
     def __validate_attr(self, attr_name: str, expected_type) -> None:
         value = getattr(self, attr_name)
         if isinstance(expected_type, (list, tuple)):
-            expected = " or ".join([c.__name__ for c in expected_type])
+            expected = " or ".join(c.__name__ for c in expected_type)
         else:
             expected = expected_type.__name__
 
         if not isinstance(value, expected_type):
-            raise TypeError(
-                "{} must be instance of {}: actual={}".format(attr_name, expected, type(value))
-            )
+            raise TypeError(f"{attr_name} must be instance of {expected}: actual={type(value)}")

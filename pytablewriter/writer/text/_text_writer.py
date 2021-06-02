@@ -597,7 +597,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         indent = kwargs.pop("indent", None)
 
         if indent is not None:
-            self._logger.logger.debug("indent: {}".format(indent))
+            self._logger.logger.debug(f"indent: {indent}")
             self.set_indent_level(int(indent))
 
         try:

@@ -60,7 +60,7 @@ class WriterLogger:
         self.__writer = writer
         self.__logger = logger
 
-        self.logger.debug("created WriterLogger: format={}".format(writer.format_name))
+        self.logger.debug(f"created WriterLogger: format={writer.format_name}")
 
     def __enter__(self):
         self.logging_start_write()
@@ -74,11 +74,11 @@ class WriterLogger:
         log_entry_list = [
             self.__get_format_name_message(),
             self.__get_table_name_message(),
-            "headers={}".format(self.__writer.headers),
+            f"headers={self.__writer.headers}",
         ]
 
         try:
-            log_entry_list.append("rows={}".format(len(self.__writer.value_matrix)))
+            log_entry_list.append(f"rows={len(self.__writer.value_matrix)}")
         except (TypeError, AttributeError):
             log_entry_list.append("rows=NaN")
 
@@ -94,7 +94,7 @@ class WriterLogger:
         self.logger.debug("complete write table: {}".format(", ".join(log_entry_list)))
 
     def __get_format_name_message(self) -> str:
-        return "format={:s}".format(self.__writer.format_name)
+        return f"format={self.__writer.format_name:s}"
 
     def __get_table_name_message(self) -> str:
         if self.__writer.table_name:
@@ -102,13 +102,13 @@ class WriterLogger:
         else:
             table_name = ""
 
-        return "table-name='{}'".format(table_name)
+        return f"table-name='{table_name}'"
 
     def __get_extra_log_entry_list(self) -> List[str]:
         if self.__writer._iter_count is None:
             return []
 
-        return ["iteration={}/{}".format(self.__writer._iter_count, self.__writer.iteration_length)]
+        return [f"iteration={self.__writer._iter_count}/{self.__writer.iteration_length}"]
 
     def __get_typehint_message(self) -> str:
         try:

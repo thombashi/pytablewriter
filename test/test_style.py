@@ -93,7 +93,7 @@ class Test_Style_constructor:
     def test_normal(self, value, expected):
         style = Style(**value)
 
-        print("expected: {}\nactual: {}".format(expected, style), file=sys.stderr)
+        print(f"expected: {expected}\nactual: {style}", file=sys.stderr)
 
         assert style.align is expected.get("align")
         assert style.font_size is expected.get("font_size")

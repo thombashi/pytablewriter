@@ -14,9 +14,7 @@ __MAX_SHEET_NAME_LEN = 31
 
 __INVALID_EXCEL_CHARS = "[]:*?/\\"
 
-__RE_INVALID_EXCEL_SHEET_NAME = re.compile(
-    "[{:s}]".format(re.escape(__INVALID_EXCEL_CHARS)), re.UNICODE
-)
+__RE_INVALID_EXCEL_SHEET_NAME = re.compile(f"[{re.escape(__INVALID_EXCEL_CHARS):s}]", re.UNICODE)
 
 
 def validate_excel_sheet_name(sheet_name: str) -> None:
