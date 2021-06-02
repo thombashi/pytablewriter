@@ -146,6 +146,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._col_separator_style_filters = []  # type: List[ColSeparatorStyleFilterFunc]
 
+        if "theme" in kwargs:
+            self.set_theme(kwargs["theme"])
+
     def __repr__(self) -> str:
         return self.dumps()
 
