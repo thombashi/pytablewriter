@@ -981,7 +981,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                     value=value_dp.data,
                     default_style=default_style,
                 ),
-                **self.style_filter_kwargs
+                **self.style_filter_kwargs,
             )
             if style:
                 break
