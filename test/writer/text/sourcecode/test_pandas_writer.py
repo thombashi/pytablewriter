@@ -247,51 +247,48 @@ class Test_PandasDataFrameWriter_from_dataframe:
     def test_normal(self):
         import dateutil
 
-        writer = table_writer_class()
-        writer.table_name = "pd dataframe"
-        writer.from_dataframe(
-            pd.DataFrame(
+        df = pd.DataFrame(
+            [
                 [
-                    [
-                        1,
-                        0.125,
-                        "aa",
-                        1.0,
-                        "1",
-                        True,
-                        np.inf,
-                        np.nan,
-                        1,
-                        dateutil.parser.parse("2017-01-01T00:00:00"),
-                    ],
-                    [
-                        2,
-                        2.2,
-                        "bbb",
-                        2.2,
-                        "2.2",
-                        False,
-                        np.inf,
-                        np.nan,
-                        np.inf,
-                        dateutil.parser.parse("2017-01-02T03:04:05+0900"),
-                    ],
-                    [
-                        3,
-                        3333.3,
-                        "cccc",
-                        -3.0,
-                        "ccc",
-                        True,
-                        np.inf,
-                        np.nan,
-                        np.nan,
-                        dateutil.parser.parse("2017-01-01T00:00:00"),
-                    ],
+                    1,
+                    0.125,
+                    "aa",
+                    1.0,
+                    "1",
+                    True,
+                    np.inf,
+                    np.nan,
+                    1,
+                    dateutil.parser.parse("2017-01-01T00:00:00"),
                 ],
-                columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
-            )
+                [
+                    2,
+                    2.2,
+                    "bbb",
+                    2.2,
+                    "2.2",
+                    False,
+                    np.inf,
+                    np.nan,
+                    np.inf,
+                    dateutil.parser.parse("2017-01-02T03:04:05+0900"),
+                ],
+                [
+                    3,
+                    3333.3,
+                    "cccc",
+                    -3.0,
+                    "ccc",
+                    True,
+                    np.inf,
+                    np.nan,
+                    np.nan,
+                    dateutil.parser.parse("2017-01-01T00:00:00"),
+                ],
+            ],
+            columns=["i", "f", "c", "if", "ifc", "bool", "inf", "nan", "mix_num", "time"],
         )
+        writer = table_writer_class(table_name="pd dataframe", dataframe=df)
 
         expected = dedent(
             """\
@@ -319,8 +316,11 @@ class Test_PandasDataFrameWriter_from_dataframe:
 
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
-
         assert out == expected
+
+        writer = table_writer_class(table_name="pd dataframe")
+        writer.from_dataframe(df)
+        assert out == writer.dumps()
 
 
 @pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")

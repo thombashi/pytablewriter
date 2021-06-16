@@ -290,6 +290,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self.max_workers = kwargs.get("max_workers", 1)
 
+        if "dataframe" in kwargs:
+            self.from_dataframe(kwargs["dataframe"])
+
         self.__clear_preprocess()
 
     def _repr_html_(self) -> str:
