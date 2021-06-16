@@ -9,7 +9,6 @@ import warnings
 from typing import Any  # noqa
 from typing import Dict, List, Mapping, Optional, Sequence, Union, cast
 
-import msgfy
 import typepy
 from dataproperty import (
     ColumnDataProperty,
@@ -28,6 +27,7 @@ from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, N
 from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
 from ..style._theme import ColSeparatorStyleFilterFunc, StyleFilterFunc, fetch_theme
 from ._interface import TableWriterInterface
+from ._msgfy import to_error_message
 
 
 _ts_to_flag = {
@@ -1109,7 +1109,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                 to_value_matrix(self.headers, self.__value_matrix_org)
             )
         except TypeError as e:
-            self._logger.logger.debug(msgfy.to_error_message(e))
+            self._logger.logger.debug(to_error_message(e))
             self._table_value_dp_matrix = []
 
         self._column_dp_list = self._dp_extractor.to_column_dp_list(

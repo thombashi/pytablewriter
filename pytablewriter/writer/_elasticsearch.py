@@ -7,11 +7,11 @@ import copy
 from typing import Dict, Generator
 
 import dataproperty
-import msgfy
 from dataproperty import ColumnDataProperty
 from typepy import Typecode
 
 from ..error import EmptyValueError
+from ._msgfy import to_error_message
 from ._table_writer import AbstractTableWriter
 
 
@@ -187,7 +187,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         except es.TransportError as e:
             if e.error == "index_already_exists_exception":
                 # ignore already existing index
-                self._logger.logger.debug(msgfy.to_error_message(e))
+                self._logger.logger.debug(to_error_message(e))
             else:
                 raise
 
@@ -195,7 +195,7 @@ class ElasticsearchWriter(AbstractTableWriter):
             try:
                 self.stream.index(index=self.index_name, body=body, doc_type=self.document_type)
             except es.exceptions.RequestError as e:
-                self._logger.logger.error(f"{msgfy.to_error_message(e)}, body={body}")
+                self._logger.logger.error(f"{to_error_message(e)}, body={body}")
 
     def _write_value_row_separator(self) -> None:
         pass

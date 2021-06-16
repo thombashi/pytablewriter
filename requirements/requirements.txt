@@ -1,6 +1,5 @@
 DataProperty>=0.50.1,<2
 mbstrdecoder>=1.0.0,<2
-msgfy>=0.1.0,<1
 pathvalidate>=2.3.0,<3
 tabledata>=1.1.3,<2
 tcolorpy>=0.0.5,<1

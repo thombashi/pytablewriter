@@ -2,12 +2,12 @@ import abc
 import warnings
 from typing import Dict, Optional  # noqa
 
-import msgfy
 import typepy
 
 from ..._logger import logger
 from ...sanitizer import sanitize_excel_sheet_name
 from .._common import import_error_msg_template
+from .._msgfy import to_error_message
 
 
 class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
@@ -76,7 +76,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
         try:
             self.workbook.save(self._file_path)
         except IndexError as e:
-            logger.debug(msgfy.to_error_message(e))
+            logger.debug(to_error_message(e))
 
         self._clear()
 

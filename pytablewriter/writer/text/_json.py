@@ -3,13 +3,13 @@ from textwrap import indent
 from typing import List
 
 import dataproperty
-import msgfy
 import typepy
 from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
 from tabledata import to_value_matrix
 from typepy import Typecode
 
+from .._msgfy import to_error_message
 from ._common import serialize_dp
 from ._text_writer import IndentationTextTableWriter
 
@@ -126,7 +126,7 @@ class JsonTableWriter(IndentationTextTableWriter):
                 to_value_matrix(self.headers, self.value_matrix)
             )
         except TypeError as e:
-            self._logger.logger.debug(msgfy.to_error_message(e))
+            self._logger.logger.debug(to_error_message(e))
             self._table_value_dp_matrix = []
 
         self._is_complete_table_dp_preprocess = True
