@@ -590,6 +590,44 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self.style_filter_kwargs.update(**kwargs)
 
+    def __is_skip_close(self) -> bool:
+        try:
+            from _pytest.capture import EncodedFile
+
+            if isinstance(self.stream, EncodedFile):
+                # avoid closing streams for pytest
+                return True
+        except ImportError:
+            pass
+
+        try:
+            from _pytest.capture import CaptureIO
+
+            if isinstance(self.stream, CaptureIO):
+                # avoid closing streams for pytest
+                return True
+        except ImportError:
+            try:
+                # for pytest 5.4.1 or older versions
+                from _pytest.compat import CaptureIO  # type: ignore
+
+                if isinstance(self.stream, CaptureIO):
+                    # avoid closing streams for pytest
+                    return True
+            except ImportError:
+                pass
+
+        try:
+            from ipykernel.iostream import OutStream
+
+            if isinstance(self.stream, OutStream):
+                # avoid closing streams for Jupyter Notebook
+                return True
+        except ImportError:
+            pass
+
+        return False
+
     def close(self) -> None:
         """
         Close the current |stream|.
@@ -609,40 +647,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             # raised when executing an operation to a closed stream
             pass
 
-        try:
-            from _pytest.capture import EncodedFile
-
-            if isinstance(self.stream, EncodedFile):
-                # avoid closing streams for pytest
-                return
-        except ImportError:
-            pass
-
-        try:
-            from _pytest.capture import CaptureIO
-
-            if isinstance(self.stream, CaptureIO):
-                # avoid closing streams for pytest
-                return
-        except ImportError:
-            try:
-                # for pytest 5.4.1 or older versions
-                from _pytest.compat import CaptureIO  # type: ignore
-
-                if isinstance(self.stream, CaptureIO):
-                    # avoid closing streams for pytest
-                    return
-            except ImportError:
-                pass
-
-        try:
-            from ipykernel.iostream import OutStream
-
-            if isinstance(self.stream, OutStream):
-                # avoid closing streams for Jupyter Notebook
-                return
-        except ImportError:
-            pass
+        if self.__is_skip_close():
+            return
 
         try:
             self.stream.close()
