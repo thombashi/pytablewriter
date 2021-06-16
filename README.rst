@@ -4,7 +4,7 @@
 
 Summary
 =========
-`pytablewriter <https://github.com/thombashi/pytablewriter>`__ is a Python library to write a table in various formats: CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV / YAML.
+`pytablewriter <https://github.com/thombashi/pytablewriter>`__ is a Python library to write a table in various formats: AsciiDoc / CSV / Elasticsearch / HTML / JavaScript / JSON / LaTeX / LDJSON / LTSV / Markdown / MediaWiki / NumPy / Excel / Pandas / Python / reStructuredText / SQLite / TOML / TSV / YAML.
 
 .. image:: https://badge.fury.io/py/pytablewriter.svg
     :target: https://badge.fury.io/py/pytablewriter
@@ -22,9 +22,9 @@ Summary
     :target: https://pypi.org/project/pytablewriter
     :alt: Supported Python implementations
 
-.. image:: https://github.com/thombashi/pytablewriter/workflows/Tests/badge.svg
-    :target: https://github.com/thombashi/pytablewriter/actions?query=workflow%3ATests
-    :alt: Linux/macOS/Windows CI status
+.. image:: https://github.com/thombashi/pytablewriter/actions/workflows/lint_and_test.yml/badge.svg
+    :target: https://github.com/thombashi/pytablewriter/actions/workflows/lint_and_test.yml
+    :alt: CI status of Linux/macOS/Windows
 
 .. image:: https://coveralls.io/repos/github/thombashi/pytablewriter/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
@@ -317,8 +317,7 @@ Write a Markdown table from ``pandas.DataFrame`` instance
                 """))
             df = pd.read_csv(csv_data, sep=',')
 
-            writer = MarkdownTableWriter()
-            writer.from_dataframe(df)
+            writer = MarkdownTableWriter(dataframe=df)
             writer.write_table()
 
         if __name__ == "__main__":
@@ -539,31 +538,35 @@ You can also set ``Style`` to a specific column with index or header by using ``
 
 Style filter
 ~~~~~~~~~~~~~~
-``set_theme`` method can set predefined style filters.
-The following command will install themes:
-
+The following command will install external predefined themes:
 ::
 
     pip install pytablewriter[theme]
 
+``theme`` argument of writer constructor or ``set_theme`` method can set"" predefined style filters.
 ``altrow`` theme will colored rows alternatively:
 
 :Sample Code:
     .. code-block:: python
 
-        writer = TableWriterFactory.create_from_format_name("markdown")
-        writer.headers = ["INT", "STR"]
-        writer.value_matrix = [[1, "hoge"], [2, "foo"], [3, "bar"]]
-        writer.margin = 1
+        import pytablewriter as ptw
 
-        writer.set_theme("altrow")
-
+        writer = ptw.TableWriterFactory.create_from_format_name(
+            "markdown",
+            headers=["INT", "STR"],
+            value_matrix=[[1, "hoge"], [2, "foo"], [3, "bar"]],
+            margin=1,
+            theme="altrow",
+        )
         writer.write_table()
 
 :Output:
     .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter-altrow-theme@master/ss/ptw-altrow-theme_example_default.png
        :scale: 100%
        :alt: https://github.com/thombashi/pytablewriter-altrow-theme/blob/master/ss/ptw-altrow-theme_example_default.png
+
+Themes can be created as plugins like as follows:
+https://github.com/thombashi/pytablewriter-altrow-theme
 
 Make tables for specific applications
 ---------------------------------------
