@@ -18,8 +18,7 @@
                 """))
             df = pd.read_csv(csv_data, sep=',')
 
-            writer = MarkdownTableWriter()
-            writer.from_dataframe(df)
+            writer = MarkdownTableWriter(dataframe=df)
             writer.write_table()
 
         if __name__ == "__main__":
