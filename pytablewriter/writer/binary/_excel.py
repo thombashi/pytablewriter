@@ -1,7 +1,7 @@
 import abc
 import copy
 import warnings
-from typing import Any, Dict, Optional, cast  # noqa
+from typing import Any, Dict, Optional, cast
 
 import dataproperty
 import typepy
@@ -32,7 +32,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self._workbook = None  # type: Optional[ExcelWorkbookInterface]
+        self._workbook: Optional[ExcelWorkbookInterface] = None
 
         self._dp_extractor.type_value_map = {
             typepy.Typecode.INFINITY: "Inf",
@@ -43,8 +43,8 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         self._last_header_row = self.first_header_row
         self._first_data_row = self.last_header_row + 1
         self._first_data_col = 0
-        self._last_data_row = None  # type: Optional[int]
-        self._last_data_col = None  # type: Optional[int]
+        self._last_data_row: Optional[int] = None
+        self._last_data_col: Optional[int] = None
 
         self._current_data_row = self._first_data_row
 
@@ -261,7 +261,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        self.__col_style_table = {}  # type: Dict[int, Any]
+        self.__col_style_table: Dict[int, Any] = {}
 
     def _open(self, workbook_path: str) -> None:
         self._workbook = ExcelWorkbookXls(workbook_path)
@@ -399,8 +399,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             self.TableFormat.NAN: self.Default.NAN_FORMAT,
         }
 
-        self.__col_cell_format_cache = {}  # type: Dict[int, Any]
-        self.__col_numprops_table = {}  # type: Dict[int, Dict]
+        self.__col_cell_format_cache: Dict[int, Any] = {}
+        self.__col_numprops_table: Dict[int, Dict] = {}
 
     def _open(self, workbook_path: str) -> None:
         self._workbook = ExcelWorkbookXlsx(workbook_path)

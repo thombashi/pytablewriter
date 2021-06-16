@@ -1,6 +1,6 @@
 import copy
 import warnings
-from typing import Any, List, Optional, Tuple, cast  # noqa
+from typing import Any, Optional, Tuple, cast
 
 import dataproperty
 import typepy
@@ -54,7 +54,7 @@ class HtmlTableWriter(TextTableWriter):
         self._dp_extractor.preprocessor.line_break_repl = "<br>"
         self._dp_extractor.preprocessor.is_escape_html_tag = False
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
-        self._table_tag = None  # type: Any
+        self._table_tag: Any = None
 
         self.enable_ansi_escape = False
 

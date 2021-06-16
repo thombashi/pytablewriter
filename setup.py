@@ -14,7 +14,7 @@ REPOSITORY_URL = f"https://github.com/thombashi/{MODULE_NAME:s}"
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
-pkg_info = {}  # type: Dict[str, str]
+pkg_info: Dict[str, str] = {}
 
 
 def get_release_command_class() -> Dict[str, setuptools.Command]:

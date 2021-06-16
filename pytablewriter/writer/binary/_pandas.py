@@ -1,4 +1,4 @@
-from typing import Optional  # noqa
+from typing import Optional
 
 import tabledata
 
@@ -38,7 +38,7 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
 
         self._quoting_flags = copy.deepcopy(dataproperty.NOT_QUOTING_FLAGS)
 
-        self.__filepath = None  # type: Optional[str]
+        self.__filepath: Optional[str] = None
 
     def is_opened(self) -> bool:
         return self.__filepath is not None

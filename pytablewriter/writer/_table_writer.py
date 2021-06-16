@@ -6,8 +6,7 @@ import abc
 import copy
 import math
 import warnings
-from typing import Any  # noqa
-from typing import Dict, List, Mapping, Optional, Sequence, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Union, cast
 
 import typepy
 from dataproperty import (
@@ -275,16 +274,16 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.write_callback = kwargs.get(
             "write_callback", lambda _iter_count, _iter_length: None  # defaults to NOP callback
         )
-        self._iter_count = None  # type: Optional[int]
+        self._iter_count: Optional[int] = None
 
         self.__default_style = kwargs.get("default_style", Style())
 
-        self.__col_style_list = []  # type: List[Optional[Style]]
+        self.__col_style_list: List[Optional[Style]] = []
         self.column_styles = kwargs.get("column_styles", [])
 
-        self._style_filters = []  # type: List[StyleFilterFunc]
+        self._style_filters: List[StyleFilterFunc] = []
         self._styler = self._create_styler(self)
-        self.style_filter_kwargs = kwargs.get("style_filter_kwargs", {})  # type: Dict[str, Any]
+        self.style_filter_kwargs: Dict[str, Any] = kwargs.get("style_filter_kwargs", {})
         self.__colorize_terminal = kwargs.get("colorize_terminal", True)
         self.__enable_ansi_escape = kwargs.get("enable_ansi_escape", True)
 
@@ -317,10 +316,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocess_data(self) -> None:
-        self._column_dp_list = []  # type: List[ColumnDataProperty]
-        self._table_headers = []  # type: List[str]
-        self._table_value_matrix = []  # type: List[Union[List[str], Dict]]
-        self._table_value_dp_matrix = []  # type: Sequence[Sequence[DataProperty]]
+        self._column_dp_list: List[ColumnDataProperty] = []
+        self._table_headers: List[str] = []
+        self._table_value_matrix: List[Union[List[str], Dict]] = []
+        self._table_value_dp_matrix: Sequence[Sequence[DataProperty]] = []
 
     @property
     def headers(self) -> Sequence[str]:

@@ -144,7 +144,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._init_cross_point_maps()
 
-        self._col_separator_style_filters = []  # type: List[ColSeparatorStyleFilterFunc]
+        self._col_separator_style_filters: List[ColSeparatorStyleFilterFunc] = []
 
         if "theme" in kwargs:
             self.set_theme(kwargs["theme"])
