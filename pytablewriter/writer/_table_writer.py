@@ -177,12 +177,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def styles(self):
-        # deprecated
+        warnings.warn("'styles' has moved to 'column_styles'", DeprecationWarning)
         return self.column_styles
 
     @styles.setter
     def styles(self, value):
-        # deprecated
+        warnings.warn("'styles' has moved to 'column_styles'", DeprecationWarning)
         self.column_styles = value
 
     @property
