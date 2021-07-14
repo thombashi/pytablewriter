@@ -362,7 +362,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._table_name = value
 
     @property
-    def type_hints(self) -> Sequence:
+    def type_hints(self) -> List:
         """
         Type hints for each column of the tabular data.
         Writers convert data for each column using the type hints information
@@ -400,7 +400,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             - :ref:`example-type-hint-python`
         """
 
-        return self._dp_extractor.column_type_hints
+        return list(self._dp_extractor.column_type_hints)
 
     @type_hints.setter
     def type_hints(self, value: Sequence) -> None:
