@@ -21,6 +21,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     """
 
     FORMAT_NAME = "markdown"
+    DEFAULT_FLAVOR = "CommonMark"
 
     @property
     def format_name(self) -> str:
@@ -31,7 +32,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self, **kwargs) -> None:
-        self.__flavor = kwargs.pop("flavor", "").casefold()
+        self.__flavor = kwargs.pop("flavor", self.DEFAULT_FLAVOR).casefold()
 
         super().__init__(**kwargs)
 
@@ -97,6 +98,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             flavor (Optional[str]):
                 possible flavors are:
 
+                    - ``"CommonMark"``
                     - ``"github"``
                     - ``"gfm"`` (alias for ``"github"``)
 
