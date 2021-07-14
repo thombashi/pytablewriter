@@ -1,5 +1,7 @@
 from typepy import (
+    Binary,
     Bool,
+    Bytes,
     DateTime,
     Dictionary,
     Infinity,
@@ -12,3 +14,4 @@ from typepy import (
     RealNumber,
     String,
 )
+from typepy.type import AbstractType
