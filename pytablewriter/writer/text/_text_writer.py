@@ -10,6 +10,7 @@ from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandl
 from ...error import EmptyTableDataError
 from ...style import Cell, Style, StylerInterface, TextStyler
 from ...style._styler import get_align_char
+from .._common import HEADER_ROW
 from .._table_writer import AbstractTableWriter, ColSeparatorStyleFilterFunc
 from ._interface import IndentationInterface, TextWriterInterface
 
@@ -482,7 +483,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if typepy.is_empty_sequence(self._table_headers):
             raise ValueError("header is empty")
 
-        self._write_row(-1, self._table_headers)
+        self._write_row(HEADER_ROW, self._table_headers)
 
     def _write_value_row(
         self, row: int, values: Sequence[str], value_dp_list: Sequence[DataProperty]

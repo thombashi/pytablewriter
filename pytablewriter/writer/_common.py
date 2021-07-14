@@ -1,6 +1,9 @@
 from textwrap import dedent
 
 
+HEADER_ROW = -1
+
+
 import_error_msg_template = dedent(
     """\
     dependency packages for {0} not found.
