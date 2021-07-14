@@ -115,8 +115,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         if "flavor" in kwargs:
             new_flavor = kwargs["flavor"].casefold()
             if new_flavor != self.__flavor:
-                 self._clear_preprocess()
-                 self.__flavor = new_flavor
+                self._clear_preprocess()
+                self.__flavor = new_flavor
 
         if self.__flavor:
             self._styler = self._create_styler(self)
