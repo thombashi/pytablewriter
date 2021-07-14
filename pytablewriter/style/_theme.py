@@ -15,7 +15,7 @@ except ImportError:
     from .._typing import Protocol  # noqa
 
 
-KNOWN_PLUGINS = ("altrow",)
+KNOWN_PLUGINS = ("pytablewriter_altrow_theme",)
 
 Theme = namedtuple("Theme", "style_filter col_separator_style_filter")
 
@@ -61,10 +61,10 @@ def fetch_theme(plugin_name: str) -> Theme:
     loaded_themes = load_ptw_plugins()
 
     if plugin_name not in loaded_themes:
-        err_msgs = [f"{plugin_name} theme not installed."]
+        err_msgs = [f"{plugin_name} theme is not installed."]
 
         if plugin_name in KNOWN_PLUGINS:
-            err_msgs.append(f"try 'pip install {plugin_name}'")
+            err_msgs.append(f"try 'pip install {plugin_name}' to install the theme.")
 
         raise RuntimeError(" ".join(err_msgs))
 
