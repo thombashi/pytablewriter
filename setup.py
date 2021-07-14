@@ -79,6 +79,7 @@ setuptools.setup(
     description=summary,
     include_package_data=True,
     keywords=[
+        "AsciiDoc",
         "table",
         "CSV",
         "Excel",
