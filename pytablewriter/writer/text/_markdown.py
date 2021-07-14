@@ -31,7 +31,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self, **kwargs) -> None:
-        self.__flavor = ""
+        self.__flavor = kwargs.pop("flavor", "").casefold()
 
         super().__init__(**kwargs)
 
