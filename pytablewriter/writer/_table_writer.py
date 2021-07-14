@@ -582,7 +582,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             RuntimeError: Raised when a theme plugin does not installed.
         """
 
-        _theme = fetch_theme(f"pytablewriter_{theme.strip().lower()}_theme")
+        try:
+            _theme = fetch_theme(f"pytablewriter_{theme.strip().lower()}_theme")
+        except RuntimeError as e:
+            warnings.warn(f"{e}", UserWarning)
+            return
 
         if _theme.style_filter:
             self.add_style_filter(_theme.style_filter)

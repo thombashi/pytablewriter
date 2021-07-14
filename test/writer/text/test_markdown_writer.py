@@ -856,7 +856,7 @@ class Test_MarkdownTableWriter_write_table:
     def test_except_set_theme(self):
         writer = table_writer_class()
 
-        with pytest.raises(RuntimeError):
+        with pytest.warns(UserWarning):
             writer.set_theme("not_existing_theme")
 
     def test_normal_set_style(self):
