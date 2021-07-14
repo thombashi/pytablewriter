@@ -145,6 +145,8 @@ setuptools.setup(
         "Topic :: Text Processing",
         "Topic :: Text Processing :: Markup :: HTML",
         "Topic :: Text Processing :: Markup :: LaTeX",
+        "Topic :: Text Processing :: Markup :: Markdown",
+        "Topic :: Text Processing :: Markup :: reStructuredText",
     ],
     cmdclass=get_release_command_class(),
 )
