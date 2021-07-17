@@ -270,6 +270,35 @@ class Test_MediaWikiTableWriter_write_table:
         assert writer.dumps() == expected
         assert str(writer) == expected
 
+    def test_normal_(self):
+        writer = table_writer_class(
+            headers=["hoge", "foo"],
+            value_matrix=[
+                [1, "abc"],
+                [2, "xyz"],
+            ],
+            table_style="display: inline-table;",
+        )
+        expected = dedent(
+            """\
+            {| class="wikitable" style="display: inline-table;"
+            ! hoge
+            ! foo
+            |-
+            | style="text-align:right"| 1
+            | abc
+            |-
+            | style="text-align:right"| 2
+            | xyz
+            |}
+            """
+        )
+        output = writer.dumps()
+
+        print_test_result(expected=expected, actual=output)
+
+        assert output == expected
+
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in null_test_data_list],

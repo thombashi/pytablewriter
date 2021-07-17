@@ -46,6 +46,9 @@ class MediaWikiTableWriter(TextTableWriter):
 
         self._quoting_flags = copy.deepcopy(dp.NOT_QUOTING_FLAGS)
 
+        # experimental: This attribute may change in the future release
+        self.table_style = kwargs.get("table_style", "")
+
     def _write_header(self) -> None:
         if not self.is_write_header:
             return
@@ -67,7 +70,11 @@ class MediaWikiTableWriter(TextTableWriter):
         )
 
     def _get_opening_row_items(self) -> List[str]:
-        return ['{| class="wikitable"']
+        item = '{| class="wikitable"'
+        if self.table_style:
+            item += f' style="{self.table_style}"'
+
+        return [item]
 
     def _get_header_row_separator_items(self) -> List[str]:
         return ["|-"]
