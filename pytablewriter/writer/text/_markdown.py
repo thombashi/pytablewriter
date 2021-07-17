@@ -90,6 +90,12 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _get_closing_row_items(self) -> List[str]:
         return []
 
+    def _write_header(self) -> None:
+        super()._write_header()
+
+        if self.__flavor in ("kramdown", "jekyll"):
+            self._write_line()
+
     def write_table(self, **kwargs) -> None:
         """
         |write_table| with Markdown table format.
@@ -100,9 +106,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
                     - ``"CommonMark"``
                     - ``"github"``
-                    - ``"gfm"`` (alias for ``"github"``)
+                    - ``"gfm"`` (alias of ``"github"``)
+                    - ``kramdown``
+                    - ``Jekyll`` (alias of ``"kramdown"``)
 
-                Defaults to |None|.
+                Defaults to ``"CommonMark"``.
 
         Example:
             :ref:`example-markdown-table-writer`
@@ -146,6 +154,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
                 "#" * (self._indent_level + 1), MultiByteStrDecoder(self.table_name).unicode_str
             )
         )
+
+        if self.__flavor in ("kramdown", "jekyll"):
+            self._write_line()
 
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         if self.__flavor in ("gfm", "github"):
