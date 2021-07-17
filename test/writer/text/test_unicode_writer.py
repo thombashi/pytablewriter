@@ -4,6 +4,7 @@
 
 from textwrap import dedent
 
+import pandas as pd
 import pytest
 
 from pytablewriter import BoldUnicodeTableWriter, UnicodeTableWriter
@@ -52,6 +53,28 @@ class Test_UnicodeTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert regexp_ansi_escape.search(out)
         assert strip_ansi_escape(out) == expected
+
+    def test_normal_numbers(self):
+        writer = UnicodeTableWriter(
+            dataframe=pd.DataFrame(
+                {"realnumber": ["0.000000000000001"], "long": ["1,000,000,000,000"]}
+            ),
+            margin=1,
+        )
+
+        expected = dedent(
+            """\
+            ┌───────────────────┬───────────────┐
+            │    realnumber     │     long      │
+            ├───────────────────┼───────────────┤
+            │ 0.000000000000001 │ 1000000000000 │
+            └───────────────────┴───────────────┘
+            """
+        )
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
 
 
 class Test_BoldUnicodeTableWriter_write_table:
