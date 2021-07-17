@@ -28,7 +28,7 @@ from ...data import (
     vut_style_tabledata,
     vut_styles,
 )
-from ._common import regexp_ansi_escape
+from ._common import regexp_ansi_escape, strip_ansi_escape
 
 
 try:
@@ -447,7 +447,7 @@ class Test_MarkdownTableWriter_constructor:
         print_test_result(expected=expected, actual=out)
 
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
 
 class Test_MarkdownTableWriter_repr:
@@ -476,7 +476,7 @@ class Test_MarkdownTableWriter_repr:
         print_test_result(expected=expected, actual=out)
 
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
 
 class Test_MarkdownTableWriter_table_format:
@@ -737,7 +737,7 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
 
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
     def test_normal_style_mix(self):
         writer = table_writer_class(column_styles=vut_styles)
@@ -756,7 +756,7 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
 
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
     def test_normal_style_filter(self):
         def style_filter(cell: Cell, **kwargs) -> Optional[Style]:
@@ -882,7 +882,7 @@ class Test_MarkdownTableWriter_write_table:
         output = writer.dumps()
         print_test_result(expected=expected, actual=output)
         assert regexp_ansi_escape.search(output)
-        assert regexp_ansi_escape.sub("", output) == expected
+        assert strip_ansi_escape(output) == expected
 
         writer.table_name = "change style"
         writer.set_style(1, Style(align="right", font_style="italic"))
@@ -898,7 +898,7 @@ class Test_MarkdownTableWriter_write_table:
         )
         output = writer.dumps()
         print_test_result(expected=expected, actual=output)
-        assert regexp_ansi_escape.sub("", output) == expected
+        assert strip_ansi_escape(output) == expected
 
     def test_normal_ansi_color(self, capsys):
         writer = table_writer_class()
@@ -933,7 +933,7 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out, error=err)
 
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
     def test_normal_ansi_style(self):
         writer = table_writer_class(
@@ -957,7 +957,7 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out)
 
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
     def test_normal_colorize_terminal(self):
         column_styles = [

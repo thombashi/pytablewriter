@@ -17,7 +17,7 @@ from ...data import (
     vut_style_tabledata,
     vut_styles,
 )
-from ._common import regexp_ansi_escape
+from ._common import regexp_ansi_escape, strip_ansi_escape
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -130,7 +130,7 @@ class Test_LatexMatrixWriter_write_table:
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
 
         writer.column_styles = [
             None,
@@ -151,4 +151,4 @@ class Test_LatexMatrixWriter_write_table:
 """
         print_test_result(expected=expected, actual=out)
         assert regexp_ansi_escape.search(out)
-        assert regexp_ansi_escape.sub("", out) == expected
+        assert strip_ansi_escape(out) == expected
