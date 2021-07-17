@@ -357,13 +357,13 @@ normal_test_data_list = [
         expected=dedent(
             """\
             # mixed value types
-            |  data   |   v    |
-            |---------|-------:|
-            |    3.437|   65.54|
-            |   65.540|  127.64|
-            |  189.744|  189.74|
-            |10064.010|10001.91|
-            |next     |10250.32|
+            |     data      |       v       |
+            |---------------|--------------:|
+            |    3.437500000|   65.539797863|
+            |   65.539797863|  127.642095727|
+            |  189.744393590|  189.744393590|
+            |10064.009753900|10001.907456000|
+            |next           |10250.316647400|
             """
         ),
     ),
@@ -680,10 +680,10 @@ class Test_MarkdownTableWriter_write_table:
         out = writer.dumps()
         expected = dedent(
             """\
-            |none_format|thousand_separator_i|thousand_separator_f|   f   |  wo_f   |
-            |----------:|-------------------:|-------------------:|------:|--------:|
-            |       1000|           1,234,567|         1_234_567.8|1 234.6|1234567.8|
-            |       1000|           1,234,567|         1_234_567.8|1 234.6|1234567.8|
+            |none_format|thousand_separator_i|thousand_separator_f|    f     |  wo_f   |
+            |----------:|-------------------:|-------------------:|---------:|--------:|
+            |       1000|           1,234,567|         1_234_567.8|1 234.5678|1234567.8|
+            |       1000|           1,234,567|         1_234_567.8|1 234.5678|1234567.8|
             """
         )
         print_test_result(expected=expected, actual=out)
@@ -1080,7 +1080,7 @@ class Test_MarkdownTableWriter_write_table:
 
         assert output == expected
 
-    def test_normal_flavor(self):
+    def test_normal_flavor_commonmark(self):
         writer = table_writer_class(
             enable_ansi_escape=False,
             column_styles=[
@@ -1090,6 +1090,32 @@ class Test_MarkdownTableWriter_write_table:
             ],
             headers=["w/o style", "w/ strike", "w/ line through"],
             value_matrix=[["no", "strike", "line-through"]],
+            flavor="CommonMark",
+        )
+
+        expected = dedent(
+            """\
+            |w/o style|w/ strike|w/ line through|
+            |---------|---------|---------------|
+            |no       |strike   |line-through   |
+            """
+        )
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
+
+    def test_normal_flavor_gfm(self):
+        writer = table_writer_class(
+            enable_ansi_escape=False,
+            column_styles=[
+                None,
+                Style(decoration_line="strike"),
+                Style(decoration_line="line-through"),
+            ],
+            headers=["w/o style", "w/ strike", "w/ line through"],
+            value_matrix=[["no", "strike", "line-through"]],
+            flavor="gfm",
         )
 
         expected = dedent(
@@ -1100,10 +1126,40 @@ class Test_MarkdownTableWriter_write_table:
             """
         )
 
-        output = writer.dumps(flavor="gfm")
+        output = writer.dumps()
         print_test_result(expected=expected, actual=output)
-
         assert output == expected
+        assert output != writer.dumps(flavor="CommonMark")
+
+    def test_normal_flavor_kramdown(self):
+        writer = table_writer_class(
+            table_name="kramdown/Jeklly",
+            enable_ansi_escape=False,
+            column_styles=[
+                None,
+                Style(decoration_line="strike"),
+                Style(decoration_line="line-through"),
+            ],
+            headers=["w/o style", "w/ strike", "w/ line through"],
+            value_matrix=[["no", "strike", "line-through"]],
+            flavor="kramdown",
+        )
+
+        expected = dedent(
+            """\
+            # kramdown/Jeklly
+
+            |w/o style|w/ strike|w/ line through|
+
+            |---------|---------|---------------|
+            |no       |strike   |line-through   |
+            """
+        )
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
+        assert output != writer.dumps(flavor="gfm")
 
     def test_normal_avoid_overwrite_stream_by_dumps(self):
         writer = table_writer_class(headers=["a", "b"], value_matrix=[["foo", "bar"]])
@@ -1418,16 +1474,16 @@ class Test_MarkdownTableWriter_from_series:
                 dedent(
                     """\
                     # add_index_column: False
-                    |value |
-                    |-----:|
-                    |100.00|
-                    | 49.50|
-                    | 29.01|
-                    |  0.00|
-                    | 24.75|
-                    | 49.50|
-                    | 74.25|
-                    | 99.00|
+                    | value  |
+                    |-------:|
+                    |100.0000|
+                    | 49.5000|
+                    | 29.0115|
+                    |  0.0000|
+                    | 24.7500|
+                    | 49.5000|
+                    | 74.2500|
+                    | 99.0000|
                     """
                 ),
             ],
@@ -1436,16 +1492,16 @@ class Test_MarkdownTableWriter_from_series:
                 dedent(
                     """\
                     # add_index_column: True
-                    |     |value |
-                    |-----|-----:|
-                    |count|100.00|
-                    |mean | 49.50|
-                    |std  | 29.01|
-                    |min  |  0.00|
-                    |25%  | 24.75|
-                    |50%  | 49.50|
-                    |75%  | 74.25|
-                    |max  | 99.00|
+                    |     | value  |
+                    |-----|-------:|
+                    |count|100.0000|
+                    |mean | 49.5000|
+                    |std  | 29.0115|
+                    |min  |  0.0000|
+                    |25%  | 24.7500|
+                    |50%  | 49.5000|
+                    |75%  | 74.2500|
+                    |max  | 99.0000|
                     """
                 ),
             ],
