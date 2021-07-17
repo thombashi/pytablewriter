@@ -46,7 +46,7 @@ def load_ptw_plugins() -> Dict[str, Theme]:
     plugin_regexp = re.compile("^pytablewriter_.+_theme", re.IGNORECASE)
     discovered_plugins = {
         name: importlib.import_module(name)
-        for finder, name, ispkg in pkgutil.iter_modules()
+        for _finder, name, _ispkg in pkgutil.iter_modules()
         if plugin_regexp.search(name) is not None
     }
 

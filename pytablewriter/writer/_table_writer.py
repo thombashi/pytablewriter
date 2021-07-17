@@ -583,16 +583,16 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         """
 
         try:
-            _theme = fetch_theme(f"pytablewriter_{theme.strip().lower()}_theme")
+            fetched_theme = fetch_theme(f"pytablewriter_{theme.strip().lower()}_theme")
         except RuntimeError as e:
             warnings.warn(f"{e}", UserWarning)
             return
 
-        if _theme.style_filter:
-            self.add_style_filter(_theme.style_filter)
+        if fetched_theme.style_filter:
+            self.add_style_filter(fetched_theme.style_filter)
 
-        if _theme.col_separator_style_filter:
-            self.add_col_separator_style_filter(_theme.col_separator_style_filter)
+        if fetched_theme.col_separator_style_filter:
+            self.add_col_separator_style_filter(fetched_theme.col_separator_style_filter)
 
         self.style_filter_kwargs.update(**kwargs)
 
