@@ -30,7 +30,7 @@ class Test_UnicodeTableWriter_write_new_line:
 
 
 class Test_UnicodeTableWriter_write_table:
-    def test_normal_styles(self, capsys):
+    def test_normal_styles(self):
         writer = UnicodeTableWriter()
         writer.from_tabledata(vut_style_tabledata)
         writer.column_styles = vut_styles
