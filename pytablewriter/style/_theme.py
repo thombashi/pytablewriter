@@ -1,8 +1,7 @@
 import importlib
 import pkgutil
 import re
-from collections import namedtuple
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, NamedTuple, Optional, Sequence
 
 from .._logger import logger
 from ..style import Cell, Style
@@ -17,8 +16,6 @@ except ImportError:
 
 KNOWN_PLUGINS = ("pytablewriter_altrow_theme",)
 
-Theme = namedtuple("Theme", "style_filter col_separator_style_filter")
-
 
 class StyleFilterFunc(Protocol):
     def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
@@ -30,6 +27,15 @@ class ColSeparatorStyleFilterFunc(Protocol):
         self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Any
     ) -> Optional[Style]:
         ...
+
+
+Theme = NamedTuple(
+    "Theme",
+    [
+        ("style_filter", Optional[StyleFilterFunc]),
+        ("col_separator_style_filter", Optional[ColSeparatorStyleFilterFunc]),
+    ],
+)
 
 
 def list_themes() -> Sequence[str]:
