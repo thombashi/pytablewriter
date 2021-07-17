@@ -8,6 +8,7 @@ from textwrap import dedent
 import pytest
 
 import pytablewriter as ptw
+from pytablewriter.style import Style
 
 from ..._common import print_test_result
 from ...data import (
@@ -19,6 +20,7 @@ from ...data import (
     value_matrix_iter,
     value_matrix_with_none,
 )
+from ._common import strip_ansi_escape
 
 
 Data = collections.namedtuple("Data", "table header value expected")
@@ -269,6 +271,63 @@ class Test_AsciiDocTableWriter_write_table:
         assert out == expected
         assert writer.dumps() == expected
         assert str(writer) == expected
+
+    def test_normal_style_fond(self):
+        writer = table_writer_class(
+            headers=["w/ bold", "w/ italic"],
+            value_matrix=[["bold", "italic"]],
+            column_styles=[Style(font_weight="bold"), Style(align="right", font_style="italic")],
+        )
+
+        expected = dedent(
+            """\
+            [cols="<7, <9" options="header"]
+            |===
+            ^|w/ bold
+            ^|w/ italic
+
+            |*bold*
+            >|_italic_
+            |===
+            """
+        )
+        output = writer.dumps()
+
+        print_test_result(expected=expected, actual=output)
+
+        assert strip_ansi_escape(output) == expected
+
+    def test_normal_style_color(self):
+        column_styles = [
+            Style(fg_color="red"),
+            Style(bg_color="blue"),
+            Style(fg_color="red", bg_color="blue"),
+        ]
+        writer = table_writer_class(
+            column_styles=column_styles,
+            headers=["fg color", "bg color", "fg+bg color"],
+            value_matrix=[["hoge", "foo", "bar"]],
+        )
+        expected = dedent(
+            """\
+            [cols="<8, <8, <11" options="header"]
+            |===
+            ^|fg color
+            ^|bg color
+            ^|fg+bg color
+
+            |[red]##hoge##
+            |[blue-background]##foo##
+            |[red blue-background]##bar##
+            |===
+            """
+        )
+
+        output = writer.dumps()
+
+        print_test_result(expected=expected, actual=output)
+
+        assert strip_ansi_escape(output) == expected
 
     @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
