@@ -4,7 +4,6 @@
 
 from textwrap import dedent
 
-import pandas as pd
 import pytest
 
 from pytablewriter import BoldUnicodeTableWriter, UnicodeTableWriter
@@ -12,6 +11,14 @@ from pytablewriter import BoldUnicodeTableWriter, UnicodeTableWriter
 from ..._common import print_test_result
 from ...data import vut_style_tabledata, vut_styles
 from ._common import regexp_ansi_escape, strip_ansi_escape
+
+
+try:
+    import pandas as pd
+
+    SKIP_DATAFRAME_TEST = False
+except ImportError:
+    SKIP_DATAFRAME_TEST = True
 
 
 class Test_UnicodeTableWriter_write_new_line:
@@ -54,6 +61,7 @@ class Test_UnicodeTableWriter_write_table:
         assert regexp_ansi_escape.search(out)
         assert strip_ansi_escape(out) == expected
 
+    @pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")
     def test_normal_numbers(self):
         writer = UnicodeTableWriter(
             dataframe=pd.DataFrame(

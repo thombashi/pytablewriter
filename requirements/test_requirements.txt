@@ -1,5 +1,4 @@
 idna<3
-pandas
 pytablereader[excel,sqlite]>=0.29
 pytest>=6.0.1
 pytest-discord>=0.0.7
