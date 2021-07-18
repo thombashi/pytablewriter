@@ -507,13 +507,6 @@ class Test_MarkdownTableWriter_write_table:
             value_matrix=value,
             is_formatting_float=is_formatting_float,
         )
-        """
-        writer.table_name = table
-        writer.set_indent_level(indent)
-        writer.headers = header
-        writer.value_matrix = value
-        writer.is_formatting_float = is_formatting_float
-        """
         writer.set_indent_level(indent)
         writer.register_trans_func(trans_func)
         writer.write_table()
