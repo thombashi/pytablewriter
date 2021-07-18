@@ -40,7 +40,7 @@ Features
         - JSON / `Line-delimited JSON(LDJSON) <https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON>`__
         - `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
         - LaTeX: ``tabular``/``array`` environment
-        - Markdown: `GitHub Flavored Markdown (GFM) <https://github.github.com/gfm/>`__, etc.
+        - Markdown: CommonMark / `GitHub Flavored Markdown (GFM) <https://github.github.com/gfm/>`__ / `kramdown <https://kramdown.gettalong.org/>`__
         - `MediaWiki <https://www.mediawiki.org/wiki/MediaWiki>`__
         - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
         - Source code (definition of a variable that represents tabular data)
