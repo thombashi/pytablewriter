@@ -738,7 +738,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         for table_data in loader.load():
             self.from_tabledata(table_data)
 
-    def from_dataframe(self, dataframe, add_index_column: bool = False) -> None:
+    def from_dataframe(
+        self, dataframe, add_index_column: bool = False, overwrite_type_hints: bool = True
+    ) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
         Following attributes are set by the method:
@@ -753,6 +755,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             add_index_column(bool, optional):
                 If |True|, add a column of ``index`` of the ``dataframe``.
                 Defaults to |False|.
+            overwrite_type_hints(bool):
+                If |True|, Overwrite type hints with dtypes within the DataFrame.
 
         Example:
             :ref:`example-from-pandas-dataframe`
@@ -764,12 +768,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             dataframe = pd.read_pickle(dataframe)
 
         self.headers = list(dataframe.columns.values)
-        self.type_hints = [extract_typepy_from_dtype(dtype) for dtype in dataframe.dtypes]
+
+        if not self.type_hints or overwrite_type_hints:
+            self.type_hints = [extract_typepy_from_dtype(dtype) for dtype in dataframe.dtypes]
 
         if add_index_column:
-            self.headers = [""] + self.headers
+            self.headers = [" "] + self.headers
             if self.type_hints:
-                self.type_hints = [None] + self.type_hints
+                self.type_hints = [Integer] + self.type_hints
             self.value_matrix = [
                 [index] + row
                 for index, row in zip(dataframe.index.tolist(), dataframe.values.tolist())

@@ -13,6 +13,7 @@ from tcolorpy import tcolor
 
 import pytablewriter as ptw
 from pytablewriter.style import Align, Cell, FontSize, Style, ThousandSeparator
+from pytablewriter.typehint import Integer
 
 from ..._common import print_test_result
 from ...data import (
@@ -1462,6 +1463,18 @@ class Test_MarkdownTableWriter_from_dataframe:
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
         assert out == expected
+
+    def test_normal_overwrite_type_hints(self):
+        writer = table_writer_class(table_name="overwrite_type_hints", type_hints=[Integer])
+        df = pd.DataFrame({"A": [1.1, 2.2], "B": [10.1, 11.2]}, index=["a", "b"])
+
+        writer.from_dataframe(df, overwrite_type_hints=False)
+        not_overwrite = writer.dumps()
+
+        writer.from_dataframe(df, overwrite_type_hints=True)
+        overwrite = writer.dumps()
+
+        assert not_overwrite != overwrite
 
 
 @pytest.mark.skipif(SKIP_DATAFRAME_TEST, reason="required package not found")
