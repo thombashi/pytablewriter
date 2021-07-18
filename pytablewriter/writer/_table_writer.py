@@ -25,6 +25,7 @@ from .._logger import WriterLogger
 from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
 from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
 from ..style._theme import ColSeparatorStyleFilterFunc, StyleFilterFunc, fetch_theme
+from ..typehint import Integer
 from ._interface import TableWriterInterface
 from ._msgfy import to_error_message
 
