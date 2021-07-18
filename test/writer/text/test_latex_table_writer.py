@@ -50,11 +50,11 @@ normal_test_data_list = [
         header=float_header_list,
         value=float_value_matrix,
         expected=r"""\begin{array}{r | r | r} \hline
-    \verb| a  | & \verb|     b     | & \verb|  c  | \\ \hline
+    \verb| a  | & \verb|     b      | & \verb|  c  | \\ \hline
     \hline
-    0.01 &      0.0012 & 0.000 \\ \hline
-    1.00 &     99.9000 & 0.010 \\ \hline
-    1.20 & 999999.1230 & 0.001 \\ \hline
+    0.01 &      0.00125 & 0.000 \\ \hline
+    1.00 &     99.90000 & 0.010 \\ \hline
+    1.20 & 999999.12300 & 0.001 \\ \hline
 \end{array}
 """,
     ),

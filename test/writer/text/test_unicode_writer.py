@@ -65,7 +65,7 @@ class Test_UnicodeTableWriter_write_table:
     def test_normal_numbers(self):
         writer = UnicodeTableWriter(
             dataframe=pd.DataFrame(
-                {"realnumber": ["0.000000000000001"], "long": ["1,000,000,000,000"]}
+                {"realnumber": ["0.000000000000001", "1"], "long": ["1,000,000,000,000", "1"]}
             ),
             margin=1,
         )
@@ -76,6 +76,8 @@ class Test_UnicodeTableWriter_write_table:
             │    realnumber     │     long      │
             ├───────────────────┼───────────────┤
             │ 0.000000000000001 │ 1000000000000 │
+            ├───────────────────┼───────────────┤
+            │ 1.000000000000000 │             1 │
             └───────────────────┴───────────────┘
             """
         )

@@ -29,9 +29,9 @@ normal_test_data_list = [
         value=float_value_matrix,
         expected=r"""\begin{equation}
     \left( \begin{array}{rrr}
-        0.01 &      0.0012 & 0.000 \\
-        1.00 &     99.9000 & 0.010 \\
-        1.20 & 999999.1230 & 0.001 \\
+        0.01 &      0.00125 & 0.000 \\
+        1.00 &     99.90000 & 0.010 \\
+        1.20 & 999999.12300 & 0.001 \\
     \end{array} \right)
 \end{equation}
 """,
@@ -42,9 +42,9 @@ normal_test_data_list = [
         value=float_value_matrix,
         expected=r"""\begin{equation}
     A = \left( \begin{array}{rrr}
-        0.01 &      0.0012 & 0.000 \\
-        1.00 &     99.9000 & 0.010 \\
-        1.20 & 999999.1230 & 0.001 \\
+        0.01 &      0.00125 & 0.000 \\
+        1.00 &     99.90000 & 0.010 \\
+        1.20 & 999999.12300 & 0.001 \\
     \end{array} \right)
 \end{equation}
 """,
