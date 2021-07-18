@@ -42,6 +42,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     """
     An abstract base class of table writer classes.
 
+    Args:
+        max_precision (int): Maximum decimal places for real number values.
+
     .. py:attribute:: stream
 
         Stream to write tables.
@@ -240,7 +243,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self._use_default_header = False
 
-        self._dp_extractor = DataPropertyExtractor()
+        self._dp_extractor = DataPropertyExtractor(max_precision=kwargs.get("max_precision"))
         self._dp_extractor.min_column_width = 1
         self._dp_extractor.strip_str_header = '"'
         self._dp_extractor.preprocessor = Preprocessor(strip_str='"')

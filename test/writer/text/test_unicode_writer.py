@@ -86,6 +86,33 @@ class Test_UnicodeTableWriter_write_table:
         print_test_result(expected=expected, actual=output)
         assert output == expected
 
+    def test_normal_max_precision(self):
+        writer = UnicodeTableWriter(
+            headers=["realnumber", "long"],
+            value_matrix=[
+                ["0.000000000000001", "1,000,000,000,000"],
+                ["1", "1"],
+            ],
+            margin=1,
+            max_precision=3,
+        )
+
+        expected = dedent(
+            """\
+            ┌────────────┬───────────────┐
+            │ realnumber │     long      │
+            ├────────────┼───────────────┤
+            │      0.000 │ 1000000000000 │
+            ├────────────┼───────────────┤
+            │      1.000 │             1 │
+            └────────────┴───────────────┘
+            """
+        )
+
+        output = writer.dumps()
+        print_test_result(expected=expected, actual=output)
+        assert output == expected
+
 
 class Test_BoldUnicodeTableWriter_write_table:
     def test_normal_styles(self, capsys):
