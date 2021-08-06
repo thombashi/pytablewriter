@@ -49,7 +49,7 @@ normal_test_data_list = [
         value=None,
         expected=dedent(
             """\
-            .. csv-table:: 
+            .. csv-table::
                 :header: "a", "b", "c", "dd", "e"
                 :widths: 3, 3, 3, 4, 3
 
@@ -63,7 +63,7 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-            .. csv-table:: 
+            .. csv-table::
                 :widths: 1, 5, 5, 3, 6
 
                 1, 123.1, "a", 1.0, 1
@@ -77,7 +77,7 @@ normal_test_data_list = [
         indent=1,
         header=headers,
         value=value_matrix,
-        expected="""    .. csv-table:: 
+        expected="""    .. csv-table::
         :header: "a", "b", "c", "dd", "e"
         :widths: 3, 5, 5, 4, 6
 
