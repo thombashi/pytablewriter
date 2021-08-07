@@ -60,7 +60,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
     def _get_table_directive(self) -> str:
         if typepy.is_null_string(self.table_name):
-            return ".. table:: \n"
+            return ".. table::\n"
 
         return f".. table:: {MultiByteStrDecoder(self.table_name).unicode_str}\n"
 
@@ -119,12 +119,12 @@ class RstCsvTableWriter(RstTableWriter):
         IndentationTextTableWriter.write_table(self, **kwargs)
 
     def _get_opening_row_items(self) -> List[str]:
-        directive = ".. csv-table:: "
+        directive = ".. csv-table::"
 
         if typepy.is_null_string(self.table_name):
             return [directive]
 
-        return [directive + MultiByteStrDecoder(self.table_name).unicode_str]
+        return [f"{directive} {MultiByteStrDecoder(self.table_name).unicode_str}"]
 
     def _write_opening_row(self) -> None:
         self.dec_indent_level()

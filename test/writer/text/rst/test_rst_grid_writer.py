@@ -53,7 +53,7 @@ normal_test_data_list = [
         value=None,
         expected=dedent(
             """\
-            .. table:: 
+            .. table::
 
                 +-+-+-+--+-+
                 |a|b|c|dd|e|
@@ -69,7 +69,7 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-            .. table:: 
+            .. table::
 
                 +-+-----+---+---+----+
                 |1|123.1|a  |1.0|   1|

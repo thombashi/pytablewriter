@@ -50,7 +50,7 @@ normal_test_data_list = [
         value=None,
         expected=dedent(
             """\
-            .. table:: 
+            .. table::
 
                 =  =  =  ==  =
                 a  b  c  dd  e
@@ -66,7 +66,7 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-            .. table:: 
+            .. table::
 
                 =  =====  ===  ===  ====
                 1  123.1  a    1.0     1
@@ -81,7 +81,7 @@ normal_test_data_list = [
         indent=1,
         header=headers,
         value=value_matrix,
-        expected="""    .. table:: 
+        expected="""    .. table::
 
         =  =====  ===  ===  ====
         a    b     c   dd    e  
