@@ -30,6 +30,10 @@ Summary
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
     :alt: Test coverage
 
+.. image:: https://github.com/thombashi/pytablewriter/actions/workflows/codeql-analysis.yml/badge.svg
+    :target: https://github.com/thombashi/pytablewriter/actions/workflows/codeql-analysis.yml
+    :alt: CodeQL
+
 Features
 --------
 - Write a table in various formats:
