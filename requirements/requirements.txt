@@ -1,6 +1,6 @@
 DataProperty>=0.53.0,<2
 mbstrdecoder>=1.0.0,<2
 pathvalidate>=2.3.0,<3
-tabledata>=1.1.3,<2
+tabledata>=1.3.0,<2
 tcolorpy>=0.0.5,<1
 typepy[datetime]>=1.2.0,<2

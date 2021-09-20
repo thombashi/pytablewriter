@@ -143,18 +143,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     @property
-    def tabledata(self) -> TableData:
-        """Get tabular data of the writer.
-
-        Returns:
-            tabledata.TableData:
-        """
-
-        return TableData(
-            self.table_name, self.headers, self.value_matrix, max_workers=self.max_workers
-        )
-
-    @property
     def table_format(self):
         """Get the format of the writer.
 
@@ -354,6 +342,22 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     @max_workers.setter
     def max_workers(self, value: Optional[int]) -> None:
         self._dp_extractor.max_workers = value  # type: ignore
+
+    @property
+    def tabledata(self) -> TableData:
+        """Get tabular data of the writer.
+
+        Returns:
+            tabledata.TableData:
+        """
+
+        return TableData(
+            self.table_name,
+            self.headers,
+            self.value_matrix,
+            max_workers=self.max_workers,
+            max_precision=self._dp_extractor.max_precision,
+        )
 
     @property
     def table_name(self) -> str:
