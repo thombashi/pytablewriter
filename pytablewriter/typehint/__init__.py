@@ -1,3 +1,4 @@
+from dataproperty.typing import TypeHint
 from typepy import (
     Binary,
     Bool,

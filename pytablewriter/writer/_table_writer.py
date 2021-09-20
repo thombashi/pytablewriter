@@ -25,7 +25,7 @@ from .._logger import WriterLogger
 from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
 from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
 from ..style._theme import ColSeparatorStyleFilterFunc, StyleFilterFunc, fetch_theme
-from ..typehint import Integer
+from ..typehint import Integer, TypeHint
 from ._interface import TableWriterInterface
 from ._msgfy import to_error_message
 
@@ -370,7 +370,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._table_name = value
 
     @property
-    def type_hints(self) -> List:
+    def type_hints(self) -> List[TypeHint]:
         """
         Type hints for each column of the tabular data.
         Writers convert data for each column using the type hints information
@@ -408,10 +408,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             - :ref:`example-type-hint-python`
         """
 
-        return list(self._dp_extractor.column_type_hints)
+        return self._dp_extractor.column_type_hints
 
     @type_hints.setter
-    def type_hints(self, value: Sequence) -> None:
+    def type_hints(self, value: Sequence[Union[str, TypeHint]]) -> None:
         hints = list(value)
         if self.type_hints == hints:
             return
@@ -1076,10 +1076,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         except EmptyValueError:
             pass
 
-    def __set_value_matrix(self, value_matrix: Sequence):
+    def __set_value_matrix(self, value_matrix: Sequence) -> None:
         self.__value_matrix_org = value_matrix
 
-    def __set_type_hints(self, type_hints):
+    def __set_type_hints(self, type_hints: Sequence[Union[str, TypeHint]]) -> None:
         self._dp_extractor.column_type_hints = type_hints
 
     def _verify_table_name(self) -> None:
