@@ -29,13 +29,9 @@ class ColSeparatorStyleFilterFunc(Protocol):
         ...
 
 
-Theme = NamedTuple(
-    "Theme",
-    [
-        ("style_filter", Optional[StyleFilterFunc]),
-        ("col_separator_style_filter", Optional[ColSeparatorStyleFilterFunc]),
-    ],
-)
+class Theme(NamedTuple):
+    style_filter: Optional[StyleFilterFunc]
+    col_separator_style_filter: Optional[ColSeparatorStyleFilterFunc]
 
 
 def list_themes() -> Sequence[str]:
