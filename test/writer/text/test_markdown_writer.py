@@ -698,7 +698,7 @@ class Test_MarkdownTableWriter_write_table:
                 ["5", '"abc" "efg"'],
                 ["6", "'abc' 'efg'"],
             ],
-            margin=0
+            margin=0,
         )
         expected = dedent(
             """\
