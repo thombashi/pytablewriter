@@ -255,7 +255,10 @@ normal_test_data_list = [
         table="quoted values",
         indent=0,
         header=['"quote"', '"abc efg"'],
-        value=[['"1"', '"abc"'], ['"-1"', '"efg"']],
+        value=[
+            ['"1"', '"abc"'],
+            ['"-1"', '"efg"'],
+        ],
         is_formatting_float=True,
         expected=dedent(
             """\
@@ -681,6 +684,38 @@ class Test_MarkdownTableWriter_write_table:
             """
         )
         print_test_result(expected=expected, actual=out)
+        assert out == expected
+
+    def test_normal_dequote(self):
+        writer = table_writer_class(
+            table_name="zone",
+            headers=["id", "name"],
+            value_matrix=[
+                ["1", 'Debian 11 "Bullseye"'],
+                ["2", "Debian 11 'Bullseye'"],
+                ["3", '"abc" efg'],
+                ["4", "'abc' efg"],
+                ["5", '"abc" "efg"'],
+                ["6", "'abc' 'efg'"],
+            ],
+            margin=0
+        )
+        expected = dedent(
+            """\
+            # zone
+            |id |        name        |
+            |--:|--------------------|
+            |  1|Debian 11 "Bullseye"|
+            |  2|Debian 11 'Bullseye'|
+            |  3|"abc" efg           |
+            |  4|'abc' efg           |
+            |  5|"abc" "efg"         |
+            |  6|'abc' 'efg'         |
+            """
+        )
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+
         assert out == expected
 
     def test_normal_style_font_size(self):

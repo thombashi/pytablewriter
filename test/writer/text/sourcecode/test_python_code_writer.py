@@ -87,11 +87,16 @@ normal_test_data_list = [
         table="quoted values",
         indent=0,
         header=['"quote"', '"abc efg"'],
-        value=[['"1', '"abc"'], ['"-1', '"efg"']],
+        value=[
+            ['"1"', '"abc"'],
+            ['"-1"', '"efg"'],
+            ["2", '"2'],
+        ],
         expected="""quoted_values = [
     ["quote", "abc efg"],
     [1, "abc"],
     [-1, "efg"],
+    [2, "\\"2"],
 ]
 """,
     ),
