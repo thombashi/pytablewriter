@@ -93,7 +93,7 @@ class AsciiDocTableWriter(TextTableWriter):
             f"{get_align_char(col_dp.align)}{col_dp.ascii_char_width}"
             for col_dp in self._column_dp_list
         )
-        rows = [f'[cols="{cols}" options="header"]']
+        rows = [f'[cols="{cols}", options="header"]']
 
         if typepy.is_not_null_string(self.table_name):
             rows.append("." + MultiByteStrDecoder(self.table_name).unicode_str)
