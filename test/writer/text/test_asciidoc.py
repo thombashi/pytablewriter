@@ -32,7 +32,7 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-            [cols=">1, >5, <3, >3, <4" options="header"]
+            [cols=">1, >5, <3, >3, <4", options="header"]
             .test table
             |===
             ^|a
@@ -68,7 +68,7 @@ normal_test_data_list = [
         value=None,
         expected=dedent(
             """\
-            [cols="<1, <1, <1, <2, <1" options="header"]
+            [cols="<1, <1, <1, <2, <1", options="header"]
             |===
             ^|a
             ^|b
@@ -91,7 +91,7 @@ normal_test_data_list = [
         ],
         expected=dedent(
             """\
-            [cols=">5, <21" options="header"]
+            [cols=">5, <21", options="header"]
             |===
             ^|ho ge
             ^|foo - bar
@@ -121,7 +121,7 @@ normal_test_data_list = [
         value=value_matrix,
         expected=dedent(
             """\
-            [cols=">1, >5, <3, >3, <4" options="header"]
+            [cols=">1, >5, <3, >3, <4", options="header"]
             |===
             |1
             |123.1
@@ -150,7 +150,7 @@ normal_test_data_list = [
         value=value_matrix_with_none,
         expected=dedent(
             """\
-            [cols=">1, >3, <3, >3, <4" options="header"]
+            [cols=">1, >3, <3, >3, <4", options="header"]
             .values with none
             |===
             ^|a
@@ -192,7 +192,7 @@ normal_test_data_list = [
         value=mix_value_matrix,
         expected=dedent(
             """\
-            [cols=">1, >4, <4, >4, <3, <5, <8, <3, >8, <25" options="header"]
+            [cols=">1, >4, <4, >4, <3, <5, <8, <3, >8, <25", options="header"]
             .MIX VALUES
             |===
             ^|i
@@ -281,7 +281,7 @@ class Test_AsciiDocTableWriter_write_table:
 
         expected = dedent(
             """\
-            [cols="<7, <9" options="header"]
+            [cols="<7, <9", options="header"]
             |===
             ^|w/ bold
             ^|w/ italic
@@ -310,7 +310,7 @@ class Test_AsciiDocTableWriter_write_table:
         )
         expected = dedent(
             """\
-            [cols="<8, <8, <11" options="header"]
+            [cols="<8, <8, <11", options="header"]
             |===
             ^|fg color
             ^|bg color
@@ -354,7 +354,7 @@ class Test_AsciiDocTableWriter_write_table_iter:
                 lambda a, b: None,
                 dedent(
                     """\
-                    [cols=">3, >3, >3" options="header"]
+                    [cols=">3, >3, >3", options="header"]
                     .iteration write
                     |===
                     ^|ha
@@ -395,7 +395,7 @@ class Test_AsciiDocTableWriter_write_table_iter:
                 simple_write_callback,
                 dedent(
                     """\
-                    [cols=">3, >3, >3" options="header"]
+                    [cols=">3, >3, >3", options="header"]
                     |===
                     |1
                     |2
