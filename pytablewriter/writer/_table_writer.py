@@ -391,7 +391,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             - :py:class:`pytablewriter.typehint.Nan` or ``"nan"``
             - :py:class:`pytablewriter.typehint.NoneType` or ``"none"``
             - :py:class:`pytablewriter.typehint.NullString` or ``"nullstr"``
-            - :py:class:`pytablewriter.typehint.RealNumber` or ``"realnumber"`` or  ``"float"`` 
+            - :py:class:`pytablewriter.typehint.RealNumber` or ``"realnumber"`` or ``"float"``
             - :py:class:`pytablewriter.typehint.String` or ``"str"``
 
         If a type-hint value is not |None|, the writer tries to
