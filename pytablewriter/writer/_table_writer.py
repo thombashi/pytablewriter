@@ -45,6 +45,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     Args:
         max_precision (int): Maximum decimal places for real number values.
 
+        dequote (bool): If |True|, dequote values in :py:attr:`~.value_matrix`.
+
     .. py:attribute:: stream
 
         Stream to write tables.
@@ -234,7 +236,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor = DataPropertyExtractor(max_precision=kwargs.get("max_precision"))
         self._dp_extractor.min_column_width = 1
         self._dp_extractor.strip_str_header = '"'
-        self._dp_extractor.preprocessor = Preprocessor(dequote=True)
+        self._dp_extractor.preprocessor = Preprocessor(dequote=kwargs.get("dequote", True))
         self._dp_extractor.type_value_map[Typecode.NONE] = ""
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
         self._dp_extractor.update_strict_level_map({Typecode.BOOL: 1})

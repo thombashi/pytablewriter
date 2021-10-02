@@ -687,17 +687,23 @@ class Test_MarkdownTableWriter_write_table:
         assert out == expected
 
     def test_normal_dequote(self):
+        headers = ["id", "name"]
+        values = [
+            ["1", 'Debian 11 "Bullseye"'],
+            ["2", "Debian 11 'Bullseye'"],
+            ["3", '"abc" efg'],
+            ["4", "'abc' efg"],
+            ["5", '"abc" "efg"'],
+            ["6", "'abc' 'efg'"],
+            ["7", "'abc'"],
+            ["8", '"abc"'],
+        ]
+
         writer = table_writer_class(
             table_name="zone",
-            headers=["id", "name"],
-            value_matrix=[
-                ["1", 'Debian 11 "Bullseye"'],
-                ["2", "Debian 11 'Bullseye'"],
-                ["3", '"abc" efg'],
-                ["4", "'abc' efg"],
-                ["5", '"abc" "efg"'],
-                ["6", "'abc' 'efg'"],
-            ],
+            headers=headers,
+            value_matrix=values,
+            dequote=True,
             margin=0,
         )
         expected = dedent(
@@ -711,11 +717,38 @@ class Test_MarkdownTableWriter_write_table:
             |  4|'abc' efg           |
             |  5|"abc" "efg"         |
             |  6|'abc' 'efg'         |
+            |  7|abc                 |
+            |  8|abc                 |
             """
         )
         out = writer.dumps()
         print_test_result(expected=expected, actual=out)
+        assert out == expected
 
+        writer = table_writer_class(
+            table_name="zone",
+            headers=headers,
+            value_matrix=values,
+            dequote=False,
+            margin=0,
+        )
+        expected = dedent(
+            """\
+            # zone
+            |id |        name        |
+            |--:|--------------------|
+            |  1|Debian 11 "Bullseye"|
+            |  2|Debian 11 'Bullseye'|
+            |  3|"abc" efg           |
+            |  4|'abc' efg           |
+            |  5|"abc" "efg"         |
+            |  6|'abc' 'efg'         |
+            |  7|'abc'               |
+            |  8|"abc"               |
+            """
+        )
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
         assert out == expected
 
     def test_normal_style_font_size(self):
