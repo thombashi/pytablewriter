@@ -13,7 +13,7 @@ from tcolorpy import tcolor
 
 import pytablewriter as ptw
 from pytablewriter.style import Align, Cell, FontSize, Style, ThousandSeparator
-from pytablewriter.typehint import Integer
+from pytablewriter.typehint import Integer, RealNumber, String
 
 from ..._common import print_test_result
 from ...data import (
@@ -607,6 +607,36 @@ class Test_MarkdownTableWriter_write_table:
         print_test_result(expected=expected, actual=out, error=err)
 
         assert out == expected
+
+    def test_normal_type_hints(self):
+        writer = table_writer_class(
+            table_name="type hints",
+            headers=["a", "b"],
+            value_matrix=[
+                [0, 1],
+                [11, 12],
+            ],
+        )
+        expected = dedent(
+            """\
+            # type hints
+            | a | b |
+            |--:|--:|
+            |  0|  1|
+            | 11| 12|
+            """
+        )
+        out_wo_type_hints = writer.dumps()
+        print_test_result(expected=expected, actual=out_wo_type_hints)
+
+        writer.type_hints = [String, RealNumber]
+        out_w_type_hints = writer.dumps()
+        assert writer.type_hints == [String, RealNumber]
+        assert out_wo_type_hints != out_w_type_hints
+
+        writer.type_hints = ["string", "float"]
+        assert writer.type_hints == [String, RealNumber]
+        assert out_w_type_hints == writer.dumps()
 
     def test_normal_style_align(self):
         writer = table_writer_class()
