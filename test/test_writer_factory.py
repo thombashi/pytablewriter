@@ -294,12 +294,12 @@ class Test_FileLoaderFactory_create_from_format_name:
             is_formatting_float=is_formatting_float,
         )
 
-        print(format_name, type(writer), file=sys.stderr)
         assert isinstance(writer, expected)
         assert writer.table_name == table_name
         assert writer.headers == headers
         assert writer.value_matrix == value_matrix
-        assert writer.type_hints == [Integer, Integer]
+        if expected != ptw.NullTableWriter:
+            assert writer.type_hints == [Integer, Integer]
         assert writer.is_formatting_float == is_formatting_float
 
     @pytest.mark.parametrize(
