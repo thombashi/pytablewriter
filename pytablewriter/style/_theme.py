@@ -11,7 +11,7 @@ try:
     from typing import Protocol
 except ImportError:
     # typing.Protocol is only available starting from Python 3.8.
-    from .._typing import Protocol  # noqa
+    from .._typing import Protocol  # type: ignore
 
 
 KNOWN_PLUGINS = ("pytablewriter_altrow_theme",)

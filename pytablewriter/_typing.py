@@ -1,3 +1,5 @@
+# type: ignore
+
 """
 source code from: python/typing/typing_extensions/src_py3/typing_extensions.py
 tag: 3.7.4.1
