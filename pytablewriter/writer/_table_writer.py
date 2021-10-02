@@ -379,18 +379,18 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         Acceptable values are as follows:
 
             - |None| (automatically detect column type from values in the column)
-            - :py:class:`pytablewriter.typehint.Bool`
-            - :py:class:`pytablewriter.typehint.DateTime`
-            - :py:class:`pytablewriter.typehint.Dictionary`
-            - :py:class:`pytablewriter.typehint.Infinity`
-            - :py:class:`pytablewriter.typehint.Integer`
-            - :py:class:`pytablewriter.typehint.IpAddress`
-            - :py:class:`pytablewriter.typehint.List`
-            - :py:class:`pytablewriter.typehint.Nan`
-            - :py:class:`pytablewriter.typehint.NoneType`
-            - :py:class:`pytablewriter.typehint.NullString`
-            - :py:class:`pytablewriter.typehint.RealNumber`
-            - :py:class:`pytablewriter.typehint.String`
+            - :py:class:`pytablewriter.typehint.Bool` or ``"bool"``
+            - :py:class:`pytablewriter.typehint.DateTime` or ``"datetime"``
+            - :py:class:`pytablewriter.typehint.Dictionary` or ``"dict"``
+            - :py:class:`pytablewriter.typehint.Infinity` or ``"inf"``
+            - :py:class:`pytablewriter.typehint.Integer` or ``"int"``
+            - :py:class:`pytablewriter.typehint.IpAddress` or ``"ipaddr"``
+            - :py:class:`pytablewriter.typehint.List` or ``"list"``
+            - :py:class:`pytablewriter.typehint.Nan` or ``"nan"``
+            - :py:class:`pytablewriter.typehint.NoneType` or ``"none"``
+            - :py:class:`pytablewriter.typehint.NullString` or ``"nullstr"``
+            - :py:class:`pytablewriter.typehint.RealNumber` or ``"realnumber"`` or  ``"float"`` 
+            - :py:class:`pytablewriter.typehint.String` or ``"str"``
 
         If a type-hint value is not |None|, the writer tries to
         convert data for each data in a column to type-hint class.

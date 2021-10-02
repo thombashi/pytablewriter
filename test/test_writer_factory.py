@@ -187,7 +187,7 @@ class Test_WriterFactory_create_from_file_extension:
         table_name = "dummy"
         headers = ["a", "b"]
         value_matrix = [[1, 2]]
-        type_hints = [Integer, Integer]
+        type_hints = ["int", Integer]
         is_formatting_float = False
 
         writer = ptw.TableWriterFactory.create_from_file_extension(
@@ -204,7 +204,7 @@ class Test_WriterFactory_create_from_file_extension:
         assert writer.table_name == table_name
         assert writer.headers == headers
         assert writer.value_matrix == value_matrix
-        assert writer.type_hints == type_hints
+        assert writer.type_hints == [Integer, Integer]
         assert writer.is_formatting_float == is_formatting_float
 
     @pytest.mark.parametrize(
@@ -282,7 +282,7 @@ class Test_FileLoaderFactory_create_from_format_name:
         table_name = "dummy"
         headers = ["a", "b"]
         value_matrix = [[1, 2]]
-        type_hints = [Integer, Integer]
+        type_hints = [Integer, "int"]
         is_formatting_float = False
 
         writer = ptw.TableWriterFactory.create_from_format_name(
@@ -299,7 +299,7 @@ class Test_FileLoaderFactory_create_from_format_name:
         assert writer.table_name == table_name
         assert writer.headers == headers
         assert writer.value_matrix == value_matrix
-        assert writer.type_hints == type_hints
+        assert writer.type_hints == [Integer, Integer]
         assert writer.is_formatting_float == is_formatting_float
 
     @pytest.mark.parametrize(
