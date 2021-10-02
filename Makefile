@@ -13,7 +13,7 @@ build-remote: clean
 	@cd $(BUILD_WORK_DIR) && \
 		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git --depth 1 && \
 		cd $(PACKAGE) && \
-		tox -e build
+		$(PYTHON) -m tox -e build
 	ls -lh $(PKG_BUILD_DIR)/dist/*
 
 .PHONY: build
