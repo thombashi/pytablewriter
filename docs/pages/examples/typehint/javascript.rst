@@ -11,7 +11,6 @@ You can specify type hints to a writer via
 
         from datetime import datetime
         from pytablewriter import JavaScriptTableWriter
-        from pytablewriter.typehint import DateTime, Integer, String
 
         def main():
             writer = JavaScriptTableWriter()
@@ -27,7 +26,7 @@ You can specify type hints to a writer via
 
             print("// with type hints: values will be converted with type of hints if it possible")
             writer.table_name = "with type hint"
-            writer.type_hints = [Integer, DateTime, String]
+            writer.type_hints = ["int", "datetime", "str"]
             writer.write_table()
 
         if __name__ == "__main__":

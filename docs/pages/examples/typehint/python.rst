@@ -11,7 +11,6 @@ You can specify type hints to a writer via
 
         from datetime import datetime
         from pytablewriter import PythonCodeTableWriter
-        from pytablewriter.typehint import DateTime, Integer, String
 
         def main():
             writer = PythonCodeTableWriter()
@@ -28,7 +27,7 @@ You can specify type hints to a writer via
             # set type hints
             writer.table_name = "python variable with type hints"
             writer.headers = ["hint_int", "hint_str", "hint_datetime", "hint_str"]
-            writer.type_hints = [Integer, String, DateTime, String]
+            writer.type_hints = ["int", "str", "datetime", "str"]
             writer.write_table()
 
         if __name__ == "__main__":
