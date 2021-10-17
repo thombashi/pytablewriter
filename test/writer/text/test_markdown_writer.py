@@ -576,13 +576,23 @@ class Test_MarkdownTableWriter_write_table:
             TableData(
                 "first",
                 ["Name", "Loader"],
-                [["csv", "CsvTableFileLoader"], ["excel", "ExcelTableFileLoader"]],
+                [
+                    ["csv", "CsvTableFileLoader"],
+                    ["excel", "ExcelTableFileLoader"],
+                ],
             )
         )
         writer.write_table()
 
         writer.from_tabledata(
-            TableData("second", ["a", "b", "c"], [["1", "AA", "abc"], ["2", "BB", "zzz"]])
+            TableData(
+                "second",
+                ["a", "b", "c"],
+                [
+                    ["1", "AA", "abc"],
+                    ["2", "BB", "zzz"],
+                ],
+            )
         )
         writer.write_table()
 
@@ -785,7 +795,10 @@ class Test_MarkdownTableWriter_write_table:
         writer = table_writer_class()
         writer.table_name = "style test: font size will not be affected"
         writer.headers = ["none", "empty_style", "tiny", "small", "medium", "large"]
-        writer.value_matrix = [[111, 111, 111, 111, 111, 111], [1234, 1234, 1234, 1234, 1234, 1234]]
+        writer.value_matrix = [
+            [111, 111, 111, 111, 111, 111],
+            [1234, 1234, 1234, 1234, 1234, 1234],
+        ]
         writer.column_styles = [
             None,
             Style(),
@@ -813,7 +826,10 @@ class Test_MarkdownTableWriter_write_table:
         writer = table_writer_class()
         writer.table_name = "style test: bold"
         writer.headers = ["normal", "bold"]
-        writer.value_matrix = [[11, 11], [123456, 123456]]
+        writer.value_matrix = [
+            [11, 11],
+            [123456, 123456],
+        ]
         writer.column_styles = [Style(font_weight="normal"), Style(font_weight="bold")]
 
         expected = dedent(
@@ -955,7 +971,10 @@ class Test_MarkdownTableWriter_write_table:
         writer = table_writer_class(
             table_name="set style method",
             headers=["normal", "style by idx", "style by header"],
-            value_matrix=[[11, 11, 11], [123456, 123456, 123456]],
+            value_matrix=[
+                [11, 11, 11],
+                [123456, 123456, 123456],
+            ],
         )
 
         writer.set_style(1, Style(font_weight="bold", thousand_separator=","))
@@ -1154,7 +1173,11 @@ class Test_MarkdownTableWriter_write_table:
 
     def test_normal_register_trans_func(self):
         writer = table_writer_class(
-            headers=["a", "b"], value_matrix=[["foo", True], ["bar", False]]
+            headers=["a", "b"],
+            value_matrix=[
+                ["foo", True],
+                ["bar", False],
+            ],
         )
         writer.register_trans_func(trans_func)
 
