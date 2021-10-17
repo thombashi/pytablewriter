@@ -999,7 +999,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     ) -> Style:
         self.style_filter_kwargs.update({"writer": self})
 
-        style = None  # Optional[Style]
+        style: Optional[Style] = None
 
         for style_filter in self._style_filters:
             style = style_filter(
