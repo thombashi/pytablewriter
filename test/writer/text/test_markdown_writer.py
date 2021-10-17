@@ -737,6 +737,8 @@ class Test_MarkdownTableWriter_write_table:
             ["6", "'abc' 'efg'"],
             ["7", "'abc'"],
             ["8", '"abc"'],
+            ["9", {"1": 1}],
+            ["10", {"1"}],
         ]
 
         writer = table_writer_class(
@@ -759,6 +761,8 @@ class Test_MarkdownTableWriter_write_table:
             |  6|'abc' 'efg'         |
             |  7|abc                 |
             |  8|abc                 |
+            |  9|{'1': 1}            |
+            | 10|{'1'}               |
             """
         )
         out = writer.dumps()
@@ -785,6 +789,8 @@ class Test_MarkdownTableWriter_write_table:
             |  6|'abc' 'efg'         |
             |  7|'abc'               |
             |  8|"abc"               |
+            |  9|{'1': 1}            |
+            | 10|{'1'}               |
             """
         )
         out = writer.dumps()
