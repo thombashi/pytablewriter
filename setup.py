@@ -44,7 +44,7 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
     docs_requires = [line.strip() for line in f if line.strip()]
 
-setuptools_require = ["setuptools>=38.3.0"]
+setuptools_require = ["setuptools>=38.3.0,<58"]
 
 excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<4"]
 es7_requires = ["elasticsearch>=7.0.5,<8"]
