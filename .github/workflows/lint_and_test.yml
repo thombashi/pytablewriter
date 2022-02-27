@@ -9,6 +9,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    container:
+      image: ghcr.io/thombashi/python-ci:3.8
 
     steps:
       - uses: actions/checkout@v2
