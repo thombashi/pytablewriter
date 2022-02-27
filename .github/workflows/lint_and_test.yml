@@ -8,6 +8,9 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.job }}
+      cancel-in-progress: true
     timeout-minutes: 20
     container:
       image: ghcr.io/thombashi/python-ci:3.8
@@ -21,6 +24,9 @@ jobs:
 
   unit-test:
     runs-on: ${{ matrix.os }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.job }}-${{ matrix.os }}-${{ matrix.python-version }}
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
