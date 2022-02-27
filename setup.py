@@ -54,7 +54,7 @@ logging_requires = ["loguru>=0.4.1,<1"]
 sqlite_requires = ["SimpleSQLite>=1.1.3,<2"]
 theme_requires = ["pytablewriter-altrow-theme>=0.0.2,<1"]
 toml_requires = ["toml>=0.9.3,<1"]
-yaml_requires = ["PyYAML>=3.11,<6"]
+yaml_requires = ["PyYAML>=3.11,<7"]
 optional_requires = ["simplejson>=3.8.1,<4"]
 all_requires = (
     excel_requires
