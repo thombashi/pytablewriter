@@ -5,3 +5,4 @@ pytest-discord>=0.0.7
 pytest-md-report>=0.1
 sqliteschema
 tablib
+beautifulsoup4>=4.10
