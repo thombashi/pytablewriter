@@ -39,7 +39,7 @@ jobs:
             python-version: 'pypy3'
           - os: windows-latest
             python-version: '3.6'
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v2
@@ -69,13 +69,19 @@ jobs:
       - name: Install dependencies
         run: make setup-ci
 
-      - name: Run tests
+      - name: Run tests - not Windows
+        if: matrix.os != 'windows-latest'
         run: tox -e cov -- --discord-verbose=0
 
+      - name: Run tests - Windows
+        timeout-minutes: 60
+        if: matrix.os == 'windows-latest'
+        run: tox -e py
+  
       - name: Upload coverage report
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python -m pip install --upgrade --disable-pip-version-check coveralls tomli
           coveralls --service=github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8'
