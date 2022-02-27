@@ -39,7 +39,6 @@ jobs:
             python-version: 'pypy3'
           - os: windows-latest
             python-version: '3.6'
-    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v2
@@ -71,11 +70,12 @@ jobs:
 
       - name: Run tests - not Windows
         if: matrix.os != 'windows-latest'
+        timeout-minutes: 20
         run: tox -e cov -- --discord-verbose=0
 
       - name: Run tests - Windows
-        timeout-minutes: 60
         if: matrix.os == 'windows-latest'
+        timeout-minutes: 60
         run: tox -e py
   
       - name: Upload coverage report
