@@ -39,7 +39,7 @@ jobs:
             python-version: 'pypy3'
           - os: windows-latest
             python-version: '3.6'
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v2
