@@ -45,7 +45,7 @@ fmt:
 
 .PHONY: readme
 readme:
-	@cd $(DOCS_DIR) && tox -e readme
+	@$(PYTHON) -m tox -e readme
 
 .PHONY: release
 release:
