@@ -60,3 +60,7 @@ setup-ci:
 setup: setup-ci
 	@$(PYTHON) -m pip install --upgrade -q --disable-pip-version-check -e .[test] releasecmd
 	@$(PYTHON) -m pip check
+
+.PHONY: test
+test:
+	@tox -e py
