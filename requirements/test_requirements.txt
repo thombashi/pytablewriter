@@ -1,5 +1,5 @@
 idna<3
-pytablereader[excel,sqlite]>=0.29
+pytablereader[excel,sqlite]>=0.31.3
 pytest>=6.0.1
 pytest-discord>=0.0.7
 pytest-md-report>=0.1
