@@ -343,7 +343,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @max_workers.setter
     def max_workers(self, value: Optional[int]) -> None:
-        self._dp_extractor.max_workers = value  # type: ignore
+        self._dp_extractor.max_workers = value
 
     @property
     def tabledata(self) -> TableData:
@@ -625,7 +625,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         except ImportError:
             try:
                 # for pytest 5.4.1 or older versions
-                from _pytest.compat import CaptureIO  # type: ignore
+                from _pytest.compat import CaptureIO
 
                 if isinstance(self.stream, CaptureIO):
                     # avoid closing streams for pytest
