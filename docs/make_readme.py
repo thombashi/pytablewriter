@@ -27,12 +27,11 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_chapter("Write a Markdown table")
     maker.write_file(examples_root.joinpath("table_format", "text", "markdown_example.txt"))
 
-    maker.inc_indent_level()
-    maker.write_chapter("Write a Markdown table with a margin")
-    maker.write_file(
-        examples_root.joinpath("table_format", "text", "markdown_example_with_margin.txt")
-    )
-    maker.dec_indent_level()
+    with maker.indent():
+        maker.write_chapter("Write a Markdown table with a margin")
+        maker.write_file(
+            examples_root.joinpath("table_format", "text", "markdown_example_with_margin.txt")
+        )
 
     maker.write_chapter("Write a table to an Excel sheet")
     maker.write_file(
