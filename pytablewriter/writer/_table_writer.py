@@ -270,7 +270,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         )
         self._iter_count: Optional[int] = None
 
-        self.__default_style = kwargs.get("default_style", Style())
+        self.__default_style: Style
+        self.default_style = kwargs.get("default_style", Style())
 
         self.__col_style_list: List[Optional[Style]] = []
         self.column_styles = kwargs.get("column_styles", [])
@@ -435,10 +436,17 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         if not isinstance(style, Style):
             raise TypeError("default_style must be a Style instance")
 
-        if self.__default_style == style:
-            return
+        try:
+            if self.__default_style == style:
+                return
+        except AttributeError:
+            # not yet initialized
+            pass
 
         self.__default_style = style
+        self._dp_extractor.default_format_flags = _ts_to_flag[
+            self.__default_style.thousand_separator
+        ]
         self.__clear_preprocess()
 
     @property
