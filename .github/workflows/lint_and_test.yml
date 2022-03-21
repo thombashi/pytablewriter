@@ -71,8 +71,10 @@ jobs:
 
       - name: Run tests - Windows
         if: matrix.os == 'windows-latest'
-        timeout-minutes: 120
-        run: tox --verbose -e py -- -v
+        timeout-minutes: 60
+        run: |
+          python -m pip install --upgrade --disable-pip-version-check .[test]
+          python -m pytest
   
       - name: Upload coverage report
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8'
