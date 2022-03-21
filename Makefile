@@ -93,4 +93,4 @@ setup: setup-actionlint setup-ci setup-shellcheck
 
 .PHONY: test
 test:
-	@tox -e py
+	@tox --verbose -e py
