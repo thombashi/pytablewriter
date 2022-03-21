@@ -59,7 +59,7 @@ def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwa
 
 
 def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
-    # depreated: alias to dumps_tabledata()
+    # deprecated: alias to dumps_tabledata()
     return dumps_tabledata(value, format_name, **kwargs)
 
 
