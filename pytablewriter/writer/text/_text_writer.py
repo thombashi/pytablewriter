@@ -189,6 +189,34 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         }
 
     def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
+        """Add a style filter function for columns to the writer.
+
+        Args:
+            style_filter:
+                A function that called for each cell in the table to apply a style
+                to table cells.
+                The function will be required to implement the following Protocol:
+
+                .. code-block:: python
+
+                    class ColSeparatorStyleFilterFunc(Protocol):
+                        def __call__(
+                            self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Dict[str, Any]
+                        ) -> Optional[Style]:
+                            ...
+
+                If more than one style filter function is added to the writer,
+                it will be called from the last one added.
+                These style functions should return |None| when not needed to apply styles.
+                If all of the style functions returned |None|,
+                :py:attr:`~.default_style` will be applied.
+
+                You can pass keyword arguments to style filter functions via
+                :py:attr:`~.style_filter_kwargs`. In default, the attribute includes:
+
+                    - ``writer``: the writer instance that the caller of a ``style_filter function``
+        """
+
         self._col_separator_style_filters.insert(0, style_filter)
         self._clear_preprocess()
 
