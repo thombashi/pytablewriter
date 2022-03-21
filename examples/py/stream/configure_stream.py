@@ -10,16 +10,17 @@ import pytablewriter as ptw
 
 
 def main():
-    writer = ptw.MarkdownTableWriter()
-    writer.table_name = "zone"
-    writer.headers = ["zone_id", "country_code", "zone_name"]
-    writer.value_matrix = [
-        ["1", "AD", "Europe/Andorra"],
-        ["2", "AE", "Asia/Dubai"],
-        ["3", "AF", "Asia/Kabul"],
-        ["4", "AG", "America/Antigua"],
-        ["5", "AI", "America/Anguilla"],
-    ]
+    writer = ptw.MarkdownTableWriter(
+        table_name="zone",
+        headers=["zone_id", "country_code", "zone_name"],
+        value_matrix=[
+            ["1", "AD", "Europe/Andorra"],
+            ["2", "AE", "Asia/Dubai"],
+            ["3", "AF", "Asia/Kabul"],
+            ["4", "AG", "America/Antigua"],
+            ["5", "AI", "America/Anguilla"],
+        ],
+    )
 
     # writer instance writes a table to stdout by default
     writer.write_table()
@@ -35,6 +36,9 @@ def main():
     with open("sample.md", "w") as f:
         writer.stream = f
         writer.write_table()
+
+    # or you can use dump method to file if you just output a table to a file
+    # writer.dump("sample.md")
 
 
 if __name__ == "__main__":
