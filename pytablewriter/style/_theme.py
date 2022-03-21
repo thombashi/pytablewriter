@@ -50,8 +50,8 @@ def load_ptw_plugins() -> Dict[str, Theme]:
 
     return {
         theme: Theme(
-            plugin.style_filter if hasattr(plugin, "style_filter") else None,  # type: ignore
-            plugin.col_separator_style_filter  # type: ignore
+            plugin.style_filter if hasattr(plugin, "style_filter") else None,
+            plugin.col_separator_style_filter
             if hasattr(plugin, "col_separator_style_filter")
             else None,
         )
