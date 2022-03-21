@@ -64,14 +64,8 @@ jobs:
       - name: Install dependencies
         run: make setup-ci
 
-      - name: Run tests - not Windows
-        if: matrix.os != 'windows-latest'
+      - name: Run tests
         timeout-minutes: 20
-        run: tox -e cov -- --discord-verbose=0
-
-      - name: Run tests - Windows
-        if: matrix.os == 'windows-latest'
-        timeout-minutes: 60
         run: tox --verbose -e cov
 
       - name: Upload coverage report
