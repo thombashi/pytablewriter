@@ -33,9 +33,17 @@ def write_examples(maker: ReadmeMaker) -> None:
             examples_root.joinpath("table_format", "text", "markdown_example_with_margin.txt")
         )
 
+    with maker.indent():
+        maker.write_chapter("Write a Markdown table to a stream or a file")
+        maker.write_lines(
+            [
+                "`Refer an example <https://github.com/thombashi/pytablewriter/blob/master/examples/py/stream/configure_stream.py>`__"
+            ]
+        )
+
     maker.write_chapter("Write a table to an Excel sheet")
     maker.write_file(
-        examples_root.joinpath("table_format", "binary", "spreadsheet", "exel_single_example.txt")
+        examples_root.joinpath("table_format", "binary", "spreadsheet", "excel_single_example.txt")
     )
 
     maker.write_chapter("Write a Unicode table")

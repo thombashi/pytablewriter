@@ -196,6 +196,10 @@ Write a Markdown table with a margin
 
 ``margin`` attribute can be available for all of the text format writer classes.
 
+Write a Markdown table to a stream or a file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`Refer an example <https://github.com/thombashi/pytablewriter/blob/master/examples/py/stream/configure_stream.py>`__
+
 Write a table to an Excel sheet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
