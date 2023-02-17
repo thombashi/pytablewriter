@@ -16,7 +16,7 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.8
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Lint
         run: |
@@ -37,10 +37,10 @@ jobs:
             python-version: '3.6'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
