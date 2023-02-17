@@ -17,7 +17,7 @@ class LatexWriter(IndentationTextTableWriter):
     A base writer class for LaTeX format.
     """
 
-    _RE_MATH_PARTS = re.compile("^[\\]?[a-zA-z]+$")
+    _RE_MATH_PARTS = re.compile(r"^\\?[a-zA-Z]+$")
 
     @property
     def support_split_write(self) -> bool:
