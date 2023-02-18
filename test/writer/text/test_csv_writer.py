@@ -149,7 +149,6 @@ class Test_CsvTableWriter_write_new_line:
 
 
 class Test_CsvTableWriter_from_csv:
-
     __CSV_TEXT_INPUT = dedent(
         """\
         "a","b","c","dd","e"
