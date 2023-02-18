@@ -72,7 +72,6 @@ readme:
 release:
 	@cd $(PKG_BUILD_DIR) && $(PYTHON) setup.py release --sign --search-dir $(PACKAGE)
 	@$(MAKE) clean
-	@make clean
 
 .PHONY: setup-actionlint
 setup-actionlint:
