@@ -180,7 +180,7 @@ class Test_ElasticsearchWriter_write_table:
     )
     def test_smoke_empty(self, table, header, value, expected):
         writer = table_writer_class()
-        writer.stream = elasticsearch.Elasticsearch()
+        writer.stream = elasticsearch.Elasticsearch("http://localhost:9200")
         writer.table_name = table
         writer.headers = header
         writer.value_matrix = value
@@ -193,7 +193,7 @@ class Test_ElasticsearchWriter_write_table:
     )
     def test_exception(self, table, header, value, expected):
         writer = table_writer_class()
-        writer.stream = elasticsearch.Elasticsearch()
+        writer.stream = elasticsearch.Elasticsearch("http://localhost:9200")
         writer.table_name = table
         writer.headers = header
         writer.value_matrix = value
