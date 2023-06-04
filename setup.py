@@ -152,4 +152,5 @@ setuptools.setup(
         "Topic :: Text Processing :: Markup :: reStructuredText",
     ],
     cmdclass=get_release_command_class(),
+    zip_safe=False,
 )
