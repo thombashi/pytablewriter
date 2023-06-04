@@ -11,7 +11,7 @@ import typepy
 from ._logger import logger
 from ._table_format import FormatAttr, TableFormat
 from .error import WriterNotFoundError
-from .writer._table_writer import AbstractTableWriter
+from .writer import AbstractTableWriter
 
 
 class TableWriterFactory:
