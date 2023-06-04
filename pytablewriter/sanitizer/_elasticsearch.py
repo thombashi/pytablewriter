@@ -3,18 +3,19 @@
 """
 
 import re
-from typing import List, Pattern
+from typing import ClassVar, List, Pattern
 
 from ._base import VarNameSanitizer
 
 
 class ElasticsearchIndexNameSanitizer(VarNameSanitizer):
-
-    __RE_INVALID_INDEX_NAME = re.compile("[" + re.escape('\\/*?"<>|,"') + r"\s]+")
-    __RE_INVALID_INDEX_NAME_HEAD = re.compile("^[_]+")
+    __RE_INVALID_INDEX_NAME: ClassVar[Pattern] = re.compile(
+        "[" + re.escape('\\/*?"<>|,"') + r"\s]+"
+    )
+    __RE_INVALID_INDEX_NAME_HEAD: ClassVar[Pattern] = re.compile("^[_]+")
 
     @property
-    def reserved_keywords(self) -> List:
+    def reserved_keywords(self) -> List[str]:
         return []
 
     @property

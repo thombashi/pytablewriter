@@ -55,7 +55,7 @@ class PythonVarNameSanitizer(VarNameSanitizer):
     __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z]+")
 
     @property
-    def reserved_keywords(self) -> List:
+    def reserved_keywords(self) -> List[str]:
         return self.__PYTHON_RESERVED_KEYWORDS + self.__PYTHON_BUILTIN_CONSTANTS
 
     @property

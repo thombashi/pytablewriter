@@ -78,7 +78,7 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
     __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z$]+")
 
     @property
-    def reserved_keywords(self) -> List:
+    def reserved_keywords(self) -> List[str]:
         return (
             self.__JS_RESERVED_KEYWORDS_ES6
             + self.__JS_RESERVED_KEYWORDS_FUTURE

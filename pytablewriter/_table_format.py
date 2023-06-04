@@ -3,9 +3,10 @@
 """
 
 import enum
-from typing import Any, List
+from typing import Any, List, Optional, Sequence
 
 from .writer import (
+    AbstractTableWriter,
     AsciiDocTableWriter,
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
@@ -290,14 +291,20 @@ class TableFormat(enum.Enum):
 
         return self.__file_extensions
 
-    def __init__(self, names, writer_class, format_attribute, file_extensions):
-        self.__names = names
+    def __init__(
+        self,
+        names: Sequence[str],
+        writer_class: AbstractTableWriter,
+        format_attribute: int,
+        file_extensions: Sequence[str],
+    ) -> None:
+        self.__names = list(names)
         self.__writer_class = writer_class
         self.__format_attribute = format_attribute
-        self.__file_extensions = file_extensions
+        self.__file_extensions = list(file_extensions)
 
     @classmethod
-    def find_all_attr(cls, format_attribute: int) -> List:
+    def find_all_attr(cls, format_attribute: int) -> List["TableFormat"]:
         """Searching table formats which have specific attributes.
 
         Args:
@@ -315,7 +322,7 @@ class TableFormat(enum.Enum):
         ]
 
     @classmethod
-    def from_name(cls, format_name: str):
+    def from_name(cls, format_name: str) -> Optional["TableFormat"]:
         """Get a table format from a format name.
 
         Args:
@@ -334,7 +341,7 @@ class TableFormat(enum.Enum):
         return None
 
     @classmethod
-    def from_file_extension(cls, file_extension: str):
+    def from_file_extension(cls, file_extension: str) -> Optional["TableFormat"]:
         """Get a table format from a file extension.
 
         Args:
