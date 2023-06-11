@@ -47,7 +47,6 @@ with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
 setuptools_require = ["setuptools>=38.3.0"]
 
 excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<4"]
-es7_requires = ["elasticsearch>=7.0.5,<8"]
 es8_requires = ["elasticsearch>=8.0.1,<9"]
 from_requires = ["pytablereader>=0.31.3,<2"]
 html_requires = ["dominate>=2.1.5,<3"]
@@ -115,7 +114,6 @@ setuptools.setup(
         "all": all_requires,
         "docs": docs_requires,
         "excel": excel_requires,
-        "es7": es7_requires,
         "es8": es8_requires,
         "es": es8_requires,
         "html": html_requires,
