@@ -59,7 +59,7 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_chapter("Write a Markdown table from ``pandas.DataFrame`` instance")
     maker.write_file(examples_root.joinpath("datasource", "from_pandas_dataframe_example.txt"))
 
-    maker.write_chapter("Write a markdown table from a space-separated values")
+    maker.write_chapter("Write a markdown table from space-separated values")
     maker.write_file(examples_root.joinpath("datasource", "from_ssv_example.txt"))
 
     maker.set_indent_level(1)
@@ -90,7 +90,7 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_file(examples_root.joinpath("multibyte", "multibyte_table_example.txt"))
 
     maker.set_indent_level(1)
-    maker.write_chapter("Multi processing")
+    maker.write_chapter("Multiprocessing")
     maker.write_file(examples_root.joinpath("customize", "multi_process.txt"))
 
     # maker.write_chapter("Create Elasticsearch index and put data")

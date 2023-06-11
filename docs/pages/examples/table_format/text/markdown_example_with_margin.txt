@@ -6,7 +6,7 @@
 
         def main():
             writer = MarkdownTableWriter(
-                table_name="write example with a margin",
+                table_name="write an example with a margin",
                 headers=["int", "float", "str", "bool", "mix", "time"],
                 value_matrix=[
                     [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
@@ -24,7 +24,7 @@
 :Output:
     .. code-block:: none
 
-        # write example with a margin
+        # write an example with a margin
         | int | float | str  | bool  |   mix    |           time           |
         | --: | ----: | ---- | ----- | -------: | ------------------------ |
         |   0 |  0.10 | hoge | True  |        0 | 2017-01-01 03:04:05+0900 |

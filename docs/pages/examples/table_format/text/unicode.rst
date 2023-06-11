@@ -2,6 +2,6 @@
 
 Unicode
 ----------------------------
-|UnicodeTableWriter| class can write a table to the |stream| with Unicode character table from a matrix of data.
+|UnicodeTableWriter| class can write a table to the |stream| with a Unicode character table from a data matrix.
 
 .. include:: unicode_example.txt

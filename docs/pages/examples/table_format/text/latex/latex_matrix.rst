@@ -2,8 +2,7 @@
 
 LaTeX matrix
 -------------------------------------------
-|LatexMatrixWriter| class can writes a table
-with LaTeX ``array`` environment to the |stream| from a matrix of data.
+|LatexMatrixWriter| class can write a table with LaTeX ``array`` environment to the |stream| from a data matrix.
 
 :Sample Code 1:
     .. code-block:: python

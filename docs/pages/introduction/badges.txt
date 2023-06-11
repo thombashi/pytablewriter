@@ -22,6 +22,6 @@
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
     :alt: Test coverage
 
-.. image:: https://github.com/thombashi/pytablewriter/actions/workflows/codeql-analysis.yml/badge.svg
-    :target: https://github.com/thombashi/pytablewriter/actions/workflows/codeql-analysis.yml
+.. image:: https://github.com/thombashi/pytablewriter/actions/workflows/github-code-scanning/codeql/badge.svg
+    :target: https://github.com/thombashi/pytablewriter/actions/workflows/github-code-scanning/codeql
     :alt: CodeQL

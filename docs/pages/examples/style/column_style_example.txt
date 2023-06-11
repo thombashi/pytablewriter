@@ -51,7 +51,7 @@ for each column by ``column_styles`` attribute of writer classes.
     `Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/style/output.md>`__
 
 
-You can also set ``Style`` to a specific column with index or header by using ``set_style`` method:
+You can also set ``Style`` to a specific column with an index or header by using ``set_style`` method:
 
 :Sample Code:
     .. code-block:: python

@@ -4,11 +4,11 @@ LTSV
 ----------------------------
 |LtsvTableWriter| class can write a
 `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__
-table to the |stream| from a matrix of data.
+table to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python
-        :caption: Write a LTSV table
+        :caption: Write an LTSV table
 
         import pytablewriter
 

@@ -2,7 +2,7 @@
 
 CSV
 ----------------------------
-|CsvTableWriter| class can write a Comma-Separated Values (CSV) table to the |stream| from a matrix of data.
+|CsvTableWriter| class can write a Comma-Separated Values (CSV) table to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python
@@ -39,7 +39,7 @@ CSV
 
 TSV
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|TsvTableWriter| class can write a Tab-Separated Values (TSV) table to the |stream| from a matrix of data.
+|TsvTableWriter| class can write a Tab-Separated Values (TSV) table to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python

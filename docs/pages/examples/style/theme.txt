@@ -1,10 +1,11 @@
 The following command will install external predefined themes:
+
 ::
 
     pip install pytablewriter[theme]
 
 ``theme`` argument of writer constructor or ``set_theme`` method can set"" predefined style filters.
-``altrow`` theme will colored rows alternatively:
+``altrow`` theme will be colored rows alternatively:
 
 :Sample Code:
     .. code-block:: python

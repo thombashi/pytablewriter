@@ -2,6 +2,6 @@
 
 Elasticsearch
 ----------------------------
-|ElasticsearchWriter| class can create an index and put documents for each row to Elasticsearch from a matrix of data.
+|ElasticsearchWriter| class can create an index and put documents for each row to Elasticsearch from a data matrix.
 
 .. include:: elasticsearch_example.txt

@@ -4,7 +4,7 @@ TOML
 ----------------------------
 |TomlTableWriter| class can write a
 `TOML <https://github.com/toml-lang/toml>`__
-format table to the |stream| from a matrix of data.
+format table to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python

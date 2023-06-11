@@ -7,7 +7,7 @@ You can specify type hints to a writer via
 
 :Sample Code:
     .. code-block:: python
-        :caption: Using type hint to change data type to write Python code
+        :caption: Using type hint to change the data type to write Python code
 
         from datetime import datetime
         from pytablewriter import PythonCodeTableWriter

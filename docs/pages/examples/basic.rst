@@ -6,7 +6,7 @@ Basic usage of the ``pytablewriter`` is as follows:
 2. Assign a value to instance variables (such as |table_name|/|headers|/|value_matrix|) of the writer
 3. Call the ``write_table`` method
 
-The next example show how to write a table with markdown format:
+The following example shows how to write a table in markdown format:
 
 :Sample Code:
     .. code-block:: python
@@ -43,4 +43,5 @@ The next example show how to write a table with markdown format:
         |      4|AG          |America/Antigua |
         |      5|AI          |America/Anguilla|
 
-The default output stream is the standard output for text format writers, binary format writers will write to a binary file that opened by ``open`` method.
+The default output stream is the standard output for text format writers.
+Binary format writers will write to a binary file opened by the ``open`` method.

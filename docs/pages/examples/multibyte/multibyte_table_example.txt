@@ -1,5 +1,5 @@
 You can use multibyte characters as table data.
-Multibyte characters also properly padded and aligned.
+Multibyte characters are also properly padded and aligned.
 
 :Sample Code:
     .. code-block:: python

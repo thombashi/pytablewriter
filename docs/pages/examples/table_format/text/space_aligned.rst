@@ -3,11 +3,11 @@
 Space Aligned
 ----------------------------
 |SpaceAlignedTableWriter| class can write a table
-that aligned column with multiple spaces, to the |stream| from a matrix of data.
+that aligned column with multiple spaces, to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python
-        :caption: Write a space aligned table
+        :caption: Write a space-aligned table
 
         import pytablewriter
 

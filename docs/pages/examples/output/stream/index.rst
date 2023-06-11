@@ -7,7 +7,7 @@ Reference: :py:attr:`~AbstractTableWriter.stream`.
 
 :Sample Code:
     .. code-block:: python
-        :caption: Change output stream of a writer object
+        :caption: Change the output stream of a writer object
 
         import io
         import pytablewriter as ptw
@@ -28,7 +28,7 @@ Reference: :py:attr:`~AbstractTableWriter.stream`.
             writer.write_table()
 
             # change the stream to a string buffer to get the output as a string
-            # you can also get tabular text by using dumps method
+            # you can also get the tabular text by using dumps method
             writer.stream = io.StringIO()
             writer.write_table()
             print(writer.stream.getvalue())

@@ -4,7 +4,7 @@ YAML
 ----------------------------
 |YamlTableWriter| class can write a
 `YAML <https://yaml.org/>`__
-format table to the |stream| from a matrix of data.
+format table to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python

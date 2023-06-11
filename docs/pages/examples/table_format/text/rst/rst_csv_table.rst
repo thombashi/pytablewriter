@@ -2,8 +2,7 @@
 
 reStructuredText CSV Table
 -------------------------------------------
-|RstCsvTableWriter| class can writes a table
-with reStructuredText CSV table format to the |stream| from a matrix of data.
+|RstCsvTableWriter| class can write a table with reStructuredText CSV table format to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python

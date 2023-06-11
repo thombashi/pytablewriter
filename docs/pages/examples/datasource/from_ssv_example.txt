@@ -1,6 +1,6 @@
 :Sample Code:
     .. code-block:: python
-        :caption: Write a markdown table from a space-separated values
+        :caption: Write a markdown table from space-separated values
 
         import pytablewriter as ptw
 

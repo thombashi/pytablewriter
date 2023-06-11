@@ -1,6 +1,6 @@
 .. _example-from-csv:
 
-Using CSV as tabular data source
+Using CSV as a tabular data source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 from CSV text

@@ -3,7 +3,7 @@
 Pandas DataFrame
 ----------------------------
 
-|PandasDataFrameWriter| class can write a variable definition of Pandas DataFrame to the |stream| from a matrix of data.
+|PandasDataFrameWriter| class can write a variable definition of Pandas DataFrame to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python

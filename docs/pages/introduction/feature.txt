@@ -20,7 +20,7 @@ Features
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
         - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ pickle file
         - `SQLite <https://www.sqlite.org/index.html>`__ database
-    - Application specific formats:
+    - Application-specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
 - Automatic table cell formatting:
     - Alignment
@@ -32,7 +32,7 @@ Features
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
 - Configure output:
-    - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
+    - Write a table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
     - Get rendered tabular text
 - Data sources:
     - nested list

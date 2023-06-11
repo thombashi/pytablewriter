@@ -3,11 +3,11 @@
 HTML
 ----------------------------
 |HtmlTableWriter| class can write a table to a stream with
-``table`` tag format from a matrix of data.
+``table`` tag format from a data matrix.
 
 :Sample Code:
     .. code-block:: python
-        :caption: Write a HTML table
+        :caption: Write an HTML table
 
         import pytablewriter
 

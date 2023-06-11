@@ -382,7 +382,7 @@ rp_method = """
 .. |write_table| replace:: Write a table to the |stream|
 
 .. |WriterNotFoundError_desc| replace::
-    If an appropriate writer not found for
+    If an appropriate writer is not found for
 """
 
 rp_raises = """

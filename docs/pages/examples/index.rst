@@ -14,6 +14,6 @@ Examples
    jupyter_notebook/index
 
 
-Multi processing
+Multiprocessing
 ----------------------------
 .. include:: customize/multi_process.txt

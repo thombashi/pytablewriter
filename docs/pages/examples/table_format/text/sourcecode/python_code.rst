@@ -3,7 +3,7 @@
 Python Code
 ----------------------------
 |PythonCodeTableWriter| class can write a variable definition of
-a Python nested list to the |stream| from a matrix of data.
+a Python nested list to the |stream| from a data matrix.
 
 :Sample Code:
     .. code-block:: python

@@ -3,7 +3,7 @@
 JSON
 ----------------------------
 |JsonTableWriter| class can write a table to the |stream| with JSON format
-from a matrix of data.
+from a data matrix.
 JSON format change if the |table_name| has a valid value or not.
 
 JSON with a table name

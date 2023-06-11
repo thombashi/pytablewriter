@@ -1,6 +1,6 @@
 :Sample Code:
     .. code-block:: python
-        :caption: Create an index and put data to Elasticsearch
+        :caption: Create an index and put data into Elasticsearch
 
         import datetime
         import json

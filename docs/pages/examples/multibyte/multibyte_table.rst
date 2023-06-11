@@ -1,7 +1,7 @@
 .. _example-multibyte-table:
 
-Write a multibyte character table
------------------------------------
+Write a table with multi-byte characters
+-----------------------------------------
 
 .. include:: multibyte_table_example.txt
 
