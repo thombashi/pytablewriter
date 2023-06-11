@@ -30,8 +30,8 @@ Summary
     :target: https://coveralls.io/github/thombashi/pytablewriter?branch=master
     :alt: Test coverage
 
-.. image:: https://github.com/thombashi/pytablewriter/actions/workflows/codeql-analysis.yml/badge.svg
-    :target: https://github.com/thombashi/pytablewriter/actions/workflows/codeql-analysis.yml
+.. image:: https://github.com/thombashi/pytablewriter/actions/workflows/github-code-scanning/codeql/badge.svg
+    :target: https://github.com/thombashi/pytablewriter/actions/workflows/github-code-scanning/codeql
     :alt: CodeQL
 
 Features
@@ -56,7 +56,7 @@ Features
         - Microsoft Excel :superscript:`TM` (``.xlsx``/``.xls`` file format)
         - `pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ pickle file
         - `SQLite <https://www.sqlite.org/index.html>`__ database
-    - Application specific formats:
+    - Application-specific formats:
         - `Elasticsearch <https://www.elastic.co/products/elasticsearch>`__
 - Automatic table cell formatting:
     - Alignment
@@ -68,7 +68,7 @@ Features
     - Font size/weight
     - Thousand separator for numbers: e.g. ``1,000``/``1 000``
 - Configure output:
-    - Write table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
+    - Write a table to a stream such as a file/standard-output/string-buffer/Jupyter-Notebook
     - Get rendered tabular text
 - Data sources:
     - nested list
@@ -168,7 +168,7 @@ Write a Markdown table with a margin
 
         def main():
             writer = MarkdownTableWriter(
-                table_name="write example with a margin",
+                table_name="write an example with a margin",
                 headers=["int", "float", "str", "bool", "mix", "time"],
                 value_matrix=[
                     [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
@@ -186,7 +186,7 @@ Write a Markdown table with a margin
 :Output:
     .. code-block::
 
-        # write example with a margin
+        # write an example with a margin
         | int | float | str  | bool  |   mix    |           time           |
         | --: | ----: | ---- | ----- | -------: | ------------------------ |
         |   0 |  0.10 | hoge | True  |        0 | 2017-01-01 03:04:05+0900 |
@@ -369,8 +369,8 @@ Adding a column of the DataFrame index if you specify ``add_index_column=True``:
         |a  |  1| 10|
         |b  |  2| 11|
 
-Write a markdown table from a space-separated values
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Write a markdown table from space-separated values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
 
@@ -503,7 +503,7 @@ for each column by ``column_styles`` attribute of writer classes.
     `Rendering result <https://github.com/thombashi/pytablewriter/tree/master/docs/pages/examples/style/output.md>`__
 
 
-You can also set ``Style`` to a specific column with index or header by using ``set_style`` method:
+You can also set ``Style`` to a specific column with an index or header by using ``set_style`` method:
 
 :Sample Code:
     .. code-block:: python
@@ -547,12 +547,13 @@ You can also set ``Style`` to a specific column with index or header by using ``
 Style filter
 ~~~~~~~~~~~~~~
 The following command will install external predefined themes:
+
 ::
 
     pip install pytablewriter[theme]
 
 ``theme`` argument of writer constructor or ``set_theme`` method can set"" predefined style filters.
-``altrow`` theme will colored rows alternatively:
+``altrow`` theme will be colored rows alternatively:
 
 :Sample Code:
     .. code-block:: python
@@ -593,7 +594,7 @@ Multibyte character support
 Write a table using multibyte character
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 You can use multibyte characters as table data.
-Multibyte characters also properly padded and aligned.
+Multibyte characters are also properly padded and aligned.
 
 :Sample Code:
     .. code-block:: python
@@ -626,12 +627,12 @@ Multibyte characters also properly padded and aligned.
 
        Output of multi-byte character table
 
-Multi processing
-------------------
+Multiprocessing
+-----------------
 You can increase the number of workers to process table data via ``max_workers`` attribute of a writer.
 The more ``max_workers`` the less processing time when tabular data is large and the execution environment has available cores.
 
-if you increase ``max_workers`` larger than one, recommend to use main guarded as follows to avoid problems caused by multi processing:
+If you increase ``max_workers`` larger than one, recommend using main guarded as follows to avoid problems caused by multi-processing:
 
 .. code-block:: python
 
@@ -653,7 +654,7 @@ https://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 
 Dependencies
 ============
-- Python 3.6+
+- Python 3.7+
 - `Python package dependencies (automatically installed) <https://github.com/thombashi/pytablewriter/network/dependencies>`__
 
 
