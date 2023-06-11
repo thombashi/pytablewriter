@@ -72,7 +72,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         The number of iterations to write a table.
         This value is used in :py:meth:`.write_table_iter` method.
-        (defaults to ``-1``, which means the number of iterations is 
+        (defaults to ``-1``, which means the number of iterations is indefinite)
 
     .. py:attribute:: style_filter_kwargs
         :type: Dict[str, Any]
