@@ -16,7 +16,7 @@ from .writer import AbstractTableWriter
 
 class TableWriterFactory:
     """
-    A factor class of table writer classes.
+    A factory class of table writer classes.
     """
 
     @classmethod
@@ -57,7 +57,7 @@ class TableWriterFactory:
         :param str file_extension:
             File extension string (case insensitive).
         :param kwargs:
-            Keyword arguments that passing to writer class constructor.
+            Keyword arguments that pass to a writer class constructor.
         :return:
             Writer instance that coincides with the ``file_extension``.
         :rtype:
@@ -134,10 +134,12 @@ class TableWriterFactory:
             ``"yaml"``                                     :py:class:`~.YamlTableWriter`
             =============================================  ===================================
 
-        :param str format_name: Format name string (case insensitive).
+        :param str format_name:
+            Format name string (case insensitive).
         :param kwargs:
-            Keyword arguments that passing to writer class constructor.
-        :return: Writer instance that coincides with the ``format_name``:
+            Keyword arguments that pass to a writer class constructor.
+        :return:
+            Writer instance that coincides with the ``format_name``:
         :rtype:
             :py:class:`~pytablewriter.writer._table_writer.TableWriterInterface`
         :raises pytablewriter.WriterNotFoundError:

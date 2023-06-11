@@ -85,9 +85,8 @@ class ElasticsearchWriter(AbstractTableWriter):
         instance to |stream| before calling this method.
         |table_name|/:py:attr:`~pytablewriter.ElasticsearchWriter.index_name`
         used as the creating index name,
-        invalid characters in the name are replaced with underscore (``'_'``).
-        Document data types for documents are automatically detected
-        from the data.
+        invalid characters in the name are replaced with underscores (``'_'``).
+        Document data types for documents are automatically detected from the data.
 
         :raises ValueError:
             If the |stream| has not elasticsearch.Elasticsearch instance.

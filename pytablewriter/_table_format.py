@@ -305,7 +305,7 @@ class TableFormat(enum.Enum):
 
     @classmethod
     def find_all_attr(cls, format_attribute: int) -> List["TableFormat"]:
-        """Searching table formats which have specific attributes.
+        """Searching table formats that have specific attributes.
 
         Args:
             format_attribute (FormatAttr):

@@ -21,8 +21,7 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractproperty
     def support_split_write(self) -> bool:  # pragma: no cover
-        """Represents the writer class supported iterative table writing
-        (``write_table_iter`` method).
+        """Indicates whether the writer class supports iterative table writing (``write_table_iter``) method.
 
         Returns:
             bool: |True| if the writer supported iterative table writing.
@@ -42,25 +41,28 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
 
     def write_table_iter(self, **kwargs) -> None:  # pragma: no cover
         """
-        Write a table with iteration. "Iteration" means that divide the table
-        writing into multiple processes.
-        This method is useful, especially for large data.
-        The following are premises to execute this method:
+        Write a table with iteration.
+        "Iteration" means that divide the table writing into multiple writes.
+        This method is helpful, especially for extensive data.
+        The following are the premises to execute this method:
 
         - set iterator to the |value_matrix|
         - set the number of iterations to the |iteration_length| attribute
 
         Call back function (Optional):
-        Callback function is called when for each of the iteration of writing
-        a table is completed. To set call back function,
-        set a callback function to the |write_callback| attribute.
+        A callback function is called when each iteration of writing a table is completed.
+        You can set a callback function via the |write_callback| attribute.
 
-        :raises pytablewriter.NotSupportedError:
-            If the class does not support this method.
+        Raises:
+            pytablewriter.NotSupportedError: If the writer class does not support this method.
 
         .. note::
-            Following classes do not support this method:
-            |HtmlTableWriter|, |RstGridTableWriter|, |RstSimpleTableWriter|.
+            The following classes do not support this method:
+
+                - |HtmlTableWriter|
+                - |RstGridTableWriter|
+                - |RstSimpleTableWriter|
+
             ``support_split_write`` attribute return |True| if the class
             is supporting this method.
         """

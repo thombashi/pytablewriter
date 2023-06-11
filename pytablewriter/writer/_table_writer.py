@@ -50,7 +50,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     .. py:attribute:: stream
 
         Stream to write tables.
-        You can use arbitrary stream which supported ``write`` method
+        You can use arbitrary streams which support ``write``methods
         such as ``sys.stdout``, file stream, ``StringIO``, and so forth.
         Defaults to ``sys.stdout``.
 
@@ -71,44 +71,43 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         :type: int
 
         The number of iterations to write a table.
-        This value used in :py:meth:`.write_table_iter` method.
-        (defaults to ``-1`` which means number of iterations is indefinite)
+        This value is used in :py:meth:`.write_table_iter` method.
+        (defaults to ``-1``, which means the number of iterations is 
 
     .. py:attribute:: style_filter_kwargs
         :type: Dict[str, Any]
 
         Extra keyword arguments for style filter functions.
-        These arguments will passing to filter functions added by
+        These arguments will pass to filter functions added by
         :py:meth:`.add_style_filter` or :py:meth:`.add_col_separator_style_filter`
 
     .. py:attribute:: colorize_terminal
         :type: bool
         :value: True
 
-        [Only for text format writers] [experimental]
+        [Only available for text format writers] [experimental]
         If |True|, colorize text outputs with |Style|.
 
     .. py:attribute:: enable_ansi_escape
         :type: bool
         :value: True
 
-        [Only for text format writers]
-        If |True|, applies ANSI escape sequences to terminal's text outputs
-        with |Style|.
+        [Only available for text format writers]
+        If |True|, applies ANSI escape sequences to the terminal's text outputs with |Style|.
 
     .. py:attribute:: write_callback
 
         The value expected to a function.
-        The function called when for each of the iteration of writing a table
+        The function is called when each of the iterations of writing a table
         completed. (defaults to |None|)
-        Example, callback function definition is as follows:
+        For example, a callback function definition is as follows:
 
         .. code:: python
 
-            def callback_example(iter_count, iter_length):
+            def callback_example(iter_count: int, iter_length: int) -> None:
                 print("{:d}/{:d}".format(iter_count, iter_length))
 
-        Arguments that passed to the callback is:
+        Arguments that passed to the callback are:
 
         - first argument: current iteration number (start from ``1``)
         - second argument: a total number of iteration
@@ -398,11 +397,11 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         If a type-hint value is not |None|, the writer tries to
         convert data for each data in a column to type-hint class.
         If the type-hint value is |None| or failed to convert data,
-        the writer automatically detect column data type from
+        the writer automatically detects column data type from
         the column data.
 
-        If ``type_hints`` is |None|, the writer detects data types for all
-        of the columns automatically and writes a table by using detected column types.
+        If ``type_hints`` is |None|, the writer automatically detects data types
+        for all of the columns and writes a table using detected column types.
 
         Defaults to |None|.
 
@@ -451,7 +450,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def column_styles(self) -> List[Optional[Style]]:
-        """Output |Style| for each column.
+        """|Style| for each column.
 
         Returns:
             list of |Style|:
@@ -514,8 +513,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         Args:
             style_filter:
-                A function that called for each cell in the table to apply a style
-                to table cells.
+                A function called for each table cell to apply a style to table cells.
                 The function will be required to implement the following Protocol:
 
                 .. code-block:: python
@@ -528,7 +526,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                 it will be called from the last one added.
                 These style functions should return |None| when not needed to apply styles.
                 If all of the style functions returned |None|,
-                :py:attr:`~.default_style` will be applied.
+                :py:attr:`~.default_style` will be used.
 
                 You can pass keyword arguments to style filter functions via
                 :py:attr:`~.style_filter_kwargs`. In default, the attribute includes:
@@ -556,12 +554,12 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         Args:
             column (|int| or |str|):
-                Column specifier. column index or header name correlated with the column.
+                Column specifier. Column index or header name correlated with the column.
             style (|Style|):
                 Style value to be set to the column.
 
         Raises:
-            ValueError: If the column specifier is invalid.
+            ValueError: Raised when the column specifier is invalid.
         """
 
         column_idx = None
@@ -597,7 +595,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                 corresponding to the theme name.
 
         Raises:
-            RuntimeError: Raised when a theme plugin does not installed.
+            RuntimeError: Raised when a theme plugin does not install.
         """
 
         try:
@@ -686,7 +684,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def from_tabledata(self, value: TableData, is_overwrite_table_name: bool = True) -> None:
         """
         Set tabular attributes to the writer from |TableData|.
-        Following attributes are configured:
+        The following attributes are configured:
 
         - :py:attr:`~.table_name`.
         - :py:attr:`~.headers`.
@@ -721,7 +719,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def from_csv(self, csv_source: str, delimiter: str = ",") -> None:
         """
         Set tabular attributes to the writer from a character-separated values (CSV) data source.
-        Following attributes are set to the writer by the method:
+        The following attributes are set to the writer by the method:
 
         - :py:attr:`~.headers`.
         - :py:attr:`~.value_matrix`.
@@ -730,8 +728,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         In that case, :py:attr:`~.table_name` is as same as the filename.
 
         :param str csv_source:
-            Input CSV data source either can be designated CSV text or
-            CSV file path.
+            Input CSV data source can be designated CSV text or a CSV file path.
 
         :Examples:
             :ref:`example-from-csv`
@@ -761,7 +758,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     ) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
-        Following attributes are set by the method:
+        The following attributes are set by the method:
 
             - :py:attr:`~.headers`
             - :py:attr:`~.value_matrix`
@@ -804,7 +801,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def from_series(self, series, add_index_column: bool = True) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.Series`.
-        Following attributes are set by the method:
+        The following attributes are set by the method:
 
             - :py:attr:`~.headers`
             - :py:attr:`~.value_matrix`
@@ -847,7 +844,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self, writer: "AbstractTableWriter", is_overwrite_table_name: bool = True
     ) -> None:
         """
-        Set tabular attributes to the writer from an another table writer class incetance.
+        Set tabular attributes to the writer from another table writer class instance.
         """
 
         self.__clear_preprocess()
