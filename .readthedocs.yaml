@@ -9,9 +9,9 @@ sphinx:
   configuration: docs/conf.py
 
 formats:
-  - pdf
   - epub
 
 python:
   install:
     - requirements: requirements/docs_requirements.txt
+    - requirements: requirements/requirements.txt
