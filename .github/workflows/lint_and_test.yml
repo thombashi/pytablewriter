@@ -20,6 +20,20 @@ jobs:
 
       - run: make build
 
+  build-docs:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-docs
+      cancel-in-progress: true
+    timeout-minutes: 20
+    container:
+      image: ghcr.io/thombashi/python-ci:3.11
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: make docs
+
   lint:
     runs-on: ubuntu-latest
     concurrency:
