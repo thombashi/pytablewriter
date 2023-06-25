@@ -4,10 +4,12 @@ on:
   push:
     paths-ignore:
       - '.gitignore'
+      - '.readthedocs.yaml'
       - 'README.rst'
   pull_request:
     paths-ignore:
       - '.gitignore'
+      - '.readthedocs.yaml'
       - 'README.rst'
 
 env:
