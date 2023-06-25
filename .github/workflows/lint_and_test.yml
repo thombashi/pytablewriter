@@ -119,3 +119,36 @@ jobs:
         run: |
           python -m pip install --upgrade --disable-pip-version-check coveralls tomli
           coveralls --service=github
+
+  smoke-examples:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-ex
+      cancel-in-progress: true
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            setup.py
+            **/*requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade --disable-pip-version-check . jupyter
+
+      - name: Run tests
+        run: |
+          set -eux
+
+          for f in $(find examples/py -type f -name "*.py" | grep -v elasticsearch); do
+            python "$f"
+          done
+
+          for f in examples/ipynb/*.ipynb; do
+            jupyter execute "$f"
+          done
