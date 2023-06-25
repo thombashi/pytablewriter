@@ -114,7 +114,7 @@ setuptools.setup(
     setup_requires=setuptools_require,
     extras_require={
         "all": all_requires,
-        "docs": docs_requires,
+        "docs": docs_requires + all_requires,
         "es": es8_requires,
         "es8": es8_requires,
         "excel": excel_requires,
