@@ -7,7 +7,7 @@
 import pytablewriter
 
 
-def main():
+def main() -> None:
     writer = pytablewriter.SqliteTableWriter()
 
     # create the first table

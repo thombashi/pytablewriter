@@ -9,7 +9,7 @@ import io
 import pytablewriter as ptw
 
 
-def main():
+def main() -> None:
     writer = ptw.MarkdownTableWriter(
         table_name="zone",
         headers=["zone_id", "country_code", "zone_name"],

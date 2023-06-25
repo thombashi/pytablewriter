@@ -17,13 +17,13 @@ class IndentationInterface(metaclass=abc.ABCMeta):
     """
 
     @abc.abstractmethod
-    def set_indent_level(self, indent_level):  # pragma: no cover
+    def set_indent_level(self, indent_level: int) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def inc_indent_level(self):  # pragma: no cover
+    def inc_indent_level(self) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod
-    def dec_indent_level(self):  # pragma: no cover
+    def dec_indent_level(self) -> None:  # pragma: no cover
         pass

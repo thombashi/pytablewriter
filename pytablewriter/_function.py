@@ -2,6 +2,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
+from datetime import datetime
 from enum import Enum
 from typing import Optional, Type
 
@@ -14,7 +15,7 @@ def quote_datetime_formatter(value) -> str:
     return f'"{value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT):s}"'
 
 
-def dateutil_datetime_formatter(value) -> str:
+def dateutil_datetime_formatter(value: datetime) -> str:
     return 'dateutil.parser.parse("{:s}")'.format(
         value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT)
     )

@@ -1,29 +1,29 @@
-from dataproperty import Format
+from dataproperty import Align, Format
 
 from ._cell import Cell
 from ._font import FontSize, FontStyle, FontWeight
-from ._style import Align, Style, ThousandSeparator, VerticalAlign
+from ._style import DecorationLine, Style, ThousandSeparator, VerticalAlign
 from ._styler import (
-    DecorationLine,
     GFMarkdownStyler,
     HtmlStyler,
     LatexStyler,
     MarkdownStyler,
     NullStyler,
     ReStructuredTextStyler,
-    StylerInterface,
     TextStyler,
+    get_align_char,
 )
-from ._theme import list_themes
+from ._styler_interface import StylerInterface
+from ._theme import ColSeparatorStyleFilterFunc, StyleFilterFunc, Theme, fetch_theme, list_themes
 
 
 __all__ = (
+    "Align",
     "Format",
     "Cell",
     "FontSize",
     "FontStyle",
     "FontWeight",
-    "Align",
     "Style",
     "ThousandSeparator",
     "VerticalAlign",
@@ -36,5 +36,10 @@ __all__ = (
     "ReStructuredTextStyler",
     "StylerInterface",
     "TextStyler",
+    "ColSeparatorStyleFilterFunc",
+    "StyleFilterFunc",
+    "Theme",
+    "get_align_char",
+    "fetch_theme",
     "list_themes",
 )

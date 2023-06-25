@@ -20,7 +20,9 @@ class TableWriterFactory:
     """
 
     @classmethod
-    def create_from_file_extension(cls, file_extension: str, **kwargs) -> AbstractTableWriter:
+    def create_from_file_extension(
+        cls, file_extension: str, **kwargs: AbstractTableWriter
+    ) -> AbstractTableWriter:
         """
         Create a table writer class instance from a file extension.
         Supported file extensions are as follows:
@@ -81,9 +83,9 @@ class TableWriterFactory:
             if table_format.format_attribute & FormatAttr.SECONDARY_EXT:
                 continue
 
-            logger.debug(f"create a {table_format.writer_class.__name__} instance")
+            logger.debug(f"create a {table_format.writer_class} instance")
 
-            return table_format.writer_class(**kwargs)
+            return table_format.writer_class(**kwargs)  # type: ignore
 
         raise WriterNotFoundError(
             "\n".join(
@@ -96,7 +98,9 @@ class TableWriterFactory:
         )
 
     @classmethod
-    def create_from_format_name(cls, format_name: str, **kwargs) -> AbstractTableWriter:
+    def create_from_format_name(
+        cls, format_name: str, **kwargs: AbstractTableWriter
+    ) -> AbstractTableWriter:
         """
         Create a table writer class instance from a format name.
         Supported file format names are as follows:
@@ -152,9 +156,9 @@ class TableWriterFactory:
             if format_name in table_format.names and not (
                 table_format.format_attribute & FormatAttr.SECONDARY_NAME
             ):
-                logger.debug(f"create a {table_format.writer_class.__name__} instance")
+                logger.debug(f"create a {table_format.writer_class} instance")
 
-                return table_format.writer_class(**kwargs)
+                return table_format.writer_class(**kwargs)  # type: ignore
 
         raise WriterNotFoundError(
             "\n".join(

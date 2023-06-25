@@ -7,7 +7,7 @@
 import pytablewriter as ptw
 
 
-def main():
+def main() -> None:
     writer = ptw.RstSimpleTableWriter(
         table_name="生成に関するパターン",
         headers=["パターン名", "概要", "GoF", "Code Complete[1]"],

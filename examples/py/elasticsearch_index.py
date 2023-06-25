@@ -7,14 +7,13 @@
 import argparse
 import datetime
 import json
-import sys
 
 from elasticsearch import Elasticsearch
 
 import pytablewriter as ptw
 
 
-def parse_option():
+def parse_option() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--host", default="localhost", help="default=%(default)s")
@@ -23,7 +22,7 @@ def parse_option():
     return parser.parse_args()
 
 
-def main():
+def main() -> None:
     options = parse_option()
 
     es = Elasticsearch(hosts=f"{options.host:s}:{options.port:d}")
@@ -87,8 +86,6 @@ def main():
     for hit in response["hits"]["hits"]:
         print(json.dumps(hit["_source"], indent=4))
 
-    return 0
-
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

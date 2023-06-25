@@ -1,19 +1,26 @@
 import copy
-from typing import Any, List, Sequence
+from typing import List, Sequence
 
 import dataproperty as dp
 import typepy
 from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import Align, FontStyle, FontWeight, Style, StylerInterface, TextStyler
-from ...style._styler import get_align_char
+from ...style import (
+    Align,
+    FontStyle,
+    FontWeight,
+    Style,
+    StylerInterface,
+    TextStyler,
+    get_align_char,
+)
 from .._table_writer import AbstractTableWriter
 from ._text_writer import TextTableWriter
 
 
 class AsciiDocStyler(TextStyler):
-    def apply(self, value: Any, style: Style) -> str:
+    def apply(self, value: str, style: Style) -> str:
         value = super().apply(value, style)
         if not value:
             return value
@@ -114,7 +121,9 @@ class AsciiDocTableWriter(TextTableWriter):
     def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return f"{get_align_char(Align.CENTER)}|{{}}"
 
-    def __modify_row_element(self, row_idx: int, col_idx: int, value: str, value_dp: DataProperty):
+    def __modify_row_element(
+        self, row_idx: int, col_idx: int, value: str, value_dp: DataProperty
+    ) -> str:
         default_style = self._get_col_style(col_idx)
         col_dp = self._column_dp_list[col_idx]
         style = self._fetch_style_from_filter(row_idx, col_dp, value_dp, default_style)

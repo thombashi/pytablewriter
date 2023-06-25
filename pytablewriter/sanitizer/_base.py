@@ -4,6 +4,7 @@
 
 import abc
 import re
+from typing import Pattern
 
 from pathvalidate.error import ErrorReason, ValidationError
 from typepy import is_null_string
@@ -17,11 +18,11 @@ def _preprocess(name: str) -> str:
 
 class VarNameSanitizer(NameSanitizer):
     @abc.abstractproperty
-    def _invalid_var_name_head_re(self):  # pragma: no cover
+    def _invalid_var_name_head_re(self) -> Pattern[str]:  # pragma: no cover
         pass
 
     @abc.abstractproperty
-    def _invalid_var_name_re(self):  # pragma: no cover
+    def _invalid_var_name_re(self) -> Pattern[str]:  # pragma: no cover
         pass
 
     def validate(self) -> None:

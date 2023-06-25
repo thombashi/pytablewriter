@@ -1,10 +1,15 @@
-import abc
-from typing import Any, Optional, cast
+from typing import TYPE_CHECKING, Any, Dict, Optional, cast
 
+from dataproperty import Align
 from tcolorpy import tcolor
 
 from ._font import FontSize, FontStyle, FontWeight
-from ._style import Align, DecorationLine, Style, ThousandSeparator
+from ._style import DecorationLine, Style, ThousandSeparator
+from ._styler_interface import StylerInterface
+
+
+if TYPE_CHECKING:
+    from ..writer._table_writer import AbstractTableWriter
 
 
 _align_char_mapping = {
@@ -19,30 +24,8 @@ def get_align_char(align: Align) -> str:
     return _align_char_mapping[align]
 
 
-class StylerInterface(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
-    def apply(self, value: Any, style: Style) -> str:  # pragma: no cover
-        raise NotImplementedError()
-
-    @abc.abstractmethod
-    def apply_align(self, value: str, style: Style) -> str:  # pragma: no cover
-        raise NotImplementedError()
-
-    @abc.abstractmethod
-    def apply_terminal_style(self, value: str, style: Style) -> str:  # pragma: no cover
-        raise NotImplementedError()
-
-    @abc.abstractmethod
-    def get_font_size(self, style: Style) -> Optional[str]:  # pragma: no cover
-        raise NotImplementedError()
-
-    @abc.abstractmethod
-    def get_additional_char_width(self, style: Style) -> int:  # pragma: no cover
-        raise NotImplementedError()
-
-
 class AbstractStyler(StylerInterface):
-    def __init__(self, writer):
+    def __init__(self, writer: "AbstractTableWriter") -> None:
         self._writer = writer
         self._font_size_map = self._get_font_size_map()
 
@@ -102,7 +85,7 @@ class TextStyler(AbstractStyler):
     def apply_align(self, value: str, style: Style) -> str:
         return self.__get_align_format(style).format(value)
 
-    def apply(self, value: Any, style: Style) -> str:
+    def apply(self, value: str, style: Style) -> str:
         if value:
             if style.thousand_separator == ThousandSeparator.SPACE:
                 value = value.replace(",", " ")
@@ -113,7 +96,7 @@ class TextStyler(AbstractStyler):
 
 
 class HtmlStyler(TextStyler):
-    def _get_font_size_map(self):
+    def _get_font_size_map(self) -> Dict[FontSize, str]:
         return {
             FontSize.TINY: "font-size:x-small",
             FontSize.SMALL: "font-size:small",

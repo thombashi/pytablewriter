@@ -7,8 +7,7 @@ import typepy
 from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import Align
-from ...style._styler import get_align_char
+from ...style import Align, get_align_char
 from ._text_writer import TextTableWriter
 
 
@@ -90,7 +89,7 @@ class MediaWikiTableWriter(TextTableWriter):
             get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )
 
-    def __modify_table_element(self, value: str, value_dp: DataProperty):
+    def __modify_table_element(self, value: str, value_dp: DataProperty) -> str:
         if value_dp.align is Align.LEFT:
             forma_stirng = "| {1:s}"
         else:

@@ -1,5 +1,5 @@
 from enum import Enum, unique
-from typing import Optional, Union, cast
+from typing import Any, Optional, Union, cast
 
 from dataproperty import Align
 from tcolorpy import Color
@@ -32,14 +32,14 @@ class VerticalAlign(Enum):
     BOTTOM = (1 << 3, "bottom")
 
     @property
-    def align_code(self):
+    def align_code(self) -> int:
         return self.__align_code
 
     @property
-    def align_str(self):
+    def align_str(self) -> str:
         return self.__align_string
 
-    def __init__(self, code, string):
+    def __init__(self, code: int, string: str) -> None:
         self.__align_code = code
         self.__align_string = string
 
@@ -202,7 +202,7 @@ class Style:
         return self.__thousand_separator
 
     @property
-    def padding(self):
+    def padding(self) -> Optional[int]:
         return self.__padding
 
     @padding.setter
@@ -241,9 +241,9 @@ class Style:
 
         return "({})".format(", ".join(items))
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if self.__class__ is not other.__class__:
-            return NotImplemented
+            return False
 
         return all(
             [
@@ -255,9 +255,11 @@ class Style:
             ]
         )
 
-    def __ne__(self, other):
-        equal = self.__eq__(other)
-        return NotImplemented if equal is NotImplemented else not equal
+    def __ne__(self, other: Any) -> bool:
+        if self.__class__ is not other.__class__:
+            return True
+
+        return not self.__eq__(other)
 
     def update(self, **kwargs) -> None:
         """Update specified style attributes."""

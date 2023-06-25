@@ -12,7 +12,7 @@ import pytablewriter
 filename = "sample.csv"
 
 
-def main():
+def main() -> None:
     with open(filename, "w", encoding="utf8") as f:
         f.write(
             dedent(

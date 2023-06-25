@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Union, cast
 
 import typepy
 from dataproperty import (
+    Align,
     ColumnDataProperty,
     DataProperty,
     DataPropertyExtractor,
@@ -23,8 +24,15 @@ from typepy import String, Typecode, extract_typepy_from_dtype
 
 from .._logger import WriterLogger
 from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
-from ..style import Align, Cell, NullStyler, Style, StylerInterface, ThousandSeparator
-from ..style._theme import ColSeparatorStyleFilterFunc, StyleFilterFunc, fetch_theme
+from ..style import (
+    Cell,
+    ColSeparatorStyleFilterFunc,
+    Style,
+    StyleFilterFunc,
+    StylerInterface,
+    ThousandSeparator,
+    fetch_theme,
+)
 from ..typehint import Integer, TypeHint
 from ._interface import TableWriterInterface
 from ._msgfy import to_error_message
@@ -145,10 +153,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return TableFormat.from_name(self.format_name)
 
     @property
-    def value_preprocessor(self) -> Preprocessor:
-        return self._dp_extractor.preprocessor
-
-    @property
     def stream(self):
         return self._stream
 
@@ -244,6 +248,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         writer._dp_extractor = self._dp_extractor
 
         return writer.dumps()
+
+    @property
+    def value_preprocessor(self) -> Preprocessor:
+        return self._dp_extractor.preprocessor
 
     def __clear_preprocess_status(self) -> None:
         self._is_complete_table_dp_preprocess = False
@@ -1059,6 +1067,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             raise EmptyValueError()
 
     def _create_styler(self, writer) -> StylerInterface:
+        from ..style._styler import NullStyler
+
         return NullStyler(writer)
 
     def _preprocess_table_dp(self) -> None:

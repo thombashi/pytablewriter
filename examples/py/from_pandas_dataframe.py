@@ -12,7 +12,7 @@ import pandas as pd
 import pytablewriter
 
 
-def main():
+def main() -> None:
     df = pd.read_csv(
         io.StringIO(
             dedent(

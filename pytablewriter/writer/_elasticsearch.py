@@ -15,7 +15,11 @@ from ._msgfy import to_error_message
 from ._table_writer import AbstractTableWriter
 
 
-def _get_es_datatype(column_dp: ColumnDataProperty) -> Dict[str, str]:
+DataType = Dict[str, str]
+Properties = Dict[str, DataType]
+
+
+def _get_es_datatype(column_dp: ColumnDataProperty) -> DataType:
     if column_dp.typecode in (
         Typecode.NONE,
         Typecode.NULL_STRING,
@@ -145,8 +149,8 @@ class ElasticsearchWriter(AbstractTableWriter):
     def write_null_line(self) -> None:
         pass
 
-    def _get_mappings(self) -> Dict[str, Dict]:
-        properties = {}
+    def _get_mappings(self) -> Dict[str, Dict[str, Dict[str, Properties]]]:
+        properties: Properties = {}
 
         for header, column_dp in zip(self.headers, self._column_dp_list):
             properties[header] = _get_es_datatype(column_dp)

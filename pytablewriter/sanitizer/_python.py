@@ -59,11 +59,11 @@ class PythonVarNameSanitizer(VarNameSanitizer):
         return self.__PYTHON_RESERVED_KEYWORDS + self.__PYTHON_BUILTIN_CONSTANTS
 
     @property
-    def _invalid_var_name_head_re(self) -> Pattern:
+    def _invalid_var_name_head_re(self) -> Pattern[str]:
         return self.__RE_INVALID_VAR_NAME_HEAD
 
     @property
-    def _invalid_var_name_re(self) -> Pattern:
+    def _invalid_var_name_re(self) -> Pattern[str]:
         return self.__RE_INVALID_VAR_NAME
 
 

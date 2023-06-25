@@ -1,4 +1,5 @@
 import io
+from datetime import datetime
 from typing import List
 
 from dataproperty import ColumnDataProperty, DataProperty, DefaultValue
@@ -11,7 +12,7 @@ from .._common import bool_to_str
 from ._sourcecode import SourceCodeTableWriter
 
 
-def js_datetime_formatter(value) -> str:
+def js_datetime_formatter(value: datetime) -> str:
     try:
         return f'new Date("{value.strftime(DefaultValue.DATETIME_FORMAT):s}")'
     except ValueError:
@@ -74,7 +75,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         return self.__variable_declaration
 
     @variable_declaration.setter
-    def variable_declaration(self, value: str):
+    def variable_declaration(self, value: str) -> None:
         value = value.strip().casefold()
         if value not in self.__VALID_VAR_DECLARATION:
             raise ValueError("declaration must be either var, let or const")

@@ -8,10 +8,16 @@ import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
 
 from ...error import EmptyTableDataError
-from ...style import Cell, Style, StylerInterface, TextStyler
-from ...style._styler import get_align_char
+from ...style import (
+    Cell,
+    ColSeparatorStyleFilterFunc,
+    Style,
+    StylerInterface,
+    TextStyler,
+    get_align_char,
+)
 from .._common import HEADER_ROW
-from .._table_writer import AbstractTableWriter, ColSeparatorStyleFilterFunc
+from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
 
 
@@ -417,7 +423,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _write_raw_line(self, unicode_text: str = "") -> None:
         self._write_raw_string(unicode_text + "\n")
 
-    def _write(self, text):
+    def _write(self, text: str) -> None:
         self._write_raw_string(text)
 
     def _write_line(self, text: str = "") -> None:
@@ -518,7 +524,9 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     ) -> None:
         self._write_row(row, values)
 
-    def __write_separator_row(self, values, row_type=RowType.MIDDLE):
+    def __write_separator_row(
+        self, values: Sequence[str], row_type: RowType = RowType.MIDDLE
+    ) -> None:
         if typepy.is_empty_sequence(values):
             return
 
@@ -541,7 +549,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_opening_row_items(), row_type=RowType.OPENING)
 
-    def __write_header_row_separator(self):
+    def __write_header_row_separator(self) -> None:
         if any([not self.is_write_header, not self.is_write_header_separator_row]):
             return
 
@@ -564,7 +572,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self.__write_separator_row(self._get_closing_row_items(), row_type=RowType.CLOSING)
 
-    def __make_margin_format(self, margin_char):
+    def __make_margin_format(self, margin_char: str) -> str:
         margin_str = margin_char * self._margin
 
         return margin_str + "{:s}" + margin_str
@@ -641,7 +649,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
     def _get_indent_string(self) -> str:
         return self.indent_string * self._indent_level
 
-    def _write(self, text):
+    def _write(self, text: str) -> None:
         self._write_raw_string(self._get_indent_string() + text)
 
     def _write_line(self, text: str = "") -> None:

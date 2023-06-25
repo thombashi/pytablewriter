@@ -5,7 +5,7 @@ from dataproperty import DataProperty
 from typepy import Typecode
 
 
-def bool_to_str(value) -> str:
+def bool_to_str(value: Any) -> Any:
     if value is True:
         return "true"
     if value is False:

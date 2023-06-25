@@ -7,7 +7,7 @@
 from pytablewriter import ExcelXlsxTableWriter
 
 
-def main():
+def main() -> None:
     writer = ExcelXlsxTableWriter()
 
     writer.table_name = "example"

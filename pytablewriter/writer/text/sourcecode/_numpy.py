@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 import typepy
 
@@ -43,7 +43,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.import_numpy_as = "np"

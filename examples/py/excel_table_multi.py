@@ -7,7 +7,7 @@
 from pytablewriter import ExcelXlsxTableWriter
 
 
-def main():
+def main() -> None:
     writer = ExcelXlsxTableWriter()
     filepath = "multi_sheet_example.xlsx"
 

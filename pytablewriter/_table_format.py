@@ -3,7 +3,7 @@
 """
 
 import enum
-from typing import Any, List, Optional, Sequence
+from typing import List, Optional, Sequence
 
 from .writer import (
     AbstractTableWriter,
@@ -262,7 +262,7 @@ class TableFormat(enum.Enum):
         return self.__names
 
     @property
-    def writer_class(self) -> Any:
+    def writer_class(self) -> AbstractTableWriter:
         """Table writer class object associated with the table format.
 
         Returns:

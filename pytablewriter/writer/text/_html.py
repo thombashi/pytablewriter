@@ -1,6 +1,6 @@
 import copy
 import warnings
-from typing import Any, Optional, Tuple, cast
+from typing import Any, List, Optional, Tuple, cast
 
 import dataproperty
 import typepy
@@ -168,7 +168,7 @@ class HtmlTableWriter(TextTableWriter):
         self._write_line(self._table_tag.render(indent=self.indent_string))
 
     def __make_style_tag(self, style: Style) -> Optional[str]:
-        styles = []  # List[str]
+        styles: List[str] = []
 
         if self._styler.get_font_size(style):
             styles.append(cast(str, self._styler.get_font_size(style)))
