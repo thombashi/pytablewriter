@@ -56,6 +56,7 @@ theme_requires = ["pytablewriter-altrow-theme>=0.0.2,<1"]
 toml_requires = ["toml>=0.9.3,<1"]
 yaml_requires = ["PyYAML>=3.11,<7"]
 optional_requires = ["simplejson>=3.8.1,<4"]
+pandas_requires = ["pandas>=0.25.3,<3"]
 all_requires = (
     excel_requires
     + es8_requires
@@ -67,6 +68,7 @@ all_requires = (
     + toml_requires
     + yaml_requires
     + optional_requires
+    + pandas_requires
 )
 tests_requires = list(set(tests_requires + all_requires))
 
@@ -119,6 +121,7 @@ setuptools.setup(
         "html": html_requires,
         "from": from_requires,
         "logging": logging_requires,
+        "pandas": pandas_requires,
         "sqlite": sqlite_requires,
         "test": tests_requires,
         "theme": theme_requires,
