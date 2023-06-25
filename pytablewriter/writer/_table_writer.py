@@ -122,17 +122,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         raise NotImplementedError()
 
     @property
-    def header_list(self):
-        warnings.warn("'header_list' has moved to 'headers'", DeprecationWarning)
-
-        return self.headers
-
-    @header_list.setter
-    def header_list(self, value):
-        warnings.warn("'header_list' has moved to 'headers'", DeprecationWarning)
-        self.headers = value
-
-    @property
     def value_matrix(self) -> Sequence:
         """Data of a table to be outputted."""
 
@@ -156,55 +145,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return TableFormat.from_name(self.format_name)
 
     @property
-    def type_hint_list(self):
-        warnings.warn("'type_hint_list' has moved to 'type_hints'", DeprecationWarning)
-
-        return self.type_hints
-
-    @type_hint_list.setter
-    def type_hint_list(self, value):
-        warnings.warn("'type_hint_list' has moved to 'type_hints'", DeprecationWarning)
-
-        self.type_hints = value
-
-    @property
-    def styles(self):
-        warnings.warn("'styles' has moved to 'column_styles'", DeprecationWarning)
-        return self.column_styles
-
-    @styles.setter
-    def styles(self, value):
-        warnings.warn("'styles' has moved to 'column_styles'", DeprecationWarning)
-        self.column_styles = value
-
-    @property
-    def style_list(self):
-        warnings.warn("'style_list' has moved to 'column_styles'", DeprecationWarning)
-
-        return self.column_styles
-
-    @style_list.setter
-    def style_list(self, value):
-        warnings.warn("'style_list' has moved to 'column_styles'", DeprecationWarning)
-
-        self.column_styles = value
-
-    @property
-    def value_preprocessor(self):
+    def value_preprocessor(self) -> Preprocessor:
         return self._dp_extractor.preprocessor
-
-    @value_preprocessor.setter
-    def value_preprocessor(self, value):
-        warnings.warn(
-            "this setter will be deleted in the future. use update_preprocessor instead",
-            DeprecationWarning,
-        )
-
-        if self._dp_extractor.preprocessor == value:
-            return
-
-        self._dp_extractor.preprocessor = value
-        self.__clear_preprocess()
 
     @property
     def stream(self):

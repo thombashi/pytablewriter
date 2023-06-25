@@ -6,8 +6,8 @@ from dataproperty import LineBreakHandling
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
 from ._factory import TableWriterFactory
-from ._function import dump_tabledata, dumps_tabledata
-from ._logger import set_log_level, set_logger
+from ._function import dumps_tabledata
+from ._logger import set_logger
 from ._table_format import FormatAttr, TableFormat
 from .error import (
     EmptyTableDataError,
@@ -75,9 +75,7 @@ __all__ = (
     "__version__",
     "LineBreakHandling",
     "TableWriterFactory",
-    "dump_tabledata",
     "dumps_tabledata",
-    "set_log_level",
     "set_logger",
     "FormatAttr",
     "TableFormat",

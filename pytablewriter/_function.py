@@ -58,11 +58,6 @@ def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwa
     return writer.dumps()
 
 
-def dump_tabledata(value, format_name="rst_grid_table", **kwargs):
-    # deprecated: alias to dumps_tabledata()
-    return dumps_tabledata(value, format_name, **kwargs)
-
-
 def normalize_enum(
     value, enum_class: Type[Enum], validate: bool = True, default: Optional[Enum] = None
 ):

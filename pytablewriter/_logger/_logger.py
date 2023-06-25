@@ -46,11 +46,6 @@ def set_logger(is_enable: bool, propagation_depth: int = 1) -> None:
         pass
 
 
-def set_log_level(log_level):
-    # deprecated
-    logger.disable(MODULE_NAME)
-
-
 class WriterLogger:
     @property
     def logger(self):
