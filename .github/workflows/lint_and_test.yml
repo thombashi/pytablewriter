@@ -13,7 +13,7 @@ jobs:
       cancel-in-progress: true
     timeout-minutes: 20
     container:
-      image: ghcr.io/thombashi/python-ci:3.8
+      image: ghcr.io/thombashi/python-ci:3.11
 
     steps:
       - uses: actions/checkout@v3
