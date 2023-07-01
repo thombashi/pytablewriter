@@ -581,13 +581,13 @@ Make tables for specific applications
 ---------------------------------------
 Render a table on Jupyter Notebook
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb
+`Jupyter Notebook code examples <https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb>`__
 
-.. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/docs/pages/examples/jupyter_notebook/ss/jupyter_notebook.png
+.. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/ss/jupyter_notebook.png
    :scale: 100%
-   :alt: https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/jupyter_notebook/ss/jupyter_notebook.png
+   :alt: https://github.com/thombashi/pytablewriter/blob/master/ss/jupyter_notebook.png
 
-   Table formatting for Jupyter Notebook
+   Table formatting outputs of Jupyter Notebook
 
 Multibyte character support
 -----------------------------
