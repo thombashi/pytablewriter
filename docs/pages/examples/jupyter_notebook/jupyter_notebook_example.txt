@@ -1,7 +1,13 @@
-`Jupyter Notebook code examples <https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb>`__
+All table writer class instances in ``pytablewriter`` can render in Jupyter Notebook.
+To render writers at notebook cells, you will require the dependency packages to be installed either by:
+
+- ``pip install pytablewriter[html]`` or
+- ``pip install pytablewriter[all]``
+
+Jupyter Notebook code examples can be found `here <https://nbviewer.jupyter.org/github/thombashi/pytablewriter/blob/master/examples/ipynb/jupyter_notebook_example.ipynb>`__:
 
 .. figure:: https://cdn.jsdelivr.net/gh/thombashi/pytablewriter@master/ss/jupyter_notebook.png
    :scale: 100%
    :alt: https://github.com/thombashi/pytablewriter/blob/master/ss/jupyter_notebook.png
 
-   Table formatting outputs of Jupyter Notebook
+   Table rendering results of Jupyter Notebook
