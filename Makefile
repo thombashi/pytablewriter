@@ -7,7 +7,6 @@ AUTHOR := thombashi
 PACKAGE := pytablewriter
 
 DOCS_DIR := docs
-DOCS_BUILD_DIR := $(DOCS_DIR)/_build
 BUILD_WORK_DIR := _work
 PKG_BUILD_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)
 
