@@ -26,7 +26,7 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.11
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - run: make build
 
@@ -40,7 +40,7 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.11
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - run: make docs
 
@@ -54,7 +54,7 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.11
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - run: make check
 
@@ -75,7 +75,7 @@ jobs:
             python-version: "pypy-3.8"
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -105,7 +105,7 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -137,7 +137,7 @@ jobs:
       cancel-in-progress: true
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4
