@@ -4,6 +4,7 @@ Import from https://github.com/thombashi/msgfy
 
 import inspect
 import os.path
+from types import FrameType
 from typing import Optional
 
 
@@ -14,9 +15,12 @@ error_message_format = DEFAULT_ERROR_MESSAGE_FORMAT
 debug_message_format = DEFAULT_DEBUG_MESSAGE_FORMAT
 
 
-def _to_message(exception_obj: Exception, format_str: str, frame) -> str:
+def _to_message(exception_obj: Exception, format_str: str, frame: Optional[FrameType]) -> str:
     if not isinstance(exception_obj, Exception):
         raise ValueError("exception_obj must be an instance of a subclass of the Exception class")
+
+    if frame is None:
+        return str(exception_obj)
 
     try:
         return (

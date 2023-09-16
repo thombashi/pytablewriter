@@ -1,3 +1,5 @@
+from typing import Any
+
 import pathvalidate
 import typepy
 
@@ -23,14 +25,14 @@ class LtsvTableWriter(CsvTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.is_write_header = False
 
         self._is_require_header = True
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with
         `Labeled Tab-separated Values (LTSV) <http://ltsv.org/>`__ format.

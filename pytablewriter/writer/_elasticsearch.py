@@ -4,7 +4,7 @@
 
 
 import copy
-from typing import Dict, Generator
+from typing import Any, Dict, Generator
 
 import dataproperty
 from dataproperty import ColumnDataProperty
@@ -113,7 +113,7 @@ class ElasticsearchWriter(AbstractTableWriter):
         return super().table_name
 
     @table_name.setter
-    def table_name(self, value) -> None:
+    def table_name(self, value: str) -> None:
         from pathvalidate import ErrorReason, ValidationError
 
         from ..sanitizer import ElasticsearchIndexNameSanitizer
@@ -134,7 +134,7 @@ class ElasticsearchWriter(AbstractTableWriter):
     def index_name(self, value: str) -> None:
         self.table_name = value
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.stream = None
@@ -168,7 +168,7 @@ class ElasticsearchWriter(AbstractTableWriter):
 
             yield dict(zip(self.headers, values))
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         import elasticsearch as es
 
         if not isinstance(self.stream, es.Elasticsearch):

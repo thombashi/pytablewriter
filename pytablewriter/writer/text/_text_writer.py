@@ -2,7 +2,7 @@ import enum
 import io
 import sys
 from itertools import chain
-from typing import IO, List, Optional, Sequence, Union, cast
+from typing import IO, Any, List, Optional, Sequence, Union, cast
 
 import typepy
 from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
@@ -124,7 +124,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         )
         self.__closing_row_cell_format = self.__make_margin_format(self.char_closing_row)
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.stream = sys.stdout
@@ -244,7 +244,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._write_line()
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table|.
 
@@ -260,7 +260,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs) -> None:
+    def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs: Any) -> None:
         """Write data to the output with tabular format.
 
         During the executing this method,
@@ -293,7 +293,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
             self.enable_ansi_escape = stash
 
-    def dumps(self, **kwargs) -> str:
+    def dumps(self, **kwargs: Any) -> str:
         """Get rendered tabular text from the table data.
 
         Only available for text format table writers.
@@ -347,12 +347,12 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
         return TextStyler(writer)
 
-    def _write_table_iter(self, **kwargs) -> None:
+    def _write_table_iter(self, **kwargs: Any) -> None:
         super()._write_table_iter()
         if self.is_write_null_line_after_table:
             self.write_null_line()
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         self._preprocess()
         self._write_opening_row()
 
@@ -595,7 +595,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
         Indentation string for each level.
     """
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.set_indent_level(kwargs.get("indent_level", 0))
@@ -620,7 +620,7 @@ class IndentationTextTableWriter(TextTableWriter, IndentationInterface):
 
         self._indent_level -= 1
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table|.
 

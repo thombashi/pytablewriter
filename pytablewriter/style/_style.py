@@ -206,10 +206,10 @@ class Style:
         return self.__padding
 
     @padding.setter
-    def padding(self, value: Optional[int]):
+    def padding(self, value: Optional[int]) -> None:
         self.__padding = value
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         self.__update_color(initialize=True, **kwargs)
         self.__update_align(initialize=True, **kwargs)
         self.__update_font(initialize=True, **kwargs)
@@ -261,14 +261,14 @@ class Style:
 
         return not self.__eq__(other)
 
-    def update(self, **kwargs) -> None:
+    def update(self, **kwargs: Any) -> None:
         """Update specified style attributes."""
         self.__update_color(initialize=False, **kwargs)
         self.__update_align(initialize=False, **kwargs)
         self.__update_font(initialize=False, **kwargs)
         self.__update_misc(initialize=False, **kwargs)
 
-    def __update_color(self, initialize: bool, **kwargs) -> None:
+    def __update_color(self, initialize: bool, **kwargs: Any) -> None:
         fg_color = kwargs.get("color") or kwargs.get("fg_color")
         if fg_color:
             self.__fg_color: Optional[Color] = Color(fg_color)
@@ -281,7 +281,7 @@ class Style:
         elif initialize:
             self.__bg_color = None
 
-    def __update_font(self, initialize: bool, **kwargs) -> None:
+    def __update_font(self, initialize: bool, **kwargs: Any) -> None:
         font_size = kwargs.get("font_size")
         if font_size:
             self.__font_size = normalize_enum(
@@ -303,7 +303,7 @@ class Style:
         elif initialize:
             self.__font_weight = FontWeight.NORMAL
 
-    def __update_align(self, initialize: bool, **kwargs) -> None:
+    def __update_align(self, initialize: bool, **kwargs: Any) -> None:
         align = kwargs.get("align")
         if align:
             self.__align = normalize_enum(align, Align, default=Align.AUTO)
@@ -316,7 +316,7 @@ class Style:
         elif initialize:
             self.__valign = VerticalAlign.BASELINE
 
-    def __update_misc(self, initialize: bool, **kwargs) -> None:
+    def __update_misc(self, initialize: bool, **kwargs: Any) -> None:
         padding = kwargs.get("padding")
         if padding is not None:
             self.__padding = padding
@@ -345,7 +345,7 @@ class Style:
             self.__thousand_separator = ThousandSeparator.NONE
         self.__validate_attr("thousand_separator", ThousandSeparator)
 
-    def __validate_attr(self, attr_name: str, expected_type) -> None:
+    def __validate_attr(self, attr_name: str, expected_type: Any) -> None:
         value = getattr(self, attr_name)
         if isinstance(expected_type, (list, tuple)):
             expected = " or ".join(c.__name__ for c in expected_type)

@@ -4,14 +4,14 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Optional, Type
+from typing import Any, Optional, Type
 
 import dataproperty
 from pathvalidate import replace_symbol
 from tabledata._core import TableData
 
 
-def quote_datetime_formatter(value) -> str:
+def quote_datetime_formatter(value: datetime) -> str:
     return f'"{value.strftime(dataproperty.DefaultValue.DATETIME_FORMAT):s}"'
 
 
@@ -21,7 +21,7 @@ def dateutil_datetime_formatter(value: datetime) -> str:
     )
 
 
-def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwargs) -> str:
+def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwargs: Any) -> str:
     """
     :param tabledata.TableData value: Tabular data to dump.
     :param str format_name:
@@ -60,8 +60,8 @@ def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwa
 
 
 def normalize_enum(
-    value, enum_class: Type[Enum], validate: bool = True, default: Optional[Enum] = None
-):
+    value: Any, enum_class: Type[Enum], validate: bool = True, default: Optional[Enum] = None
+) -> Any:
     if value is None:
         return default
 

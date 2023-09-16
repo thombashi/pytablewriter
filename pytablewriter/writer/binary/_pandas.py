@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import IO, Any, Optional, Union
 
 import tabledata
 
@@ -25,7 +25,7 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         import copy
 
         import dataproperty
@@ -50,12 +50,15 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
         super().close()
         self.__filepath = None
 
-    def dump(self, output: str, close_after_write: bool = True, **kwargs) -> None:
+    def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs: Any) -> None:
         """Write data to a DataFrame pickle file.
 
         Args:
             output (file descriptor or filepath):
         """
+
+        if not isinstance(output, str):
+            raise TypeError(f"output must be a str: actual={type(output)}")
 
         self.open(output)
         try:
@@ -67,7 +70,7 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
     def _verify_stream(self) -> None:
         pass
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         if not self.is_opened():
             self._logger.logger.error("required to open(file_path) first.")
             return
@@ -92,5 +95,5 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
         )
         table_data.as_dataframe().to_pickle(self.__filepath)
 
-    def _write_table_iter(self, **kwargs) -> None:
+    def _write_table_iter(self, **kwargs: Any) -> None:
         self._write_table(**kwargs)

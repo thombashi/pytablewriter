@@ -7,7 +7,7 @@ class TextWriterInterface(metaclass=abc.ABCMeta):
     """
 
     @abc.abstractmethod
-    def write_null_line(self):  # pragma: no cover
+    def write_null_line(self) -> None:  # pragma: no cover
         pass
 
 

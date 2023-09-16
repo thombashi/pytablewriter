@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
@@ -58,7 +58,7 @@ class PandasDataFrameWriter(NumpyTableWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.import_pandas_as = "pd"

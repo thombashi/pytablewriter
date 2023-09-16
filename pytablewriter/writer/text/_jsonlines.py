@@ -1,3 +1,5 @@
+from typing import Any
+
 from ._json import JsonTableWriter
 
 
@@ -25,7 +27,7 @@ class JsonLinesTableWriter(JsonTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with
         `Line-delimited JSON(LDJSON)

@@ -1,7 +1,7 @@
 import abc
 import copy
 import warnings
-from typing import Any, ClassVar, Dict, Optional, Union, cast
+from typing import IO, TYPE_CHECKING, Any, ClassVar, Dict, Optional, Union, cast
 
 import dataproperty
 import typepy
@@ -12,6 +12,10 @@ from typepy import Integer
 from .._common import import_error_msg_template
 from ._excel_workbook import ExcelWorkbookInterface, ExcelWorkbookXls, ExcelWorkbookXlsx
 from ._interface import AbstractBinaryTableWriter
+
+
+if TYPE_CHECKING:
+    from xlwt import XFStyle
 
 
 class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
@@ -29,7 +33,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     def workbook(self) -> Optional[ExcelWorkbookInterface]:
         return self._workbook
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self._workbook: Optional[ExcelWorkbookInterface] = None
@@ -183,7 +187,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
         self._stream = self.workbook.add_worksheet(sheet_name)  # type: ignore
         self._current_data_row = self._first_data_row
 
-    def dump(self, output: str, close_after_write: bool = True, **kwargs) -> None:
+    def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs: Any) -> None:
         """Write a worksheet to the current workbook.
 
         Args:
@@ -193,6 +197,9 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
                 Close the workbook after write.
                 Defaults to |True|.
         """
+
+        if not isinstance(output, str):
+            raise TypeError(f"output must be a str: actual={type(output)}")
 
         self.open(output)
         try:
@@ -210,7 +217,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
     def _write_cell(self, row: int, col: int, value_dp: DataProperty) -> None:
         pass
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         self._preprocess_table_dp()
         self._preprocess_table_property()
         self._write_header()
@@ -258,7 +265,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             - |nan|: written as ``NaN``
     """
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.__col_style_table: Dict[int, Any] = {}
@@ -290,7 +297,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
 
         self.__col_style_table = {}
 
-    def __get_cell_style(self, col: int):
+    def __get_cell_style(self, col: int) -> "XFStyle":
         try:
             import xlwt
         except ImportError:
@@ -389,7 +396,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
     def __cell_format_property(self) -> Dict[str, Union[int, str, bool]]:
         return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.default_format = self.Default.CELL_FORMAT
@@ -463,7 +470,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
         return num_props
 
-    def __get_cell_format(self, format_key, cell_props) -> Dict:
+    def __get_cell_format(self, format_key, cell_props) -> Dict:  # type: ignore
         cell_format = self.__col_cell_format_cache.get(format_key)
         if cell_format is not None:
             return cell_format
@@ -474,7 +481,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
         return cell_format
 
-    def __add_format(self, dict_property):
+    def __add_format(self, dict_property):  # type: ignore
         assert self.workbook
         return self.workbook.workbook.add_format(dict_property)
 

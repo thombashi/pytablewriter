@@ -2,13 +2,16 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
 
-from ._null_logger import NullLogger
+from ._null_logger import NullLogger  # type: ignore
 
+
+if TYPE_CHECKING:
+    from ..writer import AbstractTableWriter
 
 MODULE_NAME = "pytablewriter"
 
@@ -48,20 +51,20 @@ def set_logger(is_enable: bool, propagation_depth: int = 1) -> None:
 
 class WriterLogger:
     @property
-    def logger(self):
+    def logger(self):  # type: ignore
         return self.__logger
 
-    def __init__(self, writer) -> None:
+    def __init__(self, writer: "AbstractTableWriter") -> None:
         self.__writer = writer
         self.__logger = logger
 
         self.logger.debug(f"created WriterLogger: format={writer.format_name}")
 
-    def __enter__(self):
+    def __enter__(self) -> "WriterLogger":
         self.logging_start_write()
         return self
 
-    def __exit__(self, *exc):
+    def __exit__(self, *exc):  # type: ignore
         self.logging_complete_write()
         return False
 

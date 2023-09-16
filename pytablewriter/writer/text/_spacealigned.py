@@ -1,4 +1,5 @@
 import copy
+from typing import Any
 
 import dataproperty
 
@@ -26,7 +27,7 @@ class SpaceAlignedTableWriter(CsvTableWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.column_delimiter = "  "

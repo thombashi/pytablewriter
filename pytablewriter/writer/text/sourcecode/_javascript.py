@@ -1,6 +1,6 @@
 import io
 from datetime import datetime
-from typing import List
+from typing import Any, List
 
 from dataproperty import ColumnDataProperty, DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
@@ -82,7 +82,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
 
         self.__variable_declaration = value
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.variable_declaration = "const"
@@ -97,7 +97,7 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     def get_variable_name(self, value: str) -> str:
         return sanitize_js_var_name(value, "_").casefold()
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = js_datetime_formatter
         else:

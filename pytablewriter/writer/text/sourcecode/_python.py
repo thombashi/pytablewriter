@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 import typepy
 
@@ -49,7 +49,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self._dp_extractor.type_value_map = {
@@ -61,7 +61,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
     def get_variable_name(self, value: str) -> str:
         return sanitize_python_var_name(self.table_name, "_").lower()
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         if self.is_datetime_instance_formatting:
             self._dp_extractor.datetime_formatter = dateutil_datetime_formatter
         else:

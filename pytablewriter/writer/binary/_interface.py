@@ -1,4 +1,5 @@
 import abc
+from typing import Any
 
 from .._table_writer import AbstractTableWriter
 
@@ -20,11 +21,11 @@ class BinaryWriterInterface(metaclass=abc.ABCMeta):
 
 class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
     @property
-    def stream(self):
+    def stream(self) -> Any:
         return self._stream
 
     @stream.setter
-    def stream(self, value) -> None:
+    def stream(self, value: Any) -> None:
         raise RuntimeError(
             "cannot assign a stream to binary format writers. use open method instead."
         )
@@ -33,7 +34,7 @@ class AbstractBinaryTableWriter(AbstractTableWriter, BinaryWriterInterface):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.table_name = kwargs.get("table_name", "")

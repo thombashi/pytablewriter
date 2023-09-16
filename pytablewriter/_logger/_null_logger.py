@@ -1,3 +1,6 @@
+# type: ignore
+
+
 class NullLogger:
     level_name = None
 

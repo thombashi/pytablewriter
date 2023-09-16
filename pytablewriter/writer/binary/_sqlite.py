@@ -1,4 +1,5 @@
 from os.path import abspath
+from typing import IO, Any, Union
 
 import tabledata
 
@@ -26,7 +27,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         import copy
 
         import dataproperty
@@ -60,7 +61,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
 
         self._stream = SimpleSQLite(file_path, "w", max_workers=self.max_workers)
 
-    def dump(self, output: str, close_after_write: bool = True, **kwargs) -> None:
+    def dump(self, output: Union[str, IO], close_after_write: bool = True, **kwargs: Any) -> None:
         """Write data to the SQLite database file.
 
         Args:
@@ -70,6 +71,9 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
                 Defaults to |True|.
         """
 
+        if not isinstance(output, str):
+            raise TypeError(f"output must be a str: actual={type(output)}")
+
         self.open(output)
         try:
             self.write_table(**kwargs)
@@ -77,7 +81,7 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
             if close_after_write:
                 self.close()
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         try:
             self._verify_value_matrix()
         except EmptyValueError:

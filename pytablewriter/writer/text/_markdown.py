@@ -1,5 +1,5 @@
 import copy
-from typing import List
+from typing import Any, List
 
 import dataproperty as dp
 import typepy
@@ -31,7 +31,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         self.__flavor = kwargs.pop("flavor", self.DEFAULT_FLAVOR).casefold()
 
         super().__init__(**kwargs)
@@ -96,7 +96,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         if self.__flavor in ("kramdown", "jekyll"):
             self._write_line()
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with Markdown table format.
 
@@ -141,7 +141,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             if self.is_write_null_line_after_table:
                 self.write_null_line()
 
-    def _write_table_iter(self, **kwargs) -> None:
+    def _write_table_iter(self, **kwargs: Any) -> None:
         self.__write_chapter()
         super()._write_table_iter()
 

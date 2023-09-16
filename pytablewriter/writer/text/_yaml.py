@@ -19,7 +19,7 @@ class YamlTableWriter(TextTableWriter):
 
     FORMAT_NAME = "yaml"
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.is_padding = False
@@ -35,7 +35,7 @@ class YamlTableWriter(TextTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with
         YAML format.

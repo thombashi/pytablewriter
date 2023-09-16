@@ -1,5 +1,6 @@
 import warnings
 from decimal import Decimal
+from typing import Any
 
 import typepy
 
@@ -24,10 +25,10 @@ class TomlTableWriter(TextTableWriter):
         return self.FORMAT_NAME
 
     @property
-    def support_split_write(self):
+    def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.is_formatting_float = False
@@ -35,7 +36,7 @@ class TomlTableWriter(TextTableWriter):
         self._is_require_table_name = True
         self._is_require_header = True
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with
         `TOML <https://github.com/toml-lang/toml>`__ format.
@@ -50,11 +51,11 @@ class TomlTableWriter(TextTableWriter):
             import toml
 
             class TomlTableEncoder(toml.encoder.TomlEncoder):
-                def __init__(self, _dict=dict, preserve=False):
+                def __init__(self, _dict=dict, preserve=False):  # type: ignore
                     super().__init__(_dict=_dict, preserve=preserve)
 
                     self.dump_funcs[str] = str
-                    self.dump_funcs[Decimal] = toml.encoder._dump_float
+                    self.dump_funcs[Decimal] = toml.encoder._dump_float  # type: ignore
 
         except ImportError:
             warnings.warn(import_error_msg_template.format("toml"))

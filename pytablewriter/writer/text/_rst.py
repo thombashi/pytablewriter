@@ -1,5 +1,5 @@
 import copy
-from typing import List
+from typing import Any, List
 
 import dataproperty
 import typepy
@@ -16,7 +16,7 @@ class RstTableWriter(IndentationTextTableWriter):
     A base class of reStructuredText table writer.
     """
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.char_header_row_separator = "="
@@ -44,7 +44,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         with self._logger:
             self._write_line(self._get_table_directive())
 
@@ -64,7 +64,7 @@ class RstTableWriter(IndentationTextTableWriter):
 
         return f".. table:: {MultiByteStrDecoder(self.table_name).unicode_str}\n"
 
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         self.inc_indent_level()
         super()._write_table(**kwargs)
         self.dec_indent_level()
@@ -93,7 +93,7 @@ class RstCsvTableWriter(RstTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.column_delimiter = ", "
@@ -105,7 +105,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         self._quoting_flags[typepy.Typecode.STRING] = True
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with reStructuredText CSV table format.
 
@@ -184,7 +184,7 @@ class RstGridTableWriter(RstTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.char_left_side_row = "|"
@@ -222,7 +222,7 @@ class RstSimpleTableWriter(RstTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.column_delimiter = "  "

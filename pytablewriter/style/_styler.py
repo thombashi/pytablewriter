@@ -44,7 +44,7 @@ class AbstractStyler(StylerInterface):
     def apply_terminal_style(self, value: str, style: Style) -> str:
         return value
 
-    def _get_font_size_map(self):
+    def _get_font_size_map(self) -> Dict[FontSize, str]:
         return {}
 
 
@@ -144,7 +144,7 @@ class LatexStyler(TextStyler):
         item_list.append(value)
         return " ".join(item_list)
 
-    def _get_font_size_map(self):
+    def _get_font_size_map(self) -> Dict[FontSize, str]:
         return {
             FontSize.TINY: r"\tiny",
             FontSize.SMALL: r"\small",

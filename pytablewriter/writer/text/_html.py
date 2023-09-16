@@ -45,7 +45,7 @@ class HtmlTableWriter(TextTableWriter):
     def support_split_write(self) -> bool:
         return False
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.is_padding = False
@@ -58,7 +58,7 @@ class HtmlTableWriter(TextTableWriter):
 
         self.enable_ansi_escape = False
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table| with HTML table format.
 

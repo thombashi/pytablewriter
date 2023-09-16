@@ -6,7 +6,7 @@ import abc
 import copy
 import math
 import warnings
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Union, cast
+from typing import TYPE_CHECKING, Any, Dict, List, Mapping, Optional, Sequence, Union, cast
 
 import typepy
 from dataproperty import (
@@ -38,7 +38,13 @@ from ._interface import TableWriterInterface
 from ._msgfy import to_error_message
 
 
-_ts_to_flag = {
+if TYPE_CHECKING:
+    import pandas
+    import tablib
+
+    from .._table_format import TableFormat
+
+_ts_to_flag: Dict[ThousandSeparator, int] = {
     ThousandSeparator.NONE: Format.NONE,
     ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
     ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
@@ -141,30 +147,29 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     @property
-    def table_format(self):
-        """Get the format of the writer.
-
-        Returns:
-            TableFormat:
-        """
+    def table_format(self) -> "TableFormat":
+        """TableFormat: Get the format of the writer."""
 
         from .._table_format import TableFormat
 
-        return TableFormat.from_name(self.format_name)
+        table_format = TableFormat.from_name(self.format_name)
+        assert table_format
+
+        return table_format
 
     @property
-    def stream(self):
+    def stream(self) -> Any:
         return self._stream
 
     @stream.setter
-    def stream(self, value) -> None:
+    def stream(self, value: Any) -> None:
         self._stream = value
 
     @abc.abstractmethod
-    def _write_table(self, **kwargs) -> None:
+    def _write_table(self, **kwargs: Any) -> None:
         pass
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         self._logger = WriterLogger(self)
 
         self.table_name = kwargs.get("table_name", "")
@@ -209,7 +214,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._is_require_table_name = False
         self._is_require_header = False
 
-        self.iteration_length = kwargs.get("iteration_length", -1)
+        self.iteration_length: int = kwargs.get("iteration_length", -1)
         self.write_callback = kwargs.get(
             "write_callback", lambda _iter_count, _iter_length: None  # defaults to NOP callback
         )
@@ -536,7 +541,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         raise ValueError(f"column must be an int or string: actual={column}")
 
-    def set_theme(self, theme: str, **kwargs) -> None:
+    def set_theme(self, theme: str, **kwargs: Any) -> None:
         """Set style filters for a theme.
 
         Args:
@@ -704,7 +709,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             self.from_tabledata(table_data)
 
     def from_dataframe(
-        self, dataframe, add_index_column: bool = False, overwrite_type_hints: bool = True
+        self,
+        dataframe: "pandas.DataFrame",
+        add_index_column: bool = False,
+        overwrite_type_hints: bool = True,
     ) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.DataFrame`.
@@ -748,7 +756,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         else:
             self.value_matrix = dataframe.values.tolist()
 
-    def from_series(self, series, add_index_column: bool = True) -> None:
+    def from_series(self, series: "pandas.Series", add_index_column: bool = True) -> None:
         """
         Set tabular attributes to the writer from :py:class:`pandas.Series`.
         The following attributes are set by the method:
@@ -782,7 +790,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         else:
             self.value_matrix = [[value] for value in series.tolist()]
 
-    def from_tablib(self, tablib_dataset) -> None:
+    def from_tablib(self, tablib_dataset: "tablib.Dataset") -> None:
         """
         Set tabular attributes to the writer from :py:class:`tablib.Dataset`.
         """
@@ -823,7 +831,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor.register_trans_func(trans_func)
         self.__clear_preprocess()
 
-    def update_preprocessor(self, **kwargs) -> None:
+    def update_preprocessor(self, **kwargs: Any) -> None:
         # TODO: documentation
         #   is_escape_formula_injection: for CSV/Excel
 
@@ -832,7 +840,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self.__clear_preprocess()
 
-    def write_table(self, **kwargs) -> None:
+    def write_table(self, **kwargs: Any) -> None:
         """
         |write_table|.
         """
@@ -846,7 +854,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
             self._write_table(**kwargs)
 
-    def _write_table_iter(self, **kwargs) -> None:
+    def _write_table_iter(self, **kwargs: Any) -> None:
         if not self.support_split_write:
             raise NotSupportedError("the class not supported the write_table_iter method")
 
@@ -1066,7 +1074,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         if typepy.is_empty_sequence(self.value_matrix):
             raise EmptyValueError()
 
-    def _create_styler(self, writer) -> StylerInterface:
+    def _create_styler(self, writer: "AbstractTableWriter") -> StylerInterface:
         from ..style._styler import NullStyler
 
         return NullStyler(writer)

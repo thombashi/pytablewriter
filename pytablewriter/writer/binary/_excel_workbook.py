@@ -12,11 +12,11 @@ from .._msgfy import to_error_message
 
 class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
     @abc.abstractproperty
-    def workbook(self):  # pragma: no cover
+    def workbook(self) -> Any:  # pragma: no cover
         pass
 
     @abc.abstractproperty
-    def file_path(self):  # pragma: no cover
+    def file_path(self) -> Optional[str]:  # pragma: no cover
         pass
 
     @abc.abstractmethod
@@ -28,13 +28,13 @@ class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def add_worksheet(self, worksheet_name):  # pragma: no cover
+    def add_worksheet(self, worksheet_name: Optional[str]) -> Any:  # pragma: no cover
         pass
 
 
 class ExcelWorkbook(ExcelWorkbookInterface):
     @property
-    def workbook(self):
+    def workbook(self) -> Any:
         return self._workbook
 
     @property

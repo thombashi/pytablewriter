@@ -1,6 +1,6 @@
 import copy
 import re
-from typing import List
+from typing import Any, List
 
 import dataproperty as dp
 import typepy
@@ -23,7 +23,7 @@ class LatexWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self._set_chars("")
@@ -110,7 +110,7 @@ class LatexMatrixWriter(LatexWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.is_write_header = False
@@ -179,7 +179,7 @@ class LatexTableWriter(LatexWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.char_right_side_row = r" \\ \hline"

@@ -1,6 +1,6 @@
 import copy
 import re
-from typing import List, Sequence
+from typing import Any, List, Sequence
 
 import dataproperty as dp
 import typepy
@@ -30,7 +30,7 @@ class MediaWikiTableWriter(TextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.column_delimiter = "\n"

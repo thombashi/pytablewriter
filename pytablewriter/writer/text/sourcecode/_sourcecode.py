@@ -1,5 +1,5 @@
 import abc
-from typing import List
+from typing import Any, List
 
 import typepy
 
@@ -42,7 +42,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
         # margin setting must be ignored
         return
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.indent_string = kwargs.get("indent_string", "    ")

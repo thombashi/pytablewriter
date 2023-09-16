@@ -2,8 +2,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-
 import abc
+from typing import IO, Any, Union
 
 
 class TableWriterInterface(metaclass=abc.ABCMeta):
@@ -28,18 +28,20 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
         """
 
     @abc.abstractmethod
-    def write_table(self, **kwargs) -> None:  # pragma: no cover
+    def write_table(self, **kwargs: Any) -> None:  # pragma: no cover
         """
         |write_table|.
         """
 
-    def dump(self, output, close_after_write: bool, **kwargs) -> None:  # pragma: no cover
+    def dump(
+        self, output: Union[str, IO], close_after_write: bool, **kwargs: Any
+    ) -> None:  # pragma: no cover
         raise NotImplementedError(f"{self.format_name} writer did not support dump method")
 
     def dumps(self) -> str:  # pragma: no cover
         raise NotImplementedError(f"{self.format_name} writer did not support dumps method")
 
-    def write_table_iter(self, **kwargs) -> None:  # pragma: no cover
+    def write_table_iter(self, **kwargs: Any) -> None:  # pragma: no cover
         """
         Write a table with iteration.
         "Iteration" means that divide the table writing into multiple writes.
@@ -70,7 +72,7 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
         self._write_table_iter(**kwargs)
 
     @abc.abstractmethod
-    def _write_table_iter(self, **kwargs) -> None:  # pragma: no cover
+    def _write_table_iter(self, **kwargs: Any) -> None:  # pragma: no cover
         pass
 
     @abc.abstractmethod

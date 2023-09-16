@@ -1,4 +1,5 @@
 import copy
+from typing import Any
 
 import dataproperty as dp
 
@@ -23,7 +24,7 @@ class UnicodeTableWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.column_delimiter = "│"
@@ -79,7 +80,7 @@ class BoldUnicodeTableWriter(IndentationTextTableWriter):
     def support_split_write(self) -> bool:
         return True
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         self.table_name = ""
