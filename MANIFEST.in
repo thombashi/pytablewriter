@@ -1,6 +1,5 @@
 include LICENSE
 include README.rst
-include setup.cfg
 include tox.ini
 include docs/pages/introduction/summary.txt
 include */py.typed
