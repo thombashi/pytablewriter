@@ -54,7 +54,7 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
         """Write data to a DataFrame pickle file.
 
         Args:
-            output (file descriptor or filepath):
+            output (str): Path to an output DataFrame pickle file.
         """
 
         if not isinstance(output, str):

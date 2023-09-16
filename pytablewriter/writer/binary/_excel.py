@@ -57,9 +57,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
     @property
     def first_header_row(self) -> int:
-        """
-        :return: Index of the first row of the header.
-        :rtype: int
+        """int: Index of the first row of the header.
 
         .. note:: |excel_attr|
         """
@@ -68,9 +66,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
     @property
     def last_header_row(self) -> int:
-        """
-        :return: Index of the last row of the header.
-        :rtype: int
+        """int: Index of the last row of the header.
 
         .. note:: |excel_attr|
         """
@@ -79,9 +75,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
     @property
     def first_data_row(self) -> int:
-        """
-        :return: Index of the first row of the data (table body).
-        :rtype: int
+        """int: Index of the first row of the data (table body).
 
         .. note:: |excel_attr|
         """
@@ -90,9 +84,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
     @property
     def last_data_row(self) -> Optional[int]:
-        """
-        :return: Index of the last row of the data (table body).
-        :rtype: int
+        """int: Index of the last row of the data (table body).
 
         .. note:: |excel_attr|
         """
@@ -101,9 +93,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
     @property
     def first_data_col(self) -> int:
-        """
-        :return: Index of the first column of the table.
-        :rtype: int
+        """int: Index of the first column of the table.
 
         .. note:: |excel_attr|
         """
@@ -112,9 +102,7 @@ class ExcelTableWriter(AbstractBinaryTableWriter, metaclass=abc.ABCMeta):
 
     @property
     def last_data_col(self) -> Optional[int]:
-        """
-        :return: Index of the last column of the table.
-        :rtype: int
+        """int: Index of the last column of the table.
 
         .. note:: |excel_attr|
         """

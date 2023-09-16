@@ -65,7 +65,8 @@ class SqliteTableWriter(AbstractBinaryTableWriter):
         """Write data to the SQLite database file.
 
         Args:
-            output (file descriptor or filepath):
+            output (str):
+                path to the output SQLite database file.
             close_after_write (bool, optional):
                 Close the output after write.
                 Defaults to |True|.

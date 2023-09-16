@@ -25,10 +25,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
     @property
     def variable_name(self) -> str:
         """
-        Return a valid variable name that converted from the |table_name|.
-
-        :return: A variable name.
-        :rtype: str
+        str: Return a valid variable name that converted from the |table_name|.
         """
 
         return self.get_variable_name(self.table_name)

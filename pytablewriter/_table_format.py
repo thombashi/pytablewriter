@@ -253,40 +253,32 @@ class TableFormat(enum.Enum):
 
     @property
     def names(self) -> List[str]:
-        """Names associated with the table format.
-
-        Returns:
-            List[str]: format names
+        """
+        List[str]: Names associated with the table format.
         """
 
         return self.__names
 
     @property
     def writer_class(self) -> AbstractTableWriter:
-        """Table writer class object associated with the table format.
-
-        Returns:
-            Type[AbstractTableWriter]:
+        """
+        Type[AbstractTableWriter]: Table writer class object associated with the table format.
         """
 
         return self.__writer_class
 
     @property
     def format_attribute(self) -> int:
-        """Table attributes bitmap.
-
-        Returns:
-            :py:class:`pytablewriter.FormatAttr`:
+        """
+        FormatAttr: Table attributes bitmap.
         """
 
         return self.__format_attribute
 
     @property
     def file_extensions(self) -> List[str]:
-        """File extensions associated with the table format.
-
-        Returns:
-            List[str]:
+        """
+        List[str]: File extensions associated with the table format.
         """
 
         return self.__file_extensions

@@ -272,7 +272,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def headers(self) -> Sequence[str]:
-        """Headers of a table to be outputted."""
+        """Sequence[str]: Headers of a table to be outputted."""
 
         return self._dp_extractor.headers
 
@@ -302,11 +302,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def tabledata(self) -> TableData:
-        """Get tabular data of the writer.
-
-        Returns:
-            tabledata.TableData:
-        """
+        """tabledata.TableData: Get tabular data of the writer."""
 
         return TableData(
             self.table_name,
@@ -318,7 +314,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def table_name(self) -> str:
-        """Name of a table."""
+        """str: Name of a table."""
 
         return self._table_name
 
@@ -378,7 +374,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def default_style(self) -> Style:
-        """Default |Style| of table cells."""
+        """Style: Default |Style| of table cells."""
 
         return self.__default_style
 
@@ -405,11 +401,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     @property
     def column_styles(self) -> List[Optional[Style]]:
-        """|Style| for each column.
-
-        Returns:
-            list of |Style|:
-        """
+        """List[Optional[Style]]: |Style| for each column."""
 
         return self.__col_style_list
 
@@ -724,7 +716,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         Args:
             dataframe(pandas.DataFrame or |str|):
-                Input pandas.DataFrame object or pickle.
+                Input pandas.DataFrame object or path to a DataFrame pickle.
             add_index_column(bool, optional):
                 If |True|, add a column of ``index`` of the ``dataframe``.
                 Defaults to |False|.
