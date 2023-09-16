@@ -76,10 +76,13 @@ python_version = 3.7
 
 pretty = true
 
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
 no_implicit_optional = true
 show_error_codes = true
 show_error_context = true
-strict = true
+# strict = true
 warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
