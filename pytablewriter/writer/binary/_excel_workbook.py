@@ -80,10 +80,10 @@ class ExcelWorkbookXls(ExcelWorkbook):
 
         self._clear()
 
-    def add_worksheet(self, worksheet_name):
-        worksheet_name = sanitize_excel_sheet_name(worksheet_name)
-
+    def add_worksheet(self, worksheet_name: Optional[str]) -> Any:
         if typepy.is_not_null_string(worksheet_name):
+            assert worksheet_name
+            worksheet_name = sanitize_excel_sheet_name(worksheet_name)
             if worksheet_name in self._worksheet_table:
                 # the work sheet is already exists
                 return self._worksheet_table.get(worksheet_name)
@@ -96,7 +96,7 @@ class ExcelWorkbookXls(ExcelWorkbook):
                 sheet_id += 1
 
         worksheet = self.workbook.add_sheet(worksheet_name)
-        self._worksheet_table[worksheet_name] = worksheet
+        self._worksheet_table[worksheet.get_name()] = worksheet
 
         return worksheet
 
@@ -123,10 +123,10 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
         self._workbook.close()  # type: ignore
         self._clear()
 
-    def add_worksheet(self, worksheet_name):
-        worksheet_name = sanitize_excel_sheet_name(worksheet_name)
-
+    def add_worksheet(self, worksheet_name: Optional[str]) -> Any:
         if typepy.is_not_null_string(worksheet_name):
+            assert worksheet_name
+            worksheet_name = sanitize_excel_sheet_name(worksheet_name)
             if worksheet_name in self._worksheet_table:
                 # the work sheet is already exists
                 return self._worksheet_table.get(worksheet_name)
@@ -134,6 +134,6 @@ class ExcelWorkbookXlsx(ExcelWorkbook):
             worksheet_name = None
 
         worksheet = self.workbook.add_worksheet(worksheet_name)
-        self._worksheet_table[worksheet_name] = worksheet
+        self._worksheet_table[worksheet.get_name()] = worksheet
 
         return worksheet
