@@ -47,7 +47,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.event_name }}-lint
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-lint
       cancel-in-progress: true
     timeout-minutes: 20
     container:
@@ -61,7 +61,7 @@ jobs:
   unit-test:
     runs-on: ${{ matrix.os }}
     concurrency:
-      group: ${{ github.workflow }}-${{ github.event_name }}-ut-${{ matrix.os }}-${{ matrix.python-version }}
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-ut-${{ matrix.os }}-${{ matrix.python-version }}
       cancel-in-progress: true
     strategy:
       fail-fast: false
@@ -100,7 +100,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.event_name }}-coverage
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-coverage
       cancel-in-progress: true
     timeout-minutes: 20
 
