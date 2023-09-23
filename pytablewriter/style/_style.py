@@ -1,5 +1,5 @@
 from enum import Enum, unique
-from typing import Any, Optional, Union, cast
+from typing import Any, Dict, Optional, Union, cast
 
 from dataproperty import Align
 from tcolorpy import Color
@@ -44,7 +44,7 @@ class VerticalAlign(Enum):
         self.__align_string = string
 
 
-_s_to_ts = {
+_s_to_ts: Dict[str, ThousandSeparator] = {
     "": ThousandSeparator.NONE,
     ",": ThousandSeparator.COMMA,
     " ": ThousandSeparator.SPACE,

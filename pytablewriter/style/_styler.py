@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from ..writer._table_writer import AbstractTableWriter
 
 
-_align_char_mapping = {
+_align_char_mapping: Dict[Align, str] = {
     Align.AUTO: "<",
     Align.LEFT: "<",
     Align.RIGHT: ">",
