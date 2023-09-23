@@ -1239,7 +1239,7 @@ class Test_MarkdownTableWriter_write_table:
             flavor="gfm",
         )
 
-        expected = dedent(
+        expected_gfm = dedent(
             """\
             |w/o style|w/ strike |w/ line through |
             |---------|----------|----------------|
@@ -1247,10 +1247,14 @@ class Test_MarkdownTableWriter_write_table:
             """
         )
 
-        output = writer.dumps()
-        print_test_result(expected=expected, actual=output)
-        assert output == expected
-        assert output != writer.dumps(flavor="CommonMark")
+        output_gfm = writer.dumps()
+        output_github = writer.dumps(flavor="github")
+        output_commonmark = writer.dumps(flavor="CommonMark")
+
+        print_test_result(expected=expected_gfm, actual=output_gfm)
+        assert output_gfm == expected_gfm
+        assert output_github == expected_gfm
+        assert output_gfm != output_commonmark
 
     def test_normal_flavor_kramdown(self):
         writer = table_writer_class(
