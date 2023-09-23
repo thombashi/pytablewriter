@@ -122,8 +122,8 @@ class Test_LatexMatrixWriter_write_table:
 
         expected = r"""\begin{equation}
     style test = \left( \begin{array}{rrrrrrlrrr}
-         111 &   111 & \tiny 111 & \small 111 &  \normalsize 111 &  \large 111 &              & \large \bf 111 & \small \it 111 & \large \bf \it 111 \\
-        1234 &  1234 & \tiny 1234 & \small 1234 & \normalsize 1,234 & \large 1 234 &              & \large \bf 1234 & \small \it 1234 & \large \bf \it 1234 \\
+         111 &   111 &  \tiny{111} &  \small{111} &   \normalsize{111} &   \large{111} &              &  \bf{\large{111}} &  \it{\small{111}} &  \it{\bf{\large{111}}} \\
+        1234 &  1234 & \tiny{1234} & \small{1234} & \normalsize{1,234} & \large{1 234} &              & \bf{\large{1234}} & \it{\small{1234}} & \it{\bf{\large{1234}}} \\
     \end{array} \right)
 \end{equation}
 """
@@ -144,8 +144,8 @@ class Test_LatexMatrixWriter_write_table:
         out = writer.dumps()
         expected = r"""\begin{equation}
     style test = \left( \begin{array}{rrrlrclrrr}
-         111 &   111 &  \tiny 111 & \small 111  & \normalsize 111 & \large 111 &              &    111 &      111 &           111 \\
-        1234 &  1234 & \tiny 1,234 & \small 1 234 & \normalsize 1234 & \large 1234 &              &   1234 &     1234 &          1234 \\
+         111 &   111 &   \tiny{111} & \small{111}   &  \normalsize{111} & \large{111}  &                &    111 &      111 &           111 \\
+        1234 &  1234 & \tiny{1,234} & \small{1 234} & \normalsize{1234} & \large{1234} &                &   1234 &     1234 &          1234 \\
     \end{array} \right)
 \end{equation}
 """

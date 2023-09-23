@@ -132,6 +132,7 @@ class Style:
 
             - ``"normal"`` (default)
             - ``"italic"``
+            - ``"typewriter"`` (only for Latex writer)
 
         decoration_line (|str| / :py:class:`~.style.DecorationLine`)
 

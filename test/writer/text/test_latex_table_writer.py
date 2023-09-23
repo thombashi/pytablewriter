@@ -103,10 +103,10 @@ class Test_LatexTableWriter_write_table:
         writer.column_styles = vut_styles
 
         expected = r"""\begin{array}{r | r | r | r | r | r | l | r | r | r} \hline
-    \verb|none| & \verb|empty| & \verb|  tiny   | & \verb|  small   | & \verb|     medium     | & \verb|   large   | & \verb|null w/ bold| & \verb|   L bold    | & \verb|  S italic   | & \verb| L bold italic  | \\ \hline
+    \verb|none| & \verb|empty| & \verb|   tiny    | & \verb|   small    | & \verb|      medium      | & \verb|    large    | & \verb|null w/ bold| & \verb|     L bold      | & \verb|    S italic     | & \verb|    L bold italic     | \\ \hline
     \hline
-     111 &   111 & \tiny 111 & \small 111 &  \normalsize 111 &  \large 111 &              & \large \bf 111 & \small \it 111 & \large \bf \it 111 \\ \hline
-    1234 &  1234 & \tiny 1234 & \small 1234 & \normalsize 1,234 & \large 1 234 &              & \large \bf 1234 & \small \it 1234 & \large \bf \it 1234 \\ \hline
+     111 &   111 &  \tiny{111} &  \small{111} &   \normalsize{111} &   \large{111} &              &  \bf{\large{111}} &  \it{\small{111}} &  \it{\bf{\large{111}}} \\ \hline
+    1234 &  1234 & \tiny{1234} & \small{1234} & \normalsize{1,234} & \large{1 234} &              & \bf{\large{1234}} & \it{\small{1234}} & \it{\bf{\large{1234}}} \\ \hline
 \end{array}
 """
 

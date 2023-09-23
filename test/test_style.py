@@ -121,6 +121,7 @@ class Test_Style_eq:
             [Style(font_weight="bold"), Style(font_weight="normal"), False],
             [Style(font_style="italic"), Style(font_style=FontStyle.ITALIC), True],
             [Style(font_style="italic"), Style(font_style="normal"), False],
+            [Style(font_style="typewriter"), Style(font_style=FontStyle.TYPEWRITER), True],
             [Style(thousand_separator=","), Style(thousand_separator=","), True],
             [Style(thousand_separator=","), Style(thousand_separator="comma"), True],
             [Style(thousand_separator="_"), Style(thousand_separator="underscore"), True],

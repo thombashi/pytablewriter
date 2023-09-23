@@ -109,18 +109,20 @@ class LatexStyler(TextStyler):
     class Command:
         BOLD = r"\bf"
         ITALIC = r"\it"
+        TYPEWRITER = r"\tt"
 
     def get_additional_char_width(self, style: Style) -> int:
         width = 0
+        CURLY_BRACES_LEN = 2
 
         if self.get_font_size(style):
-            width += len(cast(str, self.get_font_size(style)))
+            width += len(cast(str, self.get_font_size(style))) + CURLY_BRACES_LEN
 
         if style.font_weight == FontWeight.BOLD:
-            width += len(self.Command.BOLD)
+            width += len(self.Command.BOLD) + CURLY_BRACES_LEN
 
-        if style.font_style == FontStyle.ITALIC:
-            width += len(self.Command.ITALIC)
+        if style.font_style != FontStyle.NORMAL:
+            width += 3 + CURLY_BRACES_LEN
 
         return width
 
@@ -130,19 +132,23 @@ class LatexStyler(TextStyler):
             return value
 
         font_size = self.get_font_size(style)
-        item_list = []
+        commands = []
 
         if font_size:
-            item_list.append(font_size)
+            commands.append(font_size)
 
         if style.font_weight == FontWeight.BOLD:
-            item_list.append(self.Command.BOLD)
+            commands.append(self.Command.BOLD)
 
         if style.font_style == FontStyle.ITALIC:
-            item_list.append(self.Command.ITALIC)
+            commands.append(self.Command.ITALIC)
+        elif style.font_style == FontStyle.TYPEWRITER:
+            commands.append(self.Command.TYPEWRITER)
 
-        item_list.append(value)
-        return " ".join(item_list)
+        for cmd in commands:
+            value = cmd + "{" + value + "}"
+
+        return value
 
     def _get_font_size_map(self) -> Dict[FontSize, str]:
         return {
