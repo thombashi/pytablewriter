@@ -110,6 +110,8 @@ class LatexStyler(TextStyler):
         BOLD = r"\bf"
         ITALIC = r"\it"
         TYPEWRITER = r"\tt"
+        UNDERLINE = r"\underline"
+        STRIKEOUT = r"\sout"
 
     def get_additional_char_width(self, style: Style) -> int:
         width = 0
@@ -144,6 +146,11 @@ class LatexStyler(TextStyler):
             commands.append(self.Command.ITALIC)
         elif style.font_style == FontStyle.TYPEWRITER:
             commands.append(self.Command.TYPEWRITER)
+
+        if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
+            commands.append(self.Command.STRIKEOUT)
+        elif style.decoration_line == DecorationLine.UNDERLINE:
+            commands.append(self.Command.UNDERLINE)
 
         for cmd in commands:
             value = cmd + "{" + value + "}"

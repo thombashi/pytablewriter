@@ -152,3 +152,26 @@ class Test_LatexMatrixWriter_write_table:
         print_test_result(expected=expected, actual=out)
         assert regexp_ansi_escape.search(out)
         assert strip_ansi_escape(out) == expected
+
+    def test_normal_decorator_line(self):
+        writer = table_writer_class(
+            enable_ansi_escape=False,
+            column_styles=[
+                Style(decoration_line=DecorationLine.UNDERLINE),
+                Style(decoration_line=DecorationLine.STRIKE),
+            ],
+            headers=["underline", "strike"],
+            value_matrix=[
+                ["a", 1],
+            ],
+            flavor="gfm",
+        )
+        out = writer.dumps()
+        expected = r"""\begin{equation}
+    \left( \begin{array}{lr}
+        \underline{a} & \sout{1} \\
+    \end{array} \right)
+\end{equation}
+"""
+        print_test_result(expected=expected, actual=out)
+        assert strip_ansi_escape(out) == expected
