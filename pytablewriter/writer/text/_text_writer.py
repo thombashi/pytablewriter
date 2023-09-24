@@ -207,7 +207,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
                     class ColSeparatorStyleFilterFunc(Protocol):
                         def __call__(
-                            self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Dict[str, Any]
+                            self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Any
                         ) -> Optional[Style]:
                             ...
 

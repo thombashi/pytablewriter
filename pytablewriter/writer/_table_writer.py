@@ -466,7 +466,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
                 .. code-block:: python
 
                     class StyleFilterFunc(Protocol):
-                        def __call__(self, cell: Cell, **kwargs: Dict[str, Any]) -> Optional[Style]:
+                        def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
                             ...
 
                 If more than one style filter function is added to the writer,

@@ -18,13 +18,13 @@ KNOWN_PLUGINS = ("pytablewriter_altrow_theme",)
 
 
 class StyleFilterFunc(Protocol):
-    def __call__(self, cell: Cell, **kwargs: Dict[str, Any]) -> Optional[Style]:
+    def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
         ...
 
 
 class ColSeparatorStyleFilterFunc(Protocol):
     def __call__(
-        self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Dict[str, Any]
+        self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Any
     ) -> Optional[Style]:
         ...
 
