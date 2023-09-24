@@ -1,0 +1,27 @@
+If you set ``flavor`` keyword argument of ``MarkdownTableWriter`` class to ``"github"`` or ``"gfm"``, the writer will output markdown tables with GitHub flavor.
+GFM can apply some additional styles to tables such as ``fg_color`` (text color).
+
+:Sample Code:
+    .. code-block:: python
+        :caption: Write a Markdown table with GitHub flavor
+
+            from pytablewriter import MarkdownTableWriter
+            from pytablewriter.style import Style
+
+            writer = MarkdownTableWriter(
+                column_styles=[
+                    Style(fg_color="red"),
+                    Style(fg_color="green", decoration_line="underline"),
+                ],
+                headers=["A", "B"],
+                value_matrix=[
+                    ["abc", 1],
+                    ["efg", 2],
+                ],
+                margin=1,
+                flavor="github",
+                enable_ansi_escape=False,
+            )
+            writer.write_table()
+
+Rendered results can be found at `here <https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/output/markdown/gfm.md>`__

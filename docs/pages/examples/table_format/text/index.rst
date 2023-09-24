@@ -9,7 +9,7 @@ Text formats
    ltsv
    html
    json
-   markdown
+   markdown/markdown
    mediawiki
    rst/index
    sourcecode/index

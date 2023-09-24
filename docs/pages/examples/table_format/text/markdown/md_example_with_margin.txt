@@ -1,12 +1,12 @@
 :Sample Code:
     .. code-block:: python
-        :caption: Write a Markdown table with a margin
+        :caption: Write a Markdown table with margins
 
         from pytablewriter import MarkdownTableWriter
 
         def main():
             writer = MarkdownTableWriter(
-                table_name="write an example with a margin",
+                table_name="write a table with margins",
                 headers=["int", "float", "str", "bool", "mix", "time"],
                 value_matrix=[
                     [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
@@ -24,7 +24,7 @@
 :Output:
     .. code-block:: none
 
-        # write an example with a margin
+        # write a table with margins
         | int | float | str  | bool  |   mix    |           time           |
         | --: | ----: | ---- | ----- | -------: | ------------------------ |
         |   0 |  0.10 | hoge | True  |        0 | 2017-01-01 03:04:05+0900 |

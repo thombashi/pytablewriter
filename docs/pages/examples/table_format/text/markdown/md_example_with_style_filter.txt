@@ -1,0 +1,49 @@
+You can apply styles to specific cells by using style filters.
+Style filters will be written as functions.
+Example of a style filter function are as follows:
+
+:Sample Code:
+    .. code-block:: python
+        :caption: Write a Markdown table with GitHub flavor
+
+            from typing import Any, Optional
+
+            from pytablewriter import MarkdownTableWriter
+            from pytablewriter.style import Cell, Style
+
+
+            def style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
+                if cell.is_header_row():
+                    return None
+
+                if cell.col == 0:
+                    return Style(font_weight="bold")
+
+                value = int(cell.value)
+
+                if value > 80:
+                    return Style(fg_color="red", font_weight="bold", decoration_line="underline")
+                elif value > 50:
+                    return Style(fg_color="yellow", font_weight="bold")
+                elif value > 20:
+                    return Style(fg_color="green")
+
+                return Style(fg_color="lightblue")
+
+
+            writer = MarkdownTableWriter(
+                table_name="style filter example",
+                headers=["Key", "Value 1", "Value 2"],
+                value_matrix=[
+                    ["A", 95, 40],
+                    ["B", 55, 5],
+                    ["C", 30, 85],
+                    ["D", 0, 69],
+                ],
+                flavor="github",
+                enable_ansi_escape=False,
+            )
+            writer.add_style_filter(style_filter)
+            writer.write_table()
+
+Rendered results can be found at `here <https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/output/markdown/style_filter.md>`__

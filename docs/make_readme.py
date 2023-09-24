@@ -25,12 +25,24 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.inc_indent_level()
 
     maker.write_chapter("Write a Markdown table")
-    maker.write_file(examples_root.joinpath("table_format", "text", "markdown_example.txt"))
+    maker.write_file(examples_root.joinpath("table_format", "text", "markdown", "md_example.txt"))
 
     with maker.indent():
-        maker.write_chapter("Write a Markdown table with a margin")
+        maker.write_chapter("Write a Markdown table with margins")
         maker.write_file(
-            examples_root.joinpath("table_format", "text", "markdown_example_with_margin.txt")
+            examples_root.joinpath("table_format", "text", "markdown", "md_example_with_margin.txt")
+        )
+
+        maker.write_chapter("Write a GitHub Flavored Markdown (GFM) table")
+        maker.write_file(
+            examples_root.joinpath("table_format", "text", "markdown", "md_example_with_flavor.txt")
+        )
+
+        maker.write_chapter("Apply styles to GFM table with programmatically")
+        maker.write_file(
+            examples_root.joinpath(
+                "table_format", "text", "markdown", "md_example_with_style_filter.txt"
+            )
         )
 
     with maker.indent():
