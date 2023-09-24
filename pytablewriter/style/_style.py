@@ -297,12 +297,14 @@ class Style:
             self.__font_style = normalize_enum(font_style, FontStyle, default=FontStyle.NORMAL)
         elif initialize:
             self.__font_style = FontStyle.NORMAL
+        self.__validate_attr("font_style", FontStyle)
 
         font_weight = kwargs.get("font_weight")
         if font_weight:
             self.__font_weight = normalize_enum(font_weight, FontWeight, default=FontWeight.NORMAL)
         elif initialize:
             self.__font_weight = FontWeight.NORMAL
+        self.__validate_attr("font_weight", FontWeight)
 
     def __update_align(self, initialize: bool, **kwargs: Any) -> None:
         align = kwargs.get("align")
@@ -310,12 +312,14 @@ class Style:
             self.__align = normalize_enum(align, Align, default=Align.AUTO)
         elif initialize:
             self.__align = Align.AUTO
+        self.__validate_attr("align", Align)
 
         valign = kwargs.get("vertical_align")
         if valign:
             self.__valign = normalize_enum(valign, VerticalAlign, default=VerticalAlign.BASELINE)
         elif initialize:
             self.__valign = VerticalAlign.BASELINE
+        self.__validate_attr("vertical_align", VerticalAlign)
 
     def __update_misc(self, initialize: bool, **kwargs: Any) -> None:
         padding = kwargs.get("padding")
@@ -331,6 +335,7 @@ class Style:
             )
         elif initialize:
             self.__decoration_line = DecorationLine.NONE
+        self.__validate_attr("decoration_line", DecorationLine)
 
         thousand_separator = kwargs.get("thousand_separator")
         if thousand_separator:
