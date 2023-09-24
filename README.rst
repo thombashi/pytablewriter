@@ -159,8 +159,8 @@ Write a Markdown table
 
        Rendered markdown at GitHub
 
-Write a Markdown table with a margin
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Write a Markdown table with margins
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 :Sample Code:
     .. code-block:: python
 
@@ -168,7 +168,7 @@ Write a Markdown table with a margin
 
         def main():
             writer = MarkdownTableWriter(
-                table_name="write an example with a margin",
+                table_name="write a table with margins",
                 headers=["int", "float", "str", "bool", "mix", "time"],
                 value_matrix=[
                     [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
@@ -186,7 +186,7 @@ Write a Markdown table with a margin
 :Output:
     .. code-block::
 
-        # write an example with a margin
+        # write a table with margins
         | int | float | str  | bool  |   mix    |           time           |
         | --: | ----: | ---- | ----- | -------: | ------------------------ |
         |   0 |  0.10 | hoge | True  |        0 | 2017-01-01 03:04:05+0900 |
@@ -195,6 +195,86 @@ Write a Markdown table with a margin
         | -10 | -9.90 |      | False |      NaN | 2017-01-01 00:00:00+0900 |
 
 ``margin`` attribute can be available for all of the text format writer classes.
+
+Write a GitHub Flavored Markdown (GFM) table
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you set ``flavor`` keyword argument of ``MarkdownTableWriter`` class to ``"github"`` or ``"gfm"``, the writer will output markdown tables with GitHub flavor.
+GFM can apply some additional styles to tables such as ``fg_color`` (text color).
+
+:Sample Code:
+    .. code-block:: python
+
+            from pytablewriter import MarkdownTableWriter
+            from pytablewriter.style import Style
+
+            writer = MarkdownTableWriter(
+                column_styles=[
+                    Style(fg_color="red"),
+                    Style(fg_color="green", decoration_line="underline"),
+                ],
+                headers=["A", "B"],
+                value_matrix=[
+                    ["abc", 1],
+                    ["efg", 2],
+                ],
+                margin=1,
+                flavor="github",
+                enable_ansi_escape=False,
+            )
+            writer.write_table()
+
+Rendered results can be found at `here <https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/output/markdown/gfm.md>`__
+
+Apply styles to GFM table with programmatically
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can apply styles to specific cells by using style filters.
+Style filters will be written as functions.
+Example of a style filter function are as follows:
+
+:Sample Code:
+    .. code-block:: python
+
+            from typing import Any, Optional
+
+            from pytablewriter import MarkdownTableWriter
+            from pytablewriter.style import Cell, Style
+
+
+            def style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
+                if cell.is_header_row():
+                    return None
+
+                if cell.col == 0:
+                    return Style(font_weight="bold")
+
+                value = int(cell.value)
+
+                if value > 80:
+                    return Style(fg_color="red", font_weight="bold", decoration_line="underline")
+                elif value > 50:
+                    return Style(fg_color="yellow", font_weight="bold")
+                elif value > 20:
+                    return Style(fg_color="green")
+
+                return Style(fg_color="lightblue")
+
+
+            writer = MarkdownTableWriter(
+                table_name="style filter example",
+                headers=["Key", "Value 1", "Value 2"],
+                value_matrix=[
+                    ["A", 95, 40],
+                    ["B", 55, 5],
+                    ["C", 30, 85],
+                    ["D", 0, 69],
+                ],
+                flavor="github",
+                enable_ansi_escape=False,
+            )
+            writer.add_style_filter(style_filter)
+            writer.write_table()
+
+Rendered results can be found at `here <https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/output/markdown/style_filter.md>`__
 
 Write a Markdown table to a stream or a file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
