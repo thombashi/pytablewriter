@@ -14,6 +14,7 @@ class FontSize(Enum):
 class FontStyle(Enum):
     NORMAL = "normal"
     ITALIC = "italic"
+    TYPEWRITER = "typewriter"
 
 
 @unique
