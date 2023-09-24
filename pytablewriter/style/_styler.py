@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Dict, Optional, cast
+import re
+from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from dataproperty import Align
 from tcolorpy import Color, tcolor
@@ -217,6 +218,11 @@ class GFMarkdownStyler(MarkdownStyler):
         if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
             width += 4
 
+        if self.__use_latex(style):
+            dummy_value = "d"
+            value = self.apply(dummy_value, style)
+            width += len(value) - len(dummy_value)
+
         return width
 
     def apply(self, value: Any, style: Style) -> str:
@@ -224,8 +230,61 @@ class GFMarkdownStyler(MarkdownStyler):
         if not value:
             return value
 
+        use_latex = self.__use_latex(style)
+
+        if use_latex:
+            value = self.__escape_for_latex(value)
+            value = LatexStyler.Command.TYPEWRITER + "{" + value + "}"
+
+        value = self.__apply_decoration_line(value, style)
+
+        if use_latex:
+            value = r"$$" + self.__apply_color(value, style) + r"$$"
+
+        return value
+
+    def __use_latex(self, style: Style) -> bool:
+        return style.fg_color is not None
+
+    def __escape_for_latex(self, value: str) -> str:
+        value = re.sub(r"[\s_]", r"\\\\\g<0>", value)
+        return value.replace("-", r"\text{-}")
+
+    def __apply_decoration_line(self, value: str, style: Style) -> str:
+        use_latex = self.__use_latex(style)
+
         if style.decoration_line in (DecorationLine.STRIKE, DecorationLine.LINE_THROUGH):
-            value = f"~~{value}~~"
+            if use_latex:
+                value = r"\enclose{horizontalstrike}{" + value + "}"
+            else:
+                value = f"~~{value}~~"
+        elif style.decoration_line == DecorationLine.UNDERLINE:
+            if use_latex:
+                value = r"\underline{" + value + "}"
+
+        return value
+
+    def __apply_color(self, value: str, style: Style) -> str:
+        if not style.fg_color:
+            return value
+
+        return _to_latex_rgb(style.fg_color, value)
+
+    def _apply_font_weight(self, value: Any, style: Style) -> str:
+        if not self.__use_latex(style):
+            return super()._apply_font_weight(value, style)
+
+        if style.font_weight == FontWeight.BOLD:
+            value = LatexStyler.Command.BOLD + "{" + value + "}"
+
+        return value
+
+    def _apply_font_style(self, value: Any, style: Style) -> str:
+        if not self.__use_latex(style):
+            return super()._apply_font_style(value, style)
+
+        if style.font_style == FontStyle.ITALIC:
+            value = LatexStyler.Command.ITALIC + "{" + value + "}"
 
         return value
 

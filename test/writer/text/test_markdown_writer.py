@@ -9,10 +9,10 @@ from typing import Optional
 
 import pytest
 from tabledata import TableData
-from tcolorpy import tcolor
+from tcolorpy import Color, tcolor
 
 import pytablewriter as ptw
-from pytablewriter.style import Align, Cell, FontSize, Style, ThousandSeparator
+from pytablewriter.style import Align, Cell, DecorationLine, FontSize, Style, ThousandSeparator
 from pytablewriter.typehint import Integer, RealNumber, String
 
 from ..._common import print_test_result
@@ -1255,6 +1255,32 @@ class Test_MarkdownTableWriter_write_table:
         assert output_gfm == expected_gfm
         assert output_github == expected_gfm
         assert output_gfm != output_commonmark
+
+    def test_normal_flavor_gfm_style_color(self):
+        writer = table_writer_class(
+            enable_ansi_escape=False,
+            column_styles=[
+                Style(fg_color="red"),
+                Style(fg_color=Color((0, 255, 0)), decoration_line=DecorationLine.LINE_THROUGH),
+                Style(fg_color="blue", decoration_line=DecorationLine.UNDERLINE),
+            ],
+            headers=["red", "green", "blue"],
+            value_matrix=[
+                ["abc", 1, "foo"],
+                ["efg", 2, "foo bar"],
+                ["xyz", 3, "foo_bar hoge-test/ab"],
+            ],
+            flavor="github",
+        )
+        out = writer.dumps()
+        expected = r"""|               red               |                              green                              |                             blue                             |
+|---------------------------------|----------------------------------------------------------------:|--------------------------------------------------------------|
+|$$\textcolor{#cd3131}{\tt{abc}}$$|      $$\textcolor{#00ff00}{\enclose{horizontalstrike}{\tt{1}}}$$|$$\textcolor{#2472c8}{\underline{\tt{foo}}}$$                 |
+|$$\textcolor{#cd3131}{\tt{efg}}$$|      $$\textcolor{#00ff00}{\enclose{horizontalstrike}{\tt{2}}}$$|$$\textcolor{#2472c8}{\underline{\tt{foo\\ bar}}}$$           |
+|$$\textcolor{#cd3131}{\tt{xyz}}$$|      $$\textcolor{#00ff00}{\enclose{horizontalstrike}{\tt{3}}}$$|$$\textcolor{#2472c8}{\underline{\tt{foo\\_bar\\ hoge\text{-}test/ab}}}$$|
+"""
+        print_test_result(expected=expected, actual=out)
+        assert strip_ansi_escape(out) == expected
 
     def test_normal_flavor_kramdown(self):
         writer = table_writer_class(
