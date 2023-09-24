@@ -118,19 +118,10 @@ class LatexStyler(TextStyler):
         STRIKEOUT = r"\sout"
 
     def get_additional_char_width(self, style: Style) -> int:
-        width = 0
-        CURLY_BRACES_LEN = 2
+        dummy_value = "d"
+        applied_value = self.apply(dummy_value, style)
 
-        if self.get_font_size(style):
-            width += len(cast(str, self.get_font_size(style))) + CURLY_BRACES_LEN
-
-        if style.font_weight == FontWeight.BOLD:
-            width += len(self.Command.BOLD) + CURLY_BRACES_LEN
-
-        if style.font_style != FontStyle.NORMAL:
-            width += 3 + CURLY_BRACES_LEN
-
-        return width
+        return len(applied_value) - len(dummy_value)
 
     def apply(self, value: Any, style: Style) -> str:
         value = super().apply(value, style)

@@ -194,7 +194,7 @@ class Test_LatexMatrixWriter_write_table:
         out = writer.dumps()
         expected = r"""\begin{equation}
     \left( \begin{array}{lr}
-        \textcolor{#cd3131}{a} & \textcolor{#00ff00}{1} \\
+        \textcolor{#cd3131}{a}   & \textcolor{#00ff00}{1} \\
         \textcolor{#cd3131}{efg} & \textcolor{#00ff00}{2} \\
     \end{array} \right)
 \end{equation}
