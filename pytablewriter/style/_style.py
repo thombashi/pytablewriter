@@ -1,3 +1,4 @@
+import warnings
 from enum import Enum, unique
 from typing import Any, Dict, Optional, Union, cast
 
@@ -211,10 +212,14 @@ class Style:
         self.__padding = value
 
     def __init__(self, **kwargs: Any) -> None:
-        self.__update_color(initialize=True, **kwargs)
-        self.__update_align(initialize=True, **kwargs)
-        self.__update_font(initialize=True, **kwargs)
-        self.__update_misc(initialize=True, **kwargs)
+        self.__kwargs = kwargs
+        self.__update_color(initialize=True)
+        self.__update_align(initialize=True)
+        self.__update_font(initialize=True)
+        self.__update_misc(initialize=True)
+
+        if self.__kwargs:
+            warnings.warn(f"unknown style attributes found: {self.__kwargs.keys()}", UserWarning)
 
     def __repr__(self) -> str:
         items = []
@@ -264,71 +269,78 @@ class Style:
 
     def update(self, **kwargs: Any) -> None:
         """Update specified style attributes."""
-        self.__update_color(initialize=False, **kwargs)
-        self.__update_align(initialize=False, **kwargs)
-        self.__update_font(initialize=False, **kwargs)
-        self.__update_misc(initialize=False, **kwargs)
+        self.__kwargs = kwargs
+        self.__update_color(initialize=False)
+        self.__update_align(initialize=False)
+        self.__update_font(initialize=False)
+        self.__update_misc(initialize=False)
 
-    def __update_color(self, initialize: bool, **kwargs: Any) -> None:
-        fg_color = kwargs.get("color") or kwargs.get("fg_color")
+        if self.__kwargs:
+            warnings.warn(f"unknown style attributes found: {self.__kwargs.keys()}", UserWarning)
+
+    def __update_color(self, initialize: bool) -> None:
+        fg_color = self.__kwargs.pop("color", None) or self.__kwargs.pop("fg_color", None)
         if fg_color:
             self.__fg_color: Optional[Color] = Color(fg_color)
         elif initialize:
             self.__fg_color = None
 
-        bg_color = kwargs.get("bg_color")
+        bg_color = self.__kwargs.pop("bg_color", None)
         if bg_color:
             self.__bg_color: Optional[Color] = Color(bg_color)
         elif initialize:
             self.__bg_color = None
 
-    def __update_font(self, initialize: bool, **kwargs: Any) -> None:
-        font_size = kwargs.get("font_size")
+    def __update_font(self, initialize: bool) -> None:
+        font_size = self.__kwargs.pop("font_size", None)
         if font_size:
             self.__font_size = normalize_enum(
-                kwargs.get("font_size"), FontSize, validate=False, default=FontSize.NONE
+                font_size,
+                FontSize,
+                validate=False,
+                default=FontSize.NONE,
             )
         elif initialize:
             self.__font_size = FontSize.NONE
         self.__validate_attr("font_size", (FontSize, str))
 
-        font_style = kwargs.get("font_style")
+        font_style = self.__kwargs.pop("font_style", None)
         if font_style:
             self.__font_style = normalize_enum(font_style, FontStyle, default=FontStyle.NORMAL)
         elif initialize:
             self.__font_style = FontStyle.NORMAL
         self.__validate_attr("font_style", FontStyle)
 
-        font_weight = kwargs.get("font_weight")
+        font_weight = self.__kwargs.pop("font_weight", None)
         if font_weight:
             self.__font_weight = normalize_enum(font_weight, FontWeight, default=FontWeight.NORMAL)
         elif initialize:
             self.__font_weight = FontWeight.NORMAL
         self.__validate_attr("font_weight", FontWeight)
 
-    def __update_align(self, initialize: bool, **kwargs: Any) -> None:
-        align = kwargs.get("align")
+    def __update_align(self, initialize: bool) -> None:
+        align = self.__kwargs.pop("align", None)
         if align:
             self.__align = normalize_enum(align, Align, default=Align.AUTO)
         elif initialize:
             self.__align = Align.AUTO
         self.__validate_attr("align", Align)
 
-        valign = kwargs.get("vertical_align")
+        valign = self.__kwargs.pop("vertical_align", None)
         if valign:
             self.__valign = normalize_enum(valign, VerticalAlign, default=VerticalAlign.BASELINE)
         elif initialize:
             self.__valign = VerticalAlign.BASELINE
         self.__validate_attr("vertical_align", VerticalAlign)
 
-    def __update_misc(self, initialize: bool, **kwargs: Any) -> None:
-        padding = kwargs.get("padding")
+    def __update_misc(self, initialize: bool) -> None:
+        padding = self.__kwargs.pop("padding", None)
         if padding is not None:
             self.__padding = padding
         elif initialize:
             self.__padding = None
 
-        decoration_line = kwargs.get("decoration_line")
+        decoration_line = self.__kwargs.pop("decoration_line", None)
         if decoration_line:
             self.__decoration_line = normalize_enum(
                 decoration_line, DecorationLine, default=DecorationLine.NONE
@@ -337,7 +349,7 @@ class Style:
             self.__decoration_line = DecorationLine.NONE
         self.__validate_attr("decoration_line", DecorationLine)
 
-        thousand_separator = kwargs.get("thousand_separator")
+        thousand_separator = self.__kwargs.pop("thousand_separator", None)
         if thousand_separator:
             self.__thousand_separator = _normalize_thousand_separator(
                 normalize_enum(
