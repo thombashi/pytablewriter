@@ -87,6 +87,7 @@ setuptools.setup(
         "Excel",
         "JavaScript",
         "JSON",
+        "LaTeX",
         "LTSV",
         "Markdown",
         "MediaWiki",
