@@ -5,9 +5,10 @@
 import collections
 
 import pytest
+from tcolorpy import Color
 
 import pytablewriter as ptw
-from pytablewriter.style import Style
+from pytablewriter.style import DecorationLine, Style
 
 from ..._common import print_test_result
 from ...data import (
@@ -170,6 +171,31 @@ class Test_LatexMatrixWriter_write_table:
         expected = r"""\begin{equation}
     \left( \begin{array}{lr}
         \underline{a} & \sout{1} \\
+    \end{array} \right)
+\end{equation}
+"""
+        print_test_result(expected=expected, actual=out)
+        assert strip_ansi_escape(out) == expected
+
+    def test_normal_style_fg_color(self):
+        writer = table_writer_class(
+            enable_ansi_escape=False,
+            column_styles=[
+                Style(fg_color="red"),
+                Style(fg_color=Color((0, 255, 0))),
+            ],
+            headers=["red", "green"],
+            value_matrix=[
+                ["a", 1],
+                ["efg", 2],
+            ],
+            flavor="gfm",
+        )
+        out = writer.dumps()
+        expected = r"""\begin{equation}
+    \left( \begin{array}{lr}
+        \textcolor{#cd3131}{a} & \textcolor{#00ff00}{1} \\
+        \textcolor{#cd3131}{efg} & \textcolor{#00ff00}{2} \\
     \end{array} \right)
 \end{equation}
 """

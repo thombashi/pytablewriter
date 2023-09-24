@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Any, Dict, Optional, cast
 
 from dataproperty import Align
-from tcolorpy import tcolor
+from tcolorpy import Color, tcolor
 
 from ._font import FontSize, FontStyle, FontWeight
 from ._style import DecorationLine, Style, ThousandSeparator
@@ -22,6 +22,10 @@ _align_char_mapping: Dict[Align, str] = {
 
 def get_align_char(align: Align) -> str:
     return _align_char_mapping[align]
+
+
+def _to_latex_rgb(color: Color, value: str) -> str:
+    return r"\textcolor{" + color.color_code + "}{" + value + "}"
 
 
 class AbstractStyler(StylerInterface):
@@ -154,6 +158,16 @@ class LatexStyler(TextStyler):
 
         for cmd in commands:
             value = cmd + "{" + value + "}"
+
+        value = self.__apply_color(value, style)
+
+        return value
+
+    def __apply_color(self, value: str, style: Style) -> str:
+        if not style.fg_color:
+            return value
+
+        value = _to_latex_rgb(style.fg_color, value)
 
         return value
 
