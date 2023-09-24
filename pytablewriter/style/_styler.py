@@ -188,9 +188,18 @@ class MarkdownStyler(TextStyler):
         if not value:
             return value
 
+        value = self._apply_font_weight(value, style)
+        value = self._apply_font_style(value, style)
+
+        return value
+
+    def _apply_font_weight(self, value: Any, style: Style) -> str:
         if style.font_weight == FontWeight.BOLD:
             value = f"**{value}**"
 
+        return value
+
+    def _apply_font_style(self, value: Any, style: Style) -> str:
         if style.font_style == FontStyle.ITALIC:
             value = f"_{value}_"
 
