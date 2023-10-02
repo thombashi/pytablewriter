@@ -356,7 +356,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         Defaults to |None|.
 
-        :Examples:
+        Examples:
             - :ref:`example-type-hint-js`
             - :ref:`example-type-hint-python`
         """
@@ -674,10 +674,15 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         :py:attr:`~.table_name` also be set if the CSV data source is a file.
         In that case, :py:attr:`~.table_name` is as same as the filename.
 
-        :param str csv_source:
-            Input CSV data source can be designated CSV text or a CSV file path.
+        Args:
+            csv_source (str):
+                Input CSV data source can be designated CSV text or a CSV file path.
 
-        :Examples:
+            delimiter (str):
+                Delimiter character of the CSV data source.
+                Defaults to ``,``.
+
+        Examples:
             :ref:`example-from-csv`
 
         :Dependency Packages:

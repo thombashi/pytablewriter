@@ -326,7 +326,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         Write a table to the current opened worksheet.
 
         :raises IOError: If failed to write data to the worksheet.
-        :Examples:
+
+        Examples:
             :ref:`example-excel-table-writer`
 
         .. note::
