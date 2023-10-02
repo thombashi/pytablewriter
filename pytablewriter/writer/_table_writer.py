@@ -546,7 +546,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         """
 
         try:
-            fetched_theme = fetch_theme(f"pytablewriter_{theme.strip().lower()}_theme")
+            fetched_theme = fetch_theme(theme.strip())
         except RuntimeError as e:
             warnings.warn(f"{e}", UserWarning)
             return
