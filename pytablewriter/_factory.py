@@ -4,7 +4,7 @@
 
 import os
 from itertools import chain
-from typing import List
+from typing import Any, List
 
 import typepy
 
@@ -20,9 +20,7 @@ class TableWriterFactory:
     """
 
     @classmethod
-    def create_from_file_extension(
-        cls, file_extension: str, **kwargs: AbstractTableWriter
-    ) -> AbstractTableWriter:
+    def create_from_file_extension(cls, file_extension: str, **kwargs: Any) -> AbstractTableWriter:
         """
         Create a table writer class instance from a file extension.
         Supported file extensions are as follows:
@@ -98,9 +96,7 @@ class TableWriterFactory:
         )
 
     @classmethod
-    def create_from_format_name(
-        cls, format_name: str, **kwargs: AbstractTableWriter
-    ) -> AbstractTableWriter:
+    def create_from_format_name(cls, format_name: str, **kwargs: Any) -> AbstractTableWriter:
         """
         Create a table writer class instance from a format name.
         Supported file format names are as follows:
