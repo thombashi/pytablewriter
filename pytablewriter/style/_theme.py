@@ -13,8 +13,9 @@ except ImportError:
     # typing.Protocol is only available starting from Python 3.8.
     from .._typing import Protocol  # type: ignore
 
-
-KNOWN_PLUGINS = ("pytablewriter_altrow_theme",)
+PLUGIN_NAME_PEFIX = "pytablewriter"
+PLUGIN_NAME_SUFFIX = "theme"
+KNOWN_PLUGINS = (f"{PLUGIN_NAME_PEFIX}_altrow_{PLUGIN_NAME_SUFFIX}",)
 
 
 class StyleFilterFunc(Protocol):
@@ -39,7 +40,10 @@ def list_themes() -> Sequence[str]:
 
 
 def load_ptw_plugins() -> Dict[str, Theme]:
-    plugin_regexp = re.compile("^pytablewriter_.+_theme", re.IGNORECASE)
+    plugin_regexp = re.compile(
+        rf"^{PLUGIN_NAME_PEFIX}[_-].+[_-]{PLUGIN_NAME_SUFFIX}", re.IGNORECASE
+    )
+
     discovered_plugins = {
         name: importlib.import_module(name)
         for _finder, name, _ispkg in pkgutil.iter_modules()
@@ -61,8 +65,16 @@ def load_ptw_plugins() -> Dict[str, Theme]:
 
 def fetch_theme(plugin_name: str) -> Theme:
     loaded_themes = load_ptw_plugins()
+    theme_regexp = re.compile(
+        rf"^{PLUGIN_NAME_PEFIX}[_-]{plugin_name}[_-]{PLUGIN_NAME_SUFFIX}", re.IGNORECASE
+    )
+    matched_theme = None
 
-    if plugin_name not in loaded_themes:
+    for loaded_theme in loaded_themes:
+        if theme_regexp.search(loaded_theme):
+            matched_theme = loaded_theme
+            break
+    else:
         err_msgs = [f"{plugin_name} theme is not installed."]
 
         if plugin_name in KNOWN_PLUGINS:
@@ -70,4 +82,4 @@ def fetch_theme(plugin_name: str) -> Theme:
 
         raise RuntimeError(" ".join(err_msgs))
 
-    return loaded_themes[plugin_name]
+    return loaded_themes[matched_theme]
