@@ -15,7 +15,10 @@ except ImportError:
 
 PLUGIN_NAME_PEFIX = "pytablewriter"
 PLUGIN_NAME_SUFFIX = "theme"
-KNOWN_PLUGINS = (f"{PLUGIN_NAME_PEFIX}_altrow_{PLUGIN_NAME_SUFFIX}",)
+KNOWN_PLUGINS = (
+    f"{PLUGIN_NAME_PEFIX}_altrow_{PLUGIN_NAME_SUFFIX}",
+    f"{PLUGIN_NAME_PEFIX}_altcol_{PLUGIN_NAME_SUFFIX}",
+)
 
 
 class StyleFilterFunc(Protocol):

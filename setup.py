@@ -52,7 +52,10 @@ from_requires = ["pytablereader>=0.31.3,<2"]
 html_requires = ["dominate>=2.1.5,<3"]
 logging_requires = ["loguru>=0.4.1,<1"]
 sqlite_requires = ["SimpleSQLite>=1.3.2,<2"]
-theme_requires = ["pytablewriter-altrow-theme>=0.0.2,<1"]
+theme_requires = [
+    "pytablewriter-altrow-theme>=0.1.1,<1",
+    "pytablewriter-altcol-theme>=0.0.1,<1",
+]
 toml_requires = ["toml>=0.9.3,<1"]
 yaml_requires = ["PyYAML>=3.11,<7"]
 optional_requires = ["simplejson>=3.8.1,<4"]
