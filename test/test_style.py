@@ -172,7 +172,7 @@ class Test_Style_eq:
             [FontSize.TINY, None, None, TypeError],
             [None, 12, None, TypeError],
             [None, Align.LEFT, None, TypeError],
-            [None, None, "invalid", TypeError],
+            [None, None, "invalid", ValueError],
         ],
     )
     def test_exception(self, align, font_size, thousand_separator, expected):

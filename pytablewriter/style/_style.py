@@ -1,6 +1,6 @@
 import warnings
 from enum import Enum, unique
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, Optional, Union
 
 from dataproperty import Align
 from tcolorpy import Color
@@ -57,9 +57,18 @@ def _normalize_thousand_separator(value: Union[str, ThousandSeparator]) -> Thous
     if isinstance(value, ThousandSeparator):
         return value
 
+    thousand_separator = normalize_enum(
+        value,
+        ThousandSeparator,
+        default=ThousandSeparator.NONE,
+        validate=False,
+    )
+    if isinstance(thousand_separator, ThousandSeparator):
+        return thousand_separator
+
     norm_value = _s_to_ts.get(value)
     if norm_value is None:
-        return cast(ThousandSeparator, value)
+        raise ValueError(f"unknown thousand separator: {value}")
 
     return norm_value
 
@@ -351,14 +360,7 @@ class Style:
 
         thousand_separator = self.__kwargs.pop("thousand_separator", None)
         if thousand_separator:
-            self.__thousand_separator = _normalize_thousand_separator(
-                normalize_enum(
-                    thousand_separator,
-                    ThousandSeparator,
-                    default=ThousandSeparator.NONE,
-                    validate=False,
-                )
-            )
+            self.__thousand_separator = _normalize_thousand_separator(thousand_separator)
         elif initialize:
             self.__thousand_separator = ThousandSeparator.NONE
         self.__validate_attr("thousand_separator", ThousandSeparator)
