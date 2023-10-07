@@ -19,7 +19,7 @@ jobs:
   build-package:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-build
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-build-pkg
       cancel-in-progress: true
     timeout-minutes: 20
     container:
@@ -33,7 +33,7 @@ jobs:
   build-docs:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-docs
+      group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-build-docs
       cancel-in-progress: true
     timeout-minutes: 20
     container:
