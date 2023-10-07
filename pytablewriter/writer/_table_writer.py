@@ -813,11 +813,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.type_hints = writer.type_hints
         self.column_styles = writer.column_styles
         self._style_filters = writer._style_filters
+        self.margin = writer.margin
 
         self._table_headers = writer._table_headers
         self._table_value_dp_matrix = writer._table_value_dp_matrix
         self._column_dp_list = writer._column_dp_list
         self._table_value_matrix = writer._table_value_matrix
+
+        self.stream = writer.stream
 
         self._is_complete_table_dp_preprocess = writer._is_complete_table_dp_preprocess
         self._is_complete_table_property_preprocess = writer._is_complete_table_property_preprocess
