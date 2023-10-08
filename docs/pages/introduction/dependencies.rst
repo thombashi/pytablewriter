@@ -21,5 +21,6 @@ Optional dependencies
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - ``theme`` extras
     - `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
+    - `pytablewriter-altcol-theme <https://github.com/thombashi/pytablewriter-altcol-theme>`__
 - ``toml`` extras
     - `toml <https://github.com/uiri/toml>`__

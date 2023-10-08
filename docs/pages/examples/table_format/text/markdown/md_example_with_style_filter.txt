@@ -1,6 +1,6 @@
 You can apply styles to specific cells by using style filters.
-Style filters will be written as functions.
-Example of a style filter function are as follows:
+Style filters will be written as Python functions.
+Examples of a style filter function and how you apply it are as follows:
 
 :Sample Code:
     .. code-block:: python

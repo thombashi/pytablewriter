@@ -5,13 +5,23 @@
 """
 
 import sys
+from typing import Final
 
 from path import Path
 from readmemaker import ReadmeMaker
 
 
-PROJECT_NAME = "pytablewriter"
-OUTPUT_DIR = ".."
+PROJECT_NAME: Final = "pytablewriter"
+OUTPUT_DIR: Final = ".."
+
+
+class Chapter:
+    STYLE_FILTER: Final = "Style filter"
+
+
+def make_internal_link(title: str, chapter: str) -> str:
+    link = chapter.replace(" ", "-").lower()
+    return f"`{title:s} <#{link:s}>`_"
 
 
 def write_examples(maker: ReadmeMaker) -> None:
@@ -39,10 +49,11 @@ def write_examples(maker: ReadmeMaker) -> None:
         )
 
         maker.write_chapter("Apply styles to GFM table with programmatically")
-        maker.write_file(
-            examples_root.joinpath(
-                "table_format", "text", "markdown", "md_example_with_style_filter.txt"
-            )
+        maker.write_lines(
+            [
+                "Applying style filters to GFM allows for more flexible style settings for cells.",
+                "See also the {}".format(make_internal_link("example", Chapter.STYLE_FILTER)),
+            ]
         )
 
     with maker.indent():
@@ -71,7 +82,7 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_chapter("Write a Markdown table from ``pandas.DataFrame`` instance")
     maker.write_file(examples_root.joinpath("datasource", "from_pandas_dataframe_example.txt"))
 
-    maker.write_chapter("Write a markdown table from space-separated values")
+    maker.write_chapter("Write a Markdown table from space-separated values")
     maker.write_file(examples_root.joinpath("datasource", "from_ssv_example.txt"))
 
     maker.set_indent_level(1)
@@ -84,7 +95,14 @@ def write_examples(maker: ReadmeMaker) -> None:
     maker.write_chapter("Column styles")
     maker.write_file(examples_root.joinpath("style", "column_style_example.txt"))
 
-    maker.write_chapter("Style filter")
+    maker.write_chapter(Chapter.STYLE_FILTER)
+    maker.write_file(
+        examples_root.joinpath(
+            "table_format", "text", "markdown", "md_example_with_style_filter.txt"
+        )
+    )
+
+    maker.write_chapter("Theme")
     maker.write_file(examples_root.joinpath("style", "theme.txt"))
 
     maker.set_indent_level(1)

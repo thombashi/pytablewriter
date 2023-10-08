@@ -1,10 +1,12 @@
+Themes consists of a set of style filters.
 The following command will install external predefined themes:
 
 ::
 
     pip install pytablewriter[theme]
 
-``theme`` argument of writer constructor or ``set_theme`` method can set"" predefined style filters.
+Themes can be set via the constructor of the writer classes or the ``set_theme`` method.
+The following is an example of setting the ``altrow`` theme via the constructor.
 ``altrow`` theme will be colored rows alternatively:
 
 :Sample Code:
@@ -26,5 +28,9 @@ The following command will install external predefined themes:
        :scale: 100%
        :alt: https://github.com/thombashi/pytablewriter-altrow-theme/blob/master/ss/ptw-altrow-theme_example_default.png
 
-Themes can be created as plugins like as follows:
-https://github.com/thombashi/pytablewriter-altrow-theme
+`[theme]` extras includes the following themes:
+
+- `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
+    - `Generated HTML table example <https://thombashi.github.io/pytablewriter-altrow-theme/example.html>`__
+- `pytablewriter-altcol-theme <https://github.com/thombashi/pytablewriter-altcol-theme>`__
+    - `Generated HTML table example <https://thombashi.github.io/pytablewriter-altcol-theme/example.html>`__

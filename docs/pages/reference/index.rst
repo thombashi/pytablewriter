@@ -9,4 +9,5 @@ Reference
    table_format
    style
    function
+   theme
    error
