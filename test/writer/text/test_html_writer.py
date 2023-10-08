@@ -460,31 +460,35 @@ class Test_HtmlTableWriter_write_table:
         assert out == expected
 
     def test_normal_write_css(self, capsys):
-        writer = table_writer_class()
-        writer.table_name = "Write HTML with CSS"
-        writer.headers = ["int"]
-        writer.value_matrix = [[1]]
+        writer = table_writer_class(
+            table_name="Write HTML with CSS",
+            headers=["int"],
+            value_matrix=[[1]],
+            margin=1,
+        )
         writer.write_table(write_css=True)
 
         expected = """\
 <style type="text/css">
     .Write-HTML-with-CSS-css thead th:nth-child(1) {
-        text-align: left;
+        text-align: center;
+        padding: 6px;
     }
     .Write-HTML-with-CSS-css tbody tr:nth-child(1) td:nth-child(1) {
         text-align: right;
+        padding: 6px;
     }
 </style>
 <table class="Write-HTML-with-CSS-css" id="WriteHTMLwithCSS">
     <caption>Write HTML with CSS</caption>
     <thead>
         <tr>
-            <th>int</th>
+            <th> int </th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>1</td>
+            <td> 1 </td>
         </tr>
     </tbody>
 </table>

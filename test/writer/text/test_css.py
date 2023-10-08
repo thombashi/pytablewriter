@@ -300,6 +300,29 @@ class Test_CssTableWriter_write_table:
 
         assert output == expected
 
+    def test_normal_margin(self):
+        writer = table_writer_class(
+            table_name="margin",
+            headers=["margin"],
+            value_matrix=[[None]],
+            margin=1,
+        )
+        expected = """\
+<style type="text/css">
+    .margin thead th:nth-child(1) {
+        text-align: center;
+        padding: 6px;
+    }
+    .margin tbody tr:nth-child(1) td:nth-child(1) {
+        text-align: left;
+        padding: 6px;
+    }
+</style>
+"""
+        out = writer.dumps(write_style_tag=True)
+        print_test_result(expected=expected, actual=out)
+        assert out == expected
+
     def test_normal_dumps(self):
         writer = table_writer_class()
         writer.table_name = "none value"

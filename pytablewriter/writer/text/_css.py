@@ -15,6 +15,7 @@ class CssTableWriter(IndentationTextTableWriter):
     """
 
     FORMAT_NAME = "css"
+    MARGIN_PIXEL = 6
 
     @property
     def format_name(self) -> str:
@@ -79,6 +80,9 @@ class CssTableWriter(IndentationTextTableWriter):
             css_tags.append("text-decoration-line: line-through")
         elif style.decoration_line == DecorationLine.UNDERLINE:
             css_tags.append("text-decoration-line: underline")
+
+        if self.margin > 0:
+            css_tags.append(f"padding: {self.margin * self.MARGIN_PIXEL}px")
 
         return css_tags
 
