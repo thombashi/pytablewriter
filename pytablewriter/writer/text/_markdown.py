@@ -6,6 +6,7 @@ import dataproperty as dp
 import typepy
 from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
+from pathvalidate import replace_symbol
 
 from ..._function import normalize_enum
 from ...error import EmptyTableDataError
@@ -24,6 +25,10 @@ class MarkdownFlavor(Enum):
 
 
 def normalize_md_flavor(flavor: Union[str, MarkdownFlavor, None]) -> MarkdownFlavor:
+    if isinstance(flavor, str):
+        flavor = replace_symbol(flavor.strip(), "_").upper()
+        flavor = flavor.replace("COMMONMARK", "COMMON_MARK")
+
     norm_flavor = normalize_enum(flavor, MarkdownFlavor, default=MarkdownFlavor.COMMON_MARK)
 
     if norm_flavor == MarkdownFlavor.GITHUB:
