@@ -631,7 +631,8 @@ Rendered results can be found at `here <https://github.com/thombashi/pytablewrit
 
 Theme
 ~~~~~~~
-Themes consists of a set of style filters.
+`Theme <https://pytablewriter.readthedocs.io/en/latest/pages/reference/theme.html#pytablewriter.style.Theme>`
+consists of a set of style filters.
 The following command will install external predefined themes:
 
 ::
