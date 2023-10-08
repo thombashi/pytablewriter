@@ -26,8 +26,9 @@ class MarkdownFlavor(Enum):
 
 def normalize_md_flavor(flavor: Union[str, MarkdownFlavor, None]) -> MarkdownFlavor:
     if isinstance(flavor, str):
-        flavor = replace_symbol(flavor.strip(), "_").upper()
-        flavor = flavor.replace("COMMONMARK", "COMMON_MARK")
+        flavor_str = replace_symbol(flavor.strip(), "_").upper()
+        flavor_str = flavor_str.replace("COMMONMARK", "COMMON_MARK")
+        flavor = flavor_str
 
     norm_flavor = normalize_enum(flavor, MarkdownFlavor, default=MarkdownFlavor.COMMON_MARK)
 
