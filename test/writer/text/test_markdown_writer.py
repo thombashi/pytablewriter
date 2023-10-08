@@ -14,6 +14,7 @@ from tcolorpy import Color, tcolor
 import pytablewriter as ptw
 from pytablewriter.style import Align, Cell, DecorationLine, FontSize, Style, ThousandSeparator
 from pytablewriter.typehint import Integer, RealNumber, String
+from pytablewriter.writer.text import MarkdownFlavor, normalize_md_flavor
 
 from ..._common import print_test_result
 from ...data import (
@@ -417,6 +418,29 @@ def trans_func(value):
     if value is False:
         return ""
     return value
+
+
+class Test_normalize_md_flavor:
+    @pytest.mark.parametrize(
+        ["table", "expected"],
+        [
+            [None, MarkdownFlavor.COMMON_MARK],
+            ["CommonMark", MarkdownFlavor.COMMON_MARK],
+            ["commonmark", MarkdownFlavor.COMMON_MARK],
+            ["common_mark", MarkdownFlavor.COMMON_MARK],
+            [MarkdownFlavor.COMMON_MARK, MarkdownFlavor.COMMON_MARK],
+            ["github", MarkdownFlavor.GFM],
+            ["GitHub", MarkdownFlavor.GFM],
+            ["gfm", MarkdownFlavor.GFM],
+            ["GFM", MarkdownFlavor.GFM],
+            [MarkdownFlavor.GITHUB, MarkdownFlavor.GFM],
+            [MarkdownFlavor.GFM, MarkdownFlavor.GFM],
+            ["kramdown", MarkdownFlavor.KRAMDOWN],
+            ["jekyll", MarkdownFlavor.KRAMDOWN],
+        ],
+    )
+    def test_normal(self, table, expected):
+        assert normalize_md_flavor(table) == expected
 
 
 class Test_MarkdownTableWriter_write_new_line:

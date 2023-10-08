@@ -1,15 +1,38 @@
 import copy
-from typing import Any, List
+from enum import Enum, unique
+from typing import Any, List, Union
 
 import dataproperty as dp
 import typepy
 from dataproperty import ColumnDataProperty, DataProperty
 from mbstrdecoder import MultiByteStrDecoder
 
+from ..._function import normalize_enum
 from ...error import EmptyTableDataError
 from ...style import Align, GFMarkdownStyler, MarkdownStyler, StylerInterface
 from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
+
+
+@unique
+class MarkdownFlavor(Enum):
+    COMMON_MARK = "common_mark"
+    GITHUB = "github"
+    GFM = "gfm"
+    JEKYLL = "jekyll"
+    KRAMDOWN = "kramdown"
+
+
+def normalize_md_flavor(flavor: Union[str, MarkdownFlavor, None]) -> MarkdownFlavor:
+    norm_flavor = normalize_enum(flavor, MarkdownFlavor, default=MarkdownFlavor.COMMON_MARK)
+
+    if norm_flavor == MarkdownFlavor.GITHUB:
+        return MarkdownFlavor.GFM
+
+    if norm_flavor == MarkdownFlavor.JEKYLL:
+        return MarkdownFlavor.KRAMDOWN
+
+    return norm_flavor
 
 
 class MarkdownTableWriter(IndentationTextTableWriter):
