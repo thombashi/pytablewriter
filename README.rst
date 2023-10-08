@@ -227,54 +227,8 @@ Rendered results can be found at `here <https://github.com/thombashi/pytablewrit
 
 Apply styles to GFM table with programmatically
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can apply styles to specific cells by using style filters.
-Style filters will be written as functions.
-Example of a style filter function are as follows:
-
-:Sample Code:
-    .. code-block:: python
-
-            from typing import Any, Optional
-
-            from pytablewriter import MarkdownTableWriter
-            from pytablewriter.style import Cell, Style
-
-
-            def style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
-                if cell.is_header_row():
-                    return None
-
-                if cell.col == 0:
-                    return Style(font_weight="bold")
-
-                value = int(cell.value)
-
-                if value > 80:
-                    return Style(fg_color="red", font_weight="bold", decoration_line="underline")
-                elif value > 50:
-                    return Style(fg_color="yellow", font_weight="bold")
-                elif value > 20:
-                    return Style(fg_color="green")
-
-                return Style(fg_color="lightblue")
-
-
-            writer = MarkdownTableWriter(
-                table_name="style filter example",
-                headers=["Key", "Value 1", "Value 2"],
-                value_matrix=[
-                    ["A", 95, 40],
-                    ["B", 55, 5],
-                    ["C", 30, 85],
-                    ["D", 0, 69],
-                ],
-                flavor="github",
-                enable_ansi_escape=False,
-            )
-            writer.add_style_filter(style_filter)
-            writer.write_table()
-
-Rendered results can be found at `here <https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/output/markdown/style_filter.md>`__
+Applying style filters to GFM allows for more flexible style settings for cells.
+See also the `example <#style-filter>`_
 
 Write a Markdown table to a stream or a file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -449,7 +403,7 @@ Adding a column of the DataFrame index if you specify ``add_index_column=True``:
         |a  |  1| 10|
         |b  |  2| 11|
 
-Write a markdown table from space-separated values
+Write a Markdown table from space-separated values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :Sample Code:
     .. code-block:: python
@@ -626,13 +580,66 @@ You can also set ``Style`` to a specific column with an index or header by using
 
 Style filter
 ~~~~~~~~~~~~~~
+You can apply styles to specific cells by using style filters.
+Style filters will be written as Python functions.
+Examples of a style filter function and how you apply it are as follows:
+
+:Sample Code:
+    .. code-block:: python
+
+            from typing import Any, Optional
+
+            from pytablewriter import MarkdownTableWriter
+            from pytablewriter.style import Cell, Style
+
+
+            def style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
+                if cell.is_header_row():
+                    return None
+
+                if cell.col == 0:
+                    return Style(font_weight="bold")
+
+                value = int(cell.value)
+
+                if value > 80:
+                    return Style(fg_color="red", font_weight="bold", decoration_line="underline")
+                elif value > 50:
+                    return Style(fg_color="yellow", font_weight="bold")
+                elif value > 20:
+                    return Style(fg_color="green")
+
+                return Style(fg_color="lightblue")
+
+
+            writer = MarkdownTableWriter(
+                table_name="style filter example",
+                headers=["Key", "Value 1", "Value 2"],
+                value_matrix=[
+                    ["A", 95, 40],
+                    ["B", 55, 5],
+                    ["C", 30, 85],
+                    ["D", 0, 69],
+                ],
+                flavor="github",
+                enable_ansi_escape=False,
+            )
+            writer.add_style_filter(style_filter)
+            writer.write_table()
+
+Rendered results can be found at `here <https://github.com/thombashi/pytablewriter/blob/master/docs/pages/examples/output/markdown/style_filter.md>`__
+
+Theme
+~~~~~~~
+Themes consists of a set of style filters.
 The following command will install external predefined themes:
 
 ::
 
     pip install pytablewriter[theme]
 
-``theme`` argument of writer constructor or ``set_theme`` method can set"" predefined style filters.
+Themes can be set via the constructor of the writer classes or the ``set_theme`` method.
+The following is an example of setting the ``altrow`` theme via the constructor.
 ``altrow`` theme will be colored rows alternatively:
 
 :Sample Code:
@@ -654,8 +661,12 @@ The following command will install external predefined themes:
        :scale: 100%
        :alt: https://github.com/thombashi/pytablewriter-altrow-theme/blob/master/ss/ptw-altrow-theme_example_default.png
 
-Themes can be created as plugins like as follows:
-https://github.com/thombashi/pytablewriter-altrow-theme
+`[theme]` extras includes the following themes:
+
+- `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
+    - `Generated HTML table example <https://thombashi.github.io/pytablewriter-altrow-theme/example.html>`__
+- `pytablewriter-altcol-theme <https://github.com/thombashi/pytablewriter-altcol-theme>`__
+    - `Generated HTML table example <https://thombashi.github.io/pytablewriter-altcol-theme/example.html>`__
 
 Make tables for specific applications
 ---------------------------------------
@@ -761,6 +772,7 @@ Optional dependencies
     - `SimpleSQLite <https://github.com/thombashi/SimpleSQLite>`__
 - ``theme`` extras
     - `pytablewriter-altrow-theme <https://github.com/thombashi/pytablewriter-altrow-theme>`__
+    - `pytablewriter-altcol-theme <https://github.com/thombashi/pytablewriter-altcol-theme>`__
 - ``toml`` extras
     - `toml <https://github.com/uiri/toml>`__
 
