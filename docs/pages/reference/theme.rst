@@ -11,6 +11,11 @@ Theme
    :undoc-members:
    :special-members: __call__
 
+.. autoclass:: pytablewriter.style.CheckStyleFilterKeywordArgsFunc
+   :members:
+   :undoc-members:
+   :special-members: __call__
+
 .. autoclass:: pytablewriter.style.Theme
    :members:
    :undoc-members:
