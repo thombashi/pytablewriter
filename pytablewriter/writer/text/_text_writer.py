@@ -5,17 +5,10 @@ from itertools import chain
 from typing import IO, Any, List, Optional, Sequence, Union, cast
 
 import typepy
-from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
+from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
 
 from ...error import EmptyTableDataError
-from ...style import (
-    Cell,
-    ColSeparatorStyleFilterFunc,
-    Style,
-    StylerInterface,
-    TextStyler,
-    get_align_char,
-)
+from ...style import Cell, ColSeparatorStyleFilterFunc, Style, StylerInterface, TextStyler
 from .._common import HEADER_ROW
 from .._table_writer import AbstractTableWriter
 from ._interface import IndentationInterface, TextWriterInterface
@@ -400,12 +393,6 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
             margin_format.format(separator_char * self._get_padding_len(col_dp))
             for col_dp in self._column_dp_list
         ]
-
-    def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        return "{{:{:s}{:s}}}".format(
-            get_align_char(Align.CENTER),
-            str(self._get_padding_len(col_dp, value_dp)),
-        )
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__value_cell_margin_format.format(super()._to_header_item(col_dp, value_dp))

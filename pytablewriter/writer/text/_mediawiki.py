@@ -7,7 +7,7 @@ import typepy
 from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 
-from ...style import Align, get_align_char
+from ...style import Align, Style, get_align_char
 from ._text_writer import TextTableWriter
 
 
@@ -84,10 +84,14 @@ class MediaWikiTableWriter(TextTableWriter):
     def _get_closing_row_items(self) -> List[str]:
         return ["|}"]
 
-    def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        return "! {{:{:s}{:s}}}".format(
+    def _apply_style_to_header_item(
+        self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
+    ) -> str:
+        value = self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        str_format = "! {{:{:s}{:s}}}".format(
             get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )
+        return str_format.format(value)
 
     def __modify_table_element(self, value: str, value_dp: DataProperty) -> str:
         if value_dp.align is Align.LEFT:

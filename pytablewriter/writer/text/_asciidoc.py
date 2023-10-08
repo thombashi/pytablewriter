@@ -118,15 +118,20 @@ class AsciiDocTableWriter(TextTableWriter):
     def _get_closing_row_items(self) -> List[str]:
         return ["|==="]
 
-    def _get_header_format_string(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        return f"{get_align_char(Align.CENTER)}|{{}}"
+    def __apply_align(self, value: str, style: Style) -> str:
+        return f"{get_align_char(Align.CENTER)}|{value}"
+
+    def _apply_style_to_header_item(
+        self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
+    ) -> str:
+        value = self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        return self.__apply_align(value, style)
 
     def __modify_row_element(
         self, row_idx: int, col_idx: int, value: str, value_dp: DataProperty
     ) -> str:
-        default_style = self._get_col_style(col_idx)
         col_dp = self._column_dp_list[col_idx]
-        style = self._fetch_style_from_filter(row_idx, col_dp, value_dp, default_style)
+        style = self._fetch_style(row_idx, col_dp, value_dp)
         align = col_dp.align
 
         if style and style.align and style.align != align:

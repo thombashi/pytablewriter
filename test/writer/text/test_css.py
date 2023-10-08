@@ -40,39 +40,34 @@ class Test_CssTableWriter_write_table:
         expected = dedent(
             """\
 .style-test thead th:nth-child(1) {
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(2) {
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(3) {
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(4) {
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(5) {
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(6) {
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(7) {
-    font-weight:bold;
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(8) {
-    font-weight:bold;
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(9) {
-    font-style:italic;
-    text-align: left;
+    text-align: center;
 }
 .style-test thead th:nth-child(10) {
-    font-weight:bold;
-    font-style:italic;
-    text-align: left;
+    text-align: center;
 }
 .style-test tbody tr:nth-child(1) td:nth-child(1) {
     text-align: right;
@@ -180,31 +175,25 @@ class Test_CssTableWriter_write_table:
 
         expected = """\
 .vertical-align thead th:nth-child(1) {
-    text-align: left;
+    text-align: center;
 }
 .vertical-align thead th:nth-child(2) {
-    text-align: left;
-    vertical-align: top;
+    text-align: center;
 }
 .vertical-align thead th:nth-child(3) {
-    text-align: left;
-    vertical-align: middle;
+    text-align: center;
 }
 .vertical-align thead th:nth-child(4) {
-    text-align: left;
-    vertical-align: bottom;
+    text-align: center;
 }
 .vertical-align thead th:nth-child(5) {
-    text-align: right;
-    vertical-align: top;
+    text-align: center;
 }
 .vertical-align thead th:nth-child(6) {
-    text-align: right;
-    vertical-align: middle;
+    text-align: center;
 }
 .vertical-align thead th:nth-child(7) {
-    text-align: right;
-    vertical-align: bottom;
+    text-align: center;
 }
 .vertical-align tbody tr:nth-child(1) td:nth-child(1) {
     text-align: left;
@@ -246,7 +235,7 @@ class Test_CssTableWriter_write_table:
         expected = """\
 <style type="text/css">
     .none-value thead th:nth-child(1) {
-        text-align: left;
+        text-align: center;
     }
     .none-value tbody tr:nth-child(1) td:nth-child(1) {
         text-align: left;
@@ -270,16 +259,13 @@ class Test_CssTableWriter_write_table:
 
         expected = """\
 .decoration-line thead th:nth-child(1) {
-    text-align: left;
-    text-decoration-line: underline;
+    text-align: center;
 }
 .decoration-line thead th:nth-child(2) {
-    text-align: left;
-    text-decoration-line: line-through;
+    text-align: center;
 }
 .decoration-line thead th:nth-child(3) {
-    text-align: left;
-    text-decoration-line: line-through;
+    text-align: center;
 }
 .decoration-line tbody tr:nth-child(1) td:nth-child(1) {
     text-align: left;
@@ -331,7 +317,7 @@ class Test_CssTableWriter_write_table:
         expected = """\
 <style type="text/css">
     .none-value thead th:nth-child(1) {
-        text-align: left;
+        text-align: center;
     }
     .none-value tbody tr:nth-child(1) td:nth-child(1) {
         text-align: left;

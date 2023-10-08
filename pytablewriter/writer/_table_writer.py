@@ -20,7 +20,7 @@ from dataproperty import (
 )
 from dataproperty.typing import TransFunc
 from tabledata import TableData, convert_idx_to_alphabet, to_value_matrix
-from typepy import String, Typecode, extract_typepy_from_dtype
+from typepy import Typecode, extract_typepy_from_dtype
 
 from .._logger import WriterLogger
 from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
@@ -34,6 +34,7 @@ from ..style import (
     fetch_theme,
 )
 from ..typehint import Integer, TypeHint
+from ._common import HEADER_ROW
 from ._interface import TableWriterInterface
 from ._msgfy import to_error_message
 
@@ -50,6 +51,16 @@ _ts_to_flag: Dict[ThousandSeparator, int] = {
     ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
     ThousandSeparator.UNDERSCORE: Format.THOUSAND_SEPARATOR,
 }
+
+
+def header_style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
+    if cell.is_header_row():
+        return Style(align=Align.CENTER)
+
+    return None
+
+
+DEFAULT_STYLE_FILTERS: List[StyleFilterFunc] = [header_style_filter]
 
 
 class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
@@ -226,7 +237,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__col_style_list: List[Optional[Style]] = []
         self.column_styles = kwargs.get("column_styles", [])
 
-        self._style_filters: List[StyleFilterFunc] = []
+        self._style_filters: List[StyleFilterFunc] = copy.deepcopy(DEFAULT_STYLE_FILTERS)
         self._styler = self._create_styler(self)
         self.style_filter_kwargs: Dict[str, Any] = kwargs.get("style_filter_kwargs", {})
         self.__colorize_terminal = kwargs.get("colorize_terminal", True)
@@ -493,7 +504,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         if not self._style_filters:
             return
 
-        self._style_filters = []
+        self._style_filters = copy.deepcopy(DEFAULT_STYLE_FILTERS)
         self.__clear_preprocess()
 
     def set_style(self, column: Union[str, int], style: Style) -> None:
@@ -932,21 +943,21 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return column_dp.ascii_char_width
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        format_string = self._get_header_format_string(col_dp, value_dp)
-        header = String(value_dp.data).force_convert().strip()
-        default_style = self._get_col_style(col_dp.column_index)
-        style = self._fetch_style_from_filter(-1, col_dp, value_dp, default_style)
+        style = self._fetch_style(HEADER_ROW, col_dp, value_dp)
+        header = self._apply_style_to_header_item(col_dp, value_dp, style)
+        header = self._styler.apply_terminal_style(header, style=style)
 
-        return self._styler.apply_terminal_style(format_string.format(header), style=style)
+        return header
 
-    def _get_header_format_string(
-        self, _col_dp: ColumnDataProperty, _value_dp: DataProperty
+    def _apply_style_to_header_item(
+        self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
     ) -> str:
-        return "{:s}"
+        return self._styler.apply_align(
+            self._styler.apply(col_dp.dp_to_str(value_dp), style=style), style=style
+        )
 
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
-        default_style = self._get_col_style(col_dp.column_index)
-        style = self._fetch_style_from_filter(row_idx, col_dp, value_dp, default_style)
+        style = self._fetch_style(row_idx, col_dp, value_dp)
         value = self._apply_style_to_row_item(row_idx, col_dp, value_dp, style)
 
         return self._styler.apply_terminal_style(value, style=style)
@@ -1106,6 +1117,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self._is_complete_table_dp_preprocess = True
 
+    def _fetch_style(self, row: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> Style:
+        default_style = self._get_col_style(col_dp.column_index)
+        return self._fetch_style_from_filter(row, col_dp, value_dp, default_style)
+
     def _preprocess_table_property(self) -> None:
         if self._is_complete_table_property_preprocess:
             return
@@ -1116,9 +1131,18 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             for column_dp in self._column_dp_list:
                 column_dp.extend_width(int(math.ceil(column_dp.ascii_char_width * 0.25)))
 
+        header_dp_list = self._dp_extractor.to_header_dp_list()
+        if not header_dp_list:
+            return
+
         for column_dp in self._column_dp_list:
             style = self._get_col_style(column_dp.column_index)
-            column_dp.extend_body_width(self._styler.get_additional_char_width(style))
+            header_style = self._fetch_style(
+                HEADER_ROW, column_dp, header_dp_list[column_dp.column_index]
+            )
+            body_width = self._styler.get_additional_char_width(style)
+            header_width = self._styler.get_additional_char_width(header_style)
+            column_dp.extend_body_width(max(body_width, header_width))
 
         self._is_complete_table_property_preprocess = True
 

@@ -6,6 +6,7 @@ from pathvalidate import replace_symbol
 
 from ...error import EmptyTableDataError
 from ...style import Align, DecorationLine, FontStyle, FontWeight, Style, VerticalAlign
+from .._common import HEADER_ROW
 from ._text_writer import IndentationTextTableWriter
 
 
@@ -96,8 +97,7 @@ class CssTableWriter(IndentationTextTableWriter):
 
     def __write_css_thead(self, css_class: str, base_indent_level: int) -> None:
         for col_dp, header_dp in zip(self._column_dp_list, self._dp_extractor.to_header_dp_list()):
-            default_style = self._get_col_style(col_dp.column_index)
-            style = self._fetch_style_from_filter(-1, col_dp, header_dp, default_style)
+            style = self._fetch_style(HEADER_ROW, col_dp, header_dp)
             css_tags = self.__extract_css_tags(header_dp, style)
 
             if not css_tags:
@@ -122,8 +122,7 @@ class CssTableWriter(IndentationTextTableWriter):
             zip(self._table_value_matrix, self._table_value_dp_matrix)
         ):
             for value, value_dp, col_dp in zip(values, value_dp_list, self._column_dp_list):
-                default_style = self._get_col_style(col_dp.column_index)
-                style = self._fetch_style_from_filter(row_idx, col_dp, value_dp, default_style)
+                style = self._fetch_style(row_idx, col_dp, value_dp)
                 css_tags = self.__extract_css_tags(value_dp, style)
 
                 if not css_tags:
