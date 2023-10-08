@@ -53,7 +53,7 @@ class CssTableWriter(IndentationTextTableWriter):
             )
 
     def __extract_css_tags(self, value_dp: DataProperty, style: Style) -> List[str]:
-        css_tags = []  # List[str]
+        css_tags: List[str] = []
 
         if self._styler.get_font_size(style):
             css_tags.append(cast(str, self._styler.get_font_size(style)))

@@ -75,7 +75,7 @@ class HtmlTableWriter(TextTableWriter):
         """
 
         tags, raw = _get_tags_module()
-        write_css = kwargs.get("write_css", False)
+        write_css: bool = kwargs.get("write_css", False)
 
         with self._logger:
             try:
@@ -86,7 +86,7 @@ class HtmlTableWriter(TextTableWriter):
 
             self._preprocess()
 
-            css_class = None
+            css_class: Optional[str] = None
 
             if write_css:
                 default_css_class_name = replace_symbol(self.table_name, replacement_text="-")
