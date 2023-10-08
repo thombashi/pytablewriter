@@ -409,7 +409,9 @@ class Test_MediaWikiTableWriter_write_table_iter:
         writer.write_callback = callback
         writer.write_table_iter()
 
-        out, _err = capsys.readouterr()
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
         assert out == expected
 
     @pytest.mark.parametrize(
