@@ -44,7 +44,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     """
 
     FORMAT_NAME = "markdown"
-    DEFAULT_FLAVOR = "CommonMark"
+    DEFAULT_FLAVOR = MarkdownFlavor.COMMON_MARK
 
     @property
     def format_name(self) -> str:
@@ -55,7 +55,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         return True
 
     def __init__(self, **kwargs: Any) -> None:
-        self.__flavor = kwargs.pop("flavor", self.DEFAULT_FLAVOR).casefold()
+        self.__flavor = normalize_md_flavor(kwargs.pop("flavor", self.DEFAULT_FLAVOR))
 
         super().__init__(**kwargs)
 
@@ -116,7 +116,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _write_header(self) -> None:
         super()._write_header()
 
-        if self.__flavor in ("kramdown", "jekyll"):
+        if self.__flavor == MarkdownFlavor.KRAMDOWN:
             self._write_line()
 
     def write_table(self, **kwargs: Any) -> None:
@@ -144,7 +144,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         """
 
         if "flavor" in kwargs:
-            new_flavor = kwargs["flavor"].casefold()
+            new_flavor = normalize_md_flavor(kwargs["flavor"])
             if new_flavor != self.__flavor:
                 self._clear_preprocess()
                 self.__flavor = new_flavor
@@ -178,11 +178,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
             )
         )
 
-        if self.__flavor in ("kramdown", "jekyll"):
+        if self.__flavor == MarkdownFlavor.KRAMDOWN:
             self._write_line()
 
     def _create_styler(self, writer: AbstractTableWriter) -> StylerInterface:
-        if self.__flavor in ("gfm", "github"):
+        if self.__flavor == MarkdownFlavor.GFM:
             return GFMarkdownStyler(writer)
 
         return MarkdownStyler(writer)
