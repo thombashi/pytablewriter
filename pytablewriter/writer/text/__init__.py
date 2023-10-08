@@ -7,7 +7,7 @@ from ._json import JsonTableWriter
 from ._jsonlines import JsonLinesTableWriter
 from ._latex import LatexMatrixWriter, LatexTableWriter
 from ._ltsv import LtsvTableWriter
-from ._markdown import MarkdownTableWriter
+from ._markdown import MarkdownFlavor, MarkdownTableWriter, normalize_md_flavor
 from ._mediawiki import MediaWikiTableWriter
 from ._rst import RstCsvTableWriter, RstGridTableWriter, RstSimpleTableWriter
 from ._spacealigned import SpaceAlignedTableWriter
@@ -29,7 +29,9 @@ __all__ = (
     "LatexMatrixWriter",
     "LatexTableWriter",
     "LtsvTableWriter",
+    "MarkdownFlavor",
     "MarkdownTableWriter",
+    "normalize_md_flavor",
     "MediaWikiTableWriter",
     "RstCsvTableWriter",
     "RstGridTableWriter",
