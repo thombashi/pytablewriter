@@ -147,7 +147,7 @@ jobs:
             **/*requirements.txt
 
       - name: Install dependencies
-        run: python -m pip install --upgrade --disable-pip-version-check .[all] jupyter
+        run: python -m pip install --upgrade --disable-pip-version-check .[all] jupyter tblfaker
 
       - name: Run examples
         run: |
