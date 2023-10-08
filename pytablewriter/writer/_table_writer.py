@@ -496,7 +496,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     def add_col_separator_style_filter(self, style_filter: ColSeparatorStyleFilterFunc) -> None:
-        raise NotImplementedError("this method is only implemented in text format writer classes")
+        self._logger.logger.debug(
+            "add_col_separator_style_filter method is only implemented in text format writer classes"
+        )
 
     def clear_theme(self) -> None:
         """Remove all of the style filters."""
