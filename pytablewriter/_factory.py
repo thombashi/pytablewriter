@@ -152,9 +152,10 @@ class TableWriterFactory:
             if format_name in table_format.names and not (
                 table_format.format_attribute & FormatAttr.SECONDARY_NAME
             ):
-                logger.debug(f"create a {table_format.writer_class} instance")
+                writer = table_format.writer_class(**kwargs)  # type: ignore
+                logger.debug(f"create a {writer.FORMAT_NAME} instance")
 
-                return table_format.writer_class(**kwargs)  # type: ignore
+                return writer
 
         raise WriterNotFoundError(
             "\n".join(
