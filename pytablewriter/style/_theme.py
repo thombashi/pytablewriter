@@ -33,9 +33,15 @@ class ColSeparatorStyleFilterFunc(Protocol):
         ...
 
 
+class CheckStyleFilterKeywordArgsFunc(Protocol):
+    def __call__(self, **kwargs: Any) -> None:
+        ...
+
+
 class Theme(NamedTuple):
     style_filter: Optional[StyleFilterFunc]
     col_separator_style_filter: Optional[ColSeparatorStyleFilterFunc]
+    check_style_filter_kwargs: Optional[CheckStyleFilterKeywordArgsFunc]
 
 
 def list_themes() -> Sequence[str]:
@@ -55,15 +61,22 @@ def load_ptw_plugins() -> Dict[str, Theme]:
 
     logger.debug(f"discovered_plugins: {list(discovered_plugins)}")
 
-    return {
-        theme: Theme(
-            plugin.style_filter if hasattr(plugin, "style_filter") else None,
+    themes: Dict[str, Theme] = {}
+    for theme, plugin in discovered_plugins.items():
+        style_filter = plugin.style_filter if hasattr(plugin, "style_filter") else None
+        col_sep_style_filter = (
             plugin.col_separator_style_filter
             if hasattr(plugin, "col_separator_style_filter")
-            else None,
+            else None
         )
-        for theme, plugin in discovered_plugins.items()
-    }
+        check_kwargs_func = (
+            plugin.check_style_filter_kwargs
+            if hasattr(plugin, "check_style_filter_kwargs")
+            else None
+        )
+        themes[theme] = Theme(style_filter, col_sep_style_filter, check_kwargs_func)
+
+    return themes
 
 
 def fetch_theme(plugin_name: str) -> Theme:

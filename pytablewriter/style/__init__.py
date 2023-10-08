@@ -14,7 +14,14 @@ from ._styler import (
     get_align_char,
 )
 from ._styler_interface import StylerInterface
-from ._theme import ColSeparatorStyleFilterFunc, StyleFilterFunc, Theme, fetch_theme, list_themes
+from ._theme import (
+    CheckStyleFilterKeywordArgsFunc,
+    ColSeparatorStyleFilterFunc,
+    StyleFilterFunc,
+    Theme,
+    fetch_theme,
+    list_themes,
+)
 
 
 __all__ = (
@@ -36,6 +43,7 @@ __all__ = (
     "ReStructuredTextStyler",
     "StylerInterface",
     "TextStyler",
+    "CheckStyleFilterKeywordArgsFunc",
     "ColSeparatorStyleFilterFunc",
     "StyleFilterFunc",
     "Theme",

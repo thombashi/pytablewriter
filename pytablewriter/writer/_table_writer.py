@@ -26,6 +26,7 @@ from .._logger import WriterLogger
 from ..error import EmptyTableDataError, EmptyTableNameError, EmptyValueError, NotSupportedError
 from ..style import (
     Cell,
+    CheckStyleFilterKeywordArgsFunc,
     ColSeparatorStyleFilterFunc,
     Style,
     StyleFilterFunc,
@@ -241,6 +242,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._enable_style_filter = True
         self._styler = self._create_styler(self)
         self.style_filter_kwargs: Dict[str, Any] = kwargs.get("style_filter_kwargs", {})
+        self._check_style_filter_kwargs_funcs: List[CheckStyleFilterKeywordArgsFunc] = []
         self.__colorize_terminal = kwargs.get("colorize_terminal", True)
         self.__enable_ansi_escape = kwargs.get("enable_ansi_escape", True)
 
@@ -508,6 +510,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return
 
         self._style_filters = copy.deepcopy(DEFAULT_STYLE_FILTERS)
+        self._check_style_filter_kwargs_funcs = []
         self.__clear_preprocess()
 
     def enable_style_filter(self) -> None:
@@ -598,6 +601,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         if fetched_theme.col_separator_style_filter:
             self.add_col_separator_style_filter(fetched_theme.col_separator_style_filter)
+
+        if fetched_theme.check_style_filter_kwargs:
+            self._check_style_filter_kwargs_funcs.append(fetched_theme.check_style_filter_kwargs)
 
         self.style_filter_kwargs.update(**kwargs)
 
@@ -908,6 +914,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         if not self.support_split_write:
             raise NotSupportedError("the class not supported the write_table_iter method")
 
+        self._verify_style_filter_kwargs()
         self._verify_table_name()
         self._verify_stream()
 
@@ -1016,7 +1023,6 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.style_filter_kwargs.update({"writer": self})
 
         style: Optional[Style] = None
-
         for style_filter in self._style_filters:
             style = style_filter(
                 Cell(
@@ -1076,6 +1082,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return col_dp.align
 
     def _verify_property(self) -> None:
+        self._verify_style_filter_kwargs()
         self._verify_table_name()
         self._verify_stream()
 
@@ -1099,6 +1106,10 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
     def __set_type_hints(self, type_hints: Sequence[Union[str, TypeHint]]) -> None:
         self._dp_extractor.column_type_hints = type_hints
+
+    def _verify_style_filter_kwargs(self) -> None:
+        for checker in self._check_style_filter_kwargs_funcs:
+            checker(**self.style_filter_kwargs)
 
     def _verify_table_name(self) -> None:
         if all([self._is_require_table_name, typepy.is_null_string(self.table_name)]):
