@@ -44,8 +44,8 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     """
     A table writer class for Markdown format.
 
-        :Example:
-            :ref:`example-markdown-table-writer`
+    Example:
+        :ref:`example-markdown-table-writer`
     """
 
     FORMAT_NAME = "markdown"
@@ -130,11 +130,11 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         Args:
             flavor (Optional[str]):
-                possible flavors are:
+                possible flavors are as follows (case insensitive):
 
                     - ``"CommonMark"``
-                    - ``"github"``
-                    - ``"gfm"`` (alias of ``"github"``)
+                    - ``"gfm"``
+                    - ``"github"`` (alias of ``"gfm"``)
                     - ``kramdown``
                     - ``Jekyll`` (alias of ``"kramdown"``)
 

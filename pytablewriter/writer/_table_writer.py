@@ -810,7 +810,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self, writer: "AbstractTableWriter", is_overwrite_table_name: bool = True
     ) -> None:
         """
-        Set tabular attributes to the writer from another table writer class instance.
+        Copy attributes from another table writer class instance.
+
+        Args:
+            writer (pytablewriter.writer.AbstractTableWriter):
+                Another table writer instance.
+            is_overwrite_table_name (bool, optional):
+                Overwrite the table name of the writer with the table name of the ``writer``.
+                Defaults to |True|.
         """
 
         self.__clear_preprocess()
