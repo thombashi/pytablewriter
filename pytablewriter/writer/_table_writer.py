@@ -813,6 +813,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.type_hints = writer.type_hints
         self.column_styles = writer.column_styles
         self._style_filters = writer._style_filters
+        self.style_filter_kwargs = writer.style_filter_kwargs
         self.margin = writer.margin
 
         self._table_headers = writer._table_headers
