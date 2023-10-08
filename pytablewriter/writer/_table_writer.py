@@ -238,6 +238,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.column_styles = kwargs.get("column_styles", [])
 
         self._style_filters: List[StyleFilterFunc] = copy.deepcopy(DEFAULT_STYLE_FILTERS)
+        self._enable_style_filter = True
         self._styler = self._create_styler(self)
         self.style_filter_kwargs: Dict[str, Any] = kwargs.get("style_filter_kwargs", {})
         self.__colorize_terminal = kwargs.get("colorize_terminal", True)
@@ -507,6 +508,34 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             return
 
         self._style_filters = copy.deepcopy(DEFAULT_STYLE_FILTERS)
+        self.__clear_preprocess()
+
+    def enable_style_filter(self) -> None:
+        """Enable style filters."""
+
+        if self._enable_style_filter is True:
+            return
+
+        self._enable_style_filter = True
+        self.__clear_preprocess()
+
+    def disable_style_filter(self, clear_filters: bool = False) -> None:
+        """Disable style filters.
+
+        Args:
+            clear_filters (bool):
+                If |True|, clear all of the style filters.
+                Defaults to |False|.
+        """
+
+        if clear_filters:
+            self.clear_theme()
+            return
+
+        if self._enable_style_filter is False:
+            return
+
+        self._enable_style_filter = False
         self.__clear_preprocess()
 
     def set_style(self, column: Union[str, int], style: Style) -> None:
@@ -981,6 +1010,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
     def _fetch_style_from_filter(
         self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty, default_style: Style
     ) -> Style:
+        if not self._enable_style_filter:
+            return default_style
+
         self.style_filter_kwargs.update({"writer": self})
 
         style: Optional[Style] = None
