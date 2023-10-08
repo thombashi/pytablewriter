@@ -89,12 +89,18 @@ class HtmlTableWriter(TextTableWriter):
             css_class = None
 
             if write_css:
-                css_class = kwargs.get(
-                    "css_class",
-                    "{}-css".format(replace_symbol(self.table_name, replacement_text="-")),
-                )
+                default_css_class_name = replace_symbol(self.table_name, replacement_text="-")
+                if default_css_class_name:
+                    default_css_class_name += "-css"
+                else:
+                    default_css_class_name = "ptw-table-css"
 
-                css_writer = CssTableWriter(table_name=css_class)
+                css_class = kwargs.get("css_class", default_css_class_name)
+                css_writer = CssTableWriter(
+                    table_name=css_class,
+                    margin=self.margin,
+                    stream=self.stream,
+                )
                 css_writer.from_writer(self, is_overwrite_table_name=False)
                 css_writer.write_table(write_style_tag=True)
 
@@ -107,7 +113,10 @@ class HtmlTableWriter(TextTableWriter):
                     self._table_tag = tags.table(id=sanitize_python_var_name(self.table_name))
                 self._table_tag += tags.caption(MultiByteStrDecoder(self.table_name).unicode_str)
             else:
-                self._table_tag = tags.table()
+                if css_class:
+                    self._table_tag = tags.table(class_name=css_class)
+                else:
+                    self._table_tag = tags.table()
 
             try:
                 self._write_header()

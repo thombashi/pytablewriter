@@ -509,6 +509,44 @@ class Test_HtmlTableWriter_write_table:
 
         assert writer.dumps() == ""
 
+    def test_normal_from_tabledata(self):
+        from tabledata import TableData
+
+        data = TableData(table_name="", headers=["a"], rows=[[1, 2, 3]])
+        writer = table_writer_class(table_name="from_tabledata", margin=1, theme="altrow")
+        writer.from_tabledata(data, is_overwrite_table_name=True)
+        got = writer.dumps(write_css=True)
+        expected = dedent(
+            """\
+            <style type="text/css">
+                .ptw-table-css thead th:nth-child(1) {
+                    text-align: center;
+                    padding: 6px;
+                }
+                .ptw-table-css tbody tr:nth-child(1) td:nth-child(1) {
+                    color: #000000;
+                    background-color: #e5e5e5;
+                    text-align: right;
+                    padding: 6px;
+                }
+            </style>
+            <table class="ptw-table-css">
+                <thead>
+                    <tr>
+                        <th> a </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> 1 </td>
+                    </tr>
+                </tbody>
+            </table>
+            """
+        )
+        print_test_result(expected=expected, actual=got)
+        assert got == expected
+
 
 class Test_HtmlTableWriter_write_table_iter:
     def test_exception(self):
