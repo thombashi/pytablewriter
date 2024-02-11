@@ -22,20 +22,17 @@ KNOWN_PLUGINS = (
 
 
 class StyleFilterFunc(Protocol):
-    def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]:
-        ...
+    def __call__(self, cell: Cell, **kwargs: Any) -> Optional[Style]: ...
 
 
 class ColSeparatorStyleFilterFunc(Protocol):
     def __call__(
         self, left_cell: Optional[Cell], right_cell: Optional[Cell], **kwargs: Any
-    ) -> Optional[Style]:
-        ...
+    ) -> Optional[Style]: ...
 
 
 class CheckStyleFilterKeywordArgsFunc(Protocol):
-    def __call__(self, **kwargs: Any) -> None:
-        ...
+    def __call__(self, **kwargs: Any) -> None: ...
 
 
 class Theme(NamedTuple):

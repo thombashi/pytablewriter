@@ -85,7 +85,13 @@ class Test_sanitize_excel_sheet_name:
         assert sanitized_name == expected
         validate_excel_sheet_name(sanitized_name)
 
-    @pytest.mark.parametrize(["value", "expected"], [["あい*うえお", "あいうえお"], ["シー?ト", "シート"]])
+    @pytest.mark.parametrize(
+        ["value", "expected"],
+        [
+            ["あい*うえお", "あいうえお"],
+            ["シー?ト", "シート"],
+        ],
+    )
     def test_normal_multibyte(self, value, expected):
         sanitize_excel_sheet_name(value)
 
