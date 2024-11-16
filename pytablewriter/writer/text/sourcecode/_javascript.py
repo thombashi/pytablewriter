@@ -1,6 +1,6 @@
 import io
 from datetime import datetime
-from typing import Any, List
+from typing import Any
 
 from dataproperty import ColumnDataProperty, DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
@@ -124,10 +124,10 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
         self._write_line(js_matrix_var_def_text)
         self.inc_indent_level()
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         return [f"{self.variable_declaration:s} {self.variable_name:s} = ["]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return ["];"]
 
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:

@@ -1,5 +1,5 @@
 import abc
-from typing import Any, List
+from typing import Any
 
 import typepy
 
@@ -65,7 +65,7 @@ class SourceCodeTableWriter(IndentationTextTableWriter):
 
         self._init_cross_point_maps()
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return []
 
     def _write_opening_row(self) -> None:

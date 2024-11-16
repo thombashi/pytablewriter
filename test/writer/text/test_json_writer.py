@@ -4,8 +4,6 @@
 
 import collections
 import json
-import platform as m_platform
-import sys
 from textwrap import dedent
 
 import pytest

@@ -1,5 +1,6 @@
 import copy
-from typing import Any, List, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 import dataproperty as dp
 import typepy
@@ -95,7 +96,7 @@ class AsciiDocTableWriter(TextTableWriter):
             ],
         )
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         cols = ", ".join(
             f"{get_align_char(col_dp.align)}{col_dp.ascii_char_width}"
             for col_dp in self._column_dp_list
@@ -109,13 +110,13 @@ class AsciiDocTableWriter(TextTableWriter):
 
         return ["\n".join(rows)]
 
-    def _get_header_row_separator_items(self) -> List[str]:
+    def _get_header_row_separator_items(self) -> list[str]:
         return [""]
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return self._get_header_row_separator_items()
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return ["|==="]
 
     def __apply_align(self, value: str, style: Style) -> str:

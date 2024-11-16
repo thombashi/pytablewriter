@@ -3,7 +3,8 @@
 """
 
 import copy
-from typing import Any, Dict, Generator
+from collections.abc import Generator
+from typing import Any
 
 import dataproperty
 from dataproperty import ColumnDataProperty
@@ -14,8 +15,8 @@ from ._msgfy import to_error_message
 from ._table_writer import AbstractTableWriter
 
 
-DataType = Dict[str, str]
-Properties = Dict[str, DataType]
+DataType = dict[str, str]
+Properties = dict[str, DataType]
 
 
 def _get_es_datatype(column_dp: ColumnDataProperty) -> DataType:
@@ -148,7 +149,7 @@ class ElasticsearchWriter(AbstractTableWriter):
     def write_null_line(self) -> None:
         pass
 
-    def _get_mappings(self) -> Dict[str, Dict[str, Dict[str, Properties]]]:
+    def _get_mappings(self) -> dict[str, dict[str, dict[str, Properties]]]:
         properties: Properties = {}
 
         for header, column_dp in zip(self.headers, self._column_dp_list):

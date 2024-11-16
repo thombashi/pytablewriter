@@ -1,6 +1,6 @@
 import copy
 import re
-from typing import Any, List
+from typing import Any
 
 import dataproperty as dp
 import typepy
@@ -50,7 +50,7 @@ class LatexWriter(IndentationTextTableWriter):
 
         return False
 
-    def _get_col_align_char_list(self) -> List[str]:
+    def _get_col_align_char_list(self) -> list[str]:
         col_align_list = []
 
         for col_dp in self._column_dp_list:
@@ -127,10 +127,10 @@ class LatexMatrixWriter(LatexWriter):
 
         return row_item
 
-    def _get_header_row_separator_items(self) -> List[str]:
+    def _get_header_row_separator_items(self) -> list[str]:
         return []
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         row_item_list = []
 
         if typepy.is_not_null_string(self.table_name):
@@ -144,7 +144,7 @@ class LatexMatrixWriter(LatexWriter):
 
         return ["".join(row_item_list)]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return [r"\end{array} \right)"]
 
     def _write_opening_row(self) -> None:
@@ -185,7 +185,7 @@ class LatexTableWriter(LatexWriter):
         self.char_right_side_row = r" \\ \hline"
         self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         return [
             "".join(
                 [
@@ -219,8 +219,8 @@ class LatexTableWriter(LatexWriter):
 
         return row_item
 
-    def _get_header_row_separator_items(self) -> List[str]:
+    def _get_header_row_separator_items(self) -> list[str]:
         return [r"\hline"]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return [r"\end{array}"]

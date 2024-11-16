@@ -1,8 +1,9 @@
 import enum
 import io
 import sys
+from collections.abc import Sequence
 from itertools import chain
-from typing import IO, Any, List, Optional, Sequence, Union, cast
+from typing import IO, Any, Optional, Union, cast
 
 import typepy
 from dataproperty import ColumnDataProperty, DataProperty, LineBreakHandling
@@ -144,7 +145,7 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
 
         self._init_cross_point_maps()
 
-        self._col_separator_style_filters: List[ColSeparatorStyleFilterFunc] = []
+        self._col_separator_style_filters: list[ColSeparatorStyleFilterFunc] = []
 
         if "theme" in kwargs:
             self.set_theme(kwargs["theme"])
@@ -366,29 +367,29 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
                     if self.is_write_value_separator_row:
                         self._write_value_row_separator()
 
-                self._write_value_row(row, cast(List[str], values), value_dp_list)
+                self._write_value_row(row, cast(list[str], values), value_dp_list)
             except TypeError:
                 continue
 
         self._write_closing_row()
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         return self.__get_row_separator_items(self.__opening_row_cell_format, self.char_opening_row)
 
-    def _get_header_row_separator_items(self) -> List[str]:
+    def _get_header_row_separator_items(self) -> list[str]:
         return self.__get_row_separator_items(
             self._header_row_separator_cell_format, self.char_header_row_separator
         )
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return self.__get_row_separator_items(
             self.__value_row_separator_cell_format, self.char_value_row_separator
         )
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return self.__get_row_separator_items(self.__closing_row_cell_format, self.char_closing_row)
 
-    def __get_row_separator_items(self, margin_format: str, separator_char: str) -> List[str]:
+    def __get_row_separator_items(self, margin_format: str, separator_char: str) -> list[str]:
         return [
             margin_format.format(separator_char * self._get_padding_len(col_dp))
             for col_dp in self._column_dp_list

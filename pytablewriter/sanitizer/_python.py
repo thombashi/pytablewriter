@@ -3,7 +3,7 @@
 """
 
 import re
-from typing import List, Pattern
+from re import Pattern
 
 from ._base import VarNameSanitizer
 
@@ -55,7 +55,7 @@ class PythonVarNameSanitizer(VarNameSanitizer):
     __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z]+")
 
     @property
-    def reserved_keywords(self) -> List[str]:
+    def reserved_keywords(self) -> list[str]:
         return self.__PYTHON_RESERVED_KEYWORDS + self.__PYTHON_BUILTIN_CONSTANTS
 
     @property

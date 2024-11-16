@@ -1,6 +1,6 @@
 import copy
 import warnings
-from typing import Any, Dict, List, Union
+from typing import Any, Union
 
 import dataproperty
 
@@ -55,7 +55,7 @@ class YamlTableWriter(TextTableWriter):
             self._preprocess()
 
             if self.headers:
-                matrix: List[Union[Dict[str, Any], List[Any]]] = [
+                matrix: list[Union[dict[str, Any], list[Any]]] = [
                     dict(zip(self.headers, [serialize_dp(value_dp) for value_dp in value_dp_list]))
                     for value_dp_list in self._table_value_dp_matrix
                 ]

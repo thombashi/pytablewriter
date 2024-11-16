@@ -4,7 +4,7 @@
 
 import abc
 import re
-from typing import Pattern
+from re import Pattern
 
 from pathvalidate.error import ErrorReason, ValidationError
 from typepy import is_null_string

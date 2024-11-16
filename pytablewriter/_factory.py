@@ -4,7 +4,7 @@
 
 import os
 from itertools import chain
-from typing import Any, List
+from typing import Any
 
 import typepy
 
@@ -167,7 +167,7 @@ class TableWriterFactory:
         )
 
     @classmethod
-    def get_format_names(cls) -> List[str]:
+    def get_format_names(cls) -> list[str]:
         """
         :return: Available format names.
         :rtype: list
@@ -228,7 +228,7 @@ class TableWriterFactory:
         return sorted(list(set(chain(*(table_format.names for table_format in TableFormat)))))
 
     @classmethod
-    def get_extensions(cls) -> List[str]:
+    def get_extensions(cls) -> list[str]:
         """
         :return: Available file extensions.
         :rtype: list

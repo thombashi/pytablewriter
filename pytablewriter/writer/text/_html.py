@@ -1,6 +1,6 @@
 import copy
 import warnings
-from typing import Any, List, Optional, Tuple, cast
+from typing import Any, Optional, cast
 
 import dataproperty
 import typepy
@@ -16,7 +16,7 @@ from ._css import CssTableWriter
 from ._text_writer import TextTableWriter
 
 
-def _get_tags_module() -> Tuple:
+def _get_tags_module() -> tuple:
     try:
         from dominate import tags
         from dominate.util import raw
@@ -176,7 +176,7 @@ class HtmlTableWriter(TextTableWriter):
         self._write_line(self._table_tag.render(indent=self.indent_string))
 
     def __make_style_tag(self, style: Style) -> Optional[str]:
-        styles: List[str] = []
+        styles: list[str] = []
 
         if self._styler.get_font_size(style):
             styles.append(cast(str, self._styler.get_font_size(style)))

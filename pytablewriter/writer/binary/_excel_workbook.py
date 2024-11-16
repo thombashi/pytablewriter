@@ -1,6 +1,6 @@
 import abc
 import warnings
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 import typepy
 
@@ -44,7 +44,7 @@ class ExcelWorkbook(ExcelWorkbookInterface):
     def _clear(self) -> None:
         self._workbook = None
         self._file_path: Optional[str] = None
-        self._worksheet_table: Dict[str, Any] = {}
+        self._worksheet_table: dict[str, Any] = {}
 
     def __init__(self, file_path: str) -> None:
         self._clear()

@@ -1,6 +1,7 @@
 import copy
 import re
-from typing import Any, List, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 import dataproperty as dp
 import typepy
@@ -68,20 +69,20 @@ class MediaWikiTableWriter(TextTableWriter):
             ],
         )
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         item = '{| class="wikitable"'
         if self.table_style:
             item += f' style="{self.table_style}"'
 
         return [item]
 
-    def _get_header_row_separator_items(self) -> List[str]:
+    def _get_header_row_separator_items(self) -> list[str]:
         return ["|-"]
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return self._get_header_row_separator_items()
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return ["|}"]
 
     def _apply_style_to_header_item(

@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 import typepy
 from mbstrdecoder import MultiByteStrDecoder
@@ -64,10 +64,10 @@ class PandasDataFrameWriter(NumpyTableWriter):
         self.import_pandas_as = "pd"
         self.is_write_header = False
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         return [f"{self.variable_name} = {self.import_pandas_as}.DataFrame(["]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         if typepy.is_not_empty_sequence(self.headers):
             return [
                 "], columns=[{}])".format(

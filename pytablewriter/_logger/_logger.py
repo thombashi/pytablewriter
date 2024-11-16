@@ -2,7 +2,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING
 
 import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
@@ -102,7 +102,7 @@ class WriterLogger:
 
         return f"table-name='{table_name}'"
 
-    def __get_extra_log_entry_list(self) -> List[str]:
+    def __get_extra_log_entry_list(self) -> list[str]:
         if self.__writer._iter_count is None:
             return []
 

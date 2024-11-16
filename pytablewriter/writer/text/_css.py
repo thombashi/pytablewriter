@@ -1,5 +1,5 @@
 import copy
-from typing import Any, List, cast
+from typing import Any, cast
 
 from dataproperty import NOT_QUOTING_FLAGS, DataProperty
 from pathvalidate import replace_symbol
@@ -54,8 +54,8 @@ class CssTableWriter(IndentationTextTableWriter):
                 write_style_tag=kwargs.get("write_style_tag", False),
             )
 
-    def __extract_css_tags(self, value_dp: DataProperty, style: Style) -> List[str]:
-        css_tags: List[str] = []
+    def __extract_css_tags(self, value_dp: DataProperty, style: Style) -> list[str]:
+        css_tags: list[str] = []
 
         if self._styler.get_font_size(style):
             css_tags.append(cast(str, self._styler.get_font_size(style)))

@@ -1,5 +1,5 @@
 import re
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any, Optional
 
 from dataproperty import Align
 from tcolorpy import Color, tcolor
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from ..writer._table_writer import AbstractTableWriter
 
 
-_align_char_mapping: Dict[Align, str] = {
+_align_char_mapping: dict[Align, str] = {
     Align.AUTO: "<",
     Align.LEFT: "<",
     Align.RIGHT: ">",
@@ -49,7 +49,7 @@ class AbstractStyler(StylerInterface):
     def apply_terminal_style(self, value: str, style: Style) -> str:
         return value
 
-    def _get_font_size_map(self) -> Dict[FontSize, str]:
+    def _get_font_size_map(self) -> dict[FontSize, str]:
         return {}
 
 
@@ -101,7 +101,7 @@ class TextStyler(AbstractStyler):
 
 
 class HtmlStyler(TextStyler):
-    def _get_font_size_map(self) -> Dict[FontSize, str]:
+    def _get_font_size_map(self) -> dict[FontSize, str]:
         return {
             FontSize.TINY: "font-size:x-small",
             FontSize.SMALL: "font-size:small",
@@ -163,7 +163,7 @@ class LatexStyler(TextStyler):
 
         return value
 
-    def _get_font_size_map(self) -> Dict[FontSize, str]:
+    def _get_font_size_map(self) -> dict[FontSize, str]:
         return {
             FontSize.TINY: r"\tiny",
             FontSize.SMALL: r"\small",
