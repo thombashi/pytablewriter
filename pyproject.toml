@@ -21,7 +21,7 @@ exclude = '''
 | setup.py
 '''
 line-length = 100
-target-version = ['py38', 'py39', 'py310', 'py311', 'py312', 'py313']
+target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
 
 [tool.isort]
 include_trailing_comma = true
@@ -72,7 +72,7 @@ show_missing = true
 
 [tool.mypy]
 ignore_missing_imports = true
-python_version = 3.8
+python_version = 3.9
 
 pretty = true
 
