@@ -3,7 +3,7 @@
 """
 
 import re
-from typing import List, Pattern
+from re import Pattern
 
 from ._base import VarNameSanitizer
 
@@ -78,7 +78,7 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
     __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z$]+")
 
     @property
-    def reserved_keywords(self) -> List[str]:
+    def reserved_keywords(self) -> list[str]:
         return (
             self.__JS_RESERVED_KEYWORDS_ES6
             + self.__JS_RESERVED_KEYWORDS_FUTURE

@@ -1,7 +1,7 @@
 import abc
 import copy
 import warnings
-from typing import IO, TYPE_CHECKING, Any, ClassVar, Dict, Optional, Union, cast
+from typing import IO, TYPE_CHECKING, Any, ClassVar, Optional, Union, cast
 
 import dataproperty
 import typepy
@@ -256,7 +256,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
-        self.__col_style_table: Dict[int, Any] = {}
+        self.__col_style_table: dict[int, Any] = {}
 
     def _open(self, workbook_path: str) -> None:
         self._workbook = ExcelWorkbookXls(workbook_path)
@@ -349,7 +349,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         FONT_NAME: ClassVar[str] = "MS Gothic"
         FONT_SIZE: ClassVar[int] = 9
 
-        CELL_FORMAT: Dict[str, Union[int, str, bool]] = {
+        CELL_FORMAT: dict[str, Union[int, str, bool]] = {
             "font_name": FONT_NAME,
             "font_size": FONT_SIZE,
             "align": "top",
@@ -359,7 +359,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             "bottom": 1,
             "right": 1,
         }
-        HEADER_FORMAT: Dict[str, Union[int, str, bool]] = {
+        HEADER_FORMAT: dict[str, Union[int, str, bool]] = {
             "font_name": FONT_NAME,
             "font_size": FONT_SIZE,
             "bg_color": "#DFDFFF",
@@ -367,7 +367,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             "left": 1,
             "right": 1,
         }
-        NAN_FORMAT: Dict[str, Union[int, str, bool]] = {
+        NAN_FORMAT: dict[str, Union[int, str, bool]] = {
             "font_name": FONT_NAME,
             "font_size": FONT_SIZE,
             "font_color": "silver",
@@ -378,11 +378,11 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         }
 
     @property
-    def __nan_format_property(self) -> Dict[str, Union[int, str, bool]]:
+    def __nan_format_property(self) -> dict[str, Union[int, str, bool]]:
         return self.format_table.get(self.TableFormat.NAN, self.default_format)
 
     @property
-    def __cell_format_property(self) -> Dict[str, Union[int, str, bool]]:
+    def __cell_format_property(self) -> dict[str, Union[int, str, bool]]:
         return self.format_table.get(self.TableFormat.CELL, self.default_format)
 
     def __init__(self, **kwargs: Any) -> None:
@@ -395,8 +395,8 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             self.TableFormat.NAN: self.Default.NAN_FORMAT,
         }
 
-        self.__col_cell_format_cache: Dict[int, Any] = {}
-        self.__col_numprops_table: Dict[int, Dict[str, str]] = {}
+        self.__col_cell_format_cache: dict[int, Any] = {}
+        self.__col_numprops_table: dict[int, dict[str, str]] = {}
 
     def _open(self, workbook_path: str) -> None:
         self._workbook = ExcelWorkbookXlsx(workbook_path)
@@ -437,7 +437,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         cell_format = self.__get_cell_format(format_key, base_props)
         self.stream.write(row, col, value_dp.data, cell_format)
 
-    def __get_number_property(self, col: int) -> Dict[str, str]:
+    def __get_number_property(self, col: int) -> dict[str, str]:
         if col in self.__col_numprops_table:
             return self.__col_numprops_table[col]
 
@@ -459,7 +459,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
 
         return num_props
 
-    def __get_cell_format(self, format_key, cell_props) -> Dict:  # type: ignore
+    def __get_cell_format(self, format_key, cell_props) -> dict:  # type: ignore
         cell_format = self.__col_cell_format_cache.get(format_key)
         if cell_format is not None:
             return cell_format

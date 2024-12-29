@@ -4,8 +4,6 @@
 
 import collections
 import json
-import platform as m_platform
-import sys
 from textwrap import dedent
 
 import pytest
@@ -253,9 +251,6 @@ class Test_JsonTableWriter_write_table:
         print_test_result(expected=out, actual=dumps_out)
         assert dumps_out == out
 
-    @pytest.mark.skipif(
-        m_platform.system() == "Windows" and sys.version_info < (3, 6), reason="env dependent tests"
-    )
     def test_normal_sort_keys(self):
         writer = table_writer_class()
         writer.headers = ["z", "i"]

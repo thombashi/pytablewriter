@@ -1,7 +1,8 @@
 import importlib
 import pkgutil
 import re
-from typing import Any, Dict, NamedTuple, Optional, Sequence
+from collections.abc import Sequence
+from typing import Any, NamedTuple, Optional
 
 from .._logger import logger
 from ..style import Cell, Style
@@ -45,7 +46,7 @@ def list_themes() -> Sequence[str]:
     return list(load_ptw_plugins())
 
 
-def load_ptw_plugins() -> Dict[str, Theme]:
+def load_ptw_plugins() -> dict[str, Theme]:
     plugin_regexp = re.compile(
         rf"^{PLUGIN_NAME_PEFIX}[_-].+[_-]{PLUGIN_NAME_SUFFIX}", re.IGNORECASE
     )
@@ -58,7 +59,7 @@ def load_ptw_plugins() -> Dict[str, Theme]:
 
     logger.debug(f"discovered_plugins: {list(discovered_plugins)}")
 
-    themes: Dict[str, Theme] = {}
+    themes: dict[str, Theme] = {}
     for theme, plugin in discovered_plugins.items():
         style_filter = plugin.style_filter if hasattr(plugin, "style_filter") else None
         col_sep_style_filter = (

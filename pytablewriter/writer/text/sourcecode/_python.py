@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 import typepy
 
@@ -71,11 +71,11 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
         super()._write_table(**kwargs)
         self.dec_indent_level()
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         if typepy.is_not_null_string(self.table_name):
             return [self.variable_name + " = ["]
 
         return ["["]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return ["]"]

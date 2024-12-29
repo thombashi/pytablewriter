@@ -1,5 +1,5 @@
 import copy
-from typing import Any, List
+from typing import Any
 
 import dataproperty
 import typepy
@@ -118,7 +118,7 @@ class RstCsvTableWriter(RstTableWriter):
 
         IndentationTextTableWriter.write_table(self, **kwargs)
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         directive = ".. csv-table::"
 
         if typepy.is_null_string(self.table_name):
@@ -147,10 +147,10 @@ class RstCsvTableWriter(RstTableWriter):
         )
         self._write_line()
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return []
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return []
 
 

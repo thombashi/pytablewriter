@@ -4,7 +4,7 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Optional, Type
+from typing import Any, Optional
 
 import dataproperty
 from pathvalidate import replace_symbol
@@ -60,7 +60,7 @@ def dumps_tabledata(value: TableData, format_name: str = "rst_grid_table", **kwa
 
 
 def normalize_enum(
-    value: Any, enum_class: Type[Enum], validate: bool = True, default: Optional[Enum] = None
+    value: Any, enum_class: type[Enum], validate: bool = True, default: Optional[Enum] = None
 ) -> Any:
     if value is None:
         return default

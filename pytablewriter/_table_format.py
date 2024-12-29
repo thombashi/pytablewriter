@@ -3,7 +3,8 @@
 """
 
 import enum
-from typing import List, Optional, Sequence
+from collections.abc import Sequence
+from typing import Optional
 
 from .writer import (
     AbstractTableWriter,
@@ -252,7 +253,7 @@ class TableFormat(enum.Enum):
     )
 
     @property
-    def names(self) -> List[str]:
+    def names(self) -> list[str]:
         """
         List[str]: Names associated with the table format.
         """
@@ -276,7 +277,7 @@ class TableFormat(enum.Enum):
         return self.__format_attribute
 
     @property
-    def file_extensions(self) -> List[str]:
+    def file_extensions(self) -> list[str]:
         """
         List[str]: File extensions associated with the table format.
         """
@@ -296,7 +297,7 @@ class TableFormat(enum.Enum):
         self.__file_extensions = list(file_extensions)
 
     @classmethod
-    def find_all_attr(cls, format_attribute: int) -> List["TableFormat"]:
+    def find_all_attr(cls, format_attribute: int) -> list["TableFormat"]:
         """Searching table formats that have specific attributes.
 
         Args:

@@ -3,7 +3,6 @@
 """
 
 import os.path
-from typing import Dict, Type
 
 import setuptools
 
@@ -13,10 +12,10 @@ REPOSITORY_URL = f"https://github.com/thombashi/{MODULE_NAME:s}"
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"
 
-pkg_info: Dict[str, str] = {}
+pkg_info: dict[str, str] = {}
 
 
-def get_release_command_class() -> Dict[str, Type[setuptools.Command]]:
+def get_release_command_class() -> dict[str, type[setuptools.Command]]:
     try:
         from releasecmd import ReleaseCommand
     except ImportError:
@@ -112,7 +111,7 @@ setuptools.setup(
         "Source": REPOSITORY_URL,
         "Tracker": f"{REPOSITORY_URL:s}/issues",
     },
-    python_requires=">=3.7",
+    python_requires=">=3.9",
     install_requires=setuptools_require + install_requires,
     setup_requires=setuptools_require,
     extras_require={
@@ -138,12 +137,11 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",

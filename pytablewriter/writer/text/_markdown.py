@@ -1,6 +1,6 @@
 import copy
 from enum import Enum, unique
-from typing import Any, List, Union
+from typing import Any, Union
 
 import dataproperty as dp
 import typepy
@@ -89,10 +89,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__escape_vertical_bar_char(super()._to_row_item(row_idx, col_dp, value_dp))
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         return []
 
-    def _get_header_row_separator_items(self) -> List[str]:
+    def _get_header_row_separator_items(self) -> list[str]:
         header_separator_list = []
         margin = " " * self.margin
 
@@ -113,10 +113,10 @@ class MarkdownTableWriter(IndentationTextTableWriter):
 
         return header_separator_list
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return []
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return []
 
     def _write_header(self) -> None:

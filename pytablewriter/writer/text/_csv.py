@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 import typepy
 
@@ -53,11 +53,11 @@ class CsvTableWriter(TextTableWriter):
 
         super()._write_header()
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         return []
 
-    def _get_value_row_separator_items(self) -> List[str]:
+    def _get_value_row_separator_items(self) -> list[str]:
         return []
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return []

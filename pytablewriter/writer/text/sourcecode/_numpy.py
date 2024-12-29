@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 import typepy
 
@@ -54,7 +54,7 @@ class NumpyTableWriter(PythonCodeTableWriter):
             self.import_numpy_as
         )
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         array_def = f"{self.import_numpy_as:s}.array(["
 
         if typepy.is_not_null_string(self.table_name):
@@ -62,5 +62,5 @@ class NumpyTableWriter(PythonCodeTableWriter):
 
         return [array_def]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         return ["])"]

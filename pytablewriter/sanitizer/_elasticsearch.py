@@ -3,7 +3,8 @@
 """
 
 import re
-from typing import ClassVar, List, Pattern
+from re import Pattern
+from typing import ClassVar
 
 from ._base import VarNameSanitizer
 
@@ -15,7 +16,7 @@ class ElasticsearchIndexNameSanitizer(VarNameSanitizer):
     __RE_INVALID_INDEX_NAME_HEAD: ClassVar[Pattern[str]] = re.compile("^[_]+")
 
     @property
-    def reserved_keywords(self) -> List[str]:
+    def reserved_keywords(self) -> list[str]:
         return []
 
     @property

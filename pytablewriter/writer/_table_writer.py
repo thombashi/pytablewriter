@@ -6,7 +6,8 @@ import abc
 import copy
 import math
 import warnings
-from typing import TYPE_CHECKING, Any, Dict, List, Mapping, Optional, Sequence, Union, cast
+from collections.abc import Mapping, Sequence
+from typing import TYPE_CHECKING, Any, Optional, Union, cast
 
 import typepy
 from dataproperty import (
@@ -46,7 +47,7 @@ if TYPE_CHECKING:
 
     from .._table_format import TableFormat
 
-_ts_to_flag: Dict[ThousandSeparator, int] = {
+_ts_to_flag: dict[ThousandSeparator, int] = {
     ThousandSeparator.NONE: Format.NONE,
     ThousandSeparator.COMMA: Format.THOUSAND_SEPARATOR,
     ThousandSeparator.SPACE: Format.THOUSAND_SEPARATOR,
@@ -61,7 +62,7 @@ def header_style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
     return None
 
 
-DEFAULT_STYLE_FILTERS: List[StyleFilterFunc] = [header_style_filter]
+DEFAULT_STYLE_FILTERS: list[StyleFilterFunc] = [header_style_filter]
 
 
 class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
@@ -235,14 +236,14 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__default_style: Style
         self.default_style = kwargs.get("default_style", Style())
 
-        self.__col_style_list: List[Optional[Style]] = []
+        self.__col_style_list: list[Optional[Style]] = []
         self.column_styles = kwargs.get("column_styles", [])
 
-        self._style_filters: List[StyleFilterFunc] = copy.deepcopy(DEFAULT_STYLE_FILTERS)
+        self._style_filters: list[StyleFilterFunc] = copy.deepcopy(DEFAULT_STYLE_FILTERS)
         self._enable_style_filter = True
         self._styler = self._create_styler(self)
-        self.style_filter_kwargs: Dict[str, Any] = kwargs.get("style_filter_kwargs", {})
-        self._check_style_filter_kwargs_funcs: List[CheckStyleFilterKeywordArgsFunc] = []
+        self.style_filter_kwargs: dict[str, Any] = kwargs.get("style_filter_kwargs", {})
+        self._check_style_filter_kwargs_funcs: list[CheckStyleFilterKeywordArgsFunc] = []
         self.__colorize_terminal = kwargs.get("colorize_terminal", True)
         self.__enable_ansi_escape = kwargs.get("enable_ansi_escape", True)
 
@@ -279,9 +280,9 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._is_complete_value_matrix_preprocess = False
 
     def __clear_preprocess_data(self) -> None:
-        self._column_dp_list: List[ColumnDataProperty] = []
-        self._table_headers: List[str] = []
-        self._table_value_matrix: List[Union[List[str], Dict]] = []
+        self._column_dp_list: list[ColumnDataProperty] = []
+        self._table_headers: list[str] = []
+        self._table_value_matrix: list[Union[list[str], dict]] = []
         self._table_value_dp_matrix: Sequence[Sequence[DataProperty]] = []
 
     @property
@@ -337,7 +338,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._table_name = value
 
     @property
-    def type_hints(self) -> List[TypeHint]:
+    def type_hints(self) -> list[TypeHint]:
         """
         Type hints for each column of the tabular data.
         Writers convert data for each column using the type hints information
@@ -414,7 +415,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     @property
-    def column_styles(self) -> List[Optional[Style]]:
+    def column_styles(self) -> list[Optional[Style]]:
         """List[Optional[Style]]: |Style| for each column."""
 
         return self.__col_style_list
@@ -461,7 +462,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self.__clear_preprocess()
 
     @property
-    def _quoting_flags(self) -> Dict[Typecode, bool]:
+    def _quoting_flags(self) -> dict[Typecode, bool]:
         return self._dp_extractor.quoting_flags
 
     @_quoting_flags.setter

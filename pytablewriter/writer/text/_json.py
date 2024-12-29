@@ -1,6 +1,6 @@
 import copy
 from textwrap import indent
-from typing import Any, List
+from typing import Any
 
 import dataproperty
 import typepy
@@ -154,13 +154,13 @@ class JsonTableWriter(IndentationTextTableWriter):
 
         self._is_complete_value_matrix_preprocess = True
 
-    def _get_opening_row_items(self) -> List[str]:
+    def _get_opening_row_items(self) -> list[str]:
         if typepy.is_not_null_string(self.table_name):
             return [f'{{ "{MultiByteStrDecoder(self.table_name).unicode_str:s}" : [']
 
         return ["["]
 
-    def _get_closing_row_items(self) -> List[str]:
+    def _get_closing_row_items(self) -> list[str]:
         if typepy.is_not_null_string(self.table_name):
             return ["\n]}"]
 

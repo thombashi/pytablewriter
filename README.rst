@@ -752,7 +752,7 @@ https://pytablewriter.rtfd.io/en/latest/pages/examples/index.html
 
 Dependencies
 ============
-- Python 3.7+
+- Python 3.9+
 - `Python package dependencies (automatically installed) <https://github.com/thombashi/pytablewriter/network/dependencies>`__
 
 
