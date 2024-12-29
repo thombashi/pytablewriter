@@ -3,6 +3,7 @@
 """
 
 import os.path
+import re
 
 import setuptools
 
@@ -24,11 +25,16 @@ def get_release_command_class() -> dict[str, type[setuptools.Command]]:
     return {"release": ReleaseCommand}
 
 
+def make_long_description() -> str:
+    # ref: https://github.com/pypa/readme_renderer/issues/304
+    re_exclude = re.compile(r"\s*:scale:\s*\d+")
+
+    with open("README.rst", encoding=ENCODING) as f:
+        return "".join([line for line in f if not re_exclude.search(line)])
+
+
 with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
     exec(f.read(), pkg_info)
-
-with open("README.rst", encoding=ENCODING) as f:
-    long_description = f.read()
 
 with open(os.path.join("docs", "pages", "introduction", "summary.txt"), encoding=ENCODING) as f:
     summary = f.read().strip()
@@ -100,7 +106,7 @@ setuptools.setup(
         "TOML",
     ],
     license=pkg_info["__license__"],
-    long_description=long_description,
+    long_description=make_long_description(),
     long_description_content_type="text/x-rst",
     packages=setuptools.find_packages(exclude=["test*"]),
     package_data={MODULE_NAME: ["py.typed"]},
