@@ -11,7 +11,8 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
     Interface class for writing a table.
     """
 
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def format_name(self) -> str:  # pragma: no cover
         """Format name for the writer.
 
@@ -19,7 +20,8 @@ class TableWriterInterface(metaclass=abc.ABCMeta):
             |str|
         """
 
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def support_split_write(self) -> bool:  # pragma: no cover
         """Indicates whether the writer class supports iterative table writing (``write_table_iter``) method.
 

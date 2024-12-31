@@ -11,11 +11,13 @@ from .._msgfy import to_error_message
 
 
 class ExcelWorkbookInterface(metaclass=abc.ABCMeta):
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def workbook(self) -> Any:  # pragma: no cover
         pass
 
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def file_path(self) -> Optional[str]:  # pragma: no cover
         pass
 

@@ -8,7 +8,8 @@ from pathvalidate import validate_pathtype
 
 
 class NameSanitizer(metaclass=abc.ABCMeta):
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def reserved_keywords(self) -> list[str]:  # pragma: no cover
         pass
 

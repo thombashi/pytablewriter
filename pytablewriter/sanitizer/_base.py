@@ -17,11 +17,13 @@ def _preprocess(name: str) -> str:
 
 
 class VarNameSanitizer(NameSanitizer):
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def _invalid_var_name_head_re(self) -> Pattern[str]:  # pragma: no cover
         pass
 
-    @abc.abstractproperty
+    @property
+    @abc.abstractmethod
     def _invalid_var_name_re(self) -> Pattern[str]:  # pragma: no cover
         pass
 
