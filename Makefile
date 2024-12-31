@@ -85,10 +85,10 @@ setup-ci:
 .PHONY: setup-shellcheck
 setup-shellcheck: $(SHELLCHECK_CACHE_DIR)
 
-.PHONY: setup
-setup: setup-actionlint setup-ci setup-shellcheck
-	@$(PYTHON) -m pip install --upgrade -q --disable-pip-version-check -e .[test] releasecmd
-	@$(PYTHON) -m pip check
+.PHONY: setup-dev
+setup-dev: setup-actionlint setup-ci setup-shellcheck
+	$(PYTHON) -m pip install --upgrade -q --disable-pip-version-check -e .[test]
+	$(PYTHON) -m pip check
 
 .PHONY: test
 test:
