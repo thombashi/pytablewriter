@@ -1,3 +1,25 @@
+<a id="v1.2.1"></a>
+# [v1.2.1](https://github.com/thombashi/pytablewriter/releases/tag/v1.2.1) - 2025-01-01
+
+## What's Changed
+* Add support for Python 3.13 and drop EOL 3.7-3.8 by [@hugovk](https://github.com/hugovk) in [#65](https://github.com/thombashi/pytablewriter/pull/65)
+* Fix README rendering on PyPI (Thanks to [@hugovk](https://github.com/hugovk))
+  * [#65 (comment)](https://github.com/thombashi/pytablewriter/pull/65#issuecomment-2480608452)
+* Add GitHub Actions workflows for building and publishing to PyPI/TestPyPI and signing with sigstore
+* Refactor deprecated `@abstractproperty` to use `@property` and `@abstractmethod` decorators
+* Improve type annotations
+* Modify to use `setuptools_scm` for package build
+* Bump minimum version of `DataProperty` to `1.1.0`
+* Bump actions/setup-python from 4 to 5 by [@dependabot](https://github.com/dependabot) in [#61](https://github.com/thombashi/pytablewriter/pull/61)
+
+## New Contributors
+* [@dependabot](https://github.com/dependabot) made their first contribution in [#61](https://github.com/thombashi/pytablewriter/pull/61)
+
+**Full Changelog**: https://github.com/thombashi/pytablewriter/compare/v1.2.0...v1.2.1
+
+[Changes][v1.2.1]
+
+
 <a id="v1.2.0"></a>
 # [v1.2.0](https://github.com/thombashi/pytablewriter/releases/tag/v1.2.0) - 2023-10-08
 
@@ -1103,6 +1125,7 @@
 [Changes][v0.1.0]
 
 
+[v1.2.1]: https://github.com/thombashi/pytablewriter/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/thombashi/pytablewriter/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/thombashi/pytablewriter/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/thombashi/pytablewriter/compare/v0.64.2...v1.0.0
