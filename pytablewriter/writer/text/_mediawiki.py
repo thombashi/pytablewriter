@@ -65,7 +65,7 @@ class MediaWikiTableWriter(TextTableWriter):
             row,
             [
                 self.__modify_table_element(value, value_dp)
-                for value, value_dp, in zip(values, value_dp_list)
+                for value, value_dp in zip(values, value_dp_list)
             ],
         )
 

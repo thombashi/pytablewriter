@@ -115,7 +115,13 @@ class Test_PandasDataFramePickleWriter_dump:
     def test_normal_single_table(self, tmpdir):
         test_filepath = str(tmpdir.join("test.pkl"))
         data = TableData(
-            "tablename", ["ha", "hb", "hc"], [[1.0, 2.0, 3.0], [11.0, 12.0, 13.0], [1.0, 2.0, 3.0]]
+            "tablename",
+            ["ha", "hb", "hc"],
+            [
+                [1.0, 2.0, 3.0],
+                [11.0, 12.0, 13.0],
+                [1.0, 2.0, 3.0],
+            ],
         )
 
         writer = ptw.PandasDataFramePickleWriter()
@@ -130,7 +136,14 @@ class Test_PandasDataFramePickleWriter_dump:
 
     def test_normal_multi_table(self, tmpdir):
         test_filepath = str(tmpdir.join("test.pkl"))
-        data = TableData("first", ["ha1", "hb1", "hc1"], [[1.0, 2.0, 3.0], [11.0, 12.0, 13.0]])
+        data = TableData(
+            "first",
+            ["ha1", "hb1", "hc1"],
+            [
+                [1.0, 2.0, 3.0],
+                [11.0, 12.0, 13.0],
+            ],
+        )
         writer = ptw.PandasDataFramePickleWriter()
 
         writer.from_tabledata(data)

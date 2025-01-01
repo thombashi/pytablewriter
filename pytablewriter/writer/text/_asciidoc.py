@@ -92,7 +92,7 @@ class AsciiDocTableWriter(TextTableWriter):
             row,
             [
                 self.__modify_row_element(row, col_idx, value, value_dp)
-                for col_idx, (value, value_dp), in enumerate(zip(values, value_dp_list))
+                for col_idx, (value, value_dp) in enumerate(zip(values, value_dp_list))
             ],
         )
 

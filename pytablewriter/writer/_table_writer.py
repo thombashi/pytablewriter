@@ -231,7 +231,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
 
         self.iteration_length: int = kwargs.get("iteration_length", -1)
         self.write_callback = kwargs.get(
-            "write_callback", lambda _iter_count, _iter_length: None  # defaults to NOP callback
+            "write_callback",
+            lambda _iter_count, _iter_length: None,  # defaults to NOP callback
         )
         self._iter_count: Optional[int] = None
 
