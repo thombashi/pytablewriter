@@ -2,17 +2,11 @@ import importlib
 import pkgutil
 import re
 from collections.abc import Sequence
-from typing import Any, NamedTuple, Optional
+from typing import Any, NamedTuple, Optional, Protocol
 
 from .._logger import logger
 from ..style import Cell, Style
 
-
-try:
-    from typing import Protocol
-except ImportError:
-    # typing.Protocol is only available starting from Python 3.8.
-    from .._typing import Protocol  # type: ignore
 
 PLUGIN_NAME_PEFIX = "pytablewriter"
 PLUGIN_NAME_SUFFIX = "theme"

@@ -17,7 +17,6 @@ exclude = '''
     | dist
 )/
 | docs/conf.py
-| pytablewriter/_typing.py
 | setup.py
 '''
 line-length = 100
@@ -46,7 +45,6 @@ skip_glob = [
   '*/.eggs/*',
   '*/.pytype/*',
   '*/.tox/*',
-  'pytablewriter/_typing.py',
 ]
 
 [tool.coverage.run]
@@ -63,7 +61,6 @@ exclude_lines = [
   'warnings.warn',
 ]
 omit = [
-  'pytablewriter/_typing.py',
 ]
 precision = 1
 show_missing = true
