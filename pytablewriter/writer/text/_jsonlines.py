@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Final
 
 from ._json import JsonTableWriter
 
@@ -43,7 +43,7 @@ class JsonLinesTableWriter(JsonTableWriter):
             :ref:`example-jsonl-writer`
         """
 
-        sort_keys = kwargs.get("sort_keys", False)
+        sort_keys: Final = kwargs.get("sort_keys", False)
 
         with self._logger:
             self._verify_property()

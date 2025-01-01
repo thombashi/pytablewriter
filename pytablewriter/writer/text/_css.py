@@ -1,5 +1,5 @@
 import copy
-from typing import Any, cast
+from typing import Any, Final, cast
 
 from dataproperty import NOT_QUOTING_FLAGS, DataProperty
 from pathvalidate import replace_symbol
@@ -16,7 +16,7 @@ class CssTableWriter(IndentationTextTableWriter):
     """
 
     FORMAT_NAME = "css"
-    MARGIN_PIXEL = 6
+    MARGIN_PIXEL: Final = 6
 
     @property
     def format_name(self) -> str:

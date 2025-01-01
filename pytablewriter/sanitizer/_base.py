@@ -5,6 +5,7 @@
 import abc
 import re
 from re import Pattern
+from typing import Final
 
 from pathvalidate.error import ErrorReason, ValidationError
 from typepy import is_null_string
@@ -34,7 +35,7 @@ class VarNameSanitizer(NameSanitizer):
         var_name = self._invalid_var_name_re.sub(replacement_text, self._str)
 
         # delete invalid char(s) in the beginning of the variable name
-        is_require_remove_head = any(
+        is_require_remove_head: Final = any(
             [
                 is_null_string(replacement_text),
                 self._invalid_var_name_head_re.search(replacement_text) is not None,
@@ -64,7 +65,7 @@ class VarNameSanitizer(NameSanitizer):
     def _validate(self, value: str) -> None:
         self._validate_null_string(value)
 
-        unicode_var_name = _preprocess(value)
+        unicode_var_name: Final = _preprocess(value)
 
         if self._is_reserved_keyword(unicode_var_name):
             raise ValidationError(

@@ -1,7 +1,7 @@
 import copy
 import re
 from collections.abc import Sequence
-from typing import Any
+from typing import Any, Final
 
 import dataproperty as dp
 import typepy
@@ -21,7 +21,7 @@ class MediaWikiTableWriter(TextTableWriter):
     """
 
     FORMAT_NAME = "mediawiki"
-    __RE_TABLE_SEQUENCE = re.compile(r"^[\s]+[*|#]+")
+    __RE_TABLE_SEQUENCE: Final = re.compile(r"^[\s]+[*|#]+")
 
     @property
     def format_name(self) -> str:
@@ -88,7 +88,7 @@ class MediaWikiTableWriter(TextTableWriter):
     def _apply_style_to_header_item(
         self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
     ) -> str:
-        value = self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        value: Final = self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
         str_format = "! {{:{:s}{:s}}}".format(
             get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )

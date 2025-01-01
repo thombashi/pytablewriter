@@ -4,16 +4,16 @@
 
 import re
 from re import Pattern
-from typing import ClassVar
+from typing import Final
 
 from ._base import VarNameSanitizer
 
 
 class ElasticsearchIndexNameSanitizer(VarNameSanitizer):
-    __RE_INVALID_INDEX_NAME: ClassVar[Pattern[str]] = re.compile(
+    __RE_INVALID_INDEX_NAME: Final[Pattern[str]] = re.compile(
         "[" + re.escape('\\/*?"<>|,"') + r"\s]+"
     )
-    __RE_INVALID_INDEX_NAME_HEAD: ClassVar[Pattern[str]] = re.compile("^[_]+")
+    __RE_INVALID_INDEX_NAME_HEAD: Final[Pattern[str]] = re.compile("^[_]+")
 
     @property
     def reserved_keywords(self) -> list[str]:

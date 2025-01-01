@@ -1,6 +1,6 @@
 import copy
 from collections.abc import Sequence
-from typing import Any
+from typing import Any, Final
 
 import dataproperty as dp
 import typepy
@@ -97,7 +97,7 @@ class AsciiDocTableWriter(TextTableWriter):
         )
 
     def _get_opening_row_items(self) -> list[str]:
-        cols = ", ".join(
+        cols: Final = ", ".join(
             f"{get_align_char(col_dp.align)}{col_dp.ascii_char_width}"
             for col_dp in self._column_dp_list
         )
@@ -131,8 +131,8 @@ class AsciiDocTableWriter(TextTableWriter):
     def __modify_row_element(
         self, row_idx: int, col_idx: int, value: str, value_dp: DataProperty
     ) -> str:
-        col_dp = self._column_dp_list[col_idx]
-        style = self._fetch_style(row_idx, col_dp, value_dp)
+        col_dp: Final = self._column_dp_list[col_idx]
+        style: Final = self._fetch_style(row_idx, col_dp, value_dp)
         align = col_dp.align
 
         if style and style.align and style.align != align:

@@ -3,6 +3,7 @@
 """
 
 import re
+from typing import Final
 
 from pathvalidate import validate_pathtype
 from pathvalidate.error import ErrorReason, ValidationError
@@ -10,11 +11,13 @@ from pathvalidate.error import ErrorReason, ValidationError
 from ._base import _preprocess
 
 
-__MAX_SHEET_NAME_LEN = 31
+__MAX_SHEET_NAME_LEN: Final = 31
 
-__INVALID_EXCEL_CHARS = "[]:*?/\\"
+__INVALID_EXCEL_CHARS: Final = "[]:*?/\\"
 
-__RE_INVALID_EXCEL_SHEET_NAME = re.compile(f"[{re.escape(__INVALID_EXCEL_CHARS):s}]", re.UNICODE)
+__RE_INVALID_EXCEL_SHEET_NAME: Final = re.compile(
+    f"[{re.escape(__INVALID_EXCEL_CHARS):s}]", re.UNICODE
+)
 
 
 def validate_excel_sheet_name(sheet_name: str) -> None:

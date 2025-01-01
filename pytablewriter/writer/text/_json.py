@@ -1,6 +1,6 @@
 import copy
 from textwrap import indent
-from typing import Any
+from typing import Any, Final
 
 import dataproperty
 import typepy
@@ -90,7 +90,7 @@ class JsonTableWriter(IndentationTextTableWriter):
         self.stream.write("\n")
 
     def _write_table(self, **kwargs: Any) -> None:
-        sort_keys = kwargs.get("sort_keys", False)
+        sort_keys: Final = kwargs.get("sort_keys", False)
 
         self._preprocess()
 

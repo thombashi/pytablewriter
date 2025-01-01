@@ -1,6 +1,6 @@
 import copy
 import re
-from typing import Any
+from typing import Any, Final
 
 import dataproperty as dp
 import typepy
@@ -17,7 +17,7 @@ class LatexWriter(IndentationTextTableWriter):
     A base writer class for LaTeX format.
     """
 
-    _RE_MATH_PARTS = re.compile(r"^\\?[a-zA-Z]+$")
+    _RE_MATH_PARTS: Final = re.compile(r"^\\?[a-zA-Z]+$")
 
     @property
     def support_split_write(self) -> bool:
@@ -104,7 +104,7 @@ class LatexMatrixWriter(LatexWriter):
     """
 
     FORMAT_NAME = "latex_matrix"
-    _RE_VAR = re.compile(r"^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
+    _RE_VAR: Final = re.compile(r"^[a-zA-Z]+_\{[a-zA-Z0-9]+\}$")
 
     @property
     def format_name(self) -> str:
