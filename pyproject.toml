@@ -86,6 +86,19 @@ warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
+[tool.pyright]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    ".tox",
+    ".venv",
+    "_build",
+    "_sandbox",
+    "build",
+    "dist"
+]
+pythonVersion = "3.9"
+
 [tool.pytest.ini_options]
 testpaths = [
   "test",
