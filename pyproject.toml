@@ -1,6 +1,13 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = ["setuptools>=61.0"]
+requires = [
+  "setuptools>=64",
+  "setuptools_scm>=8",
+]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"
 
 [tool.black]
 exclude = '''

@@ -27,13 +27,30 @@ jobs:
       group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-build-pkg
       cancel-in-progress: true
     timeout-minutes: 20
-    container:
-      image: ghcr.io/thombashi/python-ci:3.13
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            setup.py
+            **/*requirements.txt
+            tox.ini
+
+      - run: make setup-ci
 
       - run: make build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: ./dist/*
 
   build-docs:
     runs-on: ubuntu-latest
@@ -41,11 +58,23 @@ jobs:
       group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-build-docs
       cancel-in-progress: true
     timeout-minutes: 20
-    container:
-      image: ghcr.io/thombashi/python-ci:3.13
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            setup.py
+            **/*requirements.txt
+            tox.ini
+
+      - run: make setup-ci
 
       - run: make docs
 
