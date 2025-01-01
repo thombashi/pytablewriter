@@ -119,6 +119,7 @@ dmypy.json
 .tool-versions
 
 _sandbox/
+bin/
 *_profile
 Untitled.ipynb
 

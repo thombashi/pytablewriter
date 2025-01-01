@@ -4,12 +4,13 @@
 
 import re
 from re import Pattern
+from typing import Final
 
 from ._base import VarNameSanitizer
 
 
 class PythonVarNameSanitizer(VarNameSanitizer):
-    __PYTHON_RESERVED_KEYWORDS = [
+    __PYTHON_RESERVED_KEYWORDS: Final = [
         "and",
         "del",
         "from",
@@ -42,7 +43,7 @@ class PythonVarNameSanitizer(VarNameSanitizer):
         "lambda",
         "try",
     ]
-    __PYTHON_BUILTIN_CONSTANTS = [
+    __PYTHON_BUILTIN_CONSTANTS: Final = [
         "False",
         "True",
         "None",
@@ -51,8 +52,8 @@ class PythonVarNameSanitizer(VarNameSanitizer):
         "__debug__",
     ]
 
-    __RE_INVALID_VAR_NAME = re.compile("[^a-zA-Z0-9_]")
-    __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z]+")
+    __RE_INVALID_VAR_NAME: Final = re.compile("[^a-zA-Z0-9_]")
+    __RE_INVALID_VAR_NAME_HEAD: Final = re.compile("^[^a-zA-Z]+")
 
     @property
     def reserved_keywords(self) -> list[str]:

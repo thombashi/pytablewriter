@@ -47,12 +47,8 @@ class NumpyTableWriter(PythonCodeTableWriter):
         super().__init__(**kwargs)
 
         self.import_numpy_as = "np"
-        self._dp_extractor.set_type_value(
-            typepy.Typecode.INFINITY, "{:s}.inf".format(self.import_numpy_as)
-        )
-        self._dp_extractor.set_type_value(
-            typepy.Typecode.NAN, "{:s}.nan".format(self.import_numpy_as)
-        )
+        self._dp_extractor.set_type_value(typepy.Typecode.INFINITY, f"{self.import_numpy_as:s}.inf")
+        self._dp_extractor.set_type_value(typepy.Typecode.NAN, f"{self.import_numpy_as:s}.nan")
 
     def _get_opening_row_items(self) -> list[str]:
         array_def = f"{self.import_numpy_as:s}.array(["

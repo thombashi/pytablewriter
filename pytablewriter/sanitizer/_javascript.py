@@ -4,12 +4,13 @@
 
 import re
 from re import Pattern
+from typing import Final
 
 from ._base import VarNameSanitizer
 
 
 class JavaScriptVarNameSanitizer(VarNameSanitizer):
-    __JS_RESERVED_KEYWORDS_ES6 = [
+    __JS_RESERVED_KEYWORDS_ES6: Final = [
         "break",
         "case",
         "catch",
@@ -44,7 +45,7 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
         "with",
         "yield",
     ]
-    __JS_RESERVED_KEYWORDS_FUTURE = [
+    __JS_RESERVED_KEYWORDS_FUTURE: Final = [
         "enum",
         "implements",
         "interface",
@@ -72,10 +73,10 @@ class JavaScriptVarNameSanitizer(VarNameSanitizer):
         "transient",
         "volatile",
     ]
-    __JS_BUILTIN_CONSTANTS = ["null", "true", "false"]
+    __JS_BUILTIN_CONSTANTS: Final = ["null", "true", "false"]
 
-    __RE_INVALID_VAR_NAME = re.compile("[^a-zA-Z0-9_$]")
-    __RE_INVALID_VAR_NAME_HEAD = re.compile("^[^a-zA-Z$]+")
+    __RE_INVALID_VAR_NAME: Final = re.compile("[^a-zA-Z0-9_$]")
+    __RE_INVALID_VAR_NAME_HEAD: Final = re.compile("^[^a-zA-Z$]+")
 
     @property
     def reserved_keywords(self) -> list[str]:

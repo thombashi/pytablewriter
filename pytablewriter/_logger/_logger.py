@@ -2,7 +2,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import dataproperty
 from mbstrdecoder import MultiByteStrDecoder
@@ -13,7 +13,7 @@ from ._null_logger import NullLogger  # type: ignore
 if TYPE_CHECKING:
     from ..writer import AbstractTableWriter
 
-MODULE_NAME = "pytablewriter"
+MODULE_NAME: Final = "pytablewriter"
 
 try:
     from loguru import logger

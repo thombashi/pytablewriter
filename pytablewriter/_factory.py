@@ -4,7 +4,7 @@
 
 import os
 from itertools import chain
-from typing import Any
+from typing import Any, Final
 
 import typepy
 
@@ -66,7 +66,7 @@ class TableWriterFactory:
             |WriterNotFoundError_desc| the file extension.
         """
 
-        ext = os.path.splitext(file_extension)[1]
+        ext: Final = os.path.splitext(file_extension)[1]
         if typepy.is_null_string(ext):
             file_extension = file_extension
         else:

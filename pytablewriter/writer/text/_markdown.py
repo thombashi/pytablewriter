@@ -1,6 +1,6 @@
 import copy
 from enum import Enum, unique
-from typing import Any, Union
+from typing import Any, Final, Union
 
 import dataproperty as dp
 import typepy
@@ -50,7 +50,7 @@ class MarkdownTableWriter(IndentationTextTableWriter):
     """
 
     FORMAT_NAME = "markdown"
-    DEFAULT_FLAVOR = MarkdownFlavor.COMMON_MARK
+    DEFAULT_FLAVOR: Final = MarkdownFlavor.COMMON_MARK
 
     @property
     def format_name(self) -> str:

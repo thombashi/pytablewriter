@@ -1,7 +1,7 @@
 import abc
 import copy
 import warnings
-from typing import IO, TYPE_CHECKING, Any, ClassVar, Optional, Union, cast
+from typing import IO, TYPE_CHECKING, Any, Final, Optional, Union, cast
 
 import dataproperty
 import typepy
@@ -338,18 +338,18 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             - |nan|: written as ``NaN``
     """
 
-    MAX_CELL_WIDTH: ClassVar[int] = 60
+    MAX_CELL_WIDTH: Final[int] = 60
 
     class TableFormat:
-        HEADER = "header"
-        CELL = "cell"
-        NAN = "nan"
+        HEADER: Final = "header"
+        CELL: Final = "cell"
+        NAN: Final = "nan"
 
     class Default:
-        FONT_NAME: ClassVar[str] = "MS Gothic"
-        FONT_SIZE: ClassVar[int] = 9
+        FONT_NAME: Final[str] = "MS Gothic"
+        FONT_SIZE: Final[int] = 9
 
-        CELL_FORMAT: dict[str, Union[int, str, bool]] = {
+        CELL_FORMAT: Final[dict[str, Union[int, str, bool]]] = {
             "font_name": FONT_NAME,
             "font_size": FONT_SIZE,
             "align": "top",
@@ -359,7 +359,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             "bottom": 1,
             "right": 1,
         }
-        HEADER_FORMAT: dict[str, Union[int, str, bool]] = {
+        HEADER_FORMAT: Final[dict[str, Union[int, str, bool]]] = {
             "font_name": FONT_NAME,
             "font_size": FONT_SIZE,
             "bg_color": "#DFDFFF",
@@ -367,7 +367,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
             "left": 1,
             "right": 1,
         }
-        NAN_FORMAT: dict[str, Union[int, str, bool]] = {
+        NAN_FORMAT: Final[dict[str, Union[int, str, bool]]] = {
             "font_name": FONT_NAME,
             "font_size": FONT_SIZE,
             "font_color": "silver",

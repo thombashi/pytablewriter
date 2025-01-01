@@ -2,15 +2,15 @@ import importlib
 import pkgutil
 import re
 from collections.abc import Sequence
-from typing import Any, NamedTuple, Optional, Protocol
+from typing import Any, Final, NamedTuple, Optional, Protocol
 
 from .._logger import logger
 from ..style import Cell, Style
 
 
-PLUGIN_NAME_PEFIX = "pytablewriter"
-PLUGIN_NAME_SUFFIX = "theme"
-KNOWN_PLUGINS = (
+PLUGIN_NAME_PEFIX: Final = "pytablewriter"
+PLUGIN_NAME_SUFFIX: Final = "theme"
+KNOWN_PLUGINS: Final = (
     f"{PLUGIN_NAME_PEFIX}_altrow_{PLUGIN_NAME_SUFFIX}",
     f"{PLUGIN_NAME_PEFIX}_altcol_{PLUGIN_NAME_SUFFIX}",
 )
@@ -41,11 +41,11 @@ def list_themes() -> Sequence[str]:
 
 
 def load_ptw_plugins() -> dict[str, Theme]:
-    plugin_regexp = re.compile(
+    plugin_regexp: Final = re.compile(
         rf"^{PLUGIN_NAME_PEFIX}[_-].+[_-]{PLUGIN_NAME_SUFFIX}", re.IGNORECASE
     )
 
-    discovered_plugins = {
+    discovered_plugins: Final = {
         name: importlib.import_module(name)
         for _finder, name, _ispkg in pkgutil.iter_modules()
         if plugin_regexp.search(name) is not None
@@ -72,8 +72,8 @@ def load_ptw_plugins() -> dict[str, Theme]:
 
 
 def fetch_theme(plugin_name: str) -> Theme:
-    loaded_themes = load_ptw_plugins()
-    theme_regexp = re.compile(
+    loaded_themes: Final = load_ptw_plugins()
+    theme_regexp: Final = re.compile(
         rf"^{PLUGIN_NAME_PEFIX}[_-]{plugin_name}[_-]{PLUGIN_NAME_SUFFIX}", re.IGNORECASE
     )
     matched_theme = None

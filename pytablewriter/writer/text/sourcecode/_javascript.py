@@ -1,6 +1,6 @@
 import io
 from datetime import datetime
-from typing import Any
+from typing import Any, Final
 
 from dataproperty import ColumnDataProperty, DataProperty, DefaultValue
 from typepy import StrictLevel, Typecode
@@ -59,8 +59,8 @@ class JavaScriptTableWriter(SourceCodeTableWriter):
     """
 
     FORMAT_NAME = "javascript"
-    __VALID_VAR_DECLARATION = ("var", "let", "const")
-    __NONE_VALUE_DP = DataProperty("null")
+    __VALID_VAR_DECLARATION: Final = ("var", "let", "const")
+    __NONE_VALUE_DP: Final = DataProperty("null")
 
     @property
     def format_name(self) -> str:

@@ -4,14 +4,15 @@
 
 import os.path
 import re
+from typing import Final
 
 import setuptools
 
 
-MODULE_NAME = "pytablewriter"
-REPOSITORY_URL = f"https://github.com/thombashi/{MODULE_NAME:s}"
-REQUIREMENT_DIR = "requirements"
-ENCODING = "utf8"
+MODULE_NAME: Final = "pytablewriter"
+REPOSITORY_URL: Final = f"https://github.com/thombashi/{MODULE_NAME:s}"
+REQUIREMENT_DIR: Final = "requirements"
+ENCODING: Final = "utf8"
 
 pkg_info: dict[str, str] = {}
 
@@ -110,7 +111,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=["test*"]),
     package_data={MODULE_NAME: ["py.typed"]},
     project_urls={
-        "Changelog": f"{REPOSITORY_URL:s}/releases",
+        "Changelog": f"{REPOSITORY_URL:s}/blob/master/CHANGELOG.md",
         "Documentation": f"https://{MODULE_NAME:s}.rtfd.io/",
         "Funding": "https://github.com/sponsors/thombashi",
         "Source": REPOSITORY_URL,

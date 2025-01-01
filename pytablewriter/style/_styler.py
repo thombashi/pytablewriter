@@ -1,5 +1,5 @@
 import re
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, Final, Optional
 
 from dataproperty import Align
 from tcolorpy import Color, tcolor
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from ..writer._table_writer import AbstractTableWriter
 
 
-_align_char_mapping: dict[Align, str] = {
+_align_char_mapping: Final[dict[Align, str]] = {
     Align.AUTO: "<",
     Align.LEFT: "<",
     Align.RIGHT: ">",
@@ -112,11 +112,11 @@ class HtmlStyler(TextStyler):
 
 class LatexStyler(TextStyler):
     class Command:
-        BOLD = r"\bf"
-        ITALIC = r"\it"
-        TYPEWRITER = r"\tt"
-        UNDERLINE = r"\underline"
-        STRIKEOUT = r"\sout"
+        BOLD: Final = r"\bf"
+        ITALIC: Final = r"\it"
+        TYPEWRITER: Final = r"\tt"
+        UNDERLINE: Final = r"\underline"
+        STRIKEOUT: Final = r"\sout"
 
     def get_additional_char_width(self, style: Style) -> int:
         dummy_value = "d"

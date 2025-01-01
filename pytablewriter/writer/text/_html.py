@@ -1,6 +1,6 @@
 import copy
 import warnings
-from typing import Any, Optional, cast
+from typing import Any, Final, Optional, cast
 
 import dataproperty
 import typepy
@@ -75,7 +75,7 @@ class HtmlTableWriter(TextTableWriter):
         """
 
         tags, raw = _get_tags_module()
-        write_css: bool = kwargs.get("write_css", False)
+        write_css: Final[bool] = kwargs.get("write_css", False)
 
         with self._logger:
             try:
