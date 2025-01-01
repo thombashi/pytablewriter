@@ -3,7 +3,6 @@ PYTHON := python3
 ACTIONLINT_VERSION := v1.6.9
 SHELLCHECK_VERSION := v0.8.0
 
-AUTHOR := thombashi
 PACKAGE := pytablewriter
 
 DOCS_DIR := docs
@@ -14,6 +13,10 @@ CACHE_VERSION := 0
 PKG_CACHE_ROOT_DIR := $(HOME)/.cache/downloaded
 PKG_CACHE_DIR := $(PKG_CACHE_ROOT_DIR)/$(CACHE_VERSION)
 SHELLCHECK_CACHE_DIR := $(PKG_CACHE_DIR)/shellcheck-$(SHELLCHECK_VERSION)
+
+AUTHOR := Tsuyoshi Hombashi
+FIRST_RELEASE_YEAR := 2016
+LAST_UPDATE_YEAR := $(shell git log -1 --format=%cd --date=format:%Y)
 
 
 $(SHELLCHECK_CACHE_DIR):
@@ -31,7 +34,7 @@ actionlint: setup-actionlint
 build-remote: clean
 	@mkdir -p $(BUILD_WORK_DIR)
 	@cd $(BUILD_WORK_DIR) && \
-		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git --depth 1 && \
+		git clone https://github.com/thombashi/$(PACKAGE).git --depth 1 && \
 		cd $(PACKAGE) && \
 		$(PYTHON) -m tox -e build
 	ls -lh $(PKG_BUILD_DIR)/dist/*
@@ -98,3 +101,8 @@ test:
 .PHONY: test-py
 test-py:
 	$(PYTHON) -m tox -e py
+
+.PHONY: update-copyright
+update-copyright:
+	sed -i "s/f\"Copyright .*/f\"Copyright $(FIRST_RELEASE_YEAR)-$(LAST_UPDATE_YEAR), {__author__}\"/" $(PACKAGE)/__version__.py
+	sed -i "s/^Copyright (c) .* $(AUTHOR)/Copyright (c) $(FIRST_RELEASE_YEAR)-$(LAST_UPDATE_YEAR) $(AUTHOR)/" LICENSE
