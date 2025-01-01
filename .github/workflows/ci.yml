@@ -124,7 +124,7 @@ jobs:
 
       - run: make setup-ci
 
-      - run: make test
+      - run: make test-py
         timeout-minutes: 20
 
   coverage:

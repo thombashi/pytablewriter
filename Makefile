@@ -93,4 +93,8 @@ setup-dev: setup-actionlint setup-ci setup-shellcheck
 
 .PHONY: test
 test:
-	$(PYTHON) -m tox --verbose -e py
+	$(PYTHON) -m tox
+
+.PHONY: test-py
+test-py:
+	$(PYTHON) -m tox -e py
