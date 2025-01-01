@@ -5,6 +5,7 @@ SHELLCHECK_VERSION := v0.8.0
 
 PACKAGE := pytablewriter
 
+BIN_DIR := $(shell pwd)/bin
 DOCS_DIR := docs
 BUILD_WORK_DIR := _work
 PKG_BUILD_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)
@@ -18,6 +19,11 @@ AUTHOR := Tsuyoshi Hombashi
 FIRST_RELEASE_YEAR := 2016
 LAST_UPDATE_YEAR := $(shell git log -1 --format=%cd --date=format:%Y)
 
+
+BIN_CHANGELOG_FROM_RELEASE := $(BIN_DIR)/changelog-from-release
+$(BIN_CHANGELOG_FROM_RELEASE):
+	mkdir -p $(BIN_DIR)
+	GOBIN=$(BIN_DIR) go install github.com/rhysd/changelog-from-release/v3@latest
 
 $(SHELLCHECK_CACHE_DIR):
 	@echo "installing shellcheck $(SHELLCHECK_VERSION)"
@@ -43,6 +49,11 @@ build-remote: clean
 build: clean
 	@$(PYTHON) -m tox -e build
 	ls -lh dist/*
+
+.PHONY: changelog
+changelog: $(BIN_CHANGELOG_FROM_RELEASE)
+	$(BIN_CHANGELOG_FROM_RELEASE) > CHANGELOG.md
+	cp -a CHANGELOG.md docs/pages/CHANGELOG.md
 
 .PHONY: check
 check:
