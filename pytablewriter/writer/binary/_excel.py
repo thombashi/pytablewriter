@@ -293,12 +293,12 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             raise
 
         if col in self.__col_style_table:
-            return self.__col_style_table.get(col)
+            return self.__col_style_table.get(col)  # type: ignore
 
         try:
             col_dp = self._column_dp_list[col]
         except KeyError:
-            return {}
+            return {}  # type: ignore
 
         if col_dp.typecode not in [typepy.Typecode.REAL_NUMBER]:
             raise ValueError()
@@ -307,7 +307,7 @@ class ExcelXlsTableWriter(ExcelTableWriter):
             raise ValueError()
 
         float_digit = col_dp.minmax_decimal_places.max_value
-        if float_digit <= 0:
+        if float_digit is None or float_digit <= 0:
             raise ValueError()
 
         num_format_str = "#,{:s}0.{:s}".format("#" * int(float_digit), "0" * int(float_digit))
@@ -452,7 +452,7 @@ class ExcelXlsxTableWriter(ExcelTableWriter):
         num_props = {}
         if Integer(col_dp.minmax_decimal_places.max_value).is_type():
             float_digit = col_dp.minmax_decimal_places.max_value
-            if float_digit > 0:
+            if float_digit is not None and float_digit > 0:
                 num_props = {"num_format": "0.{:s}".format("0" * int(float_digit))}
 
         self.__col_numprops_table[col] = num_props

@@ -188,15 +188,16 @@ class ElasticsearchWriter(AbstractTableWriter):
             result = self.stream.indices.create(index=self.index_name, body=mappings)
             self._logger.logger.debug(result)
         except es.TransportError as e:
-            if e.error == "index_already_exists_exception":
-                # ignore already existing index
-                self._logger.logger.debug(to_error_message(e))
+            for error in e.errors:
+                if error == "index_already_exists_exception":
+                    # ignore already existing index
+                    self._logger.logger.debug(to_error_message(e))
             else:
                 raise
 
         for body in self._get_body():
             try:
-                self.stream.index(index=self.index_name, body=body, doc_type=self.document_type)
+                self.stream.index(index=self.index_name, body=body)
             except es.exceptions.RequestError as e:
                 self._logger.logger.error(f"{to_error_message(e)}, body={body}")
 

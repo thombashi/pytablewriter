@@ -47,11 +47,11 @@ class NumpyTableWriter(PythonCodeTableWriter):
         super().__init__(**kwargs)
 
         self.import_numpy_as = "np"
-        self._dp_extractor.type_value_map[typepy.Typecode.INFINITY] = "{:s}.inf".format(
-            self.import_numpy_as
+        self._dp_extractor.set_type_value(
+            typepy.Typecode.INFINITY, "{:s}.inf".format(self.import_numpy_as)
         )
-        self._dp_extractor.type_value_map[typepy.Typecode.NAN] = "{:s}.nan".format(
-            self.import_numpy_as
+        self._dp_extractor.set_type_value(
+            typepy.Typecode.NAN, "{:s}.nan".format(self.import_numpy_as)
         )
 
     def _get_opening_row_items(self) -> list[str]:

@@ -276,9 +276,10 @@ class TextTableWriter(AbstractTableWriter, TextWriterInterface):
         except AttributeError:
             self.stream = open(output, "w", encoding="utf-8")  # type: ignore
 
+        stash = self.enable_ansi_escape
+        self.enable_ansi_escape = False
+
         try:
-            stash = self.enable_ansi_escape
-            self.enable_ansi_escape = False
             self.write_table(**kwargs)
         finally:
             if close_after_write:

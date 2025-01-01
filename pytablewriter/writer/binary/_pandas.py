@@ -71,7 +71,7 @@ class PandasDataFramePickleWriter(AbstractBinaryTableWriter):
         pass
 
     def _write_table(self, **kwargs: Any) -> None:
-        if not self.is_opened():
+        if self.__filepath is None or not self.is_opened():
             self._logger.logger.error("required to open(file_path) first.")
             return
 

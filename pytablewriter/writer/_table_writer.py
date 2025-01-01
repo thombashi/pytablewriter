@@ -6,7 +6,7 @@ import abc
 import copy
 import math
 import warnings
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from typing import TYPE_CHECKING, Any, Optional, Union, cast
 
 import typepy
@@ -140,6 +140,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         - second argument: a total number of iteration
     """
 
+    FORMAT_NAME = "abstract"
+
     @property
     def margin(self) -> int:
         raise NotImplementedError()
@@ -200,7 +202,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         self._dp_extractor.min_column_width = 1
         self._dp_extractor.strip_str_header = '"'
         self._dp_extractor.preprocessor = Preprocessor(dequote=kwargs.get("dequote", True))
-        self._dp_extractor.type_value_map[Typecode.NONE] = ""
+        self._dp_extractor.set_type_value(Typecode.NONE, "")
         self._dp_extractor.matrix_formatting = MatrixFormatting.HEADER_ALIGNED
         self._dp_extractor.update_strict_level_map({Typecode.BOOL: 1})
 
@@ -312,7 +314,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._dp_extractor.max_workers
 
     @max_workers.setter
-    def max_workers(self, value: Optional[int]) -> None:
+    def max_workers(self, value: int) -> None:
         self._dp_extractor.max_workers = value
 
     @property
@@ -466,7 +468,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         return self._dp_extractor.quoting_flags
 
     @_quoting_flags.setter
-    def _quoting_flags(self, value: Mapping[Typecode, bool]) -> None:
+    def _quoting_flags(self, value: dict[Typecode, bool]) -> None:
         self._dp_extractor.quoting_flags = value
         self.__clear_preprocess()
 
@@ -627,7 +629,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         except ImportError:
             try:
                 # for pytest 5.4.1 or older versions
-                from _pytest.compat import CaptureIO
+                from _pytest.compat import CaptureIO  # type: ignore
 
                 if isinstance(self.stream, CaptureIO):
                     # avoid closing streams for pytest
@@ -781,26 +783,28 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
             :ref:`example-from-pandas-dataframe`
         """
 
-        if typepy.String(dataframe).is_type():
+        if isinstance(dataframe, str):
             import pandas as pd
 
-            dataframe = pd.read_pickle(dataframe)
+            df = pd.read_pickle(dataframe)
+        else:
+            df = dataframe
 
-        self.headers = list(dataframe.columns.values)
+        self.headers = list(df.columns.values)
 
         if not self.type_hints or overwrite_type_hints:
-            self.type_hints = [extract_typepy_from_dtype(dtype) for dtype in dataframe.dtypes]
+            self.type_hints = [extract_typepy_from_dtype(dtype) for dtype in df.dtypes]  # type: ignore
 
         if add_index_column:
-            self.headers = [" "] + self.headers
+            index_header = str(df.index.name) if df.index.name else " "
+            self.headers = [index_header] + self.headers
             if self.type_hints:
                 self.type_hints = [Integer] + self.type_hints
             self.value_matrix = [
-                [index] + row
-                for index, row in zip(dataframe.index.tolist(), dataframe.values.tolist())
+                [index] + list(row) for index, row in zip(df.index.tolist(), df.values.tolist())
             ]
         else:
-            self.value_matrix = dataframe.values.tolist()
+            self.value_matrix = df.values.tolist()
 
     def from_series(self, series: "pandas.Series", add_index_column: bool = True) -> None:
         """
@@ -820,7 +824,7 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         """
 
         if series.name:
-            self.headers = [series.name]
+            self.headers = [str(series.name)]
         else:
             self.headers = ["value"]
 
@@ -841,7 +845,8 @@ class AbstractTableWriter(TableWriterInterface, metaclass=abc.ABCMeta):
         Set tabular attributes to the writer from :py:class:`tablib.Dataset`.
         """
 
-        self.headers = tablib_dataset.headers
+        if tablib_dataset.headers:
+            self.headers = tablib_dataset.headers
         self.value_matrix = [row for row in tablib_dataset]
 
     def from_writer(

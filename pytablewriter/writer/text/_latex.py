@@ -183,7 +183,7 @@ class LatexTableWriter(LatexWriter):
         super().__init__(**kwargs)
 
         self.char_right_side_row = r" \\ \hline"
-        self._dp_extractor.type_value_map[Typecode.INFINITY] = r"\infty"
+        self._dp_extractor.set_type_value(Typecode.INFINITY, r"\infty")
 
     def _get_opening_row_items(self) -> list[str]:
         return [

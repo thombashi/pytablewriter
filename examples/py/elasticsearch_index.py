@@ -67,7 +67,7 @@ def main() -> None:
     ]
 
     # delete existing index ---
-    es.indices.delete(index=writer.index_name, ignore=404)
+    es.indices.delete(index=writer.index_name)
 
     # create an index and put data ---
     writer.write_table()
@@ -76,13 +76,11 @@ def main() -> None:
     es.indices.refresh(index=writer.index_name)
 
     print("----- mappings -----")
-    response = es.indices.get_mapping(index=writer.index_name, doc_type="table")
+    response = es.indices.get_mapping(index=writer.index_name)
     print(f"{json.dumps(response, indent=4)}\n")
 
     print("----- documents -----")
-    response = es.search(
-        index=writer.index_name, doc_type="table", body={"query": {"match_all": {}}}
-    )
+    response = es.search(index=writer.index_name, body={"query": {"match_all": {}}})
     for hit in response["hits"]["hits"]:
         print(json.dumps(hit["_source"], indent=4))
 

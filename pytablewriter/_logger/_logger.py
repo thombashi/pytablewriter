@@ -111,7 +111,7 @@ class WriterLogger:
     def __get_typehint_message(self) -> str:
         try:
             return "type-hints={}".format(
-                [type_hint(None).typename for type_hint in self.__writer.type_hints]
+                [type_hint(None, 0).typename for type_hint in self.__writer.type_hints if type_hint]
             )
         except (TypeError, AttributeError):
             return "type-hints=[]"

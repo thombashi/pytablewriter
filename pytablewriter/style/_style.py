@@ -318,14 +318,14 @@ class Style:
             self.__font_style = normalize_enum(font_style, FontStyle, default=FontStyle.NORMAL)
         elif initialize:
             self.__font_style = FontStyle.NORMAL
-        self.__validate_attr("font_style", FontStyle)
+        self.__validate_attr("font_style", (FontStyle,))
 
         font_weight = self.__kwargs.pop("font_weight", None)
         if font_weight:
             self.__font_weight = normalize_enum(font_weight, FontWeight, default=FontWeight.NORMAL)
         elif initialize:
             self.__font_weight = FontWeight.NORMAL
-        self.__validate_attr("font_weight", FontWeight)
+        self.__validate_attr("font_weight", (FontWeight,))
 
     def __update_align(self, initialize: bool) -> None:
         align = self.__kwargs.pop("align", None)
@@ -333,14 +333,14 @@ class Style:
             self.__align = normalize_enum(align, Align, default=Align.AUTO)
         elif initialize:
             self.__align = Align.AUTO
-        self.__validate_attr("align", Align)
+        self.__validate_attr("align", (Align,))
 
         valign = self.__kwargs.pop("vertical_align", None)
         if valign:
             self.__valign = normalize_enum(valign, VerticalAlign, default=VerticalAlign.BASELINE)
         elif initialize:
             self.__valign = VerticalAlign.BASELINE
-        self.__validate_attr("vertical_align", VerticalAlign)
+        self.__validate_attr("vertical_align", (VerticalAlign,))
 
     def __update_misc(self, initialize: bool) -> None:
         padding = self.__kwargs.pop("padding", None)
@@ -356,21 +356,18 @@ class Style:
             )
         elif initialize:
             self.__decoration_line = DecorationLine.NONE
-        self.__validate_attr("decoration_line", DecorationLine)
+        self.__validate_attr("decoration_line", (DecorationLine,))
 
         thousand_separator = self.__kwargs.pop("thousand_separator", None)
         if thousand_separator:
             self.__thousand_separator = _normalize_thousand_separator(thousand_separator)
         elif initialize:
             self.__thousand_separator = ThousandSeparator.NONE
-        self.__validate_attr("thousand_separator", ThousandSeparator)
+        self.__validate_attr("thousand_separator", (ThousandSeparator,))
 
-    def __validate_attr(self, attr_name: str, expected_type: Any) -> None:
+    def __validate_attr(self, attr_name: str, expected_types: tuple[type, ...]) -> None:
         value = getattr(self, attr_name)
-        if isinstance(expected_type, (list, tuple)):
-            expected = " or ".join(c.__name__ for c in expected_type)
-        else:
-            expected = expected_type.__name__
+        expected = " or ".join(c.__name__ for c in expected_types)
 
-        if not isinstance(value, expected_type):
+        if not isinstance(value, expected_types):
             raise TypeError(f"{attr_name} must be instance of {expected}: actual={type(value)}")

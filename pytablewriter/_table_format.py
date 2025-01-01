@@ -261,7 +261,7 @@ class TableFormat(enum.Enum):
         return self.__names
 
     @property
-    def writer_class(self) -> AbstractTableWriter:
+    def writer_class(self) -> type[AbstractTableWriter]:
         """
         Type[AbstractTableWriter]: Table writer class object associated with the table format.
         """
@@ -287,7 +287,7 @@ class TableFormat(enum.Enum):
     def __init__(
         self,
         names: Sequence[str],
-        writer_class: AbstractTableWriter,
+        writer_class: type[AbstractTableWriter],
         format_attribute: int,
         file_extensions: Sequence[str],
     ) -> None:
