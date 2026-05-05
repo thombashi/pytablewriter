@@ -1405,6 +1405,86 @@ class Test_MarkdownTableWriter_write_table:
 
         assert out == expected
 
+    def test_normal_without_padding(self, capsys):
+        writer = table_writer_class(
+            headers=["row", "a longer column name", "a"],
+            value_matrix=[
+                [1, "some long value in this cell", "b"],
+                [2, "medium", "c"]
+            ],
+            is_padding=False,
+        )
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            |row|a longer column name|a|
+            |--:|---|---|
+            |1|some long value in this cell|b|
+            |2|medium|c|
+            """
+        )
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
+    def test_normal_margin_without_padding(self, capsys):
+        writer = table_writer_class(
+            headers=["row", "a longer column name", "a"],
+            value_matrix=[
+                [1, "some long value in this cell", "b"],
+                [2, "medium", "c"]
+            ],
+            is_padding=False,
+            margin=2,
+        )
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            |  row  |  a longer column name  |  a  |
+            |  --:  |  ---  |  ---  |
+            |  1  |  some long value in this cell  |  b  |
+            |  2  |  medium  |  c  |
+            """
+        )
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
+    def test_normal_align_without_padding(self, capsys):
+        writer = table_writer_class(
+            headers=["a", "b", "c", "d"],
+            value_matrix=[
+                [1, "2", "three", 4],
+            ],
+            is_padding=False,
+            column_styles=[
+                Style(align=Align.LEFT),
+                Style(align=Align.RIGHT),
+                Style(align=Align.CENTER),
+                Style(align=Align.AUTO),
+            ]
+        )
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            |a|b|c|d|
+            |---|--:|:-:|--:|
+            |1|2|three|4|
+            """
+        )
+
+        out, err = capsys.readouterr()
+        print_test_result(expected=expected, actual=out, error=err)
+
+        assert out == expected
+
 
 class Test_MarkdownTableWriter_write_table_iter:
     @pytest.mark.parametrize(

@@ -97,7 +97,9 @@ class MarkdownTableWriter(IndentationTextTableWriter):
         margin = " " * self.margin
 
         for col_dp in self._column_dp_list:
-            padding_len = self._get_padding_len(col_dp)
+            # columns in a header separator row must have at least one dash
+            # using a minimum of three accounts for right and center alignment
+            padding_len = max(3, self._get_padding_len(col_dp))
             align = self._get_align(col_dp.column_index, col_dp.align)
 
             if align == Align.RIGHT:
