@@ -2,6 +2,8 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
+import math
+
 import pytest
 
 import pytablewriter as ptw
@@ -114,6 +116,23 @@ normal_test_data_list = [
     [0.03785679191278808, 826.21158713263],
     [None, 826.21158713263],
     [0.1, 1.0499675627886724],
+]
+""",
+    ),
+    Data(
+        table="neg-inf",
+        indent=0,
+        header=["val"],
+        value=[
+            [-math.inf],
+            [math.inf],
+            [float("nan")],
+        ],
+        expected="""neg_inf = [
+    ["val"],
+    [float("-inf")],
+    [float("inf")],
+    [float("nan")],
 ]
 """,
     ),
