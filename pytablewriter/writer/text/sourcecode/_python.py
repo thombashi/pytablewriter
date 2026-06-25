@@ -1,10 +1,15 @@
+import math
 from typing import Any
 
 import typepy
+from dataproperty import ColumnDataProperty, DataProperty
 
 from ...._function import dateutil_datetime_formatter, quote_datetime_formatter
 from ....sanitizer import sanitize_python_var_name
 from ._sourcecode import SourceCodeTableWriter
+
+_NEG_INF_LITERAL = 'float("-inf")'
+_POS_INF_LITERAL = 'float("inf")'
 
 
 class PythonCodeTableWriter(SourceCodeTableWriter):
@@ -30,6 +35,7 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
             - |None|: written as ``None``
             - |inf|: written as ``float("inf")``
+            - ``-inf``: written as ``float("-inf")``
             - |nan|: written as ``float("nan")``
             - |datetime| instances determined by |is_datetime_instance_formatting| attribute:
                 - |True|: written as `dateutil.parser <https://dateutil.readthedocs.io/en/stable/parser.html>`__
@@ -54,9 +60,22 @@ class PythonCodeTableWriter(SourceCodeTableWriter):
 
         self._dp_extractor.type_value_map = {
             typepy.Typecode.NONE: None,
-            typepy.Typecode.INFINITY: 'float("inf")',
+            typepy.Typecode.INFINITY: _POS_INF_LITERAL,
             typepy.Typecode.NAN: 'float("nan")',
         }
+
+    def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        # type_value_map maps every Typecode.INFINITY to float("inf"), but
+        # dataproperty loses the sign of -inf before the map is applied.
+        # Recover the sign by checking the original value in value_matrix.
+        if value_dp.data == _POS_INF_LITERAL:
+            try:
+                orig = self.value_matrix[row_idx][col_dp.column_index]
+                if isinstance(orig, float) and math.isinf(orig) and orig < 0:
+                    value_dp = DataProperty(_NEG_INF_LITERAL)
+            except (IndexError, TypeError):
+                pass
+        return super()._to_row_item(row_idx, col_dp, value_dp)
 
     def get_variable_name(self, value: str) -> str:
         return sanitize_python_var_name(self.table_name, "_").lower()
