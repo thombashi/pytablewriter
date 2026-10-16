@@ -2,6 +2,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
+import csv
 from textwrap import dedent
 
 import pytest
@@ -136,6 +137,28 @@ class Test_RstCsvTableWriter_write_new_line:
 
 
 class Test_RstCsvTableWriter_write_table:
+    @pytest.mark.parametrize(
+        "header", ['say "hello"', '"quoted"', 'a"b, c', '日本語 "見出し"', "plain, header"]
+    )
+    def test_header_csv_roundtrip(self, header):
+        writer = table_writer_class(headers=[header, "second"], value_matrix=[["x", "y"]])
+        output = writer.dumps()
+        lines = output.splitlines()
+        header_option = next(
+            (line.strip().removeprefix(":header: ") for line in lines if ":header: " in line),
+            None,
+        )
+        if header_option is None:
+            assert "    :header-rows: 1" in lines
+            header_csv = lines[lines.index("") + 1].strip()
+        else:
+            header_csv = header_option
+
+        assert next(csv.reader([header_csv], skipinitialspace=True, strict=True)) == [
+            header,
+            "second",
+        ]
+
     @pytest.mark.parametrize(
         ["table", "indent", "header", "value", "expected"],
         [
