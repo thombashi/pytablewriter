@@ -135,17 +135,26 @@ class RstCsvTableWriter(RstTableWriter):
         if not self.is_write_header:
             return
 
-        if typepy.is_not_empty_sequence(self.headers):
-            self._write_line(
-                ':header: "{:s}"'.format(
-                    '", "'.join(MultiByteStrDecoder(header).unicode_str for header in self.headers)
-                )
-            )
+        headers = (
+            [MultiByteStrDecoder(header).unicode_str for header in self.headers]
+            if typepy.is_not_empty_sequence(self.headers)
+            else []
+        )
+        # Older Docutils versions use different CSV escaping rules for :header:.
+        # A header row in the directive content consistently supports doubled quotes.
+        use_header_row = any('"' in header for header in headers)
+        if headers:
+            if use_header_row:
+                self._write_line(":header-rows: 1")
+            else:
+                self._write_line(':header: "{:s}"'.format('", "'.join(headers)))
 
         self._write_line(
             ":widths: " + ", ".join(str(col_dp.ascii_char_width) for col_dp in self._column_dp_list)
         )
         self._write_line()
+        if use_header_row:
+            self._write_line(", ".join('"' + header.replace('"', '""') + '"' for header in headers))
 
     def _get_value_row_separator_items(self) -> list[str]:
         return []
