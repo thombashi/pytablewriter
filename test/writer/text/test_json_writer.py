@@ -227,6 +227,31 @@ class Test_JsonTableWriter_write_new_line:
 
 class Test_JsonTableWriter_write_table:
     @pytest.mark.parametrize(
+        "table_name",
+        [
+            'quarterly "sales"',
+            r"monthly\reports",
+            "monthly\nreports",
+            "monthly\treports",
+            "résumé 日本語",
+            "monthly reports",
+        ],
+    )
+    @pytest.mark.parametrize("split_write", [False, True])
+    def test_table_name_round_trip(self, capsys, table_name, split_write):
+        writer = table_writer_class(table_name=table_name, headers=["value"])
+        if split_write:
+            writer.value_matrix = [[[1]], [[2]]]
+            writer.iteration_length = 2
+            writer.write_table_iter()
+            out, _err = capsys.readouterr()
+        else:
+            writer.value_matrix = [[1], [2]]
+            out = writer.dumps()
+
+        assert json.loads(out) == {table_name: [{"value": 1}, {"value": 2}]}
+
+    @pytest.mark.parametrize(
         ["table", "header", "value", "expected"],
         [[data.table, data.header, data.value, data.expected] for data in normal_test_data_list],
     )

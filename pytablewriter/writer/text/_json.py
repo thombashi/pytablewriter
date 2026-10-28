@@ -156,7 +156,10 @@ class JsonTableWriter(IndentationTextTableWriter):
 
     def _get_opening_row_items(self) -> list[str]:
         if typepy.is_not_null_string(self.table_name):
-            return [f'{{ "{MultiByteStrDecoder(self.table_name).unicode_str:s}" : [']
+            table_name = json.dumps(
+                MultiByteStrDecoder(self.table_name).unicode_str, ensure_ascii=False
+            )
+            return [f"{{ {table_name:s} : ["]
 
         return ["["]
 
