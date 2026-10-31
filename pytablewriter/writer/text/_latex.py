@@ -7,7 +7,7 @@ import typepy
 from dataproperty import ColumnDataProperty, DataProperty
 from typepy import Typecode
 
-from ...style import Align, LatexStyler, StylerInterface
+from ...style import Align, LatexStyler, Style, StylerInterface, TextStyler
 from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
 
@@ -160,14 +160,17 @@ class LatexMatrixWriter(LatexWriter):
 
 class LatexTableWriter(LatexWriter):
     """
-    A matrix writer class for LaTeX environment.
+    A table writer for LaTeX ``array`` (default) or text-mode ``tabular``.
+
+    Args:
+        table_environment (str): Either ``"array"`` or ``"tabular"``.
 
         :Example:
             :ref:`example-latex-table-writer`
 
     .. py:method:: write_table
 
-        |write_table| with LaTeX ``array`` environment.
+        |write_table| with the selected LaTeX ``array`` or ``tabular`` environment.
 
         :Example:
             :ref:`example-latex-table-writer`
@@ -179,8 +182,20 @@ class LatexTableWriter(LatexWriter):
     def format_name(self) -> str:
         return self.FORMAT_NAME
 
+    @property
+    def table_environment(self) -> str:
+        """LaTeX environment: ``array`` (default) or ``tabular``."""
+        return self.__table_environment
+
+    @table_environment.setter
+    def table_environment(self, value: str) -> None:
+        if value not in ("array", "tabular"):
+            raise ValueError("table_environment must be 'array' or 'tabular'")
+        self.__table_environment = value
+
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
+        self.table_environment = kwargs.get("table_environment", "array")
 
         self.char_right_side_row = r" \\ \hline"
         self._dp_extractor.set_type_value(Typecode.INFINITY, r"\infty")
@@ -189,7 +204,7 @@ class LatexTableWriter(LatexWriter):
         return [
             "".join(
                 [
-                    r"\begin{array}{",
+                    rf"\begin{{{self.table_environment}}}{{",
                     "{:s}".format(" | ".join(self._get_col_align_char_list())),
                     r"} \hline",
                 ]
@@ -206,10 +221,15 @@ class LatexTableWriter(LatexWriter):
         return r"\verb" + f"|{value:s}|"
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
+        if self.table_environment == "tabular":
+            return super()._to_header_item(col_dp, value_dp)
         return self.__verbatim(super()._to_header_item(col_dp, value_dp))
 
     def _to_row_item(self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         row_item = super()._to_row_item(row_idx, col_dp, value_dp)
+
+        if self.table_environment == "tabular":
+            return row_item
 
         if self._is_math_parts(value_dp):
             return self._to_math_parts(row_item)
@@ -223,4 +243,46 @@ class LatexTableWriter(LatexWriter):
         return [r"\hline"]
 
     def _get_closing_row_items(self) -> list[str]:
-        return [r"\end{array}"]
+        return [rf"\end{{{self.table_environment}}}"]
+
+    def _apply_style_to_header_item(
+        self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
+    ) -> str:
+        if self.table_environment == "array":
+            return super()._apply_style_to_header_item(col_dp, value_dp, style)
+        return self.__tabular_cell(col_dp, value_dp, style, is_header=True)
+
+    def _apply_style_to_row_item(
+        self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
+    ) -> str:
+        if self.table_environment == "array":
+            return super()._apply_style_to_row_item(row_idx, col_dp, value_dp, style)
+        return self.__tabular_cell(col_dp, value_dp, style, is_header=False)
+
+    def __tabular_cell(
+        self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style, is_header: bool
+    ) -> str:
+        # Escape data before applying LaTeX style commands, including separators
+        # introduced by numeric formatting. Headers are always literal text.
+        value = TextStyler(self).apply(col_dp.dp_to_str(value_dp), style)
+        if not is_header and (
+            value_dp.typecode == Typecode.INFINITY
+            or re.fullmatch(r"\\[a-zA-Z]+", str(value_dp.data))
+        ):
+            value = r"\ensuremath{" + value + "}"
+        else:
+            escapes = {
+                "\\": r"\textbackslash{}",
+                "&": r"\&",
+                "%": r"\%",
+                "$": r"\$",
+                "#": r"\#",
+                "_": r"\_",
+                "{": r"\{",
+                "}": r"\}",
+                "~": r"\textasciitilde{}",
+                "^": r"\textasciicircum{}",
+                "|": r"\textbar{}",
+            }
+            value = "".join(escapes.get(char, " " if char.isspace() else char) for char in value)
+        return self._styler.apply_align(self._styler.apply(value, style), style)
