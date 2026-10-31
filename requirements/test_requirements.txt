@@ -4,3 +4,4 @@ pytest-md-report>=0.6.2
 sqliteschema>=2
 tablib>=3.2.0
 beautifulsoup4>=4.10
+docutils>=0.18

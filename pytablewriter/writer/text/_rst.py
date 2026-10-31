@@ -1,12 +1,15 @@
 import copy
+from collections.abc import Sequence
 from typing import Any
 
 import dataproperty
 import typepy
+from dataproperty import Align, ColumnDataProperty, DataProperty, LineBreakHandling
 from mbstrdecoder import MultiByteStrDecoder
 
 from ...error import EmptyTableDataError
-from ...style import ReStructuredTextStyler, StylerInterface
+from ...style import ReStructuredTextStyler, Style, StylerInterface
+from .._common import HEADER_ROW
 from .._table_writer import AbstractTableWriter
 from ._text_writer import IndentationTextTableWriter
 
@@ -189,6 +192,138 @@ class RstGridTableWriter(RstTableWriter):
 
         self.char_left_side_row = "|"
         self.char_right_side_row = "|"
+
+        self._dp_extractor.preprocessor.line_break_handling = LineBreakHandling.NOP
+
+    @staticmethod
+    def _split_cell(value: str) -> list[str]:
+        # Keep empty physical lines, including the last one. CRLF is one break.
+        return value.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+
+    def _cell_width(self, line: str) -> int:
+        return DataProperty(
+            line,
+            type_hint=typepy.String,
+            east_asian_ambiguous_width=self._dp_extractor.east_asian_ambiguous_width,
+        ).ascii_char_width
+
+    def _preprocess(self) -> None:
+        self._preprocess_table_dp()
+        header_dps = self._dp_extractor.to_header_dp_list()
+        header_values = [col.dp_to_str(dp) for col, dp in zip(self._column_dp_list, header_dps)]
+        body_values = [
+            [col.dp_to_str(dp) for col, dp in zip(self._column_dp_list, row)]
+            for row in self._table_value_dp_matrix
+        ]
+        if not any(
+            len(self._split_cell(value)) > 1
+            for row in [header_values, *body_values]
+            for value in row
+        ):
+            super()._preprocess()
+            return
+
+        # Keep the normal logical-cell type inference and column metadata.
+        # Only layout is based on physical lines, after conversion and styling.
+        super()._preprocess_table_property()
+        if self._is_complete_header_preprocess and self._is_complete_value_matrix_preprocess:
+            return
+
+        headers = [
+            self._style_cell(HEADER_ROW, col, dp, value)
+            for col, dp, value in zip(self._column_dp_list, header_dps, header_values)
+        ]
+        rows = [
+            [
+                self._style_cell(row_idx, col, dp, value)
+                for col, dp, value in zip(self._column_dp_list, dp_row, values)
+            ]
+            for row_idx, (dp_row, values) in enumerate(
+                zip(self._table_value_dp_matrix, body_values)
+            )
+        ]
+        for col_idx, col_dp in enumerate(self._column_dp_list):
+            cells = [row[col_idx] for row in rows]
+            if col_idx < len(headers):
+                cells.append(headers[col_idx])
+            width = max(
+                [self._dp_extractor.min_column_width]
+                + [self._cell_width(line) for lines, _ in cells for line in lines]
+            )
+            col_dp.extend_width(width - col_dp.ascii_char_width)
+
+        self._table_headers = [
+            self._pad_cell(col, lines, style)
+            for col, (lines, style) in zip(self._column_dp_list, headers)
+        ]
+        self._table_value_matrix = [
+            [
+                self._pad_cell(col, lines, style)
+                for col, (lines, style) in zip(self._column_dp_list, row)
+            ]
+            for row in rows
+        ]
+        self._is_complete_table_property_preprocess = True
+        self._is_complete_header_preprocess = True
+        self._is_complete_value_matrix_preprocess = True
+
+    def _style_cell(
+        self, row_idx: int, col_dp: ColumnDataProperty, value_dp: DataProperty, value: str
+    ) -> tuple[list[str], Style]:
+        style = self._fetch_style(row_idx, col_dp, value_dp)
+        lines = []
+        for line in self._split_cell(value):
+            # Inline decoration must not swallow blank lines or relative indent.
+            indent = line[: len(line) - len(line.lstrip(" "))]
+            lines.append(indent + self._styler.apply(line[len(indent) :], style=style))
+        return lines, style
+
+    def _pad_cell(self, col_dp: ColumnDataProperty, lines: list[str], style: Style) -> str:
+        widths = [self._cell_width(line) for line in lines]
+        padding = max(col_dp.ascii_char_width - max(widths), 0)
+        # Align the block as a whole: aligning each line separately changes RST
+        # nesting (e.g. a raw directive's content could become unindented).
+        left_padding = 0
+        if style.align == Align.RIGHT:
+            left_padding = padding
+        elif style.align == Align.CENTER:
+            left_padding = padding // 2
+
+        margin = " " * self.margin
+        return "\n".join(
+            self._styler.apply_terminal_style(
+                margin
+                + " " * left_padding
+                + line
+                + " " * max(col_dp.ascii_char_width - left_padding - width, 0)
+                + margin,
+                style=style,
+            )
+            for line, width in zip(lines, widths)
+        )
+
+    def _write_row(self, row: int, values: Sequence[str]) -> None:
+        if not values:
+            return
+
+        cells = [self._split_cell(value) for value in values]
+        for line_idx in range(max(len(cell) for cell in cells)):
+            super()._write_row(
+                row,
+                [
+                    cell[line_idx]
+                    if line_idx < len(cell)
+                    else " " * (col_dp.ascii_char_width + 2 * self.margin)
+                    for cell, col_dp in zip(cells, self._column_dp_list)
+                ],
+            )
+
+    def _write_table(self, **kwargs: Any) -> None:
+        self.inc_indent_level()
+        try:
+            IndentationTextTableWriter._write_table(self, **kwargs)
+        finally:
+            self.dec_indent_level()
 
 
 class RstSimpleTableWriter(RstTableWriter):
