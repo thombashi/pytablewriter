@@ -11,6 +11,7 @@ from .writer import (
     AsciiDocTableWriter,
     BoldUnicodeTableWriter,
     BorderlessTableWriter,
+    ConfluenceWikiTableWriter,
     CssTableWriter,
     CsvTableWriter,
     ElasticsearchWriter,
@@ -80,6 +81,12 @@ class TableFormat(enum.Enum):
         AsciiDocTableWriter,
         FormatAttr.FILE | FormatAttr.TEXT,
         ["adoc", "asciidoc", "asc"],
+    )
+    CONFLUENCE = (
+        [ConfluenceWikiTableWriter.FORMAT_NAME, "confluence_wiki"],
+        ConfluenceWikiTableWriter,
+        FormatAttr.FILE | FormatAttr.TEXT,
+        [],
     )
     CSV = ([CsvTableWriter.FORMAT_NAME], CsvTableWriter, FormatAttr.FILE | FormatAttr.TEXT, ["csv"])
     CSS = (

@@ -106,6 +106,7 @@ class TableWriterFactory:
             =============================================  ===================================
             ``"adoc"``                                     :py:class:`~.AsciiDocTableWriter`
             ``"asciidoc"``                                 :py:class:`~.AsciiDocTableWriter`
+            ``"confluence"``/``"confluence_wiki"``         :py:class:`~.ConfluenceWikiTableWriter`
             ``"css"``                                      :py:class:`~.CssTableWriter`
             ``"csv"``                                      :py:class:`~.CsvTableWriter`
             ``"elasticsearch"``                            :py:class:`~.ElasticsearchWriter`
@@ -183,6 +184,8 @@ class TableWriterFactory:
                 asciidoc
                 bold_unicode
                 borderless
+                confluence
+                confluence_wiki
                 css
                 csv
                 elasticsearch

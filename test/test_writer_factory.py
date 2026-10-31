@@ -18,6 +18,8 @@ class Test_WriterFactory_get_format_names:
             "asciidoc",
             "bold_unicode",
             "borderless",
+            "confluence",
+            "confluence_wiki",
             "css",
             "csv",
             "elasticsearch",

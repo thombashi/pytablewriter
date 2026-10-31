@@ -5,6 +5,7 @@ Text formats
    :maxdepth: 2
 
    csv
+   confluence
    latex/index
    ltsv
    html
