@@ -17,6 +17,7 @@ class Test_TableFormat_search_table_format:
                     TableFormat.ASCIIDOC,
                     TableFormat.BOLD_UNICODE,
                     TableFormat.BORDERLESS,
+                    TableFormat.CONFLUENCE,
                     TableFormat.CSS,
                     TableFormat.CSV,
                     TableFormat.HTML,
@@ -45,6 +46,7 @@ class Test_TableFormat_search_table_format:
                 FormatAttr.FILE,
                 [
                     TableFormat.ASCIIDOC,
+                    TableFormat.CONFLUENCE,
                     TableFormat.CSS,
                     TableFormat.CSV,
                     TableFormat.EXCEL_XLS,

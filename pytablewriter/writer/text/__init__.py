@@ -1,5 +1,6 @@
 from ._asciidoc import AsciiDocTableWriter
 from ._borderless import BorderlessTableWriter
+from ._confluence import ConfluenceWikiTableWriter
 from ._css import CssTableWriter
 from ._csv import CsvTableWriter
 from ._html import HtmlTableWriter
@@ -21,6 +22,7 @@ __all__ = (
     "AsciiDocTableWriter",
     "BoldUnicodeTableWriter",
     "BorderlessTableWriter",
+    "ConfluenceWikiTableWriter",
     "CssTableWriter",
     "CsvTableWriter",
     "HtmlTableWriter",

@@ -46,6 +46,7 @@ Features
         - LaTeX: ``tabular``/``array`` environment
         - Markdown: CommonMark / `GitHub Flavored Markdown (GFM) <https://github.github.com/gfm/>`__ / `kramdown <https://kramdown.gettalong.org/>`__
         - `MediaWiki <https://www.mediawiki.org/wiki/MediaWiki>`__
+        - Confluence Wiki markup
         - reStructuredText: `Grid Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables>`__/`Simple Tables <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables>`__/`CSV Table <http://docutils.sourceforge.net/docs/ref/rst/directives.html#id4>`__
         - Source code (definition of a variable that represents tabular data)
             - JavaScript / `NumPy <https://www.numpy.org/>`__ (`numpy.array <https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html>`__) / `Pandas <https://pandas.pydata.org/>`__ (`pandas.DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__) / Python
