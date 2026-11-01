@@ -114,19 +114,20 @@ normal_test_data_list = [
             """\
             .. table:: zone
 
-                +-------+------------+----------------+
-                |zone_id|country_code|   zone_name    |
-                +=======+============+================+
-                |      1|AD          |Europe/Andorra  |
-                +-------+------------+----------------+
-                |      2|AE          |Asia/Dubai      |
-                +-------+------------+----------------+
-                |      3|AF          |Asia/Kabul      |
-                +-------+------------+----------------+
-                |      4|AG          |America/Antigua |
-                +-------+------------+----------------+
-                |      5|AI          |America Anguilla|
-                +-------+------------+----------------+
+                +-------+------------+---------------+
+                |zone_id|country_code|   zone_name   |
+                +=======+============+===============+
+                |      1|AD          |Europe/Andorra |
+                +-------+------------+---------------+
+                |      2|AE          |Asia/Dubai     |
+                +-------+------------+---------------+
+                |      3|AF          |Asia/Kabul     |
+                +-------+------------+---------------+
+                |      4|AG          |America/Antigua|
+                +-------+------------+---------------+
+                |      5|AI          |America        |
+                |       |            |Anguilla       |
+                +-------+------------+---------------+
             """
         ),
     ),
@@ -203,19 +204,25 @@ normal_test_data_list = [
         ),
     ),
     Data(
-        table="line breaks will be converted to a white space",
+        table="multiline cells",
         indent=0,
         header=["a\nb", "\nc\n\nd\n", "e\r\nf"],
         value=[["v1\nv1", "v2\n\nv2", "v3\r\nv3"]],
         expected=dedent(
             """\
-            .. table:: line breaks will be converted to a white space
+            .. table:: multiline cells
 
-                +-----+------+-----+
-                | a b | c  d | e f |
-                +=====+======+=====+
-                |v1 v1|v2  v2|v3 v3|
-                +-----+------+-----+
+                +--+--+--+
+                |a |  |e |
+                |b |c |f |
+                |  |  |  |
+                |  |d |  |
+                |  |  |  |
+                +==+==+==+
+                |v1|v2|v3|
+                |v1|  |v3|
+                |  |v2|  |
+                +--+--+--+
             """
         ),
     ),
