@@ -451,3 +451,27 @@ class Test_AsciiDocTableWriter_write_table_iter:
         writer = table_writer_class(table_name=table, headers=header, value_matrix=value)
 
         writer.write_table_iter()
+
+
+class Test_AsciiDocTableWriter_write_vertical_bar:
+    # https://github.com/thombashi/pytablewriter/issues/88
+    def test_vertical_bar_in_header_and_value(self, capsys):
+        writer = table_writer_class()
+        writer.headers = ["h | 1", "h2"]
+        writer.value_matrix = [["x | y", "a || b"]]
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            [cols="<5, <6", options="header"]
+            |===
+            ^|h \\| 1
+            ^|h2
+
+            |x \\| y
+            |a \\|\\| b
+            |===
+            """
+        )
+        out, _err = capsys.readouterr()
+        assert out == expected
