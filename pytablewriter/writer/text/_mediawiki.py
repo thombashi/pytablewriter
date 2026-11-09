@@ -88,13 +88,23 @@ class MediaWikiTableWriter(TextTableWriter):
     def _apply_style_to_header_item(
         self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
     ) -> str:
-        value: Final = self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        value: Final = self.__escape_vertical_bar_char(
+            self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        )
         str_format = "! {{:{:s}{:s}}}".format(
             get_align_char(Align.CENTER), str(self._get_padding_len(col_dp, value_dp))
         )
         return str_format.format(value)
 
+    @staticmethod
+    def __escape_vertical_bar_char(value: str) -> str:
+        # a literal '|' is the MediaWiki cell separator: write it as a
+        # numeric character reference so that it renders as the character
+        return value.replace("|", "&#124;")
+
     def __modify_table_element(self, value: str, value_dp: DataProperty) -> str:
+        value = self.__escape_vertical_bar_char(value)
+
         if value_dp.align is Align.LEFT:
             forma_stirng = "| {1:s}"
         else:

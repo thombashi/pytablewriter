@@ -425,3 +425,26 @@ class Test_MediaWikiTableWriter_write_table_iter:
         writer.value_matrix = value
 
         writer.write_table_iter()
+
+
+class Test_MediaWikiTableWriter_write_vertical_bar:
+    # https://github.com/thombashi/pytablewriter/issues/88
+    def test_vertical_bar_in_header_and_value(self, capsys):
+        writer = table_writer_class()
+        writer.headers = ["h | 1", "h2"]
+        writer.value_matrix = [["x | y", "a || b"]]
+        writer.write_table()
+
+        expected = dedent(
+            """\
+            {| class="wikitable"
+            ! h &#124; 1
+            ! h2
+            |-
+            | x &#124; y
+            | a &#124;&#124; b
+            |}
+            """
+        )
+        out, _err = capsys.readouterr()
+        assert out == expected

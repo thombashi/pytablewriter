@@ -125,12 +125,21 @@ class AsciiDocTableWriter(TextTableWriter):
     def _apply_style_to_header_item(
         self, col_dp: ColumnDataProperty, value_dp: DataProperty, style: Style
     ) -> str:
-        value = self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        value = self.__escape_vertical_bar_char(
+            self._styler.apply(col_dp.dp_to_str(value_dp), style=style)
+        )
         return self.__apply_align(value, style)
+
+    @staticmethod
+    def __escape_vertical_bar_char(value: str) -> str:
+        # a literal '|' is the AsciiDoc table cell separator
+        return value.replace("|", r"\|")
 
     def __modify_row_element(
         self, row_idx: int, col_idx: int, value: str, value_dp: DataProperty
     ) -> str:
+        value = self.__escape_vertical_bar_char(value)
+
         col_dp: Final = self._column_dp_list[col_idx]
         style: Final = self._fetch_style(row_idx, col_dp, value_dp)
         align = col_dp.align
