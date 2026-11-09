@@ -115,3 +115,74 @@ class Test_LatexTableWriter_write_table:
 
         assert regexp_ansi_escape.search(out)
         assert strip_ansi_escape(out) == expected
+
+
+class Test_LatexTableWriter_vertical_bar_in_value:
+    def test_verbatim_delimiter_avoids_vertical_bar(self):
+        writer = table_writer_class()
+        writer.headers = ["a", "b | c"]
+        writer.value_matrix = [["x | y", 1], ["plain", 2], ["!bad", 3]]
+
+        expected = r"""\begin{array}{l | r} \hline
+    \verb|  a  | & \verb!b | c! \\ \hline
+    \hline
+    \verb!x | y! &     1 \\ \hline
+    plain &     2 \\ \hline
+    \verb|!bad | &     3 \\ \hline
+\end{array}
+"""
+
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_verbatim_delimiter_kept_for_pipe_free_values(self):
+        writer = table_writer_class()
+        writer.headers = ["a"]
+        writer.value_matrix = [["b"], ["c | d"]]
+
+        expected = r"""\begin{array}{l} \hline
+    \verb|  a  | \\ \hline
+    \hline
+    b     \\ \hline
+    \verb!c | d! \\ \hline
+\end{array}
+"""
+
+        out = writer.dumps()
+        print_test_result(expected=expected, actual=out)
+
+        assert out == expected
+
+    def test_texttt_fallback_when_all_delimiters_taken(self):
+        writer = table_writer_class()
+        writer.headers = ["a"]
+        writer.value_matrix = [["s | ! | += ? | \" | : | ; | , | . | - | / | @ | '"]]
+
+        out = writer.dumps()
+        print_test_result(expected=None, actual=out)
+
+        # every candidate delimiter occurs in the value: the value must not be
+        # wrapped in \verb and the LaTeX special characters must be escaped
+        assert r"\texttt{s | ! | += ? | \textquotedbl{}" in out
+        assert r"\verb" not in out.splitlines()[2]
+
+    def test_delimiter_collision_falls_through_in_order(self):
+        writer = table_writer_class()
+        writer.headers = ["a"]
+        writer.value_matrix = [["x | y"]]
+
+        out = writer.dumps()
+
+        # "|" is in the value, so the next candidate "!" must be used
+        assert r"\verb!x | y!" in out
+
+        writer = table_writer_class()
+        writer.headers = ["a"]
+        writer.value_matrix = [["x | ! y"]]
+
+        out = writer.dumps()
+
+        # "|" and "!" are in the value, so the next candidate "+" must be used
+        assert r"\verb+x | ! y+" in out

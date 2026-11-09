@@ -175,6 +175,27 @@ class LatexTableWriter(LatexWriter):
 
     FORMAT_NAME = "latex_table"
 
+    # all of the characters that may act as a \verb delimiter without
+    # colliding with LaTeX catcodes ("|" first so that values without a
+    # vertical bar keep the conventional \verb|...| output)
+    _VERBATIM_DELIMITER_CANDIDATES: Final = '|!+=?":;,.-/\'@'
+
+    _LATEX_TEXT_ESCAPE_TABLE: Final = str.maketrans(
+        {
+            "\\": r"\textbackslash{}",
+            "&": r"\&",
+            "%": r"\%",
+            "$": r"\$",
+            "#": r"\#",
+            "_": r"\_",
+            "{": r"\{",
+            "}": r"\}",
+            "~": r"\textasciitilde{}",
+            "^": r"\textasciicircum{}",
+            '"': r"\textquotedbl{}",
+        }
+    )
+
     @property
     def format_name(self) -> str:
         return self.FORMAT_NAME
@@ -203,7 +224,13 @@ class LatexTableWriter(LatexWriter):
         return True
 
     def __verbatim(self, value: str) -> str:
-        return r"\verb" + f"|{value:s}|"
+        for delimiter in self._VERBATIM_DELIMITER_CANDIDATES:
+            if delimiter not in value:
+                return r"\verb" + f"{delimiter}{value:s}{delimiter}"
+
+        # every candidate delimiter occurs in the value: fall back to
+        # \texttt with the LaTeX special characters escaped
+        return r"\texttt{" + f"{value:s}".translate(self._LATEX_TEXT_ESCAPE_TABLE) + "}"
 
     def _to_header_item(self, col_dp: ColumnDataProperty, value_dp: DataProperty) -> str:
         return self.__verbatim(super()._to_header_item(col_dp, value_dp))
