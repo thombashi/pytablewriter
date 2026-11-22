@@ -54,7 +54,7 @@ setuptools_require = ["setuptools>=38.3.0"]
 excel_requires = ["xlwt", "XlsxWriter>=0.9.6,<4"]
 es8_requires = ["elasticsearch>=8.0.1,<9"]
 from_requires = ["pytablereader>=0.31.3,<2"]
-html_requires = ["dominate>=2.1.5,<3"]
+html_requires = ["dominate>=2.1.5,<4"]
 logging_requires = ["loguru>=0.4.1,<1"]
 sqlite_requires = ["SimpleSQLite>=1.3.2,<2"]
 theme_requires = [
